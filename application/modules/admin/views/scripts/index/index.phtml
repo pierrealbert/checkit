@@ -1,0 +1,20 @@
+<div style="min-height: 250px;">
+
+    <ul>
+        <li>
+            <?= $this->ajaxLink($this->translate("ajax_loader_example"), $this->baseUrl("/admin/index/ajax-test"), array(
+                         'beforeSend'   => '',
+                         'complete'     => '',
+                         'noscript'     => false,
+                         'method'       => 'post',
+                         'update'       => '#container'
+                    )
+              );
+            ?>
+        </li>
+        <li>
+            <a href="<?= $this->url(array('controller' => 'file-upload')) ?>"><?= $this->translate('file_upload_example') ?></a>
+        </li>
+    </ul>
+    <div id="container"></div>
+</div>

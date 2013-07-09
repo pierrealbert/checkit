@@ -1,0 +1,14 @@
+<p>
+    <?= $this->translate('hello', array($this->first_name . ' ' . $this->last_name)) ?>
+</p>
+<p>
+    <?= $this->restore_password_key ?>
+    <a href="<?= $this->serverUrl($this->url(array(
+        'module'     => 'default',
+        'controller' => 'registration',
+        'action'     => 'confirm',
+        'key'        => $this->confirm_registration_key,
+        'id'         => $this->id,
+        'model'      => 'user'
+        ), null, true)) ?>"><?= $this->translate('click_here_to_confirm_registration') ?></a>
+</p>

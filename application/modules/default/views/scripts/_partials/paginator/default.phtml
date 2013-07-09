@@ -1,0 +1,30 @@
+<?php if ($this->pageCount): ?>
+<div class="paginationControl">
+    (<?= $this->firstItemNumber ?>-<?= $this->lastItemNumber?>/<?= $this->totalItemCount ?>)
+        <?php if (isset($this->previous)): ?>
+    <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
+        &lt; <?= $this->translate('previous') ?>
+    </a> |
+        <?php else: ?>
+    <span class="disabled">&lt; <?= $this->translate('previous') ?></span> |
+        <?php endif; ?>
+
+        <?php foreach ($this->pagesInRange as $page): ?>
+            <?php if ($page != $this->current): ?>
+    <a href="<?php echo $this->url(array('page' => $page)); ?>">
+                    <?php echo $page; ?>
+    </a> |
+            <?php else: ?>
+                <?php echo $page; ?> |
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <?php if (isset($this->next)): ?>
+    <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
+        <?= $this->translate('next') ?> &gt;
+    </a>
+        <?php else: ?>
+    <span class="disabled"><?= $this->translate('next') ?> &gt;</span>
+        <?php endif; ?>
+</div>
+<?php endif; ?>

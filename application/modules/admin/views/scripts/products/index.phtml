@@ -1,0 +1,8 @@
+<?= $this->contentHeader('products', array(
+    array(
+        'type'  => 'link',
+        'title' => 'add_product',
+        'url'   => $this->url(array('controller' => 'products', 'module' =>'admin', 'action' => 'add'), null, true),
+    )
+)) ?>
+<?= $this->grid($this->grid) ?>

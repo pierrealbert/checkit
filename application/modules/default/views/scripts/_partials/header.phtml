@@ -1,0 +1,11 @@
+<div id="header">
+    <h1><?= $this->translate('default_module_header') ?></h1>
+    <? if ($this->currUser) : ?>
+        <div class="welcome">
+            <div class="clear"></div>
+            <?= $this->translate('hello') ?>, <?= $this->currUser->getFullName() ?>!
+            [<a href="<?= $this->url(array('module' => 'default', 'controller' => 'login', 'action' => 'logout', 'model' => 'user'), null, true) ?>"><?= $this->translate('logout') ?></a>]
+        </div>
+        <div class="clear"></div>
+    <? endif ?>
+</div>

@@ -1,0 +1,8 @@
+<?= $this->contentHeader('admins', array(
+    array(
+        'type'  => 'link',
+        'title' => 'add_admin',
+        'url'   => $this->url(array('controller' => 'admins', 'module' =>'admin', 'action' => 'add'), null, true),
+    )
+)) ?>
+<?= $this->grid($this->grid) ?>

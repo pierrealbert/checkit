@@ -1,0 +1,6 @@
+<h2><?= $this->translate('login') ?></h2>
+<?  $this->form->setAction($this->url(array('action' => 'index'))); ?>
+<?= $this->form; ?>
+<p>
+    <a href="<?= $this->url(array('controller' => 'forgot-password')) ?>"><?= $this->translate('forgot_password') ?></a>
+</p>

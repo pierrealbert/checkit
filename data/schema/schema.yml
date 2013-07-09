@@ -1,0 +1,123 @@
+Admin:
+    columns:      
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+        username:             string(50)
+        first_name:           string(50)
+        last_name:            string(50)
+        email:                string(255)
+        password:             string(50)
+        restore_password_key:
+            type: string
+            length: 32
+            notnull: false
+            default: null
+        is_active:
+            type: boolean
+            notnull: true
+            default: true
+    actAs:
+        Timestampable:
+            created:
+                name: created_at
+            updated:
+                name: updated_at
+SettingsOption:
+    columns:      
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+        name:       string(255)
+        value:      text    
+User:
+    columns:      
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+        username:   string(50)
+        first_name: string(50)
+        last_name:  string(50)
+        email:      string(255)
+        password:   string(50)
+        role:       string(10)
+        country:    string(2)
+        city:       string(50)
+        confirm_registration_key:
+            type: string
+            length: 32
+            notnull: false
+            default: null
+        restore_password_key:
+            type: string
+            length: 32
+            notnull: false
+            default: null
+        is_active:
+            type: boolean
+            notnull: true
+            default: false
+        is_confirmed:
+            type: boolean
+            notnull: true
+            default: false   
+    actAs:
+        Timestampable:
+            created:
+                name: created_at
+            updated:
+                name: updated_at
+UserMessage:                
+    columns:      
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+        sender_id:   integer(4)
+        receiver_id: integer(4)
+        title:      string(255)
+        message:    text
+        is_read:    
+            type: boolean
+            notnull: true
+            default: false            
+        deleted_by_sender_id:   
+            type: boolean
+            notnull: true
+            default: false          
+        deleted_by_receiver_id: 
+            type: boolean
+            notnull: true
+            default: false          
+    relations:
+        Sender:               
+            onDelete: cascade
+            class: User
+            local: sender_id
+        Receiver:      
+            onDelete: cascade
+            class: User        
+            local: receiver_id
+    actAs:
+        Timestampable:
+            created:
+                name: created_at
+            updated:
+                name: updated_at
+PageContent:
+    columns:
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+        title:   string(255)
+        content: text
+    actAs:
+        Sluggable:
+          unique: true
+          fields: [title]
+          canUpdate: true
+
