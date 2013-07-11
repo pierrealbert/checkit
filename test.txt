@@ -1,4 +1,4 @@
-!!Welcome to the Zend Framework 1.12 Release! 
+Welcome to the Zend Framework 1.12 Release! 
 
 RELEASE INFORMATION
 ---------------
