@@ -204,6 +204,12 @@ Property:
             type: integer(4)
             primary: true
             autoincrement: true
+        owner_id:  integer(4)
+    relations:
+        Owner:
+            onDelete: cascade
+            class: User
+            local: owner_id
     actAs:
         Timestampable:
             created:

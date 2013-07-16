@@ -22,6 +22,15 @@ class LoginController extends Zend_Controller_Action
             if ($auth->authenticate($authAdapter)->isValid()) {
                 $user = $authAdapter->getResultObject();
                 $this->_autorize($user);
+
+                $referralUrl = new Zend_Session_Namespace('ReferralUrl');
+
+                if (isset($referralUrl->url)) {
+                    $url = $referralUrl->url;
+                    unset($referralUrl->url);
+                    $this->_helper->redirector->gotoUrl($url);
+                }
+
                 $this->_helper->redirector->gotoSimple('index', 'my-account', 'user');
             } else {
                 $this->_helper->messenger->error('login_error_user');
