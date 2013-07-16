@@ -46,6 +46,10 @@ User:
         role:       string(10)
         country:    string(2)
         city:       string(50)
+        type: 
+          type: enum
+          values: [owner, resident]
+          size: 15
         confirm_registration_key:
             type: string
             length: 32
@@ -70,6 +74,48 @@ User:
                 name: created_at
             updated:
                 name: updated_at
+UserResident:  
+    columns:      
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true   
+        user_id:
+            type: integer(4)            
+        rent_type:
+          type: enum
+          values: [only, in_couple, in_roommate]     
+          size: 15
+        resident_type: 
+          type: enum
+          values: [student, employee, independent, other]
+          size: 15
+        job_title:   string(255)          
+        employee_type:
+          type: enum
+          values: [cdi, csd] 
+          size: 3
+        monthly_income:
+          type: decimal(10)
+          scale: 2          
+        monthly_income_guaranteed:
+          type: decimal(10)
+          scale: 2                    
+        is_primary:
+            type: boolean
+            notnull: true
+            default: false
+    relations:
+        User:               
+            onDelete: cascade
+            class: User
+            local: user_id            
+    actAs:
+        Timestampable:
+            created:
+                name: created_at
+            updated:
+                name: updated_at  
 UserMessage:                
     columns:      
         id:

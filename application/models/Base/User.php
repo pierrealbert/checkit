@@ -14,10 +14,12 @@
  * @property string $role
  * @property string $country
  * @property string $city
+ * @property enum $type
  * @property string $confirm_registration_key
  * @property string $restore_password_key
  * @property boolean $is_active
  * @property boolean $is_confirmed
+ * @property Doctrine_Collection $UserResident
  * @property Doctrine_Collection $UserMessage
  * 
  * @package    ##PACKAGE##
@@ -68,6 +70,16 @@ abstract class Model_Base_User extends Ext_Doctrine_Record
              'type' => 'string',
              'length' => '50',
              ));
+        $this->hasColumn('type', 'enum', 15, array(
+             'type' => 'enum',
+             'values' => 
+             array(
+              0 => 'owner',
+              1 => 'resident',
+             ),
+             'size' => 15,
+             'length' => 15,
+             ));
         $this->hasColumn('confirm_registration_key', 'string', 32, array(
              'type' => 'string',
              'length' => 32,
@@ -93,6 +105,10 @@ abstract class Model_Base_User extends Ext_Doctrine_Record
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('Model_UserResident as UserResident', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
         $this->hasMany('Model_UserMessage as UserMessage', array(
              'local' => 'id',
              'foreign' => 'sender_id'));
