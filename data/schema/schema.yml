@@ -121,3 +121,46 @@ PageContent:
           fields: [title]
           canUpdate: true
 
+Message:
+    columns:
+        message_id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+        queue_id:   integer(4)
+        handle:     
+            type:   string(32)
+            unique: true
+        body:       text
+        md5:        string(32)
+        timeout:
+            type:   decimal(14)
+            scale:  4
+        created: integer(4)
+    indexes:
+        message_queueid:
+            fields: [queue_id]
+
+Queue:
+    columns:
+        queue_id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+        queue_name: string(100)
+        timeout:    
+            type: integer(2) 
+            default: 30
+
+Property:
+    columns:
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+    actAs:
+        Timestampable:
+            created:
+                name: created_at
+            updated:
+                name: updated_at
