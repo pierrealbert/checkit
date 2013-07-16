@@ -153,3 +153,12 @@ Model_User:
     last_name: Reinke
     password: 123
     country: US
+  User_23:
+    username: test
+    email: jonjonson7@gmail.com
+    first_name: Test
+    last_name: Test
+    password: test
+    country: RU
+    is_active: 1
+    is_confirmed: 1

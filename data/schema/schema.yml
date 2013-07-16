@@ -46,6 +46,10 @@ User:
         role:       string(10)
         country:    string(2)
         city:       string(50)
+        type: 
+          type: enum
+          values: [owner, resident]
+          size: 15
         confirm_registration_key:
             type: string
             length: 32
@@ -70,6 +74,48 @@ User:
                 name: created_at
             updated:
                 name: updated_at
+UserResident:  
+    columns:      
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true   
+        user_id:
+            type: integer(4)            
+        rent_type:
+          type: enum
+          values: [single, couple, roommate]     
+          size: 15
+        resident_type: 
+          type: enum
+          values: [student, employee, independent, other]
+          size: 15
+        job_title:   string(255)          
+        employee_type:
+          type: enum
+          values: [cdi, csd] 
+          size: 3
+        monthly_income:
+          type: decimal(10)
+          scale: 2          
+        monthly_income_guaranteed:
+          type: decimal(10)
+          scale: 2                    
+        is_primary:
+            type: boolean
+            notnull: true
+            default: false
+    relations:
+        User:               
+            onDelete: cascade
+            class: User
+            local: user_id            
+    actAs:
+        Timestampable:
+            created:
+                name: created_at
+            updated:
+                name: updated_at  
 UserMessage:                
     columns:      
         id:
@@ -121,3 +167,46 @@ PageContent:
           fields: [title]
           canUpdate: true
 
+Message:
+    columns:
+        message_id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+        queue_id:   integer(4)
+        handle:     
+            type:   string(32)
+            unique: true
+        body:       text
+        md5:        string(32)
+        timeout:
+            type:   decimal(14)
+            scale:  4
+        created: integer(4)
+    indexes:
+        message_queueid:
+            fields: [queue_id]
+
+Queue:
+    columns:
+        queue_id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+        queue_name: string(100)
+        timeout:    
+            type: integer(2) 
+            default: 30
+
+Property:
+    columns:
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+    actAs:
+        Timestampable:
+            created:
+                name: created_at
+            updated:
+                name: updated_at
