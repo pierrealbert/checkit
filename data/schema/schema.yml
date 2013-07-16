@@ -84,7 +84,7 @@ UserResident:
             type: integer(4)            
         rent_type:
           type: enum
-          values: [only, in_couple, in_roommate]     
+          values: [single, couple, roommate]     
           size: 15
         resident_type: 
           type: enum

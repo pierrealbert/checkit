@@ -68,3 +68,15 @@ view; "View"
 user_messages; "User Messages"
 message_details; "Message Details"
 back_to_list; "Back to list"
+
+student; "Student"
+employee; "Employee"
+independent; "Independent"
+other; "Other"
+    
+single; "Only"
+couple; "In Couple"
+roommate; "In Roommate"
+    
+employee_cdi; "CDI"
+employee_csd; "CSD"

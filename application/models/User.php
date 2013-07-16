@@ -12,6 +12,9 @@
  */
 class Model_User extends Model_Base_User
 {
+    const OWNER     = 'owner';
+    const RESIDENT  = 'resident';
+    
     /**
      *
      * @var Ext_Auth_Hash
