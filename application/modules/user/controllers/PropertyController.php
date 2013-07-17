@@ -23,9 +23,10 @@ class User_PropertyController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()
             && $form->isValid($this->getRequest()->getParams())
         ) {
-
             $this->_helper->redirector('well-description-of-property', 'property', 'user');
         }
+
+        $this->view->jQuery()->addStylesheet('/css/ui/jquery-ui-1.8.14.css');
 
         $this->view->form = $form;
     }
