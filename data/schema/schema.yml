@@ -205,6 +205,12 @@ Property:
             primary: true
             autoincrement: true
         owner_id:  integer(4)
+        amount_of_rent_excluding_charges:
+            type:   decimal(14)
+            scale:  2
+        amount_of_charges:
+            type:   decimal(14)
+            scale:  2
     relations:
         Owner:
             onDelete: cascade
