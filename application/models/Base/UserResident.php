@@ -40,9 +40,9 @@ abstract class Model_Base_UserResident extends Ext_Doctrine_Record
              'type' => 'enum',
              'values' => 
              array(
-              0 => 'only',
-              1 => 'in_couple',
-              2 => 'in_roommate',
+              0 => 'single',
+              1 => 'couple',
+              2 => 'roommate',
              ),
              'size' => 15,
              'length' => 15,

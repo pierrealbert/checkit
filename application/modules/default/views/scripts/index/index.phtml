@@ -5,5 +5,10 @@
 <p>
     <a href="<?= $this->url(array('controller' => 'registration'), null, true) ?>"><?= $this->translate('registration') ?></a>
 </p>
+<p>
+    <a href="<?= $this->url(array('module' => 'user', 'controller' => 'property', 'action' => 'post-ad'), null, true) ?>"><?= $this->translate('post_my_ad') ?></a>
+</p>
+
+
 <h2><?= $this->translate('grid_array_example') ?></h2>
 <?= $this->grid($this->grid) ?>

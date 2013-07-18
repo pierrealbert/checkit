@@ -10,6 +10,13 @@ class User_Plugin_Auth extends Zend_Controller_Plugin_Abstract
         $loginUri = '/login';
 
         if (!$auth->hasIdentity()) {
+
+            if ($this->getRequest()->isGet()) {
+
+                $referralUrl = new Zend_Session_Namespace('ReferralUrl');
+                $referralUrl->url = $this->getRequest()->getRequestUri();
+            }
+
             Zend_Controller_Action_HelperBroker::getStaticHelper('Redirector')
                     ->gotoUrlAndExit($loginUri);
         }

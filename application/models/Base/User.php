@@ -21,6 +21,7 @@
  * @property boolean $is_confirmed
  * @property Doctrine_Collection $UserResident
  * @property Doctrine_Collection $UserMessage
+ * @property Doctrine_Collection $Property
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -112,6 +113,10 @@ abstract class Model_Base_User extends Ext_Doctrine_Record
         $this->hasMany('Model_UserMessage as UserMessage', array(
              'local' => 'id',
              'foreign' => 'sender_id'));
+
+        $this->hasMany('Model_Property as Property', array(
+             'local' => 'id',
+             'foreign' => 'owner_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              'created' => 

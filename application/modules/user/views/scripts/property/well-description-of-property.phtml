@@ -1,0 +1,33 @@
+<h2><?= $this->translate('well') ?></h2>
+<h3><?= $this->translate('rental') ?></h3>
+
+    <table>
+        <tr>
+            <th align="right"><?= $this->translate('amount_of_rent_excluding_charges') ?></th>
+            <td><?= $this->property->amount_of_rent_excluding_charges ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('amount_of_charges') ?></th>
+            <td><?= $this->property->amount_of_charges ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('is_furnished') ?></th>
+            <td><?php if (1 == $this->property->is_furnished):  ?>Furnished<?php else: ?>Empty<?= $this->translate('is_furnished') ?><?php endif; ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('deposit') ?></th>
+            <td><?= $this->property->deposit ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('availability') ?></th>
+            <td><?= $this->property->availability ?></td>
+        </tr>
+    </table>
+
+    <p>
+        <a href="<?= $this->url(array('module' => 'user', 'controller' => 'property', 'action' => 'well-rental', 'item' => $this->property->id), null, true) ?>"><?= $this->translate('edit') ?></a>
+    </p>
+
+<h3><?= $this->translate('description_of_property') ?></h3>
+
+    <?= $this->form ?>
