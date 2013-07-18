@@ -9,6 +9,9 @@
  * @property integer $owner_id
  * @property decimal $amount_of_rent_excluding_charges
  * @property decimal $amount_of_charges
+ * @property integer $is_furnished
+ * @property integer $deposit
+ * @property date $availability
  * @property Model_User $Owner
  * 
  * @package    ##PACKAGE##
@@ -40,6 +43,17 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'type' => 'decimal',
              'scale' => 2,
              'length' => '14',
+             ));
+        $this->hasColumn('is_furnished', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('deposit', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => '4',
+             ));
+        $this->hasColumn('availability', 'date', null, array(
+             'type' => 'date',
              ));
     }
 

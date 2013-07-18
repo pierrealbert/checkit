@@ -211,6 +211,9 @@ Property:
         amount_of_charges:
             type:   decimal(14)
             scale:  2
+        is_furnished: integer(1)
+        deposit:    integer(4)
+        availability: date
     relations:
         Owner:
             onDelete: cascade

@@ -12,5 +12,19 @@
  */
 class Model_Property extends Model_Base_Property
 {
+    public function setOnCreateDefaults($data, $user)
+    {
 
+        if (0 === $data['deposit']) {
+            if (1 === $data['is_furnished']) {
+                $data['deposit'] = 2;
+            } else {
+                $data['deposit'] = 1;
+            }
+        }
+        
+        $data['owner_id'] = $user->id;
+
+        return $data;
+    }
 }
