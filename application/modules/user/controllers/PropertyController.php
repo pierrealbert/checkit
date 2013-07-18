@@ -18,6 +18,8 @@ class User_PropertyController extends Zend_Controller_Action
 
     public function wellRentalAction()
     {
+        $user = $this->_helper->auth->getCurrUser();
+
         $form = new User_Form_WellRental();        
 
         if ($this->getRequest()->isPost()

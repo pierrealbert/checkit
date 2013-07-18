@@ -4,17 +4,26 @@ class User_Form_WellRental extends ZendX_JQuery_Form
 {
     public function init()
     {
+        // -------------------------------------------------------------------
+
         $this->addElement('text', 'amount_of_rent_excluding_charges', array(
             'label'      => 'amount_of_rent_excluding_charges',
-            'required'   => true,
-            'filters'    => array('StringTrim')
+            'filters'    => array(new Ext_Filter_Money()),
+            'allowEmpty' => false,
+            'value'      => 0.0,
+            'validators' => array(new Zend_Validate_GreaterThan(array('min' => 0))),
+            
         ));
+        // -------------------------------------------------------------------
 
         $this->addElement('text', 'amount_of_charges', array(
             'label'      => 'amount_of_charges',
-            'required'   => true,
-            'filters'    => array('StringTrim')
+            'filters'    => array(new Ext_Filter_Money()),
+            'allowEmpty' => false,
+            'value'      => 0.0,
+            'validators' => array(new Zend_Validate_GreaterThan(array('min' => 0))),
         ));
+        // -------------------------------------------------------------------
 
         $this->addElement('radio', 'is_furnished', array(
             'label'      => 'is_furnished',
@@ -25,14 +34,22 @@ class User_Form_WellRental extends ZendX_JQuery_Form
             ),
             'value' => 0,
         ));
+        // -------------------------------------------------------------------
 
         $this->addElement('text', 'deposit', array(
             'label'      => 'deposit',
-            'filters'    => array('StringTrim')
+            'filters'    => array(new Zend_Filter_Int()),
         ));
+        // -------------------------------------------------------------------
+        //TODO: Set error message
 
         $elem = new ZendX_JQuery_Form_Element_DatePicker(
-                "availability", array("label" => "Availability:")
+                "availability", 
+                array(
+                    "label"      => "Availability:",
+                    "allowEmpty" => false,
+                    'validators' => array(new Zend_Validate_Date()),
+                )
             );
 
         $elem->setJQueryParams(array(
@@ -42,23 +59,11 @@ class User_Form_WellRental extends ZendX_JQuery_Form
             ));
         
         $this->addElement($elem);
+        // -------------------------------------------------------------------
         
         $this->addElement('submit', 'next', array(
             'label'     => 'next',
             'class'     => 'ui-state-default ui-corner-all'
         ));
-    }
-
-    public function isValid($data)
-    {
-        if (isset($data['availability']) && !empty($data['availability'])) {
-            $validator = new Zend_Validate_Date();
-
-            if (!$validator->isValid($data['availability'])) {
-
-            }
-        }
-
-        return parent::isValid($data);
     }
 }
