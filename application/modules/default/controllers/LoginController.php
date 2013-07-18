@@ -31,7 +31,7 @@ class LoginController extends Zend_Controller_Action
                     $this->_helper->redirector->gotoUrl($url);
                 }
 
-                $this->_helper->redirector->gotoSimple('index', 'my-account', 'user');
+                $this->_helper->redirector->gotoSimple('residents', 'my-account', 'user');
             } else {
                 $this->_helper->messenger->error('login_error_user');
                 $this->_helper->redirector->gotoSimple('index', 'login', 'default');
