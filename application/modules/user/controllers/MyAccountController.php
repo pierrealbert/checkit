@@ -38,4 +38,50 @@ class User_MyAccountController extends Zend_Controller_Action
         }
         $this->view->form = $form;
     }
+
+	public function residentsAction()
+    {
+		$session = new Zend_Session_Namespace('UserResidentRegistration');
+		$count = !empty($session->residentsCount) ? $session->residentsCount : 1;
+
+		$form = new User_Form_UserResident($count);
+
+		$request = $this->_request;
+		$availableTypes = Model_UserResident::getRentTypes();
+		
+		// rebuild form
+		if ($request->isXmlHttpRequest()) {
+			$type = $this->_getParam('type');
+			if (in_array($type, $availableTypes)) {
+				
+				switch ($type) {
+					case Model_UserResident::RENT_TYPE_COUPLE:
+						$count = 2;
+						break;
+					case Model_UserResident::RENT_TYPE_ROOMMATE:
+						$count = 5;
+						break;
+					default :
+						$count = 1;
+				}
+				$form = new User_Form_UserResident($count);
+				$session->residentsCount = $count;
+
+				$this->_helper->json($form->render());
+			}
+		}
+		
+		if ($request->isPost() && $form->isValid($request->getPost()))
+        {
+			Zend_Debug::dump();
+			exit;
+			if (Zend_Session::namespaceIsset('UserResidentRegistration')) {
+				Zend_Session::namespaceUnset('UserResidentRegistration');
+			}
+		}
+		$this->view->assign(array(
+			'availableTypes' => $availableTypes,
+			'form' => $form
+		));
+	}
 }

@@ -32,18 +32,6 @@ class Form_Registration extends Ext_Form
             )
         ));
 
-		$this->addElement('radio', 'sex', array(
-            'label'      => 'sex',
-            'required'   => true,
-            'validators'    => array('Int'),
-            'multiOptions' => array(
-				'Male',
-				'Female'
-			),
-			'separator' => '',
-			'value' => 0
-        ));
-
         $this->addElement('password', 'password', array(
             'label'         => 'password',
             'required'      => true,
@@ -67,7 +55,7 @@ class Form_Registration extends Ext_Form
         ));
 
         $this->addElement('submit', 'register', array(
-            'label' => 'register'
+            'label' => 'Create Account'
         ));
     }
 }

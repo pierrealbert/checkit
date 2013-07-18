@@ -22,7 +22,7 @@ class LoginController extends Zend_Controller_Action
             if ($auth->authenticate($authAdapter)->isValid()) {
                 $user = $authAdapter->getResultObject();
                 $this->_autorize($user);
-                $this->_helper->redirector->gotoSimple('index', 'my-account', 'user');
+                $this->_helper->redirector->gotoSimple('residents', 'my-account', 'user');
             } else {
                 $this->_helper->messenger->error('login_error_user');
                 $this->_helper->redirector->gotoSimple('index', 'login', 'default');

@@ -1,0 +1,33 @@
+<form>
+	<?php if (!empty($this->availableTypes)) : ?>
+		<?php foreach ($this->availableTypes as $type) :
+			$checked = ($type === Model_UserResident::RENT_TYPE_SINGLE) ? 'checked="checked"' : '';?>
+			<label>
+				<input type="radio" value="<?= $type;?>" id="rent_type-<?= $type;?>" name="rent_type" <?= $checked;?>>
+				<?= $type;?>
+			</label>
+		<?php endforeach;?>
+	<?php endif;?>
+</form>
+
+<div id="form-wrapper">
+	<?= $this->form ?>
+</div>
+<?php 
+	$function = '$(function() {
+		$("input[name=rent_type]").on("click", function() {
+			var type = this.value;
+			$.ajax({
+				type: "post",
+				url: "' . $this->url() . '/type/" + type
+			}).done(function(data) {
+				$("#form-wrapper").empty().append(data);
+			}).fail(function(data) {
+				if( console && console.log ) {
+					console.log("Something is wrong");
+				}
+			});
+		});
+	});';
+	$this->jQuery()->addOnLoad($function);
+?>
