@@ -41,10 +41,31 @@ class User_PropertyController extends Zend_Controller_Action
                 $property->save();
 
                 $this->_helper->redirector('well-description-of-property', 'property', 'user', array('item' => $property->id));
+            } else {
+                
+                $forms = new Zend_Session_Namespace('Forms');
+                $forms->well_rental_form = $form;
+
+                if ($property) {
+
+                    $this->_helper->redirector('well-rental', 'property', 'user', array('item' => $property->id));
+                } else {
+
+                    $this->_helper->redirector('well-rental', 'property', 'user');
+                }
             }
-        } elseif ($this->getRequest()->isGet() && $property) { // Fill form for edit
+        } elseif ($this->getRequest()->isGet()) {
+
+            $forms = new Zend_Session_Namespace('Forms');
+
+            if (isset($forms->well_rental_form)) {
+
+                $form = $forms->well_rental_form;
+                unset($forms->well_rental_form);
+            } elseif ($property) { // Fill form for edit
 
                 $form->populate($property->toArray());
+            }
         }
 
         $this->view->jQuery()->addStylesheet('/css/ui/jquery-ui-1.8.14.css');
@@ -73,16 +94,45 @@ class User_PropertyController extends Zend_Controller_Action
 
                 $property->save();
 
+                $this->_helper->redirector('well-download-photos', 'property', 'user', array('item' => $property->id));
+            } else {
+
+                $forms = new Zend_Session_Namespace('Forms');
+                $forms->well_description_of_property = $form;
+
                 $this->_helper->redirector('well-description-of-property', 'property', 'user', array('item' => $property->id));
             }
-        } else {
+        } elseif ($this->getRequest()->isGet()) {
 
-            $form->initData($property->toArray());
+            $forms = new Zend_Session_Namespace('Forms');
+
+            if (isset($forms->well_description_of_property)) {
+
+                $form = $forms->well_description_of_property;
+                unset($forms->well_description_of_property);
+            } elseif ($property) { // Fill form for edit
+
+                $form->initData($property->toArray());
+            }
         }
 
         $this->view->property = $property;
 
         $this->view->form = $form;
+    }
+
+    public function wellDownloadPhotosAction()
+    {
+        $user = $this->_helper->auth->getCurrUser();
+        
+        $property = $this->getProperty($user);
+
+        if (!$property) {
+
+            $this->_helper->redirector('well-description-of-property', 'property', 'user', array('item' => $property->id));
+        }
+
+        $this->view->property = $property;
     }
 
     private function getProperty($user)
