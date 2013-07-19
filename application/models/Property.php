@@ -12,11 +12,26 @@
  */
 class Model_Property extends Model_Base_Property
 {
+    const TYPE_APARTMENT        = 1;
+    const TYPE_HOUSE            = 2;
+    const TYPE_LOFT_OR_WORKSHOP = 3;
+    const TYPE_STUDIO           = 4;
+    
+    static public function getTypes()
+    {
+        return array(
+            self::TYPE_APARTMENT        => 'Apartment',
+            self::TYPE_HOUSE            => 'House',
+            self::TYPE_LOFT_OR_WORKSHOP => 'Loft or workshop',
+            self::TYPE_STUDIO           => 'Studio',
+        );
+    }
+
     public function setOnCreateDefaults($data, $user)
     {
 
-        if (0 === $data['deposit']) {
-            if (1 === $data['is_furnished']) {
+        if (0 == $data['deposit']) {
+            if (1 == $data['is_furnished']) {
                 $data['deposit'] = 2;
             } else {
                 $data['deposit'] = 1;

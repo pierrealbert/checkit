@@ -58,17 +58,26 @@ class User_PropertyController extends Zend_Controller_Action
         
         $property = $this->getProperty($user);
 
+        if (!$property) {
+
+            $this->_helper->redirector('well-rental', 'property', 'user');
+        }
+
         $form = new User_Form_WellDescriptionOfProperty();        
 
-        if ($this->getRequest()->isPost()
-            && $form->isValid($this->getRequest()->getParams())
-        ) {
+        if ($this->getRequest()->isPost()) {
 
-            $property->merge($form->getValues());
+            if ($form->isValid($this->getRequest()->getParams())) {
 
-            $property->save();
+                $property->merge($form->getData());
 
-            $this->_helper->redirector('well-description-of-property', 'property', 'user');
+                $property->save();
+
+                $this->_helper->redirector('well-description-of-property', 'property', 'user', array('item' => $property->id));
+            }
+        } else {
+
+            $form->initData($property->toArray());
         }
 
         $this->view->property = $property;

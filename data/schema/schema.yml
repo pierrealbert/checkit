@@ -201,19 +201,43 @@ Queue:
 Property:
     columns:
         id:
-            type: integer(4)
-            primary: true
+            type:       integer(4)
+            primary:    true
             autoincrement: true
-        owner_id:  integer(4)
+        owner_id:       integer(4)
         amount_of_rent_excluding_charges:
-            type:   decimal(14)
-            scale:  2
+            type:       decimal(14)
+            scale:      2
         amount_of_charges:
-            type:   decimal(14)
-            scale:  2
-        is_furnished: integer(1)
-        deposit:    integer(4)
-        availability: date
+            type:       decimal(14)
+            scale:      2
+        is_furnished:   integer(1)
+        deposit:        integer(4)
+        availability:   date
+        address:        string(255)
+        area:           string(255)
+        property_type:  integer(4)
+        is_old:         integer(1)
+        is_refurbished: integer(1)
+        is_stone:       integer(1)
+        is_floor:       integer(1)
+        is_molding:     integer(1)
+        is_double_glazing: integer(1)
+        is_storage:     integer(1)
+        number_of_rooms: integer(4)
+        floor:          integer(4)
+        is_lift:        integer(1)
+        number_of_bathrooms: integer(4)
+        is_balcony:     integer(1)
+        is_terrace:     integer(1)
+        is_garden:      integer(1)
+        is_guard:       integer(1)
+        is_attic:       integer(1)
+        is_basement:    integer(1)
+        is_garage:      integer(1)
+        is_published:   
+            type:       integer(1)
+            default:    0
     relations:
         Owner:
             onDelete: cascade
