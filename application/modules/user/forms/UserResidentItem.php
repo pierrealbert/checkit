@@ -12,7 +12,8 @@ class User_Form_UserResidentItem extends Ext_Form_SubForm
 		$this->addElement('select', 'resident_type', array(
 			'label' => 'resident_type',
 			'required' => true,
-			'multiOptions' => Model_UserResident::getTypes()
+			'multiOptions' => Model_UserResident::getTypes(),
+			'attribs' => array('class' => 'resident-type')
 		));
 
 		$this->addElement('text', 'job_title', array(
@@ -23,7 +24,6 @@ class User_Form_UserResidentItem extends Ext_Form_SubForm
 
 		$this->addElement('radio', 'employee_type', array(
 			'label' => 'employee_type',
-			'required' => true,
 			'separator' => '',
 			'value' => Model_UserResident::EMPLOYEE_TYPE_CDI,
 			'multiOptions' => Model_UserResident::getEmployeeTypes()

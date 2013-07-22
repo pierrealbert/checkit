@@ -1,33 +1,96 @@
 <form>
 	<?php if (!empty($this->availableTypes)) : ?>
 		<?php foreach ($this->availableTypes as $type) :
-			$checked = ($type === Model_UserResident::RENT_TYPE_SINGLE) ? 'checked="checked"' : '';?>
+			$selectedType = (!empty($this->selectedType)) ? $this->selectedType : Model_UserResident::RENT_TYPE_SINGLE;
+			$checked = ($type === $selectedType) ? 'checked="checked"' : '';?>
 			<label>
 				<input type="radio" value="<?= $type;?>" id="rent_type-<?= $type;?>" name="rent_type" <?= $checked;?>>
 				<?= $type;?>
 			</label>
 		<?php endforeach;?>
 	<?php endif;?>
-</form>
+	<div id="roommate-count-wrapper" style="display:none;">
+		<label for="roommate-count">Roommates count:</label>
+		<select name="roommate-count" id="roommate-count">
+			<?php for ($i = 1; $i < 6; $i++):
+				$selected = ($i === $this->count) ? 'selected="selected"' : '';?>
+				<option value="<?= $i;?>" <?= $selected;?>><?= $i;?></option>
+			<?php endfor;?>
+		</select>
+	</div>
+ </form>
 
 <div id="form-wrapper">
 	<?= $this->form ?>
 </div>
 <?php 
 	$function = '$(function() {
-		$("input[name=rent_type]").on("click", function() {
-			var type = this.value;
-			$.ajax({
-				type: "post",
-				url: "' . $this->url() . '/type/" + type
-			}).done(function(data) {
-				$("#form-wrapper").empty().append(data);
-			}).fail(function(data) {
-				if( console && console.log ) {
-					console.log("Something is wrong");
-				}
-			});
+		var formWrapper = $("#form-wrapper"),
+			countSelect = $("#roommate-count"),
+			roommateType = "' . Model_UserResident::RENT_TYPE_ROOMMATE . '",
+			baseUrlForm = "' . $this->url() . '/type/",
+			residentTypeSelects = $("select.resident-type"),
+			rentType = $("input[name=rent_type]"),
+			updateForm = function(url) {
+				$.ajax({
+					type: "post",
+					url: url
+				}).done(function(data) {
+					formWrapper.empty().append(data);
+					residentTypeSelects = $("select.resident-type");
+					residentTypeSelects.trigger("change");
+				}).fail(function(data) {
+					if( console && console.log ) {
+						console.log("Something is wrong");
+					}
+				});
+			};
+
+		/* Residents count select handler for roommate rent type */
+		countSelect.on("change", function() {
+			var url = baseUrlForm + roommateType + "/count/" + countSelect.val();
+			updateForm(url);
 		});
+
+		/* Rent type change handler */
+		rentType.on("click", function() {
+			var type = this.value,
+				url = baseUrlForm + type;
+			if (type == roommateType) {
+				url += "/count/" + countSelect.val();
+			}
+			updateForm(url);
+		}).on("change", function() {
+			var roommate = $("input[name=rent_type][value=roommate]"),
+				container = $("#roommate-count-wrapper");
+			if( $(roommate).is(":checked") ) {
+				container.slideDown();
+			} else {
+				container.slideUp();
+			}
+		});
+
+		/* Resident type change handler */
+		formWrapper.on("change", "select.resident-type", function() {
+			var radio = $(this).closest("dl").find("input:radio"),
+				elementContainer = radio.closest("dd"),
+				labelContainer = elementContainer.prev(),
+				hideEl = function() {
+					labelContainer.hide();
+					elementContainer.hide();
+				},
+				showEl = function() {
+					labelContainer.slideDown();
+					elementContainer.slideDown();
+				}
+			if (this.value != "' . Model_UserResident::TYPE_STUDENT . '") {
+				showEl();
+			} else {
+				hideEl();
+			}
+		});
+		rentType.trigger("change");
+		residentTypeSelects.trigger("change");
 	});';
 	$this->jQuery()->addOnLoad($function);
 ?>
