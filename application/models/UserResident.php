@@ -20,6 +20,8 @@ class Model_UserResident extends Model_Base_UserResident
     const RENT_TYPE_SINGLE      = 'single';
     const RENT_TYPE_COUPLE      = 'couple';
     const RENT_TYPE_ROOMMATE    = 'roommate';
+
+	const ROOMMATE_MAX_COUNT = 5;
     
     const EMPLOYEE_TYPE_CDI = 'cdi';
     const EMPLOYEE_TYPE_CSD = 'csd';

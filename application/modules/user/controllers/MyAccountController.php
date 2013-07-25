@@ -49,10 +49,11 @@ class User_MyAccountController extends Zend_Controller_Action
 				? $session->selectedType
 				: Model_UserResident::RENT_TYPE_SINGLE;
 
-		$form = new User_Form_UserResident($count);
+		$form = new User_Form_UserResident($count, $selectedType);
 
 		$request = $this->_request;
 		$availableTypes = Model_UserResident::getRentTypes();
+		$roommateMaxCount = Model_UserResident::ROOMMATE_MAX_COUNT + 1;
 		
 		// rebuild form
 		if ($request->isXmlHttpRequest()) {
@@ -65,19 +66,20 @@ class User_MyAccountController extends Zend_Controller_Action
 						break;
 					case Model_UserResident::RENT_TYPE_ROOMMATE:
 						$param = (int)$this->_getParam('count');
-						$count = ($param > 0 && $param < 6) ? $param : 1;
+						$count = ($param > 0 && $param <= $roommateMaxCount) ? $param : 1;
 						break;
 					default :
 						$count = 1;
 				}
-				$form = new User_Form_UserResident($count);
+				$form = new User_Form_UserResident($count, $type);
 				$session->residentsCount = $count;
 				$session->selectedType = $type;
 
 				$this->_helper->json($form->render());
 			}
 		}
-		
+
+		// process form
 		if ($request->isPost() && $form->isValid($request->getPost()))
         {
 			$auth = Zend_Auth::getInstance();
@@ -87,7 +89,6 @@ class User_MyAccountController extends Zend_Controller_Action
 			$members = $data['member'];
 			$membersCount = count($members);
 			
-
 			for ($i = 1; $i <= $membersCount; $i++) {
 				$userResident = Doctrine::getTable('Model_UserResident')->create();
 
@@ -111,7 +112,8 @@ class User_MyAccountController extends Zend_Controller_Action
 			'availableTypes' => $availableTypes,
 			'form' => $form,
 			'selectedType' => $selectedType,
-			'count' => $count
+			'count' => $count,
+			'roommateMaxCount' => $roommateMaxCount
 		));
 	}
 }

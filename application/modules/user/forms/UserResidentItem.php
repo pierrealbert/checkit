@@ -5,7 +5,7 @@ class User_Form_UserResidentItem extends Ext_Form_SubForm
 
 	protected $rowNumber = 1;
 
-    public function init()
+	public function init()
     {
 		$this->setElementsBelongTo("member[{$this->rowNumber}]");
 
@@ -19,7 +19,8 @@ class User_Form_UserResidentItem extends Ext_Form_SubForm
 		$this->addElement('text', 'job_title', array(
             'label'      => 'job_title',
             'required'   => true,
-            'filters'    => array('StringTrim', 'StripTags')
+            'filters'    => array('StringTrim', 'StripTags'),
+			'attribs'	 => array('class' => 'job-title')
         ));
 
 		$this->addElement('radio', 'employee_type', array(
@@ -38,7 +39,6 @@ class User_Form_UserResidentItem extends Ext_Form_SubForm
 
 		$this->addElement('text', 'monthly_income_guaranteed', array(
             'label'      => 'monthly_income_guaranteed',
-            'required'   => true,
             'filters'    => array('StringTrim', 'StripTags'),
 			'validators' => array('Float')
         ));

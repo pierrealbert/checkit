@@ -1,4 +1,5 @@
 <form>
+	<!-- Rent type radio -->
 	<?php if (!empty($this->availableTypes)) : ?>
 		<?php foreach ($this->availableTypes as $type) :
 			$selectedType = (!empty($this->selectedType)) ? $this->selectedType : Model_UserResident::RENT_TYPE_SINGLE;
@@ -9,12 +10,14 @@
 			</label>
 		<?php endforeach;?>
 	<?php endif;?>
+
+	<!-- Rent type roommate count select -->
 	<div id="roommate-count-wrapper" style="display:none;">
 		<label for="roommate-count">Roommates count:</label>
 		<select name="roommate-count" id="roommate-count">
-			<?php for ($i = 1; $i < 6; $i++):
-				$selected = ($i === $this->count) ? 'selected="selected"' : '';?>
-				<option value="<?= $i;?>" <?= $selected;?>><?= $i;?></option>
+			<?php for ($i = 1; $i < $this->roommateMaxCount; $i++):
+				$selected = ($i === $this->count - 1) ? 'selected="selected"' : '';?>
+				<option value="<?= $i + 1;?>" <?= $selected;?>><?= $i;?></option>
 			<?php endfor;?>
 		</select>
 	</div>
@@ -64,7 +67,7 @@
 			var roommate = $("input[name=rent_type][value=roommate]"),
 				container = $("#roommate-count-wrapper");
 			if( $(roommate).is(":checked") ) {
-				container.slideDown();
+				container.show();
 			} else {
 				container.slideUp();
 			}
@@ -72,21 +75,40 @@
 
 		/* Resident type change handler */
 		formWrapper.on("change", "select.resident-type", function() {
-			var radio = $(this).closest("dl").find("input:radio"),
-				elementContainer = radio.closest("dd"),
-				labelContainer = elementContainer.prev(),
-				hideEl = function() {
-					labelContainer.hide();
-					elementContainer.hide();
+			var root = $(this).closest("dl"),
+
+				employeeType = root.find("input:radio"),
+				employeeTypeContainer = employeeType.closest("dd"),
+				employeeTypeLabelContainer = employeeTypeContainer.prev(),
+				hideElemIfNotEmployee = function() {
+					employeeTypeLabelContainer.hide();
+					employeeTypeContainer.hide();
 				},
-				showEl = function() {
-					labelContainer.slideDown();
-					elementContainer.slideDown();
-				}
-			if (this.value != "' . Model_UserResident::TYPE_STUDENT . '") {
-				showEl();
+				showElemIfEmployee = function() {
+					employeeTypeLabelContainer.slideDown();
+					employeeTypeContainer.slideDown();
+				},
+
+				jobTitle = root.find("input.job-title"),
+				jobTitleContainer = jobTitle.closest("dd"),
+				jobTitleLabelContainer = jobTitleContainer.prev(),
+				hideElemIfStudent = function() {
+					jobTitleLabelContainer.hide();
+					jobTitleContainer.hide();
+				},
+				showElemIfNotStudent = function() {
+					jobTitleLabelContainer.slideDown();
+					jobTitleContainer.slideDown();
+				};
+			if (this.value === "' . Model_UserResident::TYPE_EMPLOYEE . '") {
+				showElemIfEmployee();
+				showElemIfNotStudent();
+			} else if (this.value === "' . Model_UserResident::TYPE_STUDENT . '") {
+				hideElemIfNotEmployee();
+				hideElemIfStudent();
 			} else {
-				hideEl();
+				hideElemIfNotEmployee();
+				showElemIfNotStudent();
 			}
 		});
 		rentType.trigger("change");
