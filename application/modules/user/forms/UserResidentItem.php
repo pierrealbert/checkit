@@ -9,6 +9,10 @@ class User_Form_UserResidentItem extends Ext_Form_SubForm
     {
 		$this->setElementsBelongTo("member[{$this->rowNumber}]");
 
+		$this->addElement('hidden', 'id');
+        $this->getElement('id')->removeDecorator('label')
+            ->removeDecorator('HtmlTag'); 
+        
 		$this->addElement('select', 'resident_type', array(
 			'label' => 'resident_type',
 			'required' => true,

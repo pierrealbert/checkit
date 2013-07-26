@@ -41,19 +41,31 @@ class User_MyAccountController extends Zend_Controller_Action
 
 	public function residentsAction()
     {
-		$session = new Zend_Session_Namespace('UserResidentRegistration');
+        $user           = $this->_helper->auth->getCurrUser();
+        //$session    = new Zend_Session_Namespace('UserResidentRegistration');
+        $request        = $this->_request;
+        $selectedType   = $user->getRentType();
 
-		$count = !empty($session->residentsCount) ? $session->residentsCount : 1;
+        $residents = Doctrine::getTable('Model_UserResident')
+                ->findByUserId($user->id)->toArray(); 
+        
+        if ($request->isPost()) {
+            if ($this->_getParam('member')) {
+                $residents = $this->_getParam('member');
+            }
+            if ($this->_getParam('rent_type')) {
+                $selectedType = $this->_getParam('rent_type');
 
-		$selectedType = !empty($session->selectedType)
-				? $session->selectedType
-				: Model_UserResident::RENT_TYPE_SINGLE;
-
-		$form = new User_Form_UserResident($count, $selectedType);
-
-		$request = $this->_request;
-		$availableTypes = Model_UserResident::getRentTypes();
-		$roommateMaxCount = Model_UserResident::ROOMMATE_MAX_COUNT + 1;
+            }
+        }
+        
+        $count = $residents ? count($residents) : 1;       
+        	
+		$form = new User_Form_UserResident($count, $selectedType);          
+        $form->setResidents($residents);
+        		
+		$availableTypes     = Model_UserResident::getRentTypes();
+		$roommateMaxCount   = Model_UserResident::ROOMMATE_MAX_COUNT + 1;
 		
 		// rebuild form
 		if ($request->isXmlHttpRequest()) {
@@ -71,33 +83,31 @@ class User_MyAccountController extends Zend_Controller_Action
 					default :
 						$count = 1;
 				}
-				$form = new User_Form_UserResident($count, $type);
-				$session->residentsCount = $count;
-				$session->selectedType = $type;
+                $form = new User_Form_UserResident($count, $type);
+                $form->setResidents($residents);
 
 				$this->_helper->json($form->render());
 			}
 		}
 
 		// process form
-		if ($request->isPost() && $form->isValid($request->getPost()))
-        {
-			$auth = Zend_Auth::getInstance();
-			$userId = $auth->getInstance()->getIdentity();
-
+		if ($request->isPost() && $form->isValid($request->getPost())) {
 			$data = $form->getValues();
 			$members = $data['member'];
 			$membersCount = count($members);
 			
-			for ($i = 1; $i <= $membersCount; $i++) {
-				$userResident = Doctrine::getTable('Model_UserResident')->create();
+			for ($i = 1; $i <= $membersCount; $i++) {                
+                $userResident = Doctrine::getTable('Model_UserResident')->find($members[$i]['id']);
+                if (!$userResident) {
+                	$userResident = Doctrine::getTable('Model_UserResident')->create();
+                }
 
 				$userResident->merge($members[$i]);
-				$userResident->user_id = $userId;
-				$userResident->rent_type = $selectedType;
-				$userResident->is_primary = ($i === 1) ? 1 : 0;
+				$userResident->user_id      = $user->id;
+				$userResident->rent_type    = $selectedType;
+				$userResident->is_primary   = ($i === 1) ? 1 : 0;
 
-				$userResident->save();
+				$userResident->save();               
 			}
 
 			if (Zend_Session::namespaceIsset('UserResidentRegistration')) {
@@ -109,11 +119,11 @@ class User_MyAccountController extends Zend_Controller_Action
 		}
 		
 		$this->view->assign(array(
-			'availableTypes' => $availableTypes,
-			'form' => $form,
-			'selectedType' => $selectedType,
-			'count' => $count,
-			'roommateMaxCount' => $roommateMaxCount
+			'availableTypes'    => $availableTypes,
+			'form'              => $form,
+			'selectedType'      => $selectedType,
+			'count'             => $count,
+			'roommateMaxCount'  => $roommateMaxCount
 		));
 	}
 }
