@@ -12,10 +12,29 @@ class User_Form_WellDescriptionOfProperty extends Ext_Form
             'required'   => true,
         ));
 
-        $this->addElement('text', 'area', array(
-            'label'      => 'area',
+        $this->addElement('text', 'postcode', array(
+            'label'      => 'postcode',
+            'attribs'     => array('maxlength' => 5),
+            'filters'    => array('StringTrim'),
+            'allowEmpty' => false,
+            'validators'   => array (
+                new Zend_Validate_PostCode('fr_FR')
+            )
+        ));
+
+        $this->addElement('text', 'city', array(
+            'label'      => 'city',
             'filters'    => array('StringTrim'),
             'required'   => true,
+        ));
+
+        $this->addElement('text', 'size', array(
+            'label'      => 'size',
+            'filters'    => array(new Ext_Filter_Float()),
+            'allowEmpty' => false,
+            'value'      => 0.0,
+            'validators' => array(new Zend_Validate_GreaterThan(array('min' => 0))),
+            
         ));
 
     	$this->addElement('radio', 'property_type', array(
@@ -25,15 +44,28 @@ class User_Form_WellDescriptionOfProperty extends Ext_Form
             'multiOptions' => Model_Property::getTypes(),
 		));
 
-        $this->addElement('multiCheckbox', 'type_comments', array(
-            'multiOptions' => $multiCheckboxses['type_comments'],
-    		'separator' => '',
+        $this->addElement('radio', 'number_of_rooms1', array(
+            'label'      => 'number_of_rooms1',
+    		'separator'    => '',
+            'multiOptions' => array(
+                1 => "1",
+                2 => "2",
+                3 => "3",
+                4 => "4",
+                5 => "5",
+                6 => "6 et+",
+            ),
         ));
 
-        $this->addElement('text', 'number_of_rooms', array(
-            'label'      => 'number_of_rooms',
-            'filters'    => array('StringTrim'),
-            'required'   => true,
+        $this->addElement('radio', 'number_of_rooms2', array(
+            'label'      => 'number_of_rooms2',
+    		'separator'    => '',
+            'multiOptions' => array(
+                1 => "1",
+                2 => "2",
+                3 => "3",
+                4 => "4 et+",
+            ),
         ));
 
         $this->addElement('text', 'floor', array(
@@ -48,11 +80,18 @@ class User_Form_WellDescriptionOfProperty extends Ext_Form
             'checkedValue'   => '1'
         ));
 
+        $this->addElement('multiCheckbox', 'type_comments', array(
+            'multiOptions' => $multiCheckboxses['type_comments'],
+    		'separator' => '',
+        ));
+
+        /*
         $this->addElement('text', 'number_of_bathrooms', array(
             'label'      => 'number_of_bathrooms',
             'filters'    => array('StringTrim'),
             'required'   => false,
         ));
+        */
 
         $this->addElement('multiCheckbox', 'outdoor_space', array(
             'label'      => 'outdoor_space',

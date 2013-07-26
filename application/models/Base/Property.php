@@ -15,8 +15,12 @@
  * @property integer $deposit
  * @property date $availability
  * @property string $address
- * @property string $area
+ * @property string $postcode
+ * @property string $city
+ * @property decimal $size
  * @property integer $property_type
+ * @property integer $number_of_rooms1
+ * @property integer $number_of_rooms2
  * @property integer $is_old
  * @property integer $is_refurbished
  * @property integer $is_stone
@@ -24,7 +28,6 @@
  * @property integer $is_molding
  * @property integer $is_double_glazing
  * @property integer $is_storage
- * @property integer $number_of_rooms
  * @property integer $floor
  * @property integer $is_lift
  * @property integer $number_of_bathrooms
@@ -91,11 +94,28 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'type' => 'string',
              'length' => '255',
              ));
-        $this->hasColumn('area', 'string', 255, array(
+        $this->hasColumn('postcode', 'string', 8, array(
+             'type' => 'string',
+             'length' => '8',
+             ));
+        $this->hasColumn('city', 'string', 255, array(
              'type' => 'string',
              'length' => '255',
              ));
+        $this->hasColumn('size', 'decimal', 14, array(
+             'type' => 'decimal',
+             'scale' => 2,
+             'length' => '14',
+             ));
         $this->hasColumn('property_type', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => '4',
+             ));
+        $this->hasColumn('number_of_rooms1', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => '4',
+             ));
+        $this->hasColumn('number_of_rooms2', 'integer', 4, array(
              'type' => 'integer',
              'length' => '4',
              ));
@@ -126,10 +146,6 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
         $this->hasColumn('is_storage', 'integer', 1, array(
              'type' => 'integer',
              'length' => '1',
-             ));
-        $this->hasColumn('number_of_rooms', 'integer', 4, array(
-             'type' => 'integer',
-             'length' => '4',
              ));
         $this->hasColumn('floor', 'integer', 4, array(
              'type' => 'integer',

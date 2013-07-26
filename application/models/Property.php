@@ -15,29 +15,25 @@ class Model_Property extends Model_Base_Property
     const TYPE_APARTMENT        = 1;
     const TYPE_HOUSE            = 2;
     const TYPE_LOFT_OR_WORKSHOP = 3;
-    const TYPE_STUDIO           = 4;
-    
+    const TYPE_STUDETTE         = 4;
+    const TYPE_COLOCATION       = 5;
+    const TYPE_AUTRE            = 6;
+
     static public function getTypes()
     {
         return array(
-            self::TYPE_APARTMENT        => 'Apartment',
-            self::TYPE_HOUSE            => 'House',
-            self::TYPE_LOFT_OR_WORKSHOP => 'Loft or workshop',
-            self::TYPE_STUDIO           => 'Studio',
+            self::TYPE_APARTMENT        => 'Appartement',
+            self::TYPE_HOUSE            => 'Maison',
+            self::TYPE_LOFT_OR_WORKSHOP => 'Loft / Atelier',
+            self::TYPE_STUDETTE         => 'Studette',
+            self::TYPE_COLOCATION       => 'Colocation',
+            self::TYPE_AUTRE            => 'Autre',
         );
     }
 
     public function setOnCreateDefaults($data, $user)
     {
 
-        if (0 == $data['deposit']) {
-            if (1 == $data['is_furnished']) {
-                $data['deposit'] = 2;
-            } else {
-                $data['deposit'] = 1;
-            }
-        }
-        
         $data['owner_id'] = $user->id;
 
         return $data;
