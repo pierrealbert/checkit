@@ -217,8 +217,14 @@ Property:
         deposit:        integer(4)
         availability:   date
         address:        string(255)
-        area:           string(255)
+        postcode:       string(8)
+        city:           string(255)
+        size:           
+            type:       decimal(14)
+            scale:      2
         property_type:  integer(4)
+        number_of_rooms1: integer(4)
+        number_of_rooms2: integer(4)
         is_old:         integer(1)
         is_refurbished: integer(1)
         is_stone:       integer(1)
@@ -226,7 +232,6 @@ Property:
         is_molding:     integer(1)
         is_double_glazing: integer(1)
         is_storage:     integer(1)
-        number_of_rooms: integer(4)
         floor:          integer(4)
         is_lift:        integer(1)
         number_of_bathrooms: integer(4)
