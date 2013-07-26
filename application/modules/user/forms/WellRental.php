@@ -4,6 +4,12 @@ class User_Form_WellRental extends ZendX_JQuery_Form
 {
     public function init()
     {
+        $this->addElement('text', 'title', array(
+            'label'      => 'title',
+            'required'   => true,
+            'filters'    => array('StringTrim')
+        ));
+
         // -------------------------------------------------------------------
 
         $this->addElement('text', 'amount_of_rent_excluding_charges', array(
@@ -34,14 +40,35 @@ class User_Form_WellRental extends ZendX_JQuery_Form
             ),
             'value' => 0,
         ));
+        
         // -------------------------------------------------------------------
 
-        $this->addElement('text', 'deposit', array(
-            'label'      => 'deposit',
-            'filters'    => array(new Zend_Filter_Int()),
+        $this->addElement('select','lease_duration',  array(
+            'label'        => 'lease_duration',
+            'value'        => 1,
+            'multiOptions' => array(
+                1 => "1 mois",
+                2 => "2 mois",
+                3 => "3 mois",
+                4 => "4 mois",
+                5 => "5 mois",
+                6 => "6 mois",
+            ),
         ));
+
         // -------------------------------------------------------------------
-        //TODO: Set error message
+        
+        $this->addElement('radio', 'deposit', array(
+            'label'      => 'deposit',
+            'required'   => true,
+            'multiOptions' => array(
+                1 => "1 mois",
+                2 => "2 mois",
+            ),
+            'value' => 1,
+        ));
+
+        // -------------------------------------------------------------------
 
         $elem = new ZendX_JQuery_Form_Element_DatePicker(
                 "availability", 

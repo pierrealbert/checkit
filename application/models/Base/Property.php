@@ -7,9 +7,11 @@
  * 
  * @property integer $id
  * @property integer $owner_id
+ * @property string $title
  * @property decimal $amount_of_rent_excluding_charges
  * @property decimal $amount_of_charges
  * @property integer $is_furnished
+ * @property integer $lease_duration
  * @property integer $deposit
  * @property date $availability
  * @property string $address
@@ -56,6 +58,10 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'type' => 'integer',
              'length' => '4',
              ));
+        $this->hasColumn('title', 'string', 255, array(
+             'type' => 'string',
+             'length' => '255',
+             ));
         $this->hasColumn('amount_of_rent_excluding_charges', 'decimal', 14, array(
              'type' => 'decimal',
              'scale' => 2,
@@ -69,6 +75,10 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
         $this->hasColumn('is_furnished', 'integer', 1, array(
              'type' => 'integer',
              'length' => '1',
+             ));
+        $this->hasColumn('lease_duration', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => '4',
              ));
         $this->hasColumn('deposit', 'integer', 4, array(
              'type' => 'integer',

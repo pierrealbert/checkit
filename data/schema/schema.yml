@@ -205,6 +205,7 @@ Property:
             primary:    true
             autoincrement: true
         owner_id:       integer(4)
+        title:          string(255)
         amount_of_rent_excluding_charges:
             type:       decimal(14)
             scale:      2
@@ -212,6 +213,7 @@ Property:
             type:       decimal(14)
             scale:      2
         is_furnished:   integer(1)
+        lease_duration: integer(4)
         deposit:        integer(4)
         availability:   date
         address:        string(255)
