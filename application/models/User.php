@@ -41,6 +41,24 @@ class Model_User extends Model_Base_User
 
         return $this;
     }
+    
+    public function primaryResident()
+    {
+        $table = Model_UserResidentTable::getInstance();
+        return $table->createQuery()
+                ->andWhere('user_id = ?', $this->id)
+                ->andWhere('is_primary = ?', 1)
+                ->fetchOne();
+    }    
+    
+    public function getRentType()
+    {
+        $resident = $this->primaryResident();
+        if ($resident) {
+            return $resident->rent_type;
+        } 
+        return Model_UserResident::RENT_TYPE_SINGLE;
+    }
 
     public function isActive()
     {

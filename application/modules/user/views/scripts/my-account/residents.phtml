@@ -1,11 +1,11 @@
-<form>
+<form method="post" action="">
 	<!-- Rent type radio -->
 	<?php if (!empty($this->availableTypes)) : ?>
 		<?php foreach ($this->availableTypes as $type) :
 			$selectedType = (!empty($this->selectedType)) ? $this->selectedType : Model_UserResident::RENT_TYPE_SINGLE;
 			$checked = ($type === $selectedType) ? 'checked="checked"' : '';?>
 			<label>
-				<input type="radio" value="<?= $type;?>" id="rent_type-<?= $type;?>" name="rent_type" <?= $checked;?>>
+				<input type="radio" value="<?= $type;?>" id="rent_type-<?= $type;?>" name="rent_type" <?= $checked;?> />
 				<?= $type;?>
 			</label>
 		<?php endforeach;?>
@@ -59,6 +59,7 @@
 		rentType.on("click", function() {
 			var type = this.value,
 				url = baseUrlForm + type;
+            $("#rent_type").val(type);
 			if (type == roommateType) {
 				url += "/count/" + countSelect.val();
 			}
