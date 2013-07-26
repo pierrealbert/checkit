@@ -1,3 +1,7 @@
+default_module_header; "OMMI"
+default_module_footer; ""
+registration; "Registration"
+home_page; "Home"
 hello; "Hello"
 edit; "Edit"
 delete; "Delete"
