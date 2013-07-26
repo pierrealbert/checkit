@@ -54,7 +54,7 @@ class User_Form_User extends Ext_Form
         ));
     }
 
-    public function setDefaults($defaults)
+    public function setDefaults(array $defaults)
     {
         if (!empty($defaults['id'])) {
             $this->getElement('email')
