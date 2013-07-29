@@ -131,7 +131,8 @@ class User_MyAccountController extends Zend_Controller_Action
     {
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
         $userId = Zend_Auth::getInstance()->getIdentity();
-		$form = new User_Form_UserDocuments(array('residents' => Model_UserResidentTable::getInstance()->findByUserId($userId)));
+        $residents = Model_UserResidentTable::getInstance()->findByUserId($userId);
+		$form = new User_Form_UserDocuments(array('residents' => $residents));
         $form->getValues();
         if ($this->getRequest()->isPost()
             && $form->isValid($this->getRequest()->getPost())
@@ -140,11 +141,11 @@ class User_MyAccountController extends Zend_Controller_Action
             Model_UserResidentDocumentTable::getInstance()->removeAllUsersDocuments($userId);
             
             $documentsCollection = new Doctrine_Collection('Model_UserResidentDocument');
-            foreach ($form->getSubForms() as $subForm) {
-                foreach ($subForm as $elementName => $fileElement) {
+            foreach ($residents as $resident) {
+                $group = $form->getDisplayGroup('resident_' . $resident->id);
+                foreach ($group as $elementName => $fileElement) {
                     $fileElement->getValue();
                     if ($fileElement->isUploaded()) {
-                        $resident = $subForm->getResident();
                         $fileInfo = $fileElement->getFileInfo();
                         
                         $tmpPath  = $settings->get('files.tmpPath') . '/' . $fileInfo[$elementName]['name'];
