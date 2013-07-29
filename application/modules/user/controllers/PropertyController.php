@@ -132,7 +132,13 @@ class User_PropertyController extends Zend_Controller_Action
             $this->_helper->redirector('well-description-of-property', 'property', 'user', array('item' => $property->id));
         }
 
-        $this->view->property = $property;
+        $this->view->property           = $property;
+        $this->view->property_type      = Model_Property::getTypes();
+        $this->view->number_of_rooms1   = Model_Property::getNumberOfRooms1Info();
+        $this->view->number_of_rooms2   = Model_Property::getNumberOfRooms2Info();
+        $this->view->number_of_bathrooms = Model_Property::getNumberOfBathroomsInfo();
+        $this->view->multi_checkboxses  = User_Form_WellDescriptionOfProperty::getMultiCheckboxses();
+        
     }
 
     private function getProperty($user)

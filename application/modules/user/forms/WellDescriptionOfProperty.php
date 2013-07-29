@@ -47,25 +47,13 @@ class User_Form_WellDescriptionOfProperty extends Ext_Form
         $this->addElement('radio', 'number_of_rooms1', array(
             'label'      => 'number_of_rooms1',
     		'separator'    => '',
-            'multiOptions' => array(
-                1 => "1",
-                2 => "2",
-                3 => "3",
-                4 => "4",
-                5 => "5",
-                6 => "6 et+",
-            ),
+            'multiOptions' => Model_Property::getNumberOfRooms1Info(),
         ));
 
         $this->addElement('radio', 'number_of_rooms2', array(
             'label'      => 'number_of_rooms2',
     		'separator'    => '',
-            'multiOptions' => array(
-                1 => "1",
-                2 => "2",
-                3 => "3",
-                4 => "4 et+",
-            ),
+            'multiOptions' => Model_Property::getNumberOfRooms1Info(),
         ));
 
         $this->addElement('text', 'floor', array(
@@ -107,12 +95,7 @@ class User_Form_WellDescriptionOfProperty extends Ext_Form
         $this->addElement('radio', 'number_of_bathrooms', array(
             'label'      => 'number_of_bathrooms',
     		'separator'    => '',
-            'multiOptions' => array(
-                1 => "1",
-                2 => "2",
-                3 => "3",
-                4 => "4 et+",
-            ),
+            'multiOptions' => Model_Property::getNumberOfBathroomsInfo(),
         ));
 
         $this->addElement('multiCheckbox', 'heating_system', array(
@@ -127,7 +110,7 @@ class User_Form_WellDescriptionOfProperty extends Ext_Form
         ));
     }
 
-    private static function getMultiCheckboxses()
+    public static function getMultiCheckboxses()
     {
         return array(
             'decor' => array(
