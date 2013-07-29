@@ -47,25 +47,13 @@ class User_Form_WellDescriptionOfProperty extends Ext_Form
         $this->addElement('radio', 'number_of_rooms1', array(
             'label'      => 'number_of_rooms1',
     		'separator'    => '',
-            'multiOptions' => array(
-                1 => "1",
-                2 => "2",
-                3 => "3",
-                4 => "4",
-                5 => "5",
-                6 => "6 et+",
-            ),
+            'multiOptions' => Model_Property::getNumberOfRooms1Info(),
         ));
 
         $this->addElement('radio', 'number_of_rooms2', array(
             'label'      => 'number_of_rooms2',
     		'separator'    => '',
-            'multiOptions' => array(
-                1 => "1",
-                2 => "2",
-                3 => "3",
-                4 => "4 et+",
-            ),
+            'multiOptions' => Model_Property::getNumberOfRooms1Info(),
         ));
 
         $this->addElement('text', 'floor', array(
@@ -80,29 +68,40 @@ class User_Form_WellDescriptionOfProperty extends Ext_Form
             'checkedValue'   => '1'
         ));
 
-        $this->addElement('multiCheckbox', 'type_comments', array(
-            'multiOptions' => $multiCheckboxses['type_comments'],
+        $this->addElement('multiCheckbox', 'decor', array(
+            'label'          => 'decor',
+            'multiOptions' => $multiCheckboxses['decor'],
     		'separator' => '',
         ));
 
-        /*
-        $this->addElement('text', 'number_of_bathrooms', array(
-            'label'      => 'number_of_bathrooms',
-            'filters'    => array('StringTrim'),
-            'required'   => false,
+        $this->addElement('multiCheckbox', 'outhouse', array(
+            'label'          => 'outhouse',
+            'multiOptions' => $multiCheckboxses['outhouse'],
+    		'separator' => '',
         ));
-        */
-
+        
         $this->addElement('multiCheckbox', 'outdoor_space', array(
-            'label'      => 'outdoor_space',
-            'multiOptions' => $multiCheckboxses['outdoor_space'],
-    		'separator' => '',
+            'label'         => 'outdoor_space',
+            'multiOptions'  => $multiCheckboxses['outdoor_space'],
+            'separator'     => '',
         ));
 
-        $this->addElement('multiCheckbox', 'property_other', array(
-            'label'      => 'property_other',
-            'multiOptions' => $multiCheckboxses['property_other'],
-    		'separator' => '',
+        $this->addElement('multiCheckbox', 'building', array(
+            'label'         => 'building',
+            'multiOptions'  => $multiCheckboxses['building'],
+            'separator'     => '',
+        ));
+
+        $this->addElement('radio', 'number_of_bathrooms', array(
+            'label'      => 'number_of_bathrooms',
+    		'separator'    => '',
+            'multiOptions' => Model_Property::getNumberOfBathroomsInfo(),
+        ));
+
+        $this->addElement('multiCheckbox', 'heating_system', array(
+            'label'         => 'heating_system',
+            'multiOptions'  => $multiCheckboxses['heating_system'],
+            'separator'     => '',
         ));
 
         $this->addElement('submit', 'next', array(
@@ -111,28 +110,48 @@ class User_Form_WellDescriptionOfProperty extends Ext_Form
         ));
     }
 
-    private static function getMultiCheckboxses()
+    public static function getMultiCheckboxses()
     {
         return array(
-            'type_comments' => array(
-                'is_old'         => 'Old',
-                'is_refurbished' => 'Refurbished',
-                'is_stone'       => 'Stone',
-                'is_floor'       => 'Floor',
-                'is_molding'     => 'Molding',
-                'is_double_glazing' => 'Double glazing',
-                'is_storage'     => 'Storage',
+            'decor' => array(
+                'is_separate_restrooms' => 'Separate restrooms',
+                'is_parquet_floor'      => 'Parquet floor',
+                'is_molding'            => 'Molding',
+                'is_double_glazing'     => 'Double glazing',
+                'is_storage_area'       => 'Storage area',
+                'is_fireplace'          => 'Fireplace',
             ),
+
+            'outhouse' => array(
+                'is_attic'          => 'Attic',
+                'is_basement'       => 'Basement',
+                'is_parking_lot'    => 'Parking lot',
+                'is_garage'         => 'Garage',
+                'is_swimming_pool'  => 'Swimming pool',
+            ),
+
             'outdoor_space' => array(
                 'is_balcony' => 'Balcony',
                 'is_terrace' => 'Terrace',
                 'is_garden'  => 'Garden',
+                'is_yard'    => 'Yard',
             ),
-            'property_other' => array(
-                'is_guard'    => 'Guard',
-                'is_attic'    => 'Attic',
-                'is_basement' => 'Basement',
-                'is_garage'   => 'Garage',
+
+            'building' => array(
+                'is_digicode'       => 'Digicode / Interphone',
+                'is_watchman'       => 'Watchman',
+                'is_old_building'   => 'Old Building',
+                'is_very_old_building' => 'Very old building',
+                'is_renove'         => 'Renove',
+            ),
+            
+            'heating_system' => array(
+                'is_individuel' => 'Individuel',
+                'is_central'    => 'Central / Collectif',
+                'is_au_sol'     => 'Au sol',
+                'is_gaz'        => 'Gaz',
+                'is_electrique' => 'Electrique',
+                'is_autre'      => 'Autre',
             ),
         );
     }

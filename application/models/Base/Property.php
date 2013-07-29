@@ -21,23 +21,35 @@
  * @property integer $property_type
  * @property integer $number_of_rooms1
  * @property integer $number_of_rooms2
- * @property integer $is_old
- * @property integer $is_refurbished
- * @property integer $is_stone
- * @property integer $is_floor
+ * @property integer $is_separate_restrooms
+ * @property integer $is_parquet_floor
  * @property integer $is_molding
  * @property integer $is_double_glazing
- * @property integer $is_storage
+ * @property integer $is_storage_area
+ * @property integer $is_fireplace
  * @property integer $floor
  * @property integer $is_lift
- * @property integer $number_of_bathrooms
  * @property integer $is_balcony
  * @property integer $is_terrace
  * @property integer $is_garden
- * @property integer $is_guard
+ * @property integer $is_yard
  * @property integer $is_attic
  * @property integer $is_basement
  * @property integer $is_garage
+ * @property integer $is_parking_lot
+ * @property integer $is_swimming_pool
+ * @property integer $is_digicode
+ * @property integer $is_watchman
+ * @property integer $is_old_building
+ * @property integer $is_very_old_building
+ * @property integer $is_renove
+ * @property integer $number_of_bathrooms
+ * @property integer $is_individuel
+ * @property integer $is_central
+ * @property integer $is_au_sol
+ * @property integer $is_gaz
+ * @property integer $is_electrique
+ * @property integer $is_autre
  * @property integer $is_published
  * @property Model_User $Owner
  * 
@@ -119,19 +131,11 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'type' => 'integer',
              'length' => '4',
              ));
-        $this->hasColumn('is_old', 'integer', 1, array(
+        $this->hasColumn('is_separate_restrooms', 'integer', 1, array(
              'type' => 'integer',
              'length' => '1',
              ));
-        $this->hasColumn('is_refurbished', 'integer', 1, array(
-             'type' => 'integer',
-             'length' => '1',
-             ));
-        $this->hasColumn('is_stone', 'integer', 1, array(
-             'type' => 'integer',
-             'length' => '1',
-             ));
-        $this->hasColumn('is_floor', 'integer', 1, array(
+        $this->hasColumn('is_parquet_floor', 'integer', 1, array(
              'type' => 'integer',
              'length' => '1',
              ));
@@ -143,7 +147,11 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'type' => 'integer',
              'length' => '1',
              ));
-        $this->hasColumn('is_storage', 'integer', 1, array(
+        $this->hasColumn('is_storage_area', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_fireplace', 'integer', 1, array(
              'type' => 'integer',
              'length' => '1',
              ));
@@ -154,10 +162,6 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
         $this->hasColumn('is_lift', 'integer', 1, array(
              'type' => 'integer',
              'length' => '1',
-             ));
-        $this->hasColumn('number_of_bathrooms', 'integer', 4, array(
-             'type' => 'integer',
-             'length' => '4',
              ));
         $this->hasColumn('is_balcony', 'integer', 1, array(
              'type' => 'integer',
@@ -171,7 +175,7 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'type' => 'integer',
              'length' => '1',
              ));
-        $this->hasColumn('is_guard', 'integer', 1, array(
+        $this->hasColumn('is_yard', 'integer', 1, array(
              'type' => 'integer',
              'length' => '1',
              ));
@@ -184,6 +188,62 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'length' => '1',
              ));
         $this->hasColumn('is_garage', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_parking_lot', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_swimming_pool', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_digicode', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_watchman', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_old_building', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_very_old_building', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_renove', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('number_of_bathrooms', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => '4',
+             ));
+        $this->hasColumn('is_individuel', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_central', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_au_sol', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_gaz', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_electrique', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_autre', 'integer', 1, array(
              'type' => 'integer',
              'length' => '1',
              ));

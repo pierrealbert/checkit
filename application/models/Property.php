@@ -31,9 +31,40 @@ class Model_Property extends Model_Base_Property
         );
     }
 
+    static public function getNumberOfRooms1Info()
+    {
+        return array(
+            1 => "1",
+            2 => "2",
+            3 => "3",
+            4 => "4",
+            5 => "5",
+            6 => "6 et+",
+        );
+    }
+
+    static public function getNumberOfRooms2Info()
+    {
+        return array(
+            1 => "1",
+            2 => "2",
+            3 => "3",
+            4 => "4 et+",
+        );
+    }
+
+    static public function getNumberOfBathroomsInfo()
+    {
+        return array(
+            1 => "1",
+            2 => "2",
+            3 => "3",
+            4 => "4 et+",
+        );
+    }
+
     public function setOnCreateDefaults($data, $user)
     {
-
         $data['owner_id'] = $user->id;
 
         return $data;

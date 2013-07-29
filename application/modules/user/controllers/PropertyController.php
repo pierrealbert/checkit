@@ -94,7 +94,7 @@ class User_PropertyController extends Zend_Controller_Action
 
                 $property->save();
 
-                $this->_helper->redirector('well-download-photos', 'property', 'user', array('item' => $property->id));
+                $this->_helper->redirector('well-upload-photos', 'property', 'user', array('item' => $property->id));
             } else {
 
                 $forms = new Zend_Session_Namespace('Forms');
@@ -121,7 +121,7 @@ class User_PropertyController extends Zend_Controller_Action
         $this->view->form = $form;
     }
 
-    public function wellDownloadPhotosAction()
+    public function wellUploadPhotosAction()
     {
         $user = $this->_helper->auth->getCurrUser();
         
@@ -132,7 +132,16 @@ class User_PropertyController extends Zend_Controller_Action
             $this->_helper->redirector('well-description-of-property', 'property', 'user', array('item' => $property->id));
         }
 
-        $this->view->property = $property;
+        $form = new User_Form_WellUploadPhotos();
+
+        $this->view->property           = $property;
+        $this->view->property_type      = Model_Property::getTypes();
+        $this->view->number_of_rooms1   = Model_Property::getNumberOfRooms1Info();
+        $this->view->number_of_rooms2   = Model_Property::getNumberOfRooms2Info();
+        $this->view->number_of_bathrooms = Model_Property::getNumberOfBathroomsInfo();
+        $this->view->multi_checkboxses  = User_Form_WellDescriptionOfProperty::getMultiCheckboxses();
+        
+        $this->view->form = $form;
     }
 
     private function getProperty($user)

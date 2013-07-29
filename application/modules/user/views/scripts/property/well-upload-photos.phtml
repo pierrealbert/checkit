@@ -1,0 +1,170 @@
+<h2><?= $this->translate('well') ?></h2>
+<h3><?= $this->translate('rental') ?></h3>
+
+    <table>
+        <tr>
+            <th align="right"><?= $this->translate('title') ?></th>
+            <td><?= $this->property->title ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('amount_of_rent_excluding_charges') ?></th>
+            <td><?= $this->property->amount_of_rent_excluding_charges ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('amount_of_charges') ?></th>
+            <td><?= $this->property->amount_of_charges ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('is_furnished') ?></th>
+            <td><?php if (1 == $this->property->is_furnished):  ?>Furnished<?php else: ?>Empty<?= $this->translate('is_furnished') ?><?php endif; ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('lease_duration') ?></th>
+            <td><?= $this->property->lease_duration ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('deposit') ?></th>
+            <td><?= $this->property->deposit ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('availability') ?></th>
+            <td><?= $this->property->availability ?></td>
+        </tr>
+    </table>
+
+    <p>
+        <a href="<?= $this->url(array('module' => 'user', 'controller' => 'property', 'action' => 'well-rental', 'item' => $this->property->id), null, true) ?>"><?= $this->translate('edit') ?></a>
+    </p>
+
+<h3><?= $this->translate('description_of_property') ?></h3>
+
+    <table>
+        <tr>
+            <th align="right"><?= $this->translate('address') ?></th>
+            <td><?= $this->property->address ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('postcode') ?></th>
+            <td><?= $this->property->postcode ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('city') ?></th>
+            <td><?= $this->property->city ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('size') ?></th>
+            <td><?= $this->property->size ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('property_type') ?></th>
+            <td><?= $this->property_type[$this->property->property_type] ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('number_of_rooms1') ?></th>
+            <td><?= $this->number_of_rooms1[$this->property->number_of_rooms1] ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('number_of_rooms2') ?></th>
+            <td><?= $this->number_of_rooms2[$this->property->number_of_rooms2] ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('floor') ?></th>
+            <td><?= $this->property->floor ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('is_lift') ?></th>
+            <td><?php if ($this->property->is_lift): ?>Oui<?php else: ?>Non<?php endif; ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('decor') ?></th>
+            <td>
+            <?php $string = ''; ?>
+            <?php foreach($this->multi_checkboxses['decor'] as $key => $value): ?>
+                <?php if ($this->property->$key): ?>
+                    <?php if (empty($string)): ?>
+                        <?php  $string = $value; ?>
+                    <?php else: ?>
+                        <?php  $string .= ', ' . $value; ?>
+                    <?php endif; ?>            
+                <?php endif; ?>            
+            <?php endforeach; ?>
+                <?= $string ?>
+            </td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('outhouse') ?></th>
+            <td>
+            <?php $string = ''; ?>
+            <?php foreach($this->multi_checkboxses['outhouse'] as $key => $value): ?>
+                <?php if ($this->property->$key): ?>
+                    <?php if (empty($string)): ?>
+                        <?php  $string = $value; ?>
+                    <?php else: ?>
+                        <?php  $string .= ', ' . $value; ?>
+                    <?php endif; ?>            
+                <?php endif; ?>            
+            <?php endforeach; ?>
+                <?= $string ?>
+            </td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('outdoor_space') ?></th>
+            <td>
+            <?php $string = ''; ?>
+            <?php foreach($this->multi_checkboxses['outdoor_space'] as $key => $value): ?>
+                <?php if ($this->property->$key): ?>
+                    <?php if (empty($string)): ?>
+                        <?php  $string = $value; ?>
+                    <?php else: ?>
+                        <?php  $string .= ', ' . $value; ?>
+                    <?php endif; ?>            
+                <?php endif; ?>            
+            <?php endforeach; ?>
+                <?= $string ?>
+            </td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('building') ?></th>
+            <td>
+            <?php $string = ''; ?>
+            <?php foreach($this->multi_checkboxses['building'] as $key => $value): ?>
+                <?php if ($this->property->$key): ?>
+                    <?php if (empty($string)): ?>
+                        <?php  $string = $value; ?>
+                    <?php else: ?>
+                        <?php  $string .= ', ' . $value; ?>
+                    <?php endif; ?>            
+                <?php endif; ?>            
+            <?php endforeach; ?>
+                <?= $string ?>
+            </td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('number_of_bathrooms') ?></th>
+            <td><?= $this->number_of_bathrooms[$this->property->number_of_bathrooms] ?></td>
+        </tr>
+        <tr>
+            <th align="right"><?= $this->translate('heating_system') ?></th>
+            <td>
+            <?php $string = ''; ?>
+            <?php foreach($this->multi_checkboxses['heating_system'] as $key => $value): ?>
+                <?php if ($this->property->$key): ?>
+                    <?php if (empty($string)): ?>
+                        <?php  $string = $value; ?>
+                    <?php else: ?>
+                        <?php  $string .= ', ' . $value; ?>
+                    <?php endif; ?>            
+                <?php endif; ?>            
+            <?php endforeach; ?>
+                <?= $string ?>
+            </td>
+        </tr>
+    </table>
+
+    <p>
+        <a href="<?= $this->url(array('module' => 'user', 'controller' => 'property', 'action' => 'well-description-of-property', 'item' => $this->property->id), null, true) ?>"><?= $this->translate('edit') ?></a>
+    </p>
+
+<h3><?= $this->translate('upload_photos') ?></h3>
+
+<?= $this->form ?>
