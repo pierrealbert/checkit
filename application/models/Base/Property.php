@@ -29,7 +29,6 @@
  * @property integer $is_fireplace
  * @property integer $floor
  * @property integer $is_lift
- * @property integer $number_of_bathrooms
  * @property integer $is_balcony
  * @property integer $is_terrace
  * @property integer $is_garden
@@ -44,6 +43,13 @@
  * @property integer $is_old_building
  * @property integer $is_very_old_building
  * @property integer $is_renove
+ * @property integer $number_of_bathrooms
+ * @property integer $is_individuel
+ * @property integer $is_central
+ * @property integer $is_au_sol
+ * @property integer $is_gaz
+ * @property integer $is_electrique
+ * @property integer $is_autre
  * @property integer $is_published
  * @property Model_User $Owner
  * 
@@ -157,10 +163,6 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'type' => 'integer',
              'length' => '1',
              ));
-        $this->hasColumn('number_of_bathrooms', 'integer', 4, array(
-             'type' => 'integer',
-             'length' => '4',
-             ));
         $this->hasColumn('is_balcony', 'integer', 1, array(
              'type' => 'integer',
              'length' => '1',
@@ -214,6 +216,34 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'length' => '1',
              ));
         $this->hasColumn('is_renove', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('number_of_bathrooms', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => '4',
+             ));
+        $this->hasColumn('is_individuel', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_central', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_au_sol', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_gaz', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_electrique', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_autre', 'integer', 1, array(
              'type' => 'integer',
              'length' => '1',
              ));

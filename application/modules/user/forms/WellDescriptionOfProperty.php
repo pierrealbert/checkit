@@ -115,6 +115,12 @@ class User_Form_WellDescriptionOfProperty extends Ext_Form
             ),
         ));
 
+        $this->addElement('multiCheckbox', 'heating_system', array(
+            'label'         => 'heating_system',
+            'multiOptions'  => $multiCheckboxses['heating_system'],
+            'separator'     => '',
+        ));
+
         $this->addElement('submit', 'next', array(
             'label'     => 'next',
             'class'     => 'ui-state-default ui-corner-all'
@@ -157,7 +163,12 @@ class User_Form_WellDescriptionOfProperty extends Ext_Form
             ),
             
             'heating_system' => array(
-            
+                'is_individuel' => 'Individuel',
+                'is_central'    => 'Central / Collectif',
+                'is_au_sol'     => 'Au sol',
+                'is_gaz'        => 'Gaz',
+                'is_electrique' => 'Electrique',
+                'is_autre'      => 'Autre',
             ),
         );
     }

@@ -233,7 +233,6 @@ Property:
         is_fireplace:   integer(1)
         floor:          integer(4)
         is_lift:        integer(1)
-        number_of_bathrooms: integer(4)
         is_balcony:     integer(1)
         is_terrace:     integer(1)
         is_garden:      integer(1)
@@ -248,6 +247,13 @@ Property:
         is_old_building: integer(1)
         is_very_old_building: integer(1)
         is_renove:      integer(1)
+        number_of_bathrooms: integer(4)
+        is_individuel:  integer(1)
+        is_central:     integer(1)
+        is_au_sol:      integer(1)
+        is_gaz:         integer(1)
+        is_electrique:  integer(1)
+        is_autre:       integer(1)
         is_published:   
             type:       integer(1)
             default:    0
