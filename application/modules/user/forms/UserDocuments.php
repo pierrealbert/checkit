@@ -27,27 +27,42 @@ class User_Form_UserDocuments extends Ext_Form
             $documents['contract'] = array();
             $documents['tax_notice'] = array();
             if ($resident->monthly_income_guaranteed > 0) {
-                // TODO: only one of them should be required
-                $documents['tax_notice_guaranteed'] = array();
-                $documents['payslip_guaranteed'] = array();
+                $documents['tax_notice_guaranteed'] = array(
+                    'required' => False,
+                    'validators' => array(new Ext_Validate_OneNotEmpty(array('token' => 'payslip_guaranteed' . $resident->id))),
+                );
+                $documents['payslip_guaranteed'] = array(
+                    'required' => False,
+                    'validators' => array(new Ext_Validate_OneNotEmpty(array('token' => 'tax_notice_guaranteed' . $resident->id))),
+                );
             }
         } elseif ($resident->resident_type == Model_UserResident::TYPE_INDEPENDENT) {
             $documents['passport'] = array();
             $documents['tax_notice'] = array();
             $documents['inc_certificate'] = array();
             if ($resident->monthly_income_guaranteed > 0) {
-                // TODO: only one of them should be required
-                $documents['tax_notice_guaranteed'] = array();
-                $documents['payslip_guaranteed'] = array();
+                $documents['tax_notice_guaranteed'] = array(
+                    'required' => False,
+                    'validators' => array(new Ext_Validate_OneNotEmpty(array('token' => 'payslip_guaranteed' . $resident->id))),
+                );
+                $documents['payslip_guaranteed'] = array(
+                    'required' => False,
+                    'validators' => array(new Ext_Validate_OneNotEmpty(array('token' => 'tax_notice_guaranteed' . $resident->id))),
+                );
             }
         } elseif ($resident->resident_type == Model_UserResident::TYPE_OTHER) {
             $documents['passport'] = array();
             $documents['tax_notice'] = array();
             $documents['payslip'] = array();
             if ($resident->monthly_income_guaranteed > 0) {
-                // TODO: only one of them should be required
-                $documents['tax_notice_guaranteed'] = array();
-                $documents['payslip_guaranteed'] = array();
+                $documents['tax_notice_guaranteed'] = array(
+                    'required' => False,
+                    'validators' => array(new Ext_Validate_OneNotEmpty(array('token' => 'payslip_guaranteed' . $resident->id))),
+                );
+                $documents['payslip_guaranteed'] = array(
+                    'required' => False,
+                    'validators' => array(new Ext_Validate_OneNotEmpty(array('token' => 'tax_notice_guaranteed' . $resident->id))),
+                );
             }
         }
 
@@ -78,21 +93,35 @@ class User_Form_UserDocuments extends Ext_Form
         
 		foreach($this->_residents as $resident) {
             $this->_addGroupForResident($resident);
-			// $key = "resident_". $resident->id;
-			// 
-			// $subform = new User_Form_UserDocumentsSub(array("resident" => $resident));
-            // if ($resident->is_primary) {
-            //     $subform->setLegend("Primary Resident ({$resident->resident_type})");
-            // } else {
-            //     $subform->setLegend("Another Resident ({$resident->resident_type})");
-            // }
-			// $this->addSubForm($subform, $key);
 		}
 
         $this->addElement('submit', 'save', array(
             'label'    => 'save',
         ));
 	}
+
+    public function isValid($data)
+    {
+        $result = True;
+
+        // Little hack because Zend doesn't support this kind of vilidation for File elements
+        foreach ($this->getElements() as $element) {
+            foreach ($element->getValidators() as $name => $validator) {
+                if ($validator instanceof Ext_Validate_OneNotEmpty) {
+                    $element->removeValidator($name);
+                    $validator->setTranslator($this->getTranslator());
+                    if (!$validator->isValid($element->getValue(), $this->getValues())) {
+                        $result = False;
+                        $messages = $validator->getMessages();
+                        $element->addErrors($messages);
+                    }
+                }
+            }
+        }
+        
+        $result = parent::isValid($data) and $result;
+        return $result;
+    }
     
 	public function setResidents($residents)
 	{
