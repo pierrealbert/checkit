@@ -15,6 +15,7 @@
  * @property decimal $monthly_income_guaranteed
  * @property boolean $is_primary
  * @property Model_User $User
+ * @property Doctrine_Collection $UserResidentDocument
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -97,6 +98,10 @@ abstract class Model_Base_UserResident extends Ext_Doctrine_Record
              'local' => 'user_id',
              'foreign' => 'id',
              'onDelete' => 'cascade'));
+
+        $this->hasMany('Model_UserResidentDocument as UserResidentDocument', array(
+             'local' => 'id',
+             'foreign' => 'user_resident_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              'created' => 
