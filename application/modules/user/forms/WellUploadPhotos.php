@@ -4,9 +4,20 @@ class User_Form_WellUploadPhotos extends Ext_Form
 {
     public function init()
     {
-        $image = new Ext_Form_Element_FileImage('image');
+        parent::init();
 
-        $this->addElement($image, 'image');
+        $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
+
+        $this->addElement('file', 'image', array(
+            'label'         => 'upload_image',
+            'required'      => true,
+            'destination'   => $settings->get('propertyImages.tmpPath'),
+            'filters' => array(
+                new Ext_Filter_File_UniqueName(array(
+                    'targetDir' => $settings->get('propertyImages.tmpPath')
+                ))
+            )
+        ));
 
         $this->addElement('submit', 'upload', array(
             'label'     => 'upload',
