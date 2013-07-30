@@ -126,4 +126,57 @@ class User_MyAccountController extends Zend_Controller_Action
 			'roommateMaxCount'  => $roommateMaxCount
 		));
 	}
+
+    public function documentsAction()
+    {
+        $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
+        $userId = Zend_Auth::getInstance()->getIdentity();
+        $residents = Model_UserResidentTable::getInstance()->findByUserId($userId);
+		$form = new User_Form_UserDocuments(array('residents' => $residents));
+        $form->getValues();
+        if ($this->getRequest()->isPost()
+            && $form->isValid($this->getRequest()->getPost())
+        ) {
+            // Remove all users documents. TODO: needs to implement removing only marked documents.
+            Model_UserResidentDocumentTable::getInstance()->removeAllUsersDocuments($userId);
+            
+            $documentsCollection = new Doctrine_Collection('Model_UserResidentDocument');
+            foreach ($residents as $resident) {
+                $group = $form->getDisplayGroup('resident_' . $resident->id);
+                foreach ($group as $elementName => $fileElement) {
+                    $fileElement->getValue();
+                    if ($fileElement->isUploaded()) {
+                        $fileInfo = $fileElement->getFileInfo();
+                        
+                        $tmpPath  = $settings->get('files.tmpPath') . '/' . $fileInfo[$elementName]['name'];
+                        $pathinfo = pathinfo($tmpPath);
+                        $filePath = $settings->get('files.document.path') . '/' . md5($fileInfo[$elementName]['name'] . time()) . '.' . strtolower($pathinfo['extension']);
+                        
+                        $fullFilePath = $settings->get('files.basePath') . '/' . $filePath;
+
+                        if (!is_file($tmpPath)) {
+                            throw new Zend_Controller_Action_Exception($tmpPath . ' is not exists');
+                        }
+
+                        if (!@rename($tmpPath, $fullFilePath)) {
+                            throw new Zend_Controller_Action_Exception('Can not move file to ' . $fullFilePath);
+                        }
+
+                        $documentModel = new Model_UserResidentDocument();
+                        $documentModel->file          = $filePath;
+                        $documentModel->original_name = $pathinfo['filename'];
+                        $documentModel->user_resident_id = $resident->id;
+                        $documentModel->type = $fileElement->getAttrib('documentType');
+                        $documentsCollection->add($documentModel);
+
+                    }
+                }
+            }
+            $documentsCollection->save();
+			$this->_helper->messenger->success('files_was_uploaded');
+            $this->_helper->redirector('index', 'my-account', 'user');
+            
+        }
+        $this->view->form = $form;
+    }
 }

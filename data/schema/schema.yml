@@ -116,6 +116,25 @@ UserResident:
                 name: created_at
             updated:
                 name: updated_at  
+UserResidentDocument:
+    columns:      
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true   
+        user_resident_id:
+            type: integer(4)            
+        file:           
+            type: string(255)
+        original_name:  
+            type: string(255)
+        type: 
+            type: enum
+            values: [passport, student_id, inc_certificate, payslip, paycheck1, paycheck2, paycheck3, contract, tax_notice, tax_notice_guaranteed, payslip_guaranteed]
+    relations:
+        UserResident:
+            onDelete: cascade
+
 UserMessage:                
     columns:      
         id:
