@@ -2,10 +2,8 @@
 
 class Form_Registration extends Ext_Form
 {
-    public function init()
+    protected function _addElements($withSubmit = True)
     {
-        $this->setAttrib('id', 'form-registration');
-       
         $this->addElement('text', 'first_name', array(
             'label'    => 'first_name',
             'required' => true,
@@ -54,8 +52,18 @@ class Form_Registration extends Ext_Form
             )
         ));
 
-        $this->addElement('submit', 'register', array(
-            'label' => 'Create Account'
-        ));
+        if ($withSubmit) {
+            $this->addElement('submit', 'register', array(
+                'label' => 'Create Account'
+            ));
+        }
+    }
+    
+    public function init()
+    {
+        $this->setAttrib('id', 'form-registration');
+
+        $this->_addElements();
+       
     }
 }

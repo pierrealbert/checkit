@@ -2,10 +2,8 @@
 
 class RegistrationController extends Zend_Controller_Action
 {
-    public function indexAction()
+    protected function _processRegistrationForm(Zend_Form $form)
     {
-        $form = new Form_Registration();
-
         if ($this->getRequest()->isPost() 
                 && $form->isValid($this->getRequest()->getPost()))
         {
@@ -21,6 +19,23 @@ class RegistrationController extends Zend_Controller_Action
             $this->_helper->redirector->gotoSimple('index', 'index', 'default');
         } 
         
+    }
+    
+    public function indexAction()
+    {
+        $form = new Form_Registration();
+
+        $this->_processRegistrationForm($form);
+
+        $this->view->form = $form;
+    }
+
+    public function proAction()
+    {
+        $form = new Form_RegistrationPro();
+
+        $this->_processRegistrationForm($form);
+
         $this->view->form = $form;
     }
     

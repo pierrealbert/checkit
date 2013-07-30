@@ -69,6 +69,12 @@ User:
             type: boolean
             notnull: true
             default: false   
+
+        company_name: string(50)
+        company_address: string(255)
+        company_siret: string(50)
+        company_zip: integer(4)
+        company_city: string(50)
     actAs:
         Timestampable:
             created:

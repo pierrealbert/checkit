@@ -20,6 +20,11 @@
  * @property string $restore_password_key
  * @property boolean $is_active
  * @property boolean $is_confirmed
+ * @property string $company_name
+ * @property string $company_address
+ * @property string $company_siret
+ * @property integer $company_zip
+ * @property string $company_city
  * @property Doctrine_Collection $UserResident
  * @property Doctrine_Collection $UserMessage
  * @property Doctrine_Collection $Property
@@ -105,6 +110,26 @@ abstract class Model_Base_User extends Ext_Doctrine_Record
              'type' => 'boolean',
              'notnull' => true,
              'default' => false,
+             ));
+        $this->hasColumn('company_name', 'string', 50, array(
+             'type' => 'string',
+             'length' => '50',
+             ));
+        $this->hasColumn('company_address', 'string', 255, array(
+             'type' => 'string',
+             'length' => '255',
+             ));
+        $this->hasColumn('company_siret', 'string', 50, array(
+             'type' => 'string',
+             'length' => '50',
+             ));
+        $this->hasColumn('company_zip', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => '4',
+             ));
+        $this->hasColumn('company_city', 'string', 50, array(
+             'type' => 'string',
+             'length' => '50',
              ));
     }
 
