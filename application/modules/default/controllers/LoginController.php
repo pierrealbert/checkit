@@ -2,6 +2,18 @@
 
 class LoginController extends Zend_Controller_Action
 {
+    protected function _redirectAfterLogin()
+    {
+        $referralUrl = new Zend_Session_Namespace('ReferralUrl');
+
+        if (isset($referralUrl->url)) {
+            $url = $referralUrl->url;
+            unset($referralUrl->url);
+            $this->_helper->redirector->gotoUrl($url);
+        }
+
+        $this->_helper->redirector->gotoSimple('residents', 'my-account', 'user');
+    }
     public function indexAction()
     {
         if ($this->_helper->auth->isLoggedIn()) {
@@ -23,15 +35,7 @@ class LoginController extends Zend_Controller_Action
                 $user = $authAdapter->getResultObject();
                 $this->_autorize($user);
 
-                $referralUrl = new Zend_Session_Namespace('ReferralUrl');
-
-                if (isset($referralUrl->url)) {
-                    $url = $referralUrl->url;
-                    unset($referralUrl->url);
-                    $this->_helper->redirector->gotoUrl($url);
-                }
-
-                $this->_helper->redirector->gotoSimple('residents', 'my-account', 'user');
+                $this->_redirectAfterLogin();
             } else {
                 $this->_helper->messenger->error('login_error_user');
                 $this->_helper->redirector->gotoSimple('index', 'login', 'default');
@@ -39,6 +43,98 @@ class LoginController extends Zend_Controller_Action
         }
 
         $this->view->form = $form;
+    }
+    
+    public function facebookAction() {
+        if ('cancel' == $this->getRequest()->getParam('submit')) {
+            $this->_helper->messenger->success('facebook_auth_canceled');
+            $this->_helper->redirector('index');
+        }
+
+        $currUser = Zend_Controller_Action_HelperBroker::getStaticHelper('Auth')->getCurrUser();
+        $facebook = new Ext_Service_Facebook($currUser);
+        $queryString = $this->getRequest()->getServer('QUERY_STRING');
+        parse_str($queryString, $getVariables);
+        $facebookProfile = null;
+        $sess = new Zend_Session_Namespace('Registration');
+
+        if (!empty($queryString)) {
+            try {
+                $facebookProfile = $facebook->api('/me');
+            } catch (Facebook_FacebookApiException $e) {
+                $this->_helper->messenger->success('facebook_unknown_error');
+                $this->_helper->redirector('index');
+            } catch (Exception $e) {
+                $this->_helper->messenger->success('unknown_error');
+                $this->_helper->redirector('index');
+            }
+        } else {
+            $facebookLoginUrl = $facebook->getLoginUrl(array(
+                'cancel_url' => $this->view->serverUrl() . $this->view->baseUrl() . $this->view->url(array(
+                    'action' => 'facebook',
+                    'controller' => 'login',
+                    'module' => 'default',
+                    'submit' => 'cancel'), Null, 1),
+                'next' => $this->view->serverUrl() . $this->view->baseUrl() . $this->view->url( array(
+                    'action' => 'facebook',
+                    'controller' => 'login',
+                    'module' => 'default',
+                    'submit' => 'ok'), Null, 1),
+                'req_perms' => 'email',
+                'scope' => 'email,publish_stream',
+            ));
+            Header('Location: ' . $facebookLoginUrl);
+        }
+
+        if ($facebookProfile == null) {
+            die(111); // TODO: need to solve this magic
+        }
+
+        if (!empty($currUser)) {
+            $currUser->facebook_id = $facebookProfile['id'];
+            $currUser->save();
+            $this->_helper->messenger->success('facebook_connected_to_existed_user');
+            $this->_helper->redirector->gotoSimple('index', 'login', 'default'); // if user is logged in he will be redirected to correct page according his role
+        } else {
+            $user = Model_UserTable::getInstance()->findOneBy('facebook_id', $facebookProfile['id']);
+            if ($user) {
+                $this->_autorize($user);
+                $this->_redirectAfterLogin();
+            } else {
+                $sess->facebook = $facebook;
+                $sess->facebookProfile = $facebookProfile;
+                
+                //$this->_helper->redirector->gotoSimple($action, 'signup', 'default');
+                $this->_helper->redirector->gotoSimple('facebook-confirm', 'login', 'default');
+            }
+        }
+    }
+
+    public function facebookConfirmAction()
+    {
+        $sess = new Zend_Session_Namespace('Registration');
+        if (!$sess->facebook or !$sess->facebookProfile or empty($sess->facebookProfile['id'])) {
+            $this->_helper->redirector->gotoSimple('facebook', 'login', 'default');
+        }
+
+        if ($this->getRequest()->getParam('confirm')) {
+            
+            $user = Doctrine::getTable('Model_User')->create();
+            $user->is_confirmed = 1;
+            $user->is_active = 1;
+            $user->first_name = $sess->facebookProfile['first_name'];
+            $user->last_name = $sess->facebookProfile['last_name'];
+            $user->email = $sess->facebookProfile['email'];
+            $user->facebook_id = $sess->facebookProfile['id'];
+            $user->save();
+
+            $sess->facebook = Null;
+            $sess->facebookProfile = Null;
+            
+            $this->_autorize($user);
+            $this->_helper->redirector->gotoSimple('index', 'my-account', 'user');
+        }
+
     }
 
     public function logoutAction()

@@ -46,6 +46,7 @@ User:
         role:       string(10)
         country:    string(2)
         city:       string(50)
+        facebook_id: string(50)
         type: 
           type: enum
           values: [owner, resident]

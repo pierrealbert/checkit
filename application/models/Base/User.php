@@ -14,6 +14,7 @@
  * @property string $role
  * @property string $country
  * @property string $city
+ * @property string $facebook_id
  * @property enum $type
  * @property string $confirm_registration_key
  * @property string $restore_password_key
@@ -68,6 +69,10 @@ abstract class Model_Base_User extends Ext_Doctrine_Record
              'length' => '2',
              ));
         $this->hasColumn('city', 'string', 50, array(
+             'type' => 'string',
+             'length' => '50',
+             ));
+        $this->hasColumn('facebook_id', 'string', 50, array(
              'type' => 'string',
              'length' => '50',
              ));
