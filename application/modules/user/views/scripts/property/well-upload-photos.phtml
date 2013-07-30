@@ -167,4 +167,35 @@
 
 <h3><?= $this->translate('upload_photos') ?></h3>
 
-<?= $this->form ?>
+    <?= $this->form ?>
+
+    <?php if (!$this->photos): ?>
+        <p>No photos</p>
+    <?php else: ?>
+        <ul>
+        <?php foreach ($this->photos as $photo): ?>
+            <li data-photo="<?= $photo['name'] ?>"><img src="<?= $photo['link'] ?>" alt="<?= $photo['link'] ?>" /> <a href="#" class="remove_photo">[X]</a></li>
+        <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+<?php
+    $function = "$(function() {
+        $('.remove_photo').on('click', function(){
+            var photo = $(this).parent().attr('data-photo');
+
+            $.ajax({
+                type: 'POST',
+                url: '/user/property/remove-photo/item/{$this->property->id}',
+                data: {photo: photo},
+                success: function(r) {
+                    $('li[data-photo=\"' + photo + '\"]').remove();
+                },
+                dataType: 'json'
+            });
+            return false;
+        });
+    });";
+
+    $this->jQuery()->addOnLoad($function);
+
+?>

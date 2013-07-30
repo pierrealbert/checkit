@@ -124,6 +124,7 @@ class User_PropertyController extends Zend_Controller_Action
     public function wellUploadPhotosAction()
     {
         $user = $this->_helper->auth->getCurrUser();
+
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
         
         $property = $this->getProperty($user);
@@ -159,7 +160,11 @@ class User_PropertyController extends Zend_Controller_Action
                     throw new Zend_Controller_Action_Exception('Can not move file to ' . $fullFilePath);
                 }
 
+    		    $this->_helper->messenger->success('photo_was_uploaded');
+
             } else {
+    		    $this->_helper->messenger->error('error_photo_upload');
+
                 $forms = new Zend_Session_Namespace('Forms');
                 $forms->well_upload_photos = $form;
             }
@@ -174,6 +179,7 @@ class User_PropertyController extends Zend_Controller_Action
             }
         }
 
+        $this->view->photos             = $property->getPhotos();
         $this->view->property           = $property;
         $this->view->property_type      = Model_Property::getTypes();
         $this->view->number_of_rooms1   = Model_Property::getNumberOfRooms1Info();
@@ -194,6 +200,30 @@ class User_PropertyController extends Zend_Controller_Action
         }
 
         return $property;
+    }
+
+    public function removePhotoAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+        $this->_helper->layout->disableLayout();
+
+        $user = $this->_helper->auth->getCurrUser();
+
+        $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
+        
+        $property = $this->getProperty($user);
+
+        if ($property) {
+            $data = $this->getRequest()->getPost();
+
+            if (isset($data['photo']) && !empty($data['photo'])) {
+                $data['photo'] = str_replace("_", '/', $data['photo']);
+
+                @unlink($settings->get('propertyImages.basePath') . '/' . $data['photo']);
+            }
+        }
+
+        $this->_helper->json->sendJson(array());
     }
 }
 

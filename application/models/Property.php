@@ -69,4 +69,29 @@ class Model_Property extends Model_Base_Property
 
         return $data;
     }
+
+    public function getPhotos()
+    {
+        $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
+
+        $photos = array();
+
+        $path = $settings->get('propertyImages.basePath') . "/{$this->id}";
+
+        if (!is_dir($path)) return $photos;
+
+        if ($dh = opendir($path)) {
+            while (($file = readdir($dh)) !== false) {
+                if (is_file($path . '/'. $file)) {
+                    $photos[] = array(
+                        'name' => "{$this->id}_{$file}",
+                        'link' => $settings->get('propertyImages.baseUrl') . "/{$this->id}/{$file}",
+                    );
+                }
+            }
+            closedir($dh);
+        }
+
+        return $photos;
+    }
 }
