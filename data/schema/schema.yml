@@ -274,6 +274,9 @@ Property:
         is_gaz:         integer(1)
         is_electrique:  integer(1)
         is_autre:       integer(1)
+        main_photo:
+            type:       string(255)
+            default:    ""
         is_published:   
             type:       integer(1)
             default:    0

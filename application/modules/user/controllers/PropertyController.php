@@ -2,20 +2,6 @@
 
 class User_PropertyController extends Zend_Controller_Action
 {
-    public function postAdAction()
-    {
-        $form = new User_Form_DescribeYourSelf();
-
-        if ($this->getRequest()->isPost()
-            && $form->isValid($this->getRequest()->getParams())
-        ) {
-
-            $this->_helper->redirector('well-rental', 'property', 'user');
-        }
-
-        $this->view->form = $form;
-    }
-
     public function wellRentalAction()
     {
         $user = $this->_helper->auth->getCurrUser();

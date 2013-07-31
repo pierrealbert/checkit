@@ -50,6 +50,7 @@
  * @property integer $is_gaz
  * @property integer $is_electrique
  * @property integer $is_autre
+ * @property string $main_photo
  * @property integer $is_published
  * @property Model_User $Owner
  * 
@@ -246,6 +247,11 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
         $this->hasColumn('is_autre', 'integer', 1, array(
              'type' => 'integer',
              'length' => '1',
+             ));
+        $this->hasColumn('main_photo', 'string', 255, array(
+             'type' => 'string',
+             'default' => '',
+             'length' => '255',
              ));
         $this->hasColumn('is_published', 'integer', 1, array(
              'type' => 'integer',
