@@ -201,8 +201,17 @@
                 url: '/user/property/remove-photo/item/{$this->property->id}',
                 data: {photo: photo},
                 success: function(r) {
-                    $('li[data-photo=\"' + photo + '\"]').remove();
-                    // TODO: Select diferent photo
+                    if (!r.error) {
+                        $('li[data-photo=\"' + photo + '\"]').remove();
+
+                        if (r.main_photo.length > 0) {
+                            $('.select_photo').show();
+                            $('.selected_photo').hide();
+
+                            $('.selected_photo', 'li[data-photo=\"' + r.main_photo + '\"]').show();
+                            $('.select_photo', 'li[data-photo=\"' + r.main_photo + '\"]').hide();
+                        }
+                    }
                 },
                 dataType: 'json'
             });
@@ -217,11 +226,13 @@
                 url: '/user/property/select-photo/item/{$this->property->id}',
                 data: {photo: photo},
                 success: function(r) {
-                    $('.select_photo').show();
-                    $('.selected_photo').hide();
+                    if (!r.error) {
+                        $('.select_photo').show();
+                        $('.selected_photo').hide();
 
-                    $('.selected_photo', 'li[data-photo=\"' + photo + '\"]').show();
-                    $('.select_photo', 'li[data-photo=\"' + photo + '\"]').hide();
+                        $('.selected_photo', 'li[data-photo=\"' + photo + '\"]').show();
+                        $('.select_photo', 'li[data-photo=\"' + photo + '\"]').hide();
+                    }
                 },
                 dataType: 'json'
             });

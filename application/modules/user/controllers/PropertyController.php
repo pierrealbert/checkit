@@ -132,6 +132,7 @@ class User_PropertyController extends Zend_Controller_Action
                 
                 $path = $settings->get('propertyImages.basePath') . "/{$property->id}";
                 
+                // Create property dir on first photo upload
                 if (!is_dir($path) && !mkdir($path, 0777, true)) {
                     throw new Zend_Controller_Action_Exception("Can't create dirictory \"{$path}\"");
                 }
@@ -142,8 +143,15 @@ class User_PropertyController extends Zend_Controller_Action
                     throw new Zend_Controller_Action_Exception($tmpPath . ' is not exists');
                 }
 
+                // Move photo to propery dir
                 if (!@rename($tmpPath, $fullFilePath)) {
                     throw new Zend_Controller_Action_Exception('Can not move file to ' . $fullFilePath);
+                }
+
+                // Select first photo as main
+                if (empty($property->main_photo)) {
+                    $property->main_photo = $settings->get('propertyImages.baseUrl') . "/{$property->id}/{$filePath}";
+                    $property->save();
                 }
 
     		    $this->_helper->messenger->success('photo_was_uploaded');
@@ -199,17 +207,38 @@ class User_PropertyController extends Zend_Controller_Action
         
         $property = $this->getProperty($user);
 
+        $result = array('error' => true);
+
         if ($property) {
             $data = $this->getRequest()->getPost();
-
+            
+            // TODO: Refactor. Move to model
             if (isset($data['photo']) && !empty($data['photo'])) {
                 $data['photo'] = str_replace("_", '/', $data['photo']);
 
                 @unlink($settings->get('propertyImages.basePath') . '/' . $data['photo']);
+
+                $result['main_photo'] = '';
+
+                // If deleted photo is main
+                if ($property->main_photo == $settings->get('propertyImages.baseUrl') . '/' . $data['photo']) {
+                    $property->main_photo = '';
+
+                    $photos = $property->getPhotos();
+
+                    if ($photos) {
+                        $property->main_photo = $photos[0]['link'];
+                        $result['main_photo'] = $photos[0]['name'];
+                    }
+
+                    $property->save();
+                }
+
+                $result['error'] = false;
             }
         }
 
-        $this->_helper->json->sendJson(array());
+        $this->_helper->json->sendJson($result);
     }
 
     public function selectPhotoAction()
@@ -223,18 +252,22 @@ class User_PropertyController extends Zend_Controller_Action
         
         $property = $this->getProperty($user);
 
+        $result = array('error' => true);
+
         if ($property) {
             $data = $this->getRequest()->getPost();
 
+            // TODO: Refactor. Move to model
             if (isset($data['photo']) && !empty($data['photo'])) {
                 $data['photo'] = str_replace("_", '/', $data['photo']);
 
                 $property->main_photo = $settings->get('propertyImages.baseUrl') . '/' . $data['photo'];
                 $property->save();
+                $result['error'] = false;
             }
         }
 
-        $this->_helper->json->sendJson(array());
+        $this->_helper->json->sendJson($result);
     }
 }
 
