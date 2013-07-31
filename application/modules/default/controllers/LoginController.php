@@ -11,9 +11,14 @@ class LoginController extends Zend_Controller_Action
             unset($referralUrl->url);
             $this->_helper->redirector->gotoUrl($url);
         }
-
-        $this->_helper->redirector->gotoSimple('residents', 'my-account', 'user');
+        $currUser = $this->_helper->auth->getCurrUser();
+        
+        if ($currUser->isResident() && !$currUser->hasResidents()) {
+            $this->_helper->redirector->gotoSimple('residents', 'my-account', 'user');
+        }
+        $this->_helper->redirector->gotoSimple('index', 'my-account', 'user');
     }
+    
     public function indexAction()
     {
         if ($this->_helper->auth->isLoggedIn()) {

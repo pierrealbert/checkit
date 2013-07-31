@@ -8,7 +8,8 @@ class User_Plugin_Auth extends Zend_Controller_Plugin_Abstract
         $auth->setStorage(new Zend_Auth_Storage_Session('Zend_Auth_User'));
         
         $loginUri = '/login';
-
+        $currUser = null;
+        
         if (!$auth->hasIdentity()) {
 
             if ($this->getRequest()->isGet()) {
@@ -19,22 +20,13 @@ class User_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 
             Zend_Controller_Action_HelperBroker::getStaticHelper('Redirector')
                     ->gotoUrlAndExit($loginUri);
+        } else {
+            $currUser = Doctrine::getTable('Model_User')->find($auth->getIdentity());                
         }
-
-        $this->_setViewVars();
-    }
-
-    protected function _setViewVars()
-    {
-        $auth         = Zend_Auth::getInstance();
+        
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
 
-        $viewRenderer->view->isLoggedIn = false;
-        $viewRenderer->view->currUser   = null;
-
-        if ($auth->hasIdentity()) {
-            $viewRenderer->view->isLoggedIn = true;
-            $viewRenderer->view->currUser   = Doctrine::getTable('Model_User')->find($auth->getIdentity());
-        }
+        $viewRenderer->view->isLoggedIn = $currUser ? true : false;
+        $viewRenderer->view->currUser   = $currUser;
     }
 }

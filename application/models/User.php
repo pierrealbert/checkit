@@ -51,6 +51,14 @@ class Model_User extends Model_Base_User
                 ->fetchOne();
     }    
     
+    public function hasResidents()
+    {
+        $table = Model_UserResidentTable::getInstance();
+        return (bool) $table->createQuery()
+                ->andWhere('user_id = ?', $this->id)
+                ->count();        
+    }
+    
     public function getRentType()
     {
         $resident = $this->primaryResident();
@@ -80,19 +88,19 @@ class Model_User extends Model_Base_User
         return $this->first_name . ' ' . $this->last_name;
     }
 
-    public function setConfirmRegistrationKey()
+    public function generateConfirmRegistrationKey()
     {
         $this->confirm_registration_key = md5(time() . $this->id);
 
         return $this;
     }
     
-    public function setRestorePasswordKey()
+    public function generateRestorePasswordKey()
     {
         $this->restore_password_key = md5(time() . $this->id);
         return $this;
     }
-
+    
     public function isValidPassword($password)
     {
         return $this->getHash()->validateHash($password, $this->password);
@@ -133,5 +141,29 @@ class Model_User extends Model_Base_User
     {
         $this->_authHash = $authHash;
         return $this;
+    }
+    
+    public function isOwner()
+    {
+        return $this->type == self::OWNER;
+    }
+    
+    public function isResident()
+    {
+        return $this->type == self::RESIDENT;
+    }    
+    
+    static public function getTypes()
+    {
+        return array(
+            self::OWNER     => 'user_owner',
+            self::RESIDENT  => 'user_resident'
+        );
+    }
+    
+    static public function isTypeValid($type)
+    {
+        $types = self::getTypes();
+        return isset($types[$type]);
     }
 }

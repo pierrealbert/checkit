@@ -12,7 +12,7 @@ class ForgotPasswordController extends Zend_Controller_Action
             $user = Doctrine::getTable('Model_User')->findOneByEmail($this->_getParam('email', ''));
 
             if ($user) {
-                $user->setRestorePasswordKey();
+                $user->generateRestorePasswordKey();
                 $user->save();
 
                 $this->_helper->mailer->send($user->email, 'reset-password', $user->toArray());

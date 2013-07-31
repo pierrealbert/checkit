@@ -104,7 +104,7 @@ abstract class Model_Base_User extends Ext_Doctrine_Record
         $this->hasColumn('is_active', 'boolean', null, array(
              'type' => 'boolean',
              'notnull' => true,
-             'default' => false,
+             'default' => true,
              ));
         $this->hasColumn('is_confirmed', 'boolean', null, array(
              'type' => 'boolean',
