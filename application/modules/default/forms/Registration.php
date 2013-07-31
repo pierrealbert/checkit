@@ -51,12 +51,24 @@ class Form_Registration extends Ext_Form
                 new Zend_Validate_Identical('password')
             )
         ));
+        
+		$this->addElement('hidden', 'type', array(
+            'value' => Model_User::OWNER
+        ));
+        
+        $this->getElement('type')->removeDecorator('label')
+            ->removeDecorator('HtmlTag');         
 
         if ($withSubmit) {
             $this->addElement('submit', 'register', array(
                 'label' => 'Create Account'
             ));
         }
+    }
+    
+    public function setType($type)
+    {
+        $this->getElement('type')->setValue($type);
     }
     
     public function init()

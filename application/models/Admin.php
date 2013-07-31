@@ -40,7 +40,7 @@ class Model_Admin extends Model_Base_Admin
         return $this->save();
     }
 
-    public function setRestorePasswordKey()
+    public function generateRestorePasswordKey()
     {
         $this->restore_password_key = md5(time() . $this->id);
         return $this;

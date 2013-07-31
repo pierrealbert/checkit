@@ -12,7 +12,7 @@ class Admin_ForgotPasswordController extends Zend_Controller_Action
             $admin = Doctrine::getTable('Model_Admin')->findOneByEmail($this->_getParam('email', ''));
 
             if ($admin) {
-                $admin->setRestorePasswordKey();
+                $admin->generateRestorePasswordKey();
                 $admin->save();
 
                 $this->_helper->mailer->send($admin->email, 'reset-password', $admin->toArray());
