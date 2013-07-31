@@ -76,6 +76,7 @@ class RegistrationController extends Zend_Controller_Action
             if ($currUser->isResident() && !$currUser->hasResidents()) {
                 $this->_helper->redirector->gotoSimple('residents', 'my-account', 'user');
             }
+            $this->_helper->redirector->gotoSimple('index', 'my-account', 'user');
         } else {
             $this->_helper->messenger->error('wrong_confirmation_key');
         }
