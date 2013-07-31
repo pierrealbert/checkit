@@ -211,5 +211,30 @@ class User_PropertyController extends Zend_Controller_Action
 
         $this->_helper->json->sendJson(array());
     }
+
+    public function selectPhotoAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+        $this->_helper->layout->disableLayout();
+
+        $user = $this->_helper->auth->getCurrUser();
+
+        $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
+        
+        $property = $this->getProperty($user);
+
+        if ($property) {
+            $data = $this->getRequest()->getPost();
+
+            if (isset($data['photo']) && !empty($data['photo'])) {
+                $data['photo'] = str_replace("_", '/', $data['photo']);
+
+                $property->main_photo = $settings->get('propertyImages.baseUrl') . '/' . $data['photo'];
+                $property->save();
+            }
+        }
+
+        $this->_helper->json->sendJson(array());
+    }
 }
 
