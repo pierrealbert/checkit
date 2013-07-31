@@ -14,13 +14,20 @@ class User_Form_PaymentDirect extends Ext_Form
             'filters'    => array('StringTrim'),
         ));
         
+        $expirationMonthOptions = array(
+            '' => $this->getTranslator()->translate('--')
+        );
+        $expirationMonthOptions = array_merge($expirationMonthOptions, range(1, 12));
         $this->addElement('select', 'expiration_month', array(
             'label'        => 'expiration_month',
-            'multiOptions' => range(0, 12),
+            'multiOptions' => $expirationMonthOptions,
             'required'     => true,
             'filters'      => array('StringTrim'),
         ));
         
+        $expirationYearOptions = array(
+            '' => $this->getTranslator()->translate('----')
+        );
         foreach (range(date('Y'), date('Y') + $settings->get('payment.maxExpirationYear')) as $year) {
             $expirationYearOptions[$year] = $year;
         }
@@ -29,12 +36,6 @@ class User_Form_PaymentDirect extends Ext_Form
             'multiOptions' => $expirationYearOptions,
             'required'     => true,
             'filters'      => array('StringTrim'),
-        ));
-        
-        $this->addElement('text', 'cvv2', array(
-            'label'      => 'cvv2',
-            'required'   => true,
-            'filters'    => array('StringTrim'),
         ));
         
         $this->addElement('text', 'cvv2', array(
@@ -64,7 +65,6 @@ class User_Form_PaymentDirect extends Ext_Form
         
         $this->addElement('text', 'address2', array(
             'label'      => 'address2',
-            'required'   => true,
             'filters'    => array('StringTrim'),
         ));
         

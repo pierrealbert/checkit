@@ -15,6 +15,7 @@
  * @property string $country
  * @property string $city
  * @property string $facebook_id
+ * @property boolean $is_premium
  * @property enum $type
  * @property string $confirm_registration_key
  * @property string $restore_password_key
@@ -25,6 +26,7 @@
  * @property string $company_siret
  * @property integer $company_zip
  * @property string $company_city
+ * @property Doctrine_Collection $Transaction
  * @property Doctrine_Collection $UserResident
  * @property Doctrine_Collection $UserMessage
  * @property Doctrine_Collection $Property
@@ -81,6 +83,9 @@ abstract class Model_Base_User extends Ext_Doctrine_Record
              'type' => 'string',
              'length' => '50',
              ));
+        $this->hasColumn('is_premium', 'boolean', null, array(
+             'type' => 'boolean',
+             ));
         $this->hasColumn('type', 'enum', 15, array(
              'type' => 'enum',
              'values' => 
@@ -136,6 +141,10 @@ abstract class Model_Base_User extends Ext_Doctrine_Record
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('Model_Transaction as Transaction', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
         $this->hasMany('Model_UserResident as UserResident', array(
              'local' => 'id',
              'foreign' => 'user_id'));
