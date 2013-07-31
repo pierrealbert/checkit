@@ -51,29 +51,13 @@ class Ext_Http_Client_Paypal extends Zend_Http_Client
     * @return object Returns an object representation of the response.
     */
     public static function parseResponseBody($responseBody) {
-     
-        $responseArray = explode("&amp;", $responseBody);
-     
-        $result = array();
-     
-        if (count($responseArray) > 0) {
-            foreach ($responseArray as $i => $value) {
-     
-                $keyValuePair = explode("=", $value);
-     
-                if(sizeof($keyValuePair) > 1) {
-                    $result[$keyValuePair[0]] = urldecode($keyValuePair[1]);
-                }
-            }
-        }
-     
-        if (empty($result)) {
-            $result = null;
+        $parsedBody = array();
+        parse_str($responseBody, $parsedBody);
+        if (empty($parsedBody)) {
+            return Null;
         } else {
-            $result = (object) $result;
+            return (object) $parsedBody;
         }
-     
-        return $result;
     }
 
     function __construct($uri = Null, $options = Null)
