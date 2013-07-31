@@ -56,7 +56,7 @@ class Ext_Http_Client_Paypal extends Zend_Http_Client
         if (empty($parsedBody)) {
             return Null;
         } else {
-            return (object) $parsedBody;
+            return (object) array_change_key_case($parsedBody, CASE_LOWER);
         }
     }
 
