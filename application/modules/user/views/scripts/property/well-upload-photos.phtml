@@ -186,7 +186,7 @@
             <?php endif; ?>
                </ul>
                <hr />
-               <img src="<?= $photo['link'] ?>" alt="<?= $photo['link'] ?>" />
+               <?= $this->imageResize(300, 300, $photo['link']) ?>
             </li>
         <?php endforeach; ?>
         </ul>

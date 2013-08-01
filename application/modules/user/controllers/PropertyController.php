@@ -2,6 +2,350 @@
 
 class User_PropertyController extends Zend_Controller_Action
 {
+
+    /*
+    * Create clear property
+    */
+    public function newAddAction()
+    {
+        $user = $this->_helper->auth->getCurrUser();
+
+        $form = new User_Form_PropertyNewAdd();
+
+        if ($this->getRequest()->isPost()) {
+            
+            $property = Doctrine::getTable('Model_Property')->create();
+
+            $property->owner_id = $user->id;
+            $property->state    = Model_Property::STATE_RENTAL;
+
+            $property->save();
+
+            $this->_helper->redirector('rental', 'property', 'user', array('item' => $property->id));
+        }
+
+        $this->view->form = $form;
+    }
+
+    /*
+    * Set rental info
+    */
+    public function rentalAction()
+    {
+        $user = $this->_helper->auth->getCurrUser();
+
+        $property = $this->getProperty($user);
+
+        $form = new User_Form_PropertyRental();
+
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($this->getRequest()->getParams())) {
+
+                $data = $form->getValues();
+
+                $property->merge($data);
+
+                $property->state = Model_Property::STATE_DESCRIPTION;
+
+                $property->save();
+
+                $this->_helper->redirector('description', 'property', 'user', array('item' => $property->id));
+            } else {
+                
+                $property->state = Model_Property::STATE_RENTAL;
+
+                $property->save();
+
+                $forms = new Zend_Session_Namespace('Forms');
+
+                $forms->rental_form = $form;
+
+                $this->_helper->redirector('rental', 'property', 'user', array('item' => $property->id));
+            }
+        } else {
+            $forms = new Zend_Session_Namespace('Forms');
+
+            if (isset($forms->rental_form)) {
+
+                $form = $forms->rental_form;
+
+                unset($forms->rental_form);
+            } elseif ($property) { // Fill form for edit
+
+                $form->populate($property->toArray());
+            }
+        }
+
+        $this->view->property = $property;
+
+        $this->view->current_state = Model_Property::STATE_RENTAL;
+
+        $this->view->form = $form;
+    }
+
+    public function descriptionAction()
+    {
+        $user = $this->_helper->auth->getCurrUser();
+
+        $property = $this->getProperty($user);
+
+        $form = new User_Form_PropertyDescription();
+
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($this->getRequest()->getParams())) {
+
+                $data = $form->getValues();
+
+                $property->merge($data);
+
+                $property->state = Model_Property::STATE_PHOTOS;
+
+                $property->save();
+
+                $this->_helper->redirector('photos', 'property', 'user', array('item' => $property->id));
+            } else {
+                
+                $property->state = Model_Property::STATE_DESCRIPTION;
+
+                $property->save();
+
+                $forms = new Zend_Session_Namespace('Forms');
+
+                $forms->description_form = $form;
+
+                $this->_helper->redirector('description', 'property', 'user', array('item' => $property->id));
+            }
+        } else {
+            $forms = new Zend_Session_Namespace('Forms');
+
+            if (isset($forms->description_form)) {
+
+                $form = $forms->description_form;
+
+                unset($forms->description_form);
+            } elseif ($property) { // Fill form for edit
+
+                $form->populate($property->toArray());
+            }
+        }
+
+        $this->view->property = $property;
+
+        $this->view->current_state = Model_Property::STATE_DESCRIPTION;
+
+        $this->view->form = $form;
+    }
+
+    public function photosAction()
+    {
+        $user = $this->_helper->auth->getCurrUser();
+
+        $property = $this->getProperty($user);
+
+        $form = new User_Form_PropertyPhotos();
+
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($this->getRequest()->getParams())) {
+
+                $data = $form->getValues();
+
+                $property->merge($data);
+
+                $property->state = Model_Property::STATE_HUNTED_PROFILE;
+
+                $property->save();
+
+                $this->_helper->redirector('hunted-profile', 'property', 'user', array('item' => $property->id));
+            } else {
+                
+                $property->state = Model_Property::STATE_PHOTOS;
+
+                $property->save();
+
+                $forms = new Zend_Session_Namespace('Forms');
+
+                $forms->photos_form = $form;
+
+                $this->_helper->redirector('photos', 'property', 'user', array('item' => $property->id));
+            }
+        } else {
+            $forms = new Zend_Session_Namespace('Forms');
+
+            if (isset($forms->photos_form)) {
+
+                $form = $forms->photos_form;
+
+                unset($forms->photos_form);
+            } elseif ($property) { // Fill form for edit
+
+                $form->populate($property->toArray());
+            }
+        }
+
+        $this->view->property = $property;
+
+        $this->view->current_state = Model_Property::STATE_PHOTOS;
+
+        $this->view->form = $form;
+    }
+    
+    public function huntedProfileAction()
+    {
+        $user = $this->_helper->auth->getCurrUser();
+
+        $property = $this->getProperty($user);
+
+        $form = new User_Form_PropertyHuntedProfile();
+
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($this->getRequest()->getParams())) {
+
+                $data = $form->getValues();
+
+                $property->merge($data);
+
+                $property->state = Model_Property::STATE_VISIT_DATES;
+
+                $property->save();
+
+                $this->_helper->redirector('visit-dates', 'property', 'user', array('item' => $property->id));
+            } else {
+                
+                $property->state = Model_Property::STATE_HUNTED_PROFILE;
+
+                $property->save();
+
+                $forms = new Zend_Session_Namespace('Forms');
+
+                $forms->hunted_profile_form = $form;
+
+                $this->_helper->redirector('hunted-profile', 'property', 'user', array('item' => $property->id));
+            }
+        } else {
+            $forms = new Zend_Session_Namespace('Forms');
+
+            if (isset($forms->hunted_profile_form)) {
+
+                $form = $forms->hunted_profile_form;
+
+                unset($forms->hunted_profile_form);
+            } elseif ($property) { // Fill form for edit
+
+                $form->populate($property->toArray());
+            }
+        }
+
+        $this->view->property = $property;
+
+        $this->view->current_state = Model_Property::STATE_HUNTED_PROFILE;
+
+        $this->view->form = $form;
+    }
+
+    /*
+    * Set dates for visits
+    */
+    public function visitDatesAction()
+    {
+        $user = $this->_helper->auth->getCurrUser();
+
+        $property = $this->getProperty($user);
+
+        $form = new User_Form_PropertyVisitDates();
+
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($this->getRequest()->getParams())) {
+
+                $data = $form->getValues();
+
+                $property->merge($data);
+
+                $property->state = Model_Property::STATE_PUBLISH_AD;
+
+                $property->save();
+
+                $this->_helper->redirector('publish-ad', 'property', 'user', array('item' => $property->id));
+            } else {
+                
+                $property->state = Model_Property::STATE_VISIT_DATES;
+
+                $property->save();
+
+                $forms = new Zend_Session_Namespace('Forms');
+
+                $forms->visit_dates_form = $form;
+
+                $this->_helper->redirector('visit-dates', 'property', 'user', array('item' => $property->id));
+            }
+        } else {
+            $forms = new Zend_Session_Namespace('Forms');
+
+            if (isset($forms->visit_dates_form)) {
+
+                $form = $forms->visit_dates_form;
+
+                unset($forms->visit_dates_form);
+            } elseif ($property) { // Fill form for edit
+
+                $form->populate($property->toArray());
+            }
+        }
+
+        $this->view->property = $property;
+
+        $this->view->current_state = Model_Property::STATE_VISIT_DATES;
+
+        $this->view->form = $form;
+    }
+
+    /*
+    * Publish Ad
+    */
+    public function publishAdAction()
+    {
+        $user = $this->_helper->auth->getCurrUser();
+
+        $property = $this->getProperty($user);
+
+        $form = new User_Form_PropertyPublishAd();
+
+        if ($this->getRequest()->isPost()) {
+            
+            $property->is_published = 1;
+
+            $property->save();
+
+            $this->_helper->redirector('index', 'index', 'default');
+        }
+
+        $this->view->property = $property;
+
+        $this->view->current_state = Model_Property::STATE_PUBLISH_AD;
+
+        $this->view->form = $form;
+    }
+
+    private function getProperty($user)
+    {
+        $property = Doctrine::getTable('Model_Property')->findOneById($this->_getParam('item', ''));
+
+        if (!$property || ($property && $property->owner_id != $user->id)) {
+
+            $this->_helper->redirector('new-add', 'property', 'user');
+        }
+
+        return $property;
+    }
+
+    private function validateState($property, $requredState)
+    {
+        if ($requredState > $property->state) {
+            $this->_helper->redirector($property->getStateAction(), 'property', 'user', array('item' => $property->id));
+        }
+    }
+
+    // Old -------------------------------------------------------
+
     public function wellRentalAction()
     {
         $user = $this->_helper->auth->getCurrUser();
@@ -184,17 +528,6 @@ class User_PropertyController extends Zend_Controller_Action
         $this->view->form = $form;
     }
 
-    private function getProperty($user)
-    {
-        $property = Doctrine::getTable('Model_Property')->findOneById($this->_getParam('item', ''));
-
-        if ($property && $property->owner_id != $user->id) {
-
-            $this->_helper->redirector('well-rental', 'property', 'user');
-        }
-
-        return $property;
-    }
 
     public function removePhotoAction()
     {
@@ -217,6 +550,22 @@ class User_PropertyController extends Zend_Controller_Action
                 $data['photo'] = str_replace("_", '/', $data['photo']);
 
                 @unlink($settings->get('propertyImages.basePath') . '/' . $data['photo']);
+
+                // Remove thub images
+                $image_info = pathinfo($data['photo']);
+
+                $path = $settings->get('propertyImages.basePath') . '/' . $image_info['dirname'] . '/thumb/';
+
+                if (is_dir($path)) {
+                    if ($dh = @opendir($path)) {
+                        while (($file = readdir($dh)) !== false) {
+                            if (false !== strpos($file, $image_info['filename'])) {
+                                @unlink($path . $file);
+                            }
+                        }
+                        closedir($dh);
+                    }
+                } 
 
                 $result['main_photo'] = '';
 
@@ -269,5 +618,6 @@ class User_PropertyController extends Zend_Controller_Action
 
         $this->_helper->json->sendJson($result);
     }
+
 }
 
