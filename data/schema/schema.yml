@@ -238,9 +238,13 @@ Property:
         amount_of_charges:
             type:       decimal(14)
             scale:      2
-        is_furnished:   integer(1)
+        is_furnished:   
+            type:       integer(1)
+            default:    0
         lease_duration: integer(4)
-        deposit:        integer(4)
+        deposit:        
+            type:       integer(4)
+            default:    1
         availability:   date
         address:        string(255)
         postcode:       string(8)
@@ -283,6 +287,14 @@ Property:
         main_photo:
             type:       string(255)
             default:    ""
+        is_r_student:   integer(1)
+        is_r_employee:  integer(1)
+        is_r_independent:   integer(1)
+        is_r_other:     integer(1)
+        is_roomate:     integer(1)
+        state:          
+            type:       integer(1)
+            default:    1
         is_published:   
             type:       integer(1)
             default:    0

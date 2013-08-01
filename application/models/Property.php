@@ -19,6 +19,13 @@ class Model_Property extends Model_Base_Property
     const TYPE_COLOCATION       = 5;
     const TYPE_AUTRE            = 6;
 
+    const STATE_RENTAL         = 1;
+    const STATE_DESCRIPTION    = 2;
+    const STATE_PHOTOS         = 3;
+    const STATE_HUNTED_PROFILE = 4;
+    const STATE_VISIT_DATES    = 5;
+    const STATE_PUBLISH_AD     = 6;
+
     static public function getTypes()
     {
         return array(
@@ -29,6 +36,43 @@ class Model_Property extends Model_Base_Property
             self::TYPE_COLOCATION       => 'Colocation',
             self::TYPE_AUTRE            => 'Autre',
         );
+    }
+
+    public function getStatesInfo()
+    {
+        return array(
+            self::STATE_RENTAL         => array(
+                'action' => 'rental',
+                'name'   => 'rental',
+            ),
+            self::STATE_DESCRIPTION    => array(
+                'action' => 'description',
+                'name'   => 'description',
+            ),
+            self::STATE_PHOTOS         => array(
+                'action' => 'photos',
+                'name'   => 'photos',
+            ),
+            self::STATE_HUNTED_PROFILE => array(
+                'action' => 'hunted-profile',
+                'name'   => 'hunted_profile',
+            ),
+            self::STATE_VISIT_DATES    => array(
+                'action' => 'visit-dates',
+                'name'   => 'visit_dates',
+            ),
+            self::STATE_PUBLISH_AD     => array(
+                'action' => 'publish-ad',
+                'name'   => 'publish_ad',
+            ),
+        );
+    }
+
+    public function getStateAction()
+    {
+        $states_info = $this->getStatesInfo();
+
+        return $states_info[$this->state]['action'];
     }
 
     static public function getNumberOfRooms1Info()

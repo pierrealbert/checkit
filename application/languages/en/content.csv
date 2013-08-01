@@ -92,7 +92,7 @@ employee_cdi; "CDI"
 employee_csd; "CSD"
 
 post_my_ad; "Post my ad"
-describe_your_self; "Describe your self"
+status; "Status"
 well; "Well"
 rental; "Rental"
 description_of_property; "Description of property"

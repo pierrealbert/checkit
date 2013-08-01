@@ -51,6 +51,12 @@
  * @property integer $is_electrique
  * @property integer $is_autre
  * @property string $main_photo
+ * @property integer $is_r_student
+ * @property integer $is_r_employee
+ * @property integer $is_r_independent
+ * @property integer $is_r_other
+ * @property integer $is_roomate
+ * @property integer $state
  * @property integer $is_published
  * @property Model_User $Owner
  * 
@@ -90,6 +96,7 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              ));
         $this->hasColumn('is_furnished', 'integer', 1, array(
              'type' => 'integer',
+             'default' => 0,
              'length' => '1',
              ));
         $this->hasColumn('lease_duration', 'integer', 4, array(
@@ -98,6 +105,7 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              ));
         $this->hasColumn('deposit', 'integer', 4, array(
              'type' => 'integer',
+             'default' => 1,
              'length' => '4',
              ));
         $this->hasColumn('availability', 'date', null, array(
@@ -252,6 +260,31 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'type' => 'string',
              'default' => '',
              'length' => '255',
+             ));
+        $this->hasColumn('is_r_student', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_r_employee', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_r_independent', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_r_other', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_roomate', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('state', 'integer', 1, array(
+             'type' => 'integer',
+             'default' => 1,
+             'length' => '1',
              ));
         $this->hasColumn('is_published', 'integer', 1, array(
              'type' => 'integer',
