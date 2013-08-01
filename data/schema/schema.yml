@@ -93,6 +93,13 @@ Transaction:
             type: string(50)
         paypal_correlation_id:
             type: string(50)
+        paypal_ec_token:
+            type: string(50)
+        paypal_response_body:
+            type: text
+        is_cancelled:
+            type: boolean
+            default: 0
         amount:
             type: integer(4)
             unsigned: true

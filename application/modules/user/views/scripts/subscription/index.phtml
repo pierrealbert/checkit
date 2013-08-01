@@ -1,0 +1,7 @@
+<h2><?= $this->translate('subscription') ?></h2>
+<? if ($this->user->is_premium): ?>
+    <?= $this->translate('you_have_premium_subscription') ?>
+<? else: ?>
+    <p><a href="<?= $this->url(array('module' => 'user', 'controller' => 'subscription', 'action' => 'credit-card-payment'), null, true) ?>"><?= $this->translate('pay_with_credit_card') ?></a></p>
+    <p><a href="<?= $this->url(array('module' => 'user', 'controller' => 'subscription', 'action' => 'paypal-payment'), null, true) ?>"><?= $this->translate('pay_with_paypal') ?></a></p>
+<? endif ?>

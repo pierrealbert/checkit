@@ -8,6 +8,9 @@
  * @property integer $id
  * @property string $paypal_transaction_id
  * @property string $paypal_correlation_id
+ * @property string $paypal_ec_token
+ * @property text $paypal_response_body
+ * @property boolean $is_cancelled
  * @property integer $amount
  * @property string $currency_code
  * @property string $paypal_ack
@@ -41,6 +44,17 @@ abstract class Model_Base_Transaction extends Ext_Doctrine_Record
         $this->hasColumn('paypal_correlation_id', 'string', 50, array(
              'type' => 'string',
              'length' => '50',
+             ));
+        $this->hasColumn('paypal_ec_token', 'string', 50, array(
+             'type' => 'string',
+             'length' => '50',
+             ));
+        $this->hasColumn('paypal_response_body', 'text', null, array(
+             'type' => 'text',
+             ));
+        $this->hasColumn('is_cancelled', 'boolean', null, array(
+             'type' => 'boolean',
+             'default' => 0,
              ));
         $this->hasColumn('amount', 'integer', 4, array(
              'type' => 'integer',
