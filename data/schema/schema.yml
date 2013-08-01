@@ -298,8 +298,12 @@ Property:
             type:       decimal(14)
             scale:      2
         property_type:  integer(4)
-        number_of_rooms1: integer(4)
-        number_of_rooms2: integer(4)
+        number_of_rooms1: 
+            type:       integer(4)
+            default:    1
+        number_of_rooms2: 
+            type:       integer(4)
+            default:    1
         is_separate_restrooms: integer(1)
         is_parquet_floor: integer(1)
         is_molding:     integer(1)
@@ -322,7 +326,9 @@ Property:
         is_old_building: integer(1)
         is_very_old_building: integer(1)
         is_renove:      integer(1)
-        number_of_bathrooms: integer(4)
+        number_of_bathrooms: 
+            type:       integer(4)
+            default:    1
         is_individuel:  integer(1)
         is_central:     integer(1)
         is_au_sol:      integer(1)

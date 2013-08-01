@@ -94,9 +94,7 @@ class User_PropertyController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($this->getRequest()->getParams())) {
 
-                $data = $form->getValues();
-
-                $property->merge($data);
+                $property->merge($form->getData());
 
                 $property->state = Model_Property::STATE_PHOTOS;
 
@@ -125,7 +123,7 @@ class User_PropertyController extends Zend_Controller_Action
                 unset($forms->description_form);
             } elseif ($property) { // Fill form for edit
 
-                $form->populate($property->toArray());
+                $form->initData($property->toArray());
             }
         }
 

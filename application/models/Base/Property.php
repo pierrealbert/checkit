@@ -134,10 +134,12 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              ));
         $this->hasColumn('number_of_rooms1', 'integer', 4, array(
              'type' => 'integer',
+             'default' => 1,
              'length' => '4',
              ));
         $this->hasColumn('number_of_rooms2', 'integer', 4, array(
              'type' => 'integer',
+             'default' => 1,
              'length' => '4',
              ));
         $this->hasColumn('is_separate_restrooms', 'integer', 1, array(
@@ -230,6 +232,7 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              ));
         $this->hasColumn('number_of_bathrooms', 'integer', 4, array(
              'type' => 'integer',
+             'default' => 1,
              'length' => '4',
              ));
         $this->hasColumn('is_individuel', 'integer', 1, array(
