@@ -109,6 +109,7 @@ class User_Form_PropertyDescription extends Ext_Form
             'class'     => 'ui-state-default ui-corner-all'
         ));
     }
+
     public static function getMultiCheckboxses()
     {
         return array(

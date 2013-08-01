@@ -279,9 +279,7 @@ class User_PropertyController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($this->getRequest()->getParams())) {
 
-                $data = $form->getValues();
-
-                $property->merge($data);
+                $property->merge($form->getData());
 
                 $property->state = Model_Property::STATE_VISIT_DATES;
 
@@ -309,8 +307,7 @@ class User_PropertyController extends Zend_Controller_Action
 
                 unset($forms->hunted_profile_form);
             } elseif ($property) { // Fill form for edit
-
-                $form->populate($property->toArray());
+                $form->initData($property->toArray());
             }
         }
 
