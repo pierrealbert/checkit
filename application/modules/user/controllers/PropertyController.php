@@ -218,6 +218,22 @@ class User_PropertyController extends Zend_Controller_Action
 
                 @unlink($settings->get('propertyImages.basePath') . '/' . $data['photo']);
 
+                // Remove thub images
+                $image_info = pathinfo($data['photo']);
+
+                $path = $settings->get('propertyImages.basePath') . '/' . $image_info['dirname'] . '/thumb/';
+
+                if (is_dir($path)) {
+                    if ($dh = @opendir($path)) {
+                        while (($file = readdir($dh)) !== false) {
+                            if (false !== strpos($file, $image_info['filename'])) {
+                                @unlink($path . $file);
+                            }
+                        }
+                        closedir($dh);
+                    }
+                } 
+
                 $result['main_photo'] = '';
 
                 // If deleted photo is main
