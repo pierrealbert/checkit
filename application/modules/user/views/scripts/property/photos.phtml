@@ -22,10 +22,88 @@
             <!-- /Left menu -->
         </td>
         <td>
-            <!-- Form -->
-            <?= $this->form ?>
-            <!-- /Form -->
+            <?= $this->form_upload_photo ?>
+
+            <?php if (!$this->photos): ?>
+                <p>No photos</p>
+            <?php else: ?>
+                <ul>
+                <?php foreach ($this->photos as $photo): ?>
+                    <li data-photo="<?= $photo['name'] ?>" style="width:300px;" class="photo_info">
+                        <ul>
+                            <li style="width:300px;text-align:right;"><a href="#" class="remove_photo" style="color:red;">[X]</a></li>
+                        <?php if ($photo['link'] == $this->property->main_photo): ?>
+                            <li style="display:none;width:300px;text-align:center;" class="select_photo"><a href="#" style="color:gray;">[.]</a></li>
+                            <li style="width:300px;text-align:center;color:green;" class="selected_photo">[V]</li>
+                        <?php else: ?>
+                            <li style="width:300px;text-align:center;" class="select_photo" ><a href="#" style="color:gray;">[.]</a></li>
+                            <li style="display:none;width:300px;text-align:center;color:green;" class="selected_photo">[V]</li>
+                        <?php endif; ?>
+                        </ul>
+                        
+                        <hr />
+                        
+                        <?= $this->imageResize(300, 300, $photo['link']) ?>
+                    </li>
+                <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+            <hr />
+
+            <?= $this->form_next_step ?>
         </td>
     </tr>
 </table>
+<?php
+    $function = "$(function() {
+        $('.remove_photo').on('click', function(){
+            var photo = $(this).closest('li.photo_info').attr('data-photo');
 
+            $.ajax({
+                type: 'POST',
+                url: '/user/property/remove-photo/item/{$this->property->id}',
+                data: {photo: photo},
+                success: function(r) {
+                    if (!r.error) {
+                        $('li[data-photo=\"' + photo + '\"]').remove();
+
+                        if (r.main_photo.length > 0) {
+                            $('.select_photo').show();
+                            $('.selected_photo').hide();
+
+                            $('.selected_photo', 'li[data-photo=\"' + r.main_photo + '\"]').show();
+                            $('.select_photo', 'li[data-photo=\"' + r.main_photo + '\"]').hide();
+                        }
+                    }
+                },
+                dataType: 'json'
+            });
+            return false;
+        });
+
+        $('.select_photo').on('click', function(){
+            var photo = $(this).closest('li.photo_info').attr('data-photo');
+
+            $.ajax({
+                type: 'POST',
+                url: '/user/property/select-photo/item/{$this->property->id}',
+                data: {photo: photo},
+                success: function(r) {
+                    if (!r.error) {
+                        $('.select_photo').show();
+                        $('.selected_photo').hide();
+
+                        $('.selected_photo', 'li[data-photo=\"' + photo + '\"]').show();
+                        $('.select_photo', 'li[data-photo=\"' + photo + '\"]').hide();
+                    }
+                },
+                dataType: 'json'
+            });
+
+            return false;
+        });
+    });";
+
+    $this->jQuery()->addOnLoad($function);
+
+?>

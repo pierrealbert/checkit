@@ -1,10 +1,13 @@
 <?php
 
-class User_Form_WellUploadPhotos extends Ext_Form
+
+class User_Form_PropertyUploadPhotos extends Ext_Form
 {
     public function init()
     {
-        parent::init();
+        $this->addElement('hidden', 'form', array(
+            'value' => 'upload'
+        ));
 
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
 
@@ -20,7 +23,6 @@ class User_Form_WellUploadPhotos extends Ext_Form
         ));
 
         $this->addElement('submit', 'upload', array(
-            'label'     => 'upload',
             'class'     => 'ui-state-default ui-corner-all'
         ));
     }
