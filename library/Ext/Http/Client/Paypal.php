@@ -2,6 +2,7 @@
 
 class Ext_Http_Client_Paypal extends Zend_Http_Client
 {
+    protected $_settingsHelper;
     protected $_paypalParameters = array(
         'user' => 'USER',
         'password' => 'PWD',
@@ -10,6 +11,8 @@ class Ext_Http_Client_Paypal extends Zend_Http_Client
 
         'method' => 'METHOD',
 
+        'token' => 'TOKEN',
+        'payer_id' => 'PAYERID',
         'payment_action' => 'PAYMENTACTION',
         'amount' => 'AMT',
         'credit_card_type' => 'CREDITCARDTYPE',
@@ -26,7 +29,16 @@ class Ext_Http_Client_Paypal extends Zend_Http_Client
         'country' => 'COUNTRYCODE',
         'currency_code' => 'CURRENCYCODE',
         'ip_address' => 'IPADDRESS',
+        'return_url' => 'RETURNURL',
+        'cancel_url' => 'CANCELURL',
     );
+
+    protected function _getSettings($settingName)
+    {
+        if (!$this->_settingsHelper)
+            $this->_settingsHelper = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
+        return $this->_settingsHelper->get($settingName);
+    }
 
     protected function _setParameters(array $parameterValues, array $parametersRequired, array $parametersOptional = array())
     {
@@ -35,13 +47,13 @@ class Ext_Http_Client_Paypal extends Zend_Http_Client
                 throw new Zend_Http_Client_Exception("Required parameter $parName is not set.");
                 return False;
             }
-            $this->setParameterGet($this->_paypalParameters[$parName], urlencode($parameterValues[$parName]));
+            $this->setParameterGet($this->_paypalParameters[$parName], $parameterValues[$parName]);
         }
         foreach ($parametersOptional as $parName) {
             if (!array_key_exists($parName, $parameterValues)) {
                 continue;
             }
-            $this->setParameterGet($this->_paypalParameters[$parName], urlencode($parameterValues[$parName]));
+            $this->setParameterGet($this->_paypalParameters[$parName], $parameterValues[$parName]);
         }
     }
 
@@ -62,18 +74,16 @@ class Ext_Http_Client_Paypal extends Zend_Http_Client
 
     function __construct($uri = Null, $options = Null)
     {
-        $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
-        
         if ($uri === Null)
-            $uri = $settings->get('payment.paypal.uri');
+            $uri = $this->_getSettings('payment.paypal.uri');
             
         parent::__construct($uri);
            
         // NOTE: Parameters must always be url encoded, as per PayPal documentation.
-        $this->setParameterGet('USER', urlencode($settings->get('payment.paypal.user')));
-        $this->setParameterGet('PWD', urlencode($settings->get('payment.paypal.password')));
-        $this->setParameterGet('SIGNATURE', urlencode($settings->get('payment.paypal.signature')));
-        $this->setParameterGet('VERSION', urlencode($settings->get('payment.paypal.api_version')));
+        $this->setParameterGet('USER', $this->_getSettings('payment.paypal.user'));
+        $this->setParameterGet('PWD', $this->_getSettings('payment.paypal.password'));
+        $this->setParameterGet('SIGNATURE', $this->_getSettings('payment.paypal.signature'));
+        $this->setParameterGet('VERSION', $this->_getSettings('payment.paypal.api_version'));
     }
 
     
@@ -97,10 +107,10 @@ class Ext_Http_Client_Paypal extends Zend_Http_Client
      *         $country
      *         $currency_code
      *         $ip_address
-     *         $payment_action Can be 'Authorization' (default) or 'Sale'
      *     optional elements:
      *         $address2
      *         $credit_card_type
+     *         $payment_action Can be 'Authorization' (default) or 'Sale'
      *
      * @return Zend_Http_Response
      * @throws Zend_Http_Client_Exception
@@ -129,9 +139,84 @@ class Ext_Http_Client_Paypal extends Zend_Http_Client
                                     'payment_action',
                                     'credit_card_type');
         
-        $this->_setParameters( $parameters, $requiredParameters, $optionalParameters);
+        $this->_setParameters($parameters, $requiredParameters, $optionalParameters);
+
+        $this->setUri();
         
         return $this->request(Zend_Http_Client::GET);
      
+    }
+
+     /**
+     * Request an authorization token.
+     *
+     * @param array $parameters 
+     *     required elements: 
+     *         $return_url
+     *         $cancel_url
+     *         $amount
+     *         $currency_code
+     *         $payment_action Can be 'Authorization', 'Sale', or 'Order'
+     *     optional elements:
+     *         $payment_action Can be 'Authorization' (default) or 'Sale'
+     * @return Zend_Http_Response
+     */
+    function setExpressCheckout($parameters) {
+        $parameters['method'] = 'SetExpressCheckout';
+     
+        $requiredParameters = array('method',
+                                    'return_url',
+                                    'cancel_url',
+                                    'amount',
+                                    'currency_code');
+     
+        $optionalParameters = array('payment_action');
+        
+        $this->_setParameters($parameters, $requiredParameters, $optionalParameters);
+
+        return $this->request(Zend_Http_Client::GET);
+    }
+
+    function redirectToExpressCheckoutPage($token) {
+        header(
+            'Location: ' . 
+            $this->_getSettings('payment.paypal.express_checkout_uri') . 
+            '?&cmd=_express-checkout&token=' . $token
+        );
+    }
+
+    /**
+     *
+     * Calls the 'ECDoExpressCheckout' API call. Requires a token that can
+     * be obtained using the 'SetExpressCheckout' API call. The payer_id is
+     * obtained from the 'SetExpressCheckout' or 'GetExpressCheckoutDetails' API call.
+     *
+     * @param array $parameters 
+     *     required elements: 
+     *         $token
+     *         $payer_id
+     *         $amount
+     *         $currency_code
+     *         $payment_action Can be 'Authorization' or 'Sale'
+     *     optional elements:
+     *
+     * @return Zend_Http_Response
+     * @throws Zend_Http_Client_Exception
+     * 
+     */
+    function doExpressCheckout($parameters) {
+        $parameters['method'] = 'DoExpressCheckoutPayment';
+     
+        $requiredParameters = array('amount',
+                                    'currency_code',
+                                    'method',
+                                    'token',
+                                    'payer_id');
+        
+        $optionalParameters = array('payment_action');
+        
+        $this->_setParameters($parameters, $requiredParameters, $optionalParameters);
+        
+        return $this->request(Zend_Http_Client::GET);
     }
 }
