@@ -125,3 +125,5 @@ signup_by_email; "S'inscrire par mail"
 signup_type; "Vous n'avez pas de compte Ommi?"
 signup_header_owner; "Inscription Locataire"
 signup_header_resident; "Inscription Propriétaire"
+
+property_added; "Great! You has been added new property"

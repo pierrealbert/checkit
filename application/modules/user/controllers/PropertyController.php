@@ -404,6 +404,8 @@ class User_PropertyController extends Zend_Controller_Action
 
             $property->save();
 
+            $this->_helper->messenger->success('property_added');
+            
             $this->_helper->redirector('index', 'index', 'default');
         }
 
