@@ -115,7 +115,7 @@ class User_MyAccountController extends Zend_Controller_Action
 			}
 
 			$this->_helper->messenger->success('succesfully saved');
-            $this->_helper->redirector('index', 'my-account', 'user');
+            $this->_helper->redirector('documents', 'my-account', 'user');
 		}
 		
 		$this->view->assign(array(

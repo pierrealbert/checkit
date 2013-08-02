@@ -140,8 +140,6 @@ class Ext_Http_Client_Paypal extends Zend_Http_Client
                                     'credit_card_type');
         
         $this->_setParameters($parameters, $requiredParameters, $optionalParameters);
-
-        $this->setUri();
         
         return $this->request(Zend_Http_Client::GET);
      
