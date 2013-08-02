@@ -330,7 +330,12 @@ class User_PropertyController extends Zend_Controller_Action
         $form = new User_Form_PropertyVisitDates();
 
         if ($this->getRequest()->isPost()) {
-            if ($form->isValid($this->getRequest()->getParams())) {
+            $q = Doctrine::getTable('Model_PropertyVisitDates')->createQuery('pvd')
+                ->where('pvd.property_id = ?', $property->id);
+
+            $visits = $q->execute();
+
+            if (count($visits)) {
 
                 $data = $form->getValues();
 
@@ -351,6 +356,8 @@ class User_PropertyController extends Zend_Controller_Action
 
                 $forms->visit_dates_form = $form;
 
+                $this->_helper->messenger->error('list_dates_for_visit_empty');
+
                 $this->_helper->redirector('visit-dates', 'property', 'user', array('item' => $property->id));
             }
         } else {
@@ -368,6 +375,8 @@ class User_PropertyController extends Zend_Controller_Action
         }
 
         $this->view->visits =  $this->getVisits($property);
+        $this->view->time_list = Model_PropertyVisitDates::getTimeList();
+        $this->view->number_of_candidats_list = Model_PropertyVisitDates::getNumberOfCandidats();
 
         $this->view->property = $property;
 
@@ -529,6 +538,8 @@ class User_PropertyController extends Zend_Controller_Action
             if ($this->getRequest()->isPost()) {
                 $form = new User_Form_PropertyProcessVisitDate();
 
+                $tmp = $this->getRequest()->getParams();
+
                 if ($form->isValid($this->getRequest()->getParams())) {
 
                     $data = $form->getValues();
@@ -547,7 +558,10 @@ class User_PropertyController extends Zend_Controller_Action
                     $visit->merge($data);
                     $visit->save();
 
-                    // TODO: Update phone
+                    if (isset($tmp['phone'])) {
+                        $user->phone = $tmp['phone'];
+                        $user->save();
+                    }
 
                     $result['error'] = false;
                 } else {

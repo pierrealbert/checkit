@@ -5,9 +5,32 @@
     <?php foreach($this->visits as $visit): ?>
         <tr>
             <td>Date: <?= $visit->availability ?></td>
-            <td>Time: <?= $visit->at_time ?></td>
-            <td>Number of candidats: <?= $visit->visitors?></td>
-            <td><a href="#" class="remove_visit_date" id="visitDate_<?= $visit->id ?>">[Remove]</a></td>
+            <td>Time: 
+                <?php $time_list = $visit::getTimeList(); ?>
+                <select name="at_time_<?= $visit->id ?>">
+                <?php foreach($time_list as $value => $name): ?>
+                    <?php if ($value == substr($visit->at_time, 0, 5)): ?>
+                    <option value="<?= $value ?>" selected><?= $name ?></option>
+                    <?php else: ?>
+                    <option value="<?= $value ?>"><?= $name ?></option>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                </select>
+            </td>
+            <td>Number of candidats:
+                <?php $number_of_candidats_list = $visit::getNumberOfCandidats(); ?>
+                <select name="visitors_<?= $visit->id ?>">
+                <?php foreach($number_of_candidats_list as $value => $name): ?>
+                    <?php if ($value == $visit->visitors): ?>
+                    <option value="<?= $value ?>" selected><?= $name ?></option>
+                    <?php else: ?>
+                    <option value="<?= $value ?>"><?= $name ?></option>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                </select>
+            </td>
+            <td><a href="#" class="update_visit_date" id="uVisitDate_<?= $visit->id ?>">[Seve]</a></td>
+            <td><a href="#" class="remove_visit_date" id="rVisitDate_<?= $visit->id ?>">[Remove]</a></td>
         </tr>
     <?php endforeach; ?>
 </table>

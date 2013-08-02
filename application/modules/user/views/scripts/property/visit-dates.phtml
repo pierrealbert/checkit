@@ -40,22 +40,18 @@
                         <td width="33%">
                             <label for="at_time">Time:<br />
                                 <select id="at_time" name="at_time">
-                                    <option value="08:00">08:00</option>
-                                    <option value="09:00">09:00</option>
-                                    <option value="10:00">10:00</option>
-                                    <option value="11:00">11:00</option>
-                                    <option value="12:00">12:00</option>
+                                <?php foreach($this->time_list as $value => $name): ?>
+                                    <option value="<?= $value ?>"><?= $name ?></option>
+                                <?php endforeach; ?>
                                 </select>
                             </label>
                         </td>
                         <td width="33%">
                             <label for="visitors">Number of candidats:<br />
                                 <select id="visitors" name="visitors">
-                                    <option value="0">Unlimited</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
+                                <?php foreach($this->number_of_candidats_list as $value => $name): ?>
+                                    <option value="<?= $value ?>"><?= $this->translate($name) ?></option>
+                                <?php endforeach; ?>
                                 </select>
                             </label>
                         </td>
