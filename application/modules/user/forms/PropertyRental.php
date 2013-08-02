@@ -15,9 +15,7 @@ class User_Form_PropertyRental extends ZendX_JQuery_Form
 
         $this->addElement('text', 'amount_of_rent_excluding_charges', array(
             'label'      => 'amount_of_rent_excluding_charges',
-            'filters'    => array(new Ext_Filter_Money()),
             'allowEmpty' => false,
-            'value'      => 0.0,
             'validators' => array(new Zend_Validate_GreaterThan(array('min' => 0))),
             
         ));
@@ -25,9 +23,7 @@ class User_Form_PropertyRental extends ZendX_JQuery_Form
 
         $this->addElement('text', 'amount_of_charges', array(
             'label'      => 'amount_of_charges',
-            'filters'    => array(new Ext_Filter_Money()),
             'allowEmpty' => false,
-            'value'      => 0.0,
             'validators' => array(new Zend_Validate_GreaterThan(array('min' => 0))),
         ));
         // -------------------------------------------------------------------
