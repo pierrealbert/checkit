@@ -1,4 +1,4 @@
-<?php if (!$this->visits): ?>
+<?php if (!count($this->visits)): ?>
 <p>It is't the selected dates for visits.</p>
 <?php else: ?>
 <table width="100%" border="1">
@@ -7,8 +7,57 @@
             <td>Date: <?= $visit->availability ?></td>
             <td>Time: <?= $visit->at_time ?></td>
             <td>Number of candidats: <?= $visit->visitors?></td>
-            <td><a href="#" id="visitDate_<?= $visit->id ?>">[Remove]</a></td>
+            <td><a href="#" class="remove_visit_date" id="visitDate_<?= $visit->id ?>">[Remove]</a></td>
         </tr>
     <?php endforeach; ?>
 </table>
+<?php endif; ?>
+
+<?php if ($this->is_ajax): ?>
+<script type="text/javascript">
+    $(function() {
+        $('.remove_visit_date').on('click', function(){
+            var id = $(this).attr('id');
+            $.ajax({
+                type: 'POST',
+                url: '/user/property/remove-visit-date/item/<?= $this->property->id ?>',
+                data: {
+                        id: id, 
+                    },
+                success: function(r) {
+                    if (!r.error) {
+                        $('#visits').empty().append(r.list);
+                    }
+                },
+                dataType: 'json'
+            });
+            return false;
+        });
+    });
+</script>
+<?php else: ?>
+<?php
+
+    $function = "$(function() {
+        $('.remove_visit_date').on('click', function(){
+            var id = $(this).attr('id');
+
+            $.ajax({
+                type: 'POST',
+                url: '/user/property/remove-visit-date/item/{$this->property->id}',
+                data: {
+                        id: id, 
+                    },
+                success: function(r) {
+                    if (!r.error) {
+                        $('#visits').empty().append(r.list);
+                    }
+                },
+                dataType: 'json'
+            });
+            return false;
+        });
+    });";
+
+    $this->jQuery()->addOnLoad($function); ?>
 <?php endif; ?>

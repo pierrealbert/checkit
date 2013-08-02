@@ -516,7 +516,7 @@ class User_PropertyController extends Zend_Controller_Action
 
     public function processVisitDateAction()
     {
-        //$this->_helper->viewRenderer->setNoRender(true);
+        $this->_helper->viewRenderer->setNoRender(true);
         $this->_helper->layout->disableLayout();
 
         $user = $this->_helper->auth->getCurrUser();
@@ -555,13 +555,50 @@ class User_PropertyController extends Zend_Controller_Action
                 }
             }
 
-            $result['list'] =  $this->getVisits($property);
+            $result['list'] =  $this->getVisits($property, true);
         }
 
         $this->_helper->json->sendJson($result);
     }
 
-    private function getVisits($property)
+    public function removeVisitDateAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+        $this->_helper->layout->disableLayout();
+
+        $user = $this->_helper->auth->getCurrUser();
+
+        $property = $this->getProperty($user);
+
+        $result = array('error' => true, 'list' => '');
+
+        if ($property) {
+            if ($this->getRequest()->isPost()) {
+                $data = $this->getRequest()->getParams();
+                
+                if (isset($data['id'])) {
+
+                    $id = explode('_', $data['id']);
+
+                    if (2 == count($id) && 0 < intval($id[1])) {
+                        $q = Doctrine::getTable('Model_PropertyVisitDates')->createQuery('pvd')
+                            ->delete()
+                            ->where('pvd.property_id = ?', $property->id)
+                            ->andWhere('pvd.id = ?', intval($id[1]))
+                            ->execute();
+
+                        $result['error'] = false;
+                    }
+                }
+            }
+
+            $result['list'] =  $this->getVisits($property, true);
+        }
+
+        $this->_helper->json->sendJson($result);
+    }
+
+    private function getVisits($property, $isAjax=false)
     {
         $q = Doctrine::getTable('Model_PropertyVisitDates')->createQuery('pvd')
             ->where('pvd.property_id = ?', $property->id);
@@ -570,6 +607,10 @@ class User_PropertyController extends Zend_Controller_Action
 
         $this->view->visits = $visits;
  
+        $this->view->property = $property;
+
+        $this->view->is_ajax = $isAjax;
+
         return  $this->view->render('property/process-visit-date.phtml');
     }
 }
