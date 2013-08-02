@@ -64,6 +64,8 @@
                 <input type="submit" value="add" />
             </form>
             <hr />
+            <div id="visits"><?= $this->visits ?></div>
+            <hr />
             <!-- Form -->
             <?= $this->form ?>
             <!-- /Form -->
@@ -82,7 +84,7 @@
         $('#processVisitDate').on('submit', function(){
             $.ajax({
                 type: 'POST',
-                url: '/user/property/add-visit-date/item/{$this->property->id}',
+                url: '/user/property/process-visit-date/item/{$this->property->id}',
                 data: {
                         phone: $('#phone').val(), 
                         availability: $('#availability').val(),
@@ -91,7 +93,7 @@
                     },
                 success: function(r) {
                     if (!r.error) {
-                        alert('Yes');
+                        $('#visits').empty().append(r.list);
                     }
                 },
                 dataType: 'json'

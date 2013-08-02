@@ -76,7 +76,7 @@ class User_Form_PropertyRental extends ZendX_JQuery_Form
                 array(
                     "label"      => "Availability:",
                     "allowEmpty" => false,
-                    'validators' => array(new Zend_Validate_Date()),
+                    'validators' => array(new Zend_Validate_Date('yyyy-MM-dd')),
                 )
             );
 

@@ -1,0 +1,14 @@
+<?php if (!$this->visits): ?>
+<p>It is't the selected dates for visits.</p>
+<?php else: ?>
+<table width="100%" border="1">
+    <?php foreach($this->visits as $visit): ?>
+        <tr>
+            <td>Date: <?= $visit->availability ?></td>
+            <td>Time: <?= $visit->at_time ?></td>
+            <td>Number of candidats: <?= $visit->visitors?></td>
+            <td><a href="#" id="visitDate_<?= $visit->id ?>">[Remove]</a></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+<?php endif; ?>

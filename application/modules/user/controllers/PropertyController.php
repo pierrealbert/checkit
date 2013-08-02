@@ -367,6 +367,8 @@ class User_PropertyController extends Zend_Controller_Action
             }
         }
 
+        $this->view->visits =  $this->getVisits($property);
+
         $this->view->property = $property;
 
         $this->view->user = $user;
@@ -512,27 +514,63 @@ class User_PropertyController extends Zend_Controller_Action
         $this->_helper->json->sendJson($result);
     }
 
-    public function addVisitDateAction()
+    public function processVisitDateAction()
     {
-        $this->_helper->viewRenderer->setNoRender(true);
+        //$this->_helper->viewRenderer->setNoRender(true);
         $this->_helper->layout->disableLayout();
 
         $user = $this->_helper->auth->getCurrUser();
 
         $property = $this->getProperty($user);
 
-        $result = array('error' => true);
+        $result = array('error' => true, 'list' => '');
 
         if ($property) {
-            $data = $this->getRequest()->getPost();
-            //$visit = Doctrine::getTable('Model_PropertyVisitDates')
-            //  ->findOneBy(array('property_id' => $property->id, ''));
-            // Validate params
-            // Search by date
-            $result['error'] = false;
+            if ($this->getRequest()->isPost()) {
+                $form = new User_Form_PropertyProcessVisitDate();
+
+                if ($form->isValid($this->getRequest()->getParams())) {
+
+                    $data = $form->getValues();
+                    
+                    $q = Doctrine::getTable('Model_PropertyVisitDates')->createQuery('pvd')
+                        ->where('pvd.property_id = ?', $property->id)
+                        ->andWhere('pvd.availability = ?', $data['availability']);
+
+                    $visit = $q->fetchOne();
+
+                    if (!$visit) {
+                        $visit = Doctrine::getTable('Model_PropertyVisitDates')->create();
+                        $visit->property_id = $property->id;
+                    }
+                
+                    $visit->merge($data);
+                    $visit->save();
+
+                    // TODO: Update phone
+
+                    $result['error'] = false;
+                } else {
+
+                }
+            }
+
+            $result['list'] =  $this->getVisits($property);
         }
 
         $this->_helper->json->sendJson($result);
+    }
+
+    private function getVisits($property)
+    {
+        $q = Doctrine::getTable('Model_PropertyVisitDates')->createQuery('pvd')
+            ->where('pvd.property_id = ?', $property->id);
+
+        $visits = $q->execute();
+
+        $this->view->visits = $visits;
+ 
+        return  $this->view->render('property/process-visit-date.phtml');
     }
 }
 
