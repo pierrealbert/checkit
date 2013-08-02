@@ -21,6 +21,7 @@
  * @property string $restore_password_key
  * @property boolean $is_active
  * @property boolean $is_confirmed
+ * @property string $phone
  * @property string $company_name
  * @property string $company_address
  * @property string $company_siret
@@ -115,6 +116,11 @@ abstract class Model_Base_User extends Ext_Doctrine_Record
              'type' => 'boolean',
              'notnull' => true,
              'default' => false,
+             ));
+        $this->hasColumn('phone', 'string', 32, array(
+             'type' => 'string',
+             'default' => '',
+             'length' => '32',
              ));
         $this->hasColumn('company_name', 'string', 50, array(
              'type' => 'string',

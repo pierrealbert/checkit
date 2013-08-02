@@ -26,31 +26,31 @@
         <td>
             <form id="processVisitDate">
             <div>
-                <label for="phone">Phone:<br /> <input type="text" id="phone" name="phone" value="" /></label>
+                <label for="phone">Phone:<br /> <input type="text" id="phone" name="phone" value="<?= htmlspecialchars($this->user->phone) ?>" /></label>
             </div>
             <div id="datepicker"></div>
             <hr />
                 <table width="100%">
                     <tr>
                         <td width="33%">
-                            <label for="selected_date">Date:<br />
-                                <input type="text" id="selected_date" name="selected_date" value="" />
+                            <label for="availability">Date:<br />
+                                <input type="text" id="availability" name="availability" value="" />
                             </label>
                         </td>
                         <td width="33%">
-                            <label for="selected_time">Time:<br />
-                                <select id="selected_time" name="selected_time">
-                                    <option value="8">08:00</option>
-                                    <option value="9">09:00</option>
-                                    <option value="10">10:00</option>
-                                    <option value="11">11:00</option>
-                                    <option value="12">12:00</option>
+                            <label for="at_time">Time:<br />
+                                <select id="at_time" name="at_time">
+                                    <option value="08:00">08:00</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="12:00">12:00</option>
                                 </select>
                             </label>
                         </td>
                         <td width="33%">
-                            <label for="selected_">Number of candidats:<br />
-                                <select id="selected_number" name="selected_numder">
+                            <label for="visitors">Number of candidats:<br />
+                                <select id="visitors" name="visitors">
                                     <option value="0">Unlimited</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -62,7 +62,6 @@
                     </tr>
                 </table>
                 <input type="submit" value="add" />
-            <hr />
             </form>
             <hr />
             <!-- Form -->
@@ -78,6 +77,26 @@
             defaultDate: " . time('Y-m-d') . ",
             minDate: 0,
             numberOfMonths: 2,
+            altField: '#availability',
+        });
+        $('#processVisitDate').on('submit', function(){
+            $.ajax({
+                type: 'POST',
+                url: '/user/property/add-visit-date/item/{$this->property->id}',
+                data: {
+                        phone: $('#phone').val(), 
+                        availability: $('#availability').val(),
+                        at_time: $('#at_time').val(),
+                        visitors: $('#visitors').val(),
+                    },
+                success: function(r) {
+                    if (!r.error) {
+                        alert('Yes');
+                    }
+                },
+                dataType: 'json'
+            });
+            return false;
         });
     });";
 

@@ -69,7 +69,11 @@ User:
         is_confirmed:
             type: boolean
             notnull: true
-            default: false   
+            default: false
+
+        phone:  
+            type: string(32)
+            default: ''
 
         company_name: string(50)
         company_address: string(255)
@@ -354,6 +358,30 @@ Property:
             onDelete: cascade
             class: User
             local: owner_id
+    actAs:
+        Timestampable:
+            created:
+                name: created_at
+            updated:
+                name: updated_at
+
+PropertyVisitDates:
+    columns:
+        id:
+            type:       integer(4)
+            primary:    true
+            autoincrement: true
+        property_id:    integer(4)
+        availability:   date
+        at_time:        time
+        visitors:    
+            type:       integer(4)
+            default:    0
+    relations:
+        Property:
+            onDelete: cascade
+            class: Property
+            local: property_id
     actAs:
         Timestampable:
             created:

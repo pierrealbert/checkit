@@ -59,6 +59,7 @@
  * @property integer $state
  * @property integer $is_published
  * @property Model_User $Owner
+ * @property Doctrine_Collection $PropertyVisitDates
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -303,6 +304,10 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'local' => 'owner_id',
              'foreign' => 'id',
              'onDelete' => 'cascade'));
+
+        $this->hasMany('Model_PropertyVisitDates as PropertyVisitDates', array(
+             'local' => 'id',
+             'foreign' => 'property_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              'created' => 
