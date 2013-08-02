@@ -1,3 +1,5 @@
+<?php $this->jQuery()->addStylesheet('/css/ui/jquery-ui-1.8.14.css'); ?>
+
 <table border="1" width="100%">
     <tr valign="top">
         <td width="33%">
@@ -22,9 +24,63 @@
             <!-- /Left menu -->
         </td>
         <td>
+            <form id="processVisitDate">
+            <div>
+                <label for="phone">Phone:<br /> <input type="text" id="phone" name="phone" value="" /></label>
+            </div>
+            <div id="datepicker"></div>
+            <hr />
+                <table width="100%">
+                    <tr>
+                        <td width="33%">
+                            <label for="selected_date">Date:<br />
+                                <input type="text" id="selected_date" name="selected_date" value="" />
+                            </label>
+                        </td>
+                        <td width="33%">
+                            <label for="selected_time">Time:<br />
+                                <select id="selected_time" name="selected_time">
+                                    <option value="8">08:00</option>
+                                    <option value="9">09:00</option>
+                                    <option value="10">10:00</option>
+                                    <option value="11">11:00</option>
+                                    <option value="12">12:00</option>
+                                </select>
+                            </label>
+                        </td>
+                        <td width="33%">
+                            <label for="selected_">Number of candidats:<br />
+                                <select id="selected_number" name="selected_numder">
+                                    <option value="0">Unlimited</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+                <input type="submit" value="add" />
+            <hr />
+            </form>
+            <hr />
             <!-- Form -->
             <?= $this->form ?>
             <!-- /Form -->
         </td>
     </tr>
 </table>
+<?php
+    $function = "$(function() {
+        $('#datepicker').datepicker({
+            dateFormat: 'yy-mm-dd',
+            defaultDate: " . time('Y-m-d') . ",
+            minDate: 0,
+            numberOfMonths: 2,
+        });
+    });";
+
+    $this->jQuery()->addOnLoad($function);
+
+?>
