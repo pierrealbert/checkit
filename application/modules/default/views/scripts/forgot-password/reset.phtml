@@ -1,0 +1,8 @@
+<h2><?= $this->translate('restore_password') ?></h2>
+<? if ($this->user) : ?>
+    <?= $this->form; ?>
+<? else : ?>
+    <?= $this->translate('restore_password_wrong_key', array(
+        $this->url(array('controller' => 'forgot-password'), null, true)        
+    )) ?>
+<? endif; ?>

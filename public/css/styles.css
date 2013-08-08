@@ -1,0 +1,172 @@
+ul, ol, li, div, body, h1, h2, h3, h4, dt, dd, dl, form, img {
+    margin: 0;
+    padding: 0;
+}
+body {
+    color: #666666;
+    background-color: #f0f0f0;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 0.75em;
+    background-image: url(../images/body-bg.png);
+    background-repeat: repeat-x;
+    background-position: top left;
+    padding-top: 3px;
+}
+a {
+    color: #25a4d9;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+a img {
+    border: 0;
+    vertical-align: bottom;
+}
+h1, h2, h3, h4 {
+    line-height: 1.3em;
+    color: #2e2b27;
+}
+h1 {
+    font-size: 2.0em;
+    line-height: 1.17;
+}
+h2 {
+    font-size: 1.7em;
+}
+h3 {
+    font-size: 13px;
+    margin: 0.4em 0;
+}
+h4 {
+    margin: .75em 0;
+    font-size: 12pt;
+    color: #FE860C;
+}
+p {
+    margin: .8em 0;
+}
+dt {
+    display: block;
+    font-weight: bold;
+}
+ul {
+    list-style: none;
+}
+small {
+    font-size: .92em;
+}
+big {
+    font-size: 1.1em;
+}
+hr {
+    height: 1px;
+    margin: 8px 0;
+}
+/*********** Common classes ***********/
+.nowrap {
+    white-space: nowrap;
+}
+.bold {
+    font-weight: bold;
+}
+.clear {
+    clear: both;
+}
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
+.left {
+    text-align: left;
+}
+.right {
+    text-align: right;
+}
+.center {
+    text-align: center;
+}
+.hidden {
+    display: none;
+}
+form dt {
+    padding: 2px 0;
+}
+ul.errors li, p.error {
+    color: red;
+}
+.info-block {
+    padding: 5px;
+}
+#content .info-block {
+    padding: 10px 0;
+}
+#wrapper {
+    width: 950px;
+    margin: 0 auto;
+}
+.padding-block {
+    padding: 9px 10px;
+}
+.flash-block {
+    padding: 9px 7px;
+}
+.orange {
+    color: #fa813f;
+}
+.red {
+    color: #d6524e;
+}
+.no-border {
+    border: 0;
+}
+
+/******** Ajax loader ********/
+
+#ajax-loader {
+    display:none;
+}
+.ajax-loader {
+    overflow:hidden;
+}
+.ajax-loader .ui-dialog-titlebar {
+    display:none;
+}
+.ajax-loader .ui-dialog-content {
+    overflow:hidden !important;
+    padding:0 !important;
+}
+.ajax-loader div.loading-message {
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background:transparent url(/images/ajax-loader.gif) no-repeat scroll 0 0;
+    color:#777777;
+    height:30px;
+    letter-spacing:0.3em;
+    margin:10px auto 0px;
+    padding:6px 50px 0;
+    text-transform:uppercase;
+    width:60px;
+}
+
+/*********** messages ***********/
+.message-box {
+    margin: 10px 0px;
+    padding: 10px;
+    border: 1px solid #ececec;
+    background-color: #ececec;
+}
+.message-box.error {
+    border: 1px solid #ffc8c8;
+    background-color: #ffc8c8;
+}
+.message-box.success {
+    border: 1px solid #cafdc4;
+    background-color: #cafdc4;
+}
+.message-box p {
+    margin: 5px 0px;
+}

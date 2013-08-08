@@ -1,0 +1,13 @@
+<?= $this->contentHeader('message_details', array(
+    array(
+        'type'  => 'link',
+        'title' => 'back_to_list',
+        'url'   => $this->url(array('controller' => 'messages', 'module' =>'admin', 'action' => 'index'), null, true),
+    )
+)) ?>
+<p>
+    <strong><?= $this->translate('title') ?>:</strong> <?= $this->escape($this->message->title) ?>
+</p>
+<p>
+    <strong><?= $this->translate('message') ?>:</strong> <?= $this->escape($this->message->message) ?>
+</p>

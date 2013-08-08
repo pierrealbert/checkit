@@ -1,0 +1,74 @@
+<script type="text/javascript">
+    var swfVersionStr = "10.0.1";
+    var xiSwfUrlStr = "${expressInstallSwf}";
+    var flashvars = <?= $this->flashVarsJs ?>;
+    var params = {
+        quality:            "high",
+        bgcolor:            "#ffffff",
+        wmode:              "transparent",
+        allowscriptaccess:  "sameDomain",
+        allowfullscreen:    "true"
+    };
+    var attributes = {
+        id:     "<?= $this->attributes['id'] ?>",
+        name:   "<?= $this->attributes['name'] ?>",
+        align:  "<?= $this->attributes['align'] ?>"
+    };
+    swfobject.embedSWF(
+        "<?= $this->swf ?>",
+        "<?= $this->id ?>FlashContent",
+        "<?= $this->attributes['width'] ?>",
+        "<?= $this->attributes['height'] ?>",
+        swfVersionStr,
+        xiSwfUrlStr,
+        flashvars,
+        params,
+        attributes
+    );
+    
+    swfobject.createCSS("#<?= $this->id ?>FlashContent", "display:block;");
+</script>
+<div id="<?= $this->id ?>FlashContent" class="hidden">
+    <p>
+        To view this page ensure that Adobe Flash Player version
+        10.0.1 or greater is installed.
+    </p>
+    <script type="text/javascript">
+        var pageHost = ((document.location.protocol == "https:") ? "https://" :	"http://");
+        document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='"
+                        + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>" );
+    </script>
+</div>
+
+<noscript>
+    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="<?= $this->attributes['width'] ?>" height="<?= $this->attributes['height'] ?>" id="<?= $this->id ?>">
+        <param name="movie" value="<?= $this->swf ?>" />
+        <param name="quality" value="high" />
+        <param name="bgcolor" value="#ffffff" />
+        <param name="wmode" value="transparent" />
+        <param name="allowScriptAccess" value="sameDomain" />
+        <param name="allowFullScreen" value="true" />
+        <param name="FlashVars" value="<?= $this->flashVarsStr ?>" />
+        <!--[if !IE]>-->
+        <object type="application/x-shockwave-flash" data="<?= $this->swf ?>" width="<?= $this->attributes['width'] ?>" height="<?= $this->attributes['height'] ?>">
+            <param name="quality" value="high" />
+            <param name="wmode" value="transparent" />
+            <param name="bgcolor" value="#ffffff" />
+            <param name="allowScriptAccess" value="sameDomain" />
+            <param name="allowFullScreen" value="true" />
+            <param name="FlashVars" value="<?= $this->flashVarsStr ?>" />
+        <!--<![endif]-->
+        <!--[if gte IE 6]>-->
+            <p>
+                Either scripts and active content are not permitted to run or Adobe Flash Player version
+                10.0.1 or greater is not installed.
+            </p>
+        <!--<![endif]-->
+            <a href="http://www.adobe.com/go/getflashplayer">
+                <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
+            </a>
+        <!--[if !IE]>-->
+        </object>
+        <!--<![endif]-->
+    </object>
+</noscript>

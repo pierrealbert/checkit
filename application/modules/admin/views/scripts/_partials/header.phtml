@@ -1,0 +1,9 @@
+<div id="header">
+    <? if ($this->currUser) : ?>
+    <div class="welcome">
+        <?= $this->translate('hello') ?>, <?= $this->currUser->username ?>!
+        [<a href="<?= $this->url(array('module' => 'admin', 'controller' => 'login', 'action' => 'logout'), null, true) ?>"><?= $this->translate('logout') ?></a>]
+    </div>
+    <? endif ?>
+    <h1>Admin System</h1>
+</div>

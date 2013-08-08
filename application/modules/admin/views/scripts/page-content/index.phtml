@@ -1,0 +1,8 @@
+<?= $this->contentHeader('pages', array(
+    array(
+        'type'  => 'link',
+        'title' => 'add_page',
+        'url'   => $this->url(array('controller' => 'page-content', 'module' =>'admin', 'action' => 'add'), null, true),
+    )
+)) ?>
+<?= $this->grid($this->grid) ?>

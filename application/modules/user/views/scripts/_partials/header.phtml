@@ -1,0 +1,14 @@
+<div id="header">
+    <h2>User Module Header</h2>
+    <? if ($this->currUser) : ?>
+        <div class="welcome">
+            <div class="clear"></div>
+            <?= $this->translate('hello') ?>, <?= $this->currUser->getFullName() ?>!
+            [<a href="<?= $this->url(array('module' => 'default', 'controller' => 'login', 'action' => 'logout', 'model' => 'user'), null, true) ?>"><?= $this->translate('logout') ?></a>]
+            <? if (!$this->currUser->is_premium): ?>
+                [<a href="<?= $this->url(array('module' => 'user', 'controller' => 'subscription', 'action' => 'index'), null, true) ?>"><?= $this->translate('upgrade_to_premium') ?></a>]
+            <? endif ?>
+        </div>
+        <div class="clear"></div>
+    <? endif ?>
+</div>

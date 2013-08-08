@@ -1,0 +1,48 @@
+/*
+ * Common
+ */
+.iss-dtgrid-wrapper .right {text-align: right;}
+
+/*
+ * Processing indicator
+ */
+.iss-dtgrid-processing {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 250px;
+	height: 30px;
+	margin-left: -125px;
+	margin-top: -15px;
+	padding: 14px 0 2px 0;
+	border: 1px solid #ddd;
+	text-align: center;
+	color: #999;
+	font-size: 14px;
+	background-color: white;
+}
+
+/*
+ * Length
+ */
+.iss-dtgrid-length select {width: auto; margin-top: 10px;}
+
+/*
+ * Sorting
+ */
+.iss-dtgrid-header {text-align: center;}
+.iss-dtgrid-header-sortable {}
+.iss-dtgrid-header-sortable sort-up {}
+.iss-dtgrid-header-sortable sort-down {}
+
+/*
+ * Search
+ */
+.iss-dtgrid-search-area div {display: inline-block; vertical-align: top;}
+
+/*
+ * Fields
+ */
+.iss-dtgrid-column-id {width: 50px;}
+.iss-dtgrid-column-is-active {width: 70px;}
+.iss-dtgrid-column-actions {width: 70px;}

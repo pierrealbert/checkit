@@ -1,0 +1,103 @@
+<?php $this->jQuery()->addStylesheet('/css/ui/jquery-ui-1.8.14.css'); ?>
+
+<table border="1" width="100%">
+    <tr valign="top">
+        <td width="33%">
+            <!-- Left menu -->
+            <table border="1" width="100%">
+                <tr>
+                    <td><?= $this->translate('status') ?>: 80%</td>
+                </tr>
+                <?php $states_info = $this->property->getStatesInfo(); ?>
+                <?php foreach($states_info as $state => $info): ?>
+                <tr>
+                        <?php if ($this->current_state == $state): ?>
+                    <td style="background-color:#3cbecc;"><?= $this->translate($info['name']) ?></td>
+                        <?php elseif ($this->property->state < $state): ?>
+                    <td><?= $this->translate($info['name']) ?></td>
+                        <?php else: ?>
+                    <td><a href="/user/property/<?= $info['action'] ?>/item/<?= $this->property->id ?>"><?= $this->translate($info['name']) ?></a></td>
+                        <?php endif; ?>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+            <!-- /Left menu -->
+        </td>
+        <td>
+            <form id="processVisitDate">
+            <div>
+                <label for="phone">Phone:<br /> <input type="text" id="phone" name="phone" value="<?= htmlspecialchars($this->user->phone) ?>" /></label>
+            </div>
+            <div id="datepicker"></div>
+            <hr />
+                <table width="100%">
+                    <tr>
+                        <td width="33%">
+                            <label for="availability">Date:<br />
+                                <input type="text" id="availability" name="availability" value="" />
+                            </label>
+                        </td>
+                        <td width="33%">
+                            <label for="at_time">Time:<br />
+                                <select id="at_time" name="at_time">
+                                <?php foreach($this->time_list as $value => $name): ?>
+                                    <option value="<?= $value ?>"><?= $name ?></option>
+                                <?php endforeach; ?>
+                                </select>
+                            </label>
+                        </td>
+                        <td width="33%">
+                            <label for="visitors">Number of candidats:<br />
+                                <select id="visitors" name="visitors">
+                                <?php foreach($this->number_of_candidats_list as $value => $name): ?>
+                                    <option value="<?= $value ?>"><?= $this->translate($name) ?></option>
+                                <?php endforeach; ?>
+                                </select>
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+                <input type="submit" value="add" />
+            </form>
+            <hr />
+            <div id="visits"><?= $this->visits ?></div>
+            <hr />
+            <!-- Form -->
+            <?= $this->form ?>
+            <!-- /Form -->
+        </td>
+    </tr>
+</table>
+<?php
+    $function = "$(function() {
+        $('#datepicker').datepicker({
+            dateFormat: 'yy-mm-dd',
+            defaultDate: " . time('Y-m-d') . ",
+            minDate: 0,
+            numberOfMonths: 2,
+            altField: '#availability',
+        });
+        $('#processVisitDate').on('submit', function(){
+            $.ajax({
+                type: 'POST',
+                url: '/user/property/process-visit-date/item/{$this->property->id}',
+                data: {
+                        phone: $('#phone').val(), 
+                        availability: $('#availability').val(),
+                        at_time: $('#at_time').val(),
+                        visitors: $('#visitors').val(),
+                    },
+                success: function(r) {
+                    if (!r.error) {
+                        $('#visits').empty().append(r.list);
+                    }
+                },
+                dataType: 'json'
+            });
+            return false;
+        });
+    });";
+
+    $this->jQuery()->addOnLoad($function);
+
+?>

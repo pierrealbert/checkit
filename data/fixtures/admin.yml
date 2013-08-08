@@ -1,0 +1,7 @@
+Model_Admin:
+  Admin_1:
+    first_name: Admin
+    last_name: ISSArt
+    username: admin
+    email: admin@issart.com
+    password: 123

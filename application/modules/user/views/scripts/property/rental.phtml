@@ -1,0 +1,33 @@
+<?php $this->jQuery()->addStylesheet('/css/ui/jquery-ui-1.8.14.css'); ?>
+
+<table border="1" width="100%">
+    <tr valign="top">
+        <td width="33%">
+            <!-- Left menu -->
+            <table border="1" width="100%">
+                <tr>
+                    <td><?= $this->translate('status') ?>: 0%</td>
+                </tr>
+                <?php $states_info = $this->property->getStatesInfo(); ?>
+                <?php foreach($states_info as $state => $info): ?>
+                <tr>
+                        <?php if ($this->current_state == $state): ?>
+                    <td style="background-color:#3cbecc;"><?= $this->translate($info['name']) ?></td>
+                        <?php elseif ($this->property->state < $state): ?>
+                    <td><?= $this->translate($info['name']) ?></td>
+                        <?php else: ?>
+                    <td><a href="/user/property/<?= $info['action'] ?>/item/<?= $this->property->id ?>"><?= $this->translate($info['name']) ?></a></td>
+                        <?php endif; ?>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+            <!-- /Left menu -->
+        </td>
+        <td>
+            <!-- Form -->
+            <?= $this->form ?>
+            <!-- /Form -->
+        </td>
+    </tr>
+</table>
+

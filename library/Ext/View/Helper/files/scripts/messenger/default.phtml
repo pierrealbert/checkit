@@ -1,0 +1,9 @@
+<? if (!empty($this->messages)) : ?>    
+    <? foreach ($this->messages as $type => $messages) : ?>
+        <div class="message-box <?= $type ?>">
+        <? foreach ($messages as $message) : ?>
+        <p><?= $message ?></p>
+        <? endforeach ?>
+        </div>
+    <? endforeach; ?>   
+<? endif; ?>

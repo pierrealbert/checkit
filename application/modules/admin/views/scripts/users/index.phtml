@@ -1,0 +1,10 @@
+<?= $this->contentHeader('users', array(
+    array(
+        'type'  => 'link',
+        'title' => 'add_user',
+        'url'   => $this->url(array('controller' => 'users', 'module' =>'admin', 'action' => 'add'), null, true),
+    )
+)) ?>
+<?= $this->grid($this->grid, array(
+    'emptyGridMessage' => 'no_users'
+)) ?>

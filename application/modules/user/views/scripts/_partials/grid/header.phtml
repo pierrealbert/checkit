@@ -1,0 +1,9 @@
+<? if ($this->sortable) : ?>
+<th>
+    <a href="<?= $this->url(array('sort' => $this->sort, 'dir' => $this->dir))?>"><?= $this->value ?></a>
+    <? if ('asc' == $this->arrow) : ?>&#8593;<? endif; ?>
+    <? if ('desc' == $this->arrow) : ?>&#8595;<? endif; ?>
+</th>
+<? else : ?>
+<th><?= $this->value ?></th>
+<? endif; ?>

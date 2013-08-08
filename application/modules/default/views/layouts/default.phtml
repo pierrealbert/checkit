@@ -1,0 +1,36 @@
+<?
+    $this->headLink()->headLink(array(
+        'rel'   => 'favicon',
+		'href'  => '/favicon.ico',
+		'type'  => 'image/x-icon'
+    ));
+
+    $this->headLink()->appendStylesheet('/css/styles.css');
+
+    $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=' . $this->getEncoding());
+
+    $this->headMeta()->appendHttpEquiv('Content-Language', 'en')
+?>
+<?= $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+    <?= $this->headMeta() ?>
+    <?= $this->headTitle('Frontend')->setSeparator(' - ') ?>
+    <?= $this->headLink() ?>
+    <?= $this->headScript() ?>
+</head>
+    <body>
+        <div id="wrapper">
+            <?= $this->partial('_partials/header.phtml', $this->getVars()) ?>
+            <div id="content">
+                <?= $this->messenger() ?>
+                <?= $this->layout()->content ?>
+            </div>
+            <?= $this->partial('_partials/footer.phtml', $this->getVars()) ?>
+            <div id="ajax-loader">
+                <div class="loading-message"><?= $this->translate('loading') ?></div>
+            </div>
+        </div>
+        <?= $this->getPluginLoader('helper')->isLoaded('JQuery') ? $this->jQuery() : '' ?>
+    </body>
+</html>

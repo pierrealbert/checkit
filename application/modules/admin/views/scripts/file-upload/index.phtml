@@ -1,0 +1,8 @@
+<?= $this->contentHeader('File Upload Example') ?>
+<?= $this->form ?>
+<? if ($this->fileInfo) : ?>
+<h3><?= $this->translate('file_info') ?></h3>
+<pre>
+    <?= print_r($this->fileInfo) ?>
+</pre>
+<? endif; ?>

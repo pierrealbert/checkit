@@ -1,0 +1,164 @@
+Model_User:
+  User_1:
+    username: ivan
+    email: ivan@mail.com
+    first_name: Ivan
+    last_name: Ivanov
+    password: 123
+    country: RU
+  User_2:
+    username: dmitry
+    email: dmitry@mail.com
+    first_name: Dmitry
+    last_name: Petrov
+    password: 123
+    country: RU
+  User_3:
+    username: alexandr
+    email: alexandr@mail.com
+    first_name: Alexandr
+    last_name: Maximov
+    password: 123
+    country: US
+  User_4:
+    username: pavel
+    email: pavel@mail.com
+    first_name: Pavel
+    last_name: Ivanov
+    password: 123
+    country: AL
+  User_5:
+    username: olga
+    email: olga@mail.com
+    first_name: Olga
+    last_name: Ivanova
+    password: 123
+    country: US
+  User_6:
+    username: maxim
+    email: maxim@mail.com
+    first_name: Maxim
+    last_name: Fedotov
+    password: 123
+    country: US
+  User_7:
+    username: bmaciejewski
+    email: t7@mail.com
+    first_name: Basilia
+    last_name: Maciejewski
+    password: 123
+    country: US
+  User_8:
+    username: dodowd
+    email: t8@mail.com
+    first_name: Dalziel
+    last_name: Odowd
+    password: 123
+    country: US
+  User_9:
+    username: eohagan
+    email: t9@mail.com
+    first_name: Emanuel
+    last_name: Ohagan
+    password: 123
+    country: US
+  User_10:
+    username: nrentz
+    email: t10@mail.com
+    first_name: Neva
+    last_name: Rentz
+    password: 123
+    country: US
+  User_11:
+    username: nmaddux
+    email: t11@mail.com
+    first_name: Nimai
+    last_name: Maddux
+    password: 123
+    country: US
+  User_12:
+    username: rconrad
+    email: t12@mail.com
+    first_name: Ronit
+    last_name: Conrad
+    password: 123
+    country: US
+  User_13:
+    username: pbergstrom
+    email: t13@mail.com
+    first_name: Perri
+    last_name: Bergstrom
+    password: 123
+    country: US
+  User_14:
+    username: ifeng
+    email: t14@mail.com
+    first_name: Isidore
+    last_name: Feng
+    password: 123
+    country: US
+  User_15:
+    username: khathorn
+    email: t15@mail.com
+    first_name: Kadosa
+    last_name: Hathorn
+    password: 123
+    country: US
+  User_16:
+    username: ktobar
+    email: t16@mail.com
+    first_name: Konrad
+    last_name: Tobar
+    password: 123
+    country: US
+  User_17:
+    username: asaetern
+    email: t17@mail.com
+    first_name: Alistair
+    last_name: Saetern
+    password: 123
+    country: US
+  User_18:
+    username: kcain
+    email: t18@mail.com
+    first_name: Kohana
+    last_name: Cain
+    password: 123
+    country: US
+  User_19:
+    username: keklund
+    email: t19@mail.com
+    first_name: Kishore
+    last_name: Eklund
+    password: 123
+    country: US
+  User_20:
+    username: osearcy
+    email: t20@mail.com
+    first_name: Orrin
+    last_name: Searcy
+    password: 123
+    country: US
+  User_21:
+    username: cboddie
+    email: t21@mail.com
+    first_name: Calixte
+    last_name: Boddie
+    password: 123
+    country: US
+  User_22:
+    username: preinke
+    email: t22@mail.com
+    first_name: Prabodh
+    last_name: Reinke
+    password: 123
+    country: US
+  User_23:
+    username: test
+    email: jonjonson7@gmail.com
+    first_name: Test
+    last_name: Test
+    password: test
+    country: RU
+    is_active: 1
+    is_confirmed: 1

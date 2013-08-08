@@ -1,0 +1,31 @@
+Model_UserMessage:
+  UserMessage_1:
+    sender_id: 1
+    receiver_id: 2	
+    title: Hi
+    message: How are you??
+  UserMessage_2:
+    sender_id: 2
+    receiver_id: 1	
+    title: "RE: Hi"
+    message: I'm fine, thanks
+  UserMessage_3:
+    sender_id: 2
+    receiver_id: 3	
+    title: Hello, my friend
+    message: How are you??
+  UserMessage_4:
+    sender_id: 1
+    receiver_id: 2	
+    title: Hi, how are you?
+    message: How are you??
+  UserMessage_5:
+    sender_id: 5
+    receiver_id: 2	
+    title: Where is my money??
+    message: Where is my money??
+  UserMessage_6:
+    sender_id: 2
+    receiver_id: 5	
+    title: "RE: Where is my money??"
+    message: Hmmm... What money??

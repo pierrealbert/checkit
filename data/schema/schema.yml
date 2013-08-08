@@ -1,0 +1,390 @@
+Admin:
+    columns:      
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+        username:             string(50)
+        first_name:           string(50)
+        last_name:            string(50)
+        email:                string(255)
+        password:             string(50)
+        restore_password_key:
+            type: string
+            length: 32
+            notnull: false
+            default: null
+        is_active:
+            type: boolean
+            notnull: true
+            default: true
+    actAs:
+        Timestampable:
+            created:
+                name: created_at
+            updated:
+                name: updated_at
+SettingsOption:
+    columns:      
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+        name:       string(255)
+        value:      text    
+User:
+    columns:      
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+        username:   string(50)
+        first_name: string(50)
+        last_name:  string(50)
+        email:      string(255)
+        password:   string(50)
+        role:       string(10)
+        country:    string(2)
+        city:       string(50)
+        facebook_id: string(50)
+        is_premium: boolean
+        type: 
+          type: enum
+          values: [owner, resident]
+          size: 15
+        confirm_registration_key:
+            type: string
+            length: 32
+            notnull: false
+            default: null
+        restore_password_key:
+            type: string
+            length: 32
+            notnull: false
+            default: null
+        is_active:
+            type: boolean
+            notnull: true
+            default: true
+        is_confirmed:
+            type: boolean
+            notnull: true
+            default: false
+
+        phone:  
+            type: string(32)
+            default: ''
+
+        company_name: string(50)
+        company_address: string(255)
+        company_siret: string(50)
+        company_zip: integer(4)
+        company_city: string(50)
+    actAs:
+        Timestampable:
+            created:
+                name: created_at
+            updated:
+                name: updated_at
+
+Transaction:
+    columns:
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true   
+        paypal_transaction_id:
+            type: string(50)
+        paypal_correlation_id:
+            type: string(50)
+        paypal_ec_token:
+            type: string(50)
+        paypal_response_body:
+            type: text
+        is_cancelled:
+            type: boolean
+            default: 0
+        amount:
+            type: integer(4)
+            unsigned: true
+        currency_code:
+            type: string(3)
+        paypal_ack:
+            type: string(20)
+        is_success:
+            type: boolean
+            default: 0
+        user_id:
+            type: integer(4)            
+        error_code:
+            type: integer(3)            
+        error_message:
+            type: string(255)
+        sent_at:
+            type: datetime
+    actAs:
+        Timestampable:
+            created:
+                name: created_at
+    relations:
+        User:               
+            onDelete: cascade
+
+UserResident:  
+    columns:      
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true   
+        user_id:
+            type: integer(4)            
+        rent_type:
+          type: enum
+          values: [single, couple, roommate]     
+          size: 15
+        resident_type: 
+          type: enum
+          values: [student, employee, independent, other]
+          size: 15
+        job_title:   string(255)          
+        employee_type:
+          type: enum
+          values: [cdi, csd] 
+          size: 3
+        monthly_income:
+          type: decimal(10)
+          scale: 2          
+        monthly_income_guaranteed:
+          type: decimal(10)
+          scale: 2                    
+        is_primary:
+            type: boolean
+            notnull: true
+            default: false
+    relations:
+        User:               
+            onDelete: cascade
+            class: User
+            local: user_id            
+    actAs:
+        Timestampable:
+            created:
+                name: created_at
+            updated:
+                name: updated_at  
+UserResidentDocument:
+    columns:      
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true   
+        user_resident_id:
+            type: integer(4)            
+        file:           
+            type: string(255)
+        original_name:  
+            type: string(255)
+        type: 
+            type: enum
+            values: [passport, student_id, inc_certificate, payslip, paycheck1, paycheck2, paycheck3, contract, tax_notice, tax_notice_guaranteed, payslip_guaranteed]
+    relations:
+        UserResident:
+            onDelete: cascade
+
+UserMessage:                
+    columns:      
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+        sender_id:   integer(4)
+        receiver_id: integer(4)
+        title:      string(255)
+        message:    text
+        is_read:    
+            type: boolean
+            notnull: true
+            default: false            
+        deleted_by_sender_id:   
+            type: boolean
+            notnull: true
+            default: false          
+        deleted_by_receiver_id: 
+            type: boolean
+            notnull: true
+            default: false          
+    relations:
+        Sender:               
+            onDelete: cascade
+            class: User
+            local: sender_id
+        Receiver:      
+            onDelete: cascade
+            class: User        
+            local: receiver_id
+    actAs:
+        Timestampable:
+            created:
+                name: created_at
+            updated:
+                name: updated_at
+PageContent:
+    columns:
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+        title:   string(255)
+        content: text
+    actAs:
+        Sluggable:
+          unique: true
+          fields: [title]
+          canUpdate: true
+
+Message:
+    columns:
+        message_id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+        queue_id:   integer(4)
+        handle:     
+            type:   string(32)
+            unique: true
+        body:       text
+        md5:        string(32)
+        timeout:
+            type:   decimal(14)
+            scale:  4
+        created: integer(4)
+    indexes:
+        message_queueid:
+            fields: [queue_id]
+
+Queue:
+    columns:
+        queue_id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+        queue_name: string(100)
+        timeout:    
+            type: integer(2) 
+            default: 30
+
+Property:
+    columns:
+        id:
+            type:       integer(4)
+            primary:    true
+            autoincrement: true
+        owner_id:       integer(4)
+        title:          string(255)
+        amount_of_rent_excluding_charges:
+            type:       decimal(14)
+            scale:      2
+        amount_of_charges:
+            type:       decimal(14)
+            scale:      2
+        is_furnished:   
+            type:       integer(1)
+            default:    0
+        lease_duration: integer(4)
+        deposit:        
+            type:       integer(4)
+            default:    1
+        availability:   date
+        address:        string(255)
+        postcode:       string(8)
+        city:           string(255)
+        size:           
+            type:       decimal(14)
+            scale:      2
+        property_type:  integer(4)
+        number_of_rooms1: 
+            type:       integer(4)
+            default:    1
+        number_of_rooms2: 
+            type:       integer(4)
+            default:    1
+        is_separate_restrooms: integer(1)
+        is_parquet_floor: integer(1)
+        is_molding:     integer(1)
+        is_double_glazing: integer(1)
+        is_storage_area:   integer(1)
+        is_fireplace:   integer(1)
+        floor:          integer(4)
+        is_lift:        integer(1)
+        is_balcony:     integer(1)
+        is_terrace:     integer(1)
+        is_garden:      integer(1)
+        is_yard:        integer(1)
+        is_attic:       integer(1)
+        is_basement:    integer(1)
+        is_garage:      integer(1)
+        is_parking_lot: integer(1)
+        is_swimming_pool: integer(1)
+        is_digicode:    integer(1)
+        is_watchman:    integer(1)
+        is_old_building: integer(1)
+        is_very_old_building: integer(1)
+        is_renove:      integer(1)
+        number_of_bathrooms: 
+            type:       integer(4)
+            default:    1
+        is_individuel:  integer(1)
+        is_central:     integer(1)
+        is_au_sol:      integer(1)
+        is_gaz:         integer(1)
+        is_electrique:  integer(1)
+        is_autre:       integer(1)
+        main_photo:
+            type:       string(255)
+            default:    ""
+        is_r_student:   integer(1)
+        is_r_employee:  integer(1)
+        is_r_independent:   integer(1)
+        is_r_other:     integer(1)
+        is_roomate:     integer(1)
+        state:          
+            type:       integer(1)
+            default:    1
+        is_published:   
+            type:       integer(1)
+            default:    0
+    relations:
+        Owner:
+            onDelete: cascade
+            class: User
+            local: owner_id
+    actAs:
+        Timestampable:
+            created:
+                name: created_at
+            updated:
+                name: updated_at
+
+PropertyVisitDates:
+    columns:
+        id:
+            type:       integer(4)
+            primary:    true
+            autoincrement: true
+        property_id:    integer(4)
+        availability:   date
+        at_time:        time
+        visitors:    
+            type:       integer(4)
+            default:    0
+    relations:
+        Property:
+            onDelete: cascade
+            class: Property
+            local: property_id
+    actAs:
+        Timestampable:
+            created:
+                name: created_at
+            updated:
+                name: updated_at
