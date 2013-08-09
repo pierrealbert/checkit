@@ -3,10 +3,8 @@
 /**
  * GoogleMaps service
  *
- * @category    Ext
- * @package     GoogleMaps
- * @since       1.0
- * @version     $Revision: 1.0 $
+ * @category Ext
+ * @package  GoogleMaps
  */
 class Ext_Service_GoogleMaps
 {
@@ -15,16 +13,16 @@ class Ext_Service_GoogleMaps
      *
      * array (
      *    'lat' => 104.8454635,
-     *    'lon' => -154.2342433
+     *    'lng' => -154.2342433
      * )
      *
      * @param array $address
      *
-     * example: array(
-     *  'street'        => '201 Varick Street',
-     *  'city'          => 'New York',
-     *  'state'         => 'NY',
-     *  'postal_code'   => 10014)
+     *     example: array(
+     *      'street'        => '201 Varick Street',
+     *      'city'          => 'New York',
+     *      'state'         => 'NY',
+     *      'postal_code'   => 10014)
      *
      * @return array|null
      */
@@ -37,13 +35,13 @@ class Ext_Service_GoogleMaps
         
         $response = $this->_getGeocodedCoordinates($address);
 
-        if (isset($response->Placemark[0]->Point->coordinates[1])) {
+        if (isset($response[0]->geometry->location)) {
             return array(
-                'lat' => $response->Placemark[0]->Point->coordinates[1],
-                'lon' => $response->Placemark[0]->Point->coordinates[0]
+                'lat' => $response[0]->geometry->location->lat,
+                'lng' => $response[0]->geometry->location->lng
             );
         }
-        return null;
+        return array();
     }
 
     /**
@@ -82,15 +80,18 @@ class Ext_Service_GoogleMaps
 
         $client = new Zend_Http_Client();
         $client->setUri($options['geocodingUri']);
-        $client->setParameterGet('q', urlencode($address))
-                ->setParameterGet('output', 'json')
-                ->setParameterGet('sensor', 'false')
-                ->setParameterGet('key', $options['apiKey']);
+        $client->setParameterGet('address', urlencode($address))
+               ->setParameterGet('sensor', 'false')
+               ->setParameterGet('key', $options['apiKey']);
 
         $result = $client->request('GET');
-
-        return Zend_Json_Decoder::decode(
-                $result->getBody(),
-                Zend_Json::TYPE_OBJECT);
+        $jsonResult = Zend_Json_Decoder::decode( 
+            $result->getBody(),
+            Zend_Json::TYPE_OBJECT
+        );
+        if ($jsonResult->status == 'OK')
+            return $jsonResult->results;
+        else
+            return False;
     }
 }
