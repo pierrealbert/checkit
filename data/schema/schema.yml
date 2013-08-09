@@ -364,6 +364,7 @@ Property:
                 name: created_at
             updated:
                 name: updated_at
+        Geographical:
 
 PropertyVisitDates:
     columns:

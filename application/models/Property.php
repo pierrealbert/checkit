@@ -38,6 +38,24 @@ class Model_Property extends Model_Base_Property
         );
     }
 
+    protected function _assignCoordinates()
+    {
+        if ($this->address and $this->city) {
+            $googleMaps = new Ext_Service_GoogleMaps();
+            $coordinates = $googleMaps->addressToCoordinates(array('street' => $this->address,
+                                                                   'city' => $this->city,
+                                                                   'postal_code' => $this->zipcode));
+            $this->longitude = $coordinates['lng'];
+            $this->latitude = $coordinates['lat'];
+        }
+    }
+
+    public function preSave($event)
+    {
+        $this->_assignCoordinates();
+        // $this->_assignDistrict();
+    }
+
     public function getStatesInfo()
     {
         return array(

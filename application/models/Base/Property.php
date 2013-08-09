@@ -319,6 +319,8 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
               'name' => 'updated_at',
              ),
              ));
+        $geographical0 = new Doctrine_Template_Geographical();
         $this->actAs($timestampable0);
+        $this->actAs($geographical0);
     }
 }
