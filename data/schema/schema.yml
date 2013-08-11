@@ -366,6 +366,42 @@ Property:
                 name: updated_at
         Geographical:
 
+Region:
+    columns:
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true
+        name:
+            type: string(50)
+        zoom_level:
+            type: integer(1)
+        path:
+            type: text
+        
+RegionCity:
+    inheritance:
+        extends: Region
+        type: column_aggregation
+        
+RegionDistrict:
+    inheritance:
+        extends: Region
+        type: column_aggregation
+    columns:
+        region_city_id: {type: integer(4), default: null}
+    relations:
+        RegionCity: {onDelete: cascade}
+        
+RegionBlock:
+    inheritance:
+        extends: Region
+        type: column_aggregation
+    columns:
+        region_district_id: {type: integer(4), default: null}
+    relations:
+        RegionDistrict: {onDelete: cascade}
+
 PropertyVisitDates:
     columns:
         id:
