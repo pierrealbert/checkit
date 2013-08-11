@@ -1,0 +1,6 @@
+<pre>
+<? print_r($this->regionsArray); ?>
+</pre>
+
+<input type="hidden" name="regions_selected" id="regions_selected"><input type="button" id="regions_back" value="back">
+<?= $this->googleMap(48.857261, 2.346611, array('width' => 500, 'height' => 500), array('zoom' => 8), "initSearchMap(map, {$this->regionsJson})") ?>
