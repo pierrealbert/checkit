@@ -7,6 +7,7 @@
  * 
  * @property integer $id
  * @property integer $owner_id
+ * @property integer $region_block_id
  * @property string $title
  * @property decimal $amount_of_rent_excluding_charges
  * @property decimal $amount_of_charges
@@ -59,6 +60,7 @@
  * @property integer $state
  * @property integer $is_published
  * @property Model_User $Owner
+ * @property Model_RegionBlock $RegionBlock
  * @property Doctrine_Collection $PropertyVisitDates
  * 
  * @package    ##PACKAGE##
@@ -78,6 +80,10 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'length' => '4',
              ));
         $this->hasColumn('owner_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => '4',
+             ));
+        $this->hasColumn('region_block_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => '4',
              ));
@@ -302,6 +308,11 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
         parent::setUp();
         $this->hasOne('Model_User as Owner', array(
              'local' => 'owner_id',
+             'foreign' => 'id',
+             'onDelete' => 'cascade'));
+
+        $this->hasOne('Model_RegionBlock as RegionBlock', array(
+             'local' => 'region_block_id',
              'foreign' => 'id',
              'onDelete' => 'cascade'));
 

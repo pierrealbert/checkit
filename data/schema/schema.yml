@@ -280,6 +280,9 @@ Property:
             primary:    true
             autoincrement: true
         owner_id:       integer(4)
+        region_block_id:
+            type: integer(4)
+            default: null
         title:          string(255)
         amount_of_rent_excluding_charges:
             type:       decimal(14)
@@ -358,6 +361,9 @@ Property:
             onDelete: cascade
             class: User
             local: owner_id
+        RegionBlock: 
+            onDelete: cascade
+            
     actAs:
         Timestampable:
             created:

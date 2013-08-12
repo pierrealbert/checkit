@@ -51,10 +51,24 @@ class Model_Property extends Model_Base_Property
             $this->latitude = $coordinates['lat'];
     }
 
+    protected function _assignRegion()
+    {
+        if (!$this->longitude or !$this->latitude) {
+            return;
+        }
+        $geo = new Ext_Geo();
+        $blockRegions = Model_RegionBlockTable::getInstance()->findAll();
+        foreach ($blockRegions as $blockRegion) {
+            if ($geo->isPointInPolygon(array(48.829967,2.358284), $blockRegion->path)) {
+                $this->region_block_id = $blockRegion;
+            }
+        }
+    }
+
     public function preSave($event)
     {
         $this->_assignCoordinates();
-        // $this->_assignDistrict();
+        $this->_assignRegion();
     }
 
     public function getStatesInfo()
