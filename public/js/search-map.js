@@ -4,9 +4,19 @@ function initSearchMap(map, regions) {
     //   customParams.bounds - bounds of a polygon of type google.maps.LatLngBounds
     // and additional parameters of map:
     //   customParams.currentRegionId - current city or district region if map in appropriate mode.
-
     map.customParams = {};
-    
+
+    // Default options for not selected and selected polygons. Don't use fillOpacity here.
+    var notSelectedPolygonOptions = {strokeColor: "#FF0000",
+                                     strokeOpacity: 0.8,
+                                     strokeWeight: 2,
+                                     fillColor: "#FFAAAA",
+                                     fillOpacity: 0.35};
+    var selectedPolygonOptions = {strokeColor: "#FF0000",
+                                  strokeOpacity: 0.8,
+                                  strokeWeight: 0.5,
+                                  fillColor: "#FF0000",
+                                  fillOpacity: 0.35};
     function countryMode () {
         for (region_id in regions) {
             var region = regions[region_id];
@@ -14,8 +24,8 @@ function initSearchMap(map, regions) {
             // clear all click listeners
             google.maps.event.clearListeners(region['polygon'], 'click');
 
-            // make all polygons be visible by default
-            region['polygon'].setOptions({fillOpacity: 0.35});
+            // set default options for all polygons
+            region['polygon'].setOptions(notSelectedPolygonOptions);
             
             if (region['type'] == 'RegionCity') {
                 // put cities on the map
@@ -25,6 +35,8 @@ function initSearchMap(map, regions) {
             } else if ($.inArray(parseInt(region['id']), getSelectedRegions()) > -1) {
                 // put on the map selected polygon
                 region['polygon'].setMap(map);
+                // set appropriate options
+                region['polygon'].setOptions(selectedPolygonOptions);
                 // add same click event for this polygon as for city one
                 // and we assume that only blocks can be selected
                 if (region.region_district_id) {
@@ -58,8 +70,8 @@ function initSearchMap(map, regions) {
             // clear all click listeners
             google.maps.event.clearListeners(region['polygon'], 'click');
 
-            // make all polygons be visible by default
-            region['polygon'].setOptions({fillOpacity: 0.35});
+            // set default options for all polygons
+            region['polygon'].setOptions(notSelectedPolygonOptions);
 
             if (region['region_city_id'] == regionCityId) {
                 // put on the map districts which lie in the city
@@ -77,6 +89,8 @@ function initSearchMap(map, regions) {
             } else if ($.inArray(parseInt(region['id']), getSelectedRegions()) > -1) {
                 // put on the map selected polygon
                 region['polygon'].setMap(map);
+                // set appropriate options
+                region['polygon'].setOptions(selectedPolygonOptions);
                 // add same click event for this polygon as for district one
                 // and we assume that only blocks can be selected
                 if (region.region_district_id) {
@@ -100,12 +114,16 @@ function initSearchMap(map, regions) {
             // clear all click listeners
             google.maps.event.clearListeners(region['polygon'], 'click');
 
-            // make all polygons be visible by default
-            region['polygon'].setOptions({fillOpacity: 0.35});
+            // set default options for all polygons
+            region['polygon'].setOptions(notSelectedPolygonOptions);
 
             if (region['region_district_id'] == regionDistrictId) {
                 // put on the map blocks which lie in the distriction
                 region['polygon'].setMap(map);
+                // set appropriate options if it's a selected block
+                if ($.inArray(parseInt(region['id']), getSelectedRegions()) > -1) {
+                    region['polygon'].setOptions(selectedPolygonOptions);
+                }
                 // add click listener to these blocks
                 google.maps.event.addListener(region['polygon'], 'click', function () {selectBlock(this.customParams.regionId)});
             } else if (region['id'] == regionDistrictId) {
@@ -116,9 +134,12 @@ function initSearchMap(map, regions) {
                 map.fitBounds(region['polygon'].customParams.bounds);
                 // make this polygon to be opacity
                 region['polygon'].setOptions({fillOpacity: 0});
-            } else if ($.inArray(region['id'], getSelectedRegions()) > -1) {
-                // put on the map selected polygon
-                region['polygon'].setMap(map);
+            // If want to show all selected polygons on this mode uncomment next 5 lines
+            // } else if ($.inArray(parseInt(region['id']), getSelectedRegions()) > -1) {
+            //     // put on the map selected polygon
+            //     region['polygon'].setMap(map);
+            //     // set appropriate options
+            //     region['polygon'].setOptions(selectedPolygonOptions);
             } else {
                 // remove all other not selected regions from the map
                 region['polygon'].setMap(null);
@@ -180,11 +201,6 @@ function initSearchMap(map, regions) {
         }
         region['polygon'] = new google.maps.Polygon({
             paths: region_path,
-            strokeColor: "#FF0000",
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: "#FFAAAA",
-            fillOpacity: 0.35
         });
         // define custom params for polygon described in the begininng of the initSearchMap function
         region['polygon']['customParams'] = {regionId: region['id'],
