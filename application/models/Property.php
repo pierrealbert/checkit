@@ -40,14 +40,15 @@ class Model_Property extends Model_Base_Property
 
     protected function _assignCoordinates()
     {
-        if ($this->address and $this->city) {
+        if (!$this->address or !$this->city) {
+            return;
+        }
             $googleMaps = new Ext_Service_GoogleMaps();
             $coordinates = $googleMaps->addressToCoordinates(array('street' => $this->address,
                                                                    'city' => $this->city,
-                                                                   'postal_code' => $this->zipcode));
+                                                                   'postal_code' => $this->postcode));
             $this->longitude = $coordinates['lng'];
             $this->latitude = $coordinates['lat'];
-        }
     }
 
     public function preSave($event)
