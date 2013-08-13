@@ -91,8 +91,6 @@ function initSearchMap(map, regions) {
                 google.maps.event.addListener(region.polygon, 'click', function () {districtMode(this.customParams.regionId)});
             } else if (region.id == regionCityId) {
                 // alert ('City: ' + region.name);
-                // put on the map city polygon
-                region.polygon.setMap(map);
                 // zoom to polygon
                 map.fitBounds(region.polygon.customParams.bounds);
                 // remove polygon from the map
@@ -133,8 +131,6 @@ function initSearchMap(map, regions) {
                 google.maps.event.addListener(region.polygon, 'click', function () {selectBlock(this.customParams.regionId)});
             } else if (region.id == regionDistrictId) {
                 // alert ('District: ' + region.name);
-                // put on the map district polygon
-                region.polygon.setMap(map);
                 // zoom to polygon
                 map.fitBounds(region.polygon.customParams.bounds);
                 // remove polygon from the map
