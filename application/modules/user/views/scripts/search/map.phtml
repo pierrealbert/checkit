@@ -1,7 +1,7 @@
 <form method="POST">
 <input type="hidden" name="regions_selected" id="regions_selected" value="<?= implode(',', $this->regionsSelectedIds) ?>">
-<input type="button" id="regions_back" value="back">
-<input type="submit" name="search" value="search">
+<input type="button" id="regions_back" value="<?= $this->translate('back') ?>">
+<input type="submit" name="search" value="<?= $this->translate('search') ?>">
 </form>
 <?= $this->googleMap(48.857261, 2.346611, array('width' => 800, 'height' => 600), array('zoom' => 8), "var regions = {$this->regionsJson};\ninitSearchMap(map, regions)") ?>
 <div class="result">
