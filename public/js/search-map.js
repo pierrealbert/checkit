@@ -84,8 +84,8 @@ function initSearchMap(map, regions) {
                 region.polygon.setMap(map);
                 // zoom to polygon
                 map.fitBounds(region.polygon.customParams.bounds);
-                // make this polygon to be opacity
-                region.polygon.setOptions({fillOpacity: 0, strokeOpacity: 0});
+                // remove polygon from the map
+                region.polygon.setMap(null);
             } else if ($.inArray(parseInt(region.id), getSelectedRegions()) > -1) {
                 // put on the map selected polygon
                 region.polygon.setMap(map);
@@ -132,8 +132,8 @@ function initSearchMap(map, regions) {
                 region.polygon.setMap(map);
                 // zoom to polygon
                 map.fitBounds(region.polygon.customParams.bounds);
-                // make this polygon to be opacity
-                region.polygon.setOptions({fillOpacity: 0, strokeOpacity: 0});
+                // remove polygon from the map
+                region.polygon.setMap(null);
             // If want to show all selected polygons on this mode uncomment next 5 lines
             // } else if ($.inArray(parseInt(region.id), getSelectedRegions()) > -1) {
             //     // put on the map selected polygon
