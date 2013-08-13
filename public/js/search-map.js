@@ -7,16 +7,29 @@ function initSearchMap(map, regions) {
     map.customParams = {};
 
     // Default options for not selected and selected polygons. Don't use fillOpacity here.
-    var notSelectedPolygonOptions = {strokeColor: "#FF0000",
-                                     strokeOpacity: 0.8,
-                                     strokeWeight: 2,
-                                     fillColor: "#FFAAAA",
-                                     fillOpacity: 0.35};
-    var selectedPolygonOptions = {strokeColor: "#FF0000",
-                                  strokeOpacity: 0.8,
-                                  strokeWeight: 0.5,
-                                  fillColor: "#FF0000",
-                                  fillOpacity: 0.35};
+    var defaultPolygonOptions = {'RegionCity': {strokeColor: "#FF0000",
+                                                strokeOpacity: 0.8,
+                                                strokeWeight: 2,
+                                                fillColor: "#FFAAAA",
+                                                fillOpacity: 0.35},
+        
+                                 'RegionDistrict': {strokeColor: "#FF0000",
+                                                    strokeOpacity: 0.8,
+                                                    strokeWeight: 2,
+                                                    fillColor: "#FFAAAA",
+                                                    fillOpacity: 0.35},
+                                 
+                                 'RegionBlock': {strokeColor: "#FF0000",
+                                                 strokeOpacity: 0.8,
+                                                 strokeWeight: 2,
+                                                 fillColor: "#FFAAAA",
+                                                 fillOpacity: 0.35},
+                                 
+                                 'RegionBlock_selected': {strokeColor: "#FF0000",
+                                                          strokeOpacity: 0.8,
+                                                          strokeWeight: 0.5,
+                                                          fillColor: "#FF0000",
+                                                          fillOpacity: 0.35}}
     function countryMode () {
         for (region_id in regions) {
             var region = regions[region_id];
@@ -24,8 +37,8 @@ function initSearchMap(map, regions) {
             // clear all click listeners
             google.maps.event.clearListeners(region.polygon, 'click');
 
-            // set default options for all polygons
-            region.polygon.setOptions(notSelectedPolygonOptions);
+            // set default options for each polygon
+            setRegionDefaultOptions(region);
             
             if (region.type == 'RegionCity') {
                 // put cities on the map
@@ -35,8 +48,6 @@ function initSearchMap(map, regions) {
             } else if ($.inArray(parseInt(region.id), getSelectedRegions()) > -1) {
                 // put on the map selected polygon
                 region.polygon.setMap(map);
-                // set appropriate options
-                region.polygon.setOptions(selectedPolygonOptions);
                 // add same click event for this polygon as for city one
                 // and we assume that only blocks can be selected
                 if (region.region_district_id) {
@@ -70,8 +81,8 @@ function initSearchMap(map, regions) {
             // clear all click listeners
             google.maps.event.clearListeners(region.polygon, 'click');
 
-            // set default options for all polygons
-            region.polygon.setOptions(notSelectedPolygonOptions);
+            // set default options for each polygon
+            setRegionDefaultOptions(region);
 
             if (region.region_city_id == regionCityId) {
                 // put on the map districts which lie in the city
@@ -89,8 +100,6 @@ function initSearchMap(map, regions) {
             } else if ($.inArray(parseInt(region.id), getSelectedRegions()) > -1) {
                 // put on the map selected polygon
                 region.polygon.setMap(map);
-                // set appropriate options
-                region.polygon.setOptions(selectedPolygonOptions);
                 // add same click event for this polygon as for district one
                 // and we assume that only blocks can be selected
                 if (region.region_district_id) {
@@ -114,16 +123,12 @@ function initSearchMap(map, regions) {
             // clear all click listeners
             google.maps.event.clearListeners(region.polygon, 'click');
 
-            // set default options for all polygons
-            region.polygon.setOptions(notSelectedPolygonOptions);
+            // set default options for each polygon
+            setRegionDefaultOptions(region);
 
             if (region.region_district_id == regionDistrictId) {
                 // put on the map blocks which lie in the distriction
                 region.polygon.setMap(map);
-                // set appropriate options if it's a selected block
-                if ($.inArray(parseInt(region.id), getSelectedRegions()) > -1) {
-                    region.polygon.setOptions(selectedPolygonOptions);
-                }
                 // add click listener to these blocks
                 google.maps.event.addListener(region.polygon, 'click', function () {selectBlock(this.customParams.regionId)});
             } else if (region.id == regionDistrictId) {
@@ -138,8 +143,6 @@ function initSearchMap(map, regions) {
             // } else if ($.inArray(parseInt(region.id), getSelectedRegions()) > -1) {
             //     // put on the map selected polygon
             //     region.polygon.setMap(map);
-            //     // set appropriate options
-            //     region.polygon.setOptions(selectedPolygonOptions);
             } else {
                 // remove all other not selected regions from the map
                 region.polygon.setMap(null);
@@ -162,6 +165,13 @@ function initSearchMap(map, regions) {
     function setSelectedRegions (regionIdsArray) {
         $('#regions_selected').val(regionIdsArray);
     }
+
+    function setRegionDefaultOptions (region) {
+        region.polygon.setOptions(defaultPolygonOptions[region.type]);
+        if (region.type == 'RegionBlock' && $.inArray(parseInt(region.id), getSelectedRegions()) > -1) {
+            region.polygon.setOptions(defaultPolygonOptions['RegionBlock_selected']);
+        }
+    }
     
     function regionToggleSelection (regionId) {
         regionId = parseInt(regionId);
@@ -169,14 +179,10 @@ function initSearchMap(map, regions) {
         var indexInSelected = $.inArray(regionId, selectedRegions);
         if (indexInSelected > -1) {
             selectedRegions.splice(indexInSelected, 1);
-            regions[regionId].polygon.setOptions({fillColor: '#FFAAAA',
-                                                     strokeOpacity: 0.8,
-                                                     strokeWeight: 2});
+            regions[regionId].polygon.setOptions(defaultPolygonOptions['RegionBlock']);
         } else {
             selectedRegions.push(regionId);
-            regions[regionId].polygon.setOptions({fillColor: '#FF0000',
-                                                     strokeOpacity: 0.8,
-                                                     strokeWeight: 0.5});
+            regions[regionId].polygon.setOptions(defaultPolygonOptions['RegionBlock_selected']);
         }
         setSelectedRegions(selectedRegions);
     }
