@@ -363,6 +363,7 @@ Property:
             local: owner_id
         RegionBlock: 
             onDelete: cascade
+            
     actAs:
         Timestampable:
             created:
