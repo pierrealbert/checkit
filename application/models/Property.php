@@ -46,9 +46,12 @@ class Model_Property extends Model_Base_Property
             $googleMaps = new Ext_Service_GoogleMaps();
             $coordinates = $googleMaps->addressToCoordinates(array('street' => $this->address,
                                                                    'city' => $this->city,
-                                                                   'postal_code' => $this->postcode));
-            $this->longitude = $coordinates['lng'];
-            $this->latitude = $coordinates['lat'];
+                                                                   'postal_code' => $this->postcode,
+                                                                   'state' => ''));
+            if ($coordinates) {
+                $this->longitude = $coordinates['lng'];
+                $this->latitude = $coordinates['lat'];
+            }
     }
 
     protected function _assignRegion()
