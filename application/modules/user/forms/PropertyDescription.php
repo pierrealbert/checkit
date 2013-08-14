@@ -120,6 +120,7 @@ class User_Form_PropertyDescription extends Ext_Form
                 'is_double_glazing'     => 'Double glazing',
                 'is_storage_area'       => 'Storage area',
                 'is_fireplace'          => 'Fireplace',
+                'is_conditioner'        => 'Conditioner',
             ),
 
             'outhouse' => array(

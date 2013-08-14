@@ -317,6 +317,7 @@ Property:
         is_double_glazing: integer(1)
         is_storage_area:   integer(1)
         is_fireplace:   integer(1)
+        is_conditioner: integer(1)
         floor:          integer(4)
         is_lift:        integer(1)
         is_balcony:     integer(1)
