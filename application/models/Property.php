@@ -48,8 +48,10 @@ class Model_Property extends Model_Base_Property
                                                                    'city' => $this->city,
                                                                    'postal_code' => $this->postcode,
                                                                    'state' => ''));
-            $this->longitude = $coordinates['lng'];
-            $this->latitude = $coordinates['lat'];
+            if ($coordinates) {
+                $this->longitude = $coordinates['lng'];
+                $this->latitude = $coordinates['lat'];
+            }
     }
 
     protected function _assignRegion()
