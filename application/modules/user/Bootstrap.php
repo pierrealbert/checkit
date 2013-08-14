@@ -13,6 +13,10 @@ class User_Bootstrap extends Zend_Application_Module_Bootstrap
             array('grids' => array(
                 'namespace' => 'Grid',
                 'path'      => 'grids',
+            ),
+            'calendar' => array(
+                'namespace' => 'Calendar',
+                'path'      => 'calendar'
             ))
         );
     }

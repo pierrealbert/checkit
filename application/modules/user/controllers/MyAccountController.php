@@ -8,7 +8,7 @@ class User_MyAccountController extends Zend_Controller_Action
 
         $form = new User_Form_User();
         $form->populate($user->toArray());
-               
+
         if ($this->getRequest()->isPost()
             && $form->isValid($this->getRequest()->getParams())
         ) {
