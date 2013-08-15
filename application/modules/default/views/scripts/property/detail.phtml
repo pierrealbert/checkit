@@ -1,10 +1,23 @@
 <div>
     <h1>Ad Details</h1>
     <a href="<?= $this->url(array('controller' => 'test', 'action' => 'ad-list'), null, true) ?>" class="back_to_resaults"><?= $this->translate('back_to_resaults') ?></a>
+    
     <button class="add_to_bookmark">Add to bookmark</button>
+    
     <button class="share">Share</button>
-    <a href="#" class="previous">Previous</a>
-    <a href="#" class="next">Next</a>
+
+    <?php if ($this->previous_and_next['previous']): ?>
+    <a href="<?= $this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $this->previous_and_next['previous']), null, true) ?>" class="previous">Previous</a>
+    <?php else: ?>
+    <button disabled="disabled" class="previous">Previous</button>
+    <?php endif; ?>
+
+    <?php if ($this->previous_and_next['next']): ?>
+    <a href="<?= $this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $this->previous_and_next['next']), null, true) ?>" class="next">Next</a>
+    <?php else: ?>
+    <button disabled="disabled" class="next">Next</button>
+    <?php endif; ?>
+
 </div>
 
 <div>
