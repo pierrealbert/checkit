@@ -205,10 +205,14 @@ class Ext_Doctrine_Table extends Doctrine_Table
      */
     public function createQuery($tableAlias = NULL, $cachable = NULL, $cacheLifeTime = NULL, $cacheKey = NULL, $cacheKeyHashNeeded = false)
     {
-        $cachable = $cachable !== NULL ? $cachable : $this->_autoCache;
-        $cacheLifeTime = $cacheLifeTime ? : $this->_cacheLifeTime;
-        $cacheKey = $cacheKey ? : $this->_cacheLifeTime;
-        $tableAlias = $tableAlias ? : $this->_getTableAlias();
+        if ($cachable === NULL)
+            $cachable = $this->_autoCache;
+        if (!$cacheLifeTime)
+            $cacheLifeTime = $this->_cacheLifeTime;
+        if (!$cacheKey)
+            $cacheKey = $this->_cacheLifeTime;
+        if (!$tableAlias)
+            $tableAlias = $this->_getTableAlias();
         $query = new Ext_Doctrine_Query(NULL, NULL, $cachable, $cacheLifeTime, $cacheKey, $cacheKeyHashNeeded);
         return $query->from($this->getComponentName() . ' ' . $tableAlias);
     }
