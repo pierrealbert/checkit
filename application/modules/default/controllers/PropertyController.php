@@ -21,6 +21,7 @@ class PropertyController extends Zend_Controller_Action
         $this->view->property_type    = Model_Property::getTypes();
         $this->view->number_of_rooms1 = Model_Property::getNumberOfRooms1Info();
         $this->view->photos           = $property->getPhotos();
+        $this->view->values_groups    = Model_Property::getValuesGroups();
 
         $options = Zend_Controller_Action_HelperBroker::getStaticHelper('settings')
             ->get('services.googleMaps');
