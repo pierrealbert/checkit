@@ -6,3 +6,240 @@
     <a href="#" class="previous">Previous</a>
     <a href="#" class="next">Next</a>
 </div>
+
+<div>
+    <table width="100%">
+        <tr>
+            <td>
+                <h2><?= $this->property->title ?></h2>
+                <b><?= $this->property_type[$this->property->property_type] ?></b> | <b><?= $this->property->size ?> m<sup>2</sup></b> | <b><?= $this->property->number_of_rooms1 ?> rooms</b>
+            </td>
+            <td width="20%">
+                <b><?= $this->property->price ?> &euro;</b><br />
+                <b>Urgent</b>
+            </td>
+            <td width="20%">
+                <button class="apply">Apply</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="propertyTtabs" style="display:none;">
+  <ul>
+    <li><a href="#description">Description</a></li>
+    <li><a href="#photos">Photos</a></li>
+    <li><a href="#map">Map</a></li>
+    <li><a href="#calendar">Calendar</a></li>
+  </ul>
+
+  <div id="description">
+    <table width="100%">
+        <tr>
+            <td></td>
+            <td width="200px">
+                <ul id="menu">
+                    <li>
+                        <a href="#">Report an issue</a>
+                        <ul>
+                            <li><a href="#">Message 1</a></li>
+                            <li><a href="#">Message 2</a></li>
+                            <li><a href="#">Spam</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <h2>Description</h2>
+
+    <table width="100%">
+        <tr valign="top">
+            <td>
+                <table width="100%" border="1">
+                    <tr>
+                        <td width="50%">Key</td>
+                        <td>Value</td>
+                    </tr>
+                    <tr>
+                        <td width="50%">Key</td>
+                        <td>Value</td>
+                    </tr>
+                    <tr>
+                        <td width="50%">Key</td>
+                        <td>Value</td>
+                    </tr>
+                    <tr>
+                        <td width="50%">Key</td>
+                        <td>Value</td>
+                    </tr>
+                </table>
+            </td>
+            <td width="33%">
+                <div><?= $this->imageResize(400, 400, $this->property->main_photo) ?></div>
+                <button class="add_to_bookmark">Add to bookmark</button><br />
+                <button class="share">Share</button>
+            </td>
+        </tr>
+    </table>
+  </div>
+  
+  <div id="photos">
+    <h2>Photos</h2>
+
+    <table width="100%">
+        <tr>
+            <td align="center">Photo</td>
+            <td width="33%">
+                <div>Smoll photos</div>
+                <button class="add_to_bookmark">Add to bookmark</button><br />
+                <button class="share">Share</button>
+            </td>
+        </tr>
+    </table>
+  </div>
+  
+  <div id="map">
+    <h2>Map</h2>
+
+    <div id="map_canvas" style="width:600px; height:400px"></div>
+
+    <table width="100%">
+        <tr>
+            <td width="33%">Description</td>
+            <td width="33%">Center</td>
+            <td width="33%">
+                <button class="add_to_bookmark">Add to bookmark</button><br />
+                <button class="share">Share</button>
+            </td>
+        </tr>
+    </table>
+  </div>
+  <div id="calendar">
+    <h2>Calendar</h2>
+
+    <div id="datepicker"></div>
+
+    <table width="100%">
+        <tr>
+            <td>Description</td>
+            <td width="33%">
+                <button class="add_to_bookmark">Add to bookmark</button><br />
+                <button class="share">Share</button>
+            </td>
+        </tr>
+    </table>
+  </div>
+</div>
+
+<div>
+    <table width="100%" border="1">
+        <tr valign="top">
+            <td>Similar</td>
+            <td>
+                <table width="100%" border="1">
+                    <tr>
+                        <td width="100px">Photo</td>
+                        <td>Description</td>
+                        <td width="100px">Price</td>
+                    </tr>
+                    <tr>
+                        <td width="100px">Photo</td>
+                        <td>Description</td>
+                        <td width="100px">Price</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+<?php
+    $function = "$(function() {
+        function DrawCircle(rad) {
+ 
+            if (draw_circle != null) {
+                draw_circle.setMap(null);
+            }
+
+            draw_circle = new google.maps.Circle({
+                center: center,
+                radius: rad,
+                strokeColor: '#FF0000',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#FF0000',
+                fillOpacity: 0.35,
+                map: map
+            });
+        }
+
+        var radius = 1500; // Radius of circle in metres.
+ 
+        var center = new google.maps.LatLng({$this->property->latitude}, {$this->property->longitude}); // LatLng of center point of circle
+
+        var draw_circle = null;  // object of google maps polygon for redrawing the circle
+
+        var mapOptions = {
+            center: center,
+            zoom: 12,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+    
+        var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+
+        DrawCircle(radius);
+
+        $('#menu').menu();
+    
+        $('#propertyTtabs').tabs({
+                select: function (event, ui) {
+                    resizeMap(map);        
+                }
+            })
+            .show();
+
+        $('.back_to_resaults').button();
+        $('.previous').button();
+        $('.next').button();
+
+        $('.apply')
+            .button()
+            .click(function(event) {
+                event.preventDefault();
+                alert('Apply!');
+        });
+
+        $('.add_to_bookmark')
+            .button()
+            .click(function(event) {
+                event.preventDefault();
+                alert('Add to bookmark!');
+        });
+    
+        $('.share')
+            .button()
+            .click(function(event) {
+                event.preventDefault();
+                alert('Share!');
+        });
+    
+        $('#datepicker').datepicker({
+            dateFormat: 'yy-mm-dd',
+            minDate: 0,
+            numberOfMonths: 2,
+        });
+
+        function resizeMap(m) {
+            x = m.getZoom();
+            c = m.getCenter();
+            google.maps.event.trigger(m, 'resize');
+            m.setZoom(x);
+            m.setCenter(c);
+        }    
+    });";
+
+    $this->jQuery()->addOnLoad($function)
+        ->addStylesheet('/css/ui/jquery-ui-1.8.14.css')
+        ->addJavascriptFile("http://maps.googleapis.com/maps/api/js?key={$this->google_api_key}&sensor=false");
+
+?>
