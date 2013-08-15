@@ -203,7 +203,14 @@
                 </table>
             </td>
             <td width="33%">
-                <div><?= $this->imageResize(400, 400, $this->property->main_photo) ?></div>
+                <div class="slider">
+                    <?= $this->imageResize(400, 400, $this->property->main_photo, array('class' => 'slide')) ?>
+                    <?php foreach ($this->photos as $photo): ?>
+                        <?php if ($photo['link'] != $this->property->main_photo): ?>
+                            <?= $this->imageResize(400, 400, $photo['link'], array('class' => 'slide hidden')) ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
                 <button class="add_to_bookmark">Add to bookmark</button><br />
                 <button class="share">Share</button>
             </td>
@@ -356,6 +363,13 @@
             numberOfMonths: 2,
         });
 
+        var revolver = $('#slider').revolver({
+            autoPlay: false,
+            transition: {
+                type: 'fade'
+            }
+        }).data('revolver');
+
         function resizeMap(m) {
             x = m.getZoom();
             c = m.getCenter();
@@ -367,6 +381,7 @@
 
     $this->jQuery()->addOnLoad($function)
         ->addStylesheet('/css/ui/jquery-ui-1.10.3.css')
-        ->addJavascriptFile("http://maps.googleapis.com/maps/api/js?key={$this->google_api_key}&sensor=false");
+        ->addJavascriptFile("http://maps.googleapis.com/maps/api/js?key={$this->google_api_key}&sensor=false")
+        ->addJavascriptFile("/js/revolver.min.js");
 
 ?>
