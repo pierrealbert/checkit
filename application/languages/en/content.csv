@@ -130,3 +130,8 @@ property_added; "Great! You has been added new property"
 
 ad_list; "Ad list"
 back_to_resaults; "Back to resaults"
+localization; "Localization"
+charges; "Charges"
+price_include_charge; "Price (include charge)"
+right_now; "Right now"
+metro; "Metro"
