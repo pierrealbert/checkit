@@ -127,3 +127,6 @@ signup_header_owner; "Inscription Locataire"
 signup_header_resident; "Inscription Propriétaire"
 
 property_added; "Great! You has been added new property"
+
+ad_list; "Ad list"
+back_to_resaults; "Back to resaults"
