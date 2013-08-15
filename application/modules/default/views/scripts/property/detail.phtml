@@ -12,7 +12,7 @@
         <tr>
             <td>
                 <h2><?= $this->property->title ?></h2>
-                <b><?= $this->property_type[$this->property->property_type] ?></b> | <b><?= $this->property->size ?> m<sup>2</sup></b> | <b><?= $this->property->number_of_rooms1 ?> rooms</b>
+                <b><?= $this->property_type[$this->property->property_type] ?></b> | <b><?= $this->property->size ?> m<sup>2</sup></b> | <b><?= $this->number_of_rooms1[$this->property->number_of_rooms1] ?> rooms</b>
             </td>
             <td width="20%">
                 <b><?= $this->property->price ?> &euro;</b><br />
@@ -58,19 +58,27 @@
             <td>
                 <table width="100%" border="1">
                     <tr>
-                        <td width="50%">Key</td>
-                        <td>Value</td>
+                        <td width="50%"><?= $this->translate('localization') ?></td>
+                        <td><?= $this->property->postcode ?> - <?= $this->property->city ?></td>
                     </tr>
                     <tr>
-                        <td width="50%">Key</td>
-                        <td>Value</td>
+                        <td><?= $this->translate('price_include_charge') ?></td>
+                        <td><?= $this->property->price ?> &euro;</td>
                     </tr>
                     <tr>
-                        <td width="50%">Key</td>
-                        <td>Value</td>
+                        <td><?= $this->translate('charges') ?></td>
+                        <td><?= $this->property->amount_of_charges ?> &euro;</td>
                     </tr>
                     <tr>
-                        <td width="50%">Key</td>
+                        <td>?</td>
+                        <td>?</td>
+                    </tr>
+                    <tr>
+                        <td><?= $this->translate('property_type') ?></td>
+                        <td><?= $this->property_type[$this->property->property_type] ?></td>
+                    </tr>
+                    <tr>
+                        <td>Key</td>
                         <td>Value</td>
                     </tr>
                 </table>
@@ -192,7 +200,7 @@
         $('#menu').menu();
     
         $('#propertyTtabs').tabs({
-                select: function (event, ui) {
+                activate: function (event, ui) {
                     resizeMap(map);        
                 }
             })
@@ -239,7 +247,7 @@
     });";
 
     $this->jQuery()->addOnLoad($function)
-        ->addStylesheet('/css/ui/jquery-ui-1.8.14.css')
+        ->addStylesheet('/css/ui/jquery-ui-1.10.3.css')
         ->addJavascriptFile("http://maps.googleapis.com/maps/api/js?key={$this->google_api_key}&sensor=false");
 
 ?>
