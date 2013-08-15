@@ -247,9 +247,11 @@ class Ext_Doctrine_Table extends Doctrine_Table
      */
     protected function _generateTableAlias()
     {
-        return array_reduce(explode('_', $this->getTableName()), function($resultValue, $element){
-            return $resultValue . $element[0];
-        });
+        $alias = '';
+        foreach (explode('_', $this->getTableName()) as $namePart) {
+            $alias .= $namePart[0];
+        }
+        return $alias;
     }
 
     /**
