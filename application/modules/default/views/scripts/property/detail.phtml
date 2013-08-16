@@ -203,7 +203,7 @@
                 </table>
             </td>
             <td width="33%">
-                <div class="slider">
+                <div id="slider1">
                     <?= $this->imageResize(400, 400, $this->property->main_photo, array('class' => 'slide')) ?>
                     <?php foreach ($this->photos as $photo): ?>
                         <?php if ($photo['link'] != $this->property->main_photo): ?>
@@ -211,6 +211,10 @@
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
+                <button id="previous_photo1">&lt;</button>
+                <span id="slides_info"></span>
+                <button id="next_photo1">&gt;</button>
+                <hr />
                 <button class="add_to_bookmark">Add to bookmark</button><br />
                 <button class="share">Share</button>
             </td>
@@ -223,9 +227,30 @@
 
     <table width="100%">
         <tr>
-            <td align="center">Photo</td>
-            <td width="33%">
-                <div>Smoll photos</div>
+            <td align="center" valign="center">
+                <div id="slider2">
+                    <?= $this->imageResize(600, 600, $this->property->main_photo, array('class' => 'slide')) ?>
+                    <?php foreach ($this->photos as $photo): ?>
+                        <?php if ($photo['link'] != $this->property->main_photo): ?>
+                            <?= $this->imageResize(600, 600, $photo['link'], array('class' => 'slide hidden')) ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+                <button id="previous_photo2">&lt;</button>
+                <button id="next_photo2">&gt;</button>
+            </td>
+            <td width="33%" valign="top">
+                <div id="thumbs">
+                    <?php $goto = 0; ?>
+                    <a href="#" data-slide-index="<?= $goto ?>" class="goto"><?= $this->imageResize(100, 100, $this->property->main_photo) ?></a>
+                    <?php foreach ($this->photos as $photo): ?>
+                        <?php if ($photo['link'] != $this->property->main_photo): ?>
+                            <?php ++$goto; ?>
+                            <a href="#" data-slide-index="<?= $goto ?>" class="goto"><?= $this->imageResize(100, 100, $photo['link']) ?></a>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+                <hr />
                 <button class="add_to_bookmark">Add to bookmark</button><br />
                 <button class="share">Share</button>
             </td>
@@ -363,12 +388,49 @@
             numberOfMonths: 2,
         });
 
-        var revolver = $('#slider').revolver({
-            autoPlay: false,
-            transition: {
-                type: 'fade'
-            }
-        }).data('revolver');
+        var mySlides1 = $('#slider1 .slide');
+
+        var mySlider1 = new Revolver(mySlides1, {autoPlay: false});
+
+        $('#next_photo1')
+            .button()
+            .click(function(event) {
+                event.preventDefault();
+                mySlider1.next();
+        });
+
+        $('#previous_photo1')
+            .button()
+            .click(function(event) {
+                event.preventDefault();
+                mySlider1.previous();
+        });
+
+        var mySlides2 = $('#slider2 .slide');
+
+        var mySlider2 = new Revolver(mySlides2, {autoPlay: false});
+
+        $('#next_photo2')
+            .button()
+            .click(function(event) {
+                event.preventDefault();
+                mySlider2.next();
+        });
+
+        $('#previous_photo2')
+            .button()
+            .click(function(event) {
+                event.preventDefault();
+                mySlider2.previous();
+        });
+
+        $('#thumbs .goto')
+            .click(function(event) {
+                event.preventDefault();
+                console.log(mySlides2);
+                var i = $(this).data('slide-index');
+                mySlider2.goTo(i);
+        });
 
         function resizeMap(m) {
             x = m.getZoom();
@@ -382,6 +444,8 @@
     $this->jQuery()->addOnLoad($function)
         ->addStylesheet('/css/ui/jquery-ui-1.10.3.css')
         ->addJavascriptFile("http://maps.googleapis.com/maps/api/js?key={$this->google_api_key}&sensor=false")
+        ->addJavascriptFile("/js/lodash.js")
+        ->addJavascriptFile("/js/bean.min.js")
         ->addJavascriptFile("/js/revolver.min.js");
 
 ?>
