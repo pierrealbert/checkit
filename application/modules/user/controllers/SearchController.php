@@ -2,10 +2,14 @@
 
 class User_SearchController extends Zend_Controller_Action
 {
+    public function init()
+    {
+        $this->view->jQuery()->addJavascriptFile('/js/search.js');
+        
+    }
+    
     public function mapAction()
     {
-        $this->view->jQuery()->addJavascriptFile('/js/search-map.js');
-        
         $regions = Model_RegionTable::getInstance()->findAll();
         $foundProperties = array();
         $regionsSelectedIds = array();

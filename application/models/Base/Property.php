@@ -28,6 +28,7 @@
  * @property integer $is_double_glazing
  * @property integer $is_storage_area
  * @property integer $is_fireplace
+ * @property integer $is_conditioner
  * @property integer $floor
  * @property integer $is_lift
  * @property integer $is_balcony
@@ -170,6 +171,10 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'length' => '1',
              ));
         $this->hasColumn('is_fireplace', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_conditioner', 'integer', 1, array(
              'type' => 'integer',
              'length' => '1',
              ));

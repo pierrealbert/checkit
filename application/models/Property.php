@@ -174,4 +174,60 @@ class Model_Property extends Model_Base_Property
 
         return $photos;
     }
+
+    public static function getValuesGroup($key)
+    {
+        $groups = self::getValuesGroups();
+
+        if (isset($groups[$key])) return $groups[$key];
+
+        return array();
+    }
+
+    public static function getValuesGroups()
+    {
+        return array(
+            'decor' => array(
+                'is_separate_restrooms' => 'Separate restrooms',
+                'is_parquet_floor'      => 'Parquet floor',
+                'is_molding'            => 'Molding',
+                'is_double_glazing'     => 'Double glazing',
+                'is_storage_area'       => 'Storage area',
+                'is_fireplace'          => 'Fireplace',
+                'is_conditioner'        => 'Conditioner',
+            ),
+
+            'outhouse' => array(
+                'is_attic'          => 'Attic',
+                'is_basement'       => 'Basement',
+                'is_parking_lot'    => 'Parking lot',
+                'is_garage'         => 'Garage',
+                'is_swimming_pool'  => 'Swimming pool',
+            ),
+
+            'outdoor_space' => array(
+                'is_balcony' => 'Balcony',
+                'is_terrace' => 'Terrace',
+                'is_garden'  => 'Garden',
+                'is_yard'    => 'Yard',
+            ),
+
+            'building' => array(
+                'is_digicode'       => 'Digicode / Interphone',
+                'is_watchman'       => 'Watchman',
+                'is_old_building'   => 'Old Building',
+                'is_very_old_building' => 'Very old building',
+                'is_renove'         => 'Renove',
+            ),
+            
+            'heating_system' => array(
+                'is_individuel' => 'Individuel',
+                'is_central'    => 'Central / Collectif',
+                'is_au_sol'     => 'Au sol',
+                'is_gaz'        => 'Gaz',
+                'is_electrique' => 'Electrique',
+                'is_autre'      => 'Autre',
+            ),
+        );
+    }
 }

@@ -1,0 +1,451 @@
+<div>
+    <h1>Ad Details</h1>
+    <a href="<?= $this->url(array('controller' => 'test', 'action' => 'ad-list'), null, true) ?>" class="back_to_resaults"><?= $this->translate('back_to_resaults') ?></a>
+    
+    <button class="add_to_bookmark">Add to bookmark</button>
+    
+    <button class="share">Share</button>
+
+    <?php if ($this->previous_and_next['previous']): ?>
+    <a href="<?= $this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $this->previous_and_next['previous']), null, true) ?>" class="previous">Previous</a>
+    <?php else: ?>
+    <button disabled="disabled" class="previous">Previous</button>
+    <?php endif; ?>
+
+    <?php if ($this->previous_and_next['next']): ?>
+    <a href="<?= $this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $this->previous_and_next['next']), null, true) ?>" class="next">Next</a>
+    <?php else: ?>
+    <button disabled="disabled" class="next">Next</button>
+    <?php endif; ?>
+
+</div>
+
+<div>
+    <table width="100%">
+        <tr>
+            <td>
+                <h2><?= $this->property->title ?></h2>
+                <b><?= $this->property_type[$this->property->property_type] ?></b> | <b><?= $this->property->size ?> m<sup>2</sup></b> | <b><?= $this->number_of_rooms1[$this->property->number_of_rooms1] ?> rooms</b>
+            </td>
+            <td width="20%">
+                <b><?= $this->property->price ?> &euro;</b><br />
+                <b>Urgent</b>
+            </td>
+            <td width="20%">
+                <button class="apply">Apply</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="propertyTtabs" style="display:none;">
+  <ul>
+    <li><a href="#description">Description</a></li>
+    <li><a href="#photos">Photos</a></li>
+    <li><a href="#map">Map</a></li>
+    <li><a href="#calendar">Calendar</a></li>
+  </ul>
+
+  <div id="description">
+    <table width="100%">
+        <tr>
+            <td></td>
+            <td width="200px">
+                <ul id="menu">
+                    <li>
+                        <a href="#">Report an issue</a>
+                        <ul>
+                            <li><a href="#">Message 1</a></li>
+                            <li><a href="#">Message 2</a></li>
+                            <li><a href="#">Spam</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <h2>Description</h2>
+
+    <table width="100%">
+        <tr valign="top">
+            <td>
+                <table width="100%" border="1">
+                    <tr>
+                        <td width="50%"><?= $this->translate('localization') ?></td>
+                        <td><?= $this->property->postcode ?> - <?= $this->property->city ?></td>
+                    </tr>
+                    <tr>
+                        <td><?= $this->translate('price_include_charge') ?></td>
+                        <td><?= $this->property->price ?> &euro;</td>
+                    </tr>
+                    <tr>
+                        <td><?= $this->translate('charges') ?></td>
+                        <td><?= $this->property->amount_of_charges ?> &euro;</td>
+                    </tr>
+                    <tr>
+                        <td>?</td>
+                        <td>?</td>
+                    </tr>
+                    <tr>
+                        <td><?= $this->translate('property_type') ?></td>
+                        <td><?= $this->property_type[$this->property->property_type] ?></td>
+                    </tr>
+                    <tr>
+                        <td><?= $this->translate('is_furnished') ?></td>
+                        <td><?php if (1 == $this->property->is_furnished):  ?>Furnished<?php else: ?>Non<?= $this->translate('is_furnished') ?><?php endif; ?></td>
+                    </tr>
+                    <tr>
+                        <td><?= $this->translate('size') ?></td>
+                        <td><?= $this->property->size ?> m<sup>2</sup></td>
+                    </tr>
+                    <tr>
+                        <td><?= $this->translate('number_of_rooms1') ?></td>
+                        <td><?= $this->number_of_rooms1[$this->property->number_of_rooms1] ?> rooms</td>
+                    </tr>
+                    <tr>
+                        <td><?= $this->translate('floor') ?></td>
+                        <td><?= $this->property->floor ?></td>
+                    </tr>
+                    <tr>
+                        <td><?= $this->translate('availability') ?></td>
+                        <td>
+                            <?php if (date('Y-m-d') < $this->property->availability):?>
+                                <?= $this->property->availability ?>
+                            <?php else: ?>
+                                <?= $this->translate('right_now') ?>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><?= $this->translate('metro') ?></td>
+                        <td>?</td>
+                    </tr>
+                    <tr>
+                        <td><?= $this->translate('decor') ?></td>
+                        <td>
+                            <?php $string = ''; ?>
+                            <?php foreach($this->values_groups['decor'] as $key => $value): ?>
+                                <?php if ($this->property->$key): ?>
+                                    <?php if (empty($string)): ?>
+                                        <?php  $string = $value; ?>
+                                    <?php else: ?>
+                                        <?php  $string .= ', ' . $value; ?>
+                                    <?php endif; ?>            
+                                <?php endif; ?>            
+                            <?php endforeach; ?>
+                            <?= $string ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><?= $this->translate('outhouse') ?></td>
+                        <td>
+                            <?php $string = ''; ?>
+                            <?php foreach($this->values_groups['outhouse'] as $key => $value): ?>
+                                <?php if ($this->property->$key): ?>
+                                    <?php if (empty($string)): ?>
+                                        <?php  $string = $value; ?>
+                                    <?php else: ?>
+                                        <?php  $string .= ', ' . $value; ?>
+                                    <?php endif; ?>            
+                                <?php endif; ?>            
+                            <?php endforeach; ?>
+                            <?= $string ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><?= $this->translate('outdoor_space') ?></td>
+                        <td>
+                            <?php $string = ''; ?>
+                            <?php foreach($this->values_groups['outdoor_space'] as $key => $value): ?>
+                                <?php if ($this->property->$key): ?>
+                                    <?php if (empty($string)): ?>
+                                        <?php  $string = $value; ?>
+                                    <?php else: ?>
+                                        <?php  $string .= ', ' . $value; ?>
+                                    <?php endif; ?>            
+                                <?php endif; ?>            
+                            <?php endforeach; ?>
+                            <?= $string ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><?= $this->translate('building') ?></td>
+                        <td>
+                            <?php $string = ''; ?>
+                            <?php foreach($this->values_groups['building'] as $key => $value): ?>
+                                <?php if ($this->property->$key): ?>
+                                    <?php if (empty($string)): ?>
+                                        <?php  $string = $value; ?>
+                                    <?php else: ?>
+                                        <?php  $string .= ', ' . $value; ?>
+                                    <?php endif; ?>            
+                                <?php endif; ?>            
+                            <?php endforeach; ?>
+                            <?= $string ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><?= $this->translate('heating_system') ?></td>
+                        <td>
+                            <?php $string = ''; ?>
+                            <?php foreach($this->values_groups['heating_system'] as $key => $value): ?>
+                                <?php if ($this->property->$key): ?>
+                                    <?php if (empty($string)): ?>
+                                        <?php  $string = $value; ?>
+                                    <?php else: ?>
+                                        <?php  $string .= ', ' . $value; ?>
+                                    <?php endif; ?>            
+                                <?php endif; ?>            
+                            <?php endforeach; ?>
+                            <?= $string ?>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td width="33%">
+                <div id="slider1">
+                    <?= $this->imageResize(400, 400, $this->property->main_photo, array('class' => 'slide')) ?>
+                    <?php foreach ($this->photos as $photo): ?>
+                        <?php if ($photo['link'] != $this->property->main_photo): ?>
+                            <?= $this->imageResize(400, 400, $photo['link'], array('class' => 'slide hidden')) ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+                <button id="previous_photo1">&lt;</button>
+                <span id="slides_info"></span>
+                <button id="next_photo1">&gt;</button>
+                <hr />
+                <button class="add_to_bookmark">Add to bookmark</button><br />
+                <button class="share">Share</button>
+            </td>
+        </tr>
+    </table>
+  </div>
+  
+  <div id="photos">
+    <h2>Photos</h2>
+
+    <table width="100%">
+        <tr>
+            <td align="center" valign="center">
+                <div id="slider2">
+                    <?= $this->imageResize(600, 600, $this->property->main_photo, array('class' => 'slide')) ?>
+                    <?php foreach ($this->photos as $photo): ?>
+                        <?php if ($photo['link'] != $this->property->main_photo): ?>
+                            <?= $this->imageResize(600, 600, $photo['link'], array('class' => 'slide hidden')) ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+                <button id="previous_photo2">&lt;</button>
+                <button id="next_photo2">&gt;</button>
+            </td>
+            <td width="33%" valign="top">
+                <div id="thumbs">
+                    <?php $goto = 0; ?>
+                    <a href="#" data-slide-index="<?= $goto ?>" class="goto"><?= $this->imageResize(100, 100, $this->property->main_photo) ?></a>
+                    <?php foreach ($this->photos as $photo): ?>
+                        <?php if ($photo['link'] != $this->property->main_photo): ?>
+                            <?php ++$goto; ?>
+                            <a href="#" data-slide-index="<?= $goto ?>" class="goto"><?= $this->imageResize(100, 100, $photo['link']) ?></a>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+                <hr />
+                <button class="add_to_bookmark">Add to bookmark</button><br />
+                <button class="share">Share</button>
+            </td>
+        </tr>
+    </table>
+  </div>
+  
+  <div id="map">
+    <h2>Map</h2>
+
+    <div id="map_canvas" style="width:600px; height:400px"></div>
+
+    <table width="100%">
+        <tr>
+            <td width="33%">Description</td>
+            <td width="33%">Center</td>
+            <td width="33%">
+                <button class="add_to_bookmark">Add to bookmark</button><br />
+                <button class="share">Share</button>
+            </td>
+        </tr>
+    </table>
+  </div>
+  <div id="calendar">
+    <h2>Calendar</h2>
+
+    <div id="datepicker"></div>
+
+    <table width="100%">
+        <tr>
+            <td>Description</td>
+            <td width="33%">
+                <button class="add_to_bookmark">Add to bookmark</button><br />
+                <button class="share">Share</button>
+            </td>
+        </tr>
+    </table>
+  </div>
+</div>
+
+<div>
+    <table width="100%" border="1">
+        <tr valign="top">
+            <td>Similar</td>
+            <td>
+                <table width="100%" border="1">
+                    <tr>
+                        <td width="100px">Photo</td>
+                        <td>Description</td>
+                        <td width="100px">Price</td>
+                    </tr>
+                    <tr>
+                        <td width="100px">Photo</td>
+                        <td>Description</td>
+                        <td width="100px">Price</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+<?php
+    $function = "$(function() {
+        function DrawCircle(rad) {
+ 
+            if (draw_circle != null) {
+                draw_circle.setMap(null);
+            }
+
+            draw_circle = new google.maps.Circle({
+                center: center,
+                radius: rad,
+                strokeColor: '#FF0000',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#FF0000',
+                fillOpacity: 0.35,
+                map: map
+            });
+        }
+
+        var radius = 1500; // Radius of circle in metres.
+ 
+        var center = new google.maps.LatLng({$this->property->latitude}, {$this->property->longitude}); // LatLng of center point of circle
+
+        var draw_circle = null;  // object of google maps polygon for redrawing the circle
+
+        var mapOptions = {
+            center: center,
+            zoom: 12,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+    
+        var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+
+        DrawCircle(radius);
+
+        $('#menu').menu();
+    
+        $('#propertyTtabs').tabs({
+                activate: function (event, ui) {
+                    resizeMap(map);        
+                }
+            })
+            .show();
+
+        $('.back_to_resaults').button();
+        $('.previous').button();
+        $('.next').button();
+
+        $('.apply')
+            .button()
+            .click(function(event) {
+                event.preventDefault();
+                alert('Apply!');
+        });
+
+        $('.add_to_bookmark')
+            .button()
+            .click(function(event) {
+                event.preventDefault();
+                alert('Add to bookmark!');
+        });
+    
+        $('.share')
+            .button()
+            .click(function(event) {
+                event.preventDefault();
+                alert('Share!');
+        });
+    
+        $('#datepicker').datepicker({
+            dateFormat: 'yy-mm-dd',
+            minDate: 0,
+            numberOfMonths: 2,
+        });
+
+        var mySlides1 = $('#slider1 .slide');
+
+        var mySlider1 = new Revolver(mySlides1, {autoPlay: false});
+
+        $('#next_photo1')
+            .button()
+            .click(function(event) {
+                event.preventDefault();
+                mySlider1.next();
+        });
+
+        $('#previous_photo1')
+            .button()
+            .click(function(event) {
+                event.preventDefault();
+                mySlider1.previous();
+        });
+
+        var mySlides2 = $('#slider2 .slide');
+
+        var mySlider2 = new Revolver(mySlides2, {autoPlay: false});
+
+        $('#next_photo2')
+            .button()
+            .click(function(event) {
+                event.preventDefault();
+                mySlider2.next();
+        });
+
+        $('#previous_photo2')
+            .button()
+            .click(function(event) {
+                event.preventDefault();
+                mySlider2.previous();
+        });
+
+        $('#thumbs .goto')
+            .click(function(event) {
+                event.preventDefault();
+                console.log(mySlides2);
+                var i = $(this).data('slide-index');
+                mySlider2.goTo(i);
+        });
+
+        function resizeMap(m) {
+            x = m.getZoom();
+            c = m.getCenter();
+            google.maps.event.trigger(m, 'resize');
+            m.setZoom(x);
+            m.setCenter(c);
+        }    
+    });";
+
+    $this->jQuery()->addOnLoad($function)
+        ->addStylesheet('/css/ui/jquery-ui-1.10.3.css')
+        ->addJavascriptFile("http://maps.googleapis.com/maps/api/js?key={$this->google_api_key}&sensor=false")
+        ->addJavascriptFile("/js/lodash.js")
+        ->addJavascriptFile("/js/bean.min.js")
+        ->addJavascriptFile("/js/revolver.min.js");
+
+?>
