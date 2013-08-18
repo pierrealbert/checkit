@@ -1,11 +1,157 @@
 <?
 // Page "Resume"
-/** @var \Zend_View $this */ ?>
+/** @var \Zend_View $this */
+?>
 <ul>
-    <li><a href=""><?= $this->translate('My Ads')//Mes annonces ?></a></li>
-    <li><a href=""><?= $this->translate('My Candidates')//Mes candidats ?></a></li>
+    <li><a href=""><?= $this->translate('My Ads') //Mes annonces ?></a></li>
+    <li><a href=""><?= $this->translate('My Candidates') //Mes candidats ?></a></li>
     <li><a href=""><?= $this->translate('My Benefits') ?></a></li>
     <li><a href=""><?= $this->translate('Settings') ?></a></li>
 </ul>
+<style type="text/css">
+    .calendar-toltip {
+        display: none;
+        background: white;
+        padding: 4px;
+    }
 
-<?=$this->calendar->render()?>
+    .event_visit {
+        background: yellow;
+    }
+</style>
+<script type="text/javascript">
+    function calendarToltipShow(day) {
+
+        day.children[0].style.display = "block";
+        day.children[0].style.position = "absolute";
+    }
+
+    function calendarToltipHide(day) {
+
+        day.children[0].style.display = "none";
+    }
+</script>
+<?
+/** @var User_Calendar_Calendar $calendar */
+$calendar = $this->calendar;
+$dayNames = array(
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+);?>
+<? /*
+$this->headStyle()->appendStyle(<<<CSS
+.calendar-toltip {
+    display: none;
+}
+CSS
+);*/
+if (!function_exists('renderDayEvents')) {
+
+    function renderDayEvents(array $events = array(), $view)
+    {
+        $result = '';
+        foreach ($events as $type => $list) {
+
+            /** @var Model_PropertyVisitDates $item */
+            $result .= '<div>';
+            foreach ($list as $item) {
+
+                $result .= '<div>';
+                if ($type == 'visit') {
+
+                    $result .= $view->translate('Visite') . ':' . $item->id . '<br />';
+                    $result .= $view->translate('Time:') . ' ' . $item->at_time;
+                }
+                $result .= '</div>';
+            }
+            $result .= '</div>';
+        }
+        return $result;
+    }
+}
+?>
+<div>
+    <?
+    $month = $calendar->createMonth($calendar->getDateStart());
+    $lastId = $calendar->getDateStop()->format('Ym');
+    ?>
+    <? while ($lastId >= $month->getId()): ?>
+        <div>
+            <a href="<?=
+            $this->url(array(
+                'module' => 'user',
+                'controller' => 'landlord',
+                'action' => 'index',
+                't' => $month->prev()->getDateTime()->getTimestamp()
+            )) ?>">&larr;</a>
+            <strong><?= $this->translate($month->getDateTime()->format('F')) ?>
+                , <?= $month->getDateTime()->format('Y') ?></strong>
+            <a href="<?=
+            $this->url(array(
+                'module' => 'user',
+                'controller' => 'landlord',
+                'action' => 'index',
+                't' => $month->next()->getDateTime()->getTimestamp()
+            )) ?>">&rarr;</a>
+            <table>
+                <thead>
+                <tr>
+                    <? foreach ($dayNames as $name): ?>
+                        <th><?= $this->translate($name) ?></th>
+                    <? endforeach ?>
+                </tr>
+                </thead>
+                <tbody>
+                <? $day = $month->getDay($month->getDateTime()) ?>
+                <? $w = $day->getDateTime()->format('w') ?>
+                <? $c = 0 ?>
+                <tr>
+                    <? if ($w): ?>
+                    <? $_day = clone $day;
+                    $_day->getDateTime()->modify('-' . $w . ' day')?>
+                    <? for ($i = 0; $i < $w; ++$i): ?>
+                        <td class="side_month">
+                            <?= $_day->getDateTime()->format('d') ?>
+                        </td>
+                        <? $_day->getDateTime()->modify('+1 day') ?>
+                        <? ++$c; endfor ?>
+                    <? if (!($c % 7)) : ?>
+                </tr>
+                <tr>
+                    <? endif ?>
+                    <? endif ?>
+                    <? while ((int)$day->getDateTime()->format('Ym') === $month->getId()): ?>
+                    <? $classes = (count($day->getEvents())) ? array_keys($day->getEvents()) : '' ?>
+                    <td<? if ($classes): ?> class="event_<?= implode(' event_', $classes) ?>"
+                        onmouseover="calendarToltipShow(this)"
+                        onmouseout="calendarToltipHide(this)" <? endif ?>>
+                        <?= $day->getDateTime()->format('d') ?>
+                        <? if (count($day->getEvents())): ?>
+                            <div class="calendar-toltip"><?= renderDayEvents($day->getEvents(), $this) ?></div>
+                        <? endif ?>
+                    </td>
+                    <? $day = $day->next();
+                    ++$c;?>
+                    <? if (!($c % 7)): ?>
+                </tr>
+                <tr>
+                    <? endif ?>
+                    <? endwhile ?>
+                    <? while ($c % 7): ?>
+                        <td class="side_month">
+                            <?= $day->getDateTime()->format('d') ?>
+                        </td>
+                        <? $day = $day->next() ?>
+                        <? ++$c;endwhile ?>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <? $month = $month->next() ?>
+    <? endwhile ?>
+</div>
