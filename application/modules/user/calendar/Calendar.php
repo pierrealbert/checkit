@@ -7,33 +7,27 @@
  * To change this template use File | Settings | File Templates.
  */
 
-class User_Calendar_Calendar
+class User_Calendar_Calendar extends User_Calendar_Abstract
 {
-    /**
-     * @var array
-     */
-    private $_options = array();
-
     public function __construct($options = array())
     {
         $this->setOptions($options);
     }
 
-    public function setOptions($options)
-    {
-        if ($options instanceof Zend_Config) {
-
-            $options = $options->toArray();
-        }
-        $this->_options = $options;
-    }
-
     /**
      * @return array
      */
-    public function getOptions()
+    public function getEvents()
     {
-        return $this->_options;
+        return array();
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getDateTime()
+    {
+        return $this->getDateStart();
     }
 
     /**
@@ -78,9 +72,17 @@ class User_Calendar_Calendar
     public function createMonth($dateTime, $options = null)
     {
         $month = new User_Calendar_Month($dateTime);
+        if (!$options && !empty($this->_options['month'])) {
+
+            $options = $this->_options['month'];
+        }
         if ($options) {
 
             $month->setOptions($options);
+        }
+        if ($this->hasEventManager()) {
+
+            $month->setEventManager($this->getEventManager());
         }
         return $month;
     }

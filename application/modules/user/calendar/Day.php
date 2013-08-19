@@ -7,23 +7,8 @@
  * To change this template use File | Settings | File Templates.
  */
 
-class User_Calendar_Day
+class User_Calendar_Day extends User_Calendar_Abstract
 {
-
-//    public static $days = array(
-//        array('Sunday', 'Sun'),
-//        array('Monday', 'Mon'),
-//        array('Tuesday', 'Tue'),
-//        array('Wednesday', 'Wed'),
-//        array('Thursday', 'Thu'),
-//        array('Friday', 'Fri'),
-//        array('Saturday', 'Sat')
-//    );
-
-    public function getEvents()
-    {
-
-    }
 
     /**
      * @var User_Calendar_Day
@@ -40,37 +25,23 @@ class User_Calendar_Day
      */
     private $_dateTime;
 
-    /**
-     * @var array
-     */
-    private $_options = array();
-
     public function __construct(DateTime $dateTime)
     {
         $dateTime->setTime(0, 0, 0);
         $this->_dateTime = $dateTime;
     }
 
-    public function getDateTime()
-    {
-        return $this->_dateTime;
-    }
-
-    public function setOptions($options)
-    {
-        if ($options instanceof Zend_Config) {
-
-            $options = $options->toArray();
-        }
-        $this->_options = $options;
-    }
-
     /**
      * @return array
      */
-    public function getOptions()
+    public function getEvents()
     {
-        return $this->_options;
+        return $this->getEventManager()->getEventsPerDay($this->getDateTime());
+    }
+
+    public function getDateTime()
+    {
+        return $this->_dateTime;
     }
 
     public function prev()
@@ -81,6 +52,10 @@ class User_Calendar_Day
             $dt->add(DateInterval::createFromDateString('-1 day'));
             $this->_prev = new User_Calendar_Day($dt);
             $this->_prev->setOptions($this->getOptions());
+            if ($this->hasEventManager()) {
+
+                $this->_prev->setEventManager($this->getEventManager());
+            }
         }
         return $this->_prev;
     }
@@ -93,6 +68,10 @@ class User_Calendar_Day
             $dt->add(DateInterval::createFromDateString('+1 day'));
             $this->_next = new User_Calendar_Day($dt);
             $this->_next->setOptions($this->getOptions());
+            if ($this->hasEventManager()) {
+
+                $this->_next->setEventManager($this->getEventManager());
+            }
         }
         return $this->_next;
     }

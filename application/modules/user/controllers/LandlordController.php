@@ -12,7 +12,12 @@ class User_LandlordController extends Zend_Controller_Action
     public function indexAction()
     {
         $t = (int)$this->_getParam('t');
+        $eventManager = new User_Calendar_EventManager();
+        $eventManager->setBrokers(array(
+            new User_Calendar_EventBroker_Doctrine_Visit()
+        ));
         $options = array(
+            'event_manager' => $eventManager,
             'month' => array(
                 'render_label' => true,
                 'first_day' => 1

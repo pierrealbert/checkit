@@ -7,14 +7,9 @@
  * To change this template use File | Settings | File Templates.
  */
 
-class User_Calendar_Month
+class User_Calendar_Month extends User_Calendar_Abstract
 {
     const RENDER_SECONDARY = true;
-
-    /**
-     * @var array
-     */
-    private $_options = array();
 
     /**
      * @var DateTime
@@ -42,6 +37,19 @@ class User_Calendar_Month
         $this->_dateTime = $dateTime;
     }
 
+    public function getDateTime()
+    {
+        return $this->_dateTime;
+    }
+
+    /**
+     * @return array
+     */
+    public function getEvents()
+    {
+        return $this->getEventManager()->getEventsPerMonth($this->_dateTime);
+    }
+
     /**
      * @return int
      */
@@ -58,6 +66,10 @@ class User_Calendar_Month
             $dt->add(DateInterval::createFromDateString('-1 month'));
             $this->_prev = new User_Calendar_Month($dt);
             $this->_prev->setOptions($this->getOptions());
+            if ($this->hasEventManager()) {
+
+                $this->_prev->setEventManager($this->getEventManager());
+            }
         }
         return $this->_prev;
     }
@@ -70,25 +82,12 @@ class User_Calendar_Month
             $dt->add(DateInterval::createFromDateString('+1 month'));
             $this->_next = new User_Calendar_Month($dt);
             $this->_next->setOptions($this->getOptions());
+            if ($this->hasEventManager()) {
+
+                $this->_next->setEventManager($this->getEventManager());
+            }
         }
         return $this->_next;
-    }
-
-    public function setOptions($options)
-    {
-        if ($options instanceof Zend_Config) {
-
-            $options = $options->toArray();
-        }
-        $this->_options = $options;
-    }
-
-    /**
-     * @return array
-     */
-    public function getOptions()
-    {
-        return $this->_options;
     }
 
     /**
@@ -99,9 +98,17 @@ class User_Calendar_Month
     public function getDay($dateTime, $options = null)
     {
         $day = new User_Calendar_Day($dateTime);
+        if (!$options && !empty($this->_options['day'])) {
+
+            $options = $this->_options['day'];
+        }
         if ($options) {
 
             $day->setOptions($options);
+        }
+        if ($this->hasEventManager()) {
+
+            $day->setEventManager($this->getEventManager());
         }
         return $day;
     }
