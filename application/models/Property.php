@@ -38,6 +38,60 @@ class Model_Property extends Model_Base_Property
         );
     }
 
+    static public function getPlanningOptions()
+    {
+        return array(
+            'is_separate_restrooms' => 'separate_restrooms',
+            'is_parquet_floor' => 'parquet_floor',
+            'is_molding' => 'molding',
+            'is_double_glazing' => 'double_glazing',
+            'is_storage_area' => 'storage_are',
+            'is_fireplace' => 'fireplace',
+            'is_conditioner' => 'air_conditioner',
+        );
+    }
+    
+    static public function getOutbuildingOptions()
+    {
+        return array(
+            'is_parking_lot' => 'parking_lot',
+            'is_garage' => 'garage',
+        );
+    }
+    
+    static public function getExteriorOptions()
+    {
+        return array(
+            'is_balcony' => 'balcony',
+            'is_terrace' => 'terrace',
+            'is_swimming_pool' => 'swimming_pool',
+        );
+    }
+
+    static public function getBuildingFeatureOptions()
+    {
+        return array(
+            'is_lift' => 'lift',
+            'is_garden' => 'garden',
+            'is_digicode' => 'digicode',
+            'is_old_building' => 'old_building',
+            'is_renove' => 'is_renove',
+            'is_very_old_building' => 'very_old_building',
+        );
+    }
+    
+    static public function getHeatingSystemOptions()
+    {
+        return array(
+            'is_central' => 'central_heating',
+            'is_individuel' => 'individual_heating',
+            'is_au_sol' => 'au_sol_heating',
+            'is_gaz' => 'gaz_heating',
+            'is_electrique' => 'electrique_heating',
+            'is_autre' => 'autre_heating',
+        );
+    }
+
     protected function _assignCoordinates()
     {
         if (!$this->address or !$this->city) {

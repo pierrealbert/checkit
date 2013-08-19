@@ -211,3 +211,14 @@ function initSearchMap(map, regions) {
 
     countryMode(null);
 }
+
+function initSearchStandard() {
+    $('input[name=availability_select]').change(function() {
+        if ($(this).val() != 'date') {
+            $('input[name=availability]').val('');
+        }
+    });
+    $('input[name=availability]').change(function () {
+        $('input[name=availability_select][value=date]').prop('checked', 1);
+    })
+}
