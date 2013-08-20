@@ -1,0 +1,6 @@
+.Highlighted a{
+   background-color : Green !important;
+   background-image :none !important;
+   color: White !important;
+   font-weight:bold !important;
+}

@@ -313,9 +313,16 @@
     </table>
 </div>
 <?php
+    $js = "var SelectedDates = {};\n";
+
+    foreach($this->visits as $visit) {
+        $date = $this->jsDate($visit->availability);
+        $js .= "SelectedDates[new Date('{$date}')] = new Date('{$date}');\n";
+    }
+        
     $function = "$(function() {
-        function DrawCircle(rad) {
  
+        function DrawCircle(rad) {
             if (draw_circle != null) {
                 draw_circle.setMap(null);
             }
@@ -382,11 +389,23 @@
                 alert('Share!');
         });
     
+        {$js}
+
         $('#datepicker').datepicker({
             dateFormat: 'yy-mm-dd',
             minDate: 0,
             numberOfMonths: 2,
+            beforeShowDay: Highlight,
         });
+
+        function Highlight(date) {
+            var Highlight = SelectedDates[date];
+            if (Highlight) {
+                return [true, 'Highlighted', ''];
+            } else {
+                return [false, '', ''];
+            }
+        }
 
         var mySlides1 = $('#slider1 .slide');
 
@@ -443,6 +462,7 @@
 
     $this->jQuery()->addOnLoad($function)
         ->addStylesheet('/css/ui/jquery-ui-1.10.3.css')
+        ->addStylesheet('/css/datepicker.css')
         ->addJavascriptFile("http://maps.googleapis.com/maps/api/js?key={$this->google_api_key}&sensor=false")
         ->addJavascriptFile("/js/lodash.js")
         ->addJavascriptFile("/js/bean.min.js")

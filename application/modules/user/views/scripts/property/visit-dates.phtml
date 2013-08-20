@@ -69,6 +69,7 @@
     </tr>
 </table>
 <?php
+
     $function = "$(function() {
         $('#datepicker').datepicker({
             dateFormat: 'yy-mm-dd',
@@ -98,6 +99,7 @@
         });
     });";
 
-    $this->jQuery()->addOnLoad($function);
-
+    $this->jQuery()->addOnLoad($function)
+        ->addStylesheet('/css/ui/jquery-ui-1.10.3.css')
+        ->addStylesheet('/css/datepicker.css');
 ?>

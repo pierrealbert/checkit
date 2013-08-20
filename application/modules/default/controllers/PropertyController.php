@@ -25,6 +25,11 @@ class PropertyController extends Zend_Controller_Action
 
         $this->view->previous_and_next = self::getPreviousAndNext($property->id);
 
+        $this->view->visits = Doctrine::getTable('Model_PropertyVisitDates')->createQuery('pvd')
+            ->where('pvd.property_id = ?', $property->id)
+            ->execute();
+
+
         $options = Zend_Controller_Action_HelperBroker::getStaticHelper('settings')
             ->get('services.googleMaps');
 
