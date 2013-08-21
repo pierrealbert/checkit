@@ -1,6 +1,6 @@
 <?php
 
-class Ext_View_Helper_jsDate extends Zend_View_Helper_Abstract
+class Ext_View_Helper_JsDate extends Zend_View_Helper_Abstract
 {
     public function jsDate($date)
     {
