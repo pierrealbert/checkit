@@ -32,10 +32,14 @@ class Model_PropertyTable extends Ext_Doctrine_Table
         
         $dqlQuery = $this->createQuery($propertyTN);
         
-        foreach ($params as $fieldName => $fieldValue) {
+        foreach ($params as $key => $fieldValue) {
+            $fieldName = $key;
             $whereStr = '';
             $value = '';
             if (is_array($fieldValue)) {
+                if (!empty($fieldValue['field'])) {
+                    $fieldName = $fieldValue['field'];
+                }
                 if (empty($fieldValue['sign'])) {
                     $fieldValue['sign'] = '=';
                 }
