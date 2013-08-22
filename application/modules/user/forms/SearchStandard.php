@@ -44,6 +44,7 @@ class User_Form_SearchStandard extends Ext_Form
                 'dateFormat' => $settings->get('dateFormat.picker.jquery'),
             ),
         ));
+        $this->addDisplayGroup(array('availability_select', 'availability'), 'availability_group', array('legend' => "availability"));
         
         foreach (Model_Property::getPlanningOptions() as $name => $label) {
             $this->addElement('checkbox', $name, array(
