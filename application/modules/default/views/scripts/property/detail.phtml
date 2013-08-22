@@ -1,3 +1,7 @@
+<?php 
+// add script file for ajax when we click to different buttons
+$this->headScript()->appendFile( '/js/site/propertyPage.js',   'text/javascript',    $attrs = array() );
+?>
 <div>
     <h1>Ad Details</h1>
     <a href="<?= $this->url(array('controller' => 'test', 'action' => 'ad-list'), null, true) ?>" class="back_to_resaults"><?= $this->translate('back_to_resaults') ?></a>
@@ -317,6 +321,9 @@
     }
         
     $function = "$(function() {
+	// this is var for all buttons when we use ajax
+	// we can add some parammeters there and use it in file js/site/propertyPage.js
+	var additionParameter = new Object();
  
         function DrawCircle(rad) {
             if (draw_circle != null) {
@@ -369,6 +376,11 @@
             .click(function(event) {
                 event.preventDefault();
                 alert('Apply!');
+		//alex click button apply 
+		additionParameter.errorHandler = applyError;
+		var data = 'data=1';
+		applyClicked('http://realestate.dev/property/addtoapplyajax',data, additionParameter);
+		
         });
 
         $('.add_to_bookmark')
@@ -376,6 +388,10 @@
             .click(function(event) {
                 event.preventDefault();
                 alert('Add to bookmark!');
+		//alex click button add to bookmark
+		additionParameter.errorHandler = addToBookmarkError;
+		var data = 'data=1';
+		addToBookmarkClicked('http://realestate.dev/property/addtobookmarkajax',data, additionParameter);
         });
     
         $('.share')
@@ -383,6 +399,10 @@
             .click(function(event) {
                 event.preventDefault();
                 alert('Share!');
+		//alex click button share 
+		additionParameter.errorHandler = shareError;
+		var data = 'data=1';
+		shareClicked('http://realestate.dev/property/addtoshareajax',data, additionParameter);
         });
     
         {$js}
