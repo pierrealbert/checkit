@@ -33,7 +33,8 @@ class PropertyController extends Zend_Controller_Action
         $options = Zend_Controller_Action_HelperBroker::getStaticHelper('settings')
             ->get('services.googleMaps');
 
-        $this->view->google_api_key = $options['apiKey'];
+        $this->view->similarProperties  = $property->getSimilar(2);
+        $this->view->google_api_key     = $options['apiKey'];
     }
 
     private static function getPreviousAndNext($currentId)

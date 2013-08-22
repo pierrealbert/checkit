@@ -292,25 +292,21 @@
 </div>
 
 <div>
+    <h3>Similar Properties</h3>
+
     <table width="100%" border="1">
-        <tr valign="top">
-            <td>Similar</td>
-            <td>
-                <table width="100%" border="1">
-                    <tr>
-                        <td width="100px">Photo</td>
-                        <td>Description</td>
-                        <td width="100px">Price</td>
-                    </tr>
-                    <tr>
-                        <td width="100px">Photo</td>
-                        <td>Description</td>
-                        <td width="100px">Price</td>
-                    </tr>
-                </table>
+        <? foreach ($this->similarProperties as $property) : ?>
+        <tr>
+            <td width="110px" height="110px" align="center" valign="center"><?= $this->imageResize(100, 100, $property->main_photo) ?></td>
+            <td width="300px" valign="top"><h3><a href="/property/detail/item/<?= $property->id ?>"><?= $this->escape($property->title) ?></a></h3></td>
+            <td width="120px">
+               <h3><?= $property->getPrice() ?> &euro;</h3>
+               <?= $property->size ?> m<sup>2</sup><br />
+               <?= $property->number_of_rooms1 ?> rooms
             </td>
         </tr>
-    </table>
+        <? endforeach; ?>
+    </table>  
 </div>
 <?php
     $js = "var SelectedDates = {};\n";

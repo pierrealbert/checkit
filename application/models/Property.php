@@ -30,6 +30,15 @@ class Model_Property extends Model_Base_Property
     {
         return ($this->amount_of_rent_excluding_charges + $this->amount_of_charges);
     }
+    
+    public function getSimilar($limit)
+    {
+        return Doctrine::getTable('Model_Property')->createQuery('p')
+            ->select('p.*')
+            ->where('p.is_published = ?', 1)
+            ->limit($limit)
+            ->execute();
+    }
 
     static public function getTypes()
     {
