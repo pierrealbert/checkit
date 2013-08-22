@@ -83,14 +83,14 @@ function addToBookmarkClicked(url, data, additionParameter)
  * @param {type} additionParameter - object
  * @returns {undefined|share.responseData}
  */
-function applyClicked(url, data, additionParameter)
-{
-    var responseDataJson;
-    var responseDataObj;
-    responseDataJson = getAjaxData(url, data, additionParameter);
-    responseDataObj = $.parseJSON(responseDataJson);
-    return responseDataObj;
-}
+//function applyClicked(url, data, additionParameter)
+//{
+//    var responseDataJson;
+//    var responseDataObj;
+//    responseDataJson = getAjaxData(url, data, additionParameter);
+//    responseDataObj = $.parseJSON(responseDataJson);
+//    return responseDataObj;
+//}
 //////////////////////////////////////
 /////  ERROR AJAX HANDLERING    //////
 /////////////////////////////////////
@@ -110,12 +110,12 @@ function addToBookmarkError( x, status, error)
 }
 
 //description is the same like for addToBookmarkError
-function applyError( x, status, error)
-{
-     console.log('ajax error when we click share ');
-    // console.log(status);
-    // console.log(error);
-}
+//function applyError( x, status, error)
+//{
+//     console.log('ajax error when we click share ');
+//    // console.log(status);
+//    // console.log(error);
+//}
 
 
 

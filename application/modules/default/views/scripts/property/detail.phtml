@@ -85,10 +85,10 @@ $this->headScript()->appendFile( '/js/site/propertyPage.js',   'text/javascript'
         </tr>
     </table>
       
-    <div id="issue_pop_window" style="display:none;position:fixed;top:20px;left:20px; width:400px;height:200px; border:1px solid red;background-color: grey">
+    <div id="issue_pop_window" style="display:none;position:fixed;top:20px;left:20px; width:400px;height:220px; border:1px solid red;background-color: grey">
 	
 	<?php echo $this->formIssue;?>
-	
+	<div id="close_issue_pop_window">close</div>
     </div>
     <h2>Description</h2>
 
@@ -433,7 +433,6 @@ $this->headScript()->appendFile( '/js/site/propertyPage.js',   'text/javascript'
             .button()
             .click(function(event) {
                 event.preventDefault();
-                alert('Add to bookmark!');
 		//alex click button add to bookmark
 		additionParameter.errorHandler = addToBookmarkError;
 		var data = 'id='+currentpropertyId;
@@ -444,8 +443,15 @@ $this->headScript()->appendFile( '/js/site/propertyPage.js',   'text/javascript'
             .button()
             .click(function(event) {
                 event.preventDefault();
-                alert('Share!');
         });
+	
+	$('#close_issue_pop_window')
+	    .button()
+	    .click(function(){
+		//clear textarea value
+		$('#issueText').val('');
+		$('#issue_pop_window').hide();
+	    })
     
         {$js}
 

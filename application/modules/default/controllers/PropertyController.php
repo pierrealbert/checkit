@@ -2,6 +2,12 @@
 
 class PropertyController extends Zend_Controller_Action
 {
+    //for testing
+public function testAction()
+{
+    
+}
+    
     public function detailAction()
     {
 	$currentPropertyId = $this->_getParam('item');
@@ -77,7 +83,7 @@ class PropertyController extends Zend_Controller_Action
      * AJAX
      * this method for adding information to db table favorite
      * when we ckick button add to bookmark we call this method using ajax
-     * @return 
+     * @return json string with all info (error and result) 
      */
     public function addToFavoriteAjaxAction() {
 
@@ -88,7 +94,8 @@ class PropertyController extends Zend_Controller_Action
             if ($this->getRequest()->isPost()) {
                 //here i need to know user id and property id
                 $auth = Zend_Auth::getInstance();
-                $userId = $auth->getIdentity();
+                $userId = (int)$auth->getIdentity();
+	
                 //if we donot have userid it means we donot logined
                 if (empty($userId)) {
                     $returnData->redirectUrl = $this->_helper->url('', 'login');
@@ -105,20 +112,15 @@ class PropertyController extends Zend_Controller_Action
                     die;
                 }
 		//here we need to add property_id and user_id to favorite table
-		$favoriteModel = Model_FavoriteTable::getInstance();
-	
-		$param = array(
-		    'user_id'	     => $userId,
-		    'property_id'    => $propertyId
-		);
-		$isInserted = $favoriteModel->add($param);
-		if($isInserted) {
-		    $returnData->result = true; 
-		    $returnData->error = ''; 
-		}else {
-		    $returnData->result = false; 
-		    $returnData->error = 'error inserting  data to db table'; 
-		}
+		$favoriteModel = new Model_Favorite();
+//		$favoriteModel->user_id = $userId;
+//		$favoriteModel->property_id = $propertyId;
+		$favoriteModel->user_id = $userId;
+		$favoriteModel->property_id = $propertyId;
+		$favoriteModel->save();	
+		
+		$returnData->result = true; //can be string
+		$returnData->error = ''; 		
 		
 		$jsonStr = $this->_helper->json($returnData);
 		echo $jsonStr;
@@ -136,23 +138,11 @@ class PropertyController extends Zend_Controller_Action
     }
 
 
-
-    /**
-     * AJAX
-     * this method for adding information to db table favorite
-     * 
-     */
-    public function applyPropertyAjaxAction()
-    {
-	echo "<pre>";
-	print_r(1);
-	echo "</pre>";
-	die;
-    }
     
-      /**
-     * this method for adding information to db table favorite
-     * 
+    /** 
+     *  AJAX
+     * this method for adding information to db table 
+     * @return json string with all info (error and result) 
      */
     public function setIssueAction()
     {
