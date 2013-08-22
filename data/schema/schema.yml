@@ -437,3 +437,20 @@ PropertyVisitDates:
                 name: created_at
             updated:
                 name: updated_at
+Favorite:
+    columns:      
+        user_id:
+            type: integer(4)
+            primary: true
+        property_id:
+            type: integer(4)
+            primary: true            
+    relations:
+        User:
+            onDelete: cascade
+            class: User
+            local: user_id        
+        Property:
+            onDelete: cascade
+            class: Property
+            local: property_id              

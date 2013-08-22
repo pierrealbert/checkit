@@ -65,6 +65,7 @@
  * @property Model_User $Owner
  * @property Model_RegionBlock $RegionBlock
  * @property Doctrine_Collection $PropertyVisitDates
+ * @property Doctrine_Collection $Favorite
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -334,6 +335,10 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'onDelete' => 'cascade'));
 
         $this->hasMany('Model_PropertyVisitDates as PropertyVisitDates', array(
+             'local' => 'id',
+             'foreign' => 'property_id'));
+
+        $this->hasMany('Model_Favorite as Favorite', array(
              'local' => 'id',
              'foreign' => 'property_id'));
 
