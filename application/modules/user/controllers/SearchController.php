@@ -54,6 +54,34 @@ class User_SearchController extends Zend_Controller_Action
                     }
                 }
             }
+            
+            // convert min_size, max_size, min_budget and max_budget to appropriate format
+            // ex: 
+            //     min_size => 3 
+            //     to 
+            //     min_size => array('field' => 'size',
+            //                       'value' => '3',
+            //                       'sign' => '>=')
+            if (!empty($values['min_size'])) {
+                $values['min_size'] = array ('field' => 'size',
+                                             'value' => $values['min_size'],
+                                             'sign' => '>=');
+            }
+            if (!empty($values['max_size'])) {
+                $values['max_size'] = array ('field' => 'size',
+                                             'value' => $values['max_size'],
+                                             'sign' => '<=');
+            }
+            if (!empty($values['min_budget'])) {
+                $values['min_budget'] = array ('field' => 'amount_of_rent_excluding_charges',
+                                               'value' => $values['min_budget'],
+                                               'sign' => '>=');
+            }
+            if (!empty($values['max_budget'])) {
+                $values['max_budget'] = array ('field' => 'amount_of_rent_excluding_charges',
+                                               'value' => $values['max_budget'],
+                                               'sign' => '<=');
+            }
 
             // DEBUG {{{ 
             echo '<H2>Criteria</H2>';
