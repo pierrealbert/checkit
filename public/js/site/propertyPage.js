@@ -1,4 +1,61 @@
-////////////////////////////////////////
+
+var propertyPage = {
+
+    
+    showPopWindow : function (elem){
+     
+        //inset to input with type = hidden value - nameof issue
+        var titleIssue = $(elem).text();
+        //show form 
+        var divWithForm =   $('#issue_pop_window');
+        divWithForm.show();
+        //set value to that input with type = gidden
+        $('input[name=issueName]').val(titleIssue);
+        //add ajax to this form 
+        var form = $('#issue_pop_window_form');
+        form.submit(function() {
+          
+          var response =  propertyPage.submitPopWindow(form);
+          if(response.error.length) {
+              //if we have an error
+               propertyPage.alertError(response.error); 
+          } else {
+              // if everything is okay
+              //show message and  hide foem 
+              propertyPage.alertSuccessMsg(response.result)
+              divWithForm.hide();
+          }
+          return false;
+        });
+        
+    },
+            
+    submitPopWindow : function (form){
+        //create ajax 
+        var url = form.attr('action');       
+        var additionParameter = new Object();
+        var data = 'issueText='+$('textarea[name=issueText]').val();;
+        var additionParameter = getAjaxData(url, data, additionParameter);      
+        return additionParameter;
+    },
+    alertError : function (msg)
+    {
+        alert(msg);
+    },
+    alertSuccessMsg : function (msg)
+    {
+        if($.type( msg ) === "string")
+        {
+              alert(msg);   
+        }
+       
+    },
+        
+    
+}
+
+
+//////////////////////////////////////////
 /////  THE MAIN AJAX REQUEST   //////
 /////////////////////////////////////
 
@@ -13,26 +70,12 @@ function addToBookmarkClicked(url, data, additionParameter)
 {  
     var responseDataJson;
     responseDataJson = getAjaxData(url, data, additionParameter);
-    if(responseDataJson.redirectUrl){
-        window.location.href = responseDataJson.redirectUrl;
+    if(responseDataJson.error) {
+           alert(responseDataJson.error.length); 
     }
     return responseDataJson;
 }
-/**
- * this is function calls if we click button share 
- * @param {type} url - string
- * @param {type} data  - string
- * @param {type} additionParameter - object
- * @returns {undefined|share.responseData}
- */
-function shareClicked(url, data, additionParameter)
-{
-    var responseDataJson;
-    var responseDataObj;
-    responseDataJson = getAjaxData(url, data, additionParameter);
-    responseDataObj = $.parseJSON(responseDataJson);
-    return responseDataObj;
-}
+
 /**
  * this is function calls if we click button apply 
  * @param {type} url - string
@@ -65,13 +108,7 @@ function addToBookmarkError( x, status, error)
     // console.log(status);
      //console.log($.parseJSON( error.responseText ));
 }
-//description is the same like for addToBookmarkError
-function shareError( x, status, error)
-{
-     console.log('ajax error when we click share ');
-    // console.log(status);
-    // console.log(error);
-}
+
 //description is the same like for addToBookmarkError
 function applyError( x, status, error)
 {
@@ -79,10 +116,6 @@ function applyError( x, status, error)
     // console.log(status);
     // console.log(error);
 }
-
-
-
-
 
 
 
@@ -107,6 +140,10 @@ function getAjaxData(url, data, additionParameter)
         type: additionParameter.type || "POST",
         async: additionParameter.async || false,
         success: function( response ) {
+            //redirect if we tried to call some function whitch we donot have access
+            if(response.redirectUrl){
+                window.location.href = response.redirectUrl;
+            }
             myResponse = response;
         },
         error: function(x, status, error)

@@ -5,7 +5,7 @@ class PropertyController extends Zend_Controller_Action
     public function detailAction()
     {
 	$currentPropertyId = $this->_getParam('item');
-  
+
         $query = Doctrine::getTable('Model_Property')->createQuery('p')
             ->select('p.*, (p.amount_of_rent_excluding_charges + p.amount_of_charges) as price')
             ->where('p.id = ?', $this->_getParam('item', 0))
@@ -17,7 +17,12 @@ class PropertyController extends Zend_Controller_Action
 
             $this->_helper->redirector('index', 'index');
         }
-
+	//form for sending issue to admin
+	$fromIssue = new Form_Issue();
+	$fromIssue->setAction('/property/set-issue')
+		     ->setMethod('post')
+		     ->setAttrib('id', "issue_pop_window_form");
+	$this->view->formIssue        = $fromIssue;
 	$this->view->currentPropertyId= $currentPropertyId;
         $this->view->property         = $property;
         $this->view->property_type    = Model_Property::getTypes();
@@ -112,7 +117,7 @@ class PropertyController extends Zend_Controller_Action
 		    $returnData->error = ''; 
 		}else {
 		    $returnData->result = false; 
-		    $returnData->error = 'error'; 
+		    $returnData->error = 'error inserting  data to db table'; 
 		}
 		
 		$jsonStr = $this->_helper->json($returnData);
@@ -131,55 +136,6 @@ class PropertyController extends Zend_Controller_Action
     }
 
 
-     /**
-     * AJAX
-     * this method for adding information to db table favorite
-     * 
-     */
-    public function shareAjaxAction() 
-    {
-//       $returnData = new stdClass();
-//        //if it is ajax
-//        if ($this->getRequest()->isXmlHttpRequest()) {
-//            //if it is post request 
-//            if ($this->getRequest()->isPost()) {
-//                //here i need to know user id and property id
-//                $auth = Zend_Auth::getInstance();
-//                $userId = $auth->getIdentity();
-//                //if we donot have userid it means we donot logined
-//                if (empty($userId)) {
-//                    $returnData->redirectUrl = $this->_helper->url('', 'login');
-//                    $jsonStr = $this->_helper->json($returnData);
-//                    echo $jsonStr;
-//                    die;
-//                }
-//                //get property id
-//                $propertyId = (int) $this->_request->getPost('id');
-//		 if (empty($propertyId)) {
-//                    $returnData->redirectUrl = $this->_helper->url('', 'login');
-//                    $jsonStr = $this->_helper->json($returnData);
-//                    echo $jsonStr;
-//                    die;
-//                }
-//		//here we need to add property_id and user_id to favorite table
-//		$favoriteModel = Model_FavoriteTable::getInstance();
-//		$param = array(
-//		    'user_id'	     => $userId,
-//		    'property_id'    => $propertyId
-//		);
-//		$isInserted = $favoriteModel->add($param);
-//		
-//		
-//            } else {
-//                // it is not post request
-//                $this->_helper->redirector('index', 'index');
-//                die;
-//            }
-//        } else {
-//            // ... Do normal controller logic here (To catch non ajax calls to the script)
-//            $this->_helper->redirector('index', 'index');
-//        }
-    }
 
     /**
      * AJAX
@@ -188,47 +144,63 @@ class PropertyController extends Zend_Controller_Action
      */
     public function applyPropertyAjaxAction()
     {
-//        $returnData = new stdClass();
-//        //if it is ajax
-//        if ($this->getRequest()->isXmlHttpRequest()) {
-//            //if it is post request 
-//            if ($this->getRequest()->isPost()) {
-//                //here i need to know user id and property id
-//                $auth = Zend_Auth::getInstance();
-//                $userId = $auth->getIdentity();
-//                //if we donot have userid it means we donot logined
-//                if (empty($userId)) {
-//                    $returnData->redirectUrl = $this->_helper->url('', 'login');
-//                    $jsonStr = $this->_helper->json($returnData);
-//                    echo $jsonStr;
-//                    die;
-//                }
-//                //get property id
-//                $propertyId = (int) $this->_request->getPost('id');
-//		 if (empty($propertyId)) {
-//                    $returnData->redirectUrl = $this->_helper->url('', 'login');
-//                    $jsonStr = $this->_helper->json($returnData);
-//                    echo $jsonStr;
-//                    die;
-//                }
-//		//here we need to add property_id and user_id to favorite table
-//		$favoriteModel = Model_FavoriteTable::getInstance();
-//		$param = array(
-//		    'user_id'	     => $userId,
-//		    'property_id'    => $propertyId
-//		);
-//		$isInserted = $favoriteModel->add($param);
-//		
-//		
-//            } else {
-//                // it is not post request
-//                $this->_helper->redirector('index', 'index');
-//                die;
-//            }
-//        } else {
-//            // ... Do normal controller logic here (To catch non ajax calls to the script)
-//            $this->_helper->redirector('index', 'index');
-//        }
+	echo "<pre>";
+	print_r(1);
+	echo "</pre>";
+	die;
+    }
+    
+      /**
+     * this method for adding information to db table favorite
+     * 
+     */
+    public function setIssueAction()
+    {
+	 $fromIssue = new Form_Issue();
+	 
+	  $returnData = new stdClass();
+	  
+	 if ($this->getRequest()->isPost()) {
+	     if ($fromIssue->isValid($this->getRequest()->getPost())) {
+		     //here i need to know user id and property id
+		    $auth = Zend_Auth::getInstance();
+		    $userId = $auth->getIdentity();
+		    //if we donot have userid it means we donot logined
+		    if (empty($userId)) {
+			$returnData->redirectUrl = $this->_helper->url('', 'login');
+			$jsonStr = $this->_helper->json($returnData);
+			echo $jsonStr;
+			die;
+		    }
+		    //get data from post here this field is not empty
+		    $issueText = $this->_request->getPost('issueText');
+		  
+		    //TODO insert this data to db
+		    
+		    $isInserted = true;
+		    if($isInserted) {
+			$returnData->result = true; 
+			$returnData->error = ''; 
+		    }else {
+			$returnData->result = false; 
+			$returnData->error = 'error inserting  data to db table'; 
+		    }
+		    $jsonStr = $this->_helper->json($returnData);
+		    echo $jsonStr;
+		    die;
+		    
+	     } else {
+		    $returnData->result = false; 
+		    $returnData->error = 'error not valid form'; 
+		    $jsonStr = $this->_helper->json($returnData);
+		    echo $jsonStr;
+		    die;
+	     }         
+
+	} else {
+	    // it is not post request
+	    $this->_helper->redirector('index', 'index');
+	}
     }
   
 }

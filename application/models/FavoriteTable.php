@@ -18,7 +18,7 @@ class Model_FavoriteTable extends Ext_Doctrine_Table
     }
     
     public function add($param){
-	
+	return true;
 	$this->user_id = $param['user_id'];
 	$this->property_id = $param['property_id'];
 	return $this->save();
