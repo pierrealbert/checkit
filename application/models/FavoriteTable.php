@@ -16,4 +16,12 @@ class Model_FavoriteTable extends Ext_Doctrine_Table
     {
         return Doctrine_Core::getTable('Model_Favorite');
     }
+    
+    public function add($param){
+	
+	$this->user_id = $param['user_id'];
+	$this->property_id = $param['property_id'];
+	return $this->save();
+
+    }
 }

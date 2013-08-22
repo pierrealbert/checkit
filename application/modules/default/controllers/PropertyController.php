@@ -4,6 +4,8 @@ class PropertyController extends Zend_Controller_Action
 {
     public function detailAction()
     {
+	$currentPropertyId = $this->_getParam('item');
+  
         $query = Doctrine::getTable('Model_Property')->createQuery('p')
             ->select('p.*, (p.amount_of_rent_excluding_charges + p.amount_of_charges) as price')
             ->where('p.id = ?', $this->_getParam('item', 0))
@@ -16,6 +18,7 @@ class PropertyController extends Zend_Controller_Action
             $this->_helper->redirector('index', 'index');
         }
 
+	$this->view->currentPropertyId= $currentPropertyId;
         $this->view->property         = $property;
         $this->view->property_type    = Model_Property::getTypes();
         $this->view->number_of_rooms1 = Model_Property::getNumberOfRooms1Info();
@@ -72,6 +75,7 @@ class PropertyController extends Zend_Controller_Action
      * @return 
      */
     public function addToFavoriteAjaxAction() {
+
         $returnData = new stdClass();
         //if it is ajax
         if ($this->getRequest()->isXmlHttpRequest()) {
@@ -86,26 +90,47 @@ class PropertyController extends Zend_Controller_Action
                     $jsonStr = $this->_helper->json($returnData);
                     echo $jsonStr;
                     die;
-                }//endif
+                }
                 //get property id
-
-                $propertyId = '';
-                echo "<pre>";
-                print_r($propertyId);
-                echo "</pre>";
-                die;
+                $propertyId = (int) $this->_request->getPost('id');
+		 if (empty($propertyId)) {
+                    $returnData->redirectUrl = $this->_helper->url('', 'login');
+                    $jsonStr = $this->_helper->json($returnData);
+                    echo $jsonStr;
+                    die;
+                }
+		//here we need to add property_id and user_id to favorite table
+		$favoriteModel = Model_FavoriteTable::getInstance();
+	
+		$param = array(
+		    'user_id'	     => $userId,
+		    'property_id'    => $propertyId
+		);
+		$isInserted = $favoriteModel->add($param);
+		if($isInserted) {
+		    $returnData->result = true; 
+		    $returnData->error = ''; 
+		}else {
+		    $returnData->result = false; 
+		    $returnData->error = 'error'; 
+		}
+		
+		$jsonStr = $this->_helper->json($returnData);
+		echo $jsonStr;
+		die;
+		
             } else {
                 // it is not post request
                 $this->_helper->redirector('index', 'index');
                 die;
-            }//endif
+            }
         } else {
             // ... Do normal controller logic here (To catch non ajax calls to the script)
             $this->_helper->redirector('index', 'index');
-        }//endif
+        }
     }
 
-//endfunc
+
      /**
      * AJAX
      * this method for adding information to db table favorite
@@ -113,10 +138,47 @@ class PropertyController extends Zend_Controller_Action
      */
     public function shareAjaxAction() 
     {
-        echo "<pre>";
-        print_r(2);
-        echo "</pre>";
-        die;
+//       $returnData = new stdClass();
+//        //if it is ajax
+//        if ($this->getRequest()->isXmlHttpRequest()) {
+//            //if it is post request 
+//            if ($this->getRequest()->isPost()) {
+//                //here i need to know user id and property id
+//                $auth = Zend_Auth::getInstance();
+//                $userId = $auth->getIdentity();
+//                //if we donot have userid it means we donot logined
+//                if (empty($userId)) {
+//                    $returnData->redirectUrl = $this->_helper->url('', 'login');
+//                    $jsonStr = $this->_helper->json($returnData);
+//                    echo $jsonStr;
+//                    die;
+//                }
+//                //get property id
+//                $propertyId = (int) $this->_request->getPost('id');
+//		 if (empty($propertyId)) {
+//                    $returnData->redirectUrl = $this->_helper->url('', 'login');
+//                    $jsonStr = $this->_helper->json($returnData);
+//                    echo $jsonStr;
+//                    die;
+//                }
+//		//here we need to add property_id and user_id to favorite table
+//		$favoriteModel = Model_FavoriteTable::getInstance();
+//		$param = array(
+//		    'user_id'	     => $userId,
+//		    'property_id'    => $propertyId
+//		);
+//		$isInserted = $favoriteModel->add($param);
+//		
+//		
+//            } else {
+//                // it is not post request
+//                $this->_helper->redirector('index', 'index');
+//                die;
+//            }
+//        } else {
+//            // ... Do normal controller logic here (To catch non ajax calls to the script)
+//            $this->_helper->redirector('index', 'index');
+//        }
     }
 
     /**
@@ -126,10 +188,47 @@ class PropertyController extends Zend_Controller_Action
      */
     public function applyPropertyAjaxAction()
     {
-        echo "<pre>";
-        print_r(3);
-        echo "</pre>";
-        die;
+//        $returnData = new stdClass();
+//        //if it is ajax
+//        if ($this->getRequest()->isXmlHttpRequest()) {
+//            //if it is post request 
+//            if ($this->getRequest()->isPost()) {
+//                //here i need to know user id and property id
+//                $auth = Zend_Auth::getInstance();
+//                $userId = $auth->getIdentity();
+//                //if we donot have userid it means we donot logined
+//                if (empty($userId)) {
+//                    $returnData->redirectUrl = $this->_helper->url('', 'login');
+//                    $jsonStr = $this->_helper->json($returnData);
+//                    echo $jsonStr;
+//                    die;
+//                }
+//                //get property id
+//                $propertyId = (int) $this->_request->getPost('id');
+//		 if (empty($propertyId)) {
+//                    $returnData->redirectUrl = $this->_helper->url('', 'login');
+//                    $jsonStr = $this->_helper->json($returnData);
+//                    echo $jsonStr;
+//                    die;
+//                }
+//		//here we need to add property_id and user_id to favorite table
+//		$favoriteModel = Model_FavoriteTable::getInstance();
+//		$param = array(
+//		    'user_id'	     => $userId,
+//		    'property_id'    => $propertyId
+//		);
+//		$isInserted = $favoriteModel->add($param);
+//		
+//		
+//            } else {
+//                // it is not post request
+//                $this->_helper->redirector('index', 'index');
+//                die;
+//            }
+//        } else {
+//            // ... Do normal controller logic here (To catch non ajax calls to the script)
+//            $this->_helper->redirector('index', 'index');
+//        }
     }
   
 }

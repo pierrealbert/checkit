@@ -1,4 +1,4 @@
-//////////////////////////////////////
+////////////////////////////////////////
 /////  THE MAIN AJAX REQUEST   //////
 /////////////////////////////////////
 
@@ -12,15 +12,11 @@
 function addToBookmarkClicked(url, data, additionParameter)
 {  
     var responseDataJson;
-    var responseDataObj;
     responseDataJson = getAjaxData(url, data, additionParameter);
-    if(responseDataJson.redirectUrl)
-    {
+    if(responseDataJson.redirectUrl){
         window.location.href = responseDataJson.redirectUrl;
     }
-    console.log(responseDataJson.redirectUrl);
-   // console.log(responseDataObj);
-    return responseDataObj;
+    return responseDataJson;
 }
 /**
  * this is function calls if we click button share 
