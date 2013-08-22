@@ -8,8 +8,23 @@ $this->headScript()->appendFile( '/js/site/propertyPage.js',   'text/javascript'
     
     <button class="add_to_bookmark">Add to bookmark</button>
     
-    <button class="share">Share</button>
+    <!-- AddToAny BEGIN -->
+    <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
+        <span class="ui-button-text">Share</span>
+    </a>
+    
 
+    
+    <script type="text/javascript">
+    a2a_config = {
+        linkname: 'Example Page 1',
+        linkurl: 'http://www.example.com/page_1.html'
+    };
+    </script>
+
+    <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+    <!-- AddToAny END -->
+  
     <?php if ($this->previous_and_next['previous']): ?>
     <a href="<?= $this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $this->previous_and_next['previous']), null, true) ?>" class="previous">Previous</a>
     <?php else: ?>
@@ -220,7 +235,12 @@ $this->headScript()->appendFile( '/js/site/propertyPage.js',   'text/javascript'
                 <button id="next_photo1">&gt;</button>
                 <hr />
                 <button class="add_to_bookmark">Add to bookmark</button><br />
-                <button class="share">Share</button>
+                <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
+                    <span class="ui-button-text">Share</span>
+                </a>
+                <script type="text/javascript">
+                a2a.init('page');
+                </script>
             </td>
         </tr>
     </table>
@@ -256,7 +276,12 @@ $this->headScript()->appendFile( '/js/site/propertyPage.js',   'text/javascript'
                 </div>
                 <hr />
                 <button class="add_to_bookmark">Add to bookmark</button><br />
-                <button class="share">Share</button>
+                <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
+                    <span class="ui-button-text">Share</span>
+                </a>
+                <script type="text/javascript">
+                a2a.init('page');
+                </script>
             </td>
         </tr>
     </table>
@@ -273,7 +298,12 @@ $this->headScript()->appendFile( '/js/site/propertyPage.js',   'text/javascript'
             <td width="33%">Center</td>
             <td width="33%">
                 <button class="add_to_bookmark">Add to bookmark</button><br />
-                <button class="share">Share</button>
+                <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
+                    <span class="ui-button-text">Share</span>
+                </a>
+                <script type="text/javascript">
+                a2a.init('page');
+                </script>
             </td>
         </tr>
     </table>
@@ -288,7 +318,12 @@ $this->headScript()->appendFile( '/js/site/propertyPage.js',   'text/javascript'
             <td>Description</td>
             <td width="33%">
                 <button class="add_to_bookmark">Add to bookmark</button><br />
-                <button class="share">Share</button>
+                <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
+                    <span class="ui-button-text">Share</span>
+                </a>
+                <script type="text/javascript">
+                a2a.init('page');
+                </script>
             </td>
         </tr>
     </table>
