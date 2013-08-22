@@ -379,7 +379,7 @@ $this->headScript()->appendFile( '/js/site/propertyPage.js',   'text/javascript'
 		//alex click button apply 
 		additionParameter.errorHandler = applyError;
 		var data = 'data=1';
-		applyClicked('http://realestate.dev/property/addtoapplyajax',data, additionParameter);
+		applyClicked('/property/apply-ajax',data, additionParameter);
 		
         });
 
@@ -391,7 +391,7 @@ $this->headScript()->appendFile( '/js/site/propertyPage.js',   'text/javascript'
 		//alex click button add to bookmark
 		additionParameter.errorHandler = addToBookmarkError;
 		var data = 'data=1';
-		addToBookmarkClicked('http://realestate.dev/property/addtobookmarkajax',data, additionParameter);
+		addToBookmarkClicked('/property/add-to-favorite-ajax',data, additionParameter);
         });
     
         $('.share')
@@ -402,7 +402,7 @@ $this->headScript()->appendFile( '/js/site/propertyPage.js',   'text/javascript'
 		//alex click button share 
 		additionParameter.errorHandler = shareError;
 		var data = 'data=1';
-		shareClicked('http://realestate.dev/property/addtoshareajax',data, additionParameter);
+		shareClicked('/property/share-ajax', data, additionParameter);
         });
     
         {$js}

@@ -71,71 +71,65 @@ class PropertyController extends Zend_Controller_Action
      * when we ckick button add to bookmark we call this method using ajax
      * @return 
      */
-    public function addtobookmarkajaxAction()
-    {
-	$returnData = new stdClass();
-	//if it is ajax
-	if ($this->getRequest()->isXmlHttpRequest())
-	{	   
-	    //if it is post request 
-	    if ($this->getRequest()->isPost()) 
-	    {
-		//here i need to know user id and property id
-		$auth = Zend_Auth::getInstance();
-		$userId = $auth->getIdentity();
-		//if we donot have userid it means we donot logined
-		if(empty($userId))
-		{
-		    $returnData->redirectUrl = $this->_helper->url('' , 'login');
-		    $jsonStr = $this->_helper->json($returnData);
-		    echo $jsonStr;
-		    die;
-		}//endif
-		//get property id
+    public function addToFavoriteAjaxAction() {
+        $returnData = new stdClass();
+        //if it is ajax
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            //if it is post request 
+            if ($this->getRequest()->isPost()) {
+                //here i need to know user id and property id
+                $auth = Zend_Auth::getInstance();
+                $userId = $auth->getIdentity();
+                //if we donot have userid it means we donot logined
+                if (empty($userId)) {
+                    $returnData->redirectUrl = $this->_helper->url('', 'login');
+                    $jsonStr = $this->_helper->json($returnData);
+                    echo $jsonStr;
+                    die;
+                }//endif
+                //get property id
 
-		$propertyId = '';
-		echo "<pre>";
-		print_r($propertyId);
-		echo "</pre>";
-		die;
-	    }
-	    else
-	    {
-		// it is not post request
-		$this->_helper->redirector('index', 'index');
-		die;
-	    }//endif
-	}
-	else 
-	{
-	    // ... Do normal controller logic here (To catch non ajax calls to the script)
-	    $this->_helper->redirector('index', 'index');
-	}//endif
+                $propertyId = '';
+                echo "<pre>";
+                print_r($propertyId);
+                echo "</pre>";
+                die;
+            } else {
+                // it is not post request
+                $this->_helper->redirector('index', 'index');
+                die;
+            }//endif
+        } else {
+            // ... Do normal controller logic here (To catch non ajax calls to the script)
+            $this->_helper->redirector('index', 'index');
+        }//endif
+    }
 
-    }//endfunc
+//endfunc
      /**
      * AJAX
      * this method for adding information to db table favorite
      * 
      */
-    public function addtoshareajaxAction()
+    public function shareAjaxAction() 
     {
-	echo "<pre>";
-	print_r(2);
-	echo "</pre>";
-	die;
+        echo "<pre>";
+        print_r(2);
+        echo "</pre>";
+        die;
     }
-       /**
+
+    /**
      * AJAX
      * this method for adding information to db table favorite
      * 
      */
-    public function addtoapplyajaxAction()
+    public function applyPropertyAjaxAction()
     {
-	echo "<pre>";
-	print_r(3);
-	echo "</pre>";
-	die;
+        echo "<pre>";
+        print_r(3);
+        echo "</pre>";
+        die;
     }
   
 }
