@@ -357,6 +357,12 @@ Property:
         is_published:   
             type:       integer(1)
             default:    0
+        latitude: 
+            type: decimal(18)
+            scale: 10
+        longitude:
+            type: decimal(18)
+            scale: 10          
     relations:
         Owner:
             onDelete: cascade
@@ -371,7 +377,6 @@ Property:
                 name: created_at
             updated:
                 name: updated_at
-        Geographical:
 
 Region:
     columns:

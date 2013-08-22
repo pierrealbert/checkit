@@ -1,11 +1,18 @@
 <?php
 
-class User_SearchController extends Zend_Controller_Action
+class SearchController extends Zend_Controller_Action
 {
+    /**
+     *
+     * @var type Zend_Session_Namespace
+     */
+    protected $_searchConditions = array();
+    
     public function init()
     {
         $this->view->jQuery()->addJavascriptFile('/js/search.js');
         
+        $this->_searchConditions = new Zend_Session_Namespace('search');
     }
 
     public function indexAction()
@@ -13,7 +20,7 @@ class User_SearchController extends Zend_Controller_Action
         // js function initSearchStandard will be called in form
         
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
-        $form = new User_Form_SearchStandard();
+        $form = new Form_SearchStandard();
         
         if ($this->getRequest()->isPost()
             && $form->isValid($this->getRequest()->getPost())
@@ -55,25 +62,9 @@ class User_SearchController extends Zend_Controller_Action
                 }
             }
 
-            // DEBUG {{{ 
-            echo '<H2>Criteria</H2>';
-            echo '<pre>';
-            print_r($values);
-            echo '</pre>';
+            $this->_searchConditions->data = $values;
             
-            $foundProperties = Model_PropertyTable::getInstance()->search($values);
-            echo "<H2>Results ({$foundProperties->count()})</H2>";
-            foreach ($foundProperties as $property) {
-                echo "<strong>address: " . $property->address . "</strong><br/>\n";
-                echo "type: " . $property->property_type . "<br/>\n";
-                echo "id: " . $property->id . "<br/>\n";
-                echo "availability: " . $property->availability . "<br/>\n";
-                echo "<pre>";
-                print_r($property->toArray());
-                echo "</pre>";
-            }
-            die();
-            // }}} DEBUG 
+            $this->_helper->redirector->gotoSimple('results', 'search', 'default');  
         }
 
         $this->view->form = $form;
@@ -96,15 +87,25 @@ class User_SearchController extends Zend_Controller_Action
         if ($this->getRequest()->isPost() and $this->getRequest()->getParam('regions_selected')) {
             $regionsSelectedIds = explode(',', $this->getRequest()->getParam('regions_selected'));
             // TODO: put here appropriate search when standart search tab will be implemented
-            $dquery = Model_PropertyTable::getInstance()->createQuery();
-            $foundProperties = $dquery->select()
-                                      ->whereIn('region_block_id', $regionsSelectedIds)
-                                      ->execute();
+            
+            $this->_searchConditions->data = array(
+                'regions_selected' => $regionsSelectedIds
+            );
+            
+            $this->_helper->redirector->gotoSimple('results', 'search', 'default');            
         }
 
         $this->view->foundProperties = $foundProperties;
         $this->view->regionsArray = $regionsArray;
         $this->view->regionsJson = $regionsJson;
         $this->view->regionsSelectedIds = $regionsSelectedIds;
+    }
+    
+    public function resultsAction()
+    {           
+        $foundProperties = Model_PropertyTable::getInstance()
+                ->search($this->_searchConditions->data);
+
+        $this->view->foundProperties = $foundProperties;
     }
 }

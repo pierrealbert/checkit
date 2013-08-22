@@ -1,6 +1,6 @@
 <?php
 
-class User_Form_SearchStandard extends Ext_Form
+class Form_SearchStandard extends Ext_Form
 {
     protected function _addJS() 
     {

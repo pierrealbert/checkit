@@ -25,6 +25,11 @@ class Model_Property extends Model_Base_Property
     const STATE_HUNTED_PROFILE = 4;
     const STATE_VISIT_DATES    = 5;
     const STATE_PUBLISH_AD     = 6;
+    
+    public function getPrice()
+    {
+        return ($this->amount_of_rent_excluding_charges + $this->amount_of_charges);
+    }
 
     static public function getTypes()
     {
@@ -116,7 +121,7 @@ class Model_Property extends Model_Base_Property
         $geo = new Ext_Geo();
         $blockRegions = Model_RegionBlockTable::getInstance()->findAll();
         foreach ($blockRegions as $blockRegion) {
-            if ($geo->isPointInPolygon(array(48.829967,2.358284), $blockRegion->path)) {
+            if ($geo->isPointInPolygon(array($this->latitude, $this->longitude), $blockRegion->path)) {
                 $this->region_block_id = $blockRegion;
             }
         }

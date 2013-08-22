@@ -32,6 +32,12 @@ class Model_PropertyTable extends Ext_Doctrine_Table
         
         $dqlQuery = $this->createQuery($propertyTN);
         
+        // quick fix
+        if (isset($params['regions_selected'])) {
+            $dqlQuery->whereIn('region_block_id', $params['regions_selected']);
+            unset($params['regions_selected']);
+        }
+        
         foreach ($params as $fieldName => $fieldValue) {
             $whereStr = '';
             $value = '';
