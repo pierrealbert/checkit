@@ -1,8 +1,4 @@
-<?php 
-// add script file for ajax when we click to different buttons
-$this->headScript()->appendFile( '/js/site/propertyPage.js',   'text/javascript',    $attrs = array() );
 
-?>
 <div>
     <h1>Ad Details</h1>
     <a href="<?= $this->url(array('controller' => 'test', 'action' => 'ad-list'), null, true) ?>" class="back_to_resaults"><?= $this->translate('back_to_resaults') ?></a>
@@ -74,7 +70,7 @@ $this->headScript()->appendFile( '/js/site/propertyPage.js',   'text/javascript'
                 <ul  id="menu">
                     <li>
                         <a href="#">Report an issue</a>
-                        <ul>
+                        <ul class="create_issue">
                             <li><a class="menu_element" href="#">Message 1</a></li>
                             <li><a class="menu_element" href="#">Message 2</a></li>
                             <li><a class="menu_element" href="#">Spam</a></li>
@@ -84,12 +80,16 @@ $this->headScript()->appendFile( '/js/site/propertyPage.js',   'text/javascript'
             </td>
         </tr>
     </table>
+    
       
-    <div id="issue_pop_window" style="display:none;position:fixed;top:20px;left:20px; width:400px;height:220px; border:1px solid red;background-color: grey">
-	
-	<?php echo $this->formIssue;?>
-	<div id="close_issue_pop_window">close</div>
-    </div>
+<div id="dialog-form" title="">
+  <p class="validateTips">All form fields are required.</p>
+   <?php echo $this->formIssue;?>
+
+</div>
+
+
+
     <h2>Description</h2>
 
     <table width="100%">
@@ -354,6 +354,7 @@ $this->headScript()->appendFile( '/js/site/propertyPage.js',   'text/javascript'
         <? endforeach; ?>
     </table>  
 </div>
+
 <?php
     $js = "var SelectedDates = {};\n";
     //this is for ajax i need to know current id
@@ -370,9 +371,9 @@ $this->headScript()->appendFile( '/js/site/propertyPage.js',   'text/javascript'
 	var additionParameter = new Object();
 	
 	//when we click to send latter to admin
-	$('#menu').on( 'click', 'a.menu_element', function(){	  
-	   propertyPage.showPopWindow(this);
-	}); 
+//	$('#menu').on( 'click', 'a.menu_element', function(){	  
+//	   propertyPage.showPopWindow(this);
+//	}); 
 
 
         function DrawCircle(rad) {
@@ -530,6 +531,9 @@ $this->headScript()->appendFile( '/js/site/propertyPage.js',   'text/javascript'
         ->addJavascriptFile("http://maps.googleapis.com/maps/api/js?key={$this->google_api_key}&sensor=false")
         ->addJavascriptFile("/js/lodash.js")
         ->addJavascriptFile("/js/bean.min.js")
-        ->addJavascriptFile("/js/revolver.min.js");
+        ->addJavascriptFile("/js/revolver.min.js")
+	->addJavascriptFile("/js/site/propertyPage.js")
+	->addJavascriptFile("/js/site/modalIssueWindow.js");
 
 ?>
+

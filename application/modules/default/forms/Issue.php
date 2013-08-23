@@ -5,8 +5,8 @@ class Form_Issue extends Zend_Form
 	public function init(){
 	    
 	    $this->addElement('textarea', 'issueText', array(
-		'cols'	     => 50,
-		'rows'	     => 6,
+		'cols'	     => 40,
+		'rows'	     => 4,
 		'label'      => 'text',
 		'required'   => true,
 		'filters'    => array('StringTrim', 'StripTags'),
@@ -14,10 +14,10 @@ class Form_Issue extends Zend_Form
 	    ));
 	
 
-	   $this->addElement('submit', 'submit', array(
-		'label'    => 'send',
-	    ));
- 
+//	   $this->addElement('submit', 'submit', array(
+//		'label'    => 'send',
+//	    ));
+// 
 	}
 }
 

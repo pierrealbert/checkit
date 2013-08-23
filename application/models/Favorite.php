@@ -12,6 +12,6 @@
  */
 class Model_Favorite extends Model_Base_Favorite
 {
-
+ 
 
 }

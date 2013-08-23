@@ -1,9 +1,9 @@
 
 var propertyPage = {
 
-    
+    //when you click to some message theme for sending to admin in future
     showPopWindow : function (elem){
-     
+        var self = this;
         //inset to input with type = hidden value - nameof issue
         var titleIssue = $(elem).text();
         //show form 
@@ -18,19 +18,20 @@ var propertyPage = {
           var response =  propertyPage.submitPopWindow(form);
           if(response.error.length) {
               //if we have an error
-               propertyPage.alertError(response.error); 
+               self.alertError(response.error); 
           } else {
               // if everything is okay
               //show message and  hide foem 
-              propertyPage.alertSuccessMsg(response.result)
+              self.alertSuccessMsg(response.result)
               divWithForm.hide();
           }
           return false;
         });
         
     },
-            
+    //when you click send message to admin    
     submitPopWindow : function (form){
+        var self = this;
         //create ajax 
         var url = form.attr('action');       
         var additionParameter = new Object();
@@ -38,14 +39,17 @@ var propertyPage = {
         var additionParameter = getAjaxData(url, data, additionParameter);      
         return additionParameter;
     },
+    //show error message to screen
     alertError : function (msg)
     {
-        alert(msg);
+        if($.type( msg ) === "string") {
+              alert(msg);   
+        }
     },
+    //show successful message to screen
     alertSuccessMsg : function (msg)
     {
-        if($.type( msg ) === "string")
-        {
+        if($.type( msg ) === "string") {
               alert(msg);   
         }
        
@@ -70,27 +74,15 @@ function addToBookmarkClicked(url, data, additionParameter)
 {  
     var responseDataJson;
     responseDataJson = getAjaxData(url, data, additionParameter);
-    if(responseDataJson.error) {
-           alert(responseDataJson.error.length); 
+    if(responseDataJson.error.length) {
+          //exist error message
+          propertyPage.alertError(responseDataJson.error);
     }
+    //show message if everything is okay
+    propertyPage.alertSuccessMsg(responseDataJson.result);    
     return responseDataJson;
 }
 
-/**
- * this is function calls if we click button apply 
- * @param {type} url - string
- * @param {type} data  - string
- * @param {type} additionParameter - object
- * @returns {undefined|share.responseData}
- */
-//function applyClicked(url, data, additionParameter)
-//{
-//    var responseDataJson;
-//    var responseDataObj;
-//    responseDataJson = getAjaxData(url, data, additionParameter);
-//    responseDataObj = $.parseJSON(responseDataJson);
-//    return responseDataObj;
-//}
 //////////////////////////////////////
 /////  ERROR AJAX HANDLERING    //////
 /////////////////////////////////////
@@ -105,17 +97,7 @@ function addToBookmarkClicked(url, data, additionParameter)
 function addToBookmarkError( x, status, error)
 {
      console.log('ajax error when we click buttons add to bookmark');
-    // console.log(status);
-     //console.log($.parseJSON( error.responseText ));
 }
-
-//description is the same like for addToBookmarkError
-//function applyError( x, status, error)
-//{
-//     console.log('ajax error when we click share ');
-//    // console.log(status);
-//    // console.log(error);
-//}
 
 
 

@@ -162,3 +162,12 @@ Model_User:
     country: RU
     is_active: 1
     is_confirmed: 1
+  User_24:
+    username: test
+    email: test@test.ru
+    first_name: Test
+    last_name: Test
+    password: test
+    country: RU
+    is_active: 1
+    is_confirmed: 1

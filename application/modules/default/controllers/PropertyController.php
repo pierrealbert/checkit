@@ -3,10 +3,10 @@
 class PropertyController extends Zend_Controller_Action
 {
     //for testing
-public function testAction()
-{
-    
-}
+//public function testAction()
+//{
+//
+//}
     
     public function detailAction()
     {
@@ -111,15 +111,22 @@ public function testAction()
                     echo $jsonStr;
                     die;
                 }
-		//here we need to add property_id and user_id to favorite table
-		$favoriteModel = new Model_Favorite();
-//		$favoriteModel->user_id = $userId;
-//		$favoriteModel->property_id = $propertyId;
-		$favoriteModel->user_id = $userId;
-		$favoriteModel->property_id = $propertyId;
-		$favoriteModel->save();	
+		// i need to know exist this data into db or doesnot 		
+		$alreadyExist =  Doctrine_Core::getTable('Model_Favorite')->find(array('user_id'=>$userId, 'property_id'=>$propertyId));
+	 
+		if($alreadyExist) {
+		    //delete form db
+		     $alreadyExist->delete();	
+		     $returnData->result = 'deleted from db';//can be true or false
+		} else {
+		    //insert into db
+		    $favoriteModel = new Model_Favorite();
+		    $favoriteModel->user_id = $userId;
+		    $favoriteModel->property_id = $propertyId;
+		    $favoriteModel->save();	
+		    $returnData->result = 'inserted into db'; //can be true or false
+		}
 		
-		$returnData->result = true; //can be string
 		$returnData->error = ''; 		
 		
 		$jsonStr = $this->_helper->json($returnData);
