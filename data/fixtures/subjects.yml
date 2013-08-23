@@ -1,0 +1,8 @@
+Model_Subjects:
+  Subject_1:
+    subject_name: message 1
+  Subject_2:
+    subject_name: message 2
+  Subject_3:
+    subject_name: spam
+
