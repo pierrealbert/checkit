@@ -200,9 +200,9 @@ class PropertyController extends Zend_Controller_Action
 						     ->andWhere('p.subject_id=?',$subject_id)
 						    ->execute();
 	
-		  //  if( ($alreadyExistObj) ) {
-		      $arrayWithExistData = $alreadyExistObj->toArray();
-		      if( ! empty($arrayWithExistData) ) {
+	
+		    $arrayWithExistData = $alreadyExistObj->toArray();
+		    if( ! empty($arrayWithExistData) ) {
 			//update
 			$tableInstanse->createQuery('p')
 						    ->update('Model_PropertyIssue')
@@ -232,6 +232,7 @@ class PropertyController extends Zend_Controller_Action
 		    die;
 		    
 	     } else {
+		 //if we here it means the user sent not valid form 
 		    $returnData->result = false; 
 		    $returnData->error = 'error not valid form'; 
 		    $jsonStr = $this->_helper->json($returnData);
