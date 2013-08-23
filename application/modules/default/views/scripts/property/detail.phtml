@@ -69,12 +69,18 @@
             <td width="200px">
                 <ul  id="menu">
                     <li>
-                        <a href="#">Report an issue</a>
-                        <ul class="create_issue">
-                            <li><a class="menu_element" href="#">Message 1</a></li>
-                            <li><a class="menu_element" href="#">Message 2</a></li>
-                            <li><a class="menu_element" href="#">Spam</a></li>
-                        </ul>
+			 <?php if($this->subjects) :?>
+			    <a href="#">Report an issue</a>
+			    <ul class="create_issue">
+				<?php foreach ($this->subjects as $bubject) :?>
+				    <li>
+					<a class="menu_element" data-number="<?php echo $bubject->id;?>" href="#"><?php echo $bubject->subject_name;?></a>
+				    </li>
+				<?php endforeach;?>
+    <!--                            <li><a class="menu_element" href="#">Message 2</a></li>
+				<li><a class="menu_element" href="#">Spam</a></li>-->
+			    </ul>
+			<?php endif;?>
                     </li>
                 </ul>
             </td>
@@ -358,7 +364,7 @@
 <?php
     $js = "var SelectedDates = {};\n";
     //this is for ajax i need to know current id
-    $js .="var currentpropertyId = " . $this->currentPropertyId . ";"; 
+    $js .="window.currentpropertyId = " . $this->currentPropertyId . ";"; 
 
     foreach($this->visits as $visit) {
         $date = $this->jsDate($visit->availability);
@@ -369,7 +375,7 @@
 	// this is var for all buttons when we use ajax
 	// we can add some parammeters there and use it in file js/site/propertyPage.js
 	var additionParameter = new Object();
-	
+
 	//when we click to send latter to admin
 //	$('#menu').on( 'click', 'a.menu_element', function(){	  
 //	   propertyPage.showPopWindow(this);

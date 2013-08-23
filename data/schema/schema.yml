@@ -453,19 +453,32 @@ Favorite:
         Property:
             onDelete: cascade
             class: Property
-            local: property_id          
-Property_issue:
+            local: property_id  
+Subjects:
     columns:      
         id:
             type:       integer(4)
             primary:    true
             autoincrement: true
-        property_id:    integer(4)
-        user_id:        integer(4)
-        subject:        string(255)
+        subject_name:    string(50)
+PropertyIssue:
+    columns:      
+        id:
+            type:       integer(4)
+            primary:    true
+            autoincrement: true
+        property_id:    
+            type:        integer(4)
+            primary:    true         
+        user_id:        
+            type:       integer(4)
+            primary:    true 
+        subject_id:     
+            type:       integer(4)
+            primary:    true 
         message:        string(255)
-        created_at:     date 
-        updated_at:     date 
+        created_at:     datetime 
+        updated_at:     datetime 
     relations:
         User:
             onDelete: cascade
@@ -475,5 +488,9 @@ Property_issue:
             onDelete: cascade
             class: Property
             local: property_id
+        Subjects:
+            onDelete: cascade
+            class: Subjects
+            local: Subject_id
             
             

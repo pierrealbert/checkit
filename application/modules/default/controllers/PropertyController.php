@@ -3,11 +3,22 @@
 class PropertyController extends Zend_Controller_Action
 {
     //for testing
-//public function testAction()
-//{
-//
-//}
+ public  function testAction()
+{
+ 	    $alreadyExistArr =   Doctrine::getTable('Model_PropertyIssue')->createQuery('p')
+						    ->select('p.user_id')
+						    ->where('p.user_id=?',1)
+						     ->where('p.property_id=?',1)
+						     ->where('p.subject_id=?',1)
+						    ->execute();
+	    echo "<pre>";
+	    print_r($alreadyExistArr);
+	    echo "</pre>";
+	    die;
+	    
+}
     
+
     public function detailAction()
     {
 	$currentPropertyId = $this->_getParam('item');
@@ -23,6 +34,9 @@ class PropertyController extends Zend_Controller_Action
 
             $this->_helper->redirector('index', 'index');
         }
+	
+	//get all subjects from db
+	$subjects = Doctrine::getTable('Model_Subjects')->findAll();
 	//form for sending issue to admin
 	$fromIssue = new Form_Issue();
 	$fromIssue->setAction('/property/set-issue')
@@ -31,6 +45,7 @@ class PropertyController extends Zend_Controller_Action
 	$this->view->formIssue        = $fromIssue;
 	$this->view->currentPropertyId= $currentPropertyId;
         $this->view->property         = $property;
+	$this->view->subjects	      = $subjects;
         $this->view->property_type    = Model_Property::getTypes();
         $this->view->number_of_rooms1 = Model_Property::getNumberOfRooms1Info();
         $this->view->photos           = $property->getPhotos();
@@ -159,29 +174,59 @@ class PropertyController extends Zend_Controller_Action
 	  
 	 if ($this->getRequest()->isPost()) {
 	     if ($fromIssue->isValid($this->getRequest()->getPost())) {
+
 		     //here i need to know user id and property id
 		    $auth = Zend_Auth::getInstance();
 		    $userId = $auth->getIdentity();
+		           //get property id
+		    $propertyIdPost = (int) $this->_request->getPost('property_id');
+		    $subject_id = (int) $this->_request->getPost('subject_id');
+		    $issueText = $this->_request->getPost('issueText');
 		    //if we donot have userid it means we donot logined
-		    if (empty($userId)) {
+		    if ( empty($userId) || empty($propertyIdPost)  || empty($subject_id) || empty($issueText)) {
 			$returnData->redirectUrl = $this->_helper->url('', 'login');
 			$jsonStr = $this->_helper->json($returnData);
 			echo $jsonStr;
 			die;
 		    }
-		    //get data from post here this field is not empty
-		    $issueText = $this->_request->getPost('issueText');
-		  
-		    //TODO insert this data to db
-		    
-		    $isInserted = true;
-		    if($isInserted) {
-			$returnData->result = true; 
-			$returnData->error = ''; 
-		    }else {
-			$returnData->result = false; 
-			$returnData->error = 'error inserting  data to db table'; 
+	
+	
+		    //check furst exist this data into db if exist we need to update if doesnot we need to insert
+		    $tableInstanse = Doctrine::getTable('Model_PropertyIssue');
+		    $alreadyExistObj =   $tableInstanse->createQuery('p')
+						    ->select('p.user_id, p.property_id, p.subject_id, p.message, p.updated_at')
+						    ->where('p.user_id=?',$userId)
+						     ->andWhere('p.property_id=?', $propertyIdPost)
+						     ->andWhere('p.subject_id=?',$subject_id)
+						    ->execute();
+	
+		  //  if( ($alreadyExistObj) ) {
+		      $arrayWithExistData = $alreadyExistObj->toArray();
+		      if( ! empty($arrayWithExistData) ) {
+			//update
+			$tableInstanse->createQuery('p')
+						    ->update('Model_PropertyIssue')
+						    ->set('message', '?', $issueText)
+						    ->set('updated_at', '?', date( 'Y-m-d H:i:s' ))				
+						    ->where('user_id=?',$userId)
+						    ->andWhere('property_id=?',$propertyIdPost)
+						    ->andWhere('subject_id=?',$subject_id)
+						    ->execute();
+
+		    } else {
+			//insert
+			$propertyIssueModel = new Model_PropertyIssue();
+			$propertyIssueModel->user_id = $userId;
+			$propertyIssueModel->property_id = $propertyIdPost;
+			$propertyIssueModel->subject_id = $subject_id;
+			$propertyIssueModel->message = $issueText;
+			$propertyIssueModel->created_at = date( 'Y-m-d H:i:s' );
+			$propertyIssueModel->save();
+		
 		    }
+		    //return result to ajax
+		    $returnData->result = 'inserted successfully'; 
+		    $returnData->error = ''; 		  
 		    $jsonStr = $this->_helper->json($returnData);
 		    echo $jsonStr;
 		    die;

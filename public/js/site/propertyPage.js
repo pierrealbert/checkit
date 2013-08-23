@@ -1,41 +1,14 @@
 
 var propertyPage = {
 
-    //when you click to some message theme for sending to admin in future
-    showPopWindow : function (elem){
-        var self = this;
-        //inset to input with type = hidden value - nameof issue
-        var titleIssue = $(elem).text();
-        //show form 
-        var divWithForm =   $('#issue_pop_window');
-        divWithForm.show();
-        //set value to that input with type = gidden
-        $('input[name=issueName]').val(titleIssue);
-        //add ajax to this form 
-        var form = $('#issue_pop_window_form');
-        form.submit(function() {
-          
-          var response =  propertyPage.submitPopWindow(form);
-          if(response.error.length) {
-              //if we have an error
-               self.alertError(response.error); 
-          } else {
-              // if everything is okay
-              //show message and  hide foem 
-              self.alertSuccessMsg(response.result)
-              divWithForm.hide();
-          }
-          return false;
-        });
-        
-    },
+   
     //when you click send message to admin    
     submitPopWindow : function (form){
         var self = this;
         //create ajax 
         var url = form.attr('action');       
         var additionParameter = new Object();
-        var data = 'issueText='+$('textarea[name=issueText]').val();;
+        var data = form.serialize();
         var additionParameter = getAjaxData(url, data, additionParameter);      
         return additionParameter;
     },
