@@ -2,22 +2,6 @@
 
 class PropertyController extends Zend_Controller_Action
 {
-    //for testing
- public  function testAction()
-{
- 	    $alreadyExistArr =   Doctrine::getTable('Model_PropertyIssue')->createQuery('p')
-						    ->select('p.user_id')
-						    ->where('p.user_id=?',1)
-						     ->where('p.property_id=?',1)
-						     ->where('p.subject_id=?',1)
-						    ->execute();
-	    echo "<pre>";
-	    print_r($alreadyExistArr);
-	    echo "</pre>";
-	    die;
-	    
-}
-    
 
     public function detailAction()
     {
