@@ -1,11 +1,22 @@
+<?php if($this->isInbookmark) {
+    $showNowButton = 'Remove from bookmark';
+    $showWhenClick = 'Add to bookmark';
+} else {
+    $showNowButton = 'Add to bookmark';
+    $showWhenClick = 'Remove from bookmark';
+}	
+?>
+	
 <div id="formessage" style="color: red">
     
 </div>
 <div>
     <h1>Ad Details</h1>
     <a href="<?= $this->url(array('controller' => 'test', 'action' => 'ad-list'), null, true) ?>" class="back_to_resaults"><?= $this->translate('back_to_resaults') ?></a>
-    
-    <button class="add_to_bookmark">Add to bookmark</button>
+ 
+    <button class="add_to_bookmark">
+	<?php echo $showNowButton;?>
+    </button>
     
     <!-- AddToAny BEGIN -->
     <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
@@ -249,7 +260,9 @@
                 <span id="slides_info"></span>
                 <button id="next_photo1">&gt;</button>
                 <hr />
-                <button class="add_to_bookmark">Add to bookmark</button><br />
+                <button class="add_to_bookmark">
+		    <?php echo $showNowButton;?>
+		</button><br />
                 <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
                     <span class="ui-button-text">Share</span>
                 </a>
@@ -290,7 +303,9 @@
                     <?php endforeach; ?>
                 </div>
                 <hr />
-                <button class="add_to_bookmark">Add to bookmark</button><br />
+                <button class="add_to_bookmark">
+		     <?php echo $showNowButton;?>
+		</button><br />
                 <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
                     <span class="ui-button-text">Share</span>
                 </a>
@@ -312,7 +327,9 @@
             <td width="33%">Description</td>
             <td width="33%">Center</td>
             <td width="33%">
-                <button class="add_to_bookmark">Add to bookmark</button><br />
+                <button class="add_to_bookmark">
+		    <?php echo $showNowButton;?>
+		</button><br />
                 <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
                     <span class="ui-button-text">Share</span>
                 </a>
@@ -332,7 +349,9 @@
         <tr>
             <td>Description</td>
             <td width="33%">
-                <button class="add_to_bookmark">Add to bookmark</button><br />
+                <button class="add_to_bookmark">
+		    <?php echo $showNowButton;?>
+		</button><br />
                 <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
                     <span class="ui-button-text">Share</span>
                 </a>
@@ -367,8 +386,8 @@
     //this is translated data fro js message
     $errorMgg1 = $this->translate('not_valid_text');
  
-    $js  = "";   
-    $js  .= "window.errorMsg1 = '".$errorMgg1."';";  
+    $js  = "window.renameBookmarkBubbon = '" . $showWhenClick . "';";   
+    $js .= "window.errorMsg1 = '" .$errorMgg1. "';";  
     $js .= "var SelectedDates = {};\n";
     //this is for ajax i need to know current id
     $js .="window.currentpropertyId = " . $this->currentPropertyId . ";"; 
@@ -445,7 +464,6 @@
 
         $('.add_to_bookmark')
             .button()
-	    .data('new_name', 'Remove from bookmark')
             .click(function(event) {
                 event.preventDefault();
 		//alex click button add to bookmark

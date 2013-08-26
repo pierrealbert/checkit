@@ -33,7 +33,14 @@ class PropertyController extends Zend_Controller_Action
 	$fromIssue->setAction('/property/set-issue')
 		     ->setMethod('post')
 		     ->setAttrib('id', "issue_pop_window_form");
+	//we need to know this property exist in favorte table or doesnot and if it is exist we need to create delete fprm bookmark button in order to add to bookmark
+	$alreadyExist = (bool) Doctrine_Core::getTable('Model_Favorite')
+				->find(array(
+				    'user_id' => Zend_Auth::getInstance()->getIdentity(),
+				    'property_id' => $currentPropertyId));
+
 	$this->view->formIssue        = $fromIssue;
+	$this->view->isInbookmark     = $alreadyExist;
 	$this->view->currentPropertyId= $currentPropertyId;
         $this->view->property         = $property;
 	$this->view->subjects	      = $subjects;

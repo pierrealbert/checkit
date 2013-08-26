@@ -25,12 +25,14 @@ var propertyPage = {
     {
         var self = this;
         if($.type( msg ) === "string") {
+            console.log(window.renameBookmarkBubbon);
             var buttonObj = $(button);
-            var oldName = buttonObj.find('span').text();
-            var newName = buttonObj.data('new_name');
-            buttonObj.data('new_name', oldName );
-            buttonObj.find('span').text(newName);
-            buttonObj.removeClass('ui-state-focus');
+            var currentName = buttonObj.find('span').text();
+            var newName = window.renameBookmarkBubbon;       
+            $('.add_to_bookmark').find('span').text(newName).removeClass('ui-state-focus');
+            window.renameBookmarkBubbon = currentName;
+  
+
  
         }
        
