@@ -166,58 +166,44 @@ class PropertyController extends Zend_Controller_Action
                 $auth = Zend_Auth::getInstance();
                 $userId = $auth->getIdentity();
                 //get property id
-                $propertyIdPost = (int) $this->_request->getPost('property_id');
-                $subjectId = (int) $this->_request->getPost('subject_id');
-                $issueText = $this->_request->getPost('issueText');
-		if (empty($subjectId) || empty($propertyIdPost) || empty($issueText)) {
-		    $returnData->result = ''; 
-		    $returnData->error = $this->translator->translate('not valid parameters'); 
-		    echo Zend_Json::encode($returnData);	 
-		    $this->_helper->viewRenderer->setNoRender(true);
-		}
+                $propertyId = (int) $this->_request->getPost('property_id');
+                $subjectId  = (int) $this->_request->getPost('subject_id');
+                $issueText  = $this->_request->getPost('issueText');
+
                 //check exist property_id into db or doesnot 
-		$properyData =  Doctrine::getTable('Model_Property')->find($propertyIdPost);
-		$subjectData = Doctrine::getTable('Model_Subject')->find($subjectId);
-	
-		if( empty($properyData) || empty($subjectData) ) {
-		    //not valid property id or something else
-		    $returnData->result = ''; 
-		    $returnData->error = $this->translator->translate('not valid parameters'); 
-		    echo Zend_Json::encode($returnData);	 
-		    $this->_helper->viewRenderer->setNoRender(true);
-		}
-	
-		//property is exist into db and subject 
-		//insert into db all data 
-		$propertyIssueModel = new Model_PropertyIssueSubject();
-		$data = new stdClass();
-		if($userId) {
-		    $data->user_id = $userId;
-		}		
-		$data->property_id = $propertyIdPost;
-		$data->subject_id = $subjectId;
-		$data->message = $issueText;
-		$data->created_at = date( 'Y-m-d H:i:s' );
-		$data->updated_at = date( 'Y-m-d H:i:s' );
-		$propertyIssueModel->insert($data);
-	
-                //return result to ajax
-               // $returnData->result = 'issue sent successfully';
-		$returnData->result =   $this->translator->translate('issue sent successfully');
-                $returnData->error = '';
-		echo Zend_Json::encode($returnData);	 
-		$this->_helper->viewRenderer->setNoRender(true);
+                $properyData = Doctrine::getTable('Model_Property')->find($propertyId);
+                $subjectData = Doctrine::getTable('Model_Subject')->find($subjectId);
+
+                if (empty($properyData) || empty($subjectData) || !$issueText) {
+                    //not valid property id or something else
+                    $returnData->result = false;
+                    $returnData->error = $this->translator->translate('not valid parameters');    
+                }
+
+                //property is exist into db and subject 
+                //insert into db all data 
+                $propertyIssueModel = new Model_PropertyIssueSubject();
+                
+                if ($userId) {
+                    $propertyIssueModel->user_id = $userId;
+                }
+                $propertyIssueModel->property_id = $propertyId;
+                $propertyIssueModel->subject_id = $subjectId;
+                $propertyIssueModel->message = $issueText;
+                $propertyIssueModel->save();
+
+
+                $returnData->result = $this->translator->translate('issue sent successfully');
+                $returnData->error = '';                
             } else {
                 //if we here it means the user sent not valid form 
                 $returnData->result = false;
                 $returnData->error = $this->translator->translate('error not valid form');
-                echo Zend_Json::encode($returnData);	 
-		$this->_helper->viewRenderer->setNoRender(true);
-            }
-        } else {
-            // it is not post request
-            $this->_helper->redirector('index', 'index');
-        }
+            }                       
+        } 
+        
+        echo Zend_Json::encode($returnData);
+        $this->_helper->viewRenderer->setNoRender(true);         
     }
   
 }
