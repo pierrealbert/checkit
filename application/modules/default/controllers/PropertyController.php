@@ -162,59 +162,44 @@ class PropertyController extends Zend_Controller_Action
                 $propertyIdPost = (int) $this->_request->getPost('property_id');
                 $subjectId = (int) $this->_request->getPost('subject_id');
                 $issueText = $this->_request->getPost('issueText');
-                //if we donot have userid it means we donot logined
-                if (empty($userId) || empty($propertyIdPost) || empty($subjectId) || empty($issueText)) {
-                    $returnData->redirectUrl = $this->_helper->url('', 'login');
-                    $jsonStr = $this->_helper->json($returnData);
-                    echo $jsonStr;
-                    die;
-                }
-
-
-                //check furst exist this data into db if exist we need to update if doesnot we need to insert
-                $tableInstanse = Doctrine::getTable('Model_PropertyIssue');
-                $alreadyExistObj = $tableInstanse->createQuery('p')
-                        ->select('p.user_id, p.property_id, p.subject_id, p.message, p.updated_at')
-                        ->where('p.user_id=?', $userId)
-                        ->andWhere('p.property_id=?', $propertyIdPost)
-                        ->andWhere('p.subject_id=?', $subjectId)
-                        ->execute();
-
-
-                $arrayWithExistData = $alreadyExistObj->toArray();
-                if (!empty($arrayWithExistData)) {
-                    //update
-                    $tableInstanse->createQuery('p')
-                            ->update('Model_PropertyIssue')
-                            ->set('message', '?', $issueText)
-                            ->set('updated_at', '?', date('Y-m-d H:i:s'))
-                            ->where('user_id=?', $userId)
-                            ->andWhere('property_id=?', $propertyIdPost)
-                            ->andWhere('subject_id=?', $subjectId)
-                            ->execute();
-                } else {
-                    //insert
-                    $propertyIssueModel = new Model_PropertyIssue();
-                    $propertyIssueModel->user_id = $userId;
-                    $propertyIssueModel->property_id = $propertyIdPost;
-                    $propertyIssueModel->subject_id = $subjectId;
-                    $propertyIssueModel->message = $issueText;
-                    $propertyIssueModel->created_at = date('Y-m-d H:i:s');
-                    $propertyIssueModel->save();
-                }
+		if (empty($subjectId) || empty($propertyIdPost) || empty($issueText)) {
+		    $returnData->result = ''; 
+		    $returnData->error = 'not valid parameters'; 
+		    echo Zend_Json::encode($returnData);	 
+		    exit();
+		}
+                //check exist property_id into db or doesnot 
+		$properyData =  Doctrine::getTable('Model_Property')->find($propertyIdPost);
+		$subjectData = Doctrine::getTable('Model_Subject')->find($subjectId);
+	
+		if( empty($properyData) || empty($subjectData) ) {
+		    //not valid property id or something else
+		    $returnData->result = ''; 
+		    $returnData->error = 'not valid parameters'; 
+		    echo Zend_Json::encode($returnData);	 
+		    exit();
+		}
+		//property is exist into db and subject 
+		//insert into db all data 
+		$propertyIssueModel = new Model_PropertyIssueSubject();
+		$propertyIssueModel->user_id = $userId;
+		$propertyIssueModel->property_id = $propertyIdPost;
+		$propertyIssueModel->subject_id = $subject_id;
+		$propertyIssueModel->message = $issueText;
+		$propertyIssueModel->created_at = date( 'Y-m-d H:i:s' );
+		$propertyIssueModel->updated_at = date( 'Y-m-d H:i:s' );
+		$propertyIssueModel->save();
                 //return result to ajax
                 $returnData->result = 'inserted successfully';
                 $returnData->error = '';
-                $jsonStr = $this->_helper->json($returnData);
-                echo $jsonStr;
-                die;
+		echo Zend_Json::encode($returnData);	 
+		exit();
             } else {
                 //if we here it means the user sent not valid form 
                 $returnData->result = false;
                 $returnData->error = 'error not valid form';
-                $jsonStr = $this->_helper->json($returnData);
-                echo $jsonStr;
-                die;
+                echo Zend_Json::encode($returnData);	 
+		exit();
             }
         } else {
             // it is not post request

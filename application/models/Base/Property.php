@@ -66,7 +66,7 @@
  * @property Model_RegionBlock $RegionBlock
  * @property Doctrine_Collection $PropertyVisitDates
  * @property Doctrine_Collection $Favorite
- * @property Doctrine_Collection $PropertyIssue
+ * @property Doctrine_Collection $PropertyIssueSubject
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -343,7 +343,7 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'local' => 'id',
              'foreign' => 'property_id'));
 
-        $this->hasMany('Model_PropertyIssue as PropertyIssue', array(
+        $this->hasMany('Model_PropertyIssueSubject as PropertyIssueSubject', array(
              'local' => 'id',
              'foreign' => 'property_id'));
 

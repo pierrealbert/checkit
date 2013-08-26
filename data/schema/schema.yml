@@ -454,14 +454,14 @@ Favorite:
             onDelete: cascade
             class: Property
             local: property_id  
-Subjects:
+Subject:
     columns:      
         id:
             type:       integer(4)
             primary:    true
             autoincrement: true
         subject_name:    string(50)
-PropertyIssue:
+PropertyIssueSubject:
     columns:      
         id:
             type:       integer(4)
@@ -488,9 +488,9 @@ PropertyIssue:
             onDelete: cascade
             class: Property
             local: property_id
-        Subjects:
+        Subject:
             onDelete: cascade
-            class: Subjects
+            class: Subject
             local: Subject_id
             
             
