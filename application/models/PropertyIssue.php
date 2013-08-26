@@ -12,10 +12,5 @@
  */
 class Model_PropertyIssue extends Model_Base_PropertyIssue
 {
-      public function insert($data) {
-	foreach($data as $key=>$value) {
-	    $this->$key = $data->$key;
-	}
-	$this->save();
-    }
+  
 }
