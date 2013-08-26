@@ -3,6 +3,13 @@
 class PropertyController extends Zend_Controller_Action
 {
 
+    protected $translator;
+
+    public function init()
+    {
+        $this->translator = Zend_Registry::get('Zend_Translate');
+    }
+    
     public function detailAction()
     {
 	$currentPropertyId = $this->_getParam('item');
@@ -115,14 +122,14 @@ class PropertyController extends Zend_Controller_Action
                 if ($alreadyExist) {
                     //delete form db
                     $alreadyExist->delete();
-                    $returnData->result = 'deleted from db'; //can be true or false
+                    $returnData->result = $this->translator->translate('deleted from db'); //can be true or false
                 } else {
                     //insert into db
                     $favoriteModel = new Model_Favorite();
                     $favoriteModel->user_id = $userId;
                     $favoriteModel->property_id = $propertyId;
                     $favoriteModel->save();
-                    $returnData->result = 'inserted into db'; //can be true or false
+                    $returnData->result = $this->translator->translate('inserted into db'); //can be true or false
                 }
 
                 $returnData->error = '';
@@ -151,7 +158,7 @@ class PropertyController extends Zend_Controller_Action
         $fromIssue = new Form_Issue();
 
         $returnData = new stdClass();
-	
+
         if ($this->getRequest()->isPost()) {
             if ($fromIssue->isValid($this->getRequest()->getPost())) {
 
@@ -164,9 +171,9 @@ class PropertyController extends Zend_Controller_Action
                 $issueText = $this->_request->getPost('issueText');
 		if (empty($subjectId) || empty($propertyIdPost) || empty($issueText)) {
 		    $returnData->result = ''; 
-		    $returnData->error = 'not valid parameters'; 
+		    $returnData->error = $this->translator->translate('not valid parameters'); 
 		    echo Zend_Json::encode($returnData);	 
-		    exit();
+		    $this->_helper->viewRenderer->setNoRender(true);
 		}
                 //check exist property_id into db or doesnot 
 		$properyData =  Doctrine::getTable('Model_Property')->find($propertyIdPost);
@@ -175,9 +182,9 @@ class PropertyController extends Zend_Controller_Action
 		if( empty($properyData) || empty($subjectData) ) {
 		    //not valid property id or something else
 		    $returnData->result = ''; 
-		    $returnData->error = 'not valid parameters'; 
+		    $returnData->error = $this->translator->translate('not valid parameters'); 
 		    echo Zend_Json::encode($returnData);	 
-		    exit();
+		    $this->_helper->viewRenderer->setNoRender(true);
 		}
 	
 		//property is exist into db and subject 
@@ -195,16 +202,17 @@ class PropertyController extends Zend_Controller_Action
 		$propertyIssueModel->insert($data);
 	
                 //return result to ajax
-                $returnData->result = 'inserted successfully';
+               // $returnData->result = 'issue sent successfully';
+		$returnData->result =   $this->translator->translate('issue sent successfully');
                 $returnData->error = '';
 		echo Zend_Json::encode($returnData);	 
-		exit();
+		$this->_helper->viewRenderer->setNoRender(true);
             } else {
                 //if we here it means the user sent not valid form 
                 $returnData->result = false;
-                $returnData->error = 'error not valid form';
+                $returnData->error = $this->translator->translate('error not valid form');
                 echo Zend_Json::encode($returnData);	 
-		exit();
+		$this->_helper->viewRenderer->setNoRender(true);
             }
         } else {
             // it is not post request
