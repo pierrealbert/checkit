@@ -32,7 +32,6 @@
  * @property Doctrine_Collection $UserMessage
  * @property Doctrine_Collection $Property
  * @property Doctrine_Collection $Favorite
- * @property Doctrine_Collection $PropertyIssueSubject
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -166,10 +165,6 @@ abstract class Model_Base_User extends Ext_Doctrine_Record
              'foreign' => 'owner_id'));
 
         $this->hasMany('Model_Favorite as Favorite', array(
-             'local' => 'id',
-             'foreign' => 'user_id'));
-
-        $this->hasMany('Model_PropertyIssueSubject as PropertyIssueSubject', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 

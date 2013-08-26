@@ -12,7 +12,6 @@
  * @property string $message
  * @property datetime $created_at
  * @property datetime $updated_at
- * @property Model_User $User
  * @property Model_Property $Property
  * @property Model_Subject $Subject
  * 
@@ -62,11 +61,6 @@ abstract class Model_Base_PropertyIssueSubject extends Ext_Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Model_User as User', array(
-             'local' => 'user_id',
-             'foreign' => 'id',
-             'onDelete' => 'cascade'));
-
         $this->hasOne('Model_Property as Property', array(
              'local' => 'property_id',
              'foreign' => 'id',

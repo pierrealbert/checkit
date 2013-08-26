@@ -20,7 +20,7 @@ class PropertyController extends Zend_Controller_Action
         }
 	
 	//get all subjects from db
-	$subjects = Doctrine::getTable('Model_Subjects')->findAll();
+	$subjects = Doctrine::getTable('Model_Subject')->findAll();
 	//form for sending issue to admin
 	$fromIssue = new Form_Issue();
 	$fromIssue->setAction('/property/set-issue')
@@ -179,16 +179,21 @@ class PropertyController extends Zend_Controller_Action
 		    echo Zend_Json::encode($returnData);	 
 		    exit();
 		}
+	
 		//property is exist into db and subject 
 		//insert into db all data 
 		$propertyIssueModel = new Model_PropertyIssueSubject();
-		$propertyIssueModel->user_id = $userId;
-		$propertyIssueModel->property_id = $propertyIdPost;
-		$propertyIssueModel->subject_id = $subject_id;
-		$propertyIssueModel->message = $issueText;
-		$propertyIssueModel->created_at = date( 'Y-m-d H:i:s' );
-		$propertyIssueModel->updated_at = date( 'Y-m-d H:i:s' );
-		$propertyIssueModel->save();
+		$data = new stdClass();
+		if($userId) {
+		    $data->user_id = $userId;
+		}		
+		$data->property_id = $propertyIdPost;
+		$data->subject_id = $subjectId;
+		$data->message = $issueText;
+		$data->created_at = date( 'Y-m-d H:i:s' );
+		$data->updated_at = date( 'Y-m-d H:i:s' );
+		$propertyIssueModel->insert($data);
+	
                 //return result to ajax
                 $returnData->result = 'inserted successfully';
                 $returnData->error = '';
