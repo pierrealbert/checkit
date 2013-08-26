@@ -178,23 +178,24 @@ class PropertyController extends Zend_Controller_Action
                     //not valid property id or something else
                     $returnData->result = false;
                     $returnData->error = $this->translator->translate('not_valid_parameters');    
+                } else {
+
+                    //property is exist into db and subject 
+                    //insert into db all data 
+                    $propertyIssueModel = new Model_PropertyIssue();
+
+                    if ($userId) {
+                        $propertyIssueModel->user_id = $userId;
+                    }
+                    $propertyIssueModel->property_id = $propertyId;
+                    $propertyIssueModel->subject_id = $subjectId;
+                    $propertyIssueModel->message = $issueText;
+                    $propertyIssueModel->save();
+
+
+                    $returnData->result = $this->translator->translate('issue_sent_successfully');
+                    $returnData->error = false;  
                 }
-
-                //property is exist into db and subject 
-                //insert into db all data 
-                $propertyIssueModel = new Model_PropertyIssue();
-                
-                if ($userId) {
-                    $propertyIssueModel->user_id = $userId;
-                }
-                $propertyIssueModel->property_id = $propertyId;
-                $propertyIssueModel->subject_id = $subjectId;
-                $propertyIssueModel->message = $issueText;
-                $propertyIssueModel->save();
-
-
-                $returnData->result = $this->translator->translate('issue_sent_successfully');
-                $returnData->error = '';                
             } else {
                 //if we here it means the user sent not valid form 
                 $returnData->result = false;
