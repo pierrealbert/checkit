@@ -63,7 +63,9 @@ $(function() {
             } else {
                 // if everything is okay
                 $( this ).dialog( "close" );
-                //change button name
+                //show message from server
+                console.log(response.result);
+                $('#formessage').text(response.result);
             }
     
           }
