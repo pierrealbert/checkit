@@ -151,7 +151,7 @@ class PropertyController extends Zend_Controller_Action
         $fromIssue = new Form_Issue();
 
         $returnData = new stdClass();
-
+	
         if ($this->getRequest()->isPost()) {
             if ($fromIssue->isValid($this->getRequest()->getPost())) {
 

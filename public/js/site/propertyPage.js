@@ -9,8 +9,8 @@ var propertyPage = {
         var url = form.attr('action');       
         var additionParameter = new Object();
         var data = form.serialize();
-        var additionParameter = getAjaxData(url, data, additionParameter);      
-        return additionParameter;
+        var response = getAjaxData(url, data, additionParameter);      
+        return response;
     },
     //show error message to screen
     alertError : function (msg)
