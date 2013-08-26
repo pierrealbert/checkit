@@ -49,17 +49,17 @@ class PropertyController extends Zend_Controller_Action
         $this->view->google_api_key     = $options['apiKey'];
     }
 
-    private static function getPreviousAndNext($currentId)
+    private static function getPreviousAndNext($currentId) 
     {
         $result = array(
             'previous' => 0,
-            'next'     => 0,
+            'next' => 0,
         );
 
         $list_items_ids = Doctrine::getTable('Model_Property')->createQuery('p')
-            ->select('p.id')
-            ->where('p.is_published = ?', 1)
-            ->execute();
+                ->select('p.id')
+                ->where('p.is_published = ?', 1)
+                ->execute();
 
         $is_detect_next = false;
 
@@ -76,7 +76,6 @@ class PropertyController extends Zend_Controller_Action
 
         return $result;
     }
-    
 
     /**
      * AJAX
@@ -84,8 +83,8 @@ class PropertyController extends Zend_Controller_Action
      * when we ckick button add to bookmark we call this method using ajax
      * @return json string with all info (error and result) 
      */
-    public function addToFavoriteAjaxAction() {
-
+    public function addToFavoriteAjaxAction() 
+    {
         $returnData = new stdClass();
         //if it is ajax
         if ($this->getRequest()->isXmlHttpRequest()) {
@@ -93,8 +92,8 @@ class PropertyController extends Zend_Controller_Action
             if ($this->getRequest()->isPost()) {
                 //here i need to know user id and property id
                 $auth = Zend_Auth::getInstance();
-                $userId = (int)$auth->getIdentity();
-	
+                $userId = (int) $auth->getIdentity();
+
                 //if we donot have userid it means we donot logined
                 if (empty($userId)) {
                     $returnData->redirectUrl = $this->_helper->url('', 'login');
@@ -104,34 +103,33 @@ class PropertyController extends Zend_Controller_Action
                 }
                 //get property id
                 $propertyId = (int) $this->_request->getPost('id');
-		 if (empty($propertyId)) {
+                if (empty($propertyId)) {
                     $returnData->redirectUrl = $this->_helper->url('', 'login');
                     $jsonStr = $this->_helper->json($returnData);
                     echo $jsonStr;
                     die;
                 }
-		// i need to know exist this data into db or doesnot 		
-		$alreadyExist =  Doctrine_Core::getTable('Model_Favorite')->find(array('user_id'=>$userId, 'property_id'=>$propertyId));
-	 
-		if($alreadyExist) {
-		    //delete form db
-		     $alreadyExist->delete();	
-		     $returnData->result = 'deleted from db';//can be true or false
-		} else {
-		    //insert into db
-		    $favoriteModel = new Model_Favorite();
-		    $favoriteModel->user_id = $userId;
-		    $favoriteModel->property_id = $propertyId;
-		    $favoriteModel->save();	
-		    $returnData->result = 'inserted into db'; //can be true or false
-		}
-		
-		$returnData->error = ''; 		
-		
-		$jsonStr = $this->_helper->json($returnData);
-		echo $jsonStr;
-		die;
-		
+                // i need to know exist this data into db or doesnot 		
+                $alreadyExist = Doctrine_Core::getTable('Model_Favorite')->find(array('user_id' => $userId, 'property_id' => $propertyId));
+
+                if ($alreadyExist) {
+                    //delete form db
+                    $alreadyExist->delete();
+                    $returnData->result = 'deleted from db'; //can be true or false
+                } else {
+                    //insert into db
+                    $favoriteModel = new Model_Favorite();
+                    $favoriteModel->user_id = $userId;
+                    $favoriteModel->property_id = $propertyId;
+                    $favoriteModel->save();
+                    $returnData->result = 'inserted into db'; //can be true or false
+                }
+
+                $returnData->error = '';
+
+                $jsonStr = $this->_helper->json($returnData);
+                echo $jsonStr;
+                die;
             } else {
                 // it is not post request
                 $this->_helper->redirector('index', 'index');
@@ -143,91 +141,85 @@ class PropertyController extends Zend_Controller_Action
         }
     }
 
-
-    
-    /** 
+    /**
      *  AJAX
      * this method for adding information to db table 
      * @return json string with all info (error and result) 
      */
-    public function setIssueAction()
+    public function setIssueAction() 
     {
-	 $fromIssue = new Form_Issue();
-	 
-	  $returnData = new stdClass();
-	  
-	 if ($this->getRequest()->isPost()) {
-	     if ($fromIssue->isValid($this->getRequest()->getPost())) {
+        $fromIssue = new Form_Issue();
 
-		     //here i need to know user id and property id
-		    $auth = Zend_Auth::getInstance();
-		    $userId = $auth->getIdentity();
-		           //get property id
-		    $propertyIdPost = (int) $this->_request->getPost('property_id');
-		    $subject_id = (int) $this->_request->getPost('subject_id');
-		    $issueText = $this->_request->getPost('issueText');
-		    //if we donot have userid it means we donot logined
-		    if ( empty($userId) || empty($propertyIdPost)  || empty($subject_id) || empty($issueText)) {
-			$returnData->redirectUrl = $this->_helper->url('', 'login');
-			$jsonStr = $this->_helper->json($returnData);
-			echo $jsonStr;
-			die;
-		    }
-	
-	
-		    //check furst exist this data into db if exist we need to update if doesnot we need to insert
-		    $tableInstanse = Doctrine::getTable('Model_PropertyIssue');
-		    $alreadyExistObj =   $tableInstanse->createQuery('p')
-						    ->select('p.user_id, p.property_id, p.subject_id, p.message, p.updated_at')
-						    ->where('p.user_id=?',$userId)
-						     ->andWhere('p.property_id=?', $propertyIdPost)
-						     ->andWhere('p.subject_id=?',$subject_id)
-						    ->execute();
-	
-	
-		    $arrayWithExistData = $alreadyExistObj->toArray();
-		    if( ! empty($arrayWithExistData) ) {
-			//update
-			$tableInstanse->createQuery('p')
-						    ->update('Model_PropertyIssue')
-						    ->set('message', '?', $issueText)
-						    ->set('updated_at', '?', date( 'Y-m-d H:i:s' ))				
-						    ->where('user_id=?',$userId)
-						    ->andWhere('property_id=?',$propertyIdPost)
-						    ->andWhere('subject_id=?',$subject_id)
-						    ->execute();
+        $returnData = new stdClass();
 
-		    } else {
-			//insert
-			$propertyIssueModel = new Model_PropertyIssue();
-			$propertyIssueModel->user_id = $userId;
-			$propertyIssueModel->property_id = $propertyIdPost;
-			$propertyIssueModel->subject_id = $subject_id;
-			$propertyIssueModel->message = $issueText;
-			$propertyIssueModel->created_at = date( 'Y-m-d H:i:s' );
-			$propertyIssueModel->save();
-		
-		    }
-		    //return result to ajax
-		    $returnData->result = 'inserted successfully'; 
-		    $returnData->error = ''; 		  
-		    $jsonStr = $this->_helper->json($returnData);
-		    echo $jsonStr;
-		    die;
-		    
-	     } else {
-		 //if we here it means the user sent not valid form 
-		    $returnData->result = false; 
-		    $returnData->error = 'error not valid form'; 
-		    $jsonStr = $this->_helper->json($returnData);
-		    echo $jsonStr;
-		    die;
-	     }         
+        if ($this->getRequest()->isPost()) {
+            if ($fromIssue->isValid($this->getRequest()->getPost())) {
 
-	} else {
-	    // it is not post request
-	    $this->_helper->redirector('index', 'index');
-	}
+                //here i need to know user id and property id
+                $auth = Zend_Auth::getInstance();
+                $userId = $auth->getIdentity();
+                //get property id
+                $propertyIdPost = (int) $this->_request->getPost('property_id');
+                $subjectId = (int) $this->_request->getPost('subject_id');
+                $issueText = $this->_request->getPost('issueText');
+                //if we donot have userid it means we donot logined
+                if (empty($userId) || empty($propertyIdPost) || empty($subjectId) || empty($issueText)) {
+                    $returnData->redirectUrl = $this->_helper->url('', 'login');
+                    $jsonStr = $this->_helper->json($returnData);
+                    echo $jsonStr;
+                    die;
+                }
+
+
+                //check furst exist this data into db if exist we need to update if doesnot we need to insert
+                $tableInstanse = Doctrine::getTable('Model_PropertyIssue');
+                $alreadyExistObj = $tableInstanse->createQuery('p')
+                        ->select('p.user_id, p.property_id, p.subject_id, p.message, p.updated_at')
+                        ->where('p.user_id=?', $userId)
+                        ->andWhere('p.property_id=?', $propertyIdPost)
+                        ->andWhere('p.subject_id=?', $subjectId)
+                        ->execute();
+
+
+                $arrayWithExistData = $alreadyExistObj->toArray();
+                if (!empty($arrayWithExistData)) {
+                    //update
+                    $tableInstanse->createQuery('p')
+                            ->update('Model_PropertyIssue')
+                            ->set('message', '?', $issueText)
+                            ->set('updated_at', '?', date('Y-m-d H:i:s'))
+                            ->where('user_id=?', $userId)
+                            ->andWhere('property_id=?', $propertyIdPost)
+                            ->andWhere('subject_id=?', $subjectId)
+                            ->execute();
+                } else {
+                    //insert
+                    $propertyIssueModel = new Model_PropertyIssue();
+                    $propertyIssueModel->user_id = $userId;
+                    $propertyIssueModel->property_id = $propertyIdPost;
+                    $propertyIssueModel->subject_id = $subjectId;
+                    $propertyIssueModel->message = $issueText;
+                    $propertyIssueModel->created_at = date('Y-m-d H:i:s');
+                    $propertyIssueModel->save();
+                }
+                //return result to ajax
+                $returnData->result = 'inserted successfully';
+                $returnData->error = '';
+                $jsonStr = $this->_helper->json($returnData);
+                echo $jsonStr;
+                die;
+            } else {
+                //if we here it means the user sent not valid form 
+                $returnData->result = false;
+                $returnData->error = 'error not valid form';
+                $jsonStr = $this->_helper->json($returnData);
+                echo $jsonStr;
+                die;
+            }
+        } else {
+            // it is not post request
+            $this->_helper->redirector('index', 'index');
+        }
     }
   
 }
