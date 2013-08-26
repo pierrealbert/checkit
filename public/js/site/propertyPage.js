@@ -15,18 +15,27 @@ var propertyPage = {
     //show error message to screen
     alertError : function (msg)
     {
+        var self = this;
         if($.type( msg ) === "string") {
               alert(msg);   
         }
     },
     //show successful message to screen
-    alertSuccessMsg : function (msg)
+    alertSuccessMsg : function (msg, button)
     {
+        var self = this;
         if($.type( msg ) === "string") {
-              alert(msg);   
+            var buttonObj = $(button);
+            var oldName = buttonObj.find('span').text();
+            var newName = buttonObj.data('new_name');
+            buttonObj.data('new_name', oldName );
+            buttonObj.find('span').text(newName);
+            buttonObj.removeClass('ui-state-focus');
+ 
         }
        
     },
+  
         
     
 }
@@ -43,7 +52,7 @@ var propertyPage = {
  * @param {type} additionParameter - object
  * @returns {undefined|addToBookmark.responseData}
  */
-function addToBookmarkClicked(url, data, additionParameter)
+function addToBookmarkClicked(url, data, additionParameter, button)
 {  
     var responseDataJson;
     responseDataJson = getAjaxData(url, data, additionParameter);
@@ -52,7 +61,7 @@ function addToBookmarkClicked(url, data, additionParameter)
           propertyPage.alertError(responseDataJson.error);
     }
     //show message if everything is okay
-    propertyPage.alertSuccessMsg(responseDataJson.result);    
+    propertyPage.alertSuccessMsg(responseDataJson.result, button);    
     return responseDataJson;
 }
 

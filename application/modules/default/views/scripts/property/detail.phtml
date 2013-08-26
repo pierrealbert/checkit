@@ -438,12 +438,14 @@
 
         $('.add_to_bookmark')
             .button()
+	    .data('new_name', 'Remove from bookmark')
             .click(function(event) {
                 event.preventDefault();
 		//alex click button add to bookmark
 		additionParameter.errorHandler = addToBookmarkError;
 		var data = 'id='+currentpropertyId;
-		addToBookmarkClicked('/property/add-to-favorite-ajax',data, additionParameter);
+		addToBookmarkClicked('/property/add-to-favorite-ajax',data, additionParameter, this);
+	
         });
     
         $('.share')

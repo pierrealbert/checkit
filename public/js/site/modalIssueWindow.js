@@ -63,6 +63,7 @@ $(function() {
             } else {
                 // if everything is okay
                 $( this ).dialog( "close" );
+                //change button name
             }
     
           }
