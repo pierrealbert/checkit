@@ -27,7 +27,7 @@ class PropertyController extends Zend_Controller_Action
         }
 	
 	//get all subjects from db
-	$subjects = Doctrine::getTable('Model_Subject')->findAll();
+	$subjects = Doctrine::getTable('Model_PropertyIssueSubject')->findAll();
 	//form for sending issue to admin
 	$fromIssue = new Form_Issue();
 	$fromIssue->setAction('/property/set-issue')
@@ -122,14 +122,14 @@ class PropertyController extends Zend_Controller_Action
                 if ($alreadyExist) {
                     //delete form db
                     $alreadyExist->delete();
-                    $returnData->result = $this->translator->translate('deleted from db'); //can be true or false
+                    $returnData->result = $this->translator->translate('deleted_from_db'); //can be true or false
                 } else {
                     //insert into db
                     $favoriteModel = new Model_Favorite();
                     $favoriteModel->user_id = $userId;
                     $favoriteModel->property_id = $propertyId;
                     $favoriteModel->save();
-                    $returnData->result = $this->translator->translate('inserted into db'); //can be true or false
+                    $returnData->result = $this->translator->translate('inserted_into_db'); //can be true or false
                 }
 
                 $returnData->error = '';
@@ -172,17 +172,17 @@ class PropertyController extends Zend_Controller_Action
 
                 //check exist property_id into db or doesnot 
                 $properyData = Doctrine::getTable('Model_Property')->find($propertyId);
-                $subjectData = Doctrine::getTable('Model_Subject')->find($subjectId);
+                $subjectData = Doctrine::getTable('Model_PropertyIssueSubject')->find($subjectId);
 
                 if (empty($properyData) || empty($subjectData) || !$issueText) {
                     //not valid property id or something else
                     $returnData->result = false;
-                    $returnData->error = $this->translator->translate('not valid parameters');    
+                    $returnData->error = $this->translator->translate('not_valid_parameters');    
                 }
 
                 //property is exist into db and subject 
                 //insert into db all data 
-                $propertyIssueModel = new Model_PropertyIssueSubject();
+                $propertyIssueModel = new Model_PropertyIssue();
                 
                 if ($userId) {
                     $propertyIssueModel->user_id = $userId;
@@ -193,12 +193,12 @@ class PropertyController extends Zend_Controller_Action
                 $propertyIssueModel->save();
 
 
-                $returnData->result = $this->translator->translate('issue sent successfully');
+                $returnData->result = $this->translator->translate('issue_sent_successfully');
                 $returnData->error = '';                
             } else {
                 //if we here it means the user sent not valid form 
                 $returnData->result = false;
-                $returnData->error = $this->translator->translate('error not valid form');
+                $returnData->error = $this->translator->translate('error_not_valid_form');
             }                       
         } 
         
