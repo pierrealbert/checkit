@@ -64,13 +64,12 @@ $(function() {
                 // if everything is okay
                 $( this ).dialog( "close" );
                 //show message from server
-                console.log(response.result);
                 $('#formessage').text(response.result);
             }
     
           }
           else {
-                updateTips( 'not valid text ' );
+                updateTips( window.errorMsg1);
           }
               
         },

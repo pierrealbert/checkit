@@ -364,7 +364,12 @@
 </div>
 
 <?php
-    $js = "var SelectedDates = {};\n";
+    //this is translated data fro js message
+    $errorMgg1 = $this->translate('not_valid_text');
+ 
+    $js  = "";   
+    $js  .= "window.errorMsg1 = '".$errorMgg1."';";  
+    $js .= "var SelectedDates = {};\n";
     //this is for ajax i need to know current id
     $js .="window.currentpropertyId = " . $this->currentPropertyId . ";"; 
 
