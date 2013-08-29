@@ -18,7 +18,7 @@ class Form_SearchStandard extends Ext_Form
         
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
         
-        $regionBlockOptions = array();
+        $regionBlockOptions = array('' => 'all');
         foreach (Model_RegionBlockTable::getInstance()->getAllWithDiscricts() as $region) {
             $regionBlockOptions[$region->id] = $region->RegionDistrict->name . ' - ' . $region->name;
         }
