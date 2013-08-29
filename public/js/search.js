@@ -235,5 +235,31 @@ function initSearchStandard() {
     });
     $('input[name=availability]').change(function () {
         $('input[name=availability_select][value=date]').prop('checked', 1);
+    });
+}
+
+function initSearchDraw(map) {
+    var drawnPolygon = null;
+    var drawingManager = new google.maps.drawing.DrawingManager({
+        drawingMode: google.maps.drawing.OverlayType.POLYGON,
+        drawingControl: false,
+        polygonOptions: {
+            editable: true
+        },
+    });
+    drawingManager.setMap(map);
+    google.maps.event.addListener(drawingManager, 'overlaycomplete', function(event) {
+        drawingManager.setMap(null);
+        drawnPolygon = event.overlay;
+    });
+    $('#form-search-draw').submit(function () {
+        var drawnPolygonJson = [];
+        drawnPolygon.getPath().forEach(function (point) {
+            drawnPolygonJson.push({lat: point.lat(), lng: point.lng()});
+        })
+        console.log(drawnPolygonJson);
+        console.log(drawnPolygonJson.toString());
+        $('#drawn_polygon').val(drawnPolygonJson);
+        return false;
     })
 }
