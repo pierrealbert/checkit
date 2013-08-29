@@ -31,6 +31,8 @@
  * @property Doctrine_Collection $UserResident
  * @property Doctrine_Collection $UserMessage
  * @property Doctrine_Collection $Property
+ * @property Doctrine_Collection $Favorite
+ * @property Doctrine_Collection $PropertyIssue
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -162,6 +164,14 @@ abstract class Model_Base_User extends Ext_Doctrine_Record
         $this->hasMany('Model_Property as Property', array(
              'local' => 'id',
              'foreign' => 'owner_id'));
+
+        $this->hasMany('Model_Favorite as Favorite', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('Model_PropertyIssue as PropertyIssue', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              'created' => 

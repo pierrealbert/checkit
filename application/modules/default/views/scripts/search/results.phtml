@@ -1,0 +1,19 @@
+<h2><?= $this->contentHeader('search_results') ?></h2>
+
+<?php if (!count($this->foundProperties)): ?>
+    <p>Properties are not found</p>
+<?php else: ?>
+    <table border="1">
+    <?php foreach($this->foundProperties as $property): ?>
+        <tr>
+            <td width="110px" height="110px" align="center" valign="center"><?= $this->imageResize(100, 100, $property->main_photo) ?></td>
+            <td width="300px" valign="top"><h3><a href="/property/detail/item/<?= $property->id ?>"><?= $property->title ?></a></h3></td>
+            <td width="120px">
+               <h3><?= $property->getPrice() ?> &euro;</h3>
+               <?= $property->size ?> m<sup>2</sup><br />
+               <?= $property->number_of_rooms1 ?> rooms
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    </table>
+<?php endif; ?>

@@ -1,11 +1,40 @@
+<?php if($this->isInbookmark) {
+    $showNowButton = 'Remove from bookmark';
+    $showWhenClick = 'Add to bookmark';
+} else {
+    $showNowButton = 'Add to bookmark';
+    $showWhenClick = 'Remove from bookmark';
+}	
+?>
+	
+<div id="formessage" style="color: red">
+    
+</div>
 <div>
     <h1>Ad Details</h1>
     <a href="<?= $this->url(array('controller' => 'test', 'action' => 'ad-list'), null, true) ?>" class="back_to_resaults"><?= $this->translate('back_to_resaults') ?></a>
+ 
+    <button class="add_to_bookmark">
+	<?php echo $showNowButton;?>
+    </button>
     
-    <button class="add_to_bookmark">Add to bookmark</button>
+    <!-- AddToAny BEGIN -->
+    <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
+        <span class="ui-button-text">Share</span>
+    </a>
     
-    <button class="share">Share</button>
 
+    
+    <script type="text/javascript">
+    a2a_config = {
+        linkname: 'Example Page 1',
+        linkurl: 'http://www.example.com/page_1.html'
+    };
+    </script>
+
+    <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+    <!-- AddToAny END -->
+  
     <?php if ($this->previous_and_next['previous']): ?>
     <a href="<?= $this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $this->previous_and_next['previous']), null, true) ?>" class="previous">Previous</a>
     <?php else: ?>
@@ -51,19 +80,35 @@
         <tr>
             <td></td>
             <td width="200px">
-                <ul id="menu">
+                <ul  id="menu">
                     <li>
-                        <a href="#">Report an issue</a>
-                        <ul>
-                            <li><a href="#">Message 1</a></li>
-                            <li><a href="#">Message 2</a></li>
-                            <li><a href="#">Spam</a></li>
-                        </ul>
+			 <?php if($this->subjects) :?>
+			    <a href="#">Report an issue</a>
+			    <ul class="create_issue">
+				<?php foreach ($this->subjects as $bubject) :?>
+				    <li>
+					<a class="menu_element" data-number="<?php echo $bubject->id;?>" href="#"><?php echo $bubject->subject_name;?></a>
+				    </li>
+				<?php endforeach;?>
+    <!--                            <li><a class="menu_element" href="#">Message 2</a></li>
+				<li><a class="menu_element" href="#">Spam</a></li>-->
+			    </ul>
+			<?php endif;?>
                     </li>
                 </ul>
             </td>
         </tr>
     </table>
+    
+      
+    <div id="dialog-form" title="">
+      <p class="validateTips">All form fields are required.</p>
+       <?php echo $this->formIssue;?>
+
+    </div>
+
+
+
     <h2>Description</h2>
 
     <table width="100%">
@@ -215,8 +260,15 @@
                 <span id="slides_info"></span>
                 <button id="next_photo1">&gt;</button>
                 <hr />
-                <button class="add_to_bookmark">Add to bookmark</button><br />
-                <button class="share">Share</button>
+                <button class="add_to_bookmark">
+		    <?php echo $showNowButton;?>
+		</button><br />
+                <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
+                    <span class="ui-button-text">Share</span>
+                </a>
+                <script type="text/javascript">
+                a2a.init('page');
+                </script>
             </td>
         </tr>
     </table>
@@ -251,8 +303,15 @@
                     <?php endforeach; ?>
                 </div>
                 <hr />
-                <button class="add_to_bookmark">Add to bookmark</button><br />
-                <button class="share">Share</button>
+                <button class="add_to_bookmark">
+		     <?php echo $showNowButton;?>
+		</button><br />
+                <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
+                    <span class="ui-button-text">Share</span>
+                </a>
+                <script type="text/javascript">
+                a2a.init('page');
+                </script>
             </td>
         </tr>
     </table>
@@ -268,8 +327,15 @@
             <td width="33%">Description</td>
             <td width="33%">Center</td>
             <td width="33%">
-                <button class="add_to_bookmark">Add to bookmark</button><br />
-                <button class="share">Share</button>
+                <button class="add_to_bookmark">
+		    <?php echo $showNowButton;?>
+		</button><br />
+                <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
+                    <span class="ui-button-text">Share</span>
+                </a>
+                <script type="text/javascript">
+                a2a.init('page');
+                </script>
             </td>
         </tr>
     </table>
@@ -283,8 +349,15 @@
         <tr>
             <td>Description</td>
             <td width="33%">
-                <button class="add_to_bookmark">Add to bookmark</button><br />
-                <button class="share">Share</button>
+                <button class="add_to_bookmark">
+		    <?php echo $showNowButton;?>
+		</button><br />
+                <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
+                    <span class="ui-button-text">Share</span>
+                </a>
+                <script type="text/javascript">
+                a2a.init('page');
+                </script>
             </td>
         </tr>
     </table>
@@ -292,28 +365,32 @@
 </div>
 
 <div>
+    <h3>Similar Properties</h3>
+
     <table width="100%" border="1">
-        <tr valign="top">
-            <td>Similar</td>
-            <td>
-                <table width="100%" border="1">
-                    <tr>
-                        <td width="100px">Photo</td>
-                        <td>Description</td>
-                        <td width="100px">Price</td>
-                    </tr>
-                    <tr>
-                        <td width="100px">Photo</td>
-                        <td>Description</td>
-                        <td width="100px">Price</td>
-                    </tr>
-                </table>
+        <? foreach ($this->similarProperties as $property) : ?>
+        <tr>
+            <td width="110px" height="110px" align="center" valign="center"><?= $this->imageResize(100, 100, $property->main_photo) ?></td>
+            <td width="300px" valign="top"><h3><a href="/property/detail/item/<?= $property->id ?>"><?= $this->escape($property->title) ?></a></h3></td>
+            <td width="120px">
+               <h3><?= $property->getPrice() ?> &euro;</h3>
+               <?= $property->size ?> m<sup>2</sup><br />
+               <?= $property->number_of_rooms1 ?> rooms
             </td>
         </tr>
-    </table>
+        <? endforeach; ?>
+    </table>  
 </div>
+
 <?php
-    $js = "var SelectedDates = {};\n";
+    //this is translated data fro js message
+    $errorMgg1 = $this->translate('not_valid_text');
+ 
+    $js  = "window.renameBookmarkBubbon = '" . $showWhenClick . "';";   
+    $js .= "window.errorMsg1 = '" .$errorMgg1. "';";  
+    $js .= "var SelectedDates = {};\n";
+    //this is for ajax i need to know current id
+    $js .="window.currentpropertyId = " . $this->currentPropertyId . ";"; 
 
     foreach($this->visits as $visit) {
         $date = $this->jsDate($visit->availability);
@@ -321,7 +398,16 @@
     }
         
     $function = "$(function() {
- 
+	// this is var for all buttons when we use ajax
+	// we can add some parammeters there and use it in file js/site/propertyPage.js
+	var additionParameter = new Object();
+
+	//when we click to send latter to admin
+//	$('#menu').on( 'click', 'a.menu_element', function(){	  
+//	   propertyPage.showPopWindow(this);
+//	}); 
+
+
         function DrawCircle(rad) {
             if (draw_circle != null) {
                 draw_circle.setMap(null);
@@ -373,21 +459,33 @@
             .click(function(event) {
                 event.preventDefault();
                 alert('Apply!');
+		
         });
 
         $('.add_to_bookmark')
             .button()
             .click(function(event) {
                 event.preventDefault();
-                alert('Add to bookmark!');
+		//alex click button add to bookmark
+		additionParameter.errorHandler = addToBookmarkError;
+		var data = 'id='+currentpropertyId;
+		addToBookmarkClicked('/property/add-to-favorite-ajax',data, additionParameter, this);
+	
         });
     
         $('.share')
             .button()
             .click(function(event) {
                 event.preventDefault();
-                alert('Share!');
         });
+	
+	$('#close_issue_pop_window')
+	    .button()
+	    .click(function(){
+		//clear textarea value
+		$('#issueText').val('');
+		$('#issue_pop_window').hide();
+	    })
     
         {$js}
 
@@ -466,6 +564,9 @@
         ->addJavascriptFile("http://maps.googleapis.com/maps/api/js?key={$this->google_api_key}&sensor=false")
         ->addJavascriptFile("/js/lodash.js")
         ->addJavascriptFile("/js/bean.min.js")
-        ->addJavascriptFile("/js/revolver.min.js");
+        ->addJavascriptFile("/js/revolver.min.js")
+	->addJavascriptFile("/js/site/propertyPage.js")
+	->addJavascriptFile("/js/site/modalIssueWindow.js");
 
 ?>
+
