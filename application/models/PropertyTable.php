@@ -23,6 +23,9 @@ class Model_PropertyTable extends Ext_Doctrine_Table
         return array('<=', '>=', '=', '<', '>');
     }
     
+    /**
+     *TODO: write complete documentation for this method
+     */
     public function searchQuery(array $params, $exceptIds = array())
     {
         if (is_numeric($exceptIds))
@@ -31,12 +34,6 @@ class Model_PropertyTable extends Ext_Doctrine_Table
         $propertyTN = $this->getTableName(); // used as alias
         
         $dqlQuery = $this->createQuery($propertyTN);
-        
-        // quick fix
-        if (isset($params['regions_selected'])) {
-            $dqlQuery->whereIn('region_block_id', $params['regions_selected']);
-            unset($params['regions_selected']);
-        }
         
         foreach ($params as $key => $fieldValue) {
             $fieldName = $key;
@@ -62,7 +59,10 @@ class Model_PropertyTable extends Ext_Doctrine_Table
             // add WHERE only if value is not empty string ('') and not Null,
             // but WHERE will be added if value is 0 or False
             if ($value !== '' and $value !== Null) {
-                $dqlQuery->andWhere($whereStr, $value);
+                if (is_array($value))
+                    $dqlQuery->andWhereIn($fieldName, $value);
+                else
+                    $dqlQuery->andWhere($whereStr, $value);
             }
         }
         return $dqlQuery;

@@ -117,7 +117,7 @@ class SearchController extends Zend_Controller_Action
             // TODO: put here appropriate search when standart search tab will be implemented
             
             $this->_searchConditions->data = array(
-                'regions_selected' => $regionsSelectedIds
+                'region_block_id' => array('value' => $regionsSelectedIds)
             );
             
             $this->_helper->redirector->gotoSimple('results', 'search', 'default');            
