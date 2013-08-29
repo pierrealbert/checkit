@@ -4,3 +4,14 @@
     <input type="submit" name="search" value="<?= $this->translate('search') ?>">
 </form>
 <?= $this->googleMap(48.857261, 2.346611, array('width' => 800, 'height' => 600), array('zoom' => 8), "var regions = {$this->regionsJson};\ninitSearchMap(map, regions)") ?>
+<div>
+<? $curDistrictId = Null ?>
+<h2>Paris</h2>
+<? foreach ($this->allBlockRegions as $region): ?>
+    <? if ($curDistrictId != $region->region_district_id): ?>
+        <? $curDistrictId = $region->region_district_id ?>
+        <h3><?= $region->RegionDistrict->name ?></h3>
+    <? endif ?>
+    <input type="checkbox" class="region region<?= $region->id ?>" name="region<?= $region->id ?>" value="1" <? if (in_array($region->id, $this->regionsSelectedIds)): ?>checked="checked"<? endif ?> /><label for="region<?= $region->id ?>"><?= $region->name ?></label>
+<? endforeach ?>
+</div>

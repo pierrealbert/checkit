@@ -125,6 +125,7 @@ class SearchController extends Zend_Controller_Action
         $this->view->regionsArray = $regionsArray;
         $this->view->regionsJson = $regionsJson;
         $this->view->regionsSelectedIds = $regionsSelectedIds;
+        $this->view->allBlockRegions = Model_RegionBlockTable::getInstance()->getAllWithDiscricts();
     }
     
     public function resultsAction()

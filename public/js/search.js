@@ -160,6 +160,7 @@ function initSearchMap(map, regions) {
 
     function setSelectedRegions (regionIdsArray) {
         $('#regions_selected').val(regionIdsArray);
+        $('#regions_selected').change();
     }
 
     function setRegionDefaultOptions (region) {
@@ -190,6 +191,20 @@ function initSearchMap(map, regions) {
         } else if (currentRegion.type == 'RegionCity') {
             countryMode();
         }
+    })
+
+    $('#regions_selected').change(function () {
+        $(':checkbox.region').prop('checked', false);
+        var ids = $.parseJSON('[' + $(this).val() + ']');
+        $.each(ids, function (index, selectedRegionId) {
+            $(':checkbox.region.region' + selectedRegionId).prop('checked', true);
+        })
+    })
+    $(':checkbox.region').click(function () {
+        var region_id = $(this).attr('name').substring(6);
+        districtMode(regions[region_id].region_district_id);
+        regionToggleSelection(region_id);
+        // return false;
     })
 
     for (region_id in regions) {
