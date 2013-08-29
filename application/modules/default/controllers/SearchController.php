@@ -111,9 +111,15 @@ class SearchController extends Zend_Controller_Action
         }
         $regionsJson = json_encode($regionsArray);
        
-        if ($this->getRequest()->isPost() and $this->getRequest()->getParam('regions_selected')) {
+        $form = new Form_SearchMap();
+        
+        if ($this->getRequest()->isPost()
+            && $form->isValid($this->getRequest()->getPost())
+        ) {
+            $values = $form->getValues();
+            $values['region_block_id'] = array('value' => explode(',', $values['regions_selected']));
+            
             $regionsSelectedIds = explode(',', $this->getRequest()->getParam('regions_selected'));
-            // TODO: put here appropriate search when standart search tab will be implemented
             
             $this->_searchConditions->data = array(
                 'region_block_id' => array('value' => $regionsSelectedIds)
@@ -122,6 +128,7 @@ class SearchController extends Zend_Controller_Action
             $this->_helper->redirector->gotoSimple('results', 'search', 'default');            
         }
 
+        $this->view->form = $form;
         $this->view->regionsArray = $regionsArray;
         $this->view->regionsJson = $regionsJson;
         $this->view->regionsSelectedIds = $regionsSelectedIds;
