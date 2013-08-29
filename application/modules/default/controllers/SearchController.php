@@ -103,7 +103,6 @@ class SearchController extends Zend_Controller_Action
         // js function initSearchMap will be called in a view helper googleMap
         
         $regions = Model_RegionTable::getInstance()->findAll();
-        $foundProperties = array();
         $regionsSelectedIds = array();
         
         $regionsArray = array();
@@ -123,7 +122,6 @@ class SearchController extends Zend_Controller_Action
             $this->_helper->redirector->gotoSimple('results', 'search', 'default');            
         }
 
-        $this->view->foundProperties = $foundProperties;
         $this->view->regionsArray = $regionsArray;
         $this->view->regionsJson = $regionsJson;
         $this->view->regionsSelectedIds = $regionsSelectedIds;

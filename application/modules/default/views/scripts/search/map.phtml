@@ -4,13 +4,3 @@
     <input type="submit" name="search" value="<?= $this->translate('search') ?>">
 </form>
 <?= $this->googleMap(48.857261, 2.346611, array('width' => 800, 'height' => 600), array('zoom' => 8), "var regions = {$this->regionsJson};\ninitSearchMap(map, regions)") ?>
-<div class="result">
-    <? foreach ($this->foundProperties as $property): ?>
-    <div>
-        <h3><?= $property->address ?></h3>
-        <pre>
-        <? print_r($property->toArray()) ?>
-        </pre>
-    </div>
-    <? endforeach ?>
-</div>
