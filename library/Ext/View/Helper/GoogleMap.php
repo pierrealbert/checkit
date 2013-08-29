@@ -61,12 +61,21 @@ class Ext_View_Helper_GoogleMap extends Zend_View_Helper_HtmlElement
         return new Ext_View_Helper_GoogleMap_Marker($lat, $lng, $options);
     }
 
-    protected function _getGoogleMapJs($apiKey = Null)
+    protected function _getGoogleMapJs($apiKey = Null, $libraries = array())
     {
+        // Fetch data from settings {{{
         if ($apiKey == Null)
             $apiKey = $this->view->settings('services.googleMaps.apiKey', Null);
+        $libraries = array_merge ($libraries, $this->view->settings('services.googleMaps.libraries', array()));
+        // }}} Fetch data from settings 
         
-        return 'http://maps.google.com/maps/api/js?sensor=false&key=' . $apiKey;
+        
+        $url = 'http://maps.google.com/maps/api/js?sensor=false';
+        if ($apiKey)
+            $url .= '&key=' . $apiKey;
+        if ($libraries)
+            $url .= '&libraries=' . implode(',', $libraries);
+        return $url;
     }
 
     /**
