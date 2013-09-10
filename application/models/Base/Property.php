@@ -60,8 +60,6 @@
  * @property integer $is_roomate
  * @property integer $state
  * @property integer $is_published
- * @property decimal $latitude
- * @property decimal $longitude
  * @property Model_User $Owner
  * @property Model_RegionBlock $RegionBlock
  * @property Doctrine_Collection $PropertyVisitDates
@@ -310,16 +308,6 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'default' => 0,
              'length' => '1',
              ));
-        $this->hasColumn('latitude', 'decimal', 18, array(
-             'type' => 'decimal',
-             'scale' => 10,
-             'length' => '18',
-             ));
-        $this->hasColumn('longitude', 'decimal', 18, array(
-             'type' => 'decimal',
-             'scale' => 10,
-             'length' => '18',
-             ));
     }
 
     public function setUp()
@@ -357,6 +345,23 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
               'name' => 'updated_at',
              ),
              ));
+        $geographical0 = new Doctrine_Template_Geographical(array(
+             'latitude' => 
+             array(
+              'options' => 
+              array(
+              'scale' => 10,
+              ),
+             ),
+             'longitude' => 
+             array(
+              'options' => 
+              array(
+              'scale' => 10,
+              ),
+             ),
+             ));
         $this->actAs($timestampable0);
+        $this->actAs($geographical0);
     }
 }

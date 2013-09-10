@@ -1,0 +1,41 @@
+Model_MetroStation:
+  # 171507
+  Model_MetroStation_14_Olympiades:
+    name: Olympiades
+    MetroLine: Model_MetroLine_14
+    pixel_x: 5472
+    pixel_y: 6334
+    latitude: 48.8268582996999
+    longitude: 2.36729701204889
+  # 2005
+  Model_MetroStation_14_Bercy:
+    name: Bercy
+    MetroLine: Model_MetroLine_14
+    pixel_x: 5900
+    pixel_y: 5766
+    latitude: 48.8404280893475
+    longitude: 2.37958296880394
+  # 51020
+  Model_MetroStation_14_Bibliotheque:
+    name: Bibliotheque-Francois Mitterrand
+    MetroLine: Model_MetroLine_14
+    pixel_x: 5894
+    pixel_y: 6204
+    latitude: 48.8296059726948
+    longitude: 2.3760926116913
+  # 1964
+  Model_MetroStation_14_Chatelet:
+    name: Châtelet
+    MetroLine: Model_MetroLine_14
+    pixel_x: 4158
+    pixel_y: 4251
+    latitude: 48.8585195224421
+    longitude: 2.34711940104793
+  # 1689
+  Model_MetroStation_14_SaintLazare:
+    name: Saint-Lazare
+    MetroLine: Model_MetroLine_14
+    pixel_x: 3612
+    pixel_y: 4875
+    latitude: 48.8755778691635
+    longitude: 2.326185658552

@@ -415,6 +415,43 @@ RegionBlock:
     relations:
         RegionDistrict: {onDelete: cascade}
 
+MetroLine:
+    columns:
+        id:
+            type:       integer(4)
+            primary:    true
+            autoincrement: true
+        name:
+            type: string(50)
+        color:
+            type: string(6)
+
+MetroStation:
+    columns:
+        id:
+            type:       integer(4)
+            primary:    true
+            autoincrement: true
+        metro_line_id:
+            type:       integer(4)
+        name:
+            type: string(50)
+        pixel_x:
+            type:       integer(4)
+        pixel_y:
+            type:       integer(4)
+    actAs:
+        Geographical:
+            latitude:
+                options:
+                    scale: 10
+            longitude:
+                options:
+                    scale: 10
+    relations:
+        MetroLine:
+            onDelete: cascade
+
 PropertyVisitDates:
     columns:
         id:
