@@ -134,6 +134,14 @@ class SearchController extends Zend_Controller_Action
         $this->view->regionsSelectedIds = $regionsSelectedIds;
         $this->view->allBlockRegions = Model_RegionBlockTable::getInstance()->getAllWithDiscricts();
     }
+    
+    public function metroAction()
+    {
+        // $form = new Form_SearchMetro();
+        
+        // $this->view->form = $form;
+    }
+
 
     public function drawAction()
     {
