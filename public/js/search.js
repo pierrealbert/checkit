@@ -314,9 +314,6 @@ function initSearchDraw(map) {
         drawnPolygon.getPath().forEach(function (point) {
             drawnPolygonJson.push({lat: point.lat(), lng: point.lng()});
         })
-        console.log(drawnPolygonJson);
-        console.log(drawnPolygonJson.toString());
-        $('#drawn_polygon').val(drawnPolygonJson);
-        return false;
+        $('#drawn_polygon').val(JSON.stringify(drawnPolygonJson));
     })
 }
