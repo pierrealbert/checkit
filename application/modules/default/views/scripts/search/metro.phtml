@@ -1,3 +1,7 @@
-<div>
-    <?= $this->metroMap() ?>
+<?= $this->form ?>
+<?= $this->metroMap($this->stations) ?>
+<div class="metro-lines">
+    <? foreach ($this->lines as $line): ?>
+        <div data-line='<?= $line->id?>' class='metro-line' style="background-color:#<?= $line->color ?>"><?= $line->name ?></div>
+    <? endforeach ?>
 </div>
