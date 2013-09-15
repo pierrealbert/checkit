@@ -16,4 +16,36 @@ class Model_MetroStationTable extends Ext_Doctrine_Table
     {
         return Doctrine_Core::getTable('Model_MetroStation');
     }
+
+    public function getDistanceFromPointQuery($point)
+    {
+
+        $query = $this->createQuery();
+
+        $rootAlias = $query->getRootAlias();
+        $latName = 'latitude';
+        $longName = 'longitude';
+
+        $query->addSelect($rootAlias . '.*');
+
+        $sql = "((ACOS(SIN(%s * PI() / 180) * SIN(" . $rootAlias . "." . $latName . " * PI() / 180) + COS(%s * PI() / 180) * COS(" . $rootAlias . "." . $latName . " * PI() / 180) * COS((%s - " . $rootAlias . "." . $longName . ") * PI() / 180)) * 180 / PI()) * 60 * %s) as %s";
+
+        // $milesSql = sprintf($sql, $point[0], $point[0], $point[1], '1.1515', 'miles');
+        // $query->addSelect($milesSql);
+
+        $kilometersSql = sprintf($sql, $point[0], $point[0], $point[1], '1.1515 * 1.609344', 'kilometers');
+        $query->addSelect($kilometersSql);
+
+        return $query;
+    }
+
+    public function getOrderedByDistance($point, $limit = 0)
+    {
+        $query = $this->getDistanceFromPointQuery($point);
+        if ($limit) {
+            $query->having('kilometers < ?', $limit);
+        }
+        $query->orderBy('kilometers');
+        return $query->execute();
+    }
 }

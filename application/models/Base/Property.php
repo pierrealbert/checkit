@@ -62,6 +62,7 @@
  * @property integer $is_published
  * @property Model_User $Owner
  * @property Model_RegionBlock $RegionBlock
+ * @property Doctrine_Collection $PropertyXMetroStation
  * @property Doctrine_Collection $PropertyVisitDates
  * @property Doctrine_Collection $Favorite
  * @property Doctrine_Collection $PropertyIssue
@@ -322,6 +323,10 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'local' => 'region_block_id',
              'foreign' => 'id',
              'onDelete' => 'cascade'));
+
+        $this->hasMany('Model_PropertyXMetroStation as PropertyXMetroStation', array(
+             'local' => 'id',
+             'foreign' => 'property_id'));
 
         $this->hasMany('Model_PropertyVisitDates as PropertyVisitDates', array(
              'local' => 'id',

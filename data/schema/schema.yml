@@ -452,6 +452,25 @@ MetroStation:
         MetroLine:
             onDelete: cascade
 
+PropertyXMetroStation:
+    columns:
+        id:
+            type:       integer(4)
+            primary:    true
+            autoincrement: true
+        metro_station_id:
+            type:       integer(4)
+        property_id:
+            type:       integer(4)
+        distance:
+            type:       double(18, 3)
+    relations:
+        MetroStation:
+            onDelete: cascade
+        Property:
+            onDelete: cascade
+
+
 PropertyVisitDates:
     columns:
         id:
