@@ -238,6 +238,63 @@ function initSearchStandard() {
     });
 }
 
+function initSearchMetro(map, stations) {
+    // line selector {{{
+    $('.metro-line').click(function () {
+        $('#metro_line_id').val($(this).attr('data-line'));
+        $('#metro_line_id').parents('form').submit();
+    })
+    // }}} line selector
+
+    // map {{{
+    var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',
+                                   new OpenLayers.Size(25,35),
+                                   new OpenLayers.Pixel(90, 23));
+    map = new OpenLayers.Map('map', {projection: 'EPSG:900913', units: 'm'});
+    
+    var graphicLayer = new OpenLayers.Layer.Image(
+        'Metro',
+        'http://realestate.local/images/plan_metro.png',
+        // new OpenLayers.Bounds(-180, -88.759, 180, 88.759),
+        // new OpenLayers.Bounds(0, 0, 1410, 1410),
+        new OpenLayers.Bounds(0, 0, 8000, 8000),
+        new OpenLayers.Size(1410, 1410),
+        {numZoomLevels: 1, units: 'm', projection: 'EPSG:900913'}
+    );
+
+    var markersLayer = new OpenLayers.Layer.Markers(
+        'Markers',
+        {units: 'm', projection: 'EPSG:900913'}
+    );
+
+    graphicLayer.events.on({
+        loadstart: function() {
+            OpenLayers.Console.log("loadstart");
+        },
+        loadend: function() {
+            OpenLayers.Console.log("loadend");
+        }
+    });
+
+    for (i = 0; i < stations.length; i++) {
+        var marker = new OpenLayers.Marker(new OpenLayers.LonLat(stations[i]['coordinates'][0], stations[i]['coordinates'][1]), icon.clone());
+        marker.station = stations[i];
+        marker.events.register('click', marker, function(evt) {
+            $('#metro_station_id').val(this.station.id);
+            $('#metro_station_id').parents('form').submit();
+        });
+        
+        markersLayer.addMarker(marker);
+    }
+    
+    map.addLayers([graphicLayer, markersLayer]);
+    // map.addControl(new OpenLayers.Control.LayerSwitcher());
+
+    // map.zoomToMaxExtent();
+    map.setCenter([4000, 4000]);
+    // }}} map
+}
+
 function initSearchDraw(map) {
     var drawnPolygon = null;
     var drawingManager = new google.maps.drawing.DrawingManager({

@@ -137,9 +137,23 @@ class SearchController extends Zend_Controller_Action
     
     public function metroAction()
     {
-        // $form = new Form_SearchMetro();
+        $stations = Model_MetroStationTable::getInstance()->findAll();
+        $lines = Model_MetroLineTable::getInstance()->findAll();
+        $form = new Form_SearchMetro();
         
-        // $this->view->form = $form;
+        if ($this->getRequest()->isPost()
+            && $form->isValid($this->getRequest()->getPost())
+        ) {
+            $values = $form->getValues();
+            echo '<pre>';
+            print_r($values);
+            echo '</pre>';
+            die();
+        }
+        
+        $this->view->form = $form;
+        $this->view->stations = $stations;
+        $this->view->lines = $lines;
     }
 
 

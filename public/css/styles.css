@@ -170,3 +170,15 @@ ul.errors li, p.error {
 .message-box p {
     margin: 5px 0px;
 }
+
+/*********** search ***********/
+.metro-lines .metro-line {
+    padding: 20px;
+    width: 10px;
+    height: 10px;
+    text-align: center;
+    float: left;
+    color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+}

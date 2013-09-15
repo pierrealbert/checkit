@@ -35,52 +35,36 @@ class View_Helper_MetroMap extends Zend_View_Helper_Abstract
         $this->_addedCss[] = $filePath;
     }
     
-    
-    public function metroMap($imagePath = null)
+    protected function _transformCoordinates($coordinates)
     {
-        $this->_addScriptOnce('/js/ammap/ammap.js');
-        $this->_addScriptOnce('/js/ammap/maps/js/franceLow.js');
-        $this->_addCssOnce('/js/ammap/ammap.css');
+        $mapZero = array(-569, 330);
+        $modifier = array(80, -80);
+        $coordinates[0] = $coordinates[0] + $mapZero[0] + $modifier[0];
+        $coordinates[1] = (8000 - $coordinates[1]) + $mapZero[1] + $modifier[1];
+        return $coordinates;
+    }
+    
+    public function metroMap($stations)
+    {
+        $this->_addScriptOnce('http://openlayers.org/api/OpenLayers.js');
+
+        $stationsTransformed = array();
+        foreach ($stations as $station) {
+            $stationsTransformed[] = array('id' => $station->id,
+                                           'name' => $station->name,
+                                           'coordinates' => $this->_transformCoordinates(array($station->pixel_x, 
+                                                                                               $station->pixel_y)),);
+        }
+        $stationsJSON = json_encode($stationsTransformed);
+        // $stationsCoordinates = array($this->_transformCoordinates(array(5472, 6334)));
 
         $this->view->jQuery()->addOnload(
-            '
+            "
             var map;
-            var descriptionBurgundy = \'Burgundy\';
-            var descriptionBrittany = \'Brittany\';
-            AmCharts.ready(function() {
-                map = new AmCharts.AmMap();
-                map.pathToImages = "http://www.ammap.com/lib/images/";
-                //map.panEventsEnabled = true; // this line enables pinch-zooming and dragging on touch devices
-                map.colorSteps = 10;
-                map.balloon.color = "#000000";
-                var dataProvider = {
-                    mapVar: AmCharts.maps.franceLow,
-                    areas: [
-                        {
-                        id: "FR-D",
-                        description: descriptionBurgundy},
-                        {
-                        id: "FR-E",
-                        description: descriptionBrittany}
-                    ]
-                };
+            initSearchMetro(map, $stationsJSON);
+            ");
 
-                map.areasSettings = {
-                    autoZoom: true,
-                    color: "#1A5FFF",
-                    rollOverColor: "#00298B",
-                    descriptionWindowY: 20,
-                    descriptionWindowX: 550,
-                    descriptionWindowWidth: 280,
-                    descriptionWindowHeight: 330
-                };
-                map.dataProvider = dataProvider;
-
-                map.write("mapdiv");
-            });'
-        );
-
-        $html = '<div id="mapdiv" style="width: 100%; height: 370px;"></div>';
+        $html = '<div id="map" class="smallmap" style="width:100%; height:500px;"></div>';
 
         return $html;
     }
