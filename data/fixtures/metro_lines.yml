@@ -1,49 +1,49 @@
 Model_MetroLine:
   Model_MetroLine_1:
-    name: Line 1
+    name: 1
     color: f2c931
   Model_MetroLine_2:
-    name: Line 2
+    name: 2
     color: 216eb4
   Model_MetroLine_3:
-    name: Line 3
+    name: 3
     color: 9a9940
   Model_MetroLine_3bis:
-    name: Line 3bis
+    name: 3bis
     color: 89d3de
   Model_MetroLine_4:
-    name: Line 4
+    name: 4
     color: bb4d98
   Model_MetroLine_5:
-    name: Line 5
+    name: 5
     color: f68f4d
   Model_MetroLine_6:
-    name: Line 6
+    name: 6
     color: 78c696
   Model_MetroLine_7:
-    name: Line 7
+    name: 7
     color: f59eb3
   Model_MetroLine_7bis:
-    name: Line 7bis
+    name: 7bis
     color: 78c696
   Model_MetroLine_8:
-    name: Line 8
+    name: 8
     color: c5a3cc
   Model_MetroLine_9:
-    name: Line 9
+    name: 9
     color: cec82b
   Model_MetroLine_10:
-    name: Line 10
+    name: 10
     color: e0b03a
   Model_MetroLine_11:
-    name: Line 11
+    name: 11
     color: 8e6538
   Model_MetroLine_12:
-    name: Line 12
+    name: 12
     color: 028d5b
   Model_MetroLine_13:
-    name: Line 13
+    name: 13
     color: 6b9ea6
   Model_MetroLine_14:
-    name: Line 14
+    name: 14
     color: 672f8f
