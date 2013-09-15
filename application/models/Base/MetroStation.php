@@ -11,6 +11,7 @@
  * @property integer $pixel_x
  * @property integer $pixel_y
  * @property Model_MetroLine $MetroLine
+ * @property Doctrine_Collection $PropertyXMetroStation
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -53,6 +54,10 @@ abstract class Model_Base_MetroStation extends Ext_Doctrine_Record
              'local' => 'metro_line_id',
              'foreign' => 'id',
              'onDelete' => 'cascade'));
+
+        $this->hasMany('Model_PropertyXMetroStation as PropertyXMetroStation', array(
+             'local' => 'id',
+             'foreign' => 'metro_station_id'));
 
         $geographical0 = new Doctrine_Template_Geographical(array(
              'latitude' => 

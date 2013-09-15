@@ -136,10 +136,32 @@ class Model_Property extends Model_Base_Property
         }
     }
 
+    protected function _assignMetroStations()
+    {
+        if (!$this->longitude or !$this->latitude) {
+            return;
+        }
+        $stations = Model_MetroStationTable::getInstance()->getOrderedByDistance(array($this->latitude, $this->longitude), 0.65);
+        $collection = new Doctrine_Collection('Model_PropertyXMetroStation');
+        foreach ($stations as $station) {
+            $pXm = new Model_PropertyXMetroStation();
+            $pXm->metro_station_id = $station->id;
+            $pXm->property_id = $this->id;
+            $pXm->distance = $station->kilometers;
+            $collection->add($pXm);
+        }
+        $collection->save();
+    }
+
     public function preSave($event)
     {
         $this->_assignCoordinates();
         $this->_assignRegion();
+    }
+
+    public function postSave($event)
+    {
+        $this->_assignMetroStations();
     }
 
     public function getStatesInfo()
