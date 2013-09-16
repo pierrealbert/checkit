@@ -34,9 +34,16 @@ class Model_PropertyTable extends Ext_Doctrine_Table
         $propertyTN = $this->getTableName(); // used as alias
         
         $dqlQuery = $this->createQuery($propertyTN);
+        $joins = array();
         
         foreach ($params as $key => $fieldValue) {
             $fieldName = $key;
+            if (count($fieldParts = explode('.', $fieldName)) > 1) {
+                if (!in_array($fieldParts[0], $joins)) {
+                    $dqlQuery->leftJoin("{$propertyTN}.{$fieldParts[0]} {$fieldParts[0]}");
+                    $joins[] = $fieldParts[0];
+                }
+            }
             $whereStr = '';
             $value = '';
             if (is_array($fieldValue)) {

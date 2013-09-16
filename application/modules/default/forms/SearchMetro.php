@@ -57,6 +57,14 @@ class Form_SearchMetro extends Ext_Form
                                      4 => 4,
                                      '>=5' => '> 5',),
         ));
+        
+        $this->addElement('radio', 'distance', array(
+            'label'         => 'distance',
+            'required'      => true,
+            'multiOptions'  => array('0.35' => '350 meters',
+                                     '0.5' => '500 meters',
+                                     '0.65' => '650 meters'),
+        ));
 	}
 
 }
