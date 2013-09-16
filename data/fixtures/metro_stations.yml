@@ -35,7 +35,41 @@ Model_MetroStation:
   Model_MetroStation_14_SaintLazare:
     name: Saint-Lazare
     MetroLine: Model_MetroLine_14
-    pixel_x: 3612
-    pixel_y: 4875
+    pixel_x: 2912
+    pixel_y: 2967
     latitude: 48.8755778691635
     longitude: 2.326185658552
+  # 1839
+  Model_MetroStation_14_GareDeLyon:
+    name: Gare de Lyon
+    MetroLine: Model_MetroLine_14
+    # pixel_x: 5386
+    # pixel_y: 5159
+    pixel_x: 5496
+    pixel_y: 5139
+    latitude: 48.8447045450658
+    longitude: 2.37406590751466#
+  #50055
+  Model_MetroStation_14_CourSaintEmilion:
+    name: Cour Saint-Emilion
+    MetroLine: Model_MetroLine_14
+    pixel_x: 6050
+    pixel_y: 400
+    latitude: 48.8334843071503
+    longitude: 2.38761298844824
+  #50047
+  Model_MetroStation_14_Pyramides:
+    name: Pyramides
+    MetroLine: Model_MetroLine_14
+    pixel_x: 3290
+    pixel_y: 3767
+    latitude: 48.8669463020695
+    longitude: 2.33366506577888
+  #1813
+  Model_MetroStation_14_Madeleine:
+    name: Madeleine
+    MetroLine: Model_MetroLine_14
+    pixel_x: 2668
+    pixel_y: 3723
+    latitude: 48.8700643517776
+    longitude: 2.32516370025939
