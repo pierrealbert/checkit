@@ -145,10 +145,20 @@ class SearchController extends Zend_Controller_Action
             && $form->isValid($this->getRequest()->getPost())
         ) {
             $values = $form->getValues();
-            echo '<pre>';
-            print_r($values);
-            echo '</pre>';
-            die();
+            
+            if (!$values['metro_station_id'] and $values['metro_line_id']) {
+                $values['metro_station_id'] = array();
+                foreach (Model_MetroStationTable::getInstance()->findByMetroLineId($values['metro_line_id']) as $station) {
+                    $values['metro_station_id'][] = $station->id;
+                }
+            }
+            $this->_searchConditions->data = array(
+                'PropertyXMetroStation.distance' => array('value' => $values['distance'],
+                                                          'sign' => '<',),
+                'PropertyXMetroStation.metro_station_id' => array('value' => $values['metro_station_id']),
+            );
+            
+            $this->_helper->redirector->gotoSimple('results', 'search', 'default');            
         }
         
         $this->view->form = $form;
