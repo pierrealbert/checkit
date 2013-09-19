@@ -37,7 +37,7 @@ Model_MetroLine:
     color: e0b03a
   Model_MetroLine_11:
     name: 11
-    color: 8e6538
+    color: cccccc
   Model_MetroLine_12:
     name: 12
     color: 028d5b
