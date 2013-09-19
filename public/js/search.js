@@ -254,7 +254,7 @@ function initSearchMetro(map, stations) {
     
     var graphicLayer = new OpenLayers.Layer.Image(
         'Metro',
-        'http://realestate.local/images/plan_metro.png',
+        '/images/plan_metro.png',
         // new OpenLayers.Bounds(-180, -88.759, 180, 88.759),
         // new OpenLayers.Bounds(0, 0, 1410, 1410),
         new OpenLayers.Bounds(0, 0, 8000, 8000),
