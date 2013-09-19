@@ -60,6 +60,7 @@ class Form_SearchMetro extends Ext_Form
         
         $this->addElement('radio', 'distance', array(
             'label'         => 'distance',
+            'value'         => '0.5',
             'required'      => true,
             'multiOptions'  => array('0.35' => '350 meters',
                                      '0.5' => '500 meters',
