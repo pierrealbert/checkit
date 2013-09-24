@@ -21,7 +21,7 @@
 </head>
     <body>
         <div id="wrapper">
-            <?= $this->partial('_partials/header.phtml', $this->getVars()) ?>
+            <?= $this->partial('_partials/header' . (!empty($this->homeHeader) ? '-home' : '') . '.phtml', $this->getVars()) ?>
             <div id="content">
                 <?= $this->messenger() ?>
                 <?= $this->layout()->content ?>
