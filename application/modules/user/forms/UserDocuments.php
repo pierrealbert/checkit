@@ -6,6 +6,7 @@ class User_Form_UserDocuments extends Ext_Form
     
     protected function _addGroupForResident($resident)
     {
+                
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
 
         $documents = array(); // is an array of additional attributes with document type as a key
@@ -84,7 +85,7 @@ class User_Form_UserDocuments extends Ext_Form
             $this->addElement('file', $name, array_merge($defaultOptions, $elementOptions));
             $elements[$name] = $this->getElement($name);
         }
-        $this->addDisplayGroup(array_keys($elements), 'resident_' . $resident->id, array('legend' => "Primary Resident ({$resident->resident_type})"));
+        $this->addDisplayGroup(array_keys($elements), 'resident_' . $resident->id, array('legend' => $resident->resident_name));
     }
     
     public function init()

@@ -61,7 +61,10 @@ class User_MyAccountController extends Zend_Controller_Action
         
         $count = $residents ? count($residents) : 1;       
         	
-		$form = new User_Form_UserResident($count, $selectedType);          
+		$form = new User_Form_UserResident($count, $selectedType);   
+                
+                $form->getSubForm("member_1")->getElement('resident_name')->setValue($user->first_name.' '.$user->last_name);
+                
         $form->setResidents($residents);
         		
 		$availableTypes     = Model_UserResident::getRentTypes();
@@ -84,6 +87,7 @@ class User_MyAccountController extends Zend_Controller_Action
 						$count = 1;
 				}
                 $form = new User_Form_UserResident($count, $type);
+                $form->getSubForm("member_1")->getElement('resident_name')->setValue($user->first_name.' '.$user->last_name);
                 $form->setResidents($residents);
 
 				$this->_helper->json($form->render());

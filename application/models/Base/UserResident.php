@@ -8,6 +8,7 @@
  * @property integer $id
  * @property integer $user_id
  * @property enum $rent_type
+ * @property string $resident_name
  * @property enum $resident_type
  * @property string $job_title
  * @property enum $employee_type
@@ -47,6 +48,10 @@ abstract class Model_Base_UserResident extends Ext_Doctrine_Record
              ),
              'size' => 15,
              'length' => 15,
+             ));
+        $this->hasColumn('resident_name', 'string', 255, array(
+             'type' => 'string',
+             'length' => '255',
              ));
         $this->hasColumn('resident_type', 'enum', 15, array(
              'type' => 'enum',
