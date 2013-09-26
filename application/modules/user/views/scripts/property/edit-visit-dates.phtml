@@ -1,0 +1,37 @@
+<?php 
+
+$this->jQuery()->addStylesheet('/css/ui/jquery-ui-1.8.14.css'); 
+echo $this->partial('property/visit-dates.phtml', $this);
+
+    $function = "$(function() {
+        $('#datepicker').datepicker({
+            dateFormat: 'yy-mm-dd',
+            defaultDate: " . time('Y-m-d') . ",
+            minDate: 0,
+            numberOfMonths: 2,
+            altField: '#availability',
+        });
+        $('#processVisitDate').on('submit', function(){
+            $.ajax({
+                type: 'POST',
+                url: '/user/property/process-visit-date/item/{$this->property->id}',
+                data: {
+                        phone: $('#phone').val(), 
+                        availability: $('#availability').val(),
+                        at_time: $('#at_time').val(),
+                        visitors: $('#visitors').val(),
+                    },
+                success: function(r) {
+                    if (!r.error) {
+                        $('#visits').empty().append(r.list);
+                    }
+                },
+                dataType: 'json'
+            });
+            return false;
+        });
+    });";
+
+    $this->jQuery()->addOnLoad($function)
+        ->addStylesheet('/css/ui/jquery-ui-1.10.3.css')
+        ->addStylesheet('/css/datepicker.css');
