@@ -318,10 +318,22 @@ class User_PropertyController extends Zend_Controller_Action
         $this->view->form = $form;
     }
 
+    public function editVisitDatesAction()
+    {
+        $this->visitDates();
+        $this->_helper->viewRenderer->renderScript('property/edit-visit-dates.phtml');
+    }
+
     /*
     * Set dates for visits
     */
     public function visitDatesAction()
+    {
+        $this->visitDates();
+        $this->_helper->viewRenderer->renderScript('property/add-visit-dates.phtml');
+    }
+
+    protected function visitDates()
     {
         $user = $this->_helper->auth->getCurrUser();
 
@@ -386,7 +398,6 @@ class User_PropertyController extends Zend_Controller_Action
 
         $this->view->form = $form;
     }
-
     /*
     * Publish Ad
     */
@@ -404,7 +415,33 @@ class User_PropertyController extends Zend_Controller_Action
 
             $property->save();
 
-            $this->_helper->messenger->success('property_added');
+            $this->_helper->messenger->success('property_published');
+            
+            $this->_helper->redirector('index', 'index', 'default');
+        }
+
+        $this->view->property = $property;
+
+        $this->view->current_state = Model_Property::STATE_PUBLISH_AD;
+
+        $this->view->form = $form;
+    }
+
+    public function unpublishAdAction()
+    {
+        $user = $this->_helper->auth->getCurrUser();
+
+        $property = $this->getProperty($user);
+
+        $form = new User_Form_PropertyUnPublishAd();
+
+        if ($this->getRequest()->isPost()) {
+            
+            $property->is_published = 0;
+
+            $property->save();
+
+            $this->_helper->messenger->success('property_unpublished');
             
             $this->_helper->redirector('index', 'index', 'default');
         }
@@ -628,6 +665,77 @@ class User_PropertyController extends Zend_Controller_Action
         $this->view->is_ajax = $isAjax;
 
         return  $this->view->render('property/process-visit-date.phtml');
+    }
+
+    public function myAdsAction()
+    {
+        $user = $this->_helper->auth->getCurrUser();
+
+        $ads = Doctrine::getTable('Model_Property')->findByOwnerId($user->id);
+
+        $this->view->ads = $ads;
+    }
+
+    public function removeAction()
+    {
+        $user = $this->_helper->auth->getCurrUser();
+        $property = $this->getProperty($user);
+    }
+
+    public function editAction()
+    {
+        $user = $this->_helper->auth->getCurrUser();
+
+        $property = $this->getProperty($user);
+
+        $form = new User_Form_PropertyEdit();
+
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($this->getRequest()->getParams())) {
+
+                $data = $form->getValues();
+
+                $property->merge($data);
+
+                $property->state = Model_Property::STATE_DESCRIPTION;
+
+                $property->save();
+
+                $this->_helper->redirector('description', 'property', 'user', array('item' => $property->id));
+            } else {
+                
+                $property->state = Model_Property::STATE_RENTAL;
+
+                $property->save();
+
+                $forms = new Zend_Session_Namespace('Forms');
+
+                $forms->rental_form = $form;
+
+                $this->_helper->redirector('rental', 'property', 'user', array('item' => $property->id));
+            }
+        } else {
+            $forms = new Zend_Session_Namespace('Forms');
+
+            if (isset($forms->rental_form)) {
+
+                $form = $forms->rental_form;
+
+                unset($forms->rental_form);
+            } elseif ($property) { // Fill form for edit
+
+                $form->populate($property->toArray());
+            }
+        }
+
+        $this->view->property = $property;
+
+        $this->view->current_state = Model_Property::STATE_RENTAL;
+
+        $this->view->form = $form;
+
+
+
     }
 }
 

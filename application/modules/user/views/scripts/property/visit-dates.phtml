@@ -1,29 +1,3 @@
-<?php $this->jQuery()->addStylesheet('/css/ui/jquery-ui-1.8.14.css'); ?>
-
-<table border="1" width="100%">
-    <tr valign="top">
-        <td width="33%">
-            <!-- Left menu -->
-            <table border="1" width="100%">
-                <tr>
-                    <td><?= $this->translate('status') ?>: 80%</td>
-                </tr>
-                <?php $states_info = $this->property->getStatesInfo(); ?>
-                <?php foreach($states_info as $state => $info): ?>
-                <tr>
-                        <?php if ($this->current_state == $state): ?>
-                    <td style="background-color:#3cbecc;"><?= $this->translate($info['name']) ?></td>
-                        <?php elseif ($this->property->state < $state): ?>
-                    <td><?= $this->translate($info['name']) ?></td>
-                        <?php else: ?>
-                    <td><a href="/user/property/<?= $info['action'] ?>/item/<?= $this->property->id ?>"><?= $this->translate($info['name']) ?></a></td>
-                        <?php endif; ?>
-                </tr>
-                <?php endforeach; ?>
-            </table>
-            <!-- /Left menu -->
-        </td>
-        <td>
             <form id="processVisitDate">
             <div>
                 <label for="phone">Phone:<br /> <input type="text" id="phone" name="phone" value="<?= htmlspecialchars($this->user->phone) ?>" /></label>
@@ -65,41 +39,3 @@
             <!-- Form -->
             <?= $this->form ?>
             <!-- /Form -->
-        </td>
-    </tr>
-</table>
-<?php
-
-    $function = "$(function() {
-        $('#datepicker').datepicker({
-            dateFormat: 'yy-mm-dd',
-            defaultDate: " . time('Y-m-d') . ",
-            minDate: 0,
-            numberOfMonths: 2,
-            altField: '#availability',
-        });
-        $('#processVisitDate').on('submit', function(){
-            $.ajax({
-                type: 'POST',
-                url: '/user/property/process-visit-date/item/{$this->property->id}',
-                data: {
-                        phone: $('#phone').val(), 
-                        availability: $('#availability').val(),
-                        at_time: $('#at_time').val(),
-                        visitors: $('#visitors').val(),
-                    },
-                success: function(r) {
-                    if (!r.error) {
-                        $('#visits').empty().append(r.list);
-                    }
-                },
-                dataType: 'json'
-            });
-            return false;
-        });
-    });";
-
-    $this->jQuery()->addOnLoad($function)
-        ->addStylesheet('/css/ui/jquery-ui-1.10.3.css')
-        ->addStylesheet('/css/datepicker.css');
-?>
