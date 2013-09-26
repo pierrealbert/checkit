@@ -5,3 +5,19 @@
 .right {
 	float: right !important;
 }
+
+.h220 {
+	height: 220px;
+}
+
+.bottom, .top {
+	position: absolute;
+}
+
+.bottom {
+	bottom: 0;
+}
+
+.top {
+	top: 0;
+}

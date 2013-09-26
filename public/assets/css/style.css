@@ -4,10 +4,12 @@
 */
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700);
 @import url('normalize.css');
-@import url('grid.css');
+@import url('typo.css');
 @import url('helpers.css');
 @import url('buttons.css');
 @import url('blocks.css');
+@import url('inputs.css');
+@import url('colors.css');
 
 body {
 	background: #e7e7e7 url('/images/background.png') repeat;
@@ -123,4 +125,28 @@ footer > .copyright {
 .promo-page .block {
 	position: relative;
 	top: 330px;
+}
+
+#promo-left h2 {
+	padding: 20px 0;
+	margin: 0;
+	font-size: 32px;
+	font-family: "Open Sans";
+	font-weight: 300;
+}
+
+#promo-left form {
+
+}
+
+#promo-left fieldset {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+#promo-left fieldset label {
+	display: block;
+	font-size: 16px;
+	color: #fff;
 }

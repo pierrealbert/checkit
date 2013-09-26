@@ -1,0 +1,14 @@
+.gray {
+	color: #b3b3b3;
+	text-shadow: 0px -1px 0px #808080;
+}
+
+.red {
+	color: #DE4C5D;
+	text-shadow: 0px -1px 0px #b23f50;
+}
+
+.blue {
+	color: #3cbecc;
+	text-shadow: 0px -1px 0px #008f94;
+}
