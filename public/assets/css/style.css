@@ -3,6 +3,7 @@
 	Sergey Loysha
 */
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700);
+@import url('normalize.css');
 @import url('grid.css');
 @import url('helpers.css');
 @import url('buttons.css');
@@ -37,7 +38,7 @@ header .logo {
 	float: left;
 	position: relative;
 	top: 6px;
-	background: url('/images/logo.png') no-repeat;
+	background: url('../images/logo.png') no-repeat;
 	width: 116px;
 	height: 27px;
 	text-indent: -9999px;
@@ -47,8 +48,8 @@ header .home-logo {
 	display: block;
 	float: left;
 	position: relative;
-	top: 6px;
-	background: url('/images/home-logo.png') no-repeat;
+	top: -10px;
+	background: url('../images/home-logo.png') no-repeat;
 	width: 118px;
 	height: 89px;
 	text-indent: -9999px;
@@ -92,7 +93,7 @@ footer > .copyright {
 }
 
 .promo-page {
-	background: url('/images/main.jpg') no-repeat;
+	background: url('../images/main.jpg') no-repeat;
 	height: 650px;
 }
 
@@ -107,7 +108,7 @@ footer > .copyright {
 .promo-page .promo .logo {
 	width: 283px;
 	height: 63px;
-	background: url('/images/promo-logo.png') no-repeat;
+	background: url('../images/promo-logo.png') no-repeat;
 }
 
 .promo-page .promo .text {

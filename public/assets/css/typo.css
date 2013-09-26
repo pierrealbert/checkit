@@ -1,0 +1,24 @@
+h1 {
+	font-size: 38px;
+	line-height: 42px;
+	font-family: "Open Sans";
+	font-weight: 300;
+}
+
+p {
+	color: #666666;
+}
+
+a:link {
+	font-size: 16px;
+	color: #3cbecc;
+	text-decoration: underline;
+}
+
+a:hover, a:active {
+	text-decoration: none;
+}
+
+a:visited {
+	color: #85577d;
+}
