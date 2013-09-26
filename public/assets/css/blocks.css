@@ -1,0 +1,12 @@
+.block {
+	border-radius: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0 60px;
+}
+
+.block-dark {
+	background: rgba(0,0,0,.7);
+	box-shadow: rgba(0,0,0,.9);
+	color: #fff;
+}

@@ -1,0 +1,125 @@
+/*
+	Realestate - ommi
+	Sergey Loysha
+*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700);
+@import url('grid.css');
+@import url('helpers.css');
+@import url('buttons.css');
+@import url('blocks.css');
+
+body {
+	background: #e7e7e7 url('/images/background.png') repeat;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 14px;
+	color: #4d4d4d;
+}
+
+.inner {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+header {
+	height: 40px;
+	line-height: 40px;
+	background-color: #f5f5f5;
+	box-shadow: 0px 1px 1px #e5e5e5;
+}
+
+header > .inner {
+	width: 1256px;
+}
+
+header .logo {
+	display: block;
+	float: left;
+	position: relative;
+	top: 6px;
+	background: url('/images/logo.png') no-repeat;
+	width: 116px;
+	height: 27px;
+	text-indent: -9999px;
+}
+
+header .home-logo {
+	display: block;
+	float: left;
+	position: relative;
+	top: 6px;
+	background: url('/images/home-logo.png') no-repeat;
+	width: 118px;
+	height: 89px;
+	text-indent: -9999px;
+}
+
+#header-nav {
+	width: 1138px;
+	display: block;
+	float: left;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#header-nav > li {
+	float: right;
+	margin-left: 50px;
+}
+
+#header-nav > li > a {
+	font-size: 14px;
+	text-shadow: 0px 1px 0px #fff;
+	color: #4b4b4b;
+	text-decoration: none;
+}
+
+header .btn {
+	top: -1px;
+	height: 31px;
+	line-height: 31px;
+	font-size: 16px !important;
+}
+
+footer > .copyright {
+	height: 30px;
+	line-height: 30px;
+	background: #4D4D4D;
+	color: #fff;
+	font-size: 12px;
+	text-align: center;
+}
+
+.promo-page {
+	background: url('/images/main.jpg') no-repeat;
+	height: 650px;
+}
+
+.promo-page .promo {
+	display: block;
+	position: relative;
+	float: right;
+	top: 60px;
+	right: 150px;
+}
+
+.promo-page .promo .logo {
+	width: 283px;
+	height: 63px;
+	background: url('/images/promo-logo.png') no-repeat;
+}
+
+.promo-page .promo .text {
+	margin-top: 15px;
+	font-family: "Open Sans";
+	font-size: 90px;
+	line-height: 80px;
+	font-weight: 300;
+	color: #fff;
+}
+
+.promo-page .block {
+	position: relative;
+	top: 330px;
+}
