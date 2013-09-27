@@ -1,14 +1,14 @@
 .gray {
-	color: #b3b3b3;
-	text-shadow: 0px -1px 0px #808080;
+	color: #b3b3b3 !important;
+	/*text-shadow: 0px -1px 0px #808080 !important;*/
 }
 
 .red {
-	color: #DE4C5D;
-	text-shadow: 0px -1px 0px #b23f50;
+	color: #DE4C5D !important;
+	/*text-shadow: 0px -1px 0px #b23f50 !important;*/
 }
 
 .blue {
-	color: #3cbecc;
-	text-shadow: 0px -1px 0px #008f94;
+	color: #3cbecc !important;
+	/*text-shadow: 0px -1px 0px #008f94 !important;*/
 }
