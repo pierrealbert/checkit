@@ -4,6 +4,8 @@ class Form_RegistrationPro extends Form_Registration
 {
     protected function _addElements($withSubmit = True)
     {
+        $this->setAttrib('id', 'registration-pro-form');
+        
         $this->addElement('text', 'company_name', array(
             'label'    => 'company_name',
             'required' => true,

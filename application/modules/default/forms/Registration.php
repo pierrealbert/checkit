@@ -4,6 +4,8 @@ class Form_Registration extends Ext_Form
 {
     protected function _addElements($withSubmit = True)
     {
+        $this->setAttrib('id', 'registration-base-form');
+        
         $this->addElement('text', 'first_name', array(
             'label'    => 'first_name',
             'required' => true,

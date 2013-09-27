@@ -5,6 +5,7 @@ class Form_Login extends Zend_Form
     public function init()
     {
         $this->setMethod('post');
+        $this->setAttrib('id', 'login-form');
 
         $this->addElement('text', 'email', array(
             'label'      => 'email',

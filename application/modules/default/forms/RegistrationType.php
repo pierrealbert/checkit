@@ -4,6 +4,8 @@ class Form_RegistrationType extends Ext_Form
 {
     protected function _addElements()
     {
+        $this->setAttrib('id', 'registration-form');
+        
         $this->addElement('radio', 'type', array(
             'label'         => 'signup_type',
             'required'      => true,
