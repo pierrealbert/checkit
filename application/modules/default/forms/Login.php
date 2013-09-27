@@ -27,6 +27,7 @@ class Form_Login extends Zend_Form
 
         $this->addElement('submit', 'login', array(
             'label'    => 'sign_in',
+            'id'       => 'login-button',
             'class'    => 'ui-state-default ui-corner-all'
         ));
     }

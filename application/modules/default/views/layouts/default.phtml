@@ -10,6 +10,8 @@
     $this->headLink()->appendStylesheet('/css/ui/jquery-ui-1.10.3.css');
     $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=' . $this->getEncoding());
 
+    $this->headScript()->appendFile('/js/jquery.form.js');
+    $this->headScript()->appendFile('/js/common.js');
     $this->headMeta()->appendHttpEquiv('Content-Language', 'en')
 ?>
 <?= $this->doctype() ?>
@@ -18,7 +20,8 @@
     <meta charset="UTF-8">
     <?= $this->headMeta() ?>
     <?= $this->headTitle('Frontend')->setSeparator(' - ') ?>
-    <?= $this->headLink() ?>
+    <?= $this->headLink() ?>    
+    <?= $this->jQuery() ?>
     <?= $this->headScript() ?>
 </head>
     <body>
@@ -30,7 +33,7 @@
                 <div class="loading-message"><?= $this->translate('loading') ?></div>
              </div>
         </main>
-        <?= $this->partial('_partials/footer.phtml', $this->getVars()) ?>
-        <?= $this->getPluginLoader('helper')->isLoaded('JQuery') ? $this->jQuery() : '' ?>
+        <?= $this->partial('_partials/footer.phtml', $this->getVars()) ?>        
+        <div id="modal-dialog"></div>
     </body>
 </html>
