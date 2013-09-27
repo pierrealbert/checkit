@@ -10,9 +10,10 @@
 @import url('blocks.css');
 @import url('inputs.css');
 @import url('colors.css');
+@import url('anonce.css');
 
 body {
-	background: #e7e7e7 url('/images/background.png') repeat;
+	background: #e7e7e7 url('../images/background.png') repeat;
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 	font-weight: normal;
 	font-size: 14px;

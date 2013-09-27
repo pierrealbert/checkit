@@ -15,4 +15,9 @@ input {
 	border-radius: 5px;
 	color: #4d4d4d;
 	outline: none;
+	background: #FFFFFF;
+}
+input:focus{
+	background: #b6e8ed;
+	box-shadow: inset 0px 1px 0 #3cbecc;
 }

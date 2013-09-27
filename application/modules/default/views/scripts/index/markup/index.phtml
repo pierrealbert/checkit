@@ -1,0 +1,7 @@
+<?php
+$all = scandir(__DIR__);
+foreach ($all as $item) {
+	if (preg_match('/.+\.phtml$/', $item))
+		echo '<div><a href="/index/markup/file/'.$item.'">'.$item.'</a></div>';
+}
+?>
