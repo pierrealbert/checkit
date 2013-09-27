@@ -3,9 +3,7 @@
 class Form_RegistrationPro extends Form_Registration
 {
     protected function _addElements($withSubmit = True)
-    {
-        $this->setAttrib('id', 'registration-pro-form');
-        
+    {       
         $this->addElement('text', 'company_name', array(
             'label'    => 'company_name',
             'required' => true,
@@ -38,4 +36,16 @@ class Form_RegistrationPro extends Form_Registration
         
         parent::_addElements($withSubmit);
     }
+    
+    public function init()
+    {
+        $this->setAttrib('id', 'registration-pro-form');
+        
+        $this->setAction($this->getView()->url(array(
+            'controller' => 'registration',
+            'action'     => 'pro'
+        ), null, true)); 
+
+        $this->_addElements();       
+    }    
 }

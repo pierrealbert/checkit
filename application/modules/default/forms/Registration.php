@@ -4,8 +4,6 @@ class Form_Registration extends Ext_Form
 {
     protected function _addElements($withSubmit = True)
     {
-        $this->setAttrib('id', 'registration-base-form');
-        
         $this->addElement('text', 'first_name', array(
             'label'    => 'first_name',
             'required' => true,
@@ -75,9 +73,13 @@ class Form_Registration extends Ext_Form
     
     public function init()
     {
-        $this->setAttrib('id', 'form-registration');
+        $this->setAttrib('id', 'registration-base-form');
+        
+        $this->setAction($this->getView()->url(array(
+            'controller' => 'registration',
+            'action'     => 'base'
+        ), null, true)); 
 
-        $this->_addElements();
-       
+        $this->_addElements();       
     }
 }

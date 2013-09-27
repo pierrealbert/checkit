@@ -6,6 +6,10 @@ class Form_Login extends Zend_Form
     {
         $this->setMethod('post');
         $this->setAttrib('id', 'login-form');
+        $this->setAction($this->getView()->url(array(
+            'controller' => 'login',
+            'action'     => 'index'
+        ), null, true));
 
         $this->addElement('text', 'email', array(
             'label'      => 'email',

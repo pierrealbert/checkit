@@ -4,19 +4,17 @@ class LoginController extends Zend_Controller_Action
 {
     protected function _redirectAfterLogin()
     {
-        $referralUrl = new Zend_Session_Namespace('ReferralUrl');
-
-        if (isset($referralUrl->url)) {
-            $url = $referralUrl->url;
-            unset($referralUrl->url);
-            $this->_helper->redirector->gotoUrl($url);
-        }
+        $redirectUrl = '/user/my-account/index';
+                           
         $currUser = $this->_helper->auth->getCurrUser();
-        
         if ($currUser->isResident() && !$currUser->hasResidents()) {
-            $this->_helper->redirector->gotoSimple('residents', 'my-account', 'user');
+            $redirectUrl = '/user/my-account/residents';
         }
-        $this->_helper->redirector->gotoSimple('index', 'my-account', 'user');
+        
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            $this->_helper->redirector->gotoUrl($redirectUrl);
+        }
+        $this->view->redirectUrl = $redirectUrl;
     }
     
     public function indexAction()
@@ -41,9 +39,8 @@ class LoginController extends Zend_Controller_Action
                 $this->_autorize($user);
 
                 $this->_redirectAfterLogin();
-            } else {
-                $this->_helper->messenger->error('login_error_user');
-                $this->_helper->redirector->gotoSimple('index', 'login', 'default');
+            } else {                                
+                $form->getElement('email')->addError('login_error_user');
             }
         }
 
@@ -88,7 +85,7 @@ class LoginController extends Zend_Controller_Action
                 'req_perms' => 'email',
                 'scope' => 'email,publish_stream',
             ));
-            Header('Location: ' . $facebookLoginUrl);
+            header('Location: ' . $facebookLoginUrl);
         }
 
         if ($facebookProfile == null) {
