@@ -1,7 +1,27 @@
-Use <a href="<?= $this->url(array('module' => 'default', 'controller' => 'login', 'action' => 'facebook'), null, true) ?>">Facebook</a> account
+<div id="registration">
+	<div class="registration-top">
+		<span>Sélectionnez votre situation, </br><strong>Ommi</strong> vous apporte une aide adaptée à vos besoins</span>
+		<div class="registration-top-buttons">
+			<a href="#" class="btn btn-red">Je cherche une location</a><span class="sep">ou</span><a href="#" class="btn btn-gray">Je suis propriétaire</a>
+		</div>
+	</div>
+	<div class="registration-type">
+		<a href="#" class="btn btn-blue">S’inscrire par email</a>
+		<a href="<?= $this->url(array('module' => 'default', 'controller' => 'login', 'action' => 'facebook'), null, true) ?>" class="btn btn-gray btn-fb">S’inscrire avec Facebook</a>
+		<p>En cliquant sur « S’inscrire avec Facebook », vous confirmez que vous</br> acceptez les <a href="#">Conditions générales.</a></p>
+	</div>
+	<div class="registration-bottom">
+		<a href="#bottom-link1" class="red">Je suis un professionnel</a>
+		<p>Vous avez déjà un compte? <a href="#bottom-link2">Connectez-vous</a></p>
+	</div>
+</div>
+
+<!--
+
 <?= $this->form ?>
-<p>By clicking "Create Account", you confirm that you accept the
-<a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</p>
+
+-->
+
 <? if ($this->isAjax) : ?>
     <script type="text/javascript">
         $(function() {

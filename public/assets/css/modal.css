@@ -1,3 +1,29 @@
+.lock {
+	overflow: hidden;
+}
+
+.themodal-overlay {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	top: 0;
+	right: 0;
+	z-index: 100;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+
+}
+
+.themodal-overlay > * {
+	-webkit-transform: translateZ(0px);
+}
+
+.themodal-overlay {
+	background: rgba(0, 0, 0, 0.5);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = #7F000000, endColorstr = #7F000000);
+	zoom: 1;
+}
+
 #modal {
     background-color: transparent;
     width: 630px;
@@ -52,36 +78,55 @@
 	padding: 0 40px;
 }
 
-.lock {
-	/* when modal is opened we're removing scrollbars from the main content */
-	overflow: hidden;
+/*
+	Modal registration
+*/
+
+#modal .registration-top {
+background-color: #E5E5E5;
+padding: 30px 40px;
+margin: 0 -40px;
 }
 
-.themodal-overlay {
-	/* overlay will stay fixed and will take all the space available */
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	top: 0;
-	right: 0;
-	z-index: 100;
-
-	/* if modal content doesn't fit inside the overlay, display scrollbars */
-	overflow: auto;
-
-	/* allow one-finger iPad scrolling */
-	-webkit-overflow-scrolling: touch;
-
+#modal .registration-top-buttons {
+	margin: 20px 0 0 0;
+	line-height: 45px;
 }
 
-/* fix for iPad glitches */
-.themodal-overlay > * {
-	-webkit-transform: translateZ(0px);
+#modal .registration-top-buttons .btn {
+	width: 220px;
 }
 
-.themodal-overlay {
-	background: rgba(0, 0, 0, 0.5);
-	/* IE6–IE8 */
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = #7F000000, endColorstr = #7F000000);
-	zoom: 1;
+#modal .registration-top-buttons .sep {
+	display: inline-block;
+	width: 50px;
+	text-align: center;
+}
+
+#modal .registration-type {
+	margin: 30px 0;
+}
+
+#modal .registration-type .btn {
+	display: block;
+	margin: 20px 0;
+}
+
+#modal .registration-type .btn-fb {
+	background-position: 85px center;
+}
+
+#modal .registration-type p > a {
+	color: #666;
+	font-size: 14px;
+}
+
+#modal .registration-bottom {
+	border-top: 2px dotted #d3d3d3;
+	padding: 20px 40px;
+	margin: 0 -40px;
+}
+
+#modal .registration-bottom > p {
+	margin-bottom: 0;
 }

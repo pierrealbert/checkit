@@ -102,3 +102,23 @@
 	box-shadow: none;
 	top: 3px;
 }
+
+/*
+	Facebook button
+*/
+
+.btn.btn-fb, button.btn-fb {
+	background: #2e58a6 url('../images/btn-fb-icon.png') 15px center no-repeat;
+	box-shadow: 0 3px 0 #203991;
+	text-shadow: 0px -1px 0px #203991 !important;
+}
+
+.btn.btn-fb:hover, button.btn-fb:hover {
+	box-shadow: 0 1px 0 #203991;
+	top: 2px;
+}
+
+.btn.btn-fb:active, button.btn-fb:active {
+	box-shadow: none;
+	top: 3px;
+}
