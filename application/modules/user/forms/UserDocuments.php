@@ -1,12 +1,11 @@
 <?php
 
-class User_Form_UserDocuments extends Ext_Form
-{
+class User_Form_UserDocuments extends Ext_Form {
+
     protected $_residents;
-    
-    protected function _addGroupForResident($resident)
-    {
-                
+
+    protected function _addGroupForResident($resident) {
+
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
 
         $documents = array(); // is an array of additional attributes with document type as a key
@@ -87,22 +86,37 @@ class User_Form_UserDocuments extends Ext_Form
         }
         $this->addDisplayGroup(array_keys($elements), 'resident_' . $resident->id, array('legend' => $resident->resident_name));
     }
-    
-    public function init()
-    {
+
+    public function init() {
         $this->setMethod('post');
-        
-		foreach($this->_residents as $resident) {
+
+        foreach ($this->_residents as $resident) {
             $this->_addGroupForResident($resident);
-		}
+        }
 
         $this->addElement('submit', 'save', array(
-            'label'    => 'save',
+            'label' => 'save',
         ));
-	}
 
-    public function isValid($data)
-    {
+        $this->addElement(
+                'hidden', 'dummy', array(
+            'required' => false,
+            'ignore' => true,
+            'autoInsertNotEmptyValidator' => false,
+            'decorators' => array(
+                array(
+                    'HtmlTag', array(
+                        'tag' => 'div',
+                        'id' => 'queue'
+                    )
+                )
+            )
+                )
+        );
+        $this->dummy->clearValidators();
+    }
+
+    public function isValid($data) {
         $result = True;
 
         // Little hack because Zend doesn't support this kind of vilidation for File elements
@@ -119,14 +133,14 @@ class User_Form_UserDocuments extends Ext_Form
                 }
             }
         }
-        
+
         $result = parent::isValid($data) and $result;
         return $result;
     }
-    
-	public function setResidents($residents)
-	{
-		$this->_residents = $residents;
-		return $this;
-	}
+
+    public function setResidents($residents) {
+        $this->_residents = $residents;
+        return $this;
+    }
+
 }

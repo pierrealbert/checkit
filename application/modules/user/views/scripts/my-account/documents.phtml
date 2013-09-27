@@ -1,1 +1,25 @@
-<?= $this->form ?>
+<?php
+
+$this->headScript()->appendFile('/js/jquery.uploadify.min.js');
+$this->headLink()->appendStylesheet('/css/uploadify.css');
+
+echo $this->form;
+
+$function = "$(function() {
+			$('input[type=\"file\"]').each(function(){
+                            var inputObj=$(this);
+                            inputObj.uploadify({
+                                'formData': {
+                                    fieldId: inputObj.attr('id'), 
+                                    docType: inputObj.attr('documentType')
+                                },
+                                'multi': false,
+                                'method'   : 'post',
+				'swf'      : '/js/uploadify.swf',
+				'uploader' : 'documents'
+			});
+                        });
+		});";
+
+$this->jQuery()->addOnLoad($function);
+?>
