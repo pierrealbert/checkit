@@ -130,3 +130,24 @@ margin: 0 -40px;
 #modal .registration-bottom > p {
 	margin-bottom: 0;
 }
+
+#modal #registration-pro-form dl {
+	margin: 0;
+}
+
+#modal #registration-pro-form dl dt {
+	margin: 5px 0;
+}
+
+#modal #registration-pro-form dl dt label {
+	font-size: 16px;
+}
+
+#modal #registration-pro-form dl dd {
+	margin: 0;
+}
+
+#modal #registration-pro-form dl dd input {
+	display: block;
+	width: 440px;
+}
