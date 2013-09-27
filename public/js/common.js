@@ -4,7 +4,8 @@ $(function() {
     $('#modal-dialog').dialog({
         autoOpen: false,
         modal: true,
-        width: 630
+        width: 630,
+        title: 'Demo title'
     });
 
     $('.open-in-modal').click(function(event) {
