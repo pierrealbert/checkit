@@ -3,7 +3,8 @@ $(function() {
 
     $('#modal-dialog').dialog({
         autoOpen: false,
-        modal: true
+        modal: true,
+        width: 630
     });
 
     $('.open-in-modal').click(function(event) {
