@@ -11,6 +11,7 @@
 @import url('inputs.css');
 @import url('colors.css');
 @import url('anonce.css');
+@import url('modal.css');
 
 body {
 	background: #e7e7e7 url('../images/background.png') repeat;

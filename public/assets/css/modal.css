@@ -1,0 +1,87 @@
+#modal {
+    background-color: transparent;
+    width: 630px;
+    margin: 100px auto 0 auto;
+}
+
+#modal .modal-title-container {
+	position: relative;
+	padding: 17px 70px 17px 40px;
+	background-color: #4d4d4d;
+	border-radius: 10px 10px 0 0;
+}
+
+#modal .modal-title-container > .modal-close {
+	position: absolute;
+	width: 30px;
+	height: 30px;
+    top: 20px;
+    right: 20px;
+    background: url('../images/modal-close.png') no-repeat;
+    cursor: pointer;
+    -webkit-transition: opacity .2s;
+    -moz-transition: opacity .2s;
+    -ms-transition: opacity .2s;
+    -o-transition: opacity .2s;
+    transition: opacity .2s;
+}
+
+#modal .modal-title-container > .modal-close:hover {
+	opacity: .7;
+}
+
+#modal .modal-title-container > .modal-close:active {
+	opacity: .9;
+}
+
+#modal .modal-title-container > .modal-title {
+	font-family: "Open Sans";
+	font-size: 36px;
+	line-height: 36px;
+	font-weight: 300;
+	color: #fff;
+	text-shadow: 0px -1px 0px #333;
+}
+
+#modal .modal-content-container {
+	min-height: 100px;
+	background-color: #f2f2f2;
+	border-radius: 0 0 10px 10px;
+	border-top: 1px solid #f2f2f2;
+	box-shadow: 0px 3px 0px #ccc;
+	padding: 0 40px;
+}
+
+.lock {
+	/* when modal is opened we're removing scrollbars from the main content */
+	overflow: hidden;
+}
+
+.themodal-overlay {
+	/* overlay will stay fixed and will take all the space available */
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	top: 0;
+	right: 0;
+	z-index: 100;
+
+	/* if modal content doesn't fit inside the overlay, display scrollbars */
+	overflow: auto;
+
+	/* allow one-finger iPad scrolling */
+	-webkit-overflow-scrolling: touch;
+
+}
+
+/* fix for iPad glitches */
+.themodal-overlay > * {
+	-webkit-transform: translateZ(0px);
+}
+
+.themodal-overlay {
+	background: rgba(0, 0, 0, 0.5);
+	/* IE6–IE8 */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = #7F000000, endColorstr = #7F000000);
+	zoom: 1;
+}

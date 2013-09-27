@@ -5,13 +5,10 @@
 		'type'  => 'image/x-icon'
     ));
 
-    //$this->headLink()->appendStylesheet('/css/styles.css');
     $this->headLink()->appendStylesheet('/assets/css/style.css');
-    $this->headLink()->appendStylesheet('/css/ui/jquery-ui-1.10.3.css');
     $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=' . $this->getEncoding());
-
-    $this->headScript()->appendFile('/js/jquery.form.js');
     $this->headScript()->appendFile('/js/common.js');
+    $this->headScript()->appendFile('/assets/js/jquery.the-modal.js');
     $this->headMeta()->appendHttpEquiv('Content-Language', 'en')
 ?>
 <?= $this->doctype() ?>
@@ -25,6 +22,13 @@
     <?= $this->headScript() ?>
 </head>
     <body>
+        <div id="modal" style="display: none;">
+            <div class="modal-title-container">
+                <div class="modal-title">Demo title</div>
+                <div class="modal-close"></div>
+            </div>
+            <div class="modal-content-container"></div>
+        </div>
         <?= $this->partial('_partials/header' . (!empty($this->homeHeader) ? '-home' : '') . '.phtml', $this->getVars()) ?>
         <main>
             <?= $this->messenger() ?>
@@ -34,8 +38,5 @@
              </div>
         </main>
         <?= $this->partial('_partials/footer.phtml', $this->getVars()) ?>        
-        <div id="modal-dialog">
-            <div id="modal-dialog-content"></div>
-        </div>
     </body>
 </html>
