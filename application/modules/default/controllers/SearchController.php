@@ -171,6 +171,54 @@ class SearchController extends Zend_Controller_Action
     {
         $form = new Form_SearchDraw();
         
+        if ($this->getRequest()->isPost()
+            && $form->isValid($this->getRequest()->getPost())
+        ) {
+            $geo = new Ext_Geo();
+            $values = $form->getValues();
+            $polygon = array();
+            foreach (json_decode($values['drawn_polygon']) as $vertex) {
+                $polygon[] = array('x' => $vertex->lat,
+                                   'y' => $vertex->lng);
+            }
+            unset($values['drawn_polygon']);
+
+            // Optimization ??? {{{
+            // $districts = Model_RegionDistrictTable::getInstance()->findAll();
+            // $foundDistricts = $geo->polygonRegionsIntersect($polygon, $districts);
+            // $districtIds = array();
+            // foreach ($foundDistricts as $foundDistrict) {
+            //     $districtIds[] = $foundDistrict->id;
+            // }
+            // $blocks = Model_RegionBlockTable::getInstance()->getByRegionDistrictIds($districtIds);
+            // }}} Optimization ??? 
+
+            $blocks = Model_RegionBlockTable::getInstance()->findAll();
+            $foundBlocks = $geo->polygonRegionsIntersect($polygon, $blocks);
+            $blockIds = array();
+            foreach ($foundBlocks as $foundBlock) {
+                $blockIds[] = $foundBlock->id;
+            }
+            $propertiesByBlocks = Model_PropertyTable::getInstance()->search(array('region_block_id' => array('value' => $blockIds)));
+            if ($propertiesByBlocks->count() < 1000) { // TODO: needs to decide how much properties is to much
+                $foundPropertyIds = array();
+                foreach ($propertiesByBlocks as $property) {
+                    if ($geo->isPointInPolygon(array($property->latitude, $property->longitude), $polygon)) {
+                        $foundPropertyIds[] = $property->id;
+                    }
+                }
+                $this->_searchConditions->data = array(
+                    'id' => array('value' => $foundPropertyIds),
+                );
+            } else {
+                $this->_searchConditions->data = array(
+                    'region_block_id' => array('value' => $blockIds),
+                );
+            }
+
+            $this->_helper->redirector->gotoSimple('results', 'search', 'default');            
+        }
+        
         $this->view->form = $form;
     }
     
