@@ -1,3 +1,20 @@
+.cf:before, .cf:after {
+	content: '';
+	display: table;
+}
+
+.cf {
+	*zoom: 1;
+}
+
+.cf:after {
+	clear: both;
+}
+
+/*
+	
+*/
+
 .left {
 	float: left !important;
 }
@@ -24,4 +41,8 @@
 
 .w200 {
 	width: 200px;
+}
+
+.w250 {
+	width: 250px;
 }
