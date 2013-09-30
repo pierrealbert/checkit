@@ -89,9 +89,10 @@
 	float: left;
 }
 .main-container-box .container-box .grid-block-big{
-	padding: 15px 28px 53px;
-	width: 191px;
-	margin-right: 20px;
+	padding: 31px 28px 60px;
+	width: 198px;
+	margin-right: 46px;
+	position: relative;
 }
 .grid-block{
 	width: 700px;
@@ -121,12 +122,26 @@
 	margin: 0 0 10px;
 	color: #666666;
 }
+.price-box{
+	padding-left: 46px;
+	width: 94px;
+}
+.info-box{
+	width: 497px;
+}
 .triangle-left{
-	width: 0px;
-	height: 0px;
+	position: absolute;
+	width: 0;
+	height: 0;
 	border-bottom: 22px solid transparent;
-	border-left: 27px solid #FF0000;
-	border-top: 22px solid transparent
+	border-left: 23px solid #F5F5F5;
+	border-top: 22px solid transparent;
+	right: -23px;
+	top: 41px;
+	/*box-shadow: 0px 3px 0px #D8D8D8;*/
+}
+.triangle-second{
+	top: 172px;
 }
 
 /*menu annonce*/
@@ -171,45 +186,88 @@
 	color: #4d4d4d;
 }
 
+
 .inset-discription{
-	padding: 20px;
+	padding: 28px;
 	overflow: hidden;
 }
 
 
-
 .table-discription{
-	width: 630px;
+	width: 655px;
 	float: left;
 }
+
+
 .cellsblock{
 	width: 100%;
 	display: table;
 	background: #fff;
-	/*border-radius: 10px;*/
+	border-bottom: 1px solid #cccccc;
+}
+.cellsblock:nth-child(2n){
+	background: #e5e5e5;
+}
+.cellsblock-first{
+	box-shadow: inset 0 1px 0 #cccccc;
+	-moz-border-radius-topleft: 10px;
+	-webkit-border-top-left-radius: 10px;
+	border-top-left-radius: 10px;
+	-moz-border-radius-topright: 10px;
+	-webkit-border-top-right-radius: 10px;
+	border-top-right-radius: 10px;
+}
+.cellsblock-last{
+	-moz-border-radius-bottomright: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom: none;
 }
 .cellsblock .cellleft, .cellright{
 	display: table-cell !important;
 	display: inline;
 	padding: 10px;
-	border-bottom: 1px solid #cccccc;
 }
 
 .cellsblock .cellleft p,
 .cellsblock .cellright p{
 	margin: 0;
+	font-size: 16px;
 }
 .cellsblock .cellleft{
-	width: 30%;
+	width: 35%;
 	border-right: 1px solid #cccccc;
-	color: #999999;
+
 }
 .cellsblock .cellright{
-	width: 70%;
 	padding-left: 30px;
 }
-
+.cellsblock .cellleft p{
+	color: #999999;
+}
+.cellsblock .cellright p{
+	color: #4d4d4d;
+}
 
 .block-photo{
 	float: right;
+	width: 250px;
+}
+.info-block-photo{
+	background: #fff;
+	border-radius: 10px;
+	padding:  20px 35px 20px 20px;
+	box-shadow: inset 0 1px 0 #CCCCCC;
+	margin-bottom: 40px;
+}
+.info-block-photo p{
+	font-size: 16px;
+}
+
+.photo-gallery{
+	text-align: center;
+	margin-bottom: 40px;
 }

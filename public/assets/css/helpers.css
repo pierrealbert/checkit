@@ -9,7 +9,9 @@
 .h220 {
 	height: 220px;
 }
-
+.h100{
+	height: 100px;
+}
 .bottom, .top {
 	position: absolute;
 }
