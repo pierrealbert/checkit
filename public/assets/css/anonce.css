@@ -271,3 +271,10 @@
 	text-align: center;
 	margin-bottom: 40px;
 }
+.btn-nav-group{
+	width: 251px;
+}
+.btn-nav-group .btn{
+	margin-left: 0;
+	margin-top: 10px;
+}
