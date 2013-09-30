@@ -9,11 +9,11 @@
 	height: 108px;
 	padding-top: 20px;
 }
-.conteiner-text{
+.container-text{
 	width: 1000px;
 	margin: 0 auto;
 }
-.conteiner-text .white-txt{
+.container-text .white-txt{
 	margin: 0 0 10px 0;
 	color: #fff;
 	font-size: 35px;
@@ -82,13 +82,13 @@
 .box-button{
 	width: 200px;
 }
-.main-conteiner-box{
+.main-container-box{
 	overflow: hidden;
 }
-.main-conteiner-box .conteiner-box{
+.main-container-box .container-box{
 	float: left;
 }
-.main-conteiner-box .conteiner-box .grid-block-big{
+.main-container-box .container-box .grid-block-big{
 	padding: 15px 28px 53px;
 	width: 191px;
 	margin-right: 20px;
@@ -180,6 +180,7 @@
 
 .table-discription{
 	width: 630px;
+	float: left;
 }
 .cellsblock{
 	width: 100%;
