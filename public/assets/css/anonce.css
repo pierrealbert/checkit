@@ -196,6 +196,7 @@
 .table-discription{
 	width: 655px;
 	float: left;
+	margin-top: 10px;
 }
 
 
@@ -277,4 +278,18 @@
 .btn-nav-group .btn{
 	margin-left: 0;
 	margin-top: 10px;
+}
+
+.btn .btn-heart {
+	background: url(../images/icon-heart.png)no-repeat;
+	background-position: 10px 50%;
+	font-size: 18px;
+	height: 12px;
+	line-height: 26px;
+	padding-left: 50px;
+}
+
+.control-btn .btn-next{
+	background: url(../images/btn-next.png)no-repeat;
+	height: 20px;
 }
