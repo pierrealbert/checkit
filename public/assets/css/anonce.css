@@ -25,6 +25,9 @@
 	border-left: 3px dotted #e5e5e5;
 	padding: 12px 20px;
 }
+.box-text:first-child{
+	border-left: none;
+}
 .slash{
 	color: #b3b3b3;
 	margin: 0 5px;
@@ -86,7 +89,8 @@
 	float: left;
 }
 .main-conteiner-box .conteiner-box .grid-block-big{
-	width: 245px;
+	padding: 15px 28px 53px;
+	width: 191px;
 	margin-right: 20px;
 }
 .grid-block{
@@ -97,9 +101,114 @@
 	width: 485px;
 }
 .inner-box{
+	overflow: hidden;
+}
+.txt-box{
 	float: left;
 	width: 187px;
 }
-.inner-box p{
+.txt-box p{
 	margin: 0;
+}
+.price-small{
+	font-weight: bold;
+	font-size: 20px;
+	margin-top: 0;
+}
+.title-ad{
+	font-weight: normal;
+	font-size: 20px;
+	margin: 0 0 10px;
+	color: #666666;
+}
+.triangle-left{
+	width: 0px;
+	height: 0px;
+	border-bottom: 22px solid transparent;
+	border-left: 27px solid #FF0000;
+	border-top: 22px solid transparent
+}
+
+/*menu annonce*/
+
+.menu-annonce{
+	background: #4d4d4d;
+	list-style: none;
+	overflow: hidden;
+	padding-top: 10px;
+	-moz-border-radius-topleft: 10px;
+	-webkit-border-top-left-radius: 10px;
+	border-top-left-radius: 10px;
+	-moz-border-radius-topright: 10px;
+	-webkit-border-top-right-radius: 10px;
+	border-top-right-radius: 10px;
+}
+.menu-annonce ul{
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+.menu-annonce li{
+	float: left;
+	margin-left: 15px;
+}
+.menu-annonce li a{
+	text-decoration: none;
+	background: #999999;
+	color: #fff;
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-top-left-radius: 5px;
+	border-top-left-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-right-radius: 5px;
+	border-top-right-radius: 5px;
+	padding: 10px 20px;
+	display: block;
+
+}
+.menu-annonce  a.active{
+	background: #f2f2f2;
+	color: #4d4d4d;
+}
+
+.inset-discription{
+	padding: 20px;
+	overflow: hidden;
+}
+
+
+
+.table-discription{
+	width: 630px;
+}
+.cellsblock{
+	width: 100%;
+	display: table;
+	background: #fff;
+	/*border-radius: 10px;*/
+}
+.cellsblock .cellleft, .cellright{
+	display: table-cell !important;
+	display: inline;
+	padding: 10px;
+	border-bottom: 1px solid #cccccc;
+}
+
+.cellsblock .cellleft p,
+.cellsblock .cellright p{
+	margin: 0;
+}
+.cellsblock .cellleft{
+	width: 30%;
+	border-right: 1px solid #cccccc;
+	color: #999999;
+}
+.cellsblock .cellright{
+	width: 70%;
+	padding-left: 30px;
+}
+
+
+.block-photo{
+	float: right;
 }
