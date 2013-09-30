@@ -13,29 +13,93 @@
 	width: 1000px;
 	margin: 0 auto;
 }
-.white{
+.conteiner-text .white-txt{
 	margin: 0 0 10px 0;
 	color: #fff;
-	font-size: 30px;
+	font-size: 35px;
 	text-align: left;
 	text-shadow: 0 -1px 0 #4d4d4d;
 }
 .box-text{
 	float: left;
-	border-left: 1px dotted #e5e5e5;
-	padding: 10px 20px;
+	border-left: 3px dotted #e5e5e5;
+	padding: 12px 20px;
 }
-.slash{
+.box-text .slash{
 	color: #b3b3b3;
 	margin: 0 5px;
 	font-weight: bold;
 }
 .black-txt{
 	margin: 0;
-	font-family: "Open Sans";
 	color: #4d4d4d;
-	font-weight: normal;
-	font-size: 25px;
+	font-size: 30px;
 	text-shadow: 1px 1px 0px rgba(255, 255, 255, 1);
 
+}
+.box-text .txt-bold{
+	font-weight: bold;
+	font-size: 17px;
+	margin: 7px 0;
+}
+.box-text .date-txt{
+	color: #666666;
+	text-shadow: 1px 1px 0px rgba(255, 255, 255, 1);
+	margin: 15px 0;
+}
+.box-text .small-btn{
+	text-transform: uppercase;
+	font-weight: normal;
+	height: 30px;
+	line-height: 30px;
+	font-size: 15px;
+	float: right;
+}
+.box-text .big-btn{
+	height: 111px;
+	line-height: 111px;
+}
+.box-text .loyer{
+	color: #b3b3b3;
+	text-align: right;
+}
+.box-text .price{
+	color: #666666;
+	font-size: 36px;
+	font-weight: bold;
+	text-align: right;
+	padding-bottom: 25px;
+}
+.box-appart{
+	width: 511px;
+}
+.box-price{
+	width: 160px;
+}
+.box-button{
+	width: 200px;
+}
+.main-conteiner-box{
+	overflow: hidden;
+}
+.main-conteiner-box .conteiner-box{
+	float: left;
+}
+.main-conteiner-box .conteiner-box .grid-block-big{
+	width: 245px;
+	margin-right: 20px;
+}
+.grid-block{
+	width: 700px;
+	margin-bottom: 3px;
+}
+.grid-same{
+	width: 485px;
+}
+.inner-box{
+	float: left;
+	width: 187px;
+}
+.inner-box p{
+	margin: 0;
 }
