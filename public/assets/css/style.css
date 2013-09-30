@@ -67,6 +67,15 @@ header .home-logo {
 	width: 118px;
 	height: 89px;
 	text-indent: -9999px;
+	-webkit-transition: top .2s;
+	-moz-transition: top .2s;
+	-ms-transition: top .2s;
+	-o-transition: top .2s;
+	transition: top .2s;
+}
+
+header .home-logo:hover {
+	top: -5px;
 }
 
 #header-nav {
@@ -230,4 +239,25 @@ header .btn {
 
 .social-links-block .social-links > .social-link.sl-in {
 	background-position: -200px 0;
+}
+
+/*
+	Index-page (home)
+*/
+
+.index-row-six {
+	
+}
+
+.index-row-six-text {
+	float: left;
+	width: 50%;
+}
+
+.index-row-six-link {
+	position: absolute;
+	width: 50%;
+	text-align: right;
+	bottom: 0;
+	right: 0;
 }

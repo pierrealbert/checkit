@@ -26,9 +26,15 @@
 .h220 {
 	height: 220px;
 }
-.h100{
+
+.h100 {
 	height: 100px;
 }
+
+.h120 {
+	height: 120px;
+}
+
 .bottom, .top {
 	position: absolute;
 }
