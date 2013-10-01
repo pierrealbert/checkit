@@ -101,16 +101,8 @@
 .grid-same{
 	width: 485px;
 }
-.inner-box{
-	overflow: hidden;
-}
-.txt-box{
-	float: left;
-	width: 187px;
-}
-.txt-box p{
-	margin: 0;
-}
+
+
 .price-small{
 	font-weight: bold;
 	font-size: 20px;
@@ -280,16 +272,29 @@
 	margin-top: 10px;
 }
 
-.btn .btn-heart {
-	background: url(../images/icon-heart.png)no-repeat;
-	background-position: 10px 50%;
-	font-size: 18px;
+.i-group{
+	background-image: url(../../images/icons/glyphicons-halflings-white.png);
+	background-repeat: no-repeat;
+	padding: 0 0 0 22px;
+	margin-right: 26px;
+	width: 16px;
 	height: 12px;
-	line-height: 26px;
-	padding-left: 50px;
+	font-size: 18px;
 }
-
-.control-btn .btn-next{
-	background: url(../images/btn-next.png)no-repeat;
-	height: 20px;
+.icon-heart{
+	background-position: -92px 3px;
+}
+.icon-chevron-left{
+	background-position: -428px -69px;
+}
+.icon-chevron-right{
+	background-position: -453px -69px;
+	margin-right: 0;
+	margin-left: 38px;
+}
+.icon-thumbs-up{
+	background-position: -92px -141px;
+}
+.icon-share-alt{
+	background-position: -332px -93px;
 }
