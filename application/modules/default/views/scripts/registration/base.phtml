@@ -6,8 +6,6 @@ Use <a href="<?= $this->url(array('module' => 'default', 'controller' => 'login'
 <? if ($this->isAjax) : ?>
     <script type="text/javascript">
         $(function() {
-            
-            alert('ddddddd');
             $('#registration-base-form').ajaxForm({
                 target: $('.modal-content-container')
             });            

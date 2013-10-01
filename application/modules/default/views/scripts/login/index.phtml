@@ -12,12 +12,10 @@
         <? if (isset($this->redirectUrl)) : ?>
             document.location.href = '<?= $this->redirectUrl ?>';
         <? endif; ?>
-        $(function() {
-            var target = $('#modal-dialog');
-            var options = {
-                target: target
-            };
-            $('#login-form').ajaxForm(options);            
+        $(function() {             
+            $('#login-form').ajaxForm({
+                target: $('.modal-content-container')
+            });            
         });
     </script>
 <? endif; ?>
