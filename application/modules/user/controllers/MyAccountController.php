@@ -126,6 +126,42 @@ class User_MyAccountController extends Zend_Controller_Action {
     }
 
     public function documentsAction() {
+        //$settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
+        $userId = Zend_Auth::getInstance()->getIdentity();
+        $residents = Model_UserResidentTable::getInstance()->findByUserId($userId);
+        $form = new User_Form_UserDocuments(array('residents' => $residents));
+        
+
+        if ($this->getRequest()->isPost()) {
+            $groups = $form->getDisplayGroups();
+            $data = array();
+            foreach ($residents as $resident) {
+                foreach ($resident->UserResidentDocument as $doc) {
+                    $data[$doc->type . $resident->id] = $doc->file;
+                }
+            }
+
+
+            $valid = true;
+
+            foreach ($groups as $group) {
+                $elements = $group->getElements();
+                foreach ($elements as $elementKey => $val) {
+                    if (empty($data[$elementKey]))
+                        $valid = false;
+                }
+            }
+
+            if ($valid) {
+                $this->_helper->messenger->success('files_were_uploaded');
+                $this->_helper->redirector('index', 'my-account', 'user');
+            }
+            $this->_helper->messenger->error('error_not_all_files_uploaded');
+        }
+        $this->view->form = $form;
+    }
+
+    public function documentsUploadAction() {
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
         $userId = Zend_Auth::getInstance()->getIdentity();
         $residents = Model_UserResidentTable::getInstance()->findByUserId($userId);
@@ -174,15 +210,15 @@ class User_MyAccountController extends Zend_Controller_Action {
                 $documentModel->original_name = $pathinfo['filename'];
                 $documentModel->user_resident_id = $residentId;
                 $documentModel->type = $params['docType'];
-                $documentModel->save();
-                echo $settings->get('files.baseUrl') . '/' . $filePath;
+                if ($documentModel->save()) {
+                    echo $settings->get('files.baseUrl') . '/' . $filePath;
+                } else {
+                    echo 'File upload error, please try again.';
+                }
+
                 exit();
             }
-
-            $this->_helper->messenger->success('files_was_uploaded');
-            $this->_helper->redirector('index', 'my-account', 'user');
         }
-        $this->view->form = $form;
     }
 
 }
