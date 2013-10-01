@@ -21,7 +21,7 @@
     <?= $this->jQuery() ?>
     <?= $this->headScript() ?>
 </head>
-    <body>
+    <body <?php echo (!empty($this->homeHeader) ? 'class="home"' : ''); ?>>
         <div id="modal" style="display: none;">
             <div class="modal-title-container">
                 <div class="modal-title">Demo title</div>
