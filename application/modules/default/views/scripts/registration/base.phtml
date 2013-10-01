@@ -6,11 +6,11 @@ Use <a href="<?= $this->url(array('module' => 'default', 'controller' => 'login'
 <? if ($this->isAjax) : ?>
     <script type="text/javascript">
         $(function() {
-            var target = $('#modal-dialog');
-            var options = {
-                target: target
-            };
-            $('#registration-base-form').ajaxForm(options);            
+            
+            alert('ddddddd');
+            $('#registration-base-form').ajaxForm({
+                target: $('.modal-content-container')
+            });            
         });
     </script>
 <? endif; ?>

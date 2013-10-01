@@ -1,18 +1,15 @@
-<div id="registration">
+<div>
 	<p>Vous êtes un professionnel de l’immobilier?</br>Inscrivez-vous en un instant,</br>et profitez des avantages d’<strong>Ommi</strong>.</p>
 	<?= $this->form ?>
 </div>
-
 <p>By clicking "Create Account", you confirm that you accept the
 <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</p>
 <? if ($this->isAjax) : ?>
     <script type="text/javascript">
         $(function() {
-            var target = $('#modal');
-            var options = {
-                target: target
-            };
-            $('#registration-pro-form').ajaxForm(options);            
+            $('#registration-pro-form').ajaxForm({
+                target: $('modal-content-container')
+            });            
         });
     </script>
 <? endif; ?>
