@@ -10,6 +10,14 @@
 	height: 220px;
 }
 
+.h100 {
+	height: 100px;
+}
+
+.h120 {
+	height: 120px;
+}
+
 .bottom, .top {
 	position: absolute;
 }
@@ -24,4 +32,7 @@
 
 .w200 {
 	width: 200px;
+}
+.w220{
+	width: 220px;
 }

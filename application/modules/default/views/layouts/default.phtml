@@ -33,9 +33,6 @@
         <main>
             <?= $this->messenger() ?>
             <?= $this->layout()->content ?>
-            <div id="ajax-loader">
-                <div class="loading-message"><?= $this->translate('loading') ?></div>
-             </div>
         </main>
         <?= $this->partial('_partials/footer.phtml', $this->getVars()) ?>        
     </body>
