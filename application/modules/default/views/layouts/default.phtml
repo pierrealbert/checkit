@@ -8,6 +8,7 @@
     $this->headLink()->appendStylesheet('/assets/css/style.css');
     $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=' . $this->getEncoding());
     $this->headScript()->appendFile('/js/common.js');
+    $this->headScript()->appendFile('/js/jquery.form.js');
     $this->headScript()->appendFile('/assets/js/jquery.the-modal.js');
     $this->headMeta()->appendHttpEquiv('Content-Language', 'en')
 ?>
@@ -21,7 +22,7 @@
     <?= $this->jQuery() ?>
     <?= $this->headScript() ?>
 </head>
-    <body>
+    <body <?php echo (!empty($this->homeHeader) ? 'class="home"' : ''); ?>>
         <div id="modal" style="display: none;">
             <div class="modal-title-container">
                 <div class="modal-title">Demo title</div>

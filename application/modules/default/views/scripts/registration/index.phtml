@@ -2,7 +2,7 @@
 	<div class="registration-top">
 		<span>Sélectionnez votre situation, </br><strong>Ommi</strong> vous apporte une aide adaptée à vos besoins</span>
 		<div class="registration-top-buttons">
-			<a href="#" class="btn btn-red">Je cherche une location</a><span class="sep">ou</span><a href="#" class="btn btn-gray">Je suis propriétaire</a>
+			<a class="btn btn-red open-in-modal" href="<?= $this->url(array('controller' => 'registration', 'action' => 'base', 'type' => Model_User::RESIDENT), null, true) ?>">Je cherche une location</a><span class="sep">ou</span><a class="btn btn-gray open-in-modal" href="<?= $this->url(array('controller' => 'registration', 'action' => 'base', 'type' => Model_User::OWNER), null, true) ?>">Je suis propriétaire</a>
 		</div>
 	</div>
 	<div class="registration-type">
@@ -12,24 +12,32 @@
 	</div>
 	<div class="registration-bottom">
 		<a href="#bottom-link1" class="red">Je suis un professionnel</a>
-		<p>Vous avez déjà un compte? <a href="#bottom-link2">Connectez-vous</a></p>
+		<p>Vous avez déjà un compte? <a class="open-in-modal" href="<?= $this->url(array('controller' => 'login', 'action' => 'index'), null, true) ?>">Connectez-vous</a></p>
 	</div>
 </div>
+<script type="text/javascript">
+/*
+$(function() {
 
-<!--
+    $('#registration .open-in-modal').click(function(e) {
+        e.preventDefault();
 
-<?= $this->form ?>
+        var anchor = $(this).attr('href');
 
--->
-
-<? if ($this->isAjax) : ?>
-    <script type="text/javascript">
-        $(function() {
-            var target = $('#modal-dialog');
-            var options = {
-                target: target
-            };
-            $('#registration-form').ajaxForm(options);            
+        $('#modal').modal().open({
+            onOpen: function(el, options){
+                $.get(anchor, function(response){
+                    $('#modal .modal-content-container').html(response);
+                });
+            }
         });
-    </script>
-<? endif; ?>
+    });
+
+    $('#modal .modal-close').on('click', function(e){
+        e.preventDefault();
+        $.modal().close();
+        $('#modal .modal-content-container').empty();
+    });
+});
+*/
+</script>

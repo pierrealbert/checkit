@@ -8,15 +8,20 @@ echo $this->form;
 $function = "$(function() {
 			$('input[type=\"file\"]').each(function(){
                             var inputObj=$(this);
+                            var inputId=inputObj.attr('id');
                             inputObj.uploadify({
                                 'formData': {
-                                    fieldId: inputObj.attr('id'), 
+                                    fieldId: inputId, 
                                     docType: inputObj.attr('documentType')
                                 },
                                 'multi': false,
                                 'method'   : 'post',
 				'swf'      : '/js/uploadify.swf',
-				'uploader' : 'documents'
+				'uploader' : 'documents-upload',
+                                'onUploadSuccess': function(file, data, response){
+                                    $('#'+inputId).nextAll('div.uploadedDocName').remove();
+                                    $('#'+inputId).after('<div class=\"uploadedDocName\"><input type=\"hidden\" value=\"1\" name=\"'+inputId+'\" /><a  href=\"'+data+'\" target=\"_blank\">'+file.name+'</a></div>');
+                                }
 			});
                         });
 		});";
