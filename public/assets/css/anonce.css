@@ -10,8 +10,9 @@
 	padding-top: 20px;
 }
 .container-text{
-	width: 1000px;
+	width: 1100px;
 	margin: 0 auto;
+	text-align: center;
 }
 .container-text .white-txt{
 	margin: 0 0 10px 0;
@@ -19,6 +20,7 @@
 	font-size: 35px;
 	text-align: left;
 	text-shadow: 0 -1px 0 #4d4d4d;
+	padding-left: 49px;
 }
 .box-text{
 	float: left;
@@ -74,13 +76,13 @@
 	padding-bottom: 25px;
 }
 .box-appart{
-	width: 511px;
+	width: 548px;
 }
 .box-price{
 	width: 160px;
 }
 .box-button{
-	width: 200px;
+	width: 166px;
 }
 .main-container-box{
 	overflow: hidden;
@@ -272,7 +274,7 @@
 	margin-top: 10px;
 }
 
-.i-group{
+.i-group-white{
 	background-image: url(../../images/icons/glyphicons-halflings-white.png);
 	background-repeat: no-repeat;
 	padding: 0 0 0 22px;
@@ -280,6 +282,17 @@
 	width: 16px;
 	height: 12px;
 	font-size: 18px;
+	text-align: left;
+}
+.i-group-gray{
+	background-image: url(../../images/icons/glyphicons-halflings.png);
+	background-repeat: no-repeat;
+	padding: 0 0 0 22px;
+	margin-right: 26px;
+	width: 16px;
+	height: 12px;
+	font-size: 18px;
+	text-align: left;
 }
 .icon-heart{
 	background-position: -92px 3px;
@@ -290,11 +303,34 @@
 .icon-chevron-right{
 	background-position: -453px -69px;
 	margin-right: 0;
-	margin-left: 38px;
+	margin-left: 26px;
 }
 .icon-thumbs-up{
 	background-position: -92px -141px;
 }
 .icon-share-alt{
 	background-position: -332px -93px;
+}
+.icon-check{
+	background-position: -285px 3px;
+}
+.icon-list{
+	background-position: -261px 5px;
+	margin-right: 0;
+	margin-left: 24px;
+}
+.icon-photo{
+	background-position: -116px -44px;
+	margin-right: 0;
+	margin-left: 24px;
+}
+.icon-carte{
+	background-position: -20px -68px;
+	margin-right: 0;
+	margin-left: 24px;
+}
+.icon-calendar{
+	background-position: -188px -116px;
+	margin-right: 0;
+	margin-left: 46px;
 }
