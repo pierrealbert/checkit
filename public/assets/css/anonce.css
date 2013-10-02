@@ -191,29 +191,29 @@
 	margin-right: 15px;
 }
 
-.inset-discription{
+.tab-annonce{
 	padding: 28px;
 	overflow: hidden;
 }
 
 
-.table-discription{
+.tab-annonce .table-discription{
 	width: 655px;
 	float: left;
 	margin-top: 10px;
 }
 
 
-.cellsblock{
+.tab-annonce .cellsblock{
 	width: 100%;
 	display: table;
 	background: #fff;
 	border-bottom: 1px solid #cccccc;
 }
-.cellsblock:nth-child(2n){
+.tab-annonce .cellsblock:nth-child(2n){
 	background: #e5e5e5;
 }
-.cellsblock-first{
+.tab-annonce .cellsblock-first{
 	box-shadow: inset 0 1px 0 #cccccc;
 	-moz-border-radius-topleft: 10px;
 	-webkit-border-top-left-radius: 10px;
@@ -222,7 +222,7 @@
 	-webkit-border-top-right-radius: 10px;
 	border-top-right-radius: 10px;
 }
-.cellsblock-last{
+.tab-annonce .cellsblock-last{
 	-moz-border-radius-bottomright: 10px;
 	-webkit-border-bottom-right-radius: 10px;
 	border-bottom-right-radius: 10px;
@@ -231,72 +231,74 @@
 	border-bottom-left-radius: 10px;
 	border-bottom: none;
 }
-.cellsblock .cellleft, .cellright{
+.tab-annonce .cellsblock .cellleft, .cellright{
 	display: table-cell !important;
 	display: inline;
 	padding: 10px;
 }
 
-.cellsblock .cellleft p,
-.cellsblock .cellright p{
+.tab-annonce .cellsblock .cellleft p,
+.tab-annonce .cellsblock .cellright p{
 	margin: 0;
 	font-size: 16px;
 }
-.cellsblock .cellleft{
+.tab-annonce .cellsblock .cellleft{
 	width: 35%;
 	border-right: 1px solid #cccccc;
 
 }
-.cellsblock .cellright{
+.tab-annonce .cellsblock .cellright{
 	padding-left: 30px;
 }
-.cellsblock .cellleft p{
+.tab-annonce .tab-annonce .cellsblock .cellleft p{
 	color: #999999;
 }
-.cellsblock .cellright p{
+.tab-annonce .cellsblock .cellright p{
 	color: #4d4d4d;
 }
 
-.block-photo{
+.tab-annonce .block-photo{
 	float: right;
 	width: 250px;
 }
-.info-block-photo{
+.tab-annonce .info-block-photo{
 	background: #fff;
 	border-radius: 10px;
 	padding:  20px 35px 20px 20px;
 	box-shadow: inset 0 1px 0 #CCCCCC;
 	margin-bottom: 40px;
 }
-.info-block-photo p{
+.tab-annonce .info-block-photo p{
 	font-size: 16px;
 }
 
-.photo-gallery{
+.tab-annonce .photo-gallery{
 	text-align: center;
 	margin-bottom: 40px;
 	overflow: hidden;
 	margin-top: 10px;
 }
-.photo-gallery span{
+.tab-annonce .photo-gallery span{
 	font-size: 16px;
 }
 
-.photo-img{
-
+.tab-annonce .photo-img{
 	margin-bottom: 10px;
 }
-.photo-img img{
+.tab-annonce .photo-img img{
 	width: 250px;
 }
 
-.btn-nav-group{
+.tab-annonce .btn-nav-group{
 	width: 251px;
 }
-.btn-nav-group .btn{
+.tab-annonce .btn-nav-group .btn{
 	margin-left: 0;
 	margin-top: 10px;
 }
+
+
+
 
 /*--------Icons-------*/
 .i-group-white{
@@ -387,22 +389,41 @@
 	line-height: 1;
 	padding: 0 7px;
 }
-
+.icon-urgent{
+	background-image: url(../images/icon-urgent.png);
+	background-repeat: no-repeat;
+	background-position: 0 4px;
+	width: 15px;
+	height: 11px;
+	padding: 0 0 0 16px;
+	margin-right: 10px;
+}
+.icon-pro{
+	background-position: -260px -19px;
+}
+.icon-prev{
+	background-position: -429px -68px;
+	margin-right: 0;
+}
+.icon-next{
+	background-position: -452px -68px;
+	margin-right: 0;
+}
 
 
 /*--------Page-annonce-photo-------*/
-.table-photo{
+.tab-annonce .table-photo{
 	float: left;
 	margin-top: 10px;
 	width: 614px;
 }
-.photo-gallery .photo-mini{
+.tab-annonce .photo-gallery .photo-mini{
 	float: left;
 	padding: 0 9px 10px 0;
 	width: 74px;
 	height: 75px;
 }
-.nav-photo-left{
+.tab-annonce .nav-photo-left{
 	float: left;
 	width: 97px;
 	height: 495px;
@@ -414,7 +435,7 @@
 	-webkit-border-bottom-left-radius: 10px;
 	border-bottom-left-radius: 10px;
 }
-.nav-photo-right{
+.tab-annonce .nav-photo-right{
 	float: right;
 	width: 97px;
 	height: 495px;
@@ -430,10 +451,76 @@
 
 
 /*--------Page-annonce-carte-------*/
-.title-territory{
+.tab-annonce .title-territory{
 	text-align: center;
 }
-.title-territory p{
+.tab-annonce .title-territory p{
 	font-size: 16px;
+
+}
+.tab-annonce .block-nav-carte{
+	float: left;
+}
+.tab-annonce .block-nav-carte p{
+	margin-top: 0;
+	margin-bottom: 20px;
 }
 
+.tab-annonce .block-text{
+	width: 300px;
+}
+.tab-annonce .block-link{
+	text-align: center;
+	width: 350px;
+	padding-right: 42px;
+}
+.tab-annonce .block-link a{
+	color: #4d4d4d;
+
+}
+.tab-annonce .block-btn{
+	width: 250px;
+}
+.tab-annonce .block-carte{
+	width: 943px;
+	height: 500px;
+}
+
+
+/*--------Page-annonce-carte-------*/
+
+
+.tab-annonce .block-btn-visites{
+	margin: 10px 0 50px 0;
+}
+.tab-annonce .btn-blue-lite{
+	background: #b5e6e3;
+	box-shadow: 0px 3px 0px #50aab1;
+	font-size: 16px;
+	text-shadow: 0px -1px 0px #34A6B3 !important;
+}
+
+
+
+/*--------Page-annonce-visites-------*/
+.tab-annonce .block-calendar{
+	overflow: hidden;
+	margin-top: 41px;
+}
+.tab-annonce .block-calendar .calendar{
+	float: left;
+	width: 43%;
+	padding: 0 33px;
+}
+.tab-annonce .block-calendar .name-month{
+	text-align: center;
+}
+.tab-annonce .block-calendar .name-month h2{
+	margin: 0 0 10px 0;
+}
+.tab-annonce .block-calendar .name-month .btn-cal-prev{
+	float: left;
+}
+.tab-annonce .block-calendar .name-month-next{
+	float: right;
+}
