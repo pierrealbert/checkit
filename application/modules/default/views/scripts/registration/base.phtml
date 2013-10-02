@@ -3,3 +3,12 @@ Use <a href="<?= $this->url(array('module' => 'default', 'controller' => 'login'
 <?= $this->form ?>
 <p>By clicking "Create Account", you confirm that you accept the
 <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</p>
+<? if ($this->isAjax) : ?>
+    <script type="text/javascript">
+        $(function() {
+            $('#registration-base-form').ajaxForm({
+                target: $('.modal-content-container')
+            });            
+        });
+    </script>
+<? endif; ?>

@@ -6,3 +6,16 @@
 <p>
     <a href="<?= $this->url(array('controller' => 'registration'), null, true) ?>"><?= $this->translate('sign_up') ?></a>
 </p>
+
+<? if ($this->isAjax) : ?>
+    <script type="text/javascript">
+        <? if (isset($this->redirectUrl)) : ?>
+            document.location.href = '<?= $this->redirectUrl ?>';
+        <? endif; ?>
+        $(function() {             
+            $('#login-form').ajaxForm({
+                target: $('.modal-content-container')
+            });            
+        });
+    </script>
+<? endif; ?>

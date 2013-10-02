@@ -1,1 +1,30 @@
-<?= $this->form ?>
+<?php
+
+$this->headScript()->appendFile('/js/jquery.uploadify.min.js');
+$this->headLink()->appendStylesheet('/css/uploadify.css');
+
+echo $this->form;
+
+$function = "$(function() {
+			$('input[type=\"file\"]').each(function(){
+                            var inputObj=$(this);
+                            var inputId=inputObj.attr('id');
+                            inputObj.uploadify({
+                                'formData': {
+                                    fieldId: inputId, 
+                                    docType: inputObj.attr('documentType')
+                                },
+                                'multi': false,
+                                'method'   : 'post',
+				'swf'      : '/js/uploadify.swf',
+				'uploader' : 'documents-upload',
+                                'onUploadSuccess': function(file, data, response){
+                                    $('#'+inputId).nextAll('div.uploadedDocName').remove();
+                                    $('#'+inputId).after('<div class=\"uploadedDocName\"><input type=\"hidden\" value=\"1\" name=\"'+inputId+'\" /><a  href=\"'+data+'\" target=\"_blank\">'+file.name+'</a></div>');
+                                }
+			});
+                        });
+		});";
+
+$this->jQuery()->addOnLoad($function);
+?>

@@ -1,0 +1,50 @@
+<header>
+    <div class="inner">
+        <a href="<?=$this->baseUrl('/'); ?>" class="home-logo">Ommi</a>
+        <ul id="header-nav">
+            <? if ($this->currUser) : ?>
+            <li class="left"><a href="#">Guide du Locataire</a></li>
+            <li><a href="<?= $this->url(array('controller' => 'search', 'action' => 'index'), null, true) ?>" class="btn btn-red">Nouvelle recherche</a></li>
+            <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'my-account', 'action' => 'index'), null, true) ?>">Bonjour, <?= $this->currUser->first_name ?> <?= $this->currUser->last_name ?></a></li>
+            <li><a href="#">Mes candidatures</a></li>           
+            <? else : ?>            
+            <li class="left"><a href="#">Comment ça marche ?</a></li>
+            <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'property', 'action' => 'new-add'), null, true) ?>" class="btn btn-red">Publier une annonce</a></li>
+            <li><a class="open-in-modal" href="<?= $this->url(array('controller' => 'login'), null, true) ?>">Se connecter</a></li>
+            <li><a class="open-in-modal" href="<?= $this->url(array('controller' => 'registration'), null, true) ?>">S’inscrire</a></li>
+            <li><a href="#">Aide</a></li>
+            <? endif; ?>
+        </ul>
+    </div>
+</header>
+<div class="promo-page">
+	<div class="inner">
+		<div class="promo">
+			<div class="logo"></div>
+			<div class="text">l’immo<br>repensé</div>
+		</div>
+		<!--<div class="grid grid-dark">
+			<div class="grid-half grid-transparent">
+				<h2>Chercher une location</h2>
+				<form action="#">
+					<fieldset>
+						<label>Localosation</label>
+						<input type="text" placeholder="Où désirez-vous louer? ">
+					</fieldset>
+					<fieldset>
+						<label>Budget maximum</label>
+						<input type="text" placeholder="Budget max. (en €)">
+					</fieldset>
+					<fieldset>
+						<label>Surface minimum</label>
+						<input type="text" placeholder="Surface min. (en m²)">
+					</fieldset>
+					<a href="#" class="btn btn-dark">Plus de critères</a>
+				</form>
+			</div>
+			<div class="grid-half grid-transparent">
+				<a href="#" class="btn btn-blue btn-search">Recherche rapide</a>
+			</div>
+		</div>-->
+	</div>
+</div>

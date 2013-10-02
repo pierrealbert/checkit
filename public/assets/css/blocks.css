@@ -1,0 +1,60 @@
+.grid {
+	width: 1000px;
+	*zoom: 1;
+	margin-top: 10px;
+}
+
+.grid:before, .grid:after {
+	content: '';
+	display: table;
+}
+
+.grid, .grid > .grid-half {
+	border-radius: 10px;
+	background: #f5f5f5;
+	box-shadow: 0 3px 0 #d8d8d8;
+}
+
+.grid:after {
+	clear: both;
+}
+
+.grid-full {
+	width: 880px;
+	padding: 0 60px;
+}
+
+.grid-half {
+	float: left;
+	width: 375px;
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+.grid-full > .grid-inner, .grid-half > .grid-inner {
+	position: relative;
+	margin: 30px 0;
+}
+
+.grid-half + .grid-half {
+	margin-left: 10px;
+}
+
+.grid-half + .grid-half {
+	float: right;
+}
+
+/* Dark grid */
+
+.grid-dark {
+	background: rgba(0,0,0,.7);
+	box-shadow: 0 3px 0 rgba(0,0,0,.9);
+	color: #fff;
+}
+
+/* Transparent grid */
+
+.grid-transparent {
+	background: transparent !important;
+	box-shadow: none !important;
+}

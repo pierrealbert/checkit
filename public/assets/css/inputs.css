@@ -1,0 +1,23 @@
+input::-webkit-input-placeholder {
+	color: #b3b3b3;
+}
+
+input:-moz-placeholder {
+	color: #b3b3b3;
+}
+
+input {
+	display: inline-block;
+	font-size: 16px;
+	line-height: 20px;
+	padding: 5px 10px;
+	border: none;
+	border-radius: 5px;
+	color: #4d4d4d;
+	outline: none;
+	background: #FFFFFF;
+}
+input:focus{
+	background: #b6e8ed;
+	box-shadow: inset 0px 1px 0 #3cbecc;
+}

@@ -1,4 +1,4 @@
-Welcome to the Zend Framework 1.12 Release! 
+﻿Welcome to the Zend Framework 1.12 Release! 
 
 RELEASE INFORMATION
 ---------------
@@ -158,3 +158,5 @@ ACKNOWLEDGEMENTS
 The Zend Framework team would like to thank all the contributors to the Zend
 Framework project, our corporate sponsor, and you, the Zend Framework user.
 Please visit us sometime soon at http://framework.zend.com.
+
+1

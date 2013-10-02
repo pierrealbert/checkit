@@ -142,6 +142,8 @@ UserResident:
           type: enum
           values: [single, couple, roommate]     
           size: 15
+        resident_name:
+            string(255)
         resident_type: 
           type: enum
           values: [student, employee, independent, other]

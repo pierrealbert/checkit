@@ -1,0 +1,124 @@
+button, .btn, [type=submit], [type=reset], [type=button] {
+	background: transparent;
+	display: inline-block;
+	position: relative;
+	height: 45px;
+	line-height: 45px;
+	padding: 0 15px;
+	border-radius: 7px;
+	font-size: 18px;
+	color: #fff !important;
+	-webkit-transition: all .2s;
+	-moz-transition: all .2s;
+	-ms-transition: all .2s;
+	-o-transition: all .2s;
+	transition: all .2s;
+	cursor: pointer;
+	text-decoration: none !important;
+	border: 0;
+	text-align: center;
+}
+
+.btn + .btn, .btn + button, button + button, [type=submit] + [type=submit], [type=reset] + [type=reset], [type=button] + [type=button] {
+	margin-left: 10px;
+}
+
+/*
+	Blue button, Bleu bouton, Голубая кнопка
+*/
+
+.btn-blue {
+	background: #3cbecc;
+	box-shadow: 0 3px 0 #34a6b3;
+	text-shadow: 0px -1px 0px #34a6b3 !important;
+}
+
+.btn-blue:hover {
+	box-shadow: 0 1px 0 #34a6b3;
+	top: 2px;
+}
+
+.btn-blue:active {
+	box-shadow: none;
+	top: 3px;
+}
+
+/*
+	Gray button, Gris bouton, Серая кнопка
+*/
+
+.btn-gray,.btn-gray {
+	background: #b3b3b3;
+	box-shadow: 0 3px 0 #808080;
+	text-shadow: 0px -1px 0px #808080 !important;
+}
+
+.btn-gray:hover, .btn-gray:hover {
+	box-shadow: 0 1px 0 #808080;
+	top: 2px;
+}
+
+.btn-gray:active, .btn-gray:active {
+	box-shadow: none;
+	top: 3px;
+}
+
+/*
+	Dark button, Gris fonce bouton, Тёмная кнопка
+*/
+
+.btn-dark, .btn-dark {
+	background: #666;
+	box-shadow: 0 3px 0 #333;
+	text-shadow: 0px -1px 0px #333 !important;
+}
+
+.btn-dark:hover, .btn-dark:hover {
+	box-shadow: 0 1px 0 #333;
+	top: 2px;
+}
+
+.btn-dark:active, .btn-dark:active {
+	box-shadow: none;
+	top: 3px;
+}
+
+/*
+	Red button, Rouge bouton, Красная кнопка
+*/
+
+.btn-red, .btn-red {
+	background: #de4c5d;
+	box-shadow: 0 3px 0 #b23f50;
+	text-shadow: 0px -1px 0px #b23f50 !important;
+}
+
+.btn-red:hover, .btn-red:hover {
+	box-shadow: 0 1px 0 #b23f50;
+	top: 2px;
+}
+
+.btn-red:active, .btn-red:active {
+	box-shadow: none;
+	top: 3px;
+}
+
+/*
+	Facebook button
+*/
+
+.btn-fb, .btn-fb {
+	background: #2e58a6 url('../images/btn-fb-icon.png') 15px center no-repeat;
+	box-shadow: 0 3px 0 #203991;
+	text-shadow: 0px -1px 0px #203991 !important;
+}
+
+.btn-fb:hover, .btn-fb:hover {
+	box-shadow: 0 1px 0 #203991;
+	top: 2px;
+}
+
+.btn-fb:active, .btn-fb:active {
+	box-shadow: none;
+	top: 3px;
+}

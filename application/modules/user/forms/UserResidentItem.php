@@ -19,7 +19,19 @@ class User_Form_UserResidentItem extends Ext_Form_SubForm
 			'multiOptions' => Model_UserResident::getTypes(),
 			'attribs' => array('class' => 'resident-type')
 		));
-
+                
+                if($this->rowNumber!=1){
+                    $this->addElement('text', 'resident_name', array(
+                            'label' => 'resident_name',
+                            'required' => true,
+                            'filters'    => array('StringTrim', 'StripTags'),   
+                            'attribs' => array('class' => 'resident-name')
+                    ));
+                }else{
+                    $this->addElement('hidden', 'resident_name');
+                    $this->getElement('resident_name')->removeDecorator('label')
+                        ->removeDecorator('HtmlTag'); 
+                }
 		$this->addElement('text', 'job_title', array(
             'label'      => 'job_title',
             'required'   => true,

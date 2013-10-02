@@ -30,7 +30,7 @@ class User_Form_UserResident extends Ext_Form
 	}
 	
 	public function addMemberForms($count)
-	{
+	{            
 		for ($i = 0; $i < $count; $i++) {
 			$num = $i + 1;
 			$key = "member_" . $num;

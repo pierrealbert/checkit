@@ -13,6 +13,7 @@
     $this->headMeta()->appendHttpEquiv('Content-Language', 'en')
 ?>
 <?= $this->doctype() ?>
+<?= $this->getPluginLoader('helper')->isLoaded('JQuery') ? $this->jQuery() : '' ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
     <?= $this->headMeta() ?>
@@ -32,6 +33,6 @@
                 <div class="loading-message"><?= $this->translate('loading') ?></div>
             </div>
         </div>
-        <?= $this->getPluginLoader('helper')->isLoaded('JQuery') ? $this->jQuery() : '' ?>
+        
     </body>
 </html>

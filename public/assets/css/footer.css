@@ -1,0 +1,102 @@
+footer:before, footer:after {
+	content: '';
+	display: table;
+}
+
+footer {
+	margin-top: 20px;
+	border-top: 3px solid #d6d6d6;
+	background: #f2f2f2;
+	*zoom: 1;
+}
+
+.home > footer {
+	margin-top: 0;
+}
+
+footer > .inner {
+	padding: 20px 0;
+}
+
+footer:after {
+	clear: both;
+}
+
+footer .nav-buttons {
+	float: right;
+	width: 230px;
+	padding: 0 60px;
+}
+
+footer .nav-buttons > .btn {
+	display: block;
+	margin: 0 0 10px 0;
+}
+
+footer .nav-blocks {
+	float: left;
+}
+
+footer .nav-blocks > .block {
+	width: 180px;
+	float: left;
+	margin-right: 50px;
+}
+
+footer .nav-blocks > .block > h3 {
+	font-size: 16px;
+	color: #666666;
+	font-weight: bold;
+	margin: 10px 0 20px 0;
+}
+
+footer .nav-blocks > .block > ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+footer .nav-blocks > .block > ul > li {
+	display: block;
+}
+
+footer .nav-blocks > .block > ul > li > a {
+	font-size: 14px;
+	line-height: 18px;
+	height: 18px;
+	color: #666666;
+	text-decoration: none;
+}
+
+footer .nav-blocks > .block > ul > li > a:hover {
+	text-decoration: underline;
+}
+
+footer .nav-blocks > .block:last-child {
+	margin-right: 0;
+}
+
+footer .fb-likes-block {
+	float: left;
+	margin: 10px 0;
+}
+
+footer .fb-likes-block .btn {
+	font-size: 14px;
+	height: 25px;
+	line-height: 26px;
+	padding-left: 30px;
+	background-image: url('../images/btn-fb-like.png');
+	background-repeat: no-repeat;
+	background-position: 10px center;
+}
+
+footer > .copyright {
+	height: 30px;
+	line-height: 30px;
+	background: #4D4D4D;
+	color: #fff;
+	font-size: 12px;
+	text-align: center;
+}
+

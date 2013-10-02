@@ -5,32 +5,36 @@
 		'type'  => 'image/x-icon'
     ));
 
-    $this->headLink()->appendStylesheet('/css/styles.css');
-    $this->headLink()->appendStylesheet('/css/ui/jquery-ui-1.10.3.css');
+    $this->headLink()->appendStylesheet('/assets/css/style.css');
     $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=' . $this->getEncoding());
-
+    $this->headScript()->appendFile('/js/common.js');
+    $this->headScript()->appendFile('/js/jquery.form.js');
+    $this->headScript()->appendFile('/assets/js/jquery.the-modal.js');
     $this->headMeta()->appendHttpEquiv('Content-Language', 'en')
 ?>
 <?= $this->doctype() ?>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<html>
 <head>
+    <meta charset="UTF-8">
     <?= $this->headMeta() ?>
     <?= $this->headTitle('Frontend')->setSeparator(' - ') ?>
-    <?= $this->headLink() ?>
+    <?= $this->headLink() ?>    
+    <?= $this->jQuery() ?>
     <?= $this->headScript() ?>
 </head>
-    <body>
-        <div id="wrapper">
-            <?= $this->partial('_partials/header.phtml', $this->getVars()) ?>
-            <div id="content">
-                <?= $this->messenger() ?>
-                <?= $this->layout()->content ?>
+    <body <?php echo (!empty($this->homeHeader) ? 'class="home"' : ''); ?>>
+        <div id="modal" style="display: none;">
+            <div class="modal-title-container">
+                <div class="modal-title">Demo title</div>
+                <div class="modal-close"></div>
             </div>
-            <?= $this->partial('_partials/footer.phtml', $this->getVars()) ?>
-            <div id="ajax-loader">
-                <div class="loading-message"><?= $this->translate('loading') ?></div>
-            </div>
+            <div class="modal-content-container"></div>
         </div>
-        <?= $this->getPluginLoader('helper')->isLoaded('JQuery') ? $this->jQuery() : '' ?>
+        <?= $this->partial('_partials/header' . (!empty($this->homeHeader) ? '-home' : '') . '.phtml', $this->getVars()) ?>
+        <main>
+            <?= $this->messenger() ?>
+            <?= $this->layout()->content ?>
+        </main>
+        <?= $this->partial('_partials/footer.phtml', $this->getVars()) ?>        
     </body>
 </html>

@@ -1,0 +1,25 @@
+<h2><?= $this->contentHeader('ad_list') ?></h2>
+
+<?php if (!$this->ads): ?>
+    <p>Ads not found</p>
+<?php else: ?>
+    <table border="1">
+    <?php foreach($this->ads as $ad): ?>
+        <tr>
+            <td width="110px" height="110px" align="center" valign="center"><?= $this->imageResize(100, 100, $ad->main_photo) ?></td>
+            <td width="300px" valign="top"><h3><a href="/property/detail/item/<?= $ad->id ?>"><?= $ad->title ?></a></h3></td>
+            <td width="120px">
+               <h3><?= $ad->price ?> &euro;</h3>
+               <?= $ad->size ?> m<sup>2</sup><br />
+               <?= $ad->number_of_rooms1 ?> rooms
+            </td>
+            <td width="120px">
+              <h3><a href="/user/property/remove/item/<?= $ad->id ?>">Remove</a></h3>
+              <h3><a href="/user/property/edit/item/<?= $ad->id ?>">Edit</a></h3>
+              <h3><a href="/user/property/edit-visit-dates/item/<?= $ad->id ?>">Edit Visit days</a></h3>
+              <h3><a href='/user/property/<?= $ad->is_published ? "unpublish-ad/item/{$ad->id}'>Unpublish" : "publish-ad/item/{$ad->id}'>Publish"; ?></a></h3>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    </table>
+<?php endif; ?>

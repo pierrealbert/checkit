@@ -24,6 +24,9 @@ class Ext_Controller_Plugin_ContextAction extends Zend_Controller_Plugin_Abstrac
             Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer')
                 ->view->clearVars();
 
+            Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer')
+                ->view->isAjax = true;
+                    
             Zend_Controller_Action_HelperBroker::getStaticHelper('Layout')
                 ->disableLayout();
         }

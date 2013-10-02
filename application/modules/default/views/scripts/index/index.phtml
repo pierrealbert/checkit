@@ -1,15 +1,103 @@
+<div class="inner">
+    <div class="grid">
+        <div class="grid-half grid-transparent">
+            <div class="grid-inner h220">
+                <h1 class="blue">Comment </br>ça marche ?</h1>
+                <p>Ommi transforme la façon dont vous louez et vous simplifie la location.</p>
+                <div>
+                    <div class="left">
+                        <a href="#">Regarder la vidéo</a>
+                        <a href="#">Découvrir les avantages</a>
+                    </div>
+                    <div class="right">
+                        <a class="btn btn-blue open-in-modal" href="<?= $this->url(array('controller' => 'registration'), null, true) ?>">Créer un compte</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="grid grid-transparent">
+        <div class="grid-half">
+            <div class="grid-inner h220">
+                <h1 class="gray">Vous cherchez</br>une <span class="red">location ?</span></h1>
+                <p>Découvrez comment utiliser nos outils de recherches et télécharger votre dossier en ligne. Candidatez aux annonces qui vous intéressent et ne visitez plus que des appartements pour lesquels vous avez de vraies chances. Finies les visites inutiles !</p>
+                <a href="#link" class="bottom">Guide du Locataire</a>
+            </div>
+        </div>
+        <div class="grid-half">
+            <div class="grid-inner h220">
+                <h1 class="gray">Vous êtes</br><span class="red">propriétaire ?</span></h1>
+                <p>Découvrez comment publier votre annonce, présélectionner vos candidats sur la base de leurs dossiers avant des les rencontrer, organiser vos visites, gérer vos biens et enfin, profitez des avantages Ommi.</p>
+                <a href="#link" class="bottom">Guide du Propriétaire</a>
+            </div>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="grid-full">
+            <h1 class="gray">Quels sont les avantages ?</br><span class="blue">L’immo repensé !</span></h1>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="grid-full">
+            <h1 class="gray">Je m’inscris, c’est gratuit !<a class="right btn btn-blue w200 open-in-modal" href="<?= $this->url(array('controller' => 'registration'), null, true) ?>">Créer un compte</a></h1>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="grid-full">
+            <h1 class="gray">Espace <span class="red">Pro</span> C’est par là.<a class="right btn btn-red w200 open-in-modal" href="<?= $this->url(array('controller' => 'registration', 'action' => 'pro'), null, true) ?>">Compte Professionnel</a></h1>
+        </div>
+    </div>
+    <div class="grid grid-transparent">
+        <div class="grid-half">
+            <div class="grid-inner h120">
+                <h1 class="gray">Compte Ommium</h1>
+                <div class="index-row-six cf">
+                    <div class="index-row-six-text">Ommi, Ommi+ ou Ommium? Des comptes adaptés à chacun.</div>
+                    <div class="index-row-six-link"><a href="#100">Découvrez nos comptes</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-half">
+            <div class="grid-inner h120">
+                <h1 class="gray">F.A.Q.</h1>
+                <div class="index-row-six cf">
+                    <div class="index-row-six-text">Consultez les questions les plus fréquemment posées.</div>
+                    <div class="index-row-six-link"><a href="#101">Consultez les F.A.Q.</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="publish-block"></div>
+<div class="social-links-block cf">
+    <div class="inner">
+        <span>Suivez-nous sur les réseaux</span>
+        <div class="social-links cf">
+            <a href="#" class="social-link sl-tw"></a>
+            <a href="#" class="social-link sl-fb"></a>
+            <a href="#" class="social-link sl-ig"></a>
+            <a href="#" class="social-link sl-gp"></a>
+            <a href="#" class="social-link sl-in"></a>
+        </div>
+    </div>
+</div>
+
+<!--
 <h2><?= $this->translate('home_page') ?></h2>
 <p>
-    <a href="<?= $this->url(array('controller' => 'login'), null, true) ?>"><?= $this->translate('login') ?></a>
+    <a class="open-in-modal" href="<?= $this->url(array('controller' => 'login'), null, true) ?>"><?= $this->translate('login') ?></a>
 </p>
 <p>
-    <a href="<?= $this->url(array('controller' => 'registration'), null, true) ?>"><?= $this->translate('registration') ?></a>
+    <a class="open-in-modal" href="<?= $this->url(array('controller' => 'registration'), null, true) ?>"><?= $this->translate('registration') ?></a>
 </p>
 <p>
-    <a href="<?= $this->url(array('controller' => 'registration', 'action' => 'pro'), null, true) ?>"><?= $this->translate('registration_pro') ?></a>
+    <a class="open-in-modal" href="<?= $this->url(array('controller' => 'registration', 'action' => 'pro'), null, true) ?>"><?= $this->translate('registration_pro') ?></a>
 </p>
 <p>
     <a href="<?= $this->url(array('module' => 'user', 'controller' => 'property', 'action' => 'new-add'), null, true) ?>"><?= $this->translate('post_my_ad') ?></a>
+</p>
+<p>
+    <a href="<?= $this->url(array('module' => 'user', 'controller' => 'property', 'action' => 'my-ads'), null, true) ?>"><?= $this->translate('my_ads') ?></a>
 </p>
 <p>
     <a href="<?= $this->url(array('controller' => 'test', 'action' => 'ad-list'), null, true) ?>"><?= $this->translate('ad_list') ?></a>
@@ -20,3 +108,4 @@
 <p>
     <a href="<?= $this->url(array('controller' => 'search', 'action' => 'map'), null, true) ?>"><?= $this->translate('search_map') ?></a>
 </p>
+-->
