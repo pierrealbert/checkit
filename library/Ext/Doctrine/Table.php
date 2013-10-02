@@ -109,6 +109,19 @@ class Ext_Doctrine_Table extends Doctrine_Table
         ;
     }
     /**
+     * Получение записи по ID с возможностью автоматического кэширования
+     *
+     * @param int $id
+     * @return Ext_Doctrine_Record
+     */
+    public function findByIds(array $ids)
+    {
+        return $this->createQuery($this->_getTableAlias(), $this->_autoCache, $this->_cacheLifeTime, $this->_cacheKey . print_r($ids, 1) . '_')
+            ->whereIn($this->_getTableAlias() . '.id', $ids)
+            ->execute()
+        ;
+    }
+    /**
      * Удаление записей по айдишнику или по массиву айдишников
      *
      * @param int|array $ids

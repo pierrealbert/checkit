@@ -28,4 +28,11 @@ class Model_RegionBlockTable extends Model_RegionTable
                     ->execute();
         
     }
+
+    public function getByRegionDistrictIds(array $ids)
+    {
+        return $this->createQuery('region_block')
+                    ->whereIn("region_block.region_district_id", $ids)
+                    ->execute();
+    }
 }

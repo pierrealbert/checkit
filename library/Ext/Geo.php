@@ -70,4 +70,69 @@ class Ext_Geo
         }
  
     }
+
+    function polygonRegionsIntersect($polygon, $regions)
+    {
+        $result = array();
+        foreach ($regions as $region) {
+            $path = $region->path;
+            $prevRegionVertex = end($path);
+            foreach ($path as $regionVertex) {
+                if ($prevRegionVertex) {
+                    $prevPolygonVertex = end($polygon);
+                    foreach ($polygon as $polygonVertex) {
+                        $intersected = $this->segmentsIntersect($regionVertex, 
+                                                                $prevRegionVertex,
+                                                                array('x' => $prevPolygonVertex['x'],
+                                                                      'y' => $prevPolygonVertex['y']),
+                                                                array('x' => $polygonVertex['x'],
+                                                                      'y' => $polygonVertex['y']));
+                        if ($intersected) {
+                            $result[] = $region;
+                            break 2; // go to the next region
+                        }
+                        $prevPolygonVertex = $polygonVertex;
+                    }
+                }
+                $prevRegionVertex = $regionVertex;
+            }
+        }
+        return $result;
+    }
+
+    function segmentsIntersect($point1, $point2, $point3, $point4)
+    {
+        // Transform indexed array to assoc if needed
+        for ($i = 1; $i <= 4; $i++) {
+            if (!isset(${"point$i"}['x']) or !isset(${"point$i"}['y'])) {
+                ${"point$i"}['x'] = ${"point$i"}[0];
+                ${"point$i"}['y'] = ${"point$i"}[1];
+            }
+        }
+        
+        $v1['x'] = $point2['x'] - $point1['x'];
+        $v1['y'] = $point2['y'] - $point1['y'];
+        $v2['x'] = $point4['x'] - $point3['x'];
+        $v2['y'] = $point4['y'] - $point3['y'];
+
+        $d = $v1['x'] * $v2['y'] - $v1['y'] * $v2['x'];
+        if (! $d)
+        {
+            //points are collinear
+            return null;
+        }
+
+        $p3x_p1x = $point3['x'] - $point1['x'];
+        $p3y_p3y = $point3['y'] - $point1['y'];
+        $t = ($p3x_p1x * $v2['y'] - $p3y_p3y * $v2['x']) / $d;
+        $s = ($p3y_p3y * $v1['x'] - $p3x_p1x * $v1['y']) / -$d;
+        if ($t < 0 || $t > 1 || $s < 0 || $s > 1)
+        {
+            //line segments don't intersect
+            return null;
+        }
+
+        return array('x' => $point1['x'] + $v1['x'] * $t,
+                     'y' => $point1['y'] + $v1['y'] * $t);
+    }
 }

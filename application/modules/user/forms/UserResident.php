@@ -94,6 +94,8 @@ class User_Form_UserResident extends Ext_Form
             if (!$subform) {
                 continue;
             }
+            $subform->getElement('monthly_income')->getValidator('Float')->setLocale('en');
+            $subform->getElement('monthly_income_guaranteed')->getValidator('Float')->setLocale('en');
 			$residentType = $member['resident_type'];
 			// if student
 			if ($residentType === Model_UserResident::TYPE_STUDENT) {
