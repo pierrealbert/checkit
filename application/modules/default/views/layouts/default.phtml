@@ -7,6 +7,7 @@
 
     $this->headLink()->appendStylesheet('/assets/css/style.css');
     $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=' . $this->getEncoding());
+    $this->headScript()->appendFile('/assets/js/dropdown.js');
     $this->headScript()->appendFile('/js/common.js');
     $this->headScript()->appendFile('/js/jquery.form.js');
     $this->headScript()->appendFile('/assets/js/jquery.the-modal.js');

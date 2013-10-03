@@ -10,9 +10,17 @@
             <? else : ?>            
             <li class="left"><a href="#">Comment ça marche ?</a></li>
             <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'property', 'action' => 'new-add'), null, true) ?>" class="btn btn-red">Publier une annonce</a></li>
-            <li><a class="open-in-modal" href="<?= $this->url(array('controller' => 'login'), null, true) ?>">Se connecter</a></li>
+            <li class="dropdown">
+            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Aide <i class="caret"></i></a>
+            	<ul class="dropdown-menu">
+            		<li><a href="">Guide du Locataire</a></li>
+            		<li><a href="">Guide du Propriétaire</a></li>
+            		<li><a href="">Guide du Professionnel</a></li>
+            		<li><a href="">F.A.Q.</a></li>
+            	</ul>
+            </li>
             <li><a class="open-in-modal" href="<?= $this->url(array('controller' => 'registration'), null, true) ?>">S’inscrire</a></li>
-            <li><a href="#">Aide</a></li>
+            <li><a class="open-in-modal" href="<?= $this->url(array('controller' => 'login'), null, true) ?>">Se connecter</a></li>            
             <? endif; ?>
         </ul>
     </div>
