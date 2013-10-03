@@ -19,7 +19,12 @@ button, .btn, [type=submit], [type=reset], [type=button] {
 	text-align: center;
 }
 
-.btn + .btn, .btn + button, button + button, [type=submit] + [type=submit], [type=reset] + [type=reset], [type=button] + [type=button] {
+.btn-small {
+	height: 30px;
+	line-height: 30px;
+}
+
+.btn + .btn, .btn + button, button + button, [type=submit] + [type=submit], [type=reset] + [type=reset], [type=button] + [type=button], input + .btn {
 	margin-left: 10px;
 }
 
