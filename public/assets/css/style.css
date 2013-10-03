@@ -417,3 +417,34 @@ header .btn {
 	background: url('../images/play-large.png') no-repeat;
 	margin: 0 auto;
 }
+
+/*
+	Home page row-3
+*/
+
+.advantages-blocks {
+	margin: 30px 0;
+}
+
+.advantages-blocks > div {
+	position: relative;
+	width: 178px;
+	float: left;
+	padding: 0 20px;
+	border-left: 2px dotted #e3e3e3;
+	height: 220px;
+}
+
+.advantages-blocks > div:first-child {
+	border-left: none;
+}
+
+.advantages-blocks > div > strong {
+	font-size: 16px;
+	color: #666;
+}
+
+.advantages-blocks > div > a {
+	position: absolute;
+	bottom: 0;
+}
