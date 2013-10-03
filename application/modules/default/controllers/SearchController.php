@@ -17,11 +17,6 @@ class SearchController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // js function initSearchStandard will be called in form
-        
-        $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
-        $form = new Form_SearchStandard();
-        
         $this->view->buttons=array(
             0=>array(
                 'type'=>'link',
