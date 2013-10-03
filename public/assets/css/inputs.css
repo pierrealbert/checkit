@@ -16,7 +16,13 @@ input {
 	color: #4d4d4d;
 	outline: none;
 	background: #FFFFFF;
+	-webkit-transition: all .2s;
+	-moz-transition: all .2s;
+	-ms-transition: all .2s;
+	-o-transition: all .2s;
+	transition: all .2s;
 }
+
 input:focus{
 	background: #b6e8ed;
 	box-shadow: inset 0px 1px 0 #3cbecc;
