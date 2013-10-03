@@ -561,6 +561,43 @@ PropertyIssue:
             onDelete: cascade
             class: PropertyIssueSubject
             local: Subject_id
-    
-            
-            
+                
+UserProperty:
+    columns:      
+        id:
+            type:       integer(4)
+            primary:    true
+            autoincrement: true      
+        property_id:    
+            type:        integer(4)      
+        property_visit_date_id:
+            type:        integer(4)
+        user_id:        
+            type:       integer(4)
+        visit_date:     date
+        visit_time:     time        
+        is_new:         
+            type:       boolean
+            default:    true          
+        status:         
+            type:     integer(1)
+            default:  1   
+    actAs:
+          Timestampable:
+              created:
+                  name: created_at
+              updated:
+                  name: updated_at
+    relations:
+        User:
+            onDelete: cascade
+            class: User
+            local: user_id        
+        Property:
+            onDelete: cascade
+            class: Property
+            local: property_id            
+        PropertyVisitDate:
+            onDelete: cascade
+            class: PropertyVisitDate
+            local: property_visit_date_id  

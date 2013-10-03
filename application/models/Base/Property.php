@@ -66,6 +66,7 @@
  * @property Doctrine_Collection $PropertyVisitDates
  * @property Doctrine_Collection $Favorite
  * @property Doctrine_Collection $PropertyIssue
+ * @property Doctrine_Collection $UserProperty
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -337,6 +338,10 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'foreign' => 'property_id'));
 
         $this->hasMany('Model_PropertyIssue as PropertyIssue', array(
+             'local' => 'id',
+             'foreign' => 'property_id'));
+
+        $this->hasMany('Model_UserProperty as UserProperty', array(
              'local' => 'id',
              'foreign' => 'property_id'));
 
