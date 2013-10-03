@@ -193,7 +193,18 @@ class Model_Property extends Model_Base_Property
             ),
         );
     }
-
+    
+    public function getNearbyMetroStation()
+    {
+        return Model_MetroStationTable::getInstance()
+                ->createQuery('Model_MetroStation')
+                ->innerJoin('Model_MetroStation.PropertyXMetroStation pxms')
+                ->where('pxms.property_id = ?', $this->id)
+                ->orderBy('pxms.distance ASC')
+                ->limit(1)
+                ->fetchOne();
+    }
+    
     public function getStateAction()
     {
         $states_info = $this->getStatesInfo();

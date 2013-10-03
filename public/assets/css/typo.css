@@ -9,7 +9,7 @@ p {
 	color: #666666;
 }
 
-a:link {
+a, a:link {
 	font-size: 16px;
 	color: #3cbecc;
 	text-decoration: underline;
@@ -19,6 +19,6 @@ a:hover, a:active {
 	text-decoration: none;
 }
 
-a:visited {
+/*a:visited {
 	color: #85577d;
-}
+}*/

@@ -1,19 +1,21 @@
 <div class="inner">
     <div class="grid">
-        <div class="grid-half grid-transparent">
-            <div class="grid-inner h220">
-                <h1 class="blue">Comment </br>ça marche ?</h1>
-                <p>Ommi transforme la façon dont vous louez et vous simplifie la location.</p>
-                <div>
-                    <div class="left">
-                        <a href="#">Regarder la vidéo</a>
-                        <a href="#">Découvrir les avantages</a>
-                    </div>
-                    <div class="right">
-                        <a class="btn btn-blue open-in-modal" href="<?= $this->url(array('controller' => 'registration'), null, true) ?>">Créer un compte</a>
-                    </div>
+        <div class="how-it-works">
+            <h1 class="blue">Comment </br>ça marche ?</h1>
+            <p>Ommi transforme la façon dont vous louez</br>et vous simplifie la location.</p>
+            <div>
+                <div class="left">
+                    <a href="#101" class="red">Regarder la vidéo</a>
+                    <a href="#102">Découvrir les avantages</a>
+                </div>
+                <div class="right">
+                    <a class="btn btn-blue open-in-modal" href="<?= $this->url(array('controller' => 'registration'), null, true) ?>">Créer un compte</a>
                 </div>
             </div>
+        </div>
+        <div class="video-play-block">
+            <span class="red">Voir la vidéo</span>
+            <a href="#" class="play-video"></a>
         </div>
     </div>
     <div class="grid grid-transparent">
@@ -35,6 +37,32 @@
     <div class="grid">
         <div class="grid-full">
             <h1 class="gray">Quels sont les avantages ?</br><span class="blue">L’immo repensé !</span></h1>
+            <div class="advantages-blocks cf">
+                <div>
+                    <div class="advantage-1"></div>
+                    <strong>Des outils de recherche innovants</strong>
+                    <p>Dessinez au coin d’une carte. Suivez votre ligne de métro favorite. Choisissez votre quartier préféré. Jamais la recherche n’a été aussi naturelle.</p>
+                    <a href="#">En savoir plus</a>
+                </div>
+                <div>
+                    <div class="advantage-2"></div>
+                    <strong>Un compte complet totalement gratuit</strong>
+                    <p>Sans frais d’agence ni commission, avec Ommi chacun trouve ce qu’il cherche et plus encore. Modèles de bail, lettres types, dépanneurs, tout est là pour vous accompagner.</p>
+                    <a href="#">En savoir plus</a>
+                </div>
+                <div>
+                    <div class="advantage-3"></div>
+                    <strong>Propriétaires, louez en toute tranquilité</strong>
+                    <p>Ne vous faites plus inonder d’emails ni d’appels. Fixez vos critères à l’avance et présélectionnez vos candidats sur dossier avant de les rencontrer. Gérez vos rendez-vous. Ommi s’occupe de tout.</p>
+                    <a href="#">En savoir plus</a>
+                </div>
+                <div>
+                    <div class="advantage-4"></div>
+                    <strong class="red">Votre dossier de candidature en ligne</strong>
+                    <p>Locataires, économisez du temps et de l’énergie. Chargez votre dossier une fois pour toutes et envoyez-le autant de fois que vous le voulez.</p>
+                    <a href="#">En savoir plus</a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="grid">
