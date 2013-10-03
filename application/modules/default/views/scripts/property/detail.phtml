@@ -61,7 +61,7 @@
                 <b>Urgent</b>
             </td>
             <td width="20%">
-                <button class="apply">Apply</button>
+                <button class="apply"><?= $this->translate('apply'); ?></button>
             </td>
         </tr>
     </table>
@@ -69,10 +69,10 @@
 
 <div id="propertyTtabs" style="display:none;">
   <ul>
-    <li><a href="#description">Description</a></li>
-    <li><a href="#photos">Photos</a></li>
-    <li><a href="#map">Map</a></li>
-    <li><a href="#calendar">Calendar</a></li>
+    <li><a href="#description"><?= $this->translate('description') ?></a></li>
+    <li><a href="#photos"><?= $this->translate('photos') ?></a></li>
+    <li><a href="#map"><?= $this->translate('map') ?></a></li>
+    <li><a href="#calendar"><?= $this->translate('calendar') ?></a></li>
   </ul>
 
   <div id="description">
@@ -90,8 +90,6 @@
 					<a class="menu_element" data-number="<?php echo $bubject->id;?>" href="#"><?php echo $bubject->subject_name;?></a>
 				    </li>
 				<?php endforeach;?>
-    <!--                            <li><a class="menu_element" href="#">Message 2</a></li>
-				<li><a class="menu_element" href="#">Spam</a></li>-->
 			    </ul>
 			<?php endif;?>
                     </li>
@@ -128,31 +126,27 @@
                         <td><?= $this->property->amount_of_charges ?> &euro;</td>
                     </tr>
                     <tr>
-                        <td>?</td>
-                        <td>?</td>
-                    </tr>
-                    <tr>
                         <td><?= $this->translate('property_type') ?></td>
                         <td><?= $this->property_type[$this->property->property_type] ?></td>
                     </tr>
                     <tr>
-                        <td><?= $this->translate('is_furnished') ?></td>
+                        <td><?= $this->translate('is_furnished') ?>:</td>
                         <td><?php if (1 == $this->property->is_furnished):  ?>Furnished<?php else: ?>Non<?= $this->translate('is_furnished') ?><?php endif; ?></td>
                     </tr>
                     <tr>
-                        <td><?= $this->translate('size') ?></td>
+                        <td><?= $this->translate('size') ?>:</td>
                         <td><?= $this->property->size ?> m<sup>2</sup></td>
                     </tr>
                     <tr>
-                        <td><?= $this->translate('number_of_rooms1') ?></td>
+                        <td><?= $this->translate('number_of_rooms1') ?>:</td>
                         <td><?= $this->number_of_rooms1[$this->property->number_of_rooms1] ?> rooms</td>
                     </tr>
                     <tr>
-                        <td><?= $this->translate('floor') ?></td>
+                        <td><?= $this->translate('floor') ?>:</td>
                         <td><?= $this->property->floor ?></td>
                     </tr>
                     <tr>
-                        <td><?= $this->translate('availability') ?></td>
+                        <td><?= $this->translate('availability') ?>:</td>
                         <td>
                             <?php if (date('Y-m-d') < $this->property->availability):?>
                                 <?= $this->property->availability ?>
@@ -162,11 +156,14 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><?= $this->translate('metro') ?></td>
-                        <td>?</td>
+                        <td><?= $this->translate('metro') ?>:</td>
+                        <td>
+                            <? $metro = $this->property->getNearbyMetroStation() ?>
+                            <?= $metro ? $metro->name : '-' ?>
+                        </td>
                     </tr>
                     <tr>
-                        <td><?= $this->translate('decor') ?></td>
+                        <td><?= $this->translate('decor') ?>:</td>
                         <td>
                             <?php $string = ''; ?>
                             <?php foreach($this->values_groups['decor'] as $key => $value): ?>
@@ -182,7 +179,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><?= $this->translate('outhouse') ?></td>
+                        <td><?= $this->translate('outhouse') ?>:</td>
                         <td>
                             <?php $string = ''; ?>
                             <?php foreach($this->values_groups['outhouse'] as $key => $value): ?>
@@ -198,7 +195,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><?= $this->translate('outdoor_space') ?></td>
+                        <td><?= $this->translate('outdoor_space') ?>:</td>
                         <td>
                             <?php $string = ''; ?>
                             <?php foreach($this->values_groups['outdoor_space'] as $key => $value): ?>
@@ -214,7 +211,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><?= $this->translate('building') ?></td>
+                        <td><?= $this->translate('building') ?>:</td>
                         <td>
                             <?php $string = ''; ?>
                             <?php foreach($this->values_groups['building'] as $key => $value): ?>
@@ -230,7 +227,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><?= $this->translate('heating_system') ?></td>
+                        <td><?= $this->translate('heating_system') ?>:</td>
                         <td>
                             <?php $string = ''; ?>
                             <?php foreach($this->values_groups['heating_system'] as $key => $value): ?>
