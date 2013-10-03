@@ -28,21 +28,7 @@ class User_MyAccountController extends Zend_Controller_Action {
             $this->_helper->redirector('index', 'my-account', 'user');
         }
         $this->view->form = $form;
-        $this->view->buttons=array(
-            0=>array(
-                'type'=>'link',
-                'title'=>'Upload Documents',
-                'url'=>'documents',
-                'id'=>'btnUpdateDocs',
-                //'target'=>'user/my-account/documents'
-            ),
-            1=>array(
-                'type'=>'link',
-                'title'=>'Edit Residents',
-                'url'=>'residents',
-                'id'=>'btnUpdateRes',
-            )
-        );
+       
     }
 
     public function changePasswordAction() {
