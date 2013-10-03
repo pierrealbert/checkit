@@ -53,9 +53,9 @@
 					<a href="#" class="btn btn-blue">Recherche rapide</a>
 					<span class="separator">— ou —</span>
 					<div class="cf promo-search-buttons-group">
-						<div class="btn btn-red icon-metro">par métro</div>
-						<div class="btn btn-red icon-dessin">par dessin</div>
-						<div class="btn btn-red icon-carte-red">par carte</div>
+						<div class="btn btn-red icon-metro" onclick="document.location.href = '<?= $this->url(array('controller' => 'search', 'action' => 'metro'), null, true) ?>';">par métro</div>
+						<div class="btn btn-red icon-dessin" onclick="document.location.href = '<?= $this->url(array('controller' => 'search', 'action' => 'draw'), null, true) ?>';">par dessin</div>
+						<div class="btn btn-red icon-carte-red" onclick="document.location.href = '<?= $this->url(array('controller' => 'search', 'action' => 'map'), null, true) ?>';">par carte</div>
 					</div>
 				</div>
 			</div>
