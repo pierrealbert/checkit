@@ -64,6 +64,19 @@
 	height: 111px;
 	line-height: 111px;
 }
+.box-text .btn-blue-dark{
+	background: #198e9c;
+	box-shadow: 0 3px 0 #087380;
+	text-shadow: 0 -1px 0 #087380 !important;
+}
+.box-text .btn-blue-dark:hover{
+	box-shadow: 0 1px 0 #087380;
+	top: 2px;
+}
+.box-text .btn-blue-dark:active{
+	box-shadow: none;
+	top: 3px;
+}
 .box-text .loyer{
 	color: #b3b3b3;
 	text-align: right;
@@ -184,6 +197,21 @@
 	background: #f2f2f2;
 	color: #4d4d4d;
 }
+.menu-annonce .btn-gray-dark{
+	background: #808080;
+	box-shadow: 0 3px 0 #333333;
+	font-size: 16px;
+	text-shadow: 0 -1px 0 #333333 !important;
+}
+.menu-annonce .btn-gray-dark:hover{
+	box-shadow: 0 1px 0 #333333;
+	top: 2px;
+}
+.menu-annonce .btn-gray-dark:active{
+	box-shadow: none;
+	top: 3px;
+}
+
 .btn-left-flag{
 	float: right;
 	height: 34px;
@@ -604,9 +632,18 @@
 .tab-annonce .block-btn-visites{
 	margin: 10px 0 50px 0;
 }
-.tab-annonce .btn-blue-lite{
-	background: #b5e6e3;
-	box-shadow: 0px 3px 0px #50aab1;
+
+.tab-annonce .btn-gray-lite{
+	background: #e5e5e5;
+	box-shadow: 0 3px 0 #b3b3b3;
 	font-size: 16px;
-	text-shadow: 0px -1px 0px #34A6B3 !important;
+	text-shadow: 0 -1px 0 #b3b3b3 !important;
+}
+.tab-annonce .btn-gray-lite:hover{
+	box-shadow: 0 1px 0 #b3b3b3;
+	top: 2px;
+}
+.tab-annonce .btn-gray-lite:active{
+	box-shadow: none;
+	top: 3px;
 }
