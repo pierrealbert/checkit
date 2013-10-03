@@ -109,6 +109,10 @@ header .btn {
 }
 
 #promo-video {
+	padding: 0 30px 0 45px;
+	background-image: url('../images/play.png');
+	background-repeat: no-repeat;
+	background-position: 15px center;
 	position: absolute;
 	top: 270px;
 }
@@ -201,6 +205,12 @@ header .btn {
 	float: left;
 }
 
+#promo-search .promo-search-location > a.icon-location {
+	background-image: url('../images/location.png');
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
 #promo-search .promo-search-budget-surface > div {
 	display: block;
 	float: left;
@@ -215,12 +225,16 @@ header .btn {
 }
 
 #promo-search .promo-search-buttons {
+	width: 342px;
 	padding: 50px 0 20px 0;
 }
 
 #promo-search .promo-search-buttons > .btn {
 	display: block;
 	width: 312px;
+	background-image: url('../images/btn-blue-search.png');
+	background-repeat: no-repeat;
+	background-position: 40px center;
 }
 
 #promo-search .promo-search-buttons > .separator {
@@ -336,4 +350,11 @@ header .btn {
 	text-align: right;
 	bottom: 0;
 	right: 0;
+}
+
+#add-criteria {
+	background-image: url('../images/btn-dark-plus.png');
+	background-position: 151px center;
+	background-repeat: no-repeat;
+	padding: 0 45px 0 30px;
 }
