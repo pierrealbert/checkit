@@ -22,6 +22,40 @@ class SearchController extends Zend_Controller_Action
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
         $form = new Form_SearchStandard();
         
+        $this->view->buttons=array(
+            0=>array(
+                'type'=>'link',
+                'title'=>'Standard Search',
+                'url'=>'search/standard',
+                'class'=>'btnSearch',
+            ),
+            1=>array(
+                'type'=>'link',
+                'title'=>'Search by Metro',
+                'url'=>'search/metro',
+                'class'=>'btnSearch',
+            ),
+            2=>array(
+                'type'=>'link',
+                'title'=>'Search by Draw',
+                'url'=>'search/draw',
+                'class'=>'btnSearch',
+            ),
+            3=>array(
+                'type'=>'link',
+                'title'=>'Search by Map',
+                'url'=>'search/map',
+                'class'=>'btnSearch',
+            )
+        );
+    }
+    
+    public function standardAction(){
+        // js function initSearchStandard will be called in form
+        
+        $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
+        $form = new Form_SearchStandard();
+        
         if ($this->getRequest()->isPost()
             && $form->isValid($this->getRequest()->getPost())
         ) {
