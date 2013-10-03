@@ -14,8 +14,11 @@
  * @property string $role
  * @property string $country
  * @property string $city
+ * @property string $address
+ * @property string $zip
  * @property string $facebook_id
  * @property boolean $is_premium
+ * @property enum $title
  * @property enum $type
  * @property string $confirm_registration_key
  * @property string $restore_password_key
@@ -82,12 +85,31 @@ abstract class Model_Base_User extends Ext_Doctrine_Record
              'type' => 'string',
              'length' => '50',
              ));
+        $this->hasColumn('address', 'string', 255, array(
+             'type' => 'string',
+             'length' => '255',
+             ));
+        $this->hasColumn('zip', 'string', 6, array(
+             'type' => 'string',
+             'length' => '6',
+             ));
         $this->hasColumn('facebook_id', 'string', 50, array(
              'type' => 'string',
              'length' => '50',
              ));
         $this->hasColumn('is_premium', 'boolean', null, array(
              'type' => 'boolean',
+             ));
+        $this->hasColumn('title', 'enum', 3, array(
+             'type' => 'enum',
+             'values' => 
+             array(
+              0 => 'mr',
+              1 => 'mrs',
+              2 => 'miss',
+             ),
+             'size' => 3,
+             'length' => 3,
              ));
         $this->hasColumn('type', 'enum', 15, array(
              'type' => 'enum',

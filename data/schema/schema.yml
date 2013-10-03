@@ -46,8 +46,14 @@ User:
         role:       string(10)
         country:    string(2)
         city:       string(50)
+        address:    string(255)
+        zip:        string(6)
         facebook_id: string(50)
         is_premium: boolean
+        title: 
+          type: enum
+          values: [mr, mrs, miss]
+          size: 3        
         type: 
           type: enum
           values: [owner, resident]

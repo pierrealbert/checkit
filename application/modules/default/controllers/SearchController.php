@@ -17,6 +17,10 @@ class SearchController extends Zend_Controller_Action
 
     public function indexAction()
     {
+       
+    }
+    
+    public function standardAction(){
         // js function initSearchStandard will be called in form
         
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');

@@ -1,2 +1,16 @@
-<?= $this->contentHeader('my_account', $this->buttons) ?>
+<?= $this->contentHeader('my_account', array(
+            0=>array(
+                'type'=>'link',
+                'title'=>'Upload Documents',
+                'url'=>'my-account/documents',
+                'id'=>'btnUpdateDocs',
+                //'target'=>'user/my-account/documents'
+            ),
+            1=>array(
+                'type'=>'link',
+                'title'=>'Edit Residents',
+                'url'=>'my-account/residents',
+                'id'=>'btnUpdateRes',
+            )
+        )) ?>
 <?= $this->form ?>
