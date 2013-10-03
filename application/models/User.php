@@ -15,6 +15,10 @@ class Model_User extends Model_Base_User
     const OWNER     = 'owner';
     const RESIDENT  = 'resident';
     
+    const MR    = 'mr';    
+    const MRS   = 'mrs';
+    const MISS  = 'miss';
+    
     /**
      *
      * @var Ext_Auth_Hash
@@ -160,6 +164,15 @@ class Model_User extends Model_Base_User
             self::RESIDENT  => 'user_resident'
         );
     }
+    
+    static public function getTitles()
+    {
+        return array(
+            self::MR   => 'title_mr',
+            self::MRS  => 'title_mrs',
+            self::MISS => 'title_miss'
+        );
+    }    
     
     static public function isTypeValid($type)
     {

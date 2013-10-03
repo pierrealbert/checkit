@@ -2,7 +2,8 @@
 
 class User_MyAccountController extends Zend_Controller_Action {
 
-    public function indexAction() {
+    public function indexAction() 
+    {
         $user = $this->_helper->auth->getCurrUser();
 
         $form = new User_Form_User();
@@ -10,9 +11,19 @@ class User_MyAccountController extends Zend_Controller_Action {
 
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())
         ) {
-            $user->merge($form->getValues());
-            $user->save();
+            $data = $form->getValues();
+            $user->merge($data['profile']);
+            
+            if (!empty($data['change_email']['new_email'])) {
+                $user->email = $data['change_email']['new_email'];
+            }
 
+            if (!empty($data['change_pass']['new_password'])) {
+                $user->password = $data['change_pass']['new_password'];
+            }
+            
+            $user->save();
+            
             $this->_helper->messenger->success('your_account_succesfully_updated');
             $this->_helper->redirector('index', 'my-account', 'user');
         }
