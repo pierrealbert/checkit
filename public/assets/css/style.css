@@ -358,3 +358,62 @@ header .btn {
 	background-repeat: no-repeat;
 	padding: 0 45px 0 30px;
 }
+
+/*
+	Homepage row-1
+*/
+
+.how-it-works {
+	position: relative;
+	width: 450px;
+	height: 255px;
+	float: left;
+	padding: 0 0 0 60px;
+	margin-bottom: 30px;
+}
+
+.how-it-works > div {
+	width: 450px;
+	position: absolute;
+	bottom: 0;
+}
+
+.how-it-works .left, .how-it-works .right {
+	width: 50%;
+}
+
+.how-it-works .left > a {
+	display: block;
+}
+
+.how-it-works .right > .btn {
+	width: 180px;
+	float: right;
+}
+
+.video-play-block {
+	float: right;
+	width: 431px;
+	height: 285px;
+	background: url('../images/video-play.png') no-repeat;
+}
+
+.video-play-block {
+	font-size: 50px;
+	font-weight: 300;
+	font-family: "Open Sans";
+	text-align: center;
+}
+
+.video-play-block > span {
+	display: block;
+	padding: 60px 0 20px 0;
+}
+
+.video-play-block > .play-video {
+	display: block;
+	width: 40px;
+	height: 47px;
+	background: url('../images/play-large.png') no-repeat;
+	margin: 0 auto;
+}
