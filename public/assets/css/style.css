@@ -423,7 +423,7 @@ header .btn {
 */
 
 .advantages-blocks {
-	margin: 30px 0;
+	margin: 70px 0 30px 0;
 }
 
 .advantages-blocks > div {
@@ -432,7 +432,7 @@ header .btn {
 	float: left;
 	padding: 0 20px;
 	border-left: 2px dotted #e3e3e3;
-	height: 220px;
+	height: 250px;
 }
 
 .advantages-blocks > div:first-child {
@@ -440,6 +440,8 @@ header .btn {
 }
 
 .advantages-blocks > div > strong {
+	display: block;
+	margin-top: 30px;
 	font-size: 16px;
 	color: #666;
 }
@@ -447,4 +449,30 @@ header .btn {
 .advantages-blocks > div > a {
 	position: absolute;
 	bottom: 0;
+}
+
+.advantages-blocks > div > div[class^='advantage-'] {
+	position: absolute;
+	top: -50px;
+	left: 80px;
+    width: 61px;
+    height: 63px;
+    background: url('../images/advantages.png') no-repeat;
+    background-position: 0 0;
+}
+
+.advantages-blocks > div > .advantage-1 {
+	background-position: 0 0 !important;
+}
+
+.advantages-blocks > div > .advantage-2 {
+	background-position: -61px 0 !important;
+}
+
+.advantages-blocks > div > .advantage-3 {
+	background-position: -122px 0 !important;
+}
+
+.advantages-blocks > div > .advantage-4 {
+	background-position: -183px 0 !important;
 }
