@@ -1,4 +1,6 @@
-<h2><?= $this->translate('login') ?></h2>
+<? if (!$this->isAjax) : ?>
+    <h2><?= $this->translate('login') ?></h2>
+<? endif; ?>    
 <?= $this->form; ?>
 <p>
     <a href="<?= $this->url(array('controller' => 'forgot-password'), null, true) ?>"><?= $this->translate('forgot_password') ?></a>
