@@ -32,10 +32,10 @@
 			<div class="text">l’immo<br>repensé</div>
 		</div>
 		<a href="#" id="promo-video" class="btn btn-small btn-red">Voir la vidéo</a>
-		<div id="promo-search" class="grid grid-dark">
-			<div class="promo-search-left">
-				<h2>Chercher une location</h2>
-				<form action="">
+		<form action="" method="post">
+			<div id="promo-search" class="grid grid-dark">
+				<div class="promo-search-left">
+					<h2>Chercher une location</h2>
 					<fieldset class="promo-search-location">
 						<label>Localisation</label>
 						<input type="text" placeholder="Où désirez-vous louer?">
@@ -54,19 +54,19 @@
 					<fieldset>
 						<a href="#" id="add-criteria" class="btn btn-small btn-dark">Plus de critères</a>
 					</fieldset>
-				</form>
-			</div>
-			<div class="promo-search-right">
-				<div class="promo-search-buttons">
-					<a href="#" class="btn btn-blue">Recherche rapide</a>
-					<span class="separator">— ou —</span>
-					<div class="cf promo-search-buttons-group">
-						<div class="btn btn-red icon-metro" onclick="document.location.href = '<?= $this->url(array('controller' => 'search', 'action' => 'metro'), null, true) ?>';">par métro</div>
-						<div class="btn btn-red icon-dessin" onclick="document.location.href = '<?= $this->url(array('controller' => 'search', 'action' => 'draw'), null, true) ?>';">par dessin</div>
-						<div class="btn btn-red icon-carte-red" onclick="document.location.href = '<?= $this->url(array('controller' => 'search', 'action' => 'map'), null, true) ?>';">par carte</div>
+				</div>
+				<div class="promo-search-right">
+					<div class="promo-search-buttons">
+						<a href="#" class="btn btn-blue">Recherche rapide</a>
+						<span class="separator">— ou —</span>
+						<div class="cf promo-search-buttons-group">
+							<a class="btn btn-red icon-metro" href="document.location.href = '<?= $this->url(array('controller' => 'search', 'action' => 'metro'), null, true) ?>">par métro</a>
+							<a class="btn btn-red icon-dessin" href="<?= $this->url(array('controller' => 'search', 'action' => 'draw'), null, true) ?>">par dessin</a>
+							<a class="btn btn-red icon-carte-red" href="<?= $this->url(array('controller' => 'search', 'action' => 'map'), null, true) ?>">par carte</a>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 </div>
