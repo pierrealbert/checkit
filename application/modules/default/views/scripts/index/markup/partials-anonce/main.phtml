@@ -1,0 +1,150 @@
+<div class="title-row">
+	<div class="container-text">
+		<h1 class="white-txt">Details de l'annonce</h1>
+		<a href="#" class="btn btn-gray"><i class="i-group-white icon-share-alt"></i>Retour aux resultats</a>
+		<a href="#" class="btn btn-red"><i class="i-group-white icon-heart"></i>Ajouter aux favoris</a>
+		<a href="#" class="btn btn-blue"><i class="i-group-white icon-thumbs-up"></i>Partager</a>
+		<a href="#" class="btn btn-gray"><i class="i-group-white icon-chevron-left"></i>Precedente</a>
+		<a href="#" class="btn btn-gray">Suivante<i class="i-group-white icon-chevron-right"></i></a>
+	</div>
+</div>
+<main>
+	<div class="inner">
+		<div class="grid">
+			<div class="box-text box-appart">
+				<h2 class="black-txt">Joli appartement refait a neuf</h2>
+				<p class="txt-bold">Appartement
+					<span class="slash">|</span>
+					39 m<sup>2</sup>
+					<span class="slash">|</span>
+					2 pieces
+				</p>
+				<p class="date-txt">Mise en  ligne : 22/07/2013
+					<a href="#" class="btn btn-red small-btn">
+						<i class="icon-urgent"></i>
+						Urgent
+					</a>
+				</p>
+			</div>
+			<div class="box-text box-price">
+				<div class="loyer">Loyer mensuel</div>
+				<div class="price">980 €</div>
+				<a href="#" class="btn btn-gray btn-blue-dark small-btn">
+					<i class="i-group-white icon-pro"></i>
+					Pro
+				</a>
+			</div>
+			<div class="box-text box-button">
+				<a href="#" class="btn btn-blue big-btn"><i class="i-group-white icon-check"></i>Candidater</a>
+			</div>
+		</div>
+
+		<?= $this->partial('index/markup/partials-anonce/'.$this->tab.'.phtml'); ?>
+
+		<div class="grid grid-transparent">
+			<div class="main-container-box">
+				<div class="container-box">
+					<div class="grid grid-block-big">
+						<div class="triangle-left"></div>
+						<div class="triangle-left triangle-second"></div>
+						<h2 class="black-txt">Annonces similaires</h2>
+						<p>Nous vous proposons ici d’autres annonces susceptibles de vous intéresser</p>
+					</div>
+				</div>
+				<div class="container-box">
+					<div class="grid grid-block">
+						<div class="box-text info-box">
+							<img src="/./assets/images/img-gallery-01.png" class="img-ad">
+							<h3 class="title-ad">Appartement calme à Père-Lachaise</h3>
+							<div>Appartement <span class="slash">|</span> Meublé<br>
+								Paris 11e (75011)<br>
+								Disponibilité : immédiate<br>
+								Métro : Père-Lachaise
+							</div>
+						</div>
+						<div class="box-text price-box">
+							<p class="price-small">1200 €</p>
+							<p>54 m²</p>
+							<p>2 pièces</p>
+						</div>
+					</div>
+					<div class="grid grid-block">
+						<div class="box-text info-box">
+							<img src="/./assets/images/img-gallery-02.png" class="img-ad">
+							<h3 class="title-ad">Appartement entièrement rénové</h3>
+							<div>Appartement <span class="slash">|</span> Meublé<br>
+								Paris 11e (75011)<br>
+								Disponibilité : 12/09/2013<br>
+								Métro : Nation
+							</div>
+						</div>
+						<div class="box-text price-box">
+							<p class="price-small">1250 €</p>
+							<p>54 m²</p>
+							<p>2 pièces</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="grid">
+			<div class="grid-half grid-transparent">
+				<div class="grid-inner">
+					<h1 class="blue">Decouveres <br> nos outils <br> de recherche</h1>
+					<p>Ommi transforme la façon dont vous louez.
+						Il rend service aux propriétaires et aux locataires.
+						Ommi vous simplifie l’immobilier.
+					</p>
+					<a href="#" class="btn btn-red btn-annonce">
+						<i class="i-group-red icon-metro"></i>
+						par métro
+					</a>
+					<a href="#" class="btn btn-red btn-annonce">
+						<i class="i-group-red icon-dessin"></i>
+						par dessin
+					</a>
+					<a href="#" class="btn btn-red btn-annonce">
+						<i class="i-group-red icon-carte-red"></i>
+						par carte
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="grid grid-transparent">
+			<div class="grid-half">
+				<div class="grid-inner h120">
+					<h1 class="gray">Compte Ommium</h1>
+					<div class="index-row-six cf">
+						<div class="index-row-six-text">
+							Ommi, Ommi+ ou Ommium?
+							Des comptes adaptés à chacun.
+						</div>
+						<div class="index-row-six-link">
+							<a href="#link">Découvrez nos comptes</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="grid-half">
+				<div class="grid-inner h120">
+					<h1 class="gray">F.A.Q.</h1>
+					<div class="index-row-six cf">
+						<div class="index-row-six-text">
+							Consultez les questions les plus fréquemment posées.
+						</div>
+						<div class="index-row-six-link">
+							<a href="#link">Consultez les F.A.Q.</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="grid">
+			<div class="grid-full">
+				<h1 class="gray">Je m'nscris, c'est gratuit
+					<a href="#" class="right btn btn-blue w200">Créer un compte</a>
+				</h1>
+			</div>
+		</div>
+	</div>
+</main>
