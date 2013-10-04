@@ -2,17 +2,10 @@
 
 class SearchController extends Zend_Controller_Action
 {
-    /**
-     *
-     * @var type Zend_Session_Namespace
-     */
-    protected $_searchConditions = array();
     
     public function init()
     {
         $this->view->jQuery()->addJavascriptFile('/js/search.js');
-        
-        $this->_searchConditions = new Zend_Session_Namespace('search');
     }
 
     public function indexAction()
@@ -94,9 +87,13 @@ class SearchController extends Zend_Controller_Action
                                                'sign' => '<=');
             }
 
-            $this->_searchConditions->data = $values;
+            $search = new Model_Search;
+            $search->search_type = 'standart';
+            $search->conditions = serialize($values);
+            $search->user_id = Zend_Auth::getInstance()->getIdentity();
+            $search->save();
             
-            $this->_helper->redirector->gotoSimple('results', 'search', 'default');  
+            $this->_helper->redirector->gotoSimple('results', 'search', 'default', array('search_id' => $search->id));
         }
 
         $this->view->form = $form;
@@ -228,9 +225,25 @@ class SearchController extends Zend_Controller_Action
     
     public function resultsAction()
     {           
+        $searchId = $this->getRequest()->getParam('search_id');
+        $search = Model_SearchTable::getInstance()->find($searchId);
+        if (!$search or $search->user_id != Zend_Auth::getInstance()->getIdentity()) {
+            $this->_helper->redirector->gotoSimple('index', 'search', 'default');
+        }
+        $form = new Form_SaveSearch();
+        if ($this->getRequest()->isPost()
+            && $form->isValid($this->getRequest()->getPost())
+        ) {
+            $search->is_temp = False;
+            $search->name = $form->getValue('name');
+            $search->save();
+            $this->_helper->redirector->gotoSimple('results', 'search', 'default', array('search_id' => $search->id));
+        }
         $foundProperties = Model_PropertyTable::getInstance()
-                ->search($this->_searchConditions->data);
+                ->search(unserialize($search->conditions));
 
+        $this->view->form = $form;
         $this->view->foundProperties = $foundProperties;
+        $this->view->search = $search;
     }
 }
