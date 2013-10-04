@@ -29,4 +29,6 @@ $(function() {
         $.modal().close();
         $('#modal .modal-content-container').empty();
     });
+
+    $('.dropdown-toggle').dropdown()
 });

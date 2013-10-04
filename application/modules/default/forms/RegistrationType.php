@@ -13,7 +13,8 @@ class Form_RegistrationType extends Ext_Form
 
 
         $this->addElement('submit', 'register', array(
-            'label' => 'signup_by_email'
+            'label' => 'signup_by_email',
+            'class' => 'btn btn-blue'
         ));
     }
     

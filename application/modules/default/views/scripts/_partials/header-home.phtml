@@ -10,9 +10,17 @@
             <? else : ?>            
             <li class="left"><a href="#">Comment ça marche ?</a></li>
             <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'property', 'action' => 'new-add'), null, true) ?>" class="btn btn-red">Publier une annonce</a></li>
-            <li><a class="open-in-modal" href="<?= $this->url(array('controller' => 'login'), null, true) ?>">Se connecter</a></li>
+            <li class="dropdown">
+            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Aide <i class="caret"></i></a>
+            	<ul class="dropdown-menu">
+            		<li><a href="">Guide du Locataire</a></li>
+            		<li><a href="">Guide du Propriétaire</a></li>
+            		<li><a href="">Guide du Professionnel</a></li>
+            		<li><a href="">F.A.Q.</a></li>
+            	</ul>
+            </li>
             <li><a class="open-in-modal" href="<?= $this->url(array('controller' => 'registration'), null, true) ?>">S’inscrire</a></li>
-            <li><a href="#">Aide</a></li>
+            <li><a class="open-in-modal" href="<?= $this->url(array('controller' => 'login'), null, true) ?>">Se connecter</a></li>            
             <? endif; ?>
         </ul>
     </div>
@@ -24,10 +32,10 @@
 			<div class="text">l’immo<br>repensé</div>
 		</div>
 		<a href="#" id="promo-video" class="btn btn-small btn-red">Voir la vidéo</a>
-		<div id="promo-search" class="grid grid-dark">
-			<div class="promo-search-left">
-				<h2>Chercher une location</h2>
-				<form action="">
+		<form action="" method="post">
+			<div id="promo-search" class="grid grid-dark">
+				<div class="promo-search-left">
+					<h2>Chercher une location</h2>
 					<fieldset class="promo-search-location">
 						<label>Localisation</label>
 						<input type="text" placeholder="Où désirez-vous louer?">
@@ -46,19 +54,19 @@
 					<fieldset>
 						<a href="#" id="add-criteria" class="btn btn-small btn-dark">Plus de critères</a>
 					</fieldset>
-				</form>
-			</div>
-			<div class="promo-search-right">
-				<div class="promo-search-buttons">
-					<a href="#" class="btn btn-blue">Recherche rapide</a>
-					<span class="separator">— ou —</span>
-					<div class="cf promo-search-buttons-group">
-						<div class="btn btn-red icon-metro" onclick="document.location.href = '<?= $this->url(array('controller' => 'search', 'action' => 'metro'), null, true) ?>';">par métro</div>
-						<div class="btn btn-red icon-dessin" onclick="document.location.href = '<?= $this->url(array('controller' => 'search', 'action' => 'draw'), null, true) ?>';">par dessin</div>
-						<div class="btn btn-red icon-carte-red" onclick="document.location.href = '<?= $this->url(array('controller' => 'search', 'action' => 'map'), null, true) ?>';">par carte</div>
+				</div>
+				<div class="promo-search-right">
+					<div class="promo-search-buttons">
+						<a href="#" class="btn btn-blue">Recherche rapide</a>
+						<span class="separator">— ou —</span>
+						<div class="cf promo-search-buttons-group">
+							<a class="btn btn-red icon-metro" href="<?= $this->url(array('controller' => 'search', 'action' => 'metro'), null, true) ?>">par métro</a>
+							<a class="btn btn-red icon-dessin" href="<?= $this->url(array('controller' => 'search', 'action' => 'draw'), null, true) ?>">par dessin</a>
+							<a class="btn btn-red icon-carte-red" href="<?= $this->url(array('controller' => 'search', 'action' => 'map'), null, true) ?>">par carte</a>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 </div>

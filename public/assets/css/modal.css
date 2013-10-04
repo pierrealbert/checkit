@@ -8,10 +8,9 @@
 	left: 0;
 	top: 0;
 	right: 0;
-	z-index: 100;
+	z-index: 9999;
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
-
 }
 
 .themodal-overlay > * {
