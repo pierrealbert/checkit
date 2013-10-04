@@ -61,4 +61,22 @@ abstract class Ext_Form extends Zend_Form
             'decorators' => $decorators
         ));
     }
+    
+    public function isValid($data) 
+    {
+        $isValid = parent::isValid($data);
+        $this->highlightErrorElements();
+        return $isValid;
+    }
+
+
+    public function highlightErrorElements()
+    {
+        foreach($this->getElements() as $element) {
+            if ($element->hasErrors()) {
+                $currentClass = $element->getAttrib('class');
+                $element->setAttrib('class', trim($currentClass . ' input-error'));
+            }
+        }
+    }    
 }
