@@ -33,5 +33,5 @@ $(function() {
         $('#modal .modal-content-container').empty();
     });
 
-    $('.dropdown-toggle').dropdown()
+    $('.dropdown-toggle').dropdown();
 });
