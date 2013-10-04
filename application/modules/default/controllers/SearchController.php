@@ -251,9 +251,13 @@ class SearchController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()
             && $form->isValid($this->getRequest()->getPost())
         ) {
-            $search->is_temp = False;
-            $search->name = $form->getValue('name');
-            $search->save();
+            if (Zend_Auth::getInstance()->getIdentity()) {
+                $search->is_temp = False;
+                $search->name = $form->getValue('name');
+                $search->save();
+            } else {
+                $this->_helper->messenger->error('register_to_save_search_results');
+            }
             $this->_helper->redirector->gotoSimple('results', 'search', 'default', array('search_id' => $search->id));
         }
         $foundProperties = Model_PropertyTable::getInstance()
