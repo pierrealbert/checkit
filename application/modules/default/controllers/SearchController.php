@@ -122,11 +122,15 @@ class SearchController extends Zend_Controller_Action
             
             $regionsSelectedIds = explode(',', $this->getRequest()->getParam('regions_selected'));
             
-            $this->_searchConditions->data = array(
+            $search = new Model_Search;
+            $search->search_type = 'map';
+            $search->conditions = serialize(array(
                 'region_block_id' => array('value' => $regionsSelectedIds)
-            );
+            ));
+            $search->user_id = Zend_Auth::getInstance()->getIdentity();
+            $search->save();
             
-            $this->_helper->redirector->gotoSimple('results', 'search', 'default');            
+            $this->_helper->redirector->gotoSimple('results', 'search', 'default', array('search_id' => $search->id));
         }
 
         $this->view->form = $form;
@@ -153,13 +157,18 @@ class SearchController extends Zend_Controller_Action
                     $values['metro_station_id'][] = $station->id;
                 }
             }
-            $this->_searchConditions->data = array(
+            
+            $search = new Model_Search;
+            $search->search_type = 'metro';
+            $search->conditions = serialize(array(
                 'PropertyXMetroStation.distance' => array('value' => $values['distance'],
                                                           'sign' => '<',),
                 'PropertyXMetroStation.metro_station_id' => array('value' => $values['metro_station_id']),
-            );
+            ));
+            $search->user_id = Zend_Auth::getInstance()->getIdentity();
+            $search->save();
             
-            $this->_helper->redirector->gotoSimple('results', 'search', 'default');            
+            $this->_helper->redirector->gotoSimple('results', 'search', 'default', array('search_id' => $search->id));
         }
         
         $this->view->form = $form;
@@ -208,14 +217,22 @@ class SearchController extends Zend_Controller_Action
                         $foundPropertyIds[] = $property->id;
                     }
                 }
-                $this->_searchConditions->data = array(
+                $value = array(
                     'id' => array('value' => $foundPropertyIds),
                 );
             } else {
-                $this->_searchConditions->data = array(
+                $value = array(
                     'region_block_id' => array('value' => $blockIds),
                 );
             }
+            
+            $search = new Model_Search;
+            $search->search_type = 'draw';
+            $search->conditions = serialize($value);
+            $search->user_id = Zend_Auth::getInstance()->getIdentity();
+            $search->save();
+            
+            $this->_helper->redirector->gotoSimple('results', 'search', 'default', array('search_id' => $search->id));
 
             $this->_helper->redirector->gotoSimple('results', 'search', 'default');            
         }
