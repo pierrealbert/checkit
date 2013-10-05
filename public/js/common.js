@@ -5,6 +5,9 @@ $(function() {
         e.preventDefault();
 
         var anchor = $(this).attr('href');
+        var title = $(this).data('title');
+
+        $('#modal .modal-title-container .modal-title').html(title);
 
         $('#modal').modal().open({
             onOpen: function(el, options){
@@ -30,5 +33,5 @@ $(function() {
         $('#modal .modal-content-container').empty();
     });
 
-    $('.dropdown-toggle').dropdown()
+    $('.dropdown-toggle').dropdown();
 });

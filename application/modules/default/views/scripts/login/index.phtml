@@ -1,11 +1,23 @@
-<h2><?= $this->translate('login') ?></h2>
-<?= $this->form; ?>
-<p>
-    <a href="<?= $this->url(array('controller' => 'forgot-password'), null, true) ?>"><?= $this->translate('forgot_password') ?></a>
-</p>
-<p>
-    <a href="<?= $this->url(array('controller' => 'registration'), null, true) ?>"><?= $this->translate('sign_up') ?></a>
-</p>
+<? if (!$this->isAjax) : ?>
+    <div class="inner">
+        <h2><?= $this->translate('login') ?></h2>
+<? else : ?>
+    <div class="login-popup">
+<? endif; ?>    
+        <a href="<?= $this->url(array('module' => 'default', 'controller' => 'login', 'action' => 'facebook'), null, true) ?>" class="btn btn-gray btn-fb">S’inscrire avec Facebook</a>
+        <div class="separator">— ou —</div>
+        <?= $this->form; ?>
+        <div class="login-bottom">
+            <a href="<?= $this->url(array('controller' => 'forgot-password'), null, true) ?>"><?= $this->translate('forgot_password') ?></a>
+            <p>
+                <a href="<?= $this->url(array('controller' => 'registration'), null, true) ?>" class="red"><?= $this->translate('sign_up') ?></a>
+            </p>
+        </div>
+<? if (!$this->isAjax) : ?>
+    </div>
+<? else : ?>
+    </div>
+<? endif; ?> 
 
 <? if ($this->isAjax) : ?>
     <script type="text/javascript">

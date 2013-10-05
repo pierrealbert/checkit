@@ -73,6 +73,7 @@
 	background-color: #f2f2f2;
 	border-radius: 0 0 10px 10px;
 	border-top: 1px solid #f2f2f2;
+	border-bottom: 1px solid #f2f2f2;
 	box-shadow: 0px 3px 0px #ccc;
 	padding: 0 40px;
 }
@@ -120,33 +121,67 @@ margin: 0 -40px;
 	font-size: 14px;
 }
 
-#modal .registration-bottom {
+#modal .registration-bottom, #modal .login-bottom {
 	border-top: 2px dotted #d3d3d3;
 	padding: 20px 40px;
 	margin: 0 -40px;
 }
 
-#modal .registration-bottom > p {
+#modal .registration-bottom, #modal .login-bottom > p {
 	margin-bottom: 0;
 }
 
-#modal #registration-pro-form dl {
+#modal dl {
 	margin: 0;
 }
 
-#modal #registration-pro-form dl dt {
+#modal dl dt {
 	margin: 5px 0;
 }
 
-#modal #registration-pro-form dl dt label {
+#modal dl dt label {
 	font-size: 16px;
 }
 
-#modal #registration-pro-form dl dd {
-	margin: 0;
+#modal dl dd {
+	margin: 0 0 10px 0;
 }
 
-#modal #registration-pro-form dl dd input {
+#modal dl dd input[type=text], #modal dl dd input[type=password] {
 	display: block;
 	width: 440px;
+}
+
+/*
+	Login popup
+*/
+
+#modal .login-popup {
+	
+}
+
+#modal .login-popup .btn-fb {
+	display: block;
+	background-position: 85px center;
+	margin-top: 20px;
+}
+
+#modal .login-popup .separator {
+	display: block;
+	font-size: 16px;
+	padding: 20px 0;
+	text-align: center;
+}
+
+#modal .login-popup .login-bottom > a {
+	display: block;
+}
+
+#modal .login-popup #login-form {
+	margin-bottom: 20px;
+}
+
+#modal .login-popup #login-button {
+	display: block;
+	width: 100%;
 }

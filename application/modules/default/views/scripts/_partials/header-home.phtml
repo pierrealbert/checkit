@@ -19,8 +19,8 @@
             		<li><a href="">F.A.Q.</a></li>
             	</ul>
             </li>
-            <li><a class="open-in-modal" href="<?= $this->url(array('controller' => 'registration'), null, true) ?>">S’inscrire</a></li>
-            <li><a class="open-in-modal" href="<?= $this->url(array('controller' => 'login'), null, true) ?>">Se connecter</a></li>            
+            <li><a class="open-in-modal" data-title="<?= $this->translate('sign_up') ?>" href="<?= $this->url(array('controller' => 'registration'), null, true) ?>"><?= $this->translate('sign_up') ?></a></li>
+            <li><a class="open-in-modal" data-title="<?= $this->translate('sign_in') ?>" href="<?= $this->url(array('controller' => 'login'), null, true) ?>"><?= $this->translate('sign_in') ?></a></li>            
             <? endif; ?>
         </ul>
     </div>

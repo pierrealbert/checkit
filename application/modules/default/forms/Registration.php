@@ -61,7 +61,7 @@ class Form_Registration extends Ext_Form
 
         if ($withSubmit) {
             $this->addElement('submit', 'register', array(
-                'label' => 'Create Account',
+                'label' => 'create_account',
                 'class' => 'btn btn-blue'
             ));
         }
