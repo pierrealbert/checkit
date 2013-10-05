@@ -135,7 +135,21 @@
 
 
 
-
 .box-btn-search{
 	padding: 15px 57px;
+	overflow: hidden;
+}
+.box-btn-search > .btn-blue{
+	background-image: url(../images/btn-blue-search.png);
+	background-repeat: no-repeat;
+	background-position: 40px 50%;
+	width: 257px;
+	float: right;
+}
+.box-btn-search > .btn-red{
+	background-image: url(../images/icon-sauv.png);
+	background-repeat: no-repeat;
+	background-position: 24px 50%;
+	width: 330px;
+	float: left;
 }
