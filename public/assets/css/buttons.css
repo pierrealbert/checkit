@@ -148,3 +148,58 @@ button, .btn, [type=submit], [type=reset], [type=button] {
 	box-shadow: none;
 	top: 3px;
 }
+
+
+/*
+	 Button for input
+*/
+.btn-input-gray-dark,
+.btn-input-gray-lite,
+.btn-input-number,
+.btn-tous{
+	background: transparent;
+	display: inline-block;
+	position: relative;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 20px;
+	border-radius: 5px;
+	font-size: 14px;
+	color: #fff;
+	-webkit-transition: all .2s;
+	-moz-transition: all .2s;
+	-ms-transition: all .2s;
+	-o-transition: all .2s;
+	transition: all .2s;
+	cursor: pointer;
+	text-decoration: none !important;
+	border: 0;
+	text-align: center;
+}
+.btn-input-gray-lite{
+	color: #4d4d4d;
+}
+.btn-input-gray-dark:active{
+	box-shadow: none;
+	top: 0;
+}
+.btn-input-number{
+	padding: 0 15px;
+}
+.btn-tous,.btn-tous{
+	background: #b3b3b3;
+	box-shadow: 0 1px 0 #808080;
+	text-shadow: 0 -1px 0 #808080 !important;
+	margin-right: 10px;
+}
+
+.btn-tous:hover, .btn-tous:hover {
+	box-shadow: 0 0 0 #808080;
+	top: 0.5px;
+	color: #fff;
+}
+
+.btn-tous:active, .btn-tous:active {
+	box-shadow: none;
+	top: 1px;
+}
