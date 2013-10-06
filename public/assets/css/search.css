@@ -284,3 +284,23 @@
 .box-place > .btn-carte8{
 	background-image: url(../images/btn-carte-08.png);
 }
+
+
+/*--------Page-Search-Carte-------*/
+
+.bg-carte{
+	background: url(../images/bg-search-carte.png) repeat-x;
+}
+.carte-black{
+	height: 622px;
+}
+.box-carte .box-btn-return{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+.box-carte .box-btn-return > .btn-gray-lite{
+	background-image: url(../images/icon-retourn.png);
+	background-repeat: no-repeat;
+	background-position: 40px 50%;
+}
