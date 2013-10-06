@@ -180,3 +180,107 @@
 .txt-line-metro{
 	margin: 15px 0;
 }
+
+/*--------Page-Search-Dessin-------*/
+.bg-dessin{
+	background: url(../images/bg-search-dessin.png) repeat-x;
+}
+.box-carte{
+	position: relative;
+	width: 1000px;
+	height: 651px;
+}
+.box-carte .btn-carte-nav{
+	position: absolute;
+	background: #f5f5f5;
+	border-radius: 10px;
+	width: 242px;
+	top: 20px;
+	right: 20px;
+	padding: 15px;
+}
+.box-carte .btn-carte-nav > .btn{
+	width: 212px;
+	margin-left: 0;
+	margin-bottom: 10px;
+}
+.box-carte .btn-carte-nav > .btn-blue{
+	background-image: url(../images/btn-blue-search.png);
+	background-repeat: no-repeat;
+	background-position: 31px 50%;
+}
+.box-btn-search > .btn-gray{
+	background-image: url(../images/icon-remove.png);
+	background-repeat: no-repeat;
+	background-position: 24px 50%;
+	float: left;
+	width: 224px;
+}
+.box-btn-search > .btn-sauv{
+	width: 200px;
+}
+.box-carte .btn-plus-minus{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	width: 48px;
+	background: transparent;
+}
+.box-carte .btn-plus-minus > .btn-gray-lite{
+	height: 37px;
+	line-height: 37px;
+	width: 11px;
+	margin-left: 0;
+	margin-bottom: 10px;
+}
+.box-carte .btn-plus-minus > .btn-plus{
+	background-image: url(../images/icon-plus.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.box-carte .btn-plus-minus > .btn-minus{
+	background-image: url(../images/icon-minus.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.box-place{
+	float: left;
+	width: 150px;
+	margin: 0 46px 20px 0;
+}
+.box-place label{
+	display: block;
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+.box-place > .btn-gray{
+	background-repeat: no-repeat;
+	background-position: center center;
+	width: 151px;
+	height: 151px;
+	padding: 0;
+}
+.box-place > .btn-carte1{
+	background-image: url(../images/btn-carte-mini.png);
+}
+.box-place > .btn-carte2{
+	background-image: url(../images/btn-carte-02.png);
+}
+.box-place > .btn-carte3{
+	background-image: url(../images/btn-carte-03.png);
+}
+.box-place > .btn-carte4{
+	background-image: url(../images/btn-carte-04.png);
+}
+.box-place > .btn-carte5{
+	background-image: url(../images/btn-carte-05.png);
+}
+.box-place > .btn-carte6{
+	background-image: url(../images/btn-carte-06.png);
+}
+.box-place > .btn-carte7{
+	background-image: url(../images/btn-carte-07.png);
+}
+.box-place > .btn-carte8{
+	background-image: url(../images/btn-carte-08.png);
+}

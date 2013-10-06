@@ -325,7 +325,15 @@
 	margin-left: 0;
 	margin-top: 10px;
 }
-
+.inner-box-carte{
+	float: right;
+	height: 345px;
+	width: 467px;
+}
+.inner-box-carte img{
+	width: 467px;
+	height: 349px;
+}
 
 
 

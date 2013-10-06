@@ -149,6 +149,27 @@ button, .btn, [type=submit], [type=reset], [type=button] {
 	top: 3px;
 }
 
+/*
+	 Button gray-lite
+*/
+.btn-gray-lite, .btn-gray-lite{
+	background: #f2f2f2;
+	box-shadow: 0 3px 0 #d3d3d3;
+	font-size: 16px;
+	text-shadow: 0 -1px 0 #fff !important;
+}
+
+.btn-gray-lite:hover, .btn-gray-lite:hover{
+	box-shadow: 0 1px 0 #d3d3d3;
+	top: 2px;
+}
+
+.btn-gray-lite:active, .btn-gray-lite:active{
+	box-shadow: none;
+	top: 3px;
+}
+
+
 
 /*
 	 Button for input
