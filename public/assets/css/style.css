@@ -584,3 +584,8 @@ header .btn {
 #login-page .login-bottom > p {
 	margin: 0;
 }
+
+#page-registration {
+	width: 550px;
+	margin: 0 auto;
+}

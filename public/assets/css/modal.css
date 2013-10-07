@@ -82,74 +82,58 @@
 	Modal registration
 */
 
-#modal .registration-top {
+#modal .registration-top, #page-registration .registration-top {
 background-color: #E5E5E5;
 padding: 30px 40px;
 margin: 0 -40px;
 }
 
-#modal .registration-top-buttons {
+#page-registration .registration-top {
+	background-color: #F7F7F7 !important;
+	border-radius: 10px;
+}
+
+#modal .registration-top-buttons, #page-registration .registration-top-buttons {
 	margin: 20px 0 0 0;
 	line-height: 45px;
 }
 
-#modal .registration-top-buttons .btn {
+#modal .registration-top-buttons .btn, #page-registration .registration-top-buttons .btn {
 	width: 220px;
 }
 
-#modal .registration-top-buttons .sep {
+#modal .registration-top-buttons .sep, #page-registration .registration-top-buttons .sep {
 	display: inline-block;
 	width: 50px;
 	text-align: center;
 }
 
-#modal .registration-type {
+#modal .registration-type, #page-registration .registration-type {
 	margin: 30px 0;
 }
 
-#modal .registration-type .btn {
+#modal .registration-type .btn, #page-registration .registration-type .btn {
 	display: block;
 	margin: 20px 0;
 }
 
-#modal .registration-type .btn-fb {
+#modal .registration-type .btn-fb, #page-registration .registration-type .btn-fb {
 	background-position: 85px center;
 }
 
-#modal .registration-type p > a {
+#modal .registration-type p > a, #page-registration .registration-type p > a {
 	color: #666;
 	font-size: 14px;
 }
 
-#modal .registration-bottom, #modal .login-bottom {
+#modal .registration-bottom, #page-registration .registration-bottom, #modal .login-bottom {
 	border-top: 2px dotted #d3d3d3;
 	padding: 20px 40px;
 	margin: 0 -40px;
 }
 
-#modal .registration-bottom, #modal .login-bottom > p {
+#modal .registration-bottom, #page-registration .registration-bottom, #modal .login-bottom > p {
 	margin-bottom: 0;
-}
-
-#modal dl {
-	margin: 0;
-}
-
-#modal dl dt {
-	margin: 5px 0;
-}
-
-#modal dl dt label {
-	font-size: 16px;
-}
-
-#modal dl dd {
-	margin: 0 0 10px 0;
-}
-
-#modal dl dd input[type=text], #modal dl dd input[type=password] {
-	display: block;
-	width: 440px;
 }
 
 /*

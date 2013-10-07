@@ -1,4 +1,8 @@
-<div id="registration">
+<? if (!$this->isAjax) : ?>
+    <div class="inner">
+<? endif; ?>  
+<div id="page-registration">
+	<h2><?= $this->translate('registration') ?></h2>
 	<div class="registration-top">
 		<span>Sélectionnez votre situation, </br><strong>Ommi</strong> vous apporte une aide adaptée à vos besoins</span>
 		<div class="registration-top-buttons">
@@ -15,3 +19,7 @@
 		<p>Vous avez déjà un compte? <a class="open-in-modal" href="<?= $this->url(array('controller' => 'login', 'action' => 'index'), null, true) ?>">Connectez-vous</a></p>
 	</div>
 </div>
+
+<? if (!$this->isAjax) : ?>
+    </div>
+<? endif; ?> 
