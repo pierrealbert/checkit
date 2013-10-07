@@ -5,7 +5,7 @@
 	background: url(../images/bg-search-stand.png) repeat-x;
 }
 .title-row-search .container-text{
-	padding: 15px 0;
+	padding: 15px 0 15px 100px;
 }
 .title-row-search .white-txt{
 	font-size: 45px;
@@ -302,5 +302,15 @@
 .box-carte .box-btn-return > .btn-gray-lite{
 	background-image: url(../images/icon-retourn.png);
 	background-repeat: no-repeat;
-	background-position: 40px 50%;
+	background-position: 22px 50%;
+	width: 263px;
+}
+.box-search-advanced .box-all-input{
+	margin-left: 32px;
+}
+.box-search-advanced .box-all-input .box-input{
+	margin-bottom: 15px;
+}
+.box-btn-search .btn-effacer{
+	width: 248px;
 }
