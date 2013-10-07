@@ -22,3 +22,24 @@ a:hover, a:active {
 /*a:visited {
 	color: #85577d;
 }*/
+
+dl {
+	margin: 0;
+}
+
+dl dt {
+	margin: 5px 0;
+}
+
+dl dt label {
+	font-size: 16px;
+}
+
+dl dd {
+	margin: 0 0 10px 0;
+}
+
+dl dd input[type=text], dl dd input[type=password] {
+	display: block;
+	width: 440px;
+}
