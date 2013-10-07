@@ -177,6 +177,7 @@ button, .btn, [type=submit], [type=reset], [type=button] {
 .btn-input-gray-dark,
 .btn-input-gray-lite,
 .btn-input-number,
+.btn-input-grayer,
 .btn-tous{
 	background: transparent;
 	display: inline-block;
@@ -207,11 +208,14 @@ button, .btn, [type=submit], [type=reset], [type=button] {
 .btn-input-number{
 	padding: 0 15px;
 }
+.btn-input-grayer{
+	color: #4d4d4d;
+}
 .btn-tous,.btn-tous{
 	background: #9a9a9a;
 	box-shadow: 0 1px 0 #818181;
 	text-shadow: 0 -1px 0 #818181 !important;
-	margin-right: 10px;
+	/*margin-right: 10px;*/
 }
 /*.btn-tous-active{*/
 	/*background: #cdcdcd;*/

@@ -12,7 +12,7 @@
 .container-text{
 	width: 1100px;
 	margin: 0 auto;
-	text-align: center;
+	padding-left: 100px;
 }
 .container-text .white-txt{
 	margin: 0 0 10px 0;
@@ -20,7 +20,7 @@
 	font-size: 35px;
 	text-align: left;
 	text-shadow: 0 -1px 0 #4d4d4d;
-	padding-left: 49px;
+
 }
 .box-text{
 	float: left;
