@@ -550,3 +550,37 @@ header .btn {
 .advantages-blocks > div > .advantage-4 {
 	background-position: -183px 0 !important;
 }
+
+#login-page {
+	position: relative;
+}
+
+#login-page #login-form {
+	
+}
+
+#login-page .btn-fb {
+	position: absolute;
+	right: 0;
+	top: 24px;
+	width: 350px;
+}
+
+#login-page .separator {
+	position: absolute;
+	right: 430px;
+	top: 33px;
+}
+
+#login-page .login-bottom {
+	margin-top: 20px;
+}
+
+#login-page .login-bottom a {
+	float: left;
+	margin-right: 20px;
+}
+
+#login-page .login-bottom > p {
+	margin: 0;
+}

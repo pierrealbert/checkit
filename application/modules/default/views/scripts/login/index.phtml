@@ -1,6 +1,7 @@
 <? if (!$this->isAjax) : ?>
     <div class="inner">
         <h2><?= $this->translate('login') ?></h2>
+        <div id="login-page">
 <? else : ?>
     <div class="login-popup">
 <? endif; ?>    
@@ -14,6 +15,7 @@
             </p>
         </div>
 <? if (!$this->isAjax) : ?>
+    	</div>
     </div>
 <? else : ?>
     </div>
