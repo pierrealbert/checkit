@@ -5,7 +5,19 @@
             <? if ($this->currUser) : ?>
             <li class="left"><a href="#">Guide du Locataire</a></li>
             <li><a href="<?= $this->url(array('controller' => 'search', 'action' => 'index'), null, true) ?>" class="btn btn-red">Nouvelle recherche</a></li>
-            <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'my-account', 'action' => 'index'), null, true) ?>">Bonjour, <?= $this->currUser->first_name ?> <?= $this->currUser->last_name ?></a></li>
+            <li class="dropdown">
+            	<a class="dropdown-toggle" data-toggle="dropdown" href="">Bonjour, <?= $this->currUser->first_name ?> <?= $this->currUser->last_name ?> <i class="caret"></i></a>
+            	<ul class="dropdown-menu">
+            		<li><a href="">Résumé</a></li>
+            		<li><a href="">Mon dossier</a></li>
+            		<li><a href="">Mes candidatures</a></li>
+            		<li><a href="">Mes recherches</a></li>
+            		<li><a href="">Mes services</a></li>
+            		<li><a href="">Mon compte</a></li>
+            		<li><a href="">Mes recherches</a></li>
+            		<li><a href="" class="red">Se déconnecter</a></li>
+            	</ul>
+            </li>
             <li><a href="#">Mes candidatures</a></li>           
             <? else : ?>            
             <li class="left"><a href="#">Comment ça marche ?</a></li>
