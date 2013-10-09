@@ -1,0 +1,113 @@
+
+.title-row-results{
+	background: url(../images/bg-search-results.png) repeat-x;
+	height: 155px;
+	padding-top: 20px;
+}
+.title-row-results p{
+	font-size: 16px;
+	font-weight: bold;
+	color: #fff;
+	margin: 0 0 34px 0;
+	text-shadow: 0px -1px 0px #4D4D4D;
+}
+.title-row-results .white-txt{
+	margin: 0;
+}
+.grid-block h2{
+	font-size: 25px;
+	margin: 0 0 0 20px;
+	float: left;
+}
+.box-btn-date,
+.box-btn-page{
+	float: right;
+}
+.box-btn-date .btn-date,
+.grid-block .btn-page{
+	height: 32px;
+	line-height: 32px;
+	font-size: 14px;
+	margin: 5px 10px 0 10px;
+	width: 190px;
+}
+.grid-block .bg-red{
+	background: #de4c5d;
+	-moz-border-radius-topright: 10px;
+	-webkit-border-top-right-radius: 10px;
+	border-top-right-radius: 10px;
+	-moz-border-radius-bottomright: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+.grid-block .bg-red p{
+	color: #fff;
+}
+.grid-block .i-group-white{
+	margin-right: 10px;
+}
+.grid-block .btn-blue-dark{
+	margin-left: 10px;
+}
+.grid-block .page-number{
+	float: left;
+	font-size: 16px;
+	color: #fff;
+	margin-left: 20px;
+}
+
+.grid-block .btn-page{
+	width: 10px;
+	margin: 0;
+}
+.grid-block .box-btn-page{
+	padding: 10px 10px 0 0;
+}
+.grid-block-search{
+	margin-right: 15px;
+	width: 244px;
+	padding: 0 20px;
+}
+.grid-block-search .name-txt{
+	font-size: 25px;
+	margin: 5px 0;
+	text-shadow: 0 -1px 0 #34a6b3;
+}
+.box-btn-choice{
+	margin-top: 15px;
+}
+.btn-choice{
+	font-size: 15px;
+	font-weight: normal;
+	height: 30px;
+	line-height: 30px;
+	margin-bottom: 10px;
+	text-align: left;
+	width: 215px;
+}
+.box-btn-choice > .btn{
+	margin-left: 0;
+}
+.box-btn-choice > .btn-choice{
+	background-image: url(../images/btn-blue-del.png);
+	background-repeat: no-repeat;
+	background-position: 223px 50%;
+}
+.grid-block-search .name-txt2{
+	font-size: 22px;
+	margin: 0;
+}
+.box-btn-choice input{
+	width: 225px;
+	margin-bottom: 15px;
+}
+.title-name{
+	margin: 10px 0;
+}
+.title-name .btn-up,
+.title-name .btn-down{
+	float: right;
+}
+.grid-block-search input{
+	margin-bottom: 10px;
+}

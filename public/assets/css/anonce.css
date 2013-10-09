@@ -52,7 +52,7 @@
 	text-shadow: 1px 1px 0px rgba(255, 255, 255, 1);
 	margin: 15px 0;
 }
-.box-text .small-btn{
+.small-btn{
 	text-transform: uppercase;
 	font-weight: normal;
 	height: 30px;
@@ -64,18 +64,31 @@
 	height: 111px;
 	line-height: 111px;
 }
-.box-text .btn-blue-dark{
+.btn-blue-dark{
 	background: #198e9c;
-	box-shadow: 0 3px 0 #087380;
+	box-shadow: 0 2px 0 #087380;
 	text-shadow: 0 -1px 0 #087380 !important;
 }
-.box-text .btn-blue-dark:hover{
+.btn-blue-dark:hover{
 	box-shadow: 0 1px 0 #087380;
+	top: 1px;
+}
+.btn-blue-dark:active{
+	box-shadow: none;
 	top: 2px;
 }
-.box-text .btn-blue-dark:active{
+.btn-red-small{
+	background: #de4c5d;
+	box-shadow: 0 2px 0 #b74051;
+	text-shadow: 0 -1px 0 #b74051 !important;
+}
+.btn-red-small:hover{
+	box-shadow: 0 1px 0 #b74051;
+	top: 1px;
+}
+.btn-red-small:active{
 	box-shadow: none;
-	top: 3px;
+	top: 2px;
 }
 .box-text .loyer{
 	color: #b3b3b3;
