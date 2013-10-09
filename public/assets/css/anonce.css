@@ -449,7 +449,13 @@
 	margin-right: 10px;
 }
 .icon-pro{
-	background-position: -260px -19px;
+	background-image: url(../images/icon-pro.png);
+	background-repeat: no-repeat;
+	background-position: 0 3px;
+	width: 17px;
+	height: 12px;
+	padding: 0 0 0 17px;
+	margin-right: 20px;
 }
 .icon-prev{
 	background-position: -429px -68px;

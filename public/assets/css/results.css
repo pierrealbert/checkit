@@ -9,10 +9,28 @@
 	font-weight: bold;
 	color: #fff;
 	margin: 0 0 34px 0;
-	text-shadow: 0px -1px 0px #4D4D4D;
+	text-shadow: 0 -1px 0 #4D4D4D;
 }
 .title-row-results .white-txt{
 	margin: 0;
+}
+.container-text .icon-sauv{
+	background-image: url(../images/icon-sauv.png);
+	background-repeat: no-repeat;
+	background-position: 0 3px;
+	width: 15px;
+	height: 17px;
+	padding: 0 0 0 15px;
+	margin-right: 20px;
+}
+.container-text .icon-bell-blue{
+	background-image: url(../images/icon-bell-blue.png);
+	background-repeat: no-repeat;
+	background-position: 0 3px;
+	width: 15px;
+	height: 19px;
+	padding: 0 0 0 15px;
+	margin-right: 20px;
 }
 .grid-block h2{
 	font-size: 25px;
@@ -30,6 +48,13 @@
 	font-size: 14px;
 	margin: 5px 10px 0 10px;
 	width: 190px;
+	text-align: left;
+}
+.box-btn-date > .btn-date{
+	background-image: url(../images/icon-down.png);
+	background-repeat: no-repeat;
+	background-position: 178px 12px;
+	padding: 0 0 0 13px;
 }
 .grid-block .bg-red{
 	background: #de4c5d;
@@ -42,6 +67,15 @@
 }
 .grid-block .bg-red p{
 	color: #fff;
+}
+.grid-block .txt-price{
+	/*float: right;*/
+	display: block;
+	margin-bottom: 5px;
+	text-align: right;
+}
+.grid-block .inner-box-right{
+	float: right;
 }
 .grid-block .i-group-white{
 	margin-right: 10px;
@@ -110,4 +144,23 @@
 }
 .grid-block-search input{
 	margin-bottom: 10px;
+}
+.box-calend-search{
+	margin-top: 10px;
+}
+.box-calend-search .icon-calend{
+	background-image: url(../images/icon-calend-gray.png);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	width: 18px;
+	height: 20px;
+	padding: 0 0 0 18px;
+}
+.box-calend-search .btn-small{
+	height: 32px;
+	line-height: 32px;
+	padding: 0 10px;
+}
+.box-calend-search input{
+	width: 171px;
 }
