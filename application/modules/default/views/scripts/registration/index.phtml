@@ -2,7 +2,9 @@
     <div class="inner">
 <? endif; ?>  
 <div id="page-registration">
-	<h2><?= $this->translate('registration') ?></h2>
+	<? if (!$this->isAjax) : ?>
+    <h2><?= $this->translate('registration') ?></h2>
+	<? endif; ?> 
 	<div class="registration-top">
 		<span>Sélectionnez votre situation, </br><strong>Ommi</strong> vous apporte une aide adaptée à vos besoins</span>
 		<div class="registration-top-buttons">
