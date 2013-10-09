@@ -9,10 +9,10 @@
 	<div class="grid grid-dark">
 		<div class="menu-search">
 			<ul>
-				<li><a href=""  class="active menu-icons icon-search">Recherche standard</a></li>
-				<li><a href="" class="menu-icons icon-metro">Recherche<br>par  metro</a></li>
-				<li><a href="" class="menu-icons icon-dessin">Recherche<br> par dessin</a></li>
-				<li><a href="" class="menu-icons icon-carte">Recherche<br> par carte</a></li>
+				<li><a href="<?= $this->url(array('controller' => 'search', 'action' => 'standard'), null, true) ?>"  class="active menu-icons icon-search">Recherche standard</a></li>
+				<li><a href="<?= $this->url(array('controller' => 'search', 'action' => 'metro'), null, true) ?>" class="menu-icons icon-metro">Recherche<br>par  metro</a></li>
+				<li><a href="<?= $this->url(array('controller' => 'search', 'action' => 'draw'), null, true) ?>" class="menu-icons icon-dessin">Recherche<br> par dessin</a></li>
+				<li><a href="<?= $this->url(array('controller' => 'search', 'action' => 'map'), null, true) ?>" class="menu-icons icon-carte">Recherche<br> par carte</a></li>
 			</ul>
 		</div>
 		<div class="search-box">
