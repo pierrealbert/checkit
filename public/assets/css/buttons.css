@@ -197,6 +197,7 @@ button, .btn, [type=submit], [type=reset], [type=button] {
 	text-decoration: none !important;
 	border: 0;
 	text-align: center;
+	margin-bottom: 10px;
 }
 .btn-input-gray-lite{
 	color: #4d4d4d;
@@ -215,7 +216,7 @@ button, .btn, [type=submit], [type=reset], [type=button] {
 	background: #9a9a9a;
 	box-shadow: 0 1px 0 #818181;
 	text-shadow: 0 -1px 0 #818181 !important;
-	/*margin-right: 10px;*/
+	margin-bottom: 10px;
 }
 /*.btn-tous-active{*/
 	/*background: #cdcdcd;*/

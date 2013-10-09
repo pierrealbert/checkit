@@ -58,3 +58,11 @@
 	background: transparent !important;
 	box-shadow: none !important;
 }
+
+/* Dark blue */
+
+.grid-blue {
+	background: #3cbecc;
+	box-shadow: 0 3px 0 #34a6b3;
+	color: #fff;
+}

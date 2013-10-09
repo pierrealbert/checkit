@@ -2,17 +2,10 @@
 
 class SearchController extends Zend_Controller_Action
 {
-    /**
-     *
-     * @var type Zend_Session_Namespace
-     */
-    protected $_searchConditions = array();
     
     public function init()
     {
         $this->view->jQuery()->addJavascriptFile('/js/search.js');
-        
-        $this->_searchConditions = new Zend_Session_Namespace('search');
     }
 
     public function indexAction()
@@ -94,9 +87,13 @@ class SearchController extends Zend_Controller_Action
                                                'sign' => '<=');
             }
 
-            $this->_searchConditions->data = $values;
+            $search = new Model_Search;
+            $search->search_type = 'standart';
+            $search->conditions = serialize($values);
+            $search->user_id = Zend_Auth::getInstance()->getIdentity();
+            $search->save();
             
-            $this->_helper->redirector->gotoSimple('results', 'search', 'default');  
+            $this->_helper->redirector->gotoSimple('results', 'search', 'default', array('search_id' => $search->id));
         }
 
         $this->view->form = $form;
@@ -125,11 +122,15 @@ class SearchController extends Zend_Controller_Action
             
             $regionsSelectedIds = explode(',', $this->getRequest()->getParam('regions_selected'));
             
-            $this->_searchConditions->data = array(
+            $search = new Model_Search;
+            $search->search_type = 'map';
+            $search->conditions = serialize(array(
                 'region_block_id' => array('value' => $regionsSelectedIds)
-            );
+            ));
+            $search->user_id = Zend_Auth::getInstance()->getIdentity();
+            $search->save();
             
-            $this->_helper->redirector->gotoSimple('results', 'search', 'default');            
+            $this->_helper->redirector->gotoSimple('results', 'search', 'default', array('search_id' => $search->id));
         }
 
         $this->view->form = $form;
@@ -156,13 +157,18 @@ class SearchController extends Zend_Controller_Action
                     $values['metro_station_id'][] = $station->id;
                 }
             }
-            $this->_searchConditions->data = array(
+            
+            $search = new Model_Search;
+            $search->search_type = 'metro';
+            $search->conditions = serialize(array(
                 'PropertyXMetroStation.distance' => array('value' => $values['distance'],
                                                           'sign' => '<',),
                 'PropertyXMetroStation.metro_station_id' => array('value' => $values['metro_station_id']),
-            );
+            ));
+            $search->user_id = Zend_Auth::getInstance()->getIdentity();
+            $search->save();
             
-            $this->_helper->redirector->gotoSimple('results', 'search', 'default');            
+            $this->_helper->redirector->gotoSimple('results', 'search', 'default', array('search_id' => $search->id));
         }
         
         $this->view->form = $form;
@@ -211,14 +217,22 @@ class SearchController extends Zend_Controller_Action
                         $foundPropertyIds[] = $property->id;
                     }
                 }
-                $this->_searchConditions->data = array(
+                $value = array(
                     'id' => array('value' => $foundPropertyIds),
                 );
             } else {
-                $this->_searchConditions->data = array(
+                $value = array(
                     'region_block_id' => array('value' => $blockIds),
                 );
             }
+            
+            $search = new Model_Search;
+            $search->search_type = 'draw';
+            $search->conditions = serialize($value);
+            $search->user_id = Zend_Auth::getInstance()->getIdentity();
+            $search->save();
+            
+            $this->_helper->redirector->gotoSimple('results', 'search', 'default', array('search_id' => $search->id));
 
             $this->_helper->redirector->gotoSimple('results', 'search', 'default');            
         }
@@ -228,9 +242,29 @@ class SearchController extends Zend_Controller_Action
     
     public function resultsAction()
     {           
+        $searchId = $this->getRequest()->getParam('search_id');
+        $search = Model_SearchTable::getInstance()->find($searchId);
+        if (!$search or $search->user_id != Zend_Auth::getInstance()->getIdentity()) {
+            $this->_helper->redirector->gotoSimple('index', 'search', 'default');
+        }
+        $form = new Form_SaveSearch();
+        if ($this->getRequest()->isPost()
+            && $form->isValid($this->getRequest()->getPost())
+        ) {
+            if (Zend_Auth::getInstance()->getIdentity()) {
+                $search->is_temp = False;
+                $search->name = $form->getValue('name');
+                $search->save();
+            } else {
+                $this->_helper->messenger->error('register_to_save_search_results');
+            }
+            $this->_helper->redirector->gotoSimple('results', 'search', 'default', array('search_id' => $search->id));
+        }
         $foundProperties = Model_PropertyTable::getInstance()
-                ->search($this->_searchConditions->data);
+                ->search(unserialize($search->conditions));
 
+        $this->view->form = $form;
         $this->view->foundProperties = $foundProperties;
+        $this->view->search = $search;
     }
 }

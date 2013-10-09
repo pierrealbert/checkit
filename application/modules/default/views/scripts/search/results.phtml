@@ -1,5 +1,10 @@
 <h2><?= $this->contentHeader('search_results') ?></h2>
 
+<? if ($this->search->is_temp): ?>
+    <?= $this->form ?>
+<? else: ?>
+    <?= $this->t('Saved Search') ?>: <?= $this->search->name ?>
+<? endif ?>
 <?php if (!count($this->foundProperties)): ?>
     <p>Properties are not found</p>
 <?php else: ?>

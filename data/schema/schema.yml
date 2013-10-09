@@ -561,6 +561,32 @@ PropertyIssue:
             onDelete: cascade
             class: PropertyIssueSubject
             local: Subject_id
+
+Search:
+    columns:      
+        id:
+            type:       integer(4)
+            primary:    true
+            autoincrement: true
+        user_id:        
+            type:       integer(4)
+        search_type: 
+            type: enum
+            values: [standart, map, metro, draw]
+            size: 10
+        is_temp:
+            type: boolean
+            default: true
+        name:
+            type: string
+            size: 255
+        conditions:
+            type: text
+    relations:
+        User:
+            onDelete: cascade
+            class: User
+            local: user_id        
                 
 UserProperty:
     columns:      
