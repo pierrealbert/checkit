@@ -43,3 +43,15 @@ dl dd input[type=text], dl dd input[type=password] {
 	display: block;
 	width: 440px;
 }
+
+dl dd ul.errors {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+dl dd ul.errors > li {
+	display: block;
+	margin: 5px 0 0 0;
+	color: #de4c5d;
+}
