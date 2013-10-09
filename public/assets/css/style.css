@@ -600,12 +600,24 @@ header .btn {
 	width: 100%;
 }
 
-#modal p.terms {
+#page-base-registration #register-element input {
+	margin-top: 10px;
+}
+
+p.terms {
 	padding: 20px 0 30px 0;
 	margin: 0;
 	font-size: 14px;
 }
 
-#modal p.terms a {
+p.terms a {
 	font-size: 14px !important;
+}
+
+#register-label {
+	display: none;
+}
+
+#register-element {
+	margin: 0;
 }
