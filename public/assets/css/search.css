@@ -127,7 +127,7 @@
 }
 
 .box-universal{
-	margin-bottom: 24px;
+	margin-bottom: 7px;
 }
 
 .title-advanced{
@@ -179,6 +179,9 @@
 }
 .txt-line-metro{
 	margin: 15px 0;
+}
+.box-line-metro{
+	margin-bottom: 27px;
 }
 
 /*--------Page-Search-Dessin-------*/

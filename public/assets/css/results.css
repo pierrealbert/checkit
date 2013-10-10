@@ -164,3 +164,25 @@
 .box-calend-search input{
 	width: 171px;
 }
+
+.box-btn-page .icon-right{
+	background-image: url(../images/icon-right.png);
+	background-repeat: no-repeat;
+	background-position: 2px 0;
+	padding: 0 0 0 18px;
+}
+.box-btn-page .active-page{
+	background: #198e9c;
+	box-shadow: 0 3px 0 #087380;
+}
+.box-btn-page .active-page:hover,
+.box-btn-page .active-page:hover{
+	box-shadow: 0 1px 0 #087380;
+	top: 2px;
+}
+
+.box-btn-page .active-page:active,
+.box-btn-page .active-page:active{
+	box-shadow: none;
+	top: 3px;
+}
