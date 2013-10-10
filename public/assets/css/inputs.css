@@ -29,49 +29,49 @@ input {
 	/*box-shadow: inset 0px 1px 0 #3cbecc;*/
 /*}*/
 
-input[type=radio],
-input[type=checkbox]{
-	/*display:none;*/
+input[type=radio].input-pretty,
+input[type=checkbox].input-pretty{
+	display:none;
 
 }
-input[type=radio] + .btn-input-gray-dark,
-input[type=checkbox] + .btn-input-gray-dark{
+input[type=radio].input-pretty + .btn-input-gray-dark,
+input[type=checkbox].input-pretty + .btn-input-gray-dark{
 	background: #808080;
 	box-shadow: 0 1px 0 #333333;
 	text-shadow: 0 -1px 0 #333333 !important;
 	/*margin-right: 10px;*/
 
 }
-input[type=radio]:checked + .btn-input-gray-dark,
-input[type=checkbox]:checked + .btn-input-gray-dark{
+input[type=radio].input-pretty:checked + .btn-input-gray-dark,
+input[type=checkbox].input-pretty:checked + .btn-input-gray-dark{
 	background: #198e9c;
 	box-shadow: 0 1px 0 #087380;
 }
-input[type=radio]:checked + .btn-input-gray-lite,
-input[type=checkbox]:checked + .btn-input-gray-lite{
+input[type=radio].input-pretty:checked + .btn-input-gray-lite,
+input[type=checkbox].input-pretty:checked + .btn-input-gray-lite{
 	background: #198e9c;
 	box-shadow: 0 1px 0 #087380;
 	color: #fff;
 	text-shadow: 0 -1px 0 #087380;
 }
-input[type=radio]:checked + .btn-input-grayer,
-input[type=checkbox]:checked + .btn-input-grayer{
+input[type=radio].input-pretty:checked + .btn-input-grayer,
+input[type=checkbox].input-pretty:checked + .btn-input-grayer{
 	background: #198e9c;
 	box-shadow: 0 1px 0 #087380;
 	color: #fff;
 	text-shadow: 0 -1px 0 #087380;
 }
 
-input[type=radio] + .btn-input-gray-lite,
-input[type=checkbox] + .btn-input-gray-lite{
+input[type=radio].input-pretty + .btn-input-gray-lite,
+input[type=checkbox].input-pretty + .btn-input-gray-lite{
 	background: #e5e5e5;
 	box-shadow: 0 1px 0 #b3b3b3;
 	text-shadow: 0 -1px 0 #fff;
 	/*margin-right: 10px;*/
 	margin-bottom: 10px;
 }
-input[type=radio] + .btn-input-grayer,
-input[type=checkbox] + .btn-input-grayer{
+input[type=radio].input-pretty + .btn-input-grayer,
+input[type=checkbox].input-pretty + .btn-input-grayer{
 	background: #cccccc;
 	box-shadow: 0 1px 0 #bfbfbf;
 	text-shadow: none;
