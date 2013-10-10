@@ -10,7 +10,7 @@ input {
 	display: inline-block;
 	font-size: 16px;
 	line-height: 20px;
-	padding: 7px 10px;
+	padding: 5px 10px;
 	border: none;
 	border-radius: 5px;
 	color: #4d4d4d;
@@ -24,10 +24,10 @@ input {
 	transition: all .2s;
 }
 
-/*input:focus{*/
-	/*background: #b6e8ed;*/
-	/*box-shadow: inset 0px 1px 0 #3cbecc;*/
-/*}*/
+input:focus{
+	background: #b6e8ed;
+	box-shadow: inset 0px 1px 0 #3cbecc;
+}
 
 input[type=radio].input-pretty,
 input[type=checkbox].input-pretty{
@@ -77,4 +77,14 @@ input[type=checkbox].input-pretty + .btn-input-grayer{
 	text-shadow: none;
 	/*margin-right: 10px;*/
 	margin-bottom: 10px;
+}
+
+.input-error {
+	background: #ffd4da;
+	box-shadow: inset 0  1px 0 #de4c5d;
+}
+
+.input-error:focus {
+	background: #ffd4da;
+	box-shadow: inset 0  1px 0 #de4c5d;
 }

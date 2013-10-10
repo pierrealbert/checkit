@@ -43,7 +43,7 @@ header {
 	height: 40px;
 	line-height: 40px;
 	background-color: #f5f5f5;
-	box-shadow: 0px 1px 1px #e5e5e5;
+	border-bottom: 2px solid #e5e5e5;
 }
 
 header > .inner {
@@ -589,4 +589,72 @@ header .btn {
 #page-registration {
 	width: 550px;
 	margin: 0 auto;
+}
+
+#page-base-registration {
+	
+}
+
+#modal #page-base-registration #register-element input {
+	display: block;
+	width: 100%;
+}
+
+#page-base-registration #register-element input {
+	margin-top: 10px;
+}
+
+p.terms {
+	padding: 20px 0 30px 0;
+	margin: 0;
+	font-size: 14px;
+}
+
+p.terms a {
+	font-size: 14px !important;
+}
+
+#register-label {
+	display: none;
+}
+
+#register-element {
+	margin: 0;
+}
+
+/*
+	Search pages
+*/
+
+.title-container {
+	height: 73px;
+	border-bottom: 1px solid #fff;
+}
+
+.title-container-text.inner {
+	height: 73px;
+}
+
+.title-container-text > h1 {
+	margin: 0;
+	line-height: 68px;
+	height: 73px;
+	font-size: 45px;
+	font-weight: 300;
+}
+
+.title-bg-search-map {
+	background: url(../images/bg-search-carte.png) repeat-x;
+}
+
+.title-bg-search-draw {
+	background: url(../images/bg-search-dessin.png) repeat-x;
+}
+
+.title-bg-search-standard {
+	background: url(../images/bg-search-stand.png) repeat-x;
+}
+
+.title-bg-search-metro {
+	background: url(../images/bg-search-metro.png) repeat-x;
 }

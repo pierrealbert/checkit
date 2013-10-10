@@ -1,16 +1,35 @@
 <? if (!$this->isAjax) : ?>
+    <div class="inner">
+<? endif; ?>  
+
+<div id="page-base-registration">
+
+
+<? if (!$this->isAjax) : ?>
     <h2><?= $this->translate('signup_header_' . $this->type) ?></h2>
 <? endif; ?>
-Use <a href="<?= $this->url(array('module' => 'default', 'controller' => 'login', 'action' => 'facebook'), null, true) ?>">Facebook</a> account
-<?= $this->form ?>
-<p>By clicking "Create Account", you confirm that you accept the
-<a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</p>
-<? if ($this->isAjax) : ?>
-    <script type="text/javascript">
-        $(function() {
-            $('#registration-base-form').ajaxForm({
-                target: $('.modal-content-container')
-            });            
-        });
-    </script>
+	<div class="registration-type">
+		<a href="<?= $this->url(array('module' => 'default', 'controller' => 'login', 'action' => 'facebook'), null, true) ?>" class="btn btn-gray btn-fb">S’inscrire avec Facebook</a>
+	</div>
+	<?= $this->form ?>
+	<p class="terms">By clicking "Create Account", you confirm that you accept the
+	<a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.</p>
+	<? if ($this->isAjax) : ?>
+	    <script type="text/javascript">
+	        $(function() {
+	            $('#registration-base-form').ajaxForm({
+	                target: $('.modal-content-container')
+	            });            
+	        });
+    	</script>
 <? endif; ?>
+
+
+</div>
+
+<? if (!$this->isAjax) : ?>
+    </div>
+<? endif; ?> 
+
+
+
