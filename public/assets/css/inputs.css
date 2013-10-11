@@ -24,7 +24,7 @@ input {
 	transition: all .2s;
 }
 
-input:focus{
+input[type=text]:focus{
 	background: #b6e8ed;
 	box-shadow: inset 0px 1px 0 #3cbecc;
 }

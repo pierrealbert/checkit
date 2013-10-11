@@ -179,7 +179,8 @@ button, .btn, [type=submit], [type=reset], [type=button] {
 .btn-input-number,
 .btn-input-grayer,
 .btn-input-daker,
-.btn-tous{
+.btn-tous,
+.btn-tous-dark{
 	background: transparent;
 	display: inline-block;
 	position: relative;
@@ -219,11 +220,22 @@ button, .btn, [type=submit], [type=reset], [type=button] {
 	text-shadow: 0 -1px 0 #818181 !important;
 	margin-bottom: 10px;
 }
+.btn-tous-dark,.btn-tous-dark{
+	background: #808080;
+	box-shadow: 0 1px 0 #464646;
+	text-shadow: 0 -1px 0 #464646 !important;
+	margin-bottom: 10px;
+}
 /*.btn-tous-active{*/
 	/*background: #cdcdcd;*/
 	/*box-shadow: 0 1px 0 #a0a0a0;*/
 	/*color: #515151;*/
 /*}*/
+input[type="reset"]:focus{
+	background: #cdcdcd;
+	box-shadow: 0 1px 0 #a0a0a0;
+	color: #515151;
+}
 .btn-tous:hover, .btn-tous:hover {
 	box-shadow: 0 0 0 #808080;
 	top: 0.5px;

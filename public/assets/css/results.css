@@ -186,3 +186,118 @@
 	box-shadow: none;
 	top: 3px;
 }
+
+/*--------Page results with carte---------*/
+
+.title-row-carte{
+	background: url(../images/big-carte.png)center center no-repeat;
+	width: 1280px;
+	height: 779px;
+	position: relative;
+	margin: 0 auto;
+	/*padding-top: 20px;*/
+}
+.title-row-carte .bg-opacity{
+	background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.48) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.48)));
+	background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.48) 100%);
+	background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.48) 100%);
+	background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.48) 100%);
+	background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.48) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#7a000000',GradientType=0 );
+
+
+	height: 150px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	position: relative;
+	top: 600px;
+	padding-top: 30px;
+}
+
+.location-ad{
+	background: #f2f2f2;
+	width: 220px;
+	height: 118px;
+	border-radius: 10px;
+	position: absolute;
+	padding: 10px;
+	-webkit-box-shadow: 0 1px 17px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    0 1px 17px rgba(50, 50, 50, 0.75);
+	box-shadow:         0 1px 17px rgba(50, 50, 50, 0.75);
+	right: 247px;
+	bottom: 364px;
+	display: block;
+	z-index: 1000;
+}
+.location-ad:after{
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-top-color: #f2f2f2;
+	top: 100%;
+	left: 50%;
+	margin-left: -17px;
+	color: #FFF;
+	text-shadow: none;
+}
+.location-ad img{
+	float: left;
+	margin: 0 10px 10px 0;
+}
+.location-ad p{
+	margin: 0 0 24px 0;
+	text-shadow: 0 1px 0 #fff;
+}
+
+.location-ad .meter-price .price-add{
+	float: right;
+	font-weight: bold;
+	font-size: 16px;
+	color: #6e6e6e;
+	text-shadow: 0 1px 0 #fff;
+}
+.location-ad .btn-blue{
+	width: 189px;
+	height: 35px;
+	line-height: 35px;
+	font-size: 16px;
+}
+
+.title-row-carte .btn-location-red{
+	background-image: url(../images/btn-carte-location-red.png);
+	background-repeat: no-repeat;
+	width: 25px;
+	height: 35px;
+	position: absolute;
+
+}
+.title-row-carte .location-active{
+	background-image: url(../images/btn-carte-location-blue.png);
+	background-repeat: no-repeat;
+	width: 24px;
+	height: 36px;
+	position: absolute;
+}
+.title-row-carte .location1{
+	bottom: 306px;
+	right: 352px;
+}
+.title-row-carte .location2{
+	bottom: 333px;
+	right: 246px;
+}
+.title-row-carte .location3{
+	bottom: 279px;
+	right: 572px;
+}
+.title-row-carte .location4{
+	bottom: 500px;
+	right: 650px;
+}
+.title-row-carte .location5{
+	bottom: 450px;
+	right: 600px;
+}
