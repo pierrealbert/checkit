@@ -178,6 +178,7 @@ button, .btn, [type=submit], [type=reset], [type=button] {
 .btn-input-gray-lite,
 .btn-input-number,
 .btn-input-grayer,
+.btn-input-daker,
 .btn-tous{
 	background: transparent;
 	display: inline-block;
