@@ -59,36 +59,8 @@ $fields = $this->form->getElements();
                     </div>
                 </div>
                 <div class="search-right">
-                    <div class="box-universal">
-                        <label class="name-title-white">Mobilier</label>
-                        <div>
-                            <input type="button" value="Tous" class="btn-tous"/>
-                            <?php
-                            $count = 1;
-                            $ctrlName = 'is_furnished';
-                            foreach($fields[$ctrlName]->getMultiOptions() as $value => $label) {
-                                echo '<input type="radio" class="input-pretty" value="'.$value.'" name="'.$ctrlName.'" id ="'.$ctrlName.'_'.$count.'" '.($fields[$ctrlName]->getValue() === $value ? 'checked="checked"' : '').' /> ' .
-                                    '<label for="'.$ctrlName.'_'.($count++).'" class="btn-input-gray-dark">'.$label.'</label>';
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <div class="box-universal">
-                        <label class="name-title-white">Nombre de chambres</label>
-                        <div>
-                            <input type="button" value="Tous" class="btn-tous"/>
-                            <?php
-                            $count = 1;
-                            $ctrlName = 'number_of_rooms1';
-                            foreach($fields[$ctrlName]->getMultiOptions() as $value => $label) {
-                                ?>
-                                <input type='checkbox' class="input-pretty" id='Choice<?=$count?>' name='<?=$ctrlName?>' value='<?=$value?>' <?=($fields[$ctrlName]->getValue() === $value ? 'checked="checked"' : '')?>>
-                                <label for='Choice<?=($count++)?>' class="btn-input-gray-dark btn-input-number"><?=$label?></label>
-                            <?php
-                            }
-                            ?>
-                        </div>
-                    </div>
+                    <?=$this->form->getElement('is_furnished')?>
+                    <?=$this->form->getElement('number_of_rooms1')?>
                 </div>
             </div>
             </form>

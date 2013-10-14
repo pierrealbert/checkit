@@ -65,7 +65,11 @@ class Form_SearchStandard extends Ext_Form
                 1 => 'Meublé',
                 0 => 'Vide'
             ))
-            ->setDecorators(array('ViewHelper'));
+            ->setDecorators(array(
+                array('MrButtons'),
+                array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-white')),
+                array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
+            ));
         $this->addElement($radio);
 
         $chbox = new Zend_Form_Element_MultiCheckbox('number_of_rooms1');
@@ -78,37 +82,53 @@ class Form_SearchStandard extends Ext_Form
                 4 => 4,
                 '>=5' => '5 et +'
             ))
+            ->setDecorators(array(
+                array('MchBox'),
+                array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-white')),
+                array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
+            ));
+        $this->addElement($chbox);
+
+        $chbox = new Zend_Form_Element_MultiCheckbox('property_type');
+        $chbox->setSeparator('')
+            ->setLabel('Type de bien')
+            ->addMultiOptions(Model_Property::getTypes())
+            ->setAttrib('class', 'input-pretty')
+            ->setDecorators(array(
+                array('MchBox'),
+                array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-black')),
+                array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
+            ));
+        $this->addElement($chbox);
+
+        $chbox = new Zend_Form_Element_MultiCheckbox('number_of_rooms2');
+        $chbox->setSeparator('')
+            ->setLabel('Nombre de pièces')
+            ->addMultiOptions(array(
+                1 => 1,
+                2 => 2,
+                3 => 3,
+                4 => 4,
+                '>=5' => '5 et +'
+            ))
             ->setDecorators(array('ViewHelper'));
         $this->addElement($chbox);
 
-        $this->addElement('radio', 'property_type', array(
-            'label'         => 'property_type',
-            'multiOptions'  => Model_Property::getTypes(),
-        ));
-        
-        $this->addElement('radio', 'number_of_rooms2', array(
-            'label'         => 'number_of_rooms2',
-            'multiOptions'  => array(
-                 1 => 1,
-                 2 => 2,
-                 3 => 3,
-                 4 => 4,
-                 '>=5' => '5 et +'
-            ),
-        ));
-        
-        $this->addElement('radio', 'availability_select', array(
-            'label'         => 'availability',
-            'multiOptions'  => array('' => 'all', 'now' => 'immediately', 'date' => 'date'),
-        ));
-        
+        $radio = new Zend_Form_Element_Radio('availability_select');
+        $radio->setSeparator('')
+            ->setLabel('Disponibilité')
+            ->addMultiOptions(array('now' => 'immediately', 'date' => 'date'))
+            ->setDecorators(array('ViewHelper'));
+        $this->addElement($radio);
+
         $this->addElement('datePicker', 'availability', array(
             'JQueryParams' => array (
                 'dateFormat' => $settings->get('dateFormat.picker.jquery'),
             ),
         ));
-        $this->addDisplayGroup(array('availability_select', 'availability'), 'availability_group', array('legend' => "availability"));
-        
+        //$this->addDisplayGroup(array('availability_select', 'availability'), 'availability_group', array('legend' => "availability"));
+
+        //mDump(Model_Property::getPlanningOptions());
         foreach (Model_Property::getPlanningOptions() as $name => $label) {
             $this->addElement('checkbox', $name, array(
                 'label'         => $label,

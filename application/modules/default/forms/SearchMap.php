@@ -58,7 +58,11 @@ class Form_SearchMap extends Ext_Form
                 1 => 'Meublé',
                 0 => 'Vide'
             ))
-            ->setDecorators(array('ViewHelper'));
+            ->setDecorators(array(
+                array('MrButtons'),
+                array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-white')),
+                array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
+            ));
         $this->addElement($radio);
 
         $chbox = new Zend_Form_Element_MultiCheckbox('number_of_rooms1');
@@ -71,7 +75,11 @@ class Form_SearchMap extends Ext_Form
                 4 => 4,
                 '>=5' => '5 et +'
             ))
-            ->setDecorators(array('ViewHelper'));
+            ->setDecorators(array(
+                array('MchBox'),
+                array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-white')),
+                array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
+            ));
         $this->addElement($chbox);
 
         $this->addElement('submit', 'search', array(
