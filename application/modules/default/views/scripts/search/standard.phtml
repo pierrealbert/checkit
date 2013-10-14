@@ -21,6 +21,11 @@ $fields = $this->form->getElements();
                 }
             }
         });
+
+        $('a#btnSearch1, a#btnSearch2' ).click(function() {
+            $('form[name="searchForm"]').submit();
+            return false;
+        });
     });
 </script>
 <div class="title-row-search bg-stand">
