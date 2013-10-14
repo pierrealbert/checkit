@@ -1,8 +1,9 @@
 <?php
-//$this->headLink()->appendStylesheet('/assets/css/search_form.css');
+$this->headLink()->appendStylesheet('/assets/css/search_form.css');
 //$this->headScript()->appendFile('/js/common.js');
 
 $fields = $this->form->getElements();
+
 ?>
 <script type="text/javascript">
     var initialRadioValues = new Array();
@@ -23,6 +24,12 @@ $fields = $this->form->getElements();
                     $('input#'+initialRadioValues[i]).prop('checked', true);
                 }
             }
+        });
+
+        $('div.metro_line_circle div.number').click(function() {
+            var line_id = $(this).attr('data-line-id');
+            $('form[name="searchForm"]').find('input#metro_line_id').val(line_id);
+            $('form[name="searchForm"]').submit();
         });
     });
 </script>
@@ -57,50 +64,12 @@ $fields = $this->form->getElements();
                     </div>
                 </div>
                 <div class="search-right">
-                    <div class="box-universal">
-                        <label class="name-title-white">Mobilier</label>
-                        <div>
-                            <input type="button" value="Tous" class="btn-tous"/>
-                            <?php
-                            $count = 1;
-                            $ctrlName = 'is_furnished';
-                            foreach($fields[$ctrlName]->getMultiOptions() as $value => $label) {
-                                echo '<input type="radio" class="input-pretty" value="'.$value.'" name="'.$ctrlName.'" id ="'.$ctrlName.'_'.$count.'" '.($fields[$ctrlName]->getValue() === $value ? 'checked="checked"' : '').' /> ' .
-                                    '<label for="'.$ctrlName.'_'.($count++).'" class="btn-input-gray-dark">'.$label.'</label>';
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <div class="box-universal">
-                        <label class="name-title-white">Nombre de chambres</label>
-                        <div>
-                            <input type="button" value="Tous" class="btn-tous"/>
-                            <?php
-                            $count = 1;
-                            $ctrlName = 'number_of_rooms1';
-                            foreach($fields[$ctrlName]->getMultiOptions() as $value => $label) {
-                            ?>
-                                <input type='checkbox' class="input-pretty" id='Choice<?=$count?>' name='<?=$ctrlName?>' value='<?=$value?>' <?=($fields[$ctrlName]->getValue() === $value ? 'checked="checked"' : '')?>>
-                                <label for='Choice<?=($count++)?>' class="btn-input-gray-dark btn-input-number"><?=$label?></label>
-                            <?php
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <div class="box-universal">
-                        <label class="name-title-white">Distance</label>
-                        <form>
-                            <input type="button" value="Tous" class="btn-tous"/>
-                            <?php
-                            $count = 1;
-                            $ctrlName = 'distance';
-                            foreach($fields[$ctrlName]->getMultiOptions() as $value => $label) {
-                                echo '<input type="radio" class="input-pretty" value="'.$value.'" name="'.$ctrlName.'" id ="'.$ctrlName.'_'.$count.'" '.($fields[$ctrlName]->getValue() === $value ? 'checked="checked"' : '').' /> ' .
-                                    '<label for="'.$ctrlName.'_'.($count++).'" class="btn-input-gray-dark">'.$label.'</label>';
-                            }
-                            ?>
-                        </form>
-                    </div>
+                    <?=$this->form->getElement('is_furnished')?>
+                    <?=$this->form->getElement('number_of_rooms1')?>
+                    <?=$this->form->getElement('distance')?>
+
+                    <?=$this->form->getElement('metro_station_id')?>
+                    <?=$this->form->getElement('metro_line_id')?>
                 </div>
             </div>
             </form>
@@ -128,8 +97,30 @@ $fields = $this->form->getElements();
                     Vous aurez la possibilité de changer de ligne par la suite.
                 </p>
                 <div class="box-line-metro">
+                    <?php
+                    //mDump(array($this->lines[0]->id, $this->lines[0]->name, $this->lines[0]->color));
+                    ?>
                     <label class="name-title-black">Lignes de métro</label>
-                    <img src="/./assets/images/line-metro.png">
+                    <div class="metro_lines_wrapper">
+                        <?php  foreach ($this->lines as $indx => $rec): ?>
+                            <?php
+                            $number = intval($rec->name);
+                            $str    = mb_substr($rec->name, mb_strlen($number));
+                            $r = hexdec(substr($rec->color,0,2));
+                            $g = hexdec(substr($rec->color,2,2));
+                            $b = hexdec(substr($rec->color,4,2));
+                            $Y = ($r+$r+$b+$g+$g+$g)/6;
+
+                            $r = round($r * 0.6);
+                            $g = round($g * 0.6);
+                            $b = round($b * 0.6);
+                            $shadowStr = 'rgba('.$r.', '.$g.', '.$b.', 0.9)';
+
+                            ?>
+                            <div class="metro_line_circle" style="background-color: #<?=$rec->color?>; color: <?=($Y <= 128 ? 'white' : 'black')?> !important; -webkit-box-shadow: 0px 2px 0px <?=$shadowStr?>; -moz-box-shadow: 0px 2px 0px <?=$shadowStr?>; box-shadow: 0px 2px 0px <?=$shadowStr?>;"><?='<div data-line-id="'.$rec->id.'" class="number '.($str != '' ? 'align2' : 'align1').'">'.$number.'</div>'.($str != '' ? '<div class="line-str">'.$str.'</div>' : '')?></div>
+                        <?php endforeach; ?>
+                        <div class="clear"></div>
+                    </div>
                 </div>
                 <div class="box-line-metro">
                     <label class="name-title-black">Lignes de RER</label>
