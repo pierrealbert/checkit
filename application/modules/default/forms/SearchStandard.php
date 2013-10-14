@@ -20,7 +20,7 @@ class Form_SearchStandard extends Ext_Form
         ), null, true));
         
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
-        
+
         $regionBlockOptions = array('' => 'all');
         foreach (Model_RegionBlockTable::getInstance()->getAllWithDiscricts() as $region) {
             $regionBlockOptions[$region->id] = $region->RegionDistrict->name . ' - ' . $region->name;
@@ -68,8 +68,8 @@ class Form_SearchStandard extends Ext_Form
             ->setDecorators(array('ViewHelper'));
         $this->addElement($radio);
 
-        $radio = new Zend_Form_Element_MultiCheckbox('number_of_rooms1');
-        $radio->setSeparator('')
+        $chbox = new Zend_Form_Element_MultiCheckbox('number_of_rooms1');
+        $chbox->setSeparator('')
             ->setLabel('Nombre de chambres')
             ->addMultiOptions(array(
                 1 => 1,
@@ -79,22 +79,22 @@ class Form_SearchStandard extends Ext_Form
                 '>=5' => '5 et +'
             ))
             ->setDecorators(array('ViewHelper'));
-        $this->addElement($radio);
+        $this->addElement($chbox);
 
         $this->addElement('radio', 'property_type', array(
             'label'         => 'property_type',
-            'multiOptions'  => array('' => 'all') + Model_Property::getTypes(),
+            'multiOptions'  => Model_Property::getTypes(),
         ));
         
         $this->addElement('radio', 'number_of_rooms2', array(
             'label'         => 'number_of_rooms2',
-            'multiOptions'  => array('' => 'all',
-                                     1 => 1,
-                                     2 => 2,
-                                     3 => 3,
-                                     4 => 4,
-                                     5 => 5,
-                                     '>=6' => '> 6',),
+            'multiOptions'  => array(
+                 1 => 1,
+                 2 => 2,
+                 3 => 3,
+                 4 => 4,
+                 '>=5' => '5 et +'
+            ),
         ));
         
         $this->addElement('radio', 'availability_select', array(
