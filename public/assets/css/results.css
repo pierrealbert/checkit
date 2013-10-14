@@ -4,7 +4,7 @@
 	height: 155px;
 	padding-top: 20px;
 }
-.title-row-results p{
+.txt-annonce{
 	font-size: 16px;
 	font-weight: bold;
 	color: #fff;
@@ -198,27 +198,21 @@
 	/*padding-top: 20px;*/
 }
 .title-row-carte .bg-opacity{
-	background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.48) 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.48)));
-	background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.48) 100%);
-	background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.48) 100%);
-	background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.48) 100%);
-	background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.48) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#7a000000',GradientType=0 );
-
-
-	height: 150px;
-	background-position: center center;
-	background-repeat: no-repeat;
+	background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.58) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.58)));
+	background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.58) 100%);
+	background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.58) 100%);
+	background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.58) 100%);
+	background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.58) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#94000000',GradientType=0 );
 	position: relative;
-	top: 600px;
-	padding-top: 30px;
+	top: 580px;
+	padding: 30px 0 20px 0;
 }
 
 .location-ad{
 	background: #f2f2f2;
 	width: 220px;
-	height: 118px;
 	border-radius: 10px;
 	position: absolute;
 	padding: 10px;
@@ -300,4 +294,79 @@
 .title-row-carte .location5{
 	bottom: 450px;
 	right: 600px;
+}
+
+/*--------Page results with line metro---------*/
+
+.title-row-metro{
+	background: rgb(242, 242, 242);
+	background: -moz-linear-gradient(90deg, rgb(242, 242, 242) 30%, rgb(122, 122, 122) 100%);
+	background: -webkit-linear-gradient(90deg, rgb(242, 242, 242) 30%, rgb(122, 122, 122) 100%);
+	background: -o-linear-gradient(90deg, rgb(242, 242, 242) 30%, rgb(122, 122, 122) 100%);
+	background: -ms-linear-gradient(90deg, rgb(242, 242, 242) 30%, rgb(122, 122, 122) 100%);
+	background: linear-gradient(180deg, rgb(242, 242, 242) 30%, rgb(122, 122, 122) 100%);
+	padding-bottom: 15px;
+}
+.title-row-metro .line-name{
+	margin: 0 auto;
+	padding-left: 100px;
+	width: 1100px;
+	padding-top: 10px;
+}
+
+.title-row-metro .line-name p{
+	font-size: 16px;
+	font-weight: bold;
+	margin: 0;
+	display: inline-block;
+}
+.title-row-metro .line-name span{
+	font-size: 14px;
+	font-weight: normal;
+	margin-left: 10px;
+}
+.title-row-metro .yellow-line-metro{
+	margin: 0 auto;
+	width: 1280px;
+	margin-top: 26px;
+}
+.title-row-metro .yellow-line-metro .line-number{
+	text-align: center;
+	padding: 10px 0 0 17px;
+}
+.title-row-metro .yellow-line-metro .main-name{
+	text-align: center;
+	padding: 0 0 10px 17px;
+}
+.title-row-metro .yellow-line-metro .main-name p{
+	margin: 0;
+	font-weight: bold;
+	font-size: 16px;
+	text-shadow: 0 1px 0 #fff;
+}
+.title-row-metro .yellow-line-metro .name-line{
+	position: relative;
+}
+.title-row-metro .yellow-line-metro .name-line span{
+	position: absolute;
+	font-size: 16px;
+	text-shadow: 0 1px 0 #fff;
+	width: 190px;
+	text-align: center;
+}
+.title-row-metro .yellow-line-metro .name-line .line1{
+	top: -14px;
+	left: 179px;
+}
+.title-row-metro .yellow-line-metro .name-line .line2{
+	top: -14px;
+	left: 370px;
+}
+.title-row-metro .yellow-line-metro .name-line .line3{
+	top: -14px;
+	right: 353px;
+}
+.title-row-metro .yellow-line-metro .name-line .line4{
+	top: -14px;
+	right: 161px;
 }
