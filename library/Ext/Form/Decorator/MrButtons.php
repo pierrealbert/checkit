@@ -12,31 +12,9 @@
 
 require_once 'Zend/Form/Decorator/Abstract.php';
 
-class Ext_Form_Decorator_MrButtons extends Zend_Form_Decorator_ViewHelper
+class Ext_Form_Decorator_MrButtons extends Ext_Form_Decorator_MchBox
 {
     protected $_labelClass = 'btn-input-gray-dark';
-
-    public function setOptions(array $options)
-    {
-        if (isset($options['labelClass'])) {
-            $this->_labelClass = $options['labelClass'];
-        }
-
-        return $this;
-    }
-
-    public function setOption($key, $value)
-    {
-        if ($key == 'labelClass') {
-            $this->_labelClass = $value;
-        }
-
-        return $this;
-    }
-
-    public function getLabelClass() {
-        return $this->_labelClass;
-    }
 
     public function render($content)
     {
@@ -53,9 +31,16 @@ class Ext_Form_Decorator_MrButtons extends Zend_Form_Decorator_ViewHelper
         }
 
         $elHtml = '';
+        $count = 0;
         foreach ($items as $indx => $itemValue) {
             $elHtml .= '<input type="radio" class="input-pretty" value="'.$indx.'" name="'.$element->getFullyQualifiedName().'" id ="'.$element->getFullyQualifiedName().'_'.$indx.'" '.($this->getValue($element) === $indx ? 'checked="checked"' : '').' /> '.
                        '<label for="'.$element->getFullyQualifiedName().'_'.$indx.'" class="'.$this->getLabelClass().'">'.$itemValue.'</label>';
+            $count++;
+            if ($this->getBrAfter() > 0) {
+                if ($count % $this->getBrAfter() == 0) {
+                    $elHtml .= '<br />';
+                }
+            }
         }
         $separator     = $this->getSeparator();
 
@@ -68,6 +53,6 @@ class Ext_Form_Decorator_MrButtons extends Zend_Form_Decorator_ViewHelper
                 $result = $elHtml;
         }
 
-        return '<div><input type="button" value="Tous" class="btn-tous" />'.$result.'</div>';
+        return '<div>'.($this->getNeedAll() ? '<input type="button" value="Tous" class="btn-tous" />' : '').$result.'</div>';
     }
 }

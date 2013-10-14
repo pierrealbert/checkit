@@ -15,11 +15,19 @@ require_once 'Zend/Form/Decorator/Abstract.php';
 class Ext_Form_Decorator_MchBox extends Zend_Form_Decorator_ViewHelper
 {
     protected $_labelClass = 'btn-input-gray-dark btn-input-number';
+    protected $_needAll = true;
+    protected $_brAfter = -1;
 
     public function setOptions(array $options)
     {
         if (isset($options['labelClass'])) {
             $this->_labelClass = $options['labelClass'];
+        }
+        if (isset($options['needAll'])) {
+            $this->_needAll = $options['needAll'];
+        }
+        if (isset($options['brAfter'])) {
+            $this->_brAfter = intval($options['brAfter']);
         }
 
         return $this;
@@ -29,6 +37,10 @@ class Ext_Form_Decorator_MchBox extends Zend_Form_Decorator_ViewHelper
     {
         if ($key == 'labelClass') {
             $this->_labelClass = $value;
+        } elseif ($key == 'needAll') {
+            $this->_needAll = $value;
+        } elseif ($key == 'brAfter') {
+            $this->_brAfter = intval($value);
         }
 
         return $this;
@@ -37,6 +49,15 @@ class Ext_Form_Decorator_MchBox extends Zend_Form_Decorator_ViewHelper
     public function getLabelClass() {
         return $this->_labelClass;
     }
+
+    public function getNeedAll() {
+        return $this->_needAll;
+    }
+
+    public function getBrAfter() {
+        return $this->_brAfter > 0 ? $this->_brAfter : -1;
+    }
+
 
     public function render($content)
     {
@@ -53,38 +74,19 @@ class Ext_Form_Decorator_MchBox extends Zend_Form_Decorator_ViewHelper
         }
 
         $elHtml = '';
+        $count = 0;
         foreach ($items as $indx => $itemValue) {
             $elHtml .= "<input type='checkbox' class='input-pretty' id='".$element->getFullyQualifiedName()."_".$indx."' name='".$element->getFullyQualifiedName()."' value='".$indx."' ".($this->getValue($element) === $indx ? 'checked="checked"' : '').">\n".
                        "<label for='".$element->getFullyQualifiedName()."_".$indx."' class='".$this->getLabelClass()."'>".$itemValue."</label>";
+            $count++;
+            if ($this->getBrAfter() > 0) {
+                if ($count % $this->getBrAfter() == 0) {
+                    $elHtml .= '<br />';
+                }
+            }
         }
         $separator     = $this->getSeparator();
-/*
 
-        $helper        = $this->getHelper();
-        $separator     = $this->getSeparator();
-        $value         = $this->getValue($element);
-        $attribs       = $this->getElementAttribs();
-        $name          = $element->getFullyQualifiedName();
-        $id            = $element->getId();
-        $attribs['id'] = $id;
-
-        $helperObject  = $view->getHelper($helper);
-        if (method_exists($helperObject, 'setTranslator')) {
-            $helperObject->setTranslator($element->getTranslator());
-        }
-
-        // Check list separator
-        if (isset($attribs['listsep'])
-            && in_array($helper, array('formMulticheckbox', 'formRadio', 'formSelect'))
-        ) {
-            $listsep = $attribs['listsep'];
-            unset($attribs['listsep']);
-
-            $elementContent = $view->$helper($name, $value, $attribs, $element->options, $listsep);
-        } else {
-            $elementContent = $view->$helper($name, $value, $attribs, $element->options);
-        }
-*/
         switch ($this->getPlacement()) {
             case self::APPEND:
                 $result = $content . $separator . $elHtml;
@@ -94,6 +96,6 @@ class Ext_Form_Decorator_MchBox extends Zend_Form_Decorator_ViewHelper
                 $result = $elHtml;
         }
 
-        return '<div><input type="button" value="Tous" class="btn-tous" />'.$result.'</div>';
+        return '<div>'.($this->getNeedAll() ? '<input type="button" value="Tous" class="btn-tous" />' : '').$result.'</div>';
     }
 }

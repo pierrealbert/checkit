@@ -156,7 +156,7 @@ class Form_SearchStandard extends Ext_Form
             ->setLabel('Aménagement')
             ->addMultiOptions(Model_Property::getPlanningOptions())
             ->setDecorators(array(
-                array('MchBox', array('labelClass' => 'btn-input-gray-lite')),
+                array('MchBox', array('labelClass' => 'btn-input-gray-lite', 'needAll' => false, 'brAfter' => 4)),
                 array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-black')),
                 array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
             ));
@@ -167,7 +167,7 @@ class Form_SearchStandard extends Ext_Form
             ->setLabel('Dépendances')
             ->addMultiOptions(Model_Property::getOutbuildingOptions())
             ->setDecorators(array(
-                array('MchBox', array('labelClass' => 'btn-input-gray-lite')),
+                array('MchBox', array('labelClass' => 'btn-input-gray-lite', 'needAll' => false, 'brAfter' => 4)),
                 array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-black')),
                 array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
             ));
@@ -178,7 +178,7 @@ class Form_SearchStandard extends Ext_Form
             ->setLabel('Espaces extérieurs')
             ->addMultiOptions(Model_Property::getExteriorOptions())
             ->setDecorators(array(
-                array('MchBox', array('labelClass' => 'btn-input-gray-lite')),
+                array('MchBox', array('labelClass' => 'btn-input-gray-lite', 'needAll' => false, 'brAfter' => 4)),
                 array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-black')),
                 array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
             ));
@@ -189,7 +189,7 @@ class Form_SearchStandard extends Ext_Form
             ->setLabel('Immeuble')
             ->addMultiOptions(Model_Property::getBuildingFeatureOptions())
             ->setDecorators(array(
-                array('MchBox', array('labelClass' => 'btn-input-gray-lite')),
+                array('MchBox', array('labelClass' => 'btn-input-gray-lite', 'needAll' => false, 'brAfter' => 4)),
                 array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-black')),
                 array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
             ));
@@ -200,7 +200,7 @@ class Form_SearchStandard extends Ext_Form
             ->setLabel('Chauffage')
             ->addMultiOptions(Model_Property::getHeatingSystemOptions())
             ->setDecorators(array(
-                array('MchBox', array('labelClass' => 'btn-input-gray-lite')),
+                array('MchBox', array('labelClass' => 'btn-input-gray-lite', 'needAll' => false, 'brAfter' => 4)),
                 array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-black')),
                 array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
             ));
