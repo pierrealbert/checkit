@@ -15,7 +15,11 @@ class Form_SearchMetro extends Ext_Form
         $this->_addJS();
         $this->setMethod('post');
         $this->setAttrib('id', 'form-search-metro');
-        
+        $this->setAction($this->getView()->url(array(
+            'controller' => 'search',
+            'action'     => 'metro'
+        ), null, true));
+
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
 
         $this->addElement('hidden', 'metro_station_id', array());
@@ -24,47 +28,70 @@ class Form_SearchMetro extends Ext_Form
 		$this->addElement('text', 'min_budget', array(
             'label'      => 'min_budget',
             'filters'    => array('StringTrim', 'StripTags'),
+            'decorators' => array('ViewHelper'),
+            'placeholder' => 'Budget min. (en €)'
         ));
 
 		$this->addElement('text', 'max_budget', array(
             'label'      => 'max_budget',
             'filters'    => array('StringTrim', 'StripTags'),
+            'decorators' => array('ViewHelper'),
+            'placeholder' => 'Budget max. (en €)'
         ));
 
 		$this->addElement('text', 'min_size', array(
             'label'      => 'min_size',
             'filters'    => array('StringTrim', 'StripTags'),
+            'decorators' => array('ViewHelper'),
+            'placeholder' => 'Surface min. (en m²)'
         ));
 
 		$this->addElement('text', 'max_size', array(
             'label'      => 'max_size',
             'filters'    => array('StringTrim', 'StripTags'),
+            'decorators' => array('ViewHelper'),
+            'placeholder' => 'Surface max. (en m²)'
         ));
-        
-        $this->addElement('radio', 'is_furnished', array(
-            'label'         => 'furniture',
-            'multiOptions'  => array('' => 'all',
-                                     1 => 'Furnished',
-                                     0 => 'Empty'),
-        ));
-        
-        $this->addElement('radio', 'number_of_rooms1', array(
-            'label'         => 'number_of_rooms1',
-            'multiOptions'  => array('' => 'all',
-                                     1 => 1,
-                                     2 => 2,
-                                     3 => 3,
-                                     4 => 4,
-                                     '>=5' => '> 5',),
-        ));
-        
-        $this->addElement('radio', 'distance', array(
-            'label'         => 'distance',
-            'value'         => '0.5',
-            'required'      => true,
-            'multiOptions'  => array('0.35' => '350 meters',
-                                     '0.5' => '500 meters',
-                                     '0.65' => '650 meters'),
+
+        $radio = new Zend_Form_Element_Radio('is_furnished');
+        $radio->setSeparator('')
+              ->setLabel('Mobilier')
+              ->addMultiOptions(array(
+                1 => 'Meublé',
+                0 => 'Vide'
+              ))
+              ->setDecorators(array('ViewHelper'));
+        $this->addElement($radio);
+
+        $chbox = new Zend_Form_Element_MultiCheckbox('number_of_rooms1');
+        $chbox->setSeparator('')
+              ->setLabel('Nombre de chambres')
+              ->addMultiOptions(array(
+                1 => 1,
+                2 => 2,
+                3 => 3,
+                4 => 4,
+                '>=5' => '5 et +'
+              ))
+              ->setDecorators(array('ViewHelper'));
+        $this->addElement($chbox);
+
+        $radio = new Zend_Form_Element_Radio('distance');
+        $radio->setSeparator('')
+            ->setLabel('distance')
+            ->setRequired(true)
+            ->addMultiOptions(array(
+                '0.35' => '350 m',
+                '0.5' => '500 m',
+                '0.65' => '650 m'
+            ))
+            ->setDecorators(array('ViewHelper'));
+        $this->addElement($radio);
+
+        $this->setDefaults(array(
+            'is_furnished' => '',
+            'number_of_rooms1' => '',
+            'distance' => '',
         ));
 	}
 

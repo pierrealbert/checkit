@@ -37,3 +37,15 @@ $application = new Zend_Application(
 
 $application->bootstrap()
             ->run();
+
+
+function mDump($var, $var_dump = false, $exit = true) {
+    echo '<pre>';
+    if ($var_dump) {
+        var_dump($var);
+    } else {
+        print_r($var);
+    }
+    echo '</pre>';
+    if ($exit) exit;
+}

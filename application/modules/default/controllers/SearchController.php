@@ -170,7 +170,7 @@ class SearchController extends Zend_Controller_Action
             
             $this->_helper->redirector->gotoSimple('results', 'search', 'default', array('search_id' => $search->id));
         }
-        
+
         $this->view->form = $form;
         $this->view->stations = $stations;
         $this->view->lines = $lines;
