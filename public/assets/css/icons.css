@@ -1,0 +1,143 @@
+/*--------Icons-------*/
+.i-group-white{
+	background-image: url(../../images/icons/glyphicons-halflings-white.png);
+	background-repeat: no-repeat;
+	padding: 0 0 0 22px;
+	margin-right: 26px;
+	width: 16px;
+	height: 12px;
+	font-size: 18px;
+	text-align: left;
+}
+.i-group-gray{
+	background-image: url(../../images/icons/glyphicons-halflings.png);
+	background-repeat: no-repeat;
+	padding: 0 0 0 22px;
+	margin-right: 26px;
+	width: 16px;
+	height: 12px;
+	font-size: 18px;
+	text-align: left;
+}
+.icon-heart{
+	background-position: -92px 3px;
+}
+.icon-chevron-left{
+	background-position: -428px -69px;
+}
+.icon-chevron-right{
+	background-position: -453px -69px;
+	margin-right: 0;
+	margin-left: 26px;
+}
+.icon-thumbs-up{
+	background-position: -92px -141px;
+}
+.icon-share-alt{
+	background-position: -332px -93px;
+}
+.icon-check{
+	background-position: -285px 3px;
+}
+.icon-list{
+	background-position: -261px 5px;
+	margin-right: 0;
+	margin-left: 24px;
+}
+.icon-photo{
+	background-position: -116px -44px;
+	margin-right: 0;
+	margin-left: 24px;
+}
+.icon-carte{
+	background-position: -20px -68px;
+	margin-right: 0;
+	margin-left: 24px;
+}
+.icon-calendar{
+	background-position: -188px -116px;
+	margin-right: 0;
+	margin-left: 46px;
+}
+.icon-flag{
+	background-position: -308px -21px;
+	margin-right: 0;
+	padding: 5px 0px 0px 22px;
+}
+.i-group-red{
+	background-repeat: no-repeat;
+	background-position: 28px 0;
+	width: 103px;
+	height: 44px;
+	display: block;
+}
+.icon-metro{
+	background-image: url(../images/icon-metro.png);
+}
+.icon-dessin{
+	background-image: url(../images/icon-dessin.png);
+}
+.icon-carte-red{
+	background-image: url(../images/icon-carte.png);
+}
+.btn-annonce{
+	width: 100px;
+	height: 75px;
+	text-align: center;
+	line-height: 1;
+	padding: 0 7px;
+}
+.icon-urgent{
+	background-image: url(../images/icon-urgent.png);
+	background-repeat: no-repeat;
+	background-position: 0 4px;
+	width: 15px;
+	height: 11px;
+	padding: 0 0 0 16px;
+	margin-right: 10px;
+}
+.icon-pro{
+	background-image: url(../images/icon-pro.png);
+	background-repeat: no-repeat;
+	background-position: 0 3px;
+	width: 17px;
+	height: 12px;
+	padding: 0 0 0 17px;
+	margin-right: 20px;
+}
+.icon-prev{
+	background-position: -429px -68px;
+	margin-right: 0;
+}
+.icon-next{
+	background-position: -452px -68px;
+	margin-right: 0;
+}
+.icon-link-carte{
+	background-image: url(../images/icon-link-carte.png);
+	background-repeat: no-repeat;
+	background-position: 0 4px;
+	width: 15px;
+	height: 11px;
+	padding: 0 0 0 16px;
+	margin-right: 5px;
+}
+
+.icon-gal-prev{
+	background-image: url(../images/icon-gallery-prev.png);
+	background-repeat: no-repeat;
+	background-position: 10px 234px;
+	width: 15px;
+	height: 11px;
+	padding: 0 49px 274px 33px;
+	display: block;
+}
+.icon-gal-next{
+	background-image: url(../images/icon-gallery-next.png);
+	background-repeat: no-repeat;
+	background-position: 57px 234px;
+	width: 15px;
+	height: 11px;
+	padding: 0 49px 274px 33px;
+	display: block;
+}

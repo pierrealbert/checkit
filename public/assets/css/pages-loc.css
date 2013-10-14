@@ -1,0 +1,146 @@
+
+.tab-resume{
+	background: #f2f2f2;
+	padding: 20px;
+	overflow: hidden;
+}
+.tab-resume .inner-transparent{
+	float: left;
+}
+.tab-resume  .inner-left{
+	width: 318px;
+	margin-right: 20px;
+}
+.box-info-universal{
+	background: #fff;
+	border-radius: 10px;
+	box-shadow: inset 0 1px 0 #CCCCCC;
+	padding: 15px 10px;
+	margin-bottom: 20px;
+}
+.box-info-universal h2{
+	font-size: 25px;
+}
+.box-info-universal .btn-gray{
+	height: 35px;
+	line-height: 35px;
+	font-size: 16px;
+	padding-left: 50px;
+	width: 233px;
+	background-image: url(../images/icon-pencil.png);
+	background-repeat: no-repeat;
+	background-position: 23px center;
+}
+.box-info-universal .gray{
+	float: right;
+}
+.box-info-universal .calendar .cell{
+	font-size: 13px;
+	padding: 11px 0;
+}
+/*.box-info-universal .calendar .btn-cal-prev{*/
+	/*background-image: ;*/
+/*}*/
+.box-info-universal .calendar .btn-cal-prev,
+.box-info-universal .calendar .name-month-next{
+	height: 32px;
+	line-height: 32px;
+	width: 6px;
+}
+
+.box-info-universal .name-month-calend h2{
+	margin: 0;
+	color: #4d4d4d;
+}
+.box-info-universal .color-calendar{
+	margin: 10px 0 20px 0;
+}
+.box-info-universal .color-calendar img{
+	margin-right: 5px;
+}
+.box-info-universal .color-calendar span{
+	margin-right: 42px;
+}
+.box-info-universal .btn-voir{
+	height: 35px;
+	line-height: 35px;
+	padding-left: 50px;
+	font-size: 16px;
+	width: 233px;
+	background-image: url(../images/icon-line.png);
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+
+
+
+.box-btn-nav-resume{
+	padding: 20px;
+}
+.box-btn-nav-resume a{
+	height: 40px;
+	line-height: 40px;
+	padding-left: 39px;
+	font-size: 16px;
+}
+.box-btn-nav-resume > .btn-red{
+	background-image: url(../images/icon-good.png);
+	background-repeat: no-repeat;
+	background-position: 16px center;
+	width: 135px;
+}
+.box-btn-nav-resume > .btn-blue{
+	background-image: url(../images/icon-list.png);
+	background-repeat: no-repeat;
+	background-position: 16px center;
+	width: 186px;
+}
+.box-btn-nav-resume > .icon-book{
+	background-image: url(../images/icon-book.png);
+	background-repeat: no-repeat;
+	background-position: 16px center;
+	width: 157px;
+}
+.box-btn-nav-resume > .icon-hand{
+	background-image: url(../images/icon-hand-up.png);
+	background-repeat: no-repeat;
+	background-position: 16px center;
+	width: 189px;
+}
+.grid-full-other{
+	padding-left: 44px;
+	padding-right: 44px;
+}
+.grid-full-other .btn-blue{
+	height: 33px;
+	line-height: 33px;
+	font-size: 16px;
+}
+.grid-full-other .index-row-six .btn-blue{
+	background-image: url(../images/icon-cert.png);
+	background-repeat: no-repeat;
+	background-position: 20px center;
+	padding-left: 45px;
+	width: 185px;
+}
+.grid-full-other .index-row-six-text{
+	width: 61%;
+}
+
+
+.grid-half-other{
+	padding-left: 44px;
+	padding-right: 44px;
+	width: 405px;
+}
+.grid-half-other .index-row-six-text{
+	width: 72%;
+}
+.grid-half-other .index-row-six-link{
+	width: 30%;
+}
+.grid-half-other h1,
+.grid-full-other h1{
+	font-size: 45px;
+}

@@ -191,6 +191,7 @@
 .menu-annonce li{
 	float: left;
 	margin-left: 15px;
+	list-style: none;
 }
 .menu-annonce li a{
 	text-decoration: none;
@@ -350,149 +351,6 @@
 
 
 
-/*--------Icons-------*/
-.i-group-white{
-	background-image: url(../../images/icons/glyphicons-halflings-white.png);
-	background-repeat: no-repeat;
-	padding: 0 0 0 22px;
-	margin-right: 26px;
-	width: 16px;
-	height: 12px;
-	font-size: 18px;
-	text-align: left;
-}
-.i-group-gray{
-	background-image: url(../../images/icons/glyphicons-halflings.png);
-	background-repeat: no-repeat;
-	padding: 0 0 0 22px;
-	margin-right: 26px;
-	width: 16px;
-	height: 12px;
-	font-size: 18px;
-	text-align: left;
-}
-.icon-heart{
-	background-position: -92px 3px;
-}
-.icon-chevron-left{
-	background-position: -428px -69px;
-}
-.icon-chevron-right{
-	background-position: -453px -69px;
-	margin-right: 0;
-	margin-left: 26px;
-}
-.icon-thumbs-up{
-	background-position: -92px -141px;
-}
-.icon-share-alt{
-	background-position: -332px -93px;
-}
-.icon-check{
-	background-position: -285px 3px;
-}
-.icon-list{
-	background-position: -261px 5px;
-	margin-right: 0;
-	margin-left: 24px;
-}
-.icon-photo{
-	background-position: -116px -44px;
-	margin-right: 0;
-	margin-left: 24px;
-}
-.icon-carte{
-	background-position: -20px -68px;
-	margin-right: 0;
-	margin-left: 24px;
-}
-.icon-calendar{
-	background-position: -188px -116px;
-	margin-right: 0;
-	margin-left: 46px;
-}
-.icon-flag{
-	background-position: -308px -21px;
-	margin-right: 0;
-	padding: 5px 0px 0px 22px;
-}
-.i-group-red{
-	background-repeat: no-repeat;
-	background-position: 28px 0;
-	width: 103px;
-	height: 44px;
-	display: block;
-}
-.icon-metro{
-	background-image: url(../images/icon-metro.png);
-}
-.icon-dessin{
-	background-image: url(../images/icon-dessin.png);
-}
-.icon-carte-red{
-	background-image: url(../images/icon-carte.png);
-}
-.btn-annonce{
-	width: 100px;
-	height: 75px;
-	text-align: center;
-	line-height: 1;
-	padding: 0 7px;
-}
-.icon-urgent{
-	background-image: url(../images/icon-urgent.png);
-	background-repeat: no-repeat;
-	background-position: 0 4px;
-	width: 15px;
-	height: 11px;
-	padding: 0 0 0 16px;
-	margin-right: 10px;
-}
-.icon-pro{
-	background-image: url(../images/icon-pro.png);
-	background-repeat: no-repeat;
-	background-position: 0 3px;
-	width: 17px;
-	height: 12px;
-	padding: 0 0 0 17px;
-	margin-right: 20px;
-}
-.icon-prev{
-	background-position: -429px -68px;
-	margin-right: 0;
-}
-.icon-next{
-	background-position: -452px -68px;
-	margin-right: 0;
-}
-.icon-link-carte{
-	background-image: url(../images/icon-link-carte.png);
-	background-repeat: no-repeat;
-	background-position: 0 4px;
-	width: 15px;
-	height: 11px;
-	padding: 0 0 0 16px;
-	margin-right: 5px;
-}
-
-.icon-gal-prev{
-	background-image: url(../images/icon-gallery-prev.png);
-	background-repeat: no-repeat;
-	background-position: 10px 234px;
-	width: 15px;
-	height: 11px;
-	padding: 0 49px 274px 33px;
-	display: block;
-}
-.icon-gal-next{
-	background-image: url(../images/icon-gallery-next.png);
-	background-repeat: no-repeat;
-	background-position: 57px 234px;
-	width: 15px;
-	height: 11px;
-	padding: 0 49px 274px 33px;
-	display: block;
-}
 
 
 /*--------Page-annonce-photo-------*/
@@ -575,35 +433,35 @@
 
 
 /*--------Page-annonce-visites-------*/
-.tab-annonce .block-calendar{
+.block-calendar{
 	overflow: hidden;
 	margin: 41px 0 20px 0;
 	padding-bottom: 5px;
 }
-.tab-annonce .block-calendar .calendar{
+.block-calendar .calendar{
 	float: left;
 	width: 43%;
 	padding: 0 33px;
 }
-.tab-annonce .block-calendar .name-month{
+.name-month-calend{
 	text-align: center;
 }
-.tab-annonce .block-calendar .name-month h2{
-	margin: 0px 0px 24px;
+.name-month-calend h2{
+	margin: 0 0 24px;
 }
-.tab-annonce .block-calendar .name-month .btn-cal-prev{
+.name-month-calend .btn-cal-prev{
 	float: left;
 }
-.tab-annonce .block-calendar .name-month-next{
+.name-month-next{
 	float: right;
 }
-.tab-annonce .calendar .inner-cell{
+.calendar .inner-cell{
 	display: table;
 	width: 100%;
 	background: #fff;
 	border-bottom: 1px solid #4d4d4d;
 }
-.tab-annonce .calendar .cell-month{
+.calendar .cell-month{
 	background: #4d4d4d;
 	border-bottom: 1px solid #4d4d4d;
 	-moz-border-radius-topleft: 10px;
@@ -613,14 +471,14 @@
 	-webkit-border-top-right-radius: 10px;
 	border-top-right-radius: 10px;
 }
-.tab-annonce .calendar .cell-month .cell{
+.calendar .cell-month .cell{
 	color: #fff;
 	border: none;
 }
-.tab-annonce .calendar .cell-month .cell:first-child{
+.calendar .cell-month .cell:first-child{
 	border: none;
 }
-.tab-annonce .calendar .cell{
+.calendar .cell{
 	display: table-cell !important;
 	padding: 15px 0;
 	text-align: center;
@@ -629,10 +487,10 @@
 	color: #878787;
 	width: 20px;
 }
-.tab-annonce .calendar .cell:first-child{
+.calendar .cell:first-child{
 	border-left: 1px solid #4d4d4d;;
 }
-.tab-annonce .calendar .cell-bottom{
+.calendar .cell-bottom{
 	box-shadow: 0px 3px 0px #464646;
 	-moz-border-radius-bottomright: 10px;
 	-webkit-border-bottom-right-radius: 10px;
@@ -642,18 +500,18 @@
 	border-bottom-left-radius: 10px;
 }
 
-.tab-annonce .calendar .cell-next-month{
+.calendar .cell-next-month{
 	background: #f2f2f2;
 }
-.tab-annonce .calendar .cell-blue{
+.calendar .cell-blue{
 	background: #bff2ef;
 	color: #545757;
 }
-.tab-annonce .calendar .cell-black{
+.calendar .cell-black{
 	background: #4d4d4d;
 	color: #e8e8e8;
 }
-.tab-annonce .calendar .cell-gray{
+.calendar .cell-gray{
 	background: #cccccc;
 	color: #999999;
 }
@@ -661,17 +519,17 @@
 	margin: 10px 0 50px 0;
 }
 
-.tab-annonce .btn-gray-lite{
+.btn-gray-lite{
 	background: #e5e5e5;
 	box-shadow: 0 3px 0 #b3b3b3;
 	font-size: 16px;
 	text-shadow: 0 -1px 0 #b3b3b3 !important;
 }
-.tab-annonce .btn-gray-lite:hover{
+.btn-gray-lite:hover{
 	box-shadow: 0 1px 0 #b3b3b3;
 	top: 2px;
 }
-.tab-annonce .btn-gray-lite:active{
+.btn-gray-lite:active{
 	box-shadow: none;
 	top: 3px;
 }
