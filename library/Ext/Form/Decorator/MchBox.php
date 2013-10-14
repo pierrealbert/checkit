@@ -14,6 +14,30 @@ require_once 'Zend/Form/Decorator/Abstract.php';
 
 class Ext_Form_Decorator_MchBox extends Zend_Form_Decorator_ViewHelper
 {
+    protected $_labelClass = 'btn-input-gray-dark btn-input-number';
+
+    public function setOptions(array $options)
+    {
+        if (isset($options['labelClass'])) {
+            $this->_labelClass = $options['labelClass'];
+        }
+
+        return $this;
+    }
+
+    public function setOption($key, $value)
+    {
+        if ($key == 'labelClass') {
+            $this->_labelClass = $value;
+        }
+
+        return $this;
+    }
+
+    public function getLabelClass() {
+        return $this->_labelClass;
+    }
+
     public function render($content)
     {
         $element = $this->getElement();
@@ -31,7 +55,7 @@ class Ext_Form_Decorator_MchBox extends Zend_Form_Decorator_ViewHelper
         $elHtml = '';
         foreach ($items as $indx => $itemValue) {
             $elHtml .= "<input type='checkbox' class='input-pretty' id='".$element->getFullyQualifiedName()."_".$indx."' name='".$element->getFullyQualifiedName()."' value='".$indx."' ".($this->getValue($element) === $indx ? 'checked="checked"' : '').">\n".
-                       "<label for='".$element->getFullyQualifiedName()."_".$indx."' class='btn-input-gray-dark btn-input-number'>".$itemValue."</label>";
+                       "<label for='".$element->getFullyQualifiedName()."_".$indx."' class='".$this->getLabelClass()."'>".$itemValue."</label>";
         }
         $separator     = $this->getSeparator();
 /*
