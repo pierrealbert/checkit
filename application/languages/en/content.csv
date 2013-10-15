@@ -161,3 +161,54 @@ wrong_current_password; "Current Password is wrong"
 apply; "Candidater"
 number_of_rooms1; "Nombre de pièces"
 create_account; "Créer un compte"
+
+
+separate_restrooms; "Toilettes séparées"
+parquet_floor; "Parquet"
+molding; "Moulures"
+double_glazing; "Double vitrage"
+storage_are; "Rangements"
+fireplace; "Cheminée"
+air_conditioner; "Air conditionné"
+
+parking_lot; "Parking"
+garage; "Parking fermé / Box"
+cave; "Cave"
+
+garden; "Jardin"
+balcony; "Balcon"
+terrace; "Terrasse"
+swimming_pool; "Piscine"
+
+
+select_date; "Sélectionner une date"
+is_new; "Neuf"
+lift; "Ascenceur"
+guardian; "Gardien"
+digicode; "Digicode / Interphone"
+old_building; "Ancien"
+is_renove; "Rénové"
+very_old_building; "Pierre de Taille"
+
+Ascenceur
+Gardien
+Digicode / Interphone
+Ancien
+Neuf
+Pierre de Taille
+
+
+central_heating; "Central / Collectif"
+individual_heating; "Individuel"
+au_sol_heating; "Au sol"
+gaz_heating; "Gaz"
+electrique_heating; "Électrique"
+autre_heating; "Autre"
+
+
+
+
+
+
+
+

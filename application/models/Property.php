@@ -68,17 +68,19 @@ class Model_Property extends Model_Base_Property
     static public function getOutbuildingOptions()
     {
         return array(
+            'is_cave'        => 'cave',
             'is_parking_lot' => 'parking_lot',
-            'is_garage' => 'garage',
+            'is_garage'      => 'garage',
         );
     }
     
     static public function getExteriorOptions()
     {
         return array(
-            'is_balcony' => 'balcony',
-            'is_terrace' => 'terrace',
-            'is_swimming_pool' => 'swimming_pool',
+            'is_garden'         => 'garden',
+            'is_balcony'        => 'balcony',
+            'is_terrace'        => 'terrace',
+            'is_swimming_pool'  => 'swimming_pool',
         );
     }
 
@@ -86,10 +88,11 @@ class Model_Property extends Model_Base_Property
     {
         return array(
             'is_lift' => 'lift',
-            'is_garden' => 'garden',
+            'is_guardian' => 'guardian',
             'is_digicode' => 'digicode',
             'is_old_building' => 'old_building',
             'is_renove' => 'is_renove',
+            'is_new' => 'is_new',
             'is_very_old_building' => 'very_old_building',
         );
     }

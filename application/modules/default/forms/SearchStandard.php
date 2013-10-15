@@ -121,7 +121,7 @@ class Form_SearchStandard extends Ext_Form
         $radio = new Zend_Form_Element_Radio('availability_select');
         $radio->setSeparator('')
             ->setLabel('Disponibilité')
-            ->addMultiOptions(array('now' => 'Immédiatement', 'date' => 'date'))
+            ->addMultiOptions(array('now' => 'Immédiatement', 'date' => 'select_date'))
             ->setDecorators(array(
                 array('MrButtons', array('labelClass' => 'btn-input-gray-lite')),
                 array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-black')),
