@@ -10,7 +10,7 @@ class SearchController extends Zend_Controller_Action
 
     public function indexAction()
     {
-       
+       $this->_helper->redirector->gotoSimple('standard', 'search', 'default');
     }
     
     public function standardAction(){

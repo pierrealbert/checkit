@@ -22,7 +22,7 @@ class Ext_View_Helper_Date extends Zend_View_Helper_Abstract
      * @param string $format output date format
      * @return string date
      */
-    public function date($value, $format = Zend_Date::DATE_MEDIUM)
+    public function date($value, $format = 'd/m/Y')
     {
         if ($value) {
 
@@ -31,9 +31,8 @@ class Ext_View_Helper_Date extends Zend_View_Helper_Abstract
             } elseif (!is_numeric($value)) {
                 $value = strtotime($value);
             }
-
-            $date = new Zend_Date($value, $this->getLocale());
-            return $date->toString($format, $this->getLocale());
+            
+            return date($format, $value);
         }
         return null;
     }

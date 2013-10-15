@@ -342,6 +342,9 @@ Property:
         is_old_building: integer(1)
         is_very_old_building: integer(1)
         is_renove:      integer(1)
+        is_guardian:    integer(1)
+        is_new:         integer(1)
+        is_cave:        integer(1)
         number_of_bathrooms: 
             type:       integer(4)
             default:    1

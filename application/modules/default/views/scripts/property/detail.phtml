@@ -1,50 +1,408 @@
-<?php if($this->isInbookmark) {
+<div class="title-row">
+    <div class="container-text">
+        <h1 class="white-txt">Details de l'annonce</h1>
+        <a href="#" class="btn btn-gray"><i class="i-group-white icon-share-alt"></i>Retour aux resultats</a>
+        <a href="#" class="btn btn-red"><i class="i-group-white icon-heart"></i>Ajouter aux favoris</a>
+        <a href="#" class="btn btn-blue"><i class="i-group-white icon-thumbs-up"></i>Partager</a>
+        <a href="#" class="btn btn-gray"><i class="i-group-white icon-chevron-left"></i>Precedente</a>
+        <a href="#" class="btn btn-gray">Suivante<i class="i-group-white icon-chevron-right"></i></a>
+    </div>
+</div>
+<main>          
+    <div class="inner">
+        <div class="grid">
+            <div class="box-text box-appart">
+                <h2 class="black-txt"><?= $this->escape($this->property->title) ?></h2>
+                <p class="txt-bold"><?= $this->translate($this->property_type[$this->property->property_type]) ?>
+                    <span class="slash">|</span>
+                    <?= $this->property->size ?> m<sup>2</sup>
+                    <span class="slash">|</span>
+                    <?= $this->number_of_rooms1[$this->property->number_of_rooms1] ?> pieces
+                </p>
+                <p class="date-txt">Mise en  ligne : <?= $this->date($this->property->created_at) ?>
+                    <a href="#" class="btn btn-red-small small-btn">
+                        <i class="icon-urgent"></i>
+                        Urgent
+                    </a>
+                </p>
+            </div>
+            <div class="box-text box-price">
+                <div class="loyer">Loyer mensuel</div>
+                <div class="price"><?= $this->property->price ?> €</div>
+                <a href="#" class="btn btn-gray btn-blue-dark small-btn">
+                    <i class="i-group-white icon-pro"></i>
+                    Pro
+                </a>
+            </div>
+            <div class="box-text box-button">
+                <a href="#" class="btn btn-blue big-btn"><i class="i-group-white icon-check"></i>Candidater</a>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="menu-annonce">
+                <ul id="">
+                    <li><a href="#description" class="active"><?= $this->translate('description') ?><i class="i-group-gray icon-list"></i></a></li>
+                    <li><a href="#photos"><?= $this->translate('photos') ?><i class="i-group-white icon-photo"></i></a></li>
+                    <li><a href="#map"><?= $this->translate('map') ?><i class="i-group-white icon-carte"></i></a></li>
+                    <li><a href="#calendar"><?= $this->translate('Visites') ?><i class="i-group-white icon-calendar"></i></a></li>
+                </ul>
+                            
+                <a href="#" class="btn btn-gray btn-gray-dark btn-left-flag">
+                    <i class="i-group-white icon-flag"></i>
+                </a>
+            </div>
+            <div class="tab-annonce">
+                <h2 class="black-txt"><?= $this->translate('description') ?></h2>
+                <div class="table-discription">                    
+                    <div class="cellsblock cellsblock-first">
+                        <div class="cellleft">
+                            <p><?= $this->translate('localization') ?></p>
+                        </div>
+                        <div class="cellright">
+                            <p><?= $this->property->address ?> (<?= $this->property->postcode ?>)</p>
+                        </div>
+                    </div>
+                    <div class="cellsblock">
+                        <div class="cellleft">
+                            <p><?= $this->translate('price_include_charge') ?></p>
+                        </div>
+                        <div class="cellright">
+                            <p><?= $this->property->price ?> &euro;</p>
+                        </div>
+                    </div>                          
+                    <div class="cellsblock">
+                        <div class="cellleft">
+                            <p><?= $this->translate('is_furnished') ?></p>
+                        </div>
+                        <div class="cellright">
+                            <p><?= $this->property->is_furnished ? 'Meublé' : 'Non' ?></p>
+                        </div>
+                    </div>
+                    <div class="cellsblock cellsblock-first">
+                        <div class="cellleft">
+                            <p><?= $this->translate('is_roomate') ?></p>
+                        </div>
+                        <div class="cellright">
+                            <p><?= $this->translate($this->is_roomate ? 'yes' : 'no') ?></p>
+                        </div>
+                    </div>                                        
+                    <div class="cellsblock">
+                        <div class="cellleft">
+                            <p><?= $this->translate('charges') ?></p>
+                        </div>
+                        <div class="cellright">
+                            <p><?= $this->property->amount_of_charges ?> &euro;</p>
+                        </div>
+                    </div>
+                    <div class="cellsblock">
+                        <div class="cellleft">
+                            <p><?= $this->translate('property_type') ?></p>
+                        </div>
+                        <div class="cellright">
+                            <p><?= $this->translate($this->property_type[$this->property->property_type]) ?></p>
+                        </div>
+                    </div>                 
+                    <div class="cellsblock">
+                        <div class="cellleft">
+                            <p><?= $this->translate('size') ?></p>
+                        </div>
+                        <div class="cellright">
+                            <p><?= $this->property->size ?> m<sup>2</sup></p>
+                        </div>
+                    </div>
+                    <div class="cellsblock">
+                        <div class="cellleft">
+                            <p><?= $this->translate('number_of_rooms1') ?></p>
+                        </div>
+                        <div class="cellright">
+                            <p><?= $this->number_of_rooms1[$this->property->number_of_rooms1] ?> rooms</p>
+                        </div>
+                    </div>
+                    <div class="cellsblock">
+                        <div class="cellleft">
+                            <p><?= $this->translate('floor') ?></p>
+                        </div>
+                        <div class="cellright">
+                            <p><?= $this->property->floor ?></p>
+                        </div>
+                    </div>                
+                    <div class="cellsblock">
+                        <div class="cellleft">
+                            <p><?= $this->translate('availability') ?></p>
+                        </div>
+                        <div class="cellright">
+                            <p>                                
+                                <?php if (date('Y-m-d') < $this->property->availability): ?>
+                                    <?= $this->property->availability ?>
+                                <?php else: ?>
+                                    <?= $this->translate('right_now') ?>
+                                <?php endif; ?>
+                            </p>
+                        </div>
+                    </div>                 
+                    <div class="cellsblock">
+                        <div class="cellleft">
+                            <p><?= $this->translate('metro') ?></p>
+                        </div>
+                        <div class="cellright">
+                            <p>
+                                <? $metro = $this->property->getNearbyMetroStation() ?> 
+                                <?= $metro ? $metro->name : '-' ?>
+                            </p>
+                        </div>
+                    </div>              
+                    <div class="cellsblock">
+                        <div class="cellleft">
+                            <p><?= $this->translate('decor') ?></p>
+                        </div>
+                        <div class="cellright">
+                            <p>
+                                <?php $string = ''; ?>
+                                <?php foreach ($this->values_groups['decor'] as $key => $value): ?>
+                                    <?php if ($this->property->$key): ?>
+                                        <?php if (empty($string)): ?>
+                                            <?php $string = $this->translate($value); ?>
+                                        <?php else: ?>
+                                            <?php $string .= ', ' . $this->translate($value); ?>
+                                        <?php endif; ?>            
+                                    <?php endif; ?>            
+                                <?php endforeach; ?>
+                                <?= $string ?>                                
+                            </p>
+                        </div>
+                    </div>
+                    <div class="cellsblock">
+                        <div class="cellleft">
+                            <p><?= $this->translate('outhouse') ?></p>
+                        </div>
+                        <div class="cellright">
+                            <p>
+                                <?php $string = ''; ?>
+                                <?php foreach ($this->values_groups['outhouse'] as $key => $value): ?>
+                                    <?php if ($this->property->$key): ?>
+                                        <?php if (empty($string)): ?>
+                                            <?php $string = $this->translate($value); ?>
+                                        <?php else: ?>
+                                            <?php $string .= ', ' . $this->translate($value); ?>
+                                        <?php endif; ?>            
+                                    <?php endif; ?>            
+                                <?php endforeach; ?>
+                                <?= $string ?>                                
+                            </p>
+                        </div>
+                    </div>                   
+                    <div class="cellsblock">
+                        <div class="cellleft">
+                            <p><?= $this->translate('outdoor_space') ?></p>
+                        </div>
+                        <div class="cellright">
+                            <p>
+                                <?php $string = ''; ?>
+                                <?php foreach ($this->values_groups['outdoor_space'] as $key => $value): ?>
+                                    <?php if ($this->property->$key): ?>
+                                        <?php if (empty($string)): ?>
+                                            <?php $string = $this->translate($value); ?>
+                                        <?php else: ?>
+                                            <?php $string .= ', ' . $this->translate($value); ?>
+                                        <?php endif; ?>            
+                                    <?php endif; ?>            
+                                <?php endforeach; ?>
+                                <?= $string ?>                                
+                            </p>
+                        </div>
+                    </div>                        
+                    <div class="cellsblock">
+                        <div class="cellleft">
+                            <p><?= $this->translate('building') ?></p>
+                        </div>
+                        <div class="cellright">
+                            <p>
+                                <?php $string = ''; ?>
+                                <?php foreach ($this->values_groups['building'] as $key => $value): ?>
+                                    <?php if ($this->property->$key): ?>
+                                        <?php if (empty($string)): ?>
+                                            <?php $string = $this->translate($value); ?>
+                                        <?php else: ?>
+                                            <?php $string .= ', ' . $this->translate($value); ?>
+                                        <?php endif; ?>            
+                                    <?php endif; ?>            
+                                <?php endforeach; ?>
+                                <?= $string ?>                                
+                            </p>
+                        </div>
+                    </div>             
+                    <div class="cellsblock">
+                        <div class="cellleft">
+                            <p><?= $this->translate('heating_system') ?></p>
+                        </div>
+                        <div class="cellright">
+                            <p>
+                                <?php $string = ''; ?>
+                                <?php foreach ($this->values_groups['heating_system'] as $key => $value): ?>
+                                    <?php if ($this->property->$key): ?>
+                                        <?php if (empty($string)): ?>
+                                            <?php $string = $this->translate($value); ?>
+                                        <?php else: ?>
+                                            <?php $string .= ', ' . $this->translate($value); ?>
+                                        <?php endif; ?>            
+                                    <?php endif; ?>            
+                                <?php endforeach; ?>
+                                <?= $string ?>                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="block-photo">
+                    <div class="photo-gallery">
+                        <div class="photo-img" id="property-photo">
+                            <?= $this->imageResize(262, 262, $this->photos[0]['link'], array('class' => 'slide')) ?>
+                        </div>
+                        <div id="property-photos" style="display: none;">                                  
+                            <?php foreach ($this->photos as $key => $photo): ?>
+                            <span id="property-photo-<?= ($key + 1) ?>"><?= $this->imageResize(262, 262, $photo['link'], array('class' => 'slide hidden')) ?></span>
+                            <?php endforeach; ?>
+                        </div>                        
+                        <div class="control-btn">
+                            <a href="#" class="btn-next" id="prev-photo"><i class="i-group-gray icon-chevron-left"></i></a>
+                            <span>Photo <span id="current-photo">1</span>/<?= count($this->photos) ?></span>
+                            <a href="#" id="next-photo"><i class="i-group-gray icon-chevron-right"></i></a>
+                        </div>
+                        <script type="text/javascript">
+                        
+                        $(function () {
+                            var currentPhoto = 1;                                                       
+                            var totalPhotos  = <?= count($this->photos) ?>;
+                            $('#next-photo').click(function (event) {                               
+                                event.preventDefault();
+                                currentPhoto = currentPhoto + 1;
+                                if (currentPhoto > totalPhotos) {
+                                    currentPhoto = 1;
+                                }       
+                                $('#property-photo').html($('#property-photo-' + currentPhoto).html());
+                                $('#current-photo').text(currentPhoto);                                
+                            });
+                            
+                            $('#prev-photo').click(function (event) {
+                                event.preventDefault();
+                                currentPhoto = currentPhoto - 1;
+                                if (currentPhoto < 1) {
+                                    currentPhoto = totalPhotos;
+                                }        
+                                $('#property-photo').html($('#property-photo-' + currentPhoto).html());
+                                $('#current-photo').text(currentPhoto);
+                            });                            
+                        });
+                        
+                        </script>
+                    </div>
+                    <div class="info-block-photo">
+                        <span class="blue">Cette annonce a été publiée par un professionnel.</span>
+                        <p>Honoraires (ttc) : 900 €</p>
+                        <span class="gray">Colocation non acceptee. Disponible immediatement.
+                            Bail longue duree.
+                        </span>
+                    </div>
+                    <div class="btn-nav-group">
+                        <a href="#" class="btn btn-red w220">
+                            <i class="i-group-white icon-heart"></i>
+                            Ajouter aux favoris
+                        </a>
+                        <a href="#" class="btn btn-blue w220">
+                            <i class="i-group-white icon-thumbs-up icon-partager"></i>
+                            Partager
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-transparent">
+            <div class="main-container-box">
+                <div class="container-box">
+                    <div class="grid grid-block-big">
+                        <div class="triangle-left"></div>
+                        <div class="triangle-left triangle-second"></div>
+                        <h2 class="black-txt">Annonces similaires</h2>
+                        <p>Nous vous proposons ici d’autres annonces susceptibles de vous intéresser</p>
+                    </div>
+                </div>
+                <div class="container-box">
+                    <? foreach ($this->similarProperties as $property) : ?>
+                    <div class="grid grid-block">
+                        <div class="box-text info-box">
+                            <?= $this->imageResize(102, 102, $property->main_photo, array('class' => 'img-ad', 'height' => '102')) ?>
+                            <h3 class="title-ad"><?= $this->escape($this->property->title) ?></h3>
+                            <div><?= $this->translate($this->property_type[$this->property->property_type]) ?> <?= $this->property->is_furnished ? '<span class="slash">|</span> Meublé' : '' ?>
+                                <br />
+                                <?= $this->property->address ?> (<?= $this->property->postcode ?>)<br />
+                                <?= $this->translate('availability') ?> : <?= (date('Y-m-d') < $this->property->availability) ? $this->property->availability : $this->translate('right_now') ?><br />                         
+                                <?= $this->translate('metro') ?>
+                                <? $metro = $this->property->getNearbyMetroStation() ?> 
+                                <?= $metro ? $metro->name : '-' ?>                                     
+                            </div>
+                        </div>                     
+                        <div class="box-text price-box">
+                            <p class="price-small"><?= $this->property->price ?> €</p>
+                            <p><?= $this->property->size ?> m²</p>
+                            <p><?= $this->number_of_rooms1[$this->property->number_of_rooms1] ?> pièces</p>
+                        </div>
+                    <? endforeach; ?>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?= $this->partial('_partials/search.phtml', $this->getVars()) ?>
+    </div>
+</main>
+<? /*
+<?php
+if ($this->isInbookmark) {
     $showNowButton = 'Remove from bookmark';
     $showWhenClick = 'Add to bookmark';
 } else {
     $showNowButton = 'Add to bookmark';
     $showWhenClick = 'Remove from bookmark';
-}	
+}
 ?>
-	
+
 <div id="formessage" style="color: red">
-    
+
 </div>
 <div>
     <h1>Ad Details</h1>
     <a href="<?= $this->url(array('controller' => 'test', 'action' => 'ad-list'), null, true) ?>" class="back_to_resaults"><?= $this->translate('back_to_resaults') ?></a>
- 
+
     <button class="add_to_bookmark">
-	<?php echo $showNowButton;?>
+        <?php echo $showNowButton; ?>
     </button>
-    
+
     <!-- AddToAny BEGIN -->
     <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
         <span class="ui-button-text">Share</span>
     </a>
-    
 
-    
+
+
     <script type="text/javascript">
-    a2a_config = {
-        linkname: 'Example Page 1',
-        linkurl: 'http://www.example.com/page_1.html'
-    };
+        a2a_config = {
+            linkname: 'Example Page 1',
+            linkurl: 'http://www.example.com/page_1.html'
+        };
     </script>
 
     <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
     <!-- AddToAny END -->
-  
+
     <?php if ($this->previous_and_next['previous']): ?>
-    <a href="<?= $this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $this->previous_and_next['previous']), null, true) ?>" class="previous">Previous</a>
+        <a href="<?= $this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $this->previous_and_next['previous']), null, true) ?>" class="previous">Previous</a>
     <?php else: ?>
-    <button disabled="disabled" class="previous">Previous</button>
+        <button disabled="disabled" class="previous">Previous</button>
     <?php endif; ?>
 
     <?php if ($this->previous_and_next['next']): ?>
-    <a href="<?= $this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $this->previous_and_next['next']), null, true) ?>" class="next">Next</a>
+        <a href="<?= $this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $this->previous_and_next['next']), null, true) ?>" class="next">Next</a>
     <?php else: ?>
-    <button disabled="disabled" class="next">Next</button>
+        <button disabled="disabled" class="next">Next</button>
     <?php endif; ?>
 
 </div>
@@ -52,14 +410,6 @@
 <div>
     <table width="100%">
         <tr>
-            <td>
-                <h2><?= $this->property->title ?></h2>
-                <b><?= $this->property_type[$this->property->property_type] ?></b> | <b><?= $this->property->size ?> m<sup>2</sup></b> | <b><?= $this->number_of_rooms1[$this->property->number_of_rooms1] ?> rooms</b>
-            </td>
-            <td width="20%">
-                <b><?= $this->property->price ?> &euro;</b><br />
-                <b>Urgent</b>
-            </td>
             <td width="20%">
                 <button class="apply"><?= $this->translate('apply'); ?></button>
             </td>
@@ -68,333 +418,185 @@
 </div>
 
 <div id="propertyTtabs" style="display:none;">
-  <ul>
-    <li><a href="#description"><?= $this->translate('description') ?></a></li>
-    <li><a href="#photos"><?= $this->translate('photos') ?></a></li>
-    <li><a href="#map"><?= $this->translate('map') ?></a></li>
-    <li><a href="#calendar"><?= $this->translate('calendar') ?></a></li>
-  </ul>
+    <ul>
+        <li><a href="#description"><?= $this->translate('description') ?></a></li>
+        <li><a href="#photos"><?= $this->translate('photos') ?></a></li>
+        <li><a href="#map"><?= $this->translate('map') ?></a></li>
+        <li><a href="#calendar"><?= $this->translate('calendar') ?></a></li>
+    </ul>
 
-  <div id="description">
-    <table width="100%">
-        <tr>
-            <td></td>
-            <td width="200px">
-                <ul  id="menu">
-                    <li>
-			 <?php if($this->subjects) :?>
-			    <a href="#">Report an issue</a>
-			    <ul class="create_issue">
-				<?php foreach ($this->subjects as $bubject) :?>
-				    <li>
-					<a class="menu_element" data-number="<?php echo $bubject->id;?>" href="#"><?php echo $bubject->subject_name;?></a>
-				    </li>
-				<?php endforeach;?>
-			    </ul>
-			<?php endif;?>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    </table>
-    
-      
-    <div id="dialog-form" title="">
-      <p class="validateTips">All form fields are required.</p>
-       <?php echo $this->formIssue;?>
+    <div id="description">
+        <table width="100%">
+            <tr>
+                <td></td>
+                <td width="200px">
+                    <ul  id="menu">
+                        <li>
+                            <?php if ($this->subjects) : ?>
+                                <a href="#">Report an issue</a>
+                                <ul class="create_issue">
+                                    <?php foreach ($this->subjects as $bubject) : ?>
+                                        <li>
+                                            <a class="menu_element" data-number="<?php echo $bubject->id; ?>" href="#"><?php echo $bubject->subject_name; ?></a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endif; ?>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
 
+
+        <div id="dialog-form" title="">
+            <p class="validateTips">All form fields are required.</p>
+            <?php echo $this->formIssue; ?>
+
+        </div>
+
+
+
+        <h2>Description</h2>
+
+        <table width="100%">
+            <tr valign="top">
+                <td>
+
+                </td>
+                <td width="33%">
+                    <div id="slider1">
+                        <?= $this->imageResize(400, 400, $this->property->main_photo, array('class' => 'slide')) ?>
+                        <?php foreach ($this->photos as $photo): ?>
+                            <?php if ($photo['link'] != $this->property->main_photo): ?>
+                                <?= $this->imageResize(400, 400, $photo['link'], array('class' => 'slide hidden')) ?>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
+                    <button id="previous_photo1">&lt;</button>
+                    <span id="slides_info"></span>
+                    <button id="next_photo1">&gt;</button>
+                    <hr />
+                    <button class="add_to_bookmark">
+                        <?php echo $showNowButton; ?>
+                    </button><br />
+                    <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
+                        <span class="ui-button-text">Share</span>
+                    </a>
+                    <script type="text/javascript">
+                        a2a.init('page');
+                    </script>
+                </td>
+            </tr>
+        </table>
     </div>
 
+    <div id="photos">
+        <h2>Photos</h2>
 
-
-    <h2>Description</h2>
-
-    <table width="100%">
-        <tr valign="top">
-            <td>
-                <table width="100%" border="1">
-                    <tr>
-                        <td width="50%"><?= $this->translate('localization') ?></td>
-                        <td><?= $this->property->postcode ?> - <?= $this->property->city ?></td>
-                    </tr>
-                    <tr>
-                        <td><?= $this->translate('price_include_charge') ?></td>
-                        <td><?= $this->property->price ?> &euro;</td>
-                    </tr>
-                    <tr>
-                        <td><?= $this->translate('charges') ?></td>
-                        <td><?= $this->property->amount_of_charges ?> &euro;</td>
-                    </tr>
-                    <tr>
-                        <td><?= $this->translate('property_type') ?></td>
-                        <td><?= $this->property_type[$this->property->property_type] ?></td>
-                    </tr>
-                    <tr>
-                        <td><?= $this->translate('is_furnished') ?>:</td>
-                        <td><?php if (1 == $this->property->is_furnished):  ?>Furnished<?php else: ?>Non<?= $this->translate('is_furnished') ?><?php endif; ?></td>
-                    </tr>
-                    <tr>
-                        <td><?= $this->translate('size') ?>:</td>
-                        <td><?= $this->property->size ?> m<sup>2</sup></td>
-                    </tr>
-                    <tr>
-                        <td><?= $this->translate('number_of_rooms1') ?>:</td>
-                        <td><?= $this->number_of_rooms1[$this->property->number_of_rooms1] ?> rooms</td>
-                    </tr>
-                    <tr>
-                        <td><?= $this->translate('floor') ?>:</td>
-                        <td><?= $this->property->floor ?></td>
-                    </tr>
-                    <tr>
-                        <td><?= $this->translate('availability') ?>:</td>
-                        <td>
-                            <?php if (date('Y-m-d') < $this->property->availability):?>
-                                <?= $this->property->availability ?>
-                            <?php else: ?>
-                                <?= $this->translate('right_now') ?>
+        <table width="100%">
+            <tr>
+                <td align="center" valign="center">
+                    <div id="slider2">
+                        <?= $this->imageResize(600, 600, $this->property->main_photo, array('class' => 'slide')) ?>
+                        <?php foreach ($this->photos as $photo): ?>
+                            <?php if ($photo['link'] != $this->property->main_photo): ?>
+                                <?= $this->imageResize(600, 600, $photo['link'], array('class' => 'slide hidden')) ?>
                             <?php endif; ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><?= $this->translate('metro') ?>:</td>
-                        <td>
-                            <? $metro = $this->property->getNearbyMetroStation() ?>
-                            <?= $metro ? $metro->name : '-' ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><?= $this->translate('decor') ?>:</td>
-                        <td>
-                            <?php $string = ''; ?>
-                            <?php foreach($this->values_groups['decor'] as $key => $value): ?>
-                                <?php if ($this->property->$key): ?>
-                                    <?php if (empty($string)): ?>
-                                        <?php  $string = $value; ?>
-                                    <?php else: ?>
-                                        <?php  $string .= ', ' . $value; ?>
-                                    <?php endif; ?>            
-                                <?php endif; ?>            
-                            <?php endforeach; ?>
-                            <?= $string ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><?= $this->translate('outhouse') ?>:</td>
-                        <td>
-                            <?php $string = ''; ?>
-                            <?php foreach($this->values_groups['outhouse'] as $key => $value): ?>
-                                <?php if ($this->property->$key): ?>
-                                    <?php if (empty($string)): ?>
-                                        <?php  $string = $value; ?>
-                                    <?php else: ?>
-                                        <?php  $string .= ', ' . $value; ?>
-                                    <?php endif; ?>            
-                                <?php endif; ?>            
-                            <?php endforeach; ?>
-                            <?= $string ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><?= $this->translate('outdoor_space') ?>:</td>
-                        <td>
-                            <?php $string = ''; ?>
-                            <?php foreach($this->values_groups['outdoor_space'] as $key => $value): ?>
-                                <?php if ($this->property->$key): ?>
-                                    <?php if (empty($string)): ?>
-                                        <?php  $string = $value; ?>
-                                    <?php else: ?>
-                                        <?php  $string .= ', ' . $value; ?>
-                                    <?php endif; ?>            
-                                <?php endif; ?>            
-                            <?php endforeach; ?>
-                            <?= $string ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><?= $this->translate('building') ?>:</td>
-                        <td>
-                            <?php $string = ''; ?>
-                            <?php foreach($this->values_groups['building'] as $key => $value): ?>
-                                <?php if ($this->property->$key): ?>
-                                    <?php if (empty($string)): ?>
-                                        <?php  $string = $value; ?>
-                                    <?php else: ?>
-                                        <?php  $string .= ', ' . $value; ?>
-                                    <?php endif; ?>            
-                                <?php endif; ?>            
-                            <?php endforeach; ?>
-                            <?= $string ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><?= $this->translate('heating_system') ?>:</td>
-                        <td>
-                            <?php $string = ''; ?>
-                            <?php foreach($this->values_groups['heating_system'] as $key => $value): ?>
-                                <?php if ($this->property->$key): ?>
-                                    <?php if (empty($string)): ?>
-                                        <?php  $string = $value; ?>
-                                    <?php else: ?>
-                                        <?php  $string .= ', ' . $value; ?>
-                                    <?php endif; ?>            
-                                <?php endif; ?>            
-                            <?php endforeach; ?>
-                            <?= $string ?>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-            <td width="33%">
-                <div id="slider1">
-                    <?= $this->imageResize(400, 400, $this->property->main_photo, array('class' => 'slide')) ?>
-                    <?php foreach ($this->photos as $photo): ?>
-                        <?php if ($photo['link'] != $this->property->main_photo): ?>
-                            <?= $this->imageResize(400, 400, $photo['link'], array('class' => 'slide hidden')) ?>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
-                <button id="previous_photo1">&lt;</button>
-                <span id="slides_info"></span>
-                <button id="next_photo1">&gt;</button>
-                <hr />
-                <button class="add_to_bookmark">
-		    <?php echo $showNowButton;?>
-		</button><br />
-                <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
-                    <span class="ui-button-text">Share</span>
-                </a>
-                <script type="text/javascript">
-                a2a.init('page');
-                </script>
-            </td>
-        </tr>
-    </table>
-  </div>
-  
-  <div id="photos">
-    <h2>Photos</h2>
+                        <?php endforeach; ?>
+                    </div>
+                    <button id="previous_photo2">&lt;</button>
+                    <button id="next_photo2">&gt;</button>
+                </td>
+                <td width="33%" valign="top">
+                    <div id="thumbs">
+                        <?php $goto = 0; ?>
+                        <a href="#" data-slide-index="<?= $goto ?>" class="goto"><?= $this->imageResize(100, 100, $this->property->main_photo) ?></a>
+                        <?php foreach ($this->photos as $photo): ?>
+                            <?php if ($photo['link'] != $this->property->main_photo): ?>
+                                <?php ++$goto; ?>
+                                <a href="#" data-slide-index="<?= $goto ?>" class="goto"><?= $this->imageResize(100, 100, $photo['link']) ?></a>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
+                    <hr />
+                    <button class="add_to_bookmark">
+                        <?php echo $showNowButton; ?>
+                    </button><br />
+                    <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
+                        <span class="ui-button-text">Share</span>
+                    </a>
+                    <script type="text/javascript">
+                        a2a.init('page');
+                    </script>
+                </td>
+            </tr>
+        </table>
+    </div>
 
-    <table width="100%">
-        <tr>
-            <td align="center" valign="center">
-                <div id="slider2">
-                    <?= $this->imageResize(600, 600, $this->property->main_photo, array('class' => 'slide')) ?>
-                    <?php foreach ($this->photos as $photo): ?>
-                        <?php if ($photo['link'] != $this->property->main_photo): ?>
-                            <?= $this->imageResize(600, 600, $photo['link'], array('class' => 'slide hidden')) ?>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
-                <button id="previous_photo2">&lt;</button>
-                <button id="next_photo2">&gt;</button>
-            </td>
-            <td width="33%" valign="top">
-                <div id="thumbs">
-                    <?php $goto = 0; ?>
-                    <a href="#" data-slide-index="<?= $goto ?>" class="goto"><?= $this->imageResize(100, 100, $this->property->main_photo) ?></a>
-                    <?php foreach ($this->photos as $photo): ?>
-                        <?php if ($photo['link'] != $this->property->main_photo): ?>
-                            <?php ++$goto; ?>
-                            <a href="#" data-slide-index="<?= $goto ?>" class="goto"><?= $this->imageResize(100, 100, $photo['link']) ?></a>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
-                <hr />
-                <button class="add_to_bookmark">
-		     <?php echo $showNowButton;?>
-		</button><br />
-                <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
-                    <span class="ui-button-text">Share</span>
-                </a>
-                <script type="text/javascript">
-                a2a.init('page');
-                </script>
-            </td>
-        </tr>
-    </table>
-  </div>
-  
-  <div id="map">
-    <h2>Map</h2>
+    <div id="map">
+        <h2>Map</h2>
 
-    <div id="map_canvas" style="width:600px; height:400px"></div>
+        <div id="map_canvas" style="width:600px; height:400px"></div>
 
-    <table width="100%">
-        <tr>
-            <td width="33%">Description</td>
-            <td width="33%">Center</td>
-            <td width="33%">
-                <button class="add_to_bookmark">
-		    <?php echo $showNowButton;?>
-		</button><br />
-                <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
-                    <span class="ui-button-text">Share</span>
-                </a>
-                <script type="text/javascript">
-                a2a.init('page');
-                </script>
-            </td>
-        </tr>
-    </table>
-  </div>
-  <div id="calendar">
-    <h2>Calendar</h2>
+        <table width="100%">
+            <tr>
+                <td width="33%">Description</td>
+                <td width="33%">Center</td>
+                <td width="33%">
+                    <button class="add_to_bookmark">
+                        <?php echo $showNowButton; ?>
+                    </button><br />
+                    <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
+                        <span class="ui-button-text">Share</span>
+                    </a>
+                    <script type="text/javascript">
+                        a2a.init('page');
+                    </script>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="calendar">
+        <h2>Calendar</h2>
 
-    <div id="datepicker"></div>
+        <div id="datepicker"></div>
 
-    <table width="100%">
-        <tr>
-            <td>Description</td>
-            <td width="33%">
-                <button class="add_to_bookmark">
-		    <?php echo $showNowButton;?>
-		</button><br />
-                <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
-                    <span class="ui-button-text">Share</span>
-                </a>
-                <script type="text/javascript">
-                a2a.init('page');
-                </script>
-            </td>
-        </tr>
-    </table>
-  </div>
+        <table width="100%">
+            <tr>
+                <td>Description</td>
+                <td width="33%">
+                    <button class="add_to_bookmark">
+                        <?php echo $showNowButton; ?>
+                    </button><br />
+                    <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
+                        <span class="ui-button-text">Share</span>
+                    </a>
+                    <script type="text/javascript">
+                        a2a.init('page');
+                    </script>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
-
-<div>
-    <h3>Similar Properties</h3>
-
-    <table width="100%" border="1">
-        <? foreach ($this->similarProperties as $property) : ?>
-        <tr>
-            <td width="110px" height="110px" align="center" valign="center"><?= $this->imageResize(100, 100, $property->main_photo) ?></td>
-            <td width="300px" valign="top"><h3><a href="/property/detail/item/<?= $property->id ?>"><?= $this->escape($property->title) ?></a></h3></td>
-            <td width="120px">
-               <h3><?= $property->getPrice() ?> &euro;</h3>
-               <?= $property->size ?> m<sup>2</sup><br />
-               <?= $property->number_of_rooms1 ?> rooms
-            </td>
-        </tr>
-        <? endforeach; ?>
-    </table>  
-</div>
-
+*/ ?>
 <?php
-    //this is translated data fro js message
-    $errorMgg1 = $this->translate('not_valid_text');
- 
-    $js  = "window.renameBookmarkBubbon = '" . $showWhenClick . "';";   
-    $js .= "window.errorMsg1 = '" .$errorMgg1. "';";  
-    $js .= "var SelectedDates = {};\n";
-    //this is for ajax i need to know current id
-    $js .="window.currentpropertyId = " . $this->currentPropertyId . ";"; 
+//this is translated data fro js message
+$errorMgg1 = $this->translate('not_valid_text');
 
-    foreach($this->visits as $visit) {
-        $date = $this->jsDate($visit->availability);
-        $js .= "SelectedDates[new Date('{$date}')] = new Date('{$date}');\n";
-    }
-        
-    $function = "$(function() {
+$js = "window.renameBookmarkBubbon = '" . $showWhenClick . "';";
+$js .= "window.errorMsg1 = '" . $errorMgg1 . "';";
+$js .= "var SelectedDates = {};\n";
+//this is for ajax i need to know current id
+$js .="window.currentpropertyId = " . $this->currentPropertyId . ";";
+
+foreach ($this->visits as $visit) {
+    $date = $this->jsDate($visit->availability);
+    $js .= "SelectedDates[new Date('{$date}')] = new Date('{$date}');\n";
+}
+
+$function = "$(function() {
 	// this is var for all buttons when we use ajax
 	// we can add some parammeters there and use it in file js/site/propertyPage.js
 	var additionParameter = new Object();
@@ -555,15 +757,13 @@
         }    
     });";
 
-    $this->jQuery()->addOnLoad($function)
+$this->jQuery()->addOnLoad($function)
         ->addStylesheet('/css/ui/jquery-ui-1.10.3.css')
         ->addStylesheet('/css/datepicker.css')
         ->addJavascriptFile("http://maps.googleapis.com/maps/api/js?key={$this->google_api_key}&sensor=false")
         ->addJavascriptFile("/js/lodash.js")
         ->addJavascriptFile("/js/bean.min.js")
         ->addJavascriptFile("/js/revolver.min.js")
-	->addJavascriptFile("/js/site/propertyPage.js")
-	->addJavascriptFile("/js/site/modalIssueWindow.js");
-
+        ->addJavascriptFile("/js/site/propertyPage.js")
+        ->addJavascriptFile("/js/site/modalIssueWindow.js");
 ?>
-

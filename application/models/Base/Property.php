@@ -45,6 +45,9 @@
  * @property integer $is_old_building
  * @property integer $is_very_old_building
  * @property integer $is_renove
+ * @property integer $is_guardian
+ * @property integer $is_new
+ * @property integer $is_cave
  * @property integer $number_of_bathrooms
  * @property integer $is_individuel
  * @property integer $is_central
@@ -243,6 +246,18 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'length' => '1',
              ));
         $this->hasColumn('is_renove', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_guardian', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_new', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
+             ));
+        $this->hasColumn('is_cave', 'integer', 1, array(
              'type' => 'integer',
              'length' => '1',
              ));
