@@ -102,6 +102,32 @@ class ImageController extends Zend_Controller_Action
         exit();
     }
 
+    private static function _getCropDelta($oldWidth, $oldHeight, $newWidth, $newHeight) {
+        $src_aspect  = $oldHeight/$oldWidth;
+        $dest_aspect = $newHeight/$newWidth;
+
+        if ($dest_aspect > $src_aspect) {
+            $scaleK = $newHeight / $oldHeight;
+        } else {
+            $scaleK = $newWidth / $oldWidth;
+        }
+
+        $x_delta = ($oldWidth - ($newWidth / $scaleK));
+        $y_delta = ($oldHeight - ($newHeight / $scaleK));
+
+        $oldWidth = round($oldWidth - $x_delta);
+        $oldHeight = round($oldHeight - $y_delta);
+
+        $x_delta = round($x_delta / 2);
+        $y_delta = round($y_delta / 2);
+
+        if ($dest_aspect < $src_aspect) {
+            $y_delta = 0;
+        }
+
+        return array($x_delta, $y_delta, $oldWidth, $oldHeight);
+    }
+
     private static function resize($sourceImage, $destinationImage, $width, $height)
     {
         $image_info = getimagesize($sourceImage);
@@ -114,7 +140,7 @@ class ImageController extends Zend_Controller_Action
 
         $old_height = $image_info[0];
         $old_width = $image_info[1];
-                                          
+/*
 		if (($old_height  >= $old_width) && ($old_height > $width)) {
             $new_height = (float)$width;                       
             $new_width = (int)(($new_height/$old_height ) * $old_width);
@@ -124,11 +150,17 @@ class ImageController extends Zend_Controller_Action
         } else {
 			$new_height = $old_height;
 			$new_width = $old_width;
-		}		                                           
-        
+		}
+*/
+
+        $new_width  = $width;
+        $new_height = $height;
+        list($x_delta, $y_delta, $old_width, $old_height) = self::_getCropDelta($old_width, $old_height, $new_width, $new_height);
+
         $new_image = imagecreatetruecolor($new_height, $new_width);
 
-        if (!imagecopyresampled($new_image, $image, 0, 0, 0, 0, $new_height, $new_width, $old_height, $old_width)) return false;
+        //if (!imagecopyresampled($new_image, $image, 0, 0, 0, 0, $new_height, $new_width, $old_height, $old_width)) return false;
+        if (!imagecopyresampled($new_image, $image, 0, 0, $x_delta, $y_delta, $new_height, $new_width, $old_height, $old_width)) return false;
 		
         return self::saveImage($new_image, $destinationImage, $image_info[2]);
     }

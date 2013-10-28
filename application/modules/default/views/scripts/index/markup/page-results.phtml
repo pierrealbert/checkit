@@ -70,6 +70,7 @@
 						<div class="box-price-btn">
 							<a href="#" class="btn-input-gray-dark">200 €</a>
 							<a href="#" class="btn-input-gray-dark">1500 €</a>
+							<div class="slider-range"></div>
 						</div>
 					</div>
 					<div class="grid grid-dark grid-block-search">
@@ -515,3 +516,22 @@
 		</div>
 	</div>
 </main>
+
+<script type="text/javascript">
+$(function(){
+	$('.slider-range').slider({
+		range: true,
+		min: 0,
+		max: 500,
+		values: [ 75, 300 ]
+	});
+
+	$('.title-name .btn-up, .title-name .btn-down').click(function(e){
+		e.preventDefault();
+		var $this = $(this);
+		var hide = $this.hasClass('btn-up');
+		$(this).closest('.grid-block-search').find('form')[hide ? 'slideUp' : 'slideDown']();
+		$this.removeClass('btn-up btn-down').addClass(hide ? 'btn-down' : 'btn-up');
+	});
+});
+</script>

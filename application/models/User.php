@@ -55,6 +55,110 @@ class Model_User extends Model_Base_User
                 ->fetchOne();
     }    
     
+    public function searchesCount()
+    {
+        $table = Model_SearchTable::getInstance();
+        return $table->createQuery()
+                ->andWhere('user_id = ?', $this->id)
+                ->andWhere('is_temp = ?', '0')
+                ->count();
+    }   
+    
+    public function getLatestSearches($limit = 5)
+    {
+        $table = Model_SearchTable::getInstance();
+        return $table->createQuery()
+                ->andWhere('user_id = ?', $this->id)
+                ->andWhere('is_temp = ?', '0')
+                ->orderBy('created_at DESC , name  ASC')
+                ->limit($limit)
+                ->execute();
+    }     
+    
+    public function getLatestApplications($limit = 5)
+    {
+        $table = Model_PropertyApplicationTable::getInstance();
+        return $table->createQuery()
+                ->andWhere('visitor_id = ?', $this->id)
+                ->orderBy('updated_at DESC, created_at DESC')
+                ->limit($limit)
+                ->execute();
+    }
+
+    public function getApplications()
+    {
+        $table = Model_PropertyApplicationTable::getInstance();
+        return $table->createQuery()
+            ->andWhere('pa.visitor_id=?', $this->id)
+            ->orderBy('pa.updated_at DESC, pa.created_at DESC')
+            ->execute();
+    }
+
+    public function getAcceptedAppsCount()
+    {
+        $table = Model_PropertyApplicationTable::getInstance();
+        return $table->createQuery()
+            ->andWhere('pa.visitor_id=?', $this->id)
+            ->andWhere('pa.is_declined=?', 0)
+            ->andWhere('pa.is_accepted=?', 1)
+            ->orderBy('pa.updated_at DESC, pa.created_at DESC')
+            ->execute()
+            ->count();
+    }
+
+    public function getDeclinedAppsCount()
+    {
+        $table = Model_PropertyApplicationTable::getInstance();
+        return $table->createQuery()
+            ->andWhere('pa.visitor_id=?', $this->id)
+            ->andWhere('pa.is_declined=?', 1)
+            ->andWhere('pa.is_accepted=?', 0)
+            ->orderBy('pa.updated_at DESC, pa.created_at DESC')
+            ->execute()
+            ->count();
+    }
+
+    public function getDeclinedApplications()
+    {
+        $table = Model_PropertyApplicationTable::getInstance();
+        return $table->createQuery()
+            ->andWhere('pa.visitor_id=?', $this->id)
+            ->andWhere('pa.is_declined=?', 1)
+            ->andWhere('pa.is_accepted=?', 0)
+            ->orderBy('pa.updated_at DESC, pa.created_at DESC')
+            ->execute();
+    }
+    
+    public function getApplicationsCount()
+    {
+        $table = Model_PropertyApplicationTable::getInstance();
+        return $table->createQuery()
+                ->andWhere('visitor_id = ?', $this->id)
+                ->count();
+    }
+    
+    public function getResidents()
+    {
+        $table = Model_UserResidentTable::getInstance();
+        return $table->createQuery()
+                ->andWhere('user_id = ?', $this->id)
+                ->orderBy('is_primary  DESC , id  DESC')
+                ->execute();
+    }       
+    
+    public function getFavorites($limit = 2)
+    {
+        $table = Model_PropertyTable::getInstance();
+        return $table->createQuery('p')
+      
+                ->innerJoin('p.Favorite as f')
+                ->andWhere('f.user_id = ?', $this->id)
+                ->andWhere('p.is_published = ?', 1)
+                ->orderBy('p.updated_at  DESC , id  DESC')
+                ->limit($limit)
+                ->execute();
+    }           
+    
     public function hasResidents()
     {
         $table = Model_UserResidentTable::getInstance();
@@ -143,7 +247,7 @@ class Model_User extends Model_Base_User
      */
     public function setHash(Ext_Auth_Hash_Interface $hash)
     {
-        $this->_authHash = $authHash;
+        $this->_authHash = $hash;
         return $this;
     }
     

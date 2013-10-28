@@ -44,32 +44,70 @@
 			<div class="text">l’immo<br>repensé</div>
 		</div>
 		<a href="#" id="promo-video" class="btn btn-small btn-red">Voir la vidéo</a>
-		<form action="" method="post">
+
+        <?php
+            $regionBlocks = array();
+            foreach (Model_RegionBlockTable::getInstance()->getAllWithDiscricts() as $region) {
+                $regionBlocks[] = array('id' => $region->id, 'value' => $region->RegionDistrict->name . ' - ' . $region->name);
+            }
+        ?>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('a#btnSearch' ).click(function() {
+                    $('form[name="searchForm"]').submit();
+                    return false;
+                });
+
+                var availableBlocks = <?=json_encode($regionBlocks)?>;
+                for (var i=0; i<availableBlocks.length-1; i++) {
+                    availableBlocks[i].value = $('<div />').html(availableBlocks[i].value).text();
+                }
+
+                $("input[name='region_block_input']").autocomplete({
+                    source: availableBlocks,
+                    minLength: 0,
+                    select: function(event, ui) {
+                        $('input#region_block_id').val(ui.item.id);
+                    },
+                    change: function(event, ui) {
+                        $('input#region_block_id').val(ui.item.id);
+                    },
+                    open: function(event, ui) {
+                        $('ul.ui-autocomplete').css('width', '355px');
+                        $('ul.ui-autocomplete').css('max-height', '160px');
+                    }
+                });
+
+            });
+        </script>
+
+		<form name="searchForm" action="<?=$this->form->getAction()?>" method="post">
 			<div id="promo-search" class="grid grid-dark">
-				<div class="promo-search-left">
+                <div class="promo-search-left">
 					<h2>Chercher une location</h2>
 					<fieldset class="promo-search-location">
 						<label>Localisation</label>
-						<input type="text" placeholder="Où désirez-vous louer?">
+						<input type="text" name="region_block_input" placeholder="Où désirez-vous louer?">
+                        <?=$this->form->getElement('region_block_id')?>
 						<a href="#location" class="btn btn-small btn-dark icon-location"></a>
 					</fieldset>
 					<fieldset class="promo-search-budget-surface">
 						<div>
 							<label>Budget maximum</label>
-							<input type="text" placeholder="Budget max. (en €)">
+                            <?=$this->form->getElement('max_budget')?>
 						</div>
 						<div>
 							<label>Surface minimum</label>
-							<input type="text" placeholder="Surface min. (en m²)">
+                            <?=$this->form->getElement('min_size')?>
 						</div>
 					</fieldset>
 					<fieldset>
-						<a href="#" id="add-criteria" class="btn btn-small btn-dark">Plus de critères</a>
+						<a href="<?= $this->url(array('controller' => 'search', 'action' => 'standard'), null, true) ?>" id="add-criteria" class="btn btn-small btn-dark">Plus de critères</a>
 					</fieldset>
 				</div>
 				<div class="promo-search-right">
 					<div class="promo-search-buttons">
-						<a href="#" class="btn btn-blue">Recherche rapide</a>
+						<a href="#" class="btn btn-blue" id="btnSearch">Recherche rapide</a>
 						<span class="separator">— ou —</span>
 						<div class="cf promo-search-buttons-group">
 							<a class="btn btn-red icon-metro" href="<?= $this->url(array('controller' => 'search', 'action' => 'metro'), null, true) ?>">par métro</a>

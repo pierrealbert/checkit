@@ -5,6 +5,9 @@ class IndexController extends Zend_Controller_Action
     public function indexAction()
     {
         $this->view->homeHeader = true;
+
+        $form = new Form_SearchMain();
+        $this->view->form = $form;
     }
 
 	public function markupAction()

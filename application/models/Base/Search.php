@@ -9,6 +9,7 @@
  * @property integer $user_id
  * @property enum $search_type
  * @property boolean $is_temp
+ * @property integer $found_items
  * @property string $name
  * @property text $conditions
  * @property Model_User $User
@@ -49,6 +50,11 @@ abstract class Model_Base_Search extends Ext_Doctrine_Record
              'type' => 'boolean',
              'default' => true,
              ));
+        $this->hasColumn('found_items', 'integer', 4, array(
+             'type' => 'integer',
+             'default' => 0,
+             'length' => '4',
+             ));
         $this->hasColumn('name', 'string', 255, array(
              'type' => 'string',
              'size' => 255,
@@ -66,5 +72,17 @@ abstract class Model_Base_Search extends Ext_Doctrine_Record
              'local' => 'user_id',
              'foreign' => 'id',
              'onDelete' => 'cascade'));
+
+        $timestampable0 = new Doctrine_Template_Timestampable(array(
+             'created' => 
+             array(
+              'name' => 'created_at',
+             ),
+             'updated' => 
+             array(
+              'name' => 'updated_at',
+             ),
+             ));
+        $this->actAs($timestampable0);
     }
 }

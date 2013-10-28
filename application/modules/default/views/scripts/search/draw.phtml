@@ -1,27 +1,9 @@
 <?php
-$fields = $this->form->getElements();
+$this->headLink()->appendStylesheet('/css/ui/jquery-ui-1.10.3.css');
+$this->headScript()->appendFile('/assets/js/search_form.js');
 ?>
 <script type="text/javascript">
-    var initialRadioValues = new Array();
     $(document).ready(function(){
-        var arrIndx = 0;
-        $('form[name="searchForm"]').find('input[type="radio"]:checked').each(function() {
-            initialRadioValues[arrIndx++] = $(this).attr('id');
-        });
-        $('form[name="searchForm"]').find('input[type="checkbox"]:checked').each(function() {
-            initialRadioValues[arrIndx++] = $(this).attr('id');
-        });
-
-        $('input.btn-tous').click(function() {
-            $(this).parent().find('input[type="radio"]:checked').prop('checked', false);
-            $(this).parent().find('input[type="checkbox"]:checked').prop('checked', false);
-            for (var i=0; i<initialRadioValues.length; i++) {
-                if ($(this).parent().find('input#'+initialRadioValues[i]).length) {
-                    $('input#'+initialRadioValues[i]).prop('checked', true);
-                }
-            }
-        });
-
         $('a#btnSearch1, a#btnSearch2' ).click(function() {
             $('form[name="searchForm"]').submit();
             return false;
@@ -44,7 +26,7 @@ $fields = $this->form->getElements();
                     <li><a href="<?=$this->url(array('controller' => 'search', 'action' => 'map'), false, true)?>" class="menu-icons icon-carte">Recherche<br> par carte</a></li>
                 </ul>
             </div>
-            <form action="<?=$this->form->getAction()?>" name="searchForm" method="POST">
+            <form action="<?=$this->form->getAction()?>" name="searchForm" id="form-search-draw" method="POST">
             <div class="search-box">
                 <div class="search-left">
                     <div class="search-budget">
@@ -79,58 +61,32 @@ $fields = $this->form->getElements();
                 </p>
             </div>
             <div class="box-carte">
-                <img src="/./assets/images/dessin-carte.png">
+                <?= $this->googleMap(48.857261, 2.346611, array('width' => 1001, 'height' => 651, 'margin' => 0), array('zoom' => 13, 'zoomControl' => 0, 'scaleControl' => 0, 'streetViewControl' => 0, 'panControl' => 0), "initSearchDraw(map)") ?>
                 <div class="btn-plus-minus">
                     <a href="" class="btn btn-gray-lite btn-plus"></a>
                     <a href="" class="btn btn-gray-lite btn-minus"></a>
                 </div>
                 <div class="btn-carte-nav">
                     <a href="#" class="btn btn-blue" id="btnSearch1">Rechercher</a>
-                    <a href="" class="btn btn-dark">Effacer le dessin</a>
+                    <a href="#" class="btn btn-dark clear-polygon">Effacer le dessin</a>
                 </div>
             </div>
             <div class="box-btn-search">
-                <a href="" class="btn btn-gray">Effacer le dessin</a>
+                <a href="#" class="btn btn-gray clear-polygon">Effacer le dessin</a>
                 <a href="" class="btn btn-red btn-sauv">Sauvegarder</a>
                 <a href="#" class="btn btn-blue" id="btnSearch2">Rechercher</a>
             </div>
         </div>
         <div class="grid">
-            <div class="grid-full">
+            <div class="grid-full example-regions">
                 <h2 class="gray txt-line-metro">Choisir parmi nos sélections</h2>
                 <p>Sélectionnez l’un des dessins que nous avons tracés pour vous.</p>
+                <?php foreach ($this->exampleRegions as $index => $exampleRegion): ?>
                 <div class="box-place">
-                    <label>Le Marais</label>
-                    <a href="#" class="btn btn-gray btn-carte1"></a>
+                    <label><?= $exampleRegion['name']?></label>
+                    <a href="#" class="btn btn-gray btn-carte<?= $index + 1 ?>" data-region-path="<?= $exampleRegion['path'] ?>"></a>
                 </div>
-                <div class="box-place">
-                    <label>Barbès</label>
-                    <a href="#" class="btn btn-gray btn-carte2"></a>
-                </div>
-                <div class="box-place">
-                    <label>Paris Ouest</label>
-                    <a href="#" class="btn btn-gray btn-carte3"></a>
-                </div>
-                <div class="box-place">
-                    <label>Les Ambassades</label>
-                    <a href="#" class="btn btn-gray btn-carte4"></a>
-                </div>
-                <div class="box-place">
-                    <label>Paris Est</label>
-                    <a href="#" class="btn btn-gray btn-carte5"></a>
-                </div>
-                <div class="box-place">
-                    <label>Rive Gauche</label>
-                    <a href="#" class="btn btn-gray btn-carte6"></a>
-                </div>
-                <div class="box-place">
-                    <label>Périphérique Est</label>
-                    <a href="#" class="btn btn-gray btn-carte7"></a>
-                </div>
-                <div class="box-place">
-                    <label>Rive Droite</label>
-                    <a href="#" class="btn btn-gray btn-carte8"></a>
-                </div>
+                <?php endforeach ?>
             </div>
         </div>
 

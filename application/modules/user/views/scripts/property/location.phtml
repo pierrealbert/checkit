@@ -1,0 +1,98 @@
+<?php
+$this->headLink()->appendStylesheet('/css/ui/jquery-ui-1.10.3.css');
+$this->headLink()->appendStylesheet('/assets/css/property_form.css');
+$this->headScript()->appendFile('/assets/js/property_form.js');
+?>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('input#availability_select_date').click(function() {
+            if ($(this).prop('checked')) {
+                $('div.date-picker-availability-location').show();
+                $('input#availability').focus();
+            }
+        });
+        $('input#availability_select_now').click(function() {
+            if ($(this).prop('checked')) {
+                $('div.date-picker-availability-location').hide();
+                $('input#availability').val('');
+            }
+        });
+
+        if ($('input#availability').val('') != '') {
+            $('input#availability_select_date').prop('checked', true);
+            $('div.date-picker-availability-location').show();
+            $('input#availability').val($('input#availability').attr('value'));
+        } else {
+            if ($('input#availability_select_date').prop('checked')) {
+                $('div.date-picker-availability-location').show();
+            }
+        }
+    });
+</script>
+
+<div id="publier" class="grid">
+    <div class="left">
+        <?= $this->partial('property/_partials/left-dashboard.phtml', $this->getVars()) ?>
+    </div>
+    <div class="right">
+        <form id="location-form" method="post" action="">
+        <div id="content-step-1" class="progress-content">
+            <div class="step-title">
+                <h1>Location</h1>
+            </div>
+            <div class="block-grid grid-inset">
+                <fieldset>                    
+                    <?= $this->form->title ?>
+                    <span class="helper">36 caractères restants</span>
+                    <p class="description">Titre de votre annonce tel qu’il va être vu par tous.<br>Décrivez le plus fidèlement possible ce que vous offrez.</p>
+                </fieldset>
+            </div>
+            <div class="block-grid grid-inset">
+                <div class="left">
+                    <fieldset>
+                        <?= $this->form->amount_of_rent_excluding_charges ?>
+                        <p class="description">Indiquez les montants du loyer demandé et des charges.<br>Ceux-ci pourront être modifiés à tout moment.</p>
+                    </fieldset>
+                </div>
+                <div class="left">
+                    <fieldset>
+                        <?= $this->form->amount_of_charges ?>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="block-grid grid-inset">
+                <fieldset>
+                    <?= $this->form->is_furnished ?>
+                </fieldset>
+            </div>
+            <div class="block-grid grid-inset">
+                <fieldset>
+                    <?= $this->form->lease_duration ?>
+                </fieldset>
+            </div>
+            <div class="block-grid grid-inset">
+                <fieldset>
+                    <?= $this->form->deposit ?>
+                </fieldset>
+            </div>
+            <div class="block-grid grid-inset">
+                <fieldset>
+                    <?=$this->form->getElement('availability_select')?>
+                    <div class="date-picker-availability-location">
+                        <?=$this->form->getElement('availability')?>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="progress-buttons">
+                <a id="submit-form" class="btn btn-blue btn-arrow-next right" href="#">Enregistrer et continuer</a>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#submit-form').click(function (event) {
+        event.preventDefault();
+        $('#location-form').submit();
+    });
+</script>

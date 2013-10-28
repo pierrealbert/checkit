@@ -7,10 +7,12 @@
  * 
  * @property integer $id
  * @property integer $user_resident_id
+ * @property integer $user_resident_garant_id
  * @property string $file
  * @property string $original_name
  * @property enum $type
  * @property Model_UserResident $UserResident
+ * @property Model_UserResidentGarant $UserResidentGarant
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -29,6 +31,10 @@ abstract class Model_Base_UserResidentDocument extends Ext_Doctrine_Record
              'length' => '4',
              ));
         $this->hasColumn('user_resident_id', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => '4',
+             ));
+        $this->hasColumn('user_resident_garant_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => '4',
              ));
@@ -64,6 +70,11 @@ abstract class Model_Base_UserResidentDocument extends Ext_Doctrine_Record
         parent::setUp();
         $this->hasOne('Model_UserResident as UserResident', array(
              'local' => 'user_resident_id',
+             'foreign' => 'id',
+             'onDelete' => 'cascade'));
+
+        $this->hasOne('Model_UserResidentGarant as UserResidentGarant', array(
+             'local' => 'user_resident_garant_id',
              'foreign' => 'id',
              'onDelete' => 'cascade'));
     }

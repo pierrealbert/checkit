@@ -8,50 +8,53 @@ function initSearchMap(map, regions) {
 
     // Default options for not selected and selected polygons. Don't use fillOpacity here.
     var defaultPolygonOptions = {'RegionCity': {strokeColor: "#FF0000",
-                                                strokeOpacity: 0.8,
-                                                strokeWeight: 2,
-                                                fillColor: "#FFAAAA",
-                                                fillOpacity: 0.35},
-        
-                                 'RegionDistrict': {strokeColor: "#FF0000",
-                                                    strokeOpacity: 0.8,
-                                                    strokeWeight: 2,
-                                                    fillColor: "#FFAAAA",
-                                                    fillOpacity: 0.35},
-                                 
-                                 'RegionBlock': {strokeColor: "#FF0000",
-                                                 strokeOpacity: 0.8,
-                                                 strokeWeight: 2,
-                                                 fillColor: "#FFAAAA",
-                                                 fillOpacity: 0.35},
-                                 
-                                 'RegionBlock_selected': {strokeColor: "#FF0000",
-                                                          strokeOpacity: 0.8,
-                                                          strokeWeight: 0.5,
-                                                          fillColor: "#FF0000",
-                                                          fillOpacity: 0.35}}
-    function countryMode () {
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#FFAAAA",
+            fillOpacity: 0.35},
+        'RegionDistrict': {strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#FFAAAA",
+            fillOpacity: 0.35},
+        'RegionBlock': {strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#FFAAAA",
+            fillOpacity: 0.35},
+        'RegionBlock_selected': {strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 0.5,
+            fillColor: "#FF0000",
+            fillOpacity: 0.35}}
+    function countryMode() {
+        var currentRegion = regions[map.customParams.currentRegionId];
+        if (currentRegion && currentRegion.type == 'RegionDistrict') {
+            cityMode(currentRegion.region_city_id);
+        }
         for (region_id in regions) {
             var region = regions[region_id];
-            
+
             // clear all click listeners
             google.maps.event.clearListeners(region.polygon, 'click');
 
             // set default options for each polygon
             setRegionDefaultOptions(region);
-            
+
             if (region.type == 'RegionCity') {
                 // put cities on the map
                 region.polygon.setMap(map);
                 // add click listener to cities
-                google.maps.event.addListener(region.polygon, 'click', function () {cityMode(this.customParams.regionId)});
+                google.maps.event.addListener(region.polygon, 'click', function() {
+                    cityMode(this.customParams.regionId)
+                });
             } else if ($.inArray(parseInt(region.id), getSelectedRegions()) > -1) {
                 // put on the map selected polygon
                 region.polygon.setMap(map);
                 // add same click event for this polygon as for city one
                 // and we assume that only blocks can be selected
                 if (region.region_district_id) {
-                    google.maps.event.addListener(region.polygon, 'click', function () {
+                    google.maps.event.addListener(region.polygon, 'click', function() {
                         var selectedRegion = regions[this.customParams.regionId];
                         var districtRegion = regions[this.customParams.region_district_id];
                         districtMode(districtRegion.region_city_id);
@@ -64,20 +67,21 @@ function initSearchMap(map, regions) {
         }
         map.setZoom(10); // debug value cause not very clear how it should work
         map.setOptions({minZoom: null,
-                        scaleControl: false,
-                        zoomControl: false,
-                        scrollwheel: false});
-    };
+            scaleControl: false,
+            zoomControl: false,
+            scrollwheel: false});
+    }
+    ;
 
-    function cityMode (regionCityId) {
+    function cityMode(regionCityId) {
         map.setOptions({minZoom: null,
-                        scaleControl: false,
-                        zoomControl: false,
-                        scrollwheel: false});
+            scaleControl: false,
+            zoomControl: false,
+            scrollwheel: false});
         map.customParams.currentRegionId = regionCityId;
         for (region_id in regions) {
             var region = regions[region_id];
-            
+
             // clear all click listeners
             google.maps.event.clearListeners(region.polygon, 'click');
 
@@ -88,7 +92,9 @@ function initSearchMap(map, regions) {
                 // put on the map districts which lie in the city
                 region.polygon.setMap(map);
                 // add click listener to these districts
-                google.maps.event.addListener(region.polygon, 'click', function () {districtMode(this.customParams.regionId)});
+                google.maps.event.addListener(region.polygon, 'click', function() {
+                    districtMode(this.customParams.regionId)
+                });
             } else if (region.id == regionCityId) {
                 // alert ('City: ' + region.name);
                 // zoom to polygon
@@ -101,7 +107,7 @@ function initSearchMap(map, regions) {
                 // add same click event for this polygon as for district one
                 // and we assume that only blocks can be selected
                 if (region.region_district_id) {
-                    google.maps.event.addListener(region.polygon, 'click', function () {
+                    google.maps.event.addListener(region.polygon, 'click', function() {
                         var selectedRegion = regions[this.customParams.regionId];
                         districtMode(selectedRegion.region_district_id);
                     });
@@ -112,12 +118,12 @@ function initSearchMap(map, regions) {
             }
         }
     }
-    
-    function districtMode (regionDistrictId) {
+
+    function districtMode(regionDistrictId) {
         map.customParams.currentRegionId = regionDistrictId;
         for (region_id in regions) {
             var region = regions[region_id];
-            
+
             // clear all click listeners
             google.maps.event.clearListeners(region.polygon, 'click');
 
@@ -128,49 +134,51 @@ function initSearchMap(map, regions) {
                 // put on the map blocks which lie in the distriction
                 region.polygon.setMap(map);
                 // add click listener to these blocks
-                google.maps.event.addListener(region.polygon, 'click', function () {selectBlock(this.customParams.regionId)});
+                google.maps.event.addListener(region.polygon, 'click', function() {
+                    selectBlock(this.customParams.regionId)
+                });
             } else if (region.id == regionDistrictId) {
                 // alert ('District: ' + region.name);
                 // zoom to polygon
                 map.fitBounds(region.polygon.customParams.bounds);
                 // remove polygon from the map
                 region.polygon.setMap(null);
-            // If want to show all selected polygons on this mode uncomment next 5 lines
-            // } else if ($.inArray(parseInt(region.id), getSelectedRegions()) > -1) {
-            //     // put on the map selected polygon
-            //     region.polygon.setMap(map);
+                // If want to show all selected polygons on this mode uncomment next 5 lines
+                // } else if ($.inArray(parseInt(region.id), getSelectedRegions()) > -1) {
+                //     // put on the map selected polygon
+                //     region.polygon.setMap(map);
             } else {
                 // remove all other not selected regions from the map
                 region.polygon.setMap(null);
             }
         }
         map.setOptions({minZoom: map.getZoom(),
-                        scaleControl: true,
-                        zoomControl: true,
-                        scrollwheel: true});
+            scaleControl: true,
+            zoomControl: true,
+            scrollwheel: true});
     }
 
-    function selectBlock (regionBlockId) {
+    function selectBlock(regionBlockId) {
         regionToggleSelection(regionBlockId);
     }
 
-    function getSelectedRegions () {
+    function getSelectedRegions() {
         return $.parseJSON('[' + $('#regions_selected').val() + ']');
     }
 
-    function setSelectedRegions (regionIdsArray) {
+    function setSelectedRegions(regionIdsArray) {
         $('#regions_selected').val(regionIdsArray);
         $('#regions_selected').change();
     }
 
-    function setRegionDefaultOptions (region) {
+    function setRegionDefaultOptions(region) {
         region.polygon.setOptions(defaultPolygonOptions[region.type]);
         if (region.type == 'RegionBlock' && $.inArray(parseInt(region.id), getSelectedRegions()) > -1) {
             region.polygon.setOptions(defaultPolygonOptions['RegionBlock_selected']);
         }
     }
-    
-    function regionToggleSelection (regionId) {
+
+    function regionToggleSelection(regionId) {
         regionId = parseInt(regionId);
         var selectedRegions = getSelectedRegions();
         var indexInSelected = $.inArray(regionId, selectedRegions);
@@ -183,24 +191,34 @@ function initSearchMap(map, regions) {
         }
         setSelectedRegions(selectedRegions);
     }
-        
-    $('#regions_back').click(function () {
+
+    $('.btn-return').click(function() {
         var currentRegion = regions[map.customParams.currentRegionId];
         if (currentRegion.type == 'RegionDistrict') {
             cityMode(currentRegion.region_city_id);
         } else if (currentRegion.type == 'RegionCity') {
             countryMode();
         }
+        return false;
+    })
+    $('.btn-effacer').click(function() {
+        for (regionId in regions) {
+            regions[regionId].polygon.setOptions(defaultPolygonOptions['RegionBlock']);
+        }
+        setSelectedRegions('');
+        countryMode();
+        return false;
     })
 
-    $('#regions_selected').change(function () {
+    $('#regions_selected').change(function() {
         $(':checkbox.region').prop('checked', false);
         var ids = $.parseJSON('[' + $(this).val() + ']');
-        $.each(ids, function (index, selectedRegionId) {
+        $.each(ids, function(index, selectedRegionId) {
             $(':checkbox.region.region' + selectedRegionId).prop('checked', true);
+            $(':checkbox.region.region' + selectedRegionId).change();
         })
     })
-    $(':checkbox.region').click(function () {
+    $(':checkbox.region').click(function() {
         var region_id = $(this).attr('name').substring(6);
         districtMode(regions[region_id].region_district_id);
         regionToggleSelection(region_id);
@@ -221,7 +239,7 @@ function initSearchMap(map, regions) {
         });
         // define custom params for polygon described in the begininng of the initSearchMap function
         region.polygon.customParams = {regionId: region.id,
-                                         bounds: bounds};
+            bounds: bounds};
     }
 
     countryMode(null);
@@ -233,14 +251,14 @@ function initSearchStandard() {
             $('input[name=availability]').val('');
         }
     });
-    $('input[name=availability]').change(function () {
+    $('input[name=availability]').change(function() {
         $('input[name=availability_select][value=date]').prop('checked', 1);
     });
 }
 
 function initSearchMetro(map, stations) {
     // line selector {{{
-    $('.metro-line').click(function () {
+    $('.metro-line').click(function() {
         $('#metro_line_id').val($(this).attr('data-line'));
         $('#metro_line_id').parents('form').submit();
     })
@@ -248,23 +266,24 @@ function initSearchMetro(map, stations) {
 
     // map {{{
     var icon = new OpenLayers.Icon('http://www.openlayers.org/dev/img/marker.png',
-                                   new OpenLayers.Size(25,35),
-                                   new OpenLayers.Pixel(90, 23));
-    map = new OpenLayers.Map('map', {projection: 'EPSG:900913', units: 'm'});
-    
+                                   new OpenLayers.Size(15,20));
+    map = new OpenLayers.Map('map', {controls: [new OpenLayers.Control.Navigation()],
+        projection: 'EPSG:900913',
+        units: 'm'});
+
     var graphicLayer = new OpenLayers.Layer.Image(
-        'Metro',
-        '/images/plan_metro.png',
-        // new OpenLayers.Bounds(-180, -88.759, 180, 88.759),
-        // new OpenLayers.Bounds(0, 0, 1410, 1410),
-        new OpenLayers.Bounds(0, 0, 8000, 8000),
-        new OpenLayers.Size(1410, 1410),
-        {numZoomLevels: 1, units: 'm', projection: 'EPSG:900913'}
+            'Metro',
+            '/images/plan_metro.png',
+            // new OpenLayers.Bounds(-180, -88.759, 180, 88.759),
+            // new OpenLayers.Bounds(0, 0, 1410, 1410),
+            new OpenLayers.Bounds(0, 0, 7870, 7870),
+            new OpenLayers.Size(1574, 1574),
+            {numZoomLevels: 1, units: 'm', projection: 'EPSG:900913'}
     );
 
     var markersLayer = new OpenLayers.Layer.Markers(
-        'Markers',
-        {units: 'm', projection: 'EPSG:900913'}
+            'Markers',
+            {units: 'm', projection: 'EPSG:900913'}
     );
 
     graphicLayer.events.on({
@@ -280,13 +299,47 @@ function initSearchMetro(map, stations) {
         var marker = new OpenLayers.Marker(new OpenLayers.LonLat(stations[i]['coordinates'][0], stations[i]['coordinates'][1]), icon.clone());
         marker.station = stations[i];
         marker.events.register('click', marker, function(evt) {
-            $('#metro_station_id').val(this.station.id);
-            $('#metro_station_id').parents('form').submit();
-        });
+         $('#metro_station_id').val(this.station.id);
+         $('#metro_station_id').parents('form').submit();
+         });
         
+        /*
+        //updates station coords by dragging
+        var offset = $('#map').offset();
+        var relX = 0;
+        var relY = 0;
+        marker.events.register('mousedown', marker, function(e) {
+            relX = e.clientX - offset.left - 12.5;
+            relY = e.clientY - offset.top - 35;
+            var m=this;
+            console.log(this.station.id);
+            $(document).mouseup(function(ev) {
+                var relX2 = ev.clientX - offset.left - 12.5;
+                var relY2 = ev.clientY - offset.top - 35;
+                var dx = m.station.coordinates[0] - (relX - relX2) * 5;
+                var dy = (7870-m.station.coordinates[1]) - (relY - relY2) * 5;
+                $.post(
+                 '/search/metro-update-coords',
+                 'dx=' + dx + '&dy=' + dy+'&statId='+m.station.id,
+                 function() {
+                     markersLayer.removeMarker(m);
+                     new OpenLayers.Marker(new OpenLayers.LonLat(dx, dy), icon.clone());
+                    
+                 },
+                 'json'
+                 );
+                
+                $(document).unbind('mouseup');
+            });
+
+        });
+*/
+
+
+
         markersLayer.addMarker(marker);
     }
-    
+
     map.addLayers([graphicLayer, markersLayer]);
     // map.addControl(new OpenLayers.Control.LayerSwitcher());
 
@@ -309,11 +362,48 @@ function initSearchDraw(map) {
         drawingManager.setMap(null);
         drawnPolygon = event.overlay;
     });
-    $('#form-search-draw').submit(function () {
+    $('.clear-polygon').click(function() {
+        drawingManager.setMap(map);
+        drawnPolygon.setMap(null);
+        drawnPolygon = null;
+        return false;
+    });
+    $('#form-search-draw').submit(function() {
         var drawnPolygonJson = [];
-        drawnPolygon.getPath().forEach(function (point) {
+        drawnPolygon.getPath().forEach(function(point) {
             drawnPolygonJson.push({lat: point.lat(), lng: point.lng()});
         })
         $('#drawn_polygon').val(JSON.stringify(drawnPolygonJson));
-    })
+    });
+    $('.btn-plus-minus .btn-plus').click(function() {
+        map.setZoom(map.getZoom() + 1);
+        return false;
+    });
+    $('.btn-plus-minus .btn-minus').click(function() {
+        map.setZoom(map.getZoom() - 1);
+        return false;
+    });
+    $('.example-regions .box-place a.btn').click(function() {
+        if (drawnPolygon) {
+            drawnPolygon.setMap(null);
+            drawnPolygon = null;
+        }
+        drawingManager.setMap(null);
+
+        var region_path = $.parseJSON($(this).attr('data-region-path'));
+        var bounds = new google.maps.LatLngBounds();
+        var region_points = [];
+        for (point_index in region_path) {
+            var point = new google.maps.LatLng(region_path[point_index][0], region_path[point_index][1]);
+            region_points.push(point);
+            bounds.extend(point);
+        }
+        drawnPolygon = new google.maps.Polygon({
+            paths: region_points,
+            editable: true,
+        });
+        drawnPolygon.setMap(map);
+
+        return false;
+    });
 }

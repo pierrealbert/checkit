@@ -1,32 +1,20 @@
 <?php
+$this->headLink()->appendStylesheet('/css/ui/jquery-ui-1.10.3.css');
 $this->headLink()->appendStylesheet('/assets/css/search_form.css');
-//$this->headScript()->appendFile('/js/common.js');
-
-$fields = $this->form->getElements();
-
+$this->headScript()->appendFile('/assets/js/search_form.js');
 ?>
 <script type="text/javascript">
-    var initialRadioValues = new Array();
-    $(document).ready(function(){
-        var arrIndx = 0;
-        $('form[name="searchForm"]').find('input[type="radio"]:checked').each(function() {
-            initialRadioValues[arrIndx++] = $(this).attr('id');
-        });
-        $('form[name="searchForm"]').find('input[type="checkbox"]:checked').each(function() {
-            initialRadioValues[arrIndx++] = $(this).attr('id');
-        });
+    $(document).ready(function() {
 
-        $('input.btn-tous').click(function() {
-            $(this).parent().find('input[type="radio"]:checked').prop('checked', false);
-            $(this).parent().find('input[type="checkbox"]:checked').prop('checked', false);
-            for (var i=0; i<initialRadioValues.length; i++) {
-                if ($(this).parent().find('input#'+initialRadioValues[i]).length) {
-                    $('input#'+initialRadioValues[i]).prop('checked', true);
-                }
-            }
-        });
+        /*$('.olTileImage,.olAlphaImg, .olLayerDiv').click(function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            
+            return false;
+        });*/
 
-        $('div.metro_line_circle div.number').click(function() {
+
+        $('div.line-lick  div.number').click(function() {
             var line_id = $(this).attr('data-line-id');
             $('form[name="searchForm"]').find('input#metro_line_id').val(line_id);
             $('form[name="searchForm"]').submit();
@@ -43,35 +31,35 @@ $fields = $this->form->getElements();
         <div class="grid grid-dark">
             <div class="menu-search">
                 <ul>
-                    <li><a href="<?=$this->url(array('controller' => 'search', 'action' => 'standard'), false, true)?>"  class=" menu-icons icon-search">Recherche standard</a></li>
-                    <li><a href="<?=$this->url(array('controller' => 'search', 'action' => 'metro'), false, true)?>" class="active menu-icons icon-metro">Recherche<br>par  metro</a></li>
-                    <li><a href="<?=$this->url(array('controller' => 'search', 'action' => 'draw'), false, true)?>" class="menu-icons icon-dessin">Recherche<br> par dessin</a></li>
-                    <li><a href="<?=$this->url(array('controller' => 'search', 'action' => 'map'), false, true)?>" class="menu-icons icon-carte">Recherche<br> par carte</a></li>
+                    <li><a href="<?= $this->url(array('controller' => 'search', 'action' => 'standard'), false, true) ?>"  class=" menu-icons icon-search">Recherche standard</a></li>
+                    <li><a href="<?= $this->url(array('controller' => 'search', 'action' => 'metro'), false, true) ?>" class="active menu-icons icon-metro">Recherche<br>par  metro</a></li>
+                    <li><a href="<?= $this->url(array('controller' => 'search', 'action' => 'draw'), false, true) ?>" class="menu-icons icon-dessin">Recherche<br> par dessin</a></li>
+                    <li><a href="<?= $this->url(array('controller' => 'search', 'action' => 'map'), false, true) ?>" class="menu-icons icon-carte">Recherche<br> par carte</a></li>
                 </ul>
             </div>
-            <form action="<?=$this->form->getAction()?>" name="searchForm" method="POST">
-            <div class="search-box">
-                <div class="search-left">
-                    <div class="search-budget">
-                        <label class="name-title-white">Budget</label>
-                        <?=$this->form->getElement('min_budget')?>
-                        <?=$this->form->getElement('max_budget')?>
+            <form action="<?= $this->form->getAction() ?>" name="searchForm" id="form-search-metro" method="POST">
+                <div class="search-box">
+                    <div class="search-left">
+                        <div class="search-budget">
+                            <label class="name-title-white">Budget</label>
+                            <?= $this->form->getElement('min_budget') ?>
+                            <?= $this->form->getElement('max_budget') ?>
+                        </div>
+                        <div class="search-surface">
+                            <label class="name-title-white">Surface</label>
+                            <?= $this->form->getElement('min_size') ?>
+                            <?= $this->form->getElement('max_size') ?>
+                        </div>
                     </div>
-                    <div class="search-surface">
-                        <label class="name-title-white">Surface</label>
-                        <?=$this->form->getElement('min_size')?>
-                        <?=$this->form->getElement('max_size')?>
-                    </div>
-                </div>
-                <div class="search-right">
-                    <?=$this->form->getElement('is_furnished')?>
-                    <?=$this->form->getElement('number_of_rooms1')?>
-                    <?=$this->form->getElement('distance')?>
+                    <div class="search-right">
+                        <?= $this->form->getElement('is_furnished') ?>
+                        <?= $this->form->getElement('number_of_rooms1') ?>
+                        <?= $this->form->getElement('distance') ?>
 
-                    <?=$this->form->getElement('metro_station_id')?>
-                    <?=$this->form->getElement('metro_line_id')?>
+                        <?= $this->form->getElement('metro_station_id') ?>
+                        <?= $this->form->getElement('metro_line_id') ?>
+                    </div>
                 </div>
-            </div>
             </form>
         </div>
 
@@ -102,30 +90,56 @@ $fields = $this->form->getElements();
                     ?>
                     <label class="name-title-black">Lignes de métro</label>
                     <div class="metro_lines_wrapper">
-                        <?php  foreach ($this->lines as $indx => $rec): ?>
+                        <?php
+                        $count = 0;
+                        ?>
+                        <?php foreach ($this->lines as $indx => $rec): ?>
                             <?php
                             $number = intval($rec->name);
-                            $str    = mb_substr($rec->name, mb_strlen($number));
-                            $r = hexdec(substr($rec->color,0,2));
-                            $g = hexdec(substr($rec->color,2,2));
-                            $b = hexdec(substr($rec->color,4,2));
-                            $Y = ($r+$r+$b+$g+$g+$g)/6;
+                            if ($number == 0)
+                                continue;
+                            $count++;
+                            $str = mb_substr($rec->name, mb_strlen($number));
+                            $r = hexdec(substr($rec->color, 0, 2));
+                            $g = hexdec(substr($rec->color, 2, 2));
+                            $b = hexdec(substr($rec->color, 4, 2));
+                            $Y = ($r + $r + $b + $g + $g + $g) / 6;
 
                             $r = round($r * 0.6);
                             $g = round($g * 0.6);
                             $b = round($b * 0.6);
-                            $shadowStr = 'rgba('.$r.', '.$g.', '.$b.', 0.9)';
-
+                            $shadowStr = 'rgba(' . $r . ', ' . $g . ', ' . $b . ', 0.9)';
                             ?>
-                            <div class="metro_line_circle" style="background-color: #<?=$rec->color?>; color: <?=($Y <= 128 ? 'white' : 'black')?> !important; -webkit-box-shadow: 0px 2px 0px <?=$shadowStr?>; -moz-box-shadow: 0px 2px 0px <?=$shadowStr?>; box-shadow: 0px 2px 0px <?=$shadowStr?>;"><?='<div data-line-id="'.$rec->id.'" class="number '.($str != '' ? 'align2' : 'align1').'">'.$number.'</div>'.($str != '' ? '<div class="line-str">'.$str.'</div>' : '')?></div>
+                            <div class="line-lick metro_line_circle" style="background-color: #<?= $rec->color ?>; color: <?= ($Y <= 128 ? 'white' : 'black') ?> !important; -webkit-box-shadow: 0px 2px 0px <?= $shadowStr ?>; -moz-box-shadow: 0px 2px 0px <?= $shadowStr ?>; box-shadow: 0px 2px 0px <?= $shadowStr ?>;"><?= '<div data-line-id="' . $rec->id . '" class="number ' . ($str != '' ? 'align2' : 'align1') . '">' . $number . '</div>' . ($str != '' ? '<div class="line-str">' . $str . '</div>' : '') ?></div>
                         <?php endforeach; ?>
                         <div class="clear"></div>
                     </div>
                 </div>
-                <div class="box-line-metro">
-                    <label class="name-title-black">Lignes de RER</label>
-                    <img src="/./assets/images/btn-line-metro.png">
-                </div>
+                <?php if (count($this->lines) - $count > 0): ?>
+                    <div class="box-line-metro">
+                        <label class="name-title-black">Lignes de RER</label>
+                        <?php foreach ($this->lines as $indx => $rec): ?>
+                            <?php
+                            $number = intval($rec->name);
+                            if ($number != 0)
+                                continue;
+                            $number = mb_strtoupper(mb_substr($rec->name, 0, 1));
+
+                            $r = hexdec(substr($rec->color, 0, 2));
+                            $g = hexdec(substr($rec->color, 2, 2));
+                            $b = hexdec(substr($rec->color, 4, 2));
+                            $Y = ($r + $r + $b + $g + $g + $g) / 6;
+
+                            $r = round($r * 0.6);
+                            $g = round($g * 0.6);
+                            $b = round($b * 0.6);
+                            $shadowStr = 'rgba(' . $r . ', ' . $g . ', ' . $b . ', 0.9)';
+                            ?>
+                            <div class="line-lick rer_line_circle" style="border-color: #<?= $rec->color ?>; color: #<?= $rec->color ?> !important; -webkit-box-shadow: 0px 2px 0px <?= $shadowStr ?>; -moz-box-shadow: 0px 2px 0px <?= $shadowStr ?>; box-shadow: 0px 2px 0px <?= $shadowStr ?>;"><?= '<div data-line-id="' . $rec->id . '" class="number align1">' . $number . '</div>' ?></div>
+                        <?php endforeach; ?>
+                        <div class="clear"></div>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
 

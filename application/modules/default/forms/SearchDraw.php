@@ -21,7 +21,7 @@ class Form_SearchDraw extends Ext_Form
 
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
 
-        $this->addElement('hidden', 'drawn_polygon', array());
+        $this->addElement('hidden', 'drawn_polygon', array('decorators' => array('ViewHelper')));
 
         $this->addElement('text', 'min_budget', array(
             'label'      => 'min_budget',
@@ -62,7 +62,7 @@ class Form_SearchDraw extends Ext_Form
                 array('MrButtons'),
                 array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-white')),
                 array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
-            ));
+            ))->setValue(-1);
         $this->addElement($radio);
 
         $chbox = new Zend_Form_Element_MultiCheckbox('number_of_rooms1');

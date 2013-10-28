@@ -26,7 +26,7 @@ class Form_ResetPassword extends Ext_Form
 
         $this->addElement('submit', 'save', array(
             'label'    => 'save',
-            'class'    => 'btn btn-blue ui-state-default ui-corner-all'
+            'class'    => 'btn btn-blue'
         ));
     }
 }

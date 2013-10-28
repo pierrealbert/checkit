@@ -1,0 +1,27 @@
+<div class="modal-map-wrapper">
+    <h2><?=$this->property->address?>, <?=$this->property->city?> <?=$this->property->postcode?></h2>
+    <div style="width: 678px; height: 398px; margin: 0px; background-color: #4d4d4d;" id="modalMap"></div>
+    <a class="btn btn-blue map-wide-btn" href="<?=$this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $this->property->id), null, true)?>">Voir l'anonnce</a>
+    <a href="#" class="map-bottom-link modal-close">Fermer</a>
+</div>
+
+<script type="text/javascript">
+    window.showMapsStep1 = function(){
+        var cord = new google.maps.LatLng(<?=$this->property->latitude?>, <?=$this->property->longitude?>);
+        var mapOptions = {
+            zoom: 15,
+            center: cord,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById("modalMap"), mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: cord,
+            map: map,
+            title: '<?=$this->property->address?>, <?=$this->property->city?> <?=$this->property->postcode?>',
+            icon: '/assets/images/btn-carte-location-red-shadow.png'
+        });
+
+        $('#modalMap').show();
+    }
+</script>

@@ -22,6 +22,8 @@
  * @property integer $property_type
  * @property integer $number_of_rooms1
  * @property integer $number_of_rooms2
+ * @property decimal $honoraire
+ * @property integer $is_urgent
  * @property integer $is_separate_restrooms
  * @property integer $is_parquet_floor
  * @property integer $is_molding
@@ -67,6 +69,7 @@
  * @property Model_RegionBlock $RegionBlock
  * @property Doctrine_Collection $PropertyXMetroStation
  * @property Doctrine_Collection $PropertyVisitDates
+ * @property Doctrine_Collection $PropertyApplication
  * @property Doctrine_Collection $Favorite
  * @property Doctrine_Collection $PropertyIssue
  * @property Doctrine_Collection $UserProperty
@@ -156,6 +159,15 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'type' => 'integer',
              'default' => 1,
              'length' => '4',
+             ));
+        $this->hasColumn('honoraire', 'decimal', 14, array(
+             'type' => 'decimal',
+             'scale' => 2,
+             'length' => '14',
+             ));
+        $this->hasColumn('is_urgent', 'integer', 1, array(
+             'type' => 'integer',
+             'length' => '1',
              ));
         $this->hasColumn('is_separate_restrooms', 'integer', 1, array(
              'type' => 'integer',
@@ -347,6 +359,10 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
         $this->hasMany('Model_PropertyVisitDates as PropertyVisitDates', array(
              'local' => 'id',
              'foreign' => 'property_id'));
+
+        $this->hasMany('Model_PropertyApplication as PropertyApplication', array(
+             'local' => 'id',
+             'foreign' => 'visitor_id'));
 
         $this->hasMany('Model_Favorite as Favorite', array(
              'local' => 'id',

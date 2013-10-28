@@ -1,29 +1,49 @@
 <?php
-$fields = $this->form->getElements();
+$this->headLink()->appendStylesheet('/css/ui/jquery-ui-1.10.3.css');
+$this->headLink()->appendStylesheet('/assets/css/search_form.css');
+$this->headScript()->appendFile('/assets/js/search_form.js');
 ?>
 <script type="text/javascript">
-    var initialRadioValues = new Array();
     $(document).ready(function(){
-        var arrIndx = 0;
-        $('form[name="searchForm"]').find('input[type="radio"]:checked').each(function() {
-            initialRadioValues[arrIndx++] = $(this).attr('id');
-        });
-        $('form[name="searchForm"]').find('input[type="checkbox"]:checked').each(function() {
-            initialRadioValues[arrIndx++] = $(this).attr('id');
+        $('a#btnSearch1, a#btnSearch2' ).click(function() {
+            $('form[name="searchForm"]').submit();
+            return false;
         });
 
-        $('input.btn-tous').click(function() {
-            $(this).parent().find('input[type="radio"]:checked').prop('checked', false);
-            $(this).parent().find('input[type="checkbox"]:checked').prop('checked', false);
-            for (var i=0; i<initialRadioValues.length; i++) {
-                if ($(this).parent().find('input#'+initialRadioValues[i]).length) {
-                    $('input#'+initialRadioValues[i]).prop('checked', true);
-                }
+        $('input#availability_select_date').click(function() {
+            if ($(this).prop('checked')) {
+                $('div.date-picker-availability').show();
+                $('input#availability').focus();
+            }
+        });
+        $('input#availability_select_now').click(function() {
+            if ($(this).prop('checked')) {
+                $('div.date-picker-availability').hide();
+                $('input#availability').val('');
             }
         });
 
-        $('a#btnSearch1, a#btnSearch2' ).click(function() {
-            $('form[name="searchForm"]').submit();
+        var availableBlocks = <?=json_encode($this->regionBlocks)?>;
+        for (var i=0; i<availableBlocks.length-1; i++) {
+            availableBlocks[i].value = $('<div />').html(availableBlocks[i].value).text();
+        }
+
+        $("input[name='region_block_input']").autocomplete({
+            source: availableBlocks,
+            minLength: 0,
+            select: function(event, ui) {
+                $('input#region_block_id').val(ui.item.id);
+            },
+            change: function(event, ui) {
+                $('input#region_block_id').val(ui.item.id);
+            },
+            open: function(event, ui) {
+                $('ul.ui-autocomplete').width('380px');
+                $('ul.ui-autocomplete').css('max-height', '298px');
+            }
+        });
+
+        $("a.icon-location").click(function(){
             return false;
         });
     });
@@ -35,7 +55,7 @@ $fields = $this->form->getElements();
 </div>
 <main>
 <div class="inner">
-<form action="<?=$this->form->getAction()?>" name="searchForm" method="POST">
+<form action="<?=$this->form->getAction()?>" name="searchForm" id="form-search-standard" method="POST">
 <div class="grid grid-dark">
     <div class="menu-search">
         <ul>
@@ -49,7 +69,8 @@ $fields = $this->form->getElements();
         <div class="search-left">
             <div class="search-location">
                 <label class="name-title-white">Localisation</label>
-                <input type="text" placeholder="Où désirez-vous louer? "/>
+                <input name="region_block_input" type="text" placeholder="Où désirez-vous louer? "/>
+                <?=$this->form->getElement('region_block_id')?>
                 <a href="#" class="btn btn-small btn-dark icon-location"></a>
             </div>
             <div class="search-budget">
@@ -79,13 +100,17 @@ $fields = $this->form->getElements();
         <?=$this->form->getElement('property_type')?>
         <?=$this->form->getElement('number_of_rooms2')?>
         <?=$this->form->getElement('availability_select')?>
+        <div class="date-picker-availability">
+        <?=$this->form->getElement('availability')?>
+        </div>
+        <div class="clear"></div>
         <?=$this->form->getElement('rent_period')?>
-        <?=$this->form->getElement('collocation')?>
+        <?=$this->form->getElement('is_roomate')?>
         <?=$this->form->getElement('planning')?>
         <?=$this->form->getElement('outbuilding')?>
         <?=$this->form->getElement('exterior')?>
         <?=$this->form->getElement('building')?>
-        <?=$this->form->getElement('heating')?>
+        <?=$this->form->getElement('heating_system')?>
     </div>
     <div class="box-btn-search">
         <a href="" class="btn btn-red">Sauvegarder ma recherche</a>

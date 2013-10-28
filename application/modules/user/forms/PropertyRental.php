@@ -1,92 +1,128 @@
 <?php
 
 
-class User_Form_PropertyRental extends ZendX_JQuery_Form
+class User_Form_PropertyRental extends Ext_Form
 {
     public function init()
     {
+        $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
+        
         $this->addElement('text', 'title', array(
-            'label'      => 'title',
+            'label'      => 'location_title',
             'required'   => true,
+            'class'      => 'w300',
             'filters'    => array('StringTrim')
         ));
-
-        // -------------------------------------------------------------------
-
+        
         $this->addElement('text', 'amount_of_rent_excluding_charges', array(
             'label'      => 'amount_of_rent_excluding_charges',
             'allowEmpty' => false,
-            'validators' => array(new Zend_Validate_GreaterThan(array('min' => 0))),
-            
-        ));
-        // -------------------------------------------------------------------
+            'placeholder' => 'Montant en euros',
+            'required'   => true,
+            'validators' => array(new Zend_Validate_GreaterThan(array('min' => 0))),            
+        ));        
+        $this->getElement('amount_of_rent_excluding_charges')->removeDecorator('HtmlTag');
 
         $this->addElement('text', 'amount_of_charges', array(
             'label'      => 'amount_of_charges',
             'allowEmpty' => false,
+            'required'   => true,
+            'placeholder' => 'Montant en euros',
             'validators' => array(new Zend_Validate_GreaterThan(array('min' => 0))),
         ));
-        // -------------------------------------------------------------------
 
-        $this->addElement('radio', 'is_furnished', array(
-            'label'      => 'is_furnished',
-            'required'   => true,
-            'multiOptions' => array(
-                0 => "Empty",
-                1 => "Furnished",
-            ),
-            'value' => 0,
-        ));
+        $radio = new Zend_Form_Element_Radio('is_furnished');
+        $radio->setSeparator('')
+            ->setRequired(true)
+            ->setLabel('Mobilier')
+            ->addMultiOptions(array(
+                1 => 'Meublé',
+                0 => 'Vide'
+            ))
+            ->setDecorators(array(
+                array('MrButtons', array('needAll' => false, 'labelClass' => 'btn-input-lite')),
+                array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-white')),
+                array('Errors'),
+                array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
+            ));
+        $this->addElement($radio);
         
         // -------------------------------------------------------------------
 
-        $this->addElement('select','lease_duration',  array(
-            'label'        => 'lease_duration',
-            'value'        => 1,
-            'multiOptions' => array(
+        $leaseDuration = new Zend_Form_Element_Radio('lease_duration');                      
+        $leaseDuration->setSeparator('')
+            ->setRequired(true)
+            ->setLabel('lease_duration') 
+            ->addMultiOptions(array(
                 1 => "1 mois",
                 2 => "2 mois",
                 3 => "3 mois",
                 4 => "4 mois",
                 5 => "5 mois",
-                6 => "6 mois",
-            ),
+                6 => "6 mois",    
         ));
-
+        $leaseDuration->setDecorators(array(
+            array('MrButtons', array('needAll' => false, 'labelClass' => 'btn-input-lite')),
+            array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-white')),
+            array('Errors'),
+            array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
+        ));    
+        $this->addElement($leaseDuration);        
         // -------------------------------------------------------------------
         
-        $this->addElement('radio', 'deposit', array(
-            'label'      => 'deposit',
-            'required'   => true,
-            'multiOptions' => array(
-                1 => "1 mois",
-                2 => "2 mois",
-            ),
-            'value' => 1,
-        ));
-
-        // -------------------------------------------------------------------
-
-        $elem = new ZendX_JQuery_Form_Element_DatePicker(
-                "availability", 
-                array(
-                    "label"      => "Availability:",
-                    "allowEmpty" => false,
-                    'validators' => array(new Zend_Validate_Date('yyyy-MM-dd')),
-                )
-            );
-
-        $elem->setJQueryParams(array(
-                'dateFormat'  => 'yy-mm-dd',
-                'defaultDate' => time('Y-m-d'),
-                'minDate'     => 0,
+        $deposit = new Zend_Form_Element_Radio('deposit');
+        $deposit->setSeparator('')
+            ->setRequired(true)
+            ->setLabel('deposit')
+            ->addMultiOptions(array(
+                1 => '1 mois',
+                2 => '2 mois'
+            ))               
+            ->setDecorators(array(
+                array('MrButtons', array('needAll' => false, 'labelClass' => 'btn-input-lite')),
+                array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-white')),
+                array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
             ));
+        $this->addElement($deposit);
         
-        $this->addElement($elem);
         // -------------------------------------------------------------------
+        
+        $availability = new Zend_Form_Element_Radio('availability_select');
+        $availability->setSeparator('')
+            ->setLabel('Dépôt de garantie')
+            ->setRequired(true)
+            ->setAttrib('allowEmpty', false)
+            ->addMultiOptions(array(
+                'now' => 'Immédiatement', 
+                'date' => 'select_date'
+            ))->setDecorators(array(
+                array('MrButtons', array(
+                    'needAll' => false, 
+                    'labelClass' => 'btn-input-lite',
+                    'appendPart' => array(
+                        1 => array(
+                            'html' => '<label for="availability_select_date" class="btn-input-gray-lite label-date icon-calendar-gray"></label>',
+                            'pre' => '<span class="separator">ou à partir de</span><div class="labels-group standard-search-date-pick">',
+                            'post' => '</div>'
+                        )
+                    )
+                )),
+                array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-white')),
+                array('Errors'),                
+                array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal box-short')),
+            ));;
+
+        $this->addElement($availability);
+
+        $this->addElement('datePicker', 'availability', array(
+            'JQueryParams' => array (
+                'dateFormat' => $settings->get('dateFormat.picker.jquery'),
+            )
+        ));
+
 
         $this->addElement('submit', 'next', array(
-            'class'     => 'ui-state-default ui-corner-all'
+            'class' => 'ui-state-default ui-corner-all'
         ));
     }
 }

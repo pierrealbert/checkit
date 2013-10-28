@@ -17,6 +17,7 @@
  * @property boolean $is_primary
  * @property Model_User $User
  * @property Doctrine_Collection $UserResidentDocument
+ * @property Doctrine_Collection $UserResidentGarant
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -105,6 +106,10 @@ abstract class Model_Base_UserResident extends Ext_Doctrine_Record
              'onDelete' => 'cascade'));
 
         $this->hasMany('Model_UserResidentDocument as UserResidentDocument', array(
+             'local' => 'id',
+             'foreign' => 'user_resident_id'));
+
+        $this->hasMany('Model_UserResidentGarant as UserResidentGarant', array(
              'local' => 'id',
              'foreign' => 'user_resident_id'));
 

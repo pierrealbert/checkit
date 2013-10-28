@@ -17,5 +17,13 @@ class Model_FavoriteTable extends Ext_Doctrine_Table
         return Doctrine_Core::getTable('Model_Favorite');
     }
     
-  
+    public function find($values = array())
+    {   
+        $query = $this->createQuery();
+        foreach ($values as $key => $value) {
+            $query->addWhere("{$key} = ?", $value);
+        }
+        $query->limit(1);
+        return $query->fetchOne();
+    }
 }

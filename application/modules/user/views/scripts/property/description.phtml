@@ -1,3 +1,155 @@
+<div id="publier" class="grid">
+    
+    <div class="left">
+        <?= $this->partial('property/_partials/left-dashboard.phtml', $this->getVars()) ?>
+    </div>
+    <div class="right">
+        <div id="content-step-2" class="progress-content">
+            <form id="description-form" action="" method="post">
+				<div class="step-title">
+					<h1>Description du bien</h1>
+					<span class="blue">Les informations suivantes sont essentielles et donc obligatoires.</span>
+					<span>Elles renseignent sur les caract</span>
+				</div>
+				<div class="block-grid grid-inset">
+					<fieldset>
+						<?= $this->form->address ?>
+					</fieldset>
+					<div style="width: 250px;" class="left">
+						<fieldset>
+							<?= $this->form->postcode ?>
+						</fieldset>
+					</div>
+					<div class="left">
+						<fieldset>
+							<?= $this->form->city ?>
+						</fieldset>
+					</div>
+					<div style="margin-top: 10px;" class="left">
+						<span class="blue">L’adresse est essentielle pour localiser votre bien. Cette information est privée.</span><br>
+						<span class="gray">Votre adresse ne sera connue que des candidats que vous sélectionnerez pour les visites.</span>
+					</div>
+				</div>
+				<div class="block-grid grid-inset">
+					<fieldset>
+						<?= $this->form->size ?>
+					</fieldset>
+				</div>
+				<div class="block-grid grid-inset">
+					<fieldset>
+                        <?= $this->form->property_type ?>
+					</fieldset>
+				</div>
+				<div class="block-grid grid-inset">
+					<fieldset>
+                        <?= $this->form->number_of_rooms1 ?>
+	    			</fieldset>
+				</div>
+				<div class="block-grid grid-inset">
+					<fieldset>
+						<?= $this->form->number_of_rooms2 ?>
+					</fieldset>
+				</div>
+				<div class="block-grid grid-inset">
+					<div class="left half">
+						<fieldset>
+							<?= $this->form->floor ?>
+						</fieldset>
+					</div>
+					<div class="left half">
+						<fieldset>
+							<?= $this->form->is_lift ?>
+						</fieldset>
+					</div>
+				</div>
+            <? /*
+				<div class="block-grid grid-inset">
+					<div class="left half">
+						<fieldset>
+							<label>Classe Énergie <em class="red">(obligatoire)</em></label>
+							<select id="" name=""></select>
+						</fieldset>
+					</div>
+					<div class="left half">
+						<fieldset>
+							<label>GES <em class="red">(obligatoire)</em></label>
+							<select id="" name=""></select>
+						</fieldset>
+					</div>
+					<div style="margin-top: 10px;" class="left">
+						<span class="gray">La classe énergie et le GES sont déterminés suite à l’intervention d’un professionnel certifié. N’indiquez pas de classe au hasard car votre responsabilité pourrait être engagée. <br>Ommi met à votre disposition un professionnel certifié. </span><br>
+						<span class="blue">Rendez-vous dans l’onglet Mes Services.</span>
+					</div>
+				</div>
+				*/ ?>
+				<div style="margin-top:40px;" class="step-title">
+					<h1>Détails supplémentaires</h1>
+					<span class="blue">Les informations suivantes sont optionnelles.</span>
+					<span>Elles renseignent les candidats sur les spécificités de votre bien.</span>
+				</div>
+
+				<div class="block-grid grid-inset">
+					<fieldset>
+                        <?= $this->form->planning ?>
+					</fieldset>
+				</div>
+
+				<div class="block-grid grid-inset">
+					<fieldset>
+                        <?= $this->form->outbuilding ?>
+					</fieldset>
+				</div>
+
+				<div class="block-grid grid-inset">
+					<fieldset>
+                        <?= $this->form->exterior ?>
+					</fieldset>
+				</div>
+
+				<div class="block-grid grid-inset">
+					<fieldset>
+                        <?= $this->form->building ?>
+					</fieldset>
+				</div>		
+
+				<div class="block-grid grid-inset">
+					<fieldset>
+                        <?= $this->form->number_of_bathrooms ?>
+					</fieldset>
+				</div>
+
+				<div class="block-grid grid-inset">
+					<fieldset>
+                        <?= $this->form->heating_system ?>
+					</fieldset>
+				</div>
+				<div class="progress-buttons">
+                    <input type="hidden" name="next" id="form-action" value="1"/>
+					<a id="description-form-cancel" class="btn btn-gray btn-arrow-prev left" href="#">Étape précédente</a>
+					<a id="description-form-next" class="btn btn-blue btn-arrow-next right" href="#">Enregistrer et continuer</a>
+                    <script type="text/javascript">
+                        
+                        $('#description-form-cancel').click(function (event) {
+                            event.preventDefault();
+                            $('#form-action').attr('name', 'cancel');
+                            $('#description-form').submit();
+                        });
+                        
+                        $('#description-form-next').click(function (event) {
+                            event.preventDefault();
+                            $('#form-action').attr('name', 'next');
+                            $('#description-form').submit();
+                        });
+                        
+                    </script>
+				</div>
+            </form>
+    	</div>
+    </div>
+</div>
+
+<? /*
+
 <table border="1" width="100%">
     <tr valign="top">
         <td width="33%">
@@ -29,3 +181,4 @@
     </tr>
 </table>
 
+*/ ?>

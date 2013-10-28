@@ -1,0 +1,31 @@
+Model_UserResident:
+  UserResident_1:
+    id: 1
+    user_id: 5
+    rent_type: roommate
+    resident_name: Ivan Ivanov
+    resident_type: employee
+    job_title: Developer
+    employee_type: cdi
+    monthly_income : 500
+    is_primary: 1
+  UserResident_2:
+    id: 2
+    user_id: 5
+    rent_type: roommate
+    resident_name: John Doe
+    resident_type: employee
+    job_title: BeetSoft CEO
+    employee_type: cdi
+    monthly_income : 1500
+    is_primary: 0   
+  UserResident_3:
+    id: 3
+    user_id: 5
+    rent_type: roommate
+    resident_name: Jone Doe
+    resident_type: independent
+    job_title: Google Coowner
+    employee_type: cdi
+    monthly_income : 125
+    is_primary: 0       

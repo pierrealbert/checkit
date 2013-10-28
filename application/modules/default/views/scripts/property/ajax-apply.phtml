@@ -1,0 +1,30 @@
+
+<? if (!empty($this->successMessage)): ?>
+    <div class="error-message"><?= $this->successMessage ?></div>
+    <button class="btn btn-blue ui-state-default ui-corner-all modal-ok"><?= $this->translate('Ok') ?>" </button>
+<? elseif (!empty($this->errorMessage)): ?>
+    <div class="success-message"><?= $this->errorMessage ?></div>
+    <button class="btn btn-blue ui-state-default ui-corner-all modal-ok"><?= $this->translate('Ok') ?>" </button>
+<? else: ?>
+    <div class="inner">
+        <h2><?= $this->translate('apply') ?></h2>
+        <div id="apply-page">
+            <?= $this->applyForm ?>
+        </div>
+    </div>
+<? endif ?>
+<script type="text/javascript">
+    <? if (isset($this->redirectUrl)) : ?>
+        document.location.href = '<?= $this->redirectUrl ?>';
+    <? endif; ?>
+    $(function() {             
+        $('#apply-form').ajaxForm({
+            target: $('.modal-content-container')
+        });
+        $('.modal-ok').click(function (e) {
+            e.preventDefault();
+            $.modal().close();
+            $('#modal .modal-content-container').empty();
+        })
+    });
+</script>

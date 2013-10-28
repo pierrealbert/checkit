@@ -136,7 +136,7 @@ button, .btn, [type=submit], [type=reset], [type=button] {
 	background: #B5E6E3;
 	box-shadow: 0 3px 0 #50AAB1;
 	font-size: 16px;
-	text-shadow: 0 -1px 0 #34A6B3 !important;
+	text-shadow: 0 -1px 0 #fff !important;
 }
 
 .btn-blue-lite:hover, .btn-blue-lite:hover{
@@ -170,12 +170,30 @@ button, .btn, [type=submit], [type=reset], [type=button] {
 }
 
 
+/*
+	 Button grayer-lite
+*/
+.btn-grayer-lite{
+background: #e5e5e5;
+box-shadow: 0 3px 0 #b3b3b3;
+font-size: 16px;
+text-shadow: 0 -1px 0 #b3b3b3;
+}
+.btn-grayer-lite:hover{
+box-shadow: 0 1px 0 #b3b3b3;
+top: 2px;
+}
+.btn-grayer-lite:active{
+box-shadow: none;
+top: 3px;
+}
 
 /*
 	 Button for input
 */
 .btn-input-gray-dark,
 .btn-input-gray-lite,
+.btn-input-lite,
 .btn-input-number,
 .btn-input-grayer,
 .btn-input-daker,
@@ -246,3 +264,60 @@ input[type="reset"]:focus{
 	box-shadow: none;
 	top: 1px;
 }
+
+
+/*
+	 Button small
+*/
+
+.small-btn{
+	text-transform: uppercase;
+	font-weight: normal;
+	height: 30px;
+	line-height: 30px;
+	font-size: 15px;
+	float: right;
+}
+
+.btn-blue-dark{
+	background: #198e9c;
+	box-shadow: 0 2px 0 #087380;
+	text-shadow: 0 -1px 0 #087380 !important;
+}
+.btn-blue-dark:hover{
+	box-shadow: 0 1px 0 #087380;
+	top: 1px;
+}
+.btn-blue-dark:active{
+	box-shadow: none;
+	top: 2px;
+}
+
+.btn-red-small{
+	background: #de4c5d;
+	box-shadow: 0 2px 0 #b74051;
+	text-shadow: 0 -1px 0 #b74051 !important;
+}
+.btn-red-small:hover{
+	box-shadow: 0 1px 0 #b74051;
+	top: 1px;
+}
+.btn-red-small:active{
+	box-shadow: none;
+	top: 2px;
+}
+
+.btn-gray-small{
+	background: #e5e5e5;
+	box-shadow: 0 2px 0 #cccccc;
+	text-shadow: 0 -1px 0 #fff !important;
+}
+.btn-gray-small:hover{
+	box-shadow: 0 1px 0 #cccccc;
+	top: 1px;
+}
+.btn-gray-small:active{
+	box-shadow: none;
+	top: 2px;
+}
+

@@ -1,38 +1,55 @@
 <?
-    $this->headLink()->headLink(array(
-        'rel'   => 'favicon',
-		'href'  => '/favicon.ico',
-		'type'  => 'image/x-icon'
-    ));
+$this->headLink()->headLink(array(
+    'rel' => 'favicon',
+    'href' => '/favicon.ico',
+    'type' => 'image/x-icon'
+));
 
-    $this->headLink()->appendStylesheet('/css/styles.css');
-    $this->headLink()->appendStylesheet('/css/ui/jquery-ui-1.10.3.css');
+$this->headLink()->appendStylesheet('/assets/css/style.css');
 
-    $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=' . $this->getEncoding());
-
-    $this->headMeta()->appendHttpEquiv('Content-Language', 'en')
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=' . $this->getEncoding());
+$this->headScript()->appendFile('/assets/js/dropdown.js');
+$this->headScript()->appendFile('/js/common.js');
+$this->headScript()->appendFile('/js/jquery.form.js');
+$this->headScript()->appendFile('/assets/js/jquery.the-modal.js');
+$this->headMeta()->appendHttpEquiv('Content-Language', 'en')
 ?>
 <?= $this->doctype() ?>
-<?= $this->getPluginLoader('helper')->isLoaded('JQuery') ? $this->jQuery() : '' ?>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
-<head>
-    <?= $this->headMeta() ?>
-    <?= $this->headTitle('Frontend')->setSeparator(' - ') ?>
-    <?= $this->headLink() ?>
-    <?= $this->headScript() ?>
-</head>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <?= $this->headMeta() ?>
+        <?= $this->headTitle('Frontend')->setSeparator(' - ') ?>
+        <?= $this->headLink() ?>    
+        <?= $this->jQuery() ?>
+        <?= $this->headScript() ?>
+    </head>
     <body>
-        <div id="wrapper">
-            <?= $this->partial('_partials/header.phtml', $this->getVars()) ?>
-            <div id="content">
-                <?= $this->messenger() ?>
-                <?= $this->layout()->content ?>
+        <div id="modal" style="display: none;">
+            <div class="modal-title-container">
+                <div class="modal-title">Inscription</div>
+                <div class="modal-close"></div>
             </div>
-            <?= $this->partial('_partials/footer.phtml', $this->getVars()) ?>
-            <div id="ajax-loader">
-                <div class="loading-message"><?= $this->translate('loading') ?></div>
+            <div class="modal-content-container"></div>
+        </div>
+        <?= $this->partial('_partials/header.phtml', $this->getVars()) ?>
+        <div class="title-row-tabl">
+            <div class="container-text">
+                <h1 class="white-txt">
+                    <?= $this->translate($this->contentTitle) ?>
+                </h1>
             </div>
         </div>
-        
-    </body>
+        <main>
+            <div class="inner">
+                <?= $this->messenger() ?>
+                <?= $this->layout()->content ?>
+                <? if ($this->showBottomSidebar) : ?>
+                <?= $this->partial('_partials/bottom-sidebar.phtml') ?>
+                <? endif; ?>
+            </div>
+        </main>        
+    </main>
+    <?= $this->partial('_partials/footer.phtml', $this->getVars()) ?>        
+</body>
 </html>

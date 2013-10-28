@@ -34,7 +34,7 @@ class Form_ForgotPassword extends Ext_Form
         $this->addElement('submit', 'send', array(
             'required' => false,
             'label'    => 'send',
-            'class'    => 'ui-state-default ui-corner-all'
+            'class'    => 'btn btn-blue'
         ));
     }
 }

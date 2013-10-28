@@ -22,20 +22,75 @@ class Model_PropertyTable extends Ext_Doctrine_Table
         // pay attention, that longest signs goes first
         return array('<=', '>=', '=', '<', '>');
     }
+
+    protected function _queryWithDefaultJoins()
+    {
+        return $this->createQuery('Property')
+                    ->leftJoin("Property.PropertyVisitDates PropertyVisitDates")
+                    ->leftJoin("PropertyVisitDates.PropertyApplication PropertyApplication");
+                         
+    }
     
+    public function getListByOwnerId($ownerId)
+    {
+        return $this->_queryWithDefaultJoins()->where('owner_id = ?', $ownerId)
+                                              ->execute();
+    }
+
+    public function checkSortAttrs($sortBy, $sortDir) {
+        $dirList = array(
+            'asc' => false,
+            'desc' => true
+        );
+        $fieldsList = array(
+            'date' => array('sql' => 'updated_at', 'def' => true),
+            'price' => array('sql' => 'amount_of_rent_excluding_charges', 'def' => false),
+            'size' => array('sql' => 'size', 'def' => false),
+        );
+
+        $sortBy = trim(strtolower($sortBy));
+        $sortDir = trim(strtolower($sortDir));
+
+        if (!isset($dirList[$sortDir])) {
+            foreach($dirList as $indx => $val) {
+                if ($val) {
+                    $sortDir = $indx;
+                    break;
+                }
+            }
+        }
+
+        if (!isset($fieldsList[$sortBy])) {
+            foreach($fieldsList as $indx => $val) {
+                if ($val['def']) {
+                    $sortDir = $indx;
+                    break;
+                }
+            }
+        }
+
+        $sql = $fieldsList[$sortBy]['sql'].' '.$sortDir;
+
+        return array($sortBy, $sortDir, $sql);
+    }
+
     /**
      *TODO: write complete documentation for this method
      */
-    public function searchQuery(array $params, $exceptIds = array())
+    public function searchQuery(array $params, $exceptIds = array(), $sortBy = false, $sortDir = false)
     {
         if (is_numeric($exceptIds))
             $exceptIds = array($exceptIds);
-        
+
+        list($sortBy, $sortDir, $sortSql) = $this->checkSortAttrs($sortBy, $sortDir);
+
         $propertyTN = $this->getTableName(); // used as alias
-        
+
         $dqlQuery = $this->createQuery($propertyTN);
         $joins = array();
         
+        $fieldGroups = array_keys(Model_Property::getValuesGroups());
+
         foreach ($params as $key => $fieldValue) {
             $fieldName = $key;
             if (count($fieldParts = explode('.', $fieldName)) > 1) {
@@ -46,32 +101,68 @@ class Model_PropertyTable extends Ext_Doctrine_Table
             }
             $whereStr = '';
             $value = '';
+            $term = false;
             if (is_array($fieldValue)) {
-                if (!empty($fieldValue['field'])) {
-                    $fieldName = $fieldValue['field'];
+                if (isset($fieldValue['value'])) {
+                    if (!empty($fieldValue['field'])) {
+                        $fieldName = $fieldValue['field'];
+                    }
+                    if (empty($fieldValue['sign'])) {
+                        $fieldValue['sign'] = '=';
+                    }
+                    if (!in_array($fieldValue['sign'], self::getSearchAllowedSignes())) {
+                        throw new Zend_Exception("Sign {$fieldValue['sign']} is not allowed in search.");
+                    }
+                    $whereStr = "$propertyTN.$fieldName {$fieldValue['sign']} ?";
+                    $value = $fieldValue['value'];
+                } else {
+                    $value = array();
+                    $term = true;
+                    if (in_array($key, $fieldGroups)) {                                   
+                        $groupValues = array();
+          
+                        foreach ($fieldValue as $subField) {
+                            $groupValues[] = "{$propertyTN}.{$subField['value']} = 1";
+                        }
+
+                        $dqlQuery->addWhere('(' . implode(' OR ', $groupValues) . ')');
+                        continue;
+                    }                    
+                    foreach ($fieldValue as $subField) {
+                        if (!empty($subField['field'])) {
+                            $fieldName = $subField['field'];
+                        }
+                        if (empty($subField['sign'])) {
+                            $subField['sign'] = '=';
+                        }
+                        if (!in_array($subField['sign'], self::getSearchAllowedSignes())) {
+                            throw Zend_Exception("Sign {$subField['sign']} is not allowed in search.");
+                        }
+                        $whereStr .= ($whereStr != '' ? ' OR ' : '')."$propertyTN.$fieldName {$subField['sign']} ?";
+                        $value[] = $subField['value'];
+                    }
                 }
-                if (empty($fieldValue['sign'])) {
-                    $fieldValue['sign'] = '=';
-                }
-                if (!in_array($fieldValue['sign'], self::getSearchAllowedSignes())) {
-                    throw Zend_Exception("Sign {$fieldValue['sign']} is not allowed in search.");
-                }
-                $whereStr = "$propertyTN.$fieldName {$fieldValue['sign']} ?";
-                $value = $fieldValue['value'];
             } else {
                 $whereStr = "$propertyTN.$fieldName = ?";
                 $value = $fieldValue;
             }
-            
+
             // add WHERE only if value is not empty string ('') and not Null,
             // but WHERE will be added if value is 0 or False
-            if ($value !== '' and $value !== Null) {
-                if (is_array($value))
+            if ($value !== '' and $value !== Null) {                
+                if (is_array($value) && !isset($value['value']) && !$term) {
                     $dqlQuery->andWhereIn($fieldName, $value);
-                else
-                    $dqlQuery->andWhere($whereStr, $value);
+                } else {
+                    if (is_array($value) && isset($value['value'])) {
+                        $value = $value['value'];
+                    }
+                    $dqlQuery->andWhere($whereStr,  $value);
+                }
             }
         }
+
+        $dqlQuery->orderBy($sortSql);
+
         return $dqlQuery;
     }
 
@@ -79,4 +170,53 @@ class Model_PropertyTable extends Ext_Doctrine_Table
     {
         return $this->searchQuery($params, $exceptIds)->execute();
     }
+
+    public function getNearStations($paginator) {
+        $statement = Doctrine_Manager::getInstance()->connection();
+        $IDs = array();
+        foreach ($paginator as $indx => $rec) {
+            $IDs[] = $rec->id;
+        }
+        if (count($IDs) == 0) {
+            $IDs = 'NULL';
+        } else {
+            $IDs = implode(',', $IDs);
+        }
+
+        $results = $statement->execute("SELECT t1.ID, t3.name FROM property AS t1, property_x_metro_station AS t2, metro_station AS t3 WHERE t1.id = t2.property_id AND t2.metro_station_id = t3.id AND t1.id IN (".$IDs.")");
+        $tmpList = $results->fetchAll();
+        $list = array();
+        if (is_array($tmpList)) {
+            foreach ($tmpList as $indx => $rec) {
+                $list[$rec['ID']] = $rec['name'];
+            }
+        }
+
+        return $list;
+    }
+
+    public function getUsersStatus($paginator) {
+        $statement = Doctrine_Manager::getInstance()->connection();
+        $IDs = array();
+        foreach ($paginator as $indx => $rec) {
+            $IDs[] = $rec->id;
+        }
+        if (count($IDs) == 0) {
+            $IDs = 'NULL';
+        } else {
+            $IDs = implode(',', $IDs);
+        }
+
+        $results = $statement->execute("SELECT t2.ID, t2.first_name, t2.last_name, t2.is_premium FROM property AS t1, user AS t2 WHERE t2.id = t1.owner_id AND t1.id IN (".$IDs.")");
+        $tmpList = $results->fetchAll();
+        $list = array();
+        if (is_array($tmpList)) {
+            foreach ($tmpList as $indx => $rec) {
+                $list[$rec['ID']] = array('name' => $rec['first_name'].' '.$rec['last_name'], 'is_premium' => intval($rec['is_premium']));
+            }
+        }
+
+        return $list;
+    }
+
 }

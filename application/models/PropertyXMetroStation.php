@@ -12,5 +12,4 @@
  */
 class Model_PropertyXMetroStation extends Model_Base_PropertyXMetroStation
 {
-
 }

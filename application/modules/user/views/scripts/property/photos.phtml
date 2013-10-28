@@ -1,7 +1,130 @@
+<?php
+$this->headLink()->appendStylesheet('/css/ui/jquery-ui-1.10.3.css');
+$this->headLink()->appendStylesheet('/assets/css/property_form.css');
+$this->headScript()->appendFile('/assets/js/property_form.js');
+?>
+<div id="publier" class="grid">
+
+    <div class="left">
+        <?= $this->partial('property/_partials/left-dashboard.phtml', $this->getVars()) ?>
+    </div>
+    <div class="right">
+        <div id="content-step-3" class="progress-content">
+            <form id="photos-form" action="/user/property/photos/item/<?=$this->property->id?>" method="post" enctype="multipart/form-data">
+                <div class="step-title">
+                    <h1>Photos de l'annonce</h1>
+                </div>
+                <div class="block-grid grid-inset">
+                    <fieldset class="image-form">
+                        <?= $this->form_upload_photo->image ?>
+                        <a id="upload-photo-file-btn" class="btn btn-red left btn-upload-photo" href="#"><div class="i-wrapper"><i class="i-group-white icon-photo"></i></div><div class="text-wrapper">Sélectioner une photo sur mon ordinateur</div></a>
+                        <div class="file-drope-zone"><div class="i-wrapper"><i class="i-group-white icon-photo"></i></div><div class="text-wrapper">Glisser et deposer une photo ici pour la telecharger</div>
+                    </fieldset>
+                    <script type="text/javascript">
+                        $('#upload-photo-file-btn').click(function() {
+                            $('input#image').click();
+                            return false;
+                        });
+                        $('input[type="file"]').change(function() {
+                            if ($(this).val() != '') {
+                                $('form#photos-form').submit();
+                            }
+                        });
+                    </script>
+                    <div class="upload-descr">
+                        <p class="cyan">Les photos sont importantes sur OMMI.</p>
+                        <p class="drk-gray">Elles aident  les bons candidats a se faire une meiluere idee de votre bien.<br />
+                        Ne les chargez qu'une seules fois:<br />
+                        pour votre confort, OMMI les garde en memoire pour de prochaines locations.</p>
+                    </div>
+                </div>
+                <div class="block-grid grid-inset">
+                    <?php if (!$this->photos): ?>
+                        <fieldset id="photo-wrapper">
+                            <p class="cyan">No photos</p>
+                        </fieldset>
+                    <?php else: ?>
+                        <fieldset id="photo-wrapper">
+                        <label>Choisir la photo principale de l'annonce</label>
+                        <?php
+                        $count = 1;
+                        ?>
+                        <?php foreach ($this->photos as $photo): ?>
+                            <div data-action-url="/user/property/main-photo/item/<?=$this->property->id?>" data-photo-name="<?=$photo['name']?>" class="user-photo-item<?=($photo['link'] == $this->property->main_photo ? ' main' : ' setMainPhoto')?>" title="<?=($photo['link'] == $this->property->main_photo  ? '' : 'Assurez photo principale')?>" style="background: url('<?="/image/by/w/132/h/132/i/" . str_replace("/", '_', $photo['link'])?>');">
+                                <div class="bottom-area">
+                                    <?= $count++ ?>
+                                    <i class="main-photo" title="Photo principale"></i>
+                                    <a href="/user/property/remove-photo/item/<?=$this->property->id?>" class="del-photo" data-photo-name="<?=$photo['name']?>" onClick="return confirm('Effacer la photo, vous êtes shure?');"><i class="del-photo" title="Supprimer photo"></i></a>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                        </fieldset>
+                    <?php endif; ?>
+                    <script type="text/javascript">
+                        function aDelClick() {
+                            $('fieldset#photo-wrapper').css('opacity', 0.3);
+                            $.post($(this).attr('href'), {'photo': $(this).attr('data-photo-name')}, function(data) {
+                                $.get(window.location, function(htmlCode) {
+                                    $('fieldset#photo-wrapper').html($(htmlCode).find('fieldset#photo-wrapper').html());
+                                    $('fieldset#photo-wrapper').css('opacity', 1);
+                                    $('a.del-photo').click(aDelClick);
+                                    $('div.setMainPhoto').click(divSetMainClick);
+                                });
+                            });
+
+                            return false;
+                        }
+
+                        function divSetMainClick() {
+                            $('fieldset#photo-wrapper').css('opacity', 0.3);
+                            $.post($(this).attr('data-action-url'), {'photo': $(this).attr('data-photo-name')}, function(data) {
+                                $.get(window.location, function(htmlCode) {
+                                    $('fieldset#photo-wrapper').html($(htmlCode).find('fieldset#photo-wrapper').html());
+                                    $('fieldset#photo-wrapper').css('opacity', 1);
+                                    $('a.del-photo').click(aDelClick);
+                                    $('div.setMainPhoto').click(divSetMainClick);
+                                });
+                            });
+                        }
+
+                        $('a.del-photo').click(aDelClick);
+                        $('div.setMainPhoto').click(divSetMainClick);
+                    </script>
+                </div>
+
+                <div class="progress-buttons">
+                    <input type="hidden" name="form" id="form-action" value="upload"/>
+                    <a id="description-form-cancel" class="btn btn-gray btn-arrow-prev left" href="#">Étape précédente</a>
+                    <a id="description-form-next" class="btn btn-blue btn-arrow-next right" href="#">Enregistrer et continuer</a>
+                    <script type="text/javascript">
+
+                        $('#description-form-cancel').click(function (event) {
+                            event.preventDefault();
+                            $('#form-action').attr('name', 'cancel');
+                            $('#description-form').submit();
+                        });
+
+                        $('#description-form-next').click(function (event) {
+                            event.preventDefault();
+                            $('#form-action').attr('name', 'next');
+                            $('#description-form').submit();
+                        });
+
+                    </script>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--
 <table border="1" width="100%">
     <tr valign="top">
         <td width="33%">
-            <!-- Left menu -->
+
+
+
+
             <table border="1" width="100%">
                 <tr>
                     <td><?= $this->translate('status') ?>: 40%</td>
@@ -19,41 +142,21 @@
                 </tr>
                 <?php endforeach; ?>
             </table>
-            <!-- /Left menu -->
+
+
+
+
         </td>
         <td>
             <?= $this->form_upload_photo ?>
 
-            <?php if (!$this->photos): ?>
-                <p>No photos</p>
-            <?php else: ?>
-                <ul>
-                <?php foreach ($this->photos as $photo): ?>
-                    <li data-photo="<?= $photo['name'] ?>" style="width:300px;" class="photo_info">
-                        <ul>
-                            <li style="width:300px;text-align:right;"><a href="#" class="remove_photo" style="color:red;">[X]</a></li>
-                        <?php if ($photo['link'] == $this->property->main_photo): ?>
-                            <li style="display:none;width:300px;text-align:center;" class="select_photo"><a href="#" style="color:gray;">[.]</a></li>
-                            <li style="width:300px;text-align:center;color:green;" class="selected_photo">[V]</li>
-                        <?php else: ?>
-                            <li style="width:300px;text-align:center;" class="select_photo" ><a href="#" style="color:gray;">[.]</a></li>
-                            <li style="display:none;width:300px;text-align:center;color:green;" class="selected_photo">[V]</li>
-                        <?php endif; ?>
-                        </ul>
-                        
-                        <hr />
-                        
-                        <?= $this->imageResize(300, 300, $photo['link']) ?>
-                    </li>
-                <?php endforeach; ?>
-                </ul>
-            <?php endif; ?>
             <hr />
 
             <?= $this->form_next_step ?>
         </td>
     </tr>
 </table>
+-->
 <?php
     $function = "$(function() {
         $('.remove_photo').on('click', function(){

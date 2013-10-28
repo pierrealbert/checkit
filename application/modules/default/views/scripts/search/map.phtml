@@ -1,31 +1,19 @@
 <?php
-$fields = $this->form->getElements();
+$this->headLink()->appendStylesheet('/css/ui/jquery-ui-1.10.3.css');
+$this->headScript()->appendFile('/assets/js/search_form.js');
 ?>
 <script type="text/javascript">
-    var initialRadioValues = new Array();
     $(document).ready(function(){
-        var arrIndx = 0;
-        $('form[name="searchForm"]').find('input[type="radio"]:checked').each(function() {
-            initialRadioValues[arrIndx++] = $(this).attr('id');
-        });
-        $('form[name="searchForm"]').find('input[type="checkbox"]:checked').each(function() {
-            initialRadioValues[arrIndx++] = $(this).attr('id');
-        });
-
-        $('input.btn-tous').click(function() {
-            $(this).parent().find('input[type="radio"]:checked').prop('checked', false);
-            $(this).parent().find('input[type="checkbox"]:checked').prop('checked', false);
-            for (var i=0; i<initialRadioValues.length; i++) {
-                if ($(this).parent().find('input#'+initialRadioValues[i]).length) {
-                    $('input#'+initialRadioValues[i]).prop('checked', true);
-                }
-            }
-        });
-
         $('a#btnSearch1').click(function() {
             $('form[name="searchForm"]').submit();
             return false;
         });
+
+        $('a#bottomSearchButton').click(function() {
+            $('form[name="searchForm"]').submit();
+            return false;
+        });
+
     });
 </script>
 <div class="title-row-search bg-carte">
@@ -44,7 +32,7 @@ $fields = $this->form->getElements();
             <li><a href="<?=$this->url(array('controller' => 'search', 'action' => 'map'), false, true)?>" class="active menu-icons icon-carte">Recherche<br> par carte</a></li>
         </ul>
     </div>
-    <form action="<?=$this->form->getAction()?>" name="searchForm" method="POST">
+    <form action="<?=$this->form->getAction()?>" name="searchForm"  id="form-search-map" method="POST">
     <div class="search-box">
         <div class="search-left">
             <div class="search-budget">
@@ -64,7 +52,7 @@ $fields = $this->form->getElements();
             <?=$this->form->getElement('regions_selected')?>
         </div>
     </div>
-    </form>
+    <!--</form>-->
 </div>
 
 <div class="grid grid-dark">
@@ -78,9 +66,9 @@ $fields = $this->form->getElements();
         </p>
     </div>
     <div class="box-carte carte-black">
-        <img src="/./assets/images/search-carte-black.png">
+        <?= $this->googleMap(48.857261, 2.346611, array('width' => 1003, 'height' => 621, 'margin' => 0), array('zoom' => 8), "var regions = {$this->regionsJson};\ninitSearchMap(map, regions)") ?>
         <div class="box-btn-return">
-            <a href="#" class="btn btn-gray-lite">Retour à la carte générale</a>
+            <a href="#" class="btn btn-gray-lite btn-return">Retour à la carte générale</a>
         </div>
     </div>
     <div class="box-btn-search">
@@ -102,487 +90,33 @@ $fields = $this->form->getElements();
 <div class="box-universal">
 <label class="name-title-black">75 - Paris</label>
 <div class="box-all-input">
-<form>
-<div class="box-input">
-    <input type="checkbox"  class="input-pretty" id='Choice1' name='Choice' />
-    <label for='Choice1' class="btn-input-grayer">
-        1<sup>er</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice2' name='Choice'>
-    <label for='Choice2' class="btn-input-gray-lite">Les Halles</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice3' name='Choice'>
-    <label for='Choice3' class="btn-input-gray-lite">Palais Royal</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice4' name='Choice'>
-    <label for='Choice4' class="btn-input-gray-lite">St Germain</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice5' name='Choice'>
-    <label for='Choice5' class="btn-input-gray-lite">Vendôme</label>
-</div>
-<div class="box-input">
-    <input type="checkbox"  class="input-pretty"id='Choice6' name='Choice' />
-    <label for='Choice6' class="btn-input-grayer">
-        2<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice7' name='Choice'>
-    <label for='Choice7' class="btn-input-gray-lite">Provence</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice8' name='Choice'>
-    <label for='Choice8' class="btn-input-gray-lite">Sentier</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice9' name='Choice'>
-    <label for='Choice9' class="btn-input-gray-lite">Montorgueil</label>
-</div>
-<div class="box-input">
-    <input type="checkbox"  class="input-pretty" id='Choice10' name='Choice' />
-    <label for='Choice10' class="btn-input-grayer">
-        3<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice11' name='Choice'>
-    <label for='Choice11' class="btn-input-gray-lite">Arts et Métiers</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice12' name='Choice'>
-    <label for='Choice12' class="btn-input-gray-lite">Archives</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice13' name='Choice'>
-    <label for='Choice13' class="btn-input-gray-lite">Enfants Rouge</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice14' name='Choice'>
-    <label for='Choice14' class="btn-input-gray-lite">Saint-Avoye</label>
-</div>
-<div class="box-input">
-    <input type="checkbox" class="input-pretty" id='Choice15' name='Choice' />
-    <label for='Choice15' class="btn-input-grayer">
-        4<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice16' name='Choice'>
-    <label for='Choice16' class="btn-input-gray-lite">Provence</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice17' name='Choice'>
-    <label for='Choice17' class="btn-input-gray-lite">Sentier</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice18' name='Choice'>
-    <label for='Choice18' class="btn-input-gray-lite">Montorgueil</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice19' name='Choice'>
-    <label for='Choice19' class="btn-input-gray-lite">Montorgueil</label>
-</div>
-<div class="box-input">
-    <input type="checkbox" class="input-pretty" id='Choice20' name='Choice' />
-    <label for='Choice20' class="btn-input-grayer">
-        5<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice21' name='Choice'>
-    <label for='Choice21' class="btn-input-gray-lite">Arts et Métiers</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice22' name='Choice'>
-    <label for='Choice22' class="btn-input-gray-lite">Archives</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice23' name='Choice'>
-    <label for='Choice23' class="btn-input-gray-lite">Enfants Rouge</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice24' name='Choice'>
-    <label for='Choice24' class="btn-input-gray-lite">Saint-Avoye</label>
-</div>
-<div class="box-input">
-    <input type="checkbox" class="input-pretty" id='Choice25' name='Choice' />
-    <label for='Choice25' class="btn-input-grayer">
-        6<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice26' name='Choice'>
-    <label for='Choice26' class="btn-input-gray-lite">Provence</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice27' name='Choice'>
-    <label for='Choice27' class="btn-input-gray-lite">Sentier</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice28' name='Choice'>
-    <label for='Choice28' class="btn-input-gray-lite">Montorgueil</label>
-</div>
-<div class="box-input">
-    <input type="checkbox" class="input-pretty" id='Choice29' name='Choice' />
-    <label for='Choice29' class="btn-input-grayer">
-        7<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice30' name='Choice'>
-    <label for='Choice30' class="btn-input-gray-lite">Arts et Métiers</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice31' name='Choice'>
-    <label for='Choice31' class="btn-input-gray-lite">Archives</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice32' name='Choice'>
-    <label for='Choice32' class="btn-input-gray-lite">Enfants Rouge</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice33' name='Choice'>
-    <label for='Choice33' class="btn-input-gray-lite">Saint-Avoye</label>
-</div>
-<div class="box-input">
-    <input type="checkbox" class="input-pretty" id='Choice34' name='Choice' />
-    <label for='Choice34' class="btn-input-grayer">
-        8<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice35' name='Choice'>
-    <label for='Choice35' class="btn-input-gray-lite">Provence</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice36' name='Choice'>
-    <label for='Choice36' class="btn-input-gray-lite">Sentier</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice37' name='Choice'>
-    <label for='Choice37' class="btn-input-gray-lite">Montorgueil</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice38' name='Choice'>
-    <label for='Choice38' class="btn-input-gray-lite">Montorgueil</label>
-</div>
-<div class="box-input">
-    <input type="checkbox" class="input-pretty" id='Choice39' name='Choice' />
-    <label for='Choice39' class="btn-input-grayer">
-        9<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice40' name='Choice'>
-    <label for='Choice40' class="btn-input-gray-lite">Arts et Métiers</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice41' name='Choice'>
-    <label for='Choice41' class="btn-input-gray-lite">Archives</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice42' name='Choice'>
-    <label for='Choice42' class="btn-input-gray-lite">Enfants Rouge</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice43' name='Choice'>
-    <label for='Choice43' class="btn-input-gray-lite">Saint-Avoye</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice44' name='Choice'>
-    <label for='Choice44' class="btn-input-gray-lite">Enfants Rouge</label>
-</div>
-<div class="box-input">
-    <input type="checkbox" class="input-pretty" id='Choice45' name='Choice' />
-    <label for='Choice45' class="btn-input-grayer">
-        10<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice46' name='Choice'>
-    <label for='Choice46' class="btn-input-gray-lite">Arts et Métiers</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice47' name='Choice'>
-    <label for='Choice47' class="btn-input-gray-lite">Archives</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice48' name='Choice'>
-    <label for='Choice48' class="btn-input-gray-lite">Enfants Rouge</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice49' name='Choice'>
-    <label for='Choice49' class="btn-input-gray-lite">Saint-Avoye</label>
-</div>
-<div class="box-input">
-    <input type="checkbox" class="input-pretty" id='Choice50' name='Choice' />
-    <label for='Choice50' class="btn-input-grayer">
-        11<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice51' name='Choice'>
-    <label for='Choice51' class="btn-input-gray-lite">Provence</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice52' name='Choice'>
-    <label for='Choice52' class="btn-input-gray-lite">Sentier</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice53' name='Choice'>
-    <label for='Choice53' class="btn-input-gray-lite">Montorgueil</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice54' name='Choice'>
-    <label for='Choice54' class="btn-input-gray-lite">Montorgueil</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice55' name='Choice'>
-    <label for='Choice55' class="btn-input-gray-lite">Montorgueil</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice56' name='Choice'>
-    <label for='Choice56' class="btn-input-gray-lite">Sentier</label>
-</div>
-<div class="box-input">
-    <input type="checkbox" class="input-pretty" id='Choice57' name='Choice' />
-    <label for='Choice57' class="btn-input-grayer">
-        12<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice58' name='Choice'>
-    <label for='Choice58' class="btn-input-gray-lite">Arts et Métiers</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice59' name='Choice'>
-    <label for='Choice59' class="btn-input-gray-lite">Archives</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice60' name='Choice'>
-    <label for='Choice60' class="btn-input-gray-lite">Enfants Rouge</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice61' name='Choice'>
-    <label for='Choice61' class="btn-input-gray-lite">Saint-Avoye</label>
-</div>
-<div class="box-input">
-    <input type="checkbox" class="input-pretty" id='Choice62' name='Choice' />
-    <label for='Choice62' class="btn-input-grayer">
-        13<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice63' name='Choice'>
-    <label for='Choice63' class="btn-input-gray-lite">Provence</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice64' name='Choice'>
-    <label for='Choice64' class="btn-input-gray-lite">Sentier</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice65' name='Choice'>
-    <label for='Choice65' class="btn-input-gray-lite">Montorgueil</label>
-</div>
-<div class="box-input">
-    <input type="checkbox" class="input-pretty" id='Choice66' name='Choice' />
-    <label for='Choice66' class="btn-input-grayer">
-        14<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice67' name='Choice'>
-    <label for='Choice67' class="btn-input-gray-lite">Arts et Métiers</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice68' name='Choice'>
-    <label for='Choice68' class="btn-input-gray-lite">Archives</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice69' name='Choice'>
-    <label for='Choice69' class="btn-input-gray-lite">Enfants Rouge</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice70' name='Choice'>
-    <label for='Choice70' class="btn-input-gray-lite">Saint-Avoye</label>
-</div>
-<div class="box-input">
-    <input type="checkbox" class="input-pretty" id='Choice71' name='Choice' />
-    <label for='Choice71' class="btn-input-grayer">
-        15<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice72' name='Choice'>
-    <label for='Choice72' class="btn-input-gray-lite">Provence</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice73' name='Choice'>
-    <label for='Choice73' class="btn-input-gray-lite">Sentier</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice74' name='Choice'>
-    <label for='Choice74' class="btn-input-gray-lite">Montorgueil</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice75' name='Choice'>
-    <label for='Choice75' class="btn-input-gray-lite">Montorgueil</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice76' name='Choice'>
-    <label for='Choice76' class="btn-input-gray-lite">Provence</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice77' name='Choice'>
-    <label for='Choice77' class="btn-input-gray-lite">Sentier</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice78' name='Choice'>
-    <label for='Choice78' class="btn-input-gray-lite">Montorgueil</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice79' name='Choice'>
-    <label for='Choice79' class="btn-input-gray-lite">Montorgueil</label>
-</div>
-<div class="box-input">
-    <input type="checkbox" class="input-pretty" id='Choice71' name='Choice' />
-    <label for='Choice71' class="btn-input-grayer">
-        16<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice80' name='Choice'>
-    <label for='Choice80' class="btn-input-gray-lite">Arts et Métiers</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice81' name='Choice'>
-    <label for='Choice81' class="btn-input-gray-lite">Archives</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice82' name='Choice'>
-    <label for='Choice82' class="btn-input-gray-lite">Enfants Rouge</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice83' name='Choice'>
-    <label for='Choice83' class="btn-input-gray-lite">Saint-Avoye</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice84' name='Choice'>
-    <label for='Choice84' class="btn-input-gray-lite">Enfants Rouge</label>
-</div>
-<div class="box-input">
-    <input type="checkbox" class="input-pretty" id='Choice85' name='Choice' />
-    <label for='Choice85' class="btn-input-grayer">
-        17<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice86' name='Choice'>
-    <label for='Choice86' class="btn-input-gray-lite">Arts et Métiers</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice87' name='Choice'>
-    <label for='Choice87' class="btn-input-gray-lite">Archives</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice88' name='Choice'>
-    <label for='Choice88' class="btn-input-gray-lite">Enfants Rouge</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice89' name='Choice'>
-    <label for='Choice89' class="btn-input-gray-lite">Saint-Avoye</label>
-</div>
-<div class="box-input">
-    <input type="checkbox" class="input-pretty" id='Choice90' name='Choice' />
-    <label for='Choice90' class="btn-input-grayer">
-        18<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice91' name='Choice'>
-    <label for='Choice91' class="btn-input-gray-lite">Provence</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice92' name='Choice'>
-    <label for='Choice92' class="btn-input-gray-lite">Sentier</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice93' name='Choice'>
-    <label for='Choice93' class="btn-input-gray-lite">Montorgueil</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice94' name='Choice'>
-    <label for='Choice94' class="btn-input-gray-lite">Montorgueil</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice95' name='Choice'>
-    <label for='Choice95' class="btn-input-gray-lite">Montorgueil</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice96' name='Choice'>
-    <label for='Choice96' class="btn-input-gray-lite">Sentier</label>
-</div>
-<div class="box-input">
-    <input type="checkbox" class="input-pretty" id='Choice97' name='Choice' />
-    <label for='Choice97' class="btn-input-grayer">
-        19<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice98' name='Choice'>
-    <label for='Choice98' class="btn-input-gray-lite">Arts et Métiers</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice99' name='Choice'>
-    <label for='Choice99' class="btn-input-gray-lite">Archives</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice100' name='Choice'>
-    <label for='Choice100' class="btn-input-gray-lite">Enfants Rouge</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice101' name='Choice'>
-    <label for='Choice101' class="btn-input-gray-lite">Saint-Avoye</label>
-</div>
-<div class="box-input">
-    <input type="checkbox" class="input-pretty" id='Choice102' name='Choice' />
-    <label for='Choice102' class="btn-input-grayer">
-        20<sup>e</sup> Arrondissement
-    </label><br>
-
-    <input type='checkbox'  class="input-pretty" id='Choice103' name='Choice'>
-    <label for='Choice103' class="btn-input-gray-lite">Provence</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice104' name='Choice'>
-    <label for='Choice104' class="btn-input-gray-lite">Sentier</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice105' name='Choice'>
-    <label for='Choice105' class="btn-input-gray-lite">Montorgueil</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice106' name='Choice'>
-    <label for='Choice106' class="btn-input-gray-lite">Provence</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice107' name='Choice'>
-    <label for='Choice107' class="btn-input-gray-lite">Sentier</label>
-
-    <input type='checkbox'  class="input-pretty" id='Choice108' name='Choice'>
-    <label for='Choice108' class="btn-input-gray-lite">Montorgueil</label>
-</div>
+<!--<form action="<?=$this->form->getAction()?>" name="searchForm-bottom"  id="form-search-regions" method="POST">-->
+    <? $curDistrictId = Null ?>
+    <? foreach ($this->allBlockRegions as $region): ?>
+        <? if ($curDistrictId != $region->region_district_id): ?>
+            <? if ($curDistrictId): ?></div><? endif ?>
+            <div class="box-input">
+            <input type="checkbox" class="input-pretty" id="district<?= $region->region_district_id ?>" name="RegionDistrict-<?= $region->region_district_id ?>" />
+            <label class="btn-input-grayer" for="district<?= $region->region_district_id ?>">
+                <?= $region->RegionDistrict->name ?>
+            </label><br>
+        
+            <? $curDistrictId = $region->region_district_id ?>
+        <? endif ?>
+        
+            <input type="checkbox" id="region<?= $region->id ?>" name="region<?= $region->id ?>" class="input-pretty region region<?= $region->id ?>" value="1" <? if (in_array($region->id, $this->regionsSelectedIds)): ?>checked="checked"<? endif ?>>
+            <label for="region<?= $region->id ?>" class="btn-input-gray-lite"><?= $region->name ?></label>
+    <? endforeach ?>
+    
 </form>
 </div>
-</div>
-<div class="box-universal">
-    <label class="name-title-black">93 - Seine-Saint-Denis</label>
-    <div class="box-all-input">
-        <form>
-            <input type='checkbox'  class="input-pretty" id='Choice109' name='Choice'>
-            <label for='Choice109' class="btn-input-gray-lite">Provence</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice110' name='Choice'>
-            <label for='Choice110' class="btn-input-gray-lite">Sentier</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice111' name='Choice'>
-            <label for='Choice111' class="btn-input-gray-lite">Montorgueil</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice112' name='Choice'>
-            <label for='Choice112' class="btn-input-gray-lite">Provence</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice113' name='Choice'>
-            <label for='Choice113' class="btn-input-gray-lite">Sentier</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice114' name='Choice'>
-            <label for='Choice114' class="btn-input-gray-lite">Montorgueil</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice115' name='Choice'>
-            <label for='Choice115' class="btn-input-gray-lite">Sentier</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice116' name='Choice'>
-            <label for='Choice116' class="btn-input-gray-lite">Montorgueil</label>
-        </form>
-    </div>
-</div>
-<div class="box-universal">
-    <label class="name-title-black">94 - Val-de-Marne</label>
-    <div class="box-all-input">
-        <form>
-            <input type='checkbox'  class="input-pretty" id='Choice117' name='Choice'>
-            <label for='Choice117' class="btn-input-gray-lite">Provence</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice118' name='Choice'>
-            <label for='Choice118' class="btn-input-gray-lite">Sentier</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice119' name='Choice'>
-            <label for='Choice119' class="btn-input-gray-lite">Montorgueil</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice120' name='Choice'>
-            <label for='Choice120' class="btn-input-gray-lite">Provence</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice121' name='Choice'>
-            <label for='Choice121' class="btn-input-gray-lite">Sentier</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice122' name='Choice'>
-            <label for='Choice122' class="btn-input-gray-lite">Montorgueil</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice123' name='Choice'>
-            <label for='Choice123' class="btn-input-gray-lite">Sentier</label>
-        </form>
-    </div>
-</div>
-<div class="box-universal">
-    <label class="name-title-black">92 - Hauts-de-Seine</label>
-    <div class="box-all-input">
-        <form>
-            <input type='checkbox'  class="input-pretty" id='Choice124' name='Choice'>
-            <label for='Choice124' class="btn-input-gray-lite">Provence</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice125' name='Choice'>
-            <label for='Choice125' class="btn-input-gray-lite">Sentier</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice126' name='Choice'>
-            <label for='Choice126' class="btn-input-gray-lite">Montorgueil</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice127' name='Choice'>
-            <label for='Choice127' class="btn-input-gray-lite">Provence</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice128' name='Choice'>
-            <label for='Choice128' class="btn-input-gray-lite">Sentier</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice129' name='Choice'>
-            <label for='Choice129' class="btn-input-gray-lite">Montorgueil</label>
-
-            <input type='checkbox'  class="input-pretty" id='Choice130' name='Choice'>
-            <label for='Choice130' class="btn-input-gray-lite">Sentier</label>
-        </form>
-    </div>
 </div>
 </div>
 
 <div class="box-btn-search">
     <a href="" class="btn btn-gray btn-effacer">Effacer mes sélections</a>
     <a href="" class="btn btn-red btn-sauv">Sauvegarder</a>
-    <a href="" class="btn btn-blue">Rechercher</a>
+    <a href="#" id="bottomSearchButton" class="btn btn-blue">Rechercher</a>
 </div>
 </div>
 

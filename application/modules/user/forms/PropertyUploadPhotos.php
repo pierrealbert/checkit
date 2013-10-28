@@ -12,7 +12,7 @@ class User_Form_PropertyUploadPhotos extends Ext_Form
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
 
         $this->addElement('file', 'image', array(
-            'label'         => 'upload_image',
+            'label'         => 'Téléchargement des photos',
             'required'      => true,
             'destination'   => $settings->get('propertyImages.tmpPath'),
             'filters' => array(

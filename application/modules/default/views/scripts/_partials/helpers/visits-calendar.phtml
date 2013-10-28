@@ -1,0 +1,131 @@
+<?php
+
+$monthNames = array(
+    1 => 'Janvier',
+    2 => 'Fevrier',
+    3 => 'Mars',
+    4 => 'Avril',
+    5 => 'Mai',
+    6 => 'Juin',
+    7 => 'Juillet',
+    8 => 'Aout',
+    9 => 'Septembre',
+    10 => 'Octobre',
+    11 => 'Novembre',
+    12 => 'Decembre',
+);
+$weekDayNames = array(
+    1 => 'Lundi',
+    2 => 'Mardi',
+    3 => 'Mercredi',
+    4 => 'Jeudi',
+    5 => 'Vendredi',
+    6 => 'Samedi',
+    7 => 'Dimanche'
+);
+$blockIndex = 0;
+?>
+<div class="block-calendar">
+    <div class="js-months-block">
+    <?php foreach ($this->months as $mIndex => $month): ?>
+
+        <?php if ($mIndex && $mIndex % 2 == 0): ?>
+            </div>
+            <div class="js-months-block" style="display: none;">
+        <?php endif; ?>
+
+        <div class="calendar" data-visits=".js-mon-<?= "$month[year]-$month[index]"; ?>">
+            <div class="name-month-calend">
+                <h2>
+                    <?php if ($mIndex % 2 == 0): ?>
+                        <?php if ($mIndex > 0): ?>
+                            <a href="#" class="btn btn-gray btn-grayer-lite btn-cal-prev">
+                                <i class="i-group-gray icon-prev"></i>
+                            </a>
+                        <?php endif; ?>
+                        <?= $monthNames[ $month['index'] ]; ?>
+                    <?php else: ?>
+                        <?= $monthNames[ $month['index'] ]; ?>
+                        <?php if ($mIndex + 1 < count($this->months)): ?>
+                            <a href="#" class="btn btn-gray btn-grayer-lite name-month-next btn-cal-next">
+                                <i class="i-group-gray icon-next"></i>
+                            </a>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </h2>
+            </div>
+            <div class="inner-cell cell-month">
+                <div class="cell">Lun</div>
+                <div class="cell">Mar</div>
+                <div class="cell">Mer</div>
+                <div class="cell">Jeu</div>
+                <div class="cell">Ven</div>
+                <div class="cell">Sa</div>
+                <div class="cell">Dim</div>
+            </div>
+
+            <div class="js-month-body">
+                <div class="inner-cell">
+                    <?php foreach ($month['days'] as $index => $day): ?>
+                        <?php
+                        $classes = array();
+                        if (!$day['isCurMonth'])
+                            $classes[] = 'cell-next-month';
+                        if ($day['hasVisits'])
+                            $classes[] = 'cell-blue';
+                        if ($day['isToday'])
+                            $classes[] = 'cell-black';
+                        ?>
+                        <?php if ($index && $index % 7 == 0): ?>
+                            <?php $isLastRow = count($month['days']) - 7 == $index; ?>
+                            </div>
+                            <div class="inner-cell <?= $isLastRow ? 'cell-bottom' : ''; ?>">
+                        <?php endif; ?>
+                        <?php if ($day['hasVisits']): ?>
+                            <a href="" class="cell <?= implode(' ', $classes); ?>"><?= $day['day']; ?></a>
+                        <?php else: ?>
+                            <div class="cell <?= implode(' ', $classes); ?>"><?= $day['day']; ?></div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+
+    <?php endforeach; ?>
+    </div>
+
+</div>
+
+<?php if ($this->hasAnyVisits): ?>
+    <h2 class="black-txt">Visites</h2>
+    <div class="block-btn-visites">
+        <?php foreach ($this->months as $mIndex => $month): ?>
+            <?php foreach ($month['visits'] as $visit): ?>
+                <?php $display = $mIndex == 0 ? '' : 'display: none;'; ?>
+                <a href="#" class="btn btn-blue-lite blue-dark w220 <?= "js-mon-$visit[year]-$visit[month]"; ?>" style="<?= $display; ?>">
+                    <?= $weekDayNames[$visit['weekDay']].' '.$visit['day'].' '.$monthNames[$visit['month']].' '.$visit['year']; ?>
+                </a>
+            <?php endforeach; ?>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
+<script type="text/javascript">
+$(function(){
+    var getVisitClasses = function(block)
+    {
+        return $.map(block.find('.calendar'), function(elm){ return $(elm).data('visits'); }).join(',');
+    };
+
+	$('.btn-cal-prev, .btn-cal-next').click(function(e){
+        e.preventDefault();
+        var dir = $(this).hasClass('btn-cal-prev') ? 'prev' : 'next';
+        var curBlock = $(this).closest('.js-months-block');
+        var nextBlock = curBlock.hide()[dir]().show();
+        var newClasses = getVisitClasses(nextBlock);
+        $('.block-btn-visites a').hide();
+        if (newClasses)
+            $(newClasses).show();
+    });
+});
+</script>

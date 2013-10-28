@@ -1,0 +1,22 @@
+<?
+    $action = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+    $steps = array(
+        'location'       => '1 Location',
+        'description'    => '2 Description',
+        'photos'         => '3 Photos',
+        'hunted-profile' => '4 Profil recherché',
+        'visit-dates'    => '5 Dates de visite'            
+    );
+    
+    $step = (int) array_search($action, array_keys($steps));
+?>
+<div class="progress">
+    <h2 class="gray">Étapes</h2>
+    <div id="step-<?= $step ?>" class="progress-step"></div>
+    <span><?= (5 - $step) ?> étapes restantes</span>
+</div>
+<div class="menu">
+    <? foreach ($steps as $key => $label) : ?>
+    <a class="<?= $key == $action ? 'btn btn-blue progress-menu-active' : 'btn btn-gray' ?>" href="#"><?= $label ?></a>
+    <? endforeach; ?>
+</div>

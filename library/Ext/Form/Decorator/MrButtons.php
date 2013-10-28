@@ -32,9 +32,10 @@ class Ext_Form_Decorator_MrButtons extends Ext_Form_Decorator_MchBox
 
         $elHtml = '';
         $count = 0;
+
         foreach ($items as $indx => $itemValue) {
-            $elHtml .= '<input type="radio" class="input-pretty" value="'.$indx.'" name="'.$element->getFullyQualifiedName().'" id ="'.$element->getFullyQualifiedName().'_'.$indx.'" '.($this->getValue($element) === $indx ? 'checked="checked"' : '').' /> '.
-                       '<label for="'.$element->getFullyQualifiedName().'_'.$indx.'" class="'.$this->getLabelClass().'">'.$itemValue.'</label>';
+            $elHtml .= $this->getWrapPre($count).'<input type="radio" class="input-pretty" value="'.$indx.'" name="'.$element->getFullyQualifiedName().'" id ="'.$element->getFullyQualifiedName().'_'.$indx.'" '.($this->getValue($element) == $indx ? 'checked="checked"' : '').' /> '.
+                       '<label for="'.$element->getFullyQualifiedName().'_'.$indx.'" class="'.$this->getLabelClass().'">'.$itemValue.'</label>'.$this->getPostPart($count).$this->getWrapPost($count);
             $count++;
             if ($this->getBrAfter() > 0) {
                 if ($count % $this->getBrAfter() == 0) {

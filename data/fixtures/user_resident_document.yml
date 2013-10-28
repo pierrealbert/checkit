@@ -1,0 +1,32 @@
+Model_UserResidentDocument:
+  UserResidentDocument_1:
+    id: 1
+    user_resident_id: 1
+    file: passport.pdf
+    original_name: passport.pdf
+    type: passport
+  UserResidentDocument_2:
+    id: 2
+    user_resident_id: 1
+    file: student_id.pdf
+    original_name: student_id.pdf
+    type: student_id
+  UserResidentDocument_3:
+    id: 3
+    user_resident_id: 2
+    file: payslip.pdf
+    original_name: payslip.pdf
+    type: payslip
+  UserResidentDocument_4:
+    id: 4
+    user_resident_id: 3
+    file: payslip.pdf
+    original_name: payslip.pdf
+    type: payslip
+  UserResidentDocument_5:
+    id: 5
+    user_resident_id: 1
+    user_resident_garant_id: 1
+    file: payslip.pdf
+    original_name: payslip.pdf
+    type: payslip

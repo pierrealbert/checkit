@@ -215,6 +215,13 @@ class Model_Property extends Model_Base_Property
         return $states_info[$this->state]['action'];
     }
 
+    public function getShortTitle($length = 20)
+    {
+        $len = (mb_strlen($this->title) > $length) ? mb_strripos(mb_substr($this->title, 0, $length), ' ') : $length;
+        $cutStr = mb_substr($this->title, 0, $len);
+        return (mb_strlen($this->title) > $length) ? $cutStr . '...' : $cutStr;
+    }
+
     static public function getNumberOfRooms1Info()
     {
         return array(
@@ -223,7 +230,8 @@ class Model_Property extends Model_Base_Property
             3 => "3",
             4 => "4",
             5 => "5",
-            6 => "6 et+",
+            6 => "6",
+            7 => "7 et+",
         );
     }
 
@@ -233,7 +241,8 @@ class Model_Property extends Model_Base_Property
             1 => "1",
             2 => "2",
             3 => "3",
-            4 => "4 et+",
+            4 => "4",
+            5 => "4 et+",
         );
     }
 
@@ -291,11 +300,11 @@ class Model_Property extends Model_Base_Property
     public static function getValuesGroups()
     {
         return array(
-            'decor' => self::getPlanningOptions(),
-            'outhouse' => self::getOutbuildingOptions(),
-            'outdoor_space' => self::getExteriorOptions(),
-            'building' => self::getBuildingFeatureOptions(),            
-            'heating_system' => self::getHeatingSystemOptions(),
+            'planning'          => self::getPlanningOptions(),
+            'outbuilding'       => self::getOutbuildingOptions(),
+            'exterior'          => self::getExteriorOptions(),
+            'building'          => self::getBuildingFeatureOptions(),            
+            'heating_system'    => self::getHeatingSystemOptions(),
         );
     }
 }

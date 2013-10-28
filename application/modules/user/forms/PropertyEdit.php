@@ -149,21 +149,21 @@ class User_Form_PropertyEdit extends ZendX_JQuery_Form
             'checkedValue'   => '1'
         ));
 
-        $this->addElement('multiCheckbox', 'decor', array(
-            'label'          => 'decor',
-            'multiOptions' => $multiCheckboxses['decor'],
+        $this->addElement('multiCheckbox', 'planning', array(
+            'label'          => 'planning',
+            'multiOptions' => $multiCheckboxses['planning'],
             'separator' => '',
         ));
 
-        $this->addElement('multiCheckbox', 'outhouse', array(
-            'label'          => 'outhouse',
-            'multiOptions' => $multiCheckboxses['outhouse'],
+        $this->addElement('multiCheckbox', 'outbuilding', array(
+            'label'          => 'outbuilding',
+            'multiOptions' => $multiCheckboxses['outbuilding'],
             'separator' => '',
         ));
         
-        $this->addElement('multiCheckbox', 'outdoor_space', array(
-            'label'         => 'outdoor_space',
-            'multiOptions'  => $multiCheckboxses['outdoor_space'],
+        $this->addElement('multiCheckbox', 'exterior', array(
+            'label'         => 'exterior',
+            'multiOptions'  => $multiCheckboxses['exterior'],
             'separator'     => '',
         ));
 

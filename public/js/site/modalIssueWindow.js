@@ -82,15 +82,15 @@ $(function() {
       }
     });
       
-      $(".create_issue").on("click", "a.menu_element", function(event){
-          subject_id = $(this).data('number');
-         $( "#dialog-form" ).dialog( "open" );
-         var currentPropertyinput = $('#property_id');
-         if( ! currentPropertyinput.val()){
-             currentPropertyinput.val(window.currentpropertyId);
-         }
-         //set subject to inout
-         $('#subject_id').val(subject_id);
-      });
-      
-  });
+    $(".create_issue").on("click", "a.menu_element", function(event){
+        subject_id = $(this).data('number');
+       $( "#dialog-form" ).dialog( "open" );
+       var currentPropertyinput = $('#property_id');
+       if( ! currentPropertyinput.val()){
+           currentPropertyinput.val(window.currentpropertyId);
+       }
+       //set subject to inout
+       $('#subject_id').val(subject_id);
+    });
+    
+});

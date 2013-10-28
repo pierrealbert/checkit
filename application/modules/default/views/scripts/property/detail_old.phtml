@@ -1,0 +1,188 @@
+<?php
+if ($this->isInbookmark) {
+    $showNowButton = 'Remove from bookmark';
+    $showWhenClick = 'Add to bookmark';
+} else {
+    $showNowButton = 'Add to bookmark';
+    $showWhenClick = 'Remove from bookmark';
+}
+?>
+
+<div id="formessage" style="color: red">
+
+</div>
+<div>
+    <h1>Ad Details</h1>
+    <a href="<?= $this->url(array('controller' => 'test', 'action' => 'ad-list'), null, true) ?>" class="back_to_resaults"><?= $this->translate('back_to_resaults') ?></a>
+
+    <button class="add_to_bookmark">
+        <?php echo $showNowButton; ?>
+    </button>
+
+    <!-- AddToAny BEGIN -->
+    <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
+        <span class="ui-button-text">Share</span>
+    </a>
+
+
+
+    <script type="text/javascript">
+        a2a_config = {
+            linkname: 'Example Page 1',
+            linkurl: 'http://www.example.com/page_1.html'
+        };
+    </script>
+
+    <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+    <!-- AddToAny END -->
+
+    <?php if ($this->previous_and_next['previous']): ?>
+        <a href="<?= $this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $this->previous_and_next['previous']), null, true) ?>" class="previous">Previous</a>
+    <?php else: ?>
+        <button disabled="disabled" class="previous">Previous</button>
+    <?php endif; ?>
+
+    <?php if ($this->previous_and_next['next']): ?>
+        <a href="<?= $this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $this->previous_and_next['next']), null, true) ?>" class="next">Next</a>
+    <?php else: ?>
+        <button disabled="disabled" class="next">Next</button>
+    <?php endif; ?>
+
+</div>
+
+<div>
+    <table width="100%">
+        <tr>
+            <td width="20%">
+                <a class="open-in-modal btn btn-blue" href="<?= $this->url(array('controller' => 'property', 'action' => 'ajax-apply', 'item' => $this->property->id), null, true) ?>"><?= $this->translate('apply'); ?></a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<div id="propertyTtabs1" style="display:none;">
+    <ul>
+        <li><a href="#description"><?= $this->translate('description') ?></a></li>
+        <li><a href="#photos"><?= $this->translate('photos') ?></a></li>
+        <li><a href="#map"><?= $this->translate('map') ?></a></li>
+        <li><a href="#calendar"><?= $this->translate('calendar') ?></a></li>
+    </ul>
+
+    <div id="description">
+        <table width="100%">
+            <tr>
+                <td></td>
+                <td width="200px">
+                    <ul  id="menu">
+                        <li>
+                            <?php if ($this->subjects) : ?>
+                                <a href="#">Report an issue</a>
+                                <ul class="create_issue">
+                                    <?php foreach ($this->subjects as $bubject) : ?>
+                                        <li>
+                                            <a class="menu_element" data-number="<?php echo $bubject->id; ?>" href="#"><?php echo $bubject->subject_name; ?></a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endif; ?>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <div id="dialog-form" title="">
+            <p class="validateTips">All form fields are required.</p>
+            <?php echo $this->formIssue; ?>
+        </div>
+    </div>
+
+    <div id="photos">
+        <h2>Photos</h2>
+
+        <table width="100%">
+            <tr>
+                <td align="center" valign="center">
+                    <div id="slider2">
+                        <?= $this->imageResize(600, 600, $this->property->main_photo, array('class' => 'slide')) ?>
+                        <?php foreach ($this->photos as $photo): ?>
+                            <?php if ($photo['link'] != $this->property->main_photo): ?>
+                                <?= $this->imageResize(600, 600, $photo['link'], array('class' => 'slide hidden')) ?>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
+                    <button id="previous_photo2">&lt;</button>
+                    <button id="next_photo2">&gt;</button>
+                </td>
+                <td width="33%" valign="top">
+                    <div id="thumbs">
+                        <?php $goto = 0; ?>
+                        <a href="#" data-slide-index="<?= $goto ?>" class="goto"><?= $this->imageResize(100, 100, $this->property->main_photo) ?></a>
+                        <?php foreach ($this->photos as $photo): ?>
+                            <?php if ($photo['link'] != $this->property->main_photo): ?>
+                                <?php ++$goto; ?>
+                                <a href="#" data-slide-index="<?= $goto ?>" class="goto"><?= $this->imageResize(100, 100, $photo['link']) ?></a>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
+                    <hr />
+                    <button class="add_to_bookmark">
+                        <?php echo $showNowButton; ?>
+                    </button><br />
+                    <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
+                        <span class="ui-button-text">Share</span>
+                    </a>
+                    <script type="text/javascript">
+                        a2a.init('page');
+                    </script>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="map">
+        <h2>Map</h2>
+
+        <div id="map_canvas" style="width:600px; height:400px"></div>
+
+        <table width="100%">
+            <tr>
+                <td width="33%">Description</td>
+                <td width="33%">Center</td>
+                <td width="33%">
+                    <button class="add_to_bookmark">
+                        <?php echo $showNowButton; ?>
+                    </button><br />
+                    <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
+                        <span class="ui-button-text">Share</span>
+                    </a>
+                    <script type="text/javascript">
+                        a2a.init('page');
+                    </script>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="calendar">
+        <h2>Calendar</h2>
+
+        <div id="datepicker"></div>
+
+        <table width="100%">
+            <tr>
+                <td>Description</td>
+                <td width="33%">
+                    <button class="add_to_bookmark">
+                        <?php echo $showNowButton; ?>
+                    </button><br />
+                    <a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only a2a_dd" href="http://www.addtoany.com/share_save">
+                        <span class="ui-button-text">Share</span>
+                    </a>
+                    <script type="text/javascript">
+                        a2a.init('page');
+                    </script>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

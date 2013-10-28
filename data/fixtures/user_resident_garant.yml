@@ -1,0 +1,31 @@
+Model_UserResidentGarant:
+  UserResidentGarant_1:
+    id: 1
+    user_resident_id: 1
+    type: family
+    amount: 500
+  UserResidentGarant_2:
+    id: 2
+    user_resident_id: 1
+    type: employer
+    amount: 500
+  UserResidentGarant_3:
+    id: 3
+    user_resident_id: 2
+    type: friend
+    amount: 300    
+  UserResidentGarant_4:
+    id: 4
+    user_resident_id: 3
+    type: employer
+    amount: 500    
+  UserResidentGarant_5:
+    id: 5
+    user_resident_id: 3
+    type: friend
+    amount: 580    
+  UserResidentGarant_6:
+    id: 6
+    user_resident_id: 3
+    type: family
+    amount: 550        

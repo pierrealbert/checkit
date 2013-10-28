@@ -1,0 +1,72 @@
+<?= $this->contentHeader('my_candidates') ?>
+
+<?php if (!$this->ads): ?>
+<p><?= $this->translate("Ads not found") ?></p>
+<?php else: ?>
+<div class="properties-col" style="width: 300px; float: left;">
+    <?php foreach($this->ads as $ad): ?>
+    <div class="property-item" data-property-id="<?= $ad->id ?>" style="margin: 5px; border: 1px solid">
+        <div class="property-image"><?= $this->imageResize(100, 100, $ad->main_photo) ?></div>
+        <div class="property-info">
+            <p ><?= $ad->title ?></p>
+            <p ><?= $ad->address ?></p>
+            <p ><?= count($this->applicationsPerProperty[$ad->id]['awaiting']) + count($this->applicationsPerProperty[$ad->id]['accepted']) ?> <?= $this->translate('candidates') ?></p>
+
+        </div>
+        <div class="property-price"><?= $ad->price ?></div>
+    </div>
+    <?php endforeach; ?>
+</div>
+<div class="dates-col" style="width: 300px; float: left;">
+    <?php foreach($this->ads as $ad): ?>
+    <!-- dates for the property #<?= $ad->id ?> -->
+    <div class="dates-inner" data-property-id="<?= $ad->id ?>">
+        <div id="p<?= $ad->id ?>-wating-candidates-item" class="wating-candidates-item date-item" style="margin: 5px; border: 1px solid">
+            <?= $this->translate('awaiting_candidates') ?>
+        </div>
+        <div id="p<?= $ad->id ?>-selected-candidates-item" class="selected-candidates-item date-item" style="margin: 5px; border: 1px solid">
+            <?= $this->translate('selected_candidates') ?>
+        </div>
+        <?php foreach ($ad->PropertyVisitDates as $index => $visitDate): ?>
+        <div id="p<?= $ad->id ?>-visit-date-item-<?= $visitDate->id ?>" class="visit-date-item date-item" data-visit-date-id="<?= $visitDate->id ?>" style="margin: 5px; border: 1px solid">
+            <p ><?= $this->translate('visit') ?> <?= $index + 1 ?></p>
+            <p><?= $this->date($visitDate->availability) ?></p>
+        </div>
+        <?php endforeach ?>
+    </div>
+    <?php endforeach; ?>
+</div>
+<div class="candidates-col" style="width: 300px; float: left;">
+    <?php foreach($this->ads as $ad): ?>
+        <div class="candidates-inner" data-candidates-for="p<?= $ad->id ?>-wating-candidates-item">
+            <? if (count($this->applicationsPerProperty[$ad->id]['awaiting']) > 0): ?>
+                <? foreach ($this->applicationsPerProperty[$ad->id]['awaiting'] as $application): ?>
+                    <?= $this->partial('_partials/my-candidate.phtml', array('application' => $application)) ?>
+                <? endforeach ?>
+            <? else: ?>
+                <div style="margin: 5px; border: 1px solid"><?= $this->translate('no_awaiting_candidates_text') ?></div>
+            <? endif ?>
+        </div>
+        <div class="candidates-inner" data-candidates-for="p<?= $ad->id ?>-selected-candidates-item">
+            <? if (count($this->applicationsPerProperty[$ad->id]['accepted']) > 0): ?>
+                <? foreach ($this->applicationsPerProperty[$ad->id]['accepted'] as $application): ?>
+                    <?= $this->partial('_partials/my-candidate.phtml', array('application' => $application)) ?>
+                <? endforeach ?>
+            <? else: ?>
+                <div style="margin: 5px; border: 1px solid"><?= $this->translate('no_accepted_candidates_text') ?></div>
+            <? endif ?>
+        </div>
+        <?php foreach ($ad->PropertyVisitDates as $index => $visitDate): ?>
+            <!-- candidates for property #<?= $ad->id ?> date <?= $visitDate->availability ?> -->
+            <div class="candidates-inner" data-candidates-for="p<?= $ad->id ?>-visit-date-item-<?= $visitDate->id ?>">
+                <? foreach ($this->applicationsPerProperty[$ad->id]['accepted'] as $application): ?>
+                    <? if($application->property_visit_date_id == $visitDate->id): ?>
+                        <?= $this->partial('_partials/my-candidate.phtml', array('application' => $application)) ?>
+                    <? endif ?>
+                <? endforeach ?>
+            </div>
+        <?php endforeach ?>
+    <?php endforeach; ?>
+</div>
+<div style="width:100px;line-height:1px;">&nbsp;</div>
+<?php endif; ?>

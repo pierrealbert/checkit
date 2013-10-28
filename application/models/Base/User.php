@@ -34,6 +34,7 @@
  * @property Doctrine_Collection $UserResident
  * @property Doctrine_Collection $UserMessage
  * @property Doctrine_Collection $Property
+ * @property Doctrine_Collection $PropertyApplication
  * @property Doctrine_Collection $Favorite
  * @property Doctrine_Collection $PropertyIssue
  * @property Doctrine_Collection $Search
@@ -188,6 +189,10 @@ abstract class Model_Base_User extends Ext_Doctrine_Record
         $this->hasMany('Model_Property as Property', array(
              'local' => 'id',
              'foreign' => 'owner_id'));
+
+        $this->hasMany('Model_PropertyApplication as PropertyApplication', array(
+             'local' => 'id',
+             'foreign' => 'visitor_id'));
 
         $this->hasMany('Model_Favorite as Favorite', array(
              'local' => 'id',

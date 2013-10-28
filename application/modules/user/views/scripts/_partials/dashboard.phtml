@@ -1,0 +1,31 @@
+<?php
+
+$tabls = array(
+    'index'         => 'Résumé',
+    'documents'     => 'Mon dossier',
+    'searches'      => 'Mes recherches', 
+    'candidatures'  => 'Mes candidatures',
+    'services'      => 'Mes services',
+    'my-account'    => 'Mon compte'
+);
+
+$currController = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+
+?>
+
+    <div class="grid">
+        <div class="menu-annonce menu-tabl">
+            <ul>
+                <? foreach ($tabls as $controller => $label) : ?>
+                <li><a href="<?= $this->url(array('module' => 'user', 'controller' => $controller, 'action' => 'index'), null, false) ?>" <?= $currController == $controller ? 'class="active"' : '' ?>><?= $this->translate($label) ?></a></li>
+                <? endforeach; ?>
+            </ul>
+        </div>
+        <?= $this->dashboardContent ?>
+        <div class="box-btn-nav-resume">
+            <a href="#" class="btn btn-red">Profil Ommium</a>
+            <a href="#" class="btn btn-blue">Dossier de candidature</a>
+            <a href="#" class="btn btn-gray icon-book">Guide du Locataire</a>
+            <a href="#" class="btn btn-gray icon-hand">J’ai trouvé mon appart !</a>
+        </div>                
+    </div>

@@ -1,0 +1,5 @@
+<div class="property-application" style="margin: 5px; border: 1px solid">
+    <?= $this->application->User->getFullName() ?>
+    <p><a href="<?= $this->url(array('module' => 'user', 'controller' => 'my-account', 'action' => 'candidate', 'application' => $this->application->id), null, true) ?>"><?= $this->translate('view_profile') ?></a></p>
+    <?= $this->candidateRating($this->application->id, $this->application->rate) ?>
+</div>

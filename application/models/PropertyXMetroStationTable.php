@@ -16,4 +16,5 @@ class Model_PropertyXMetroStationTable extends Ext_Doctrine_Table
     {
         return Doctrine_Core::getTable('Model_PropertyXMetroStation');
     }
+
 }

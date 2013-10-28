@@ -1,0 +1,18 @@
+<?php if ($this->pageCount): ?>
+    <div class="grid grid-dark grid-block">
+        <p class="page-number"><?= $this->firstItemNumber ?> - <?= $this->lastItemNumber?> sur <?= $this->totalItemCount ?> annonces</p>
+        <div class="box-btn-page">
+            <?php if (isset($this->previous)): ?>
+                <a href="<?=$this->url(array('page' => $this->previous))?>" class="btn btn-dark btn-page"><i class="icon-left"></i></a>
+            <?php endif; ?>
+
+            <?php foreach ($this->pagesInRange as $page): ?>
+                <a href="<?=$this->url(array('page' => $page))?>" class="btn btn-dark btn-page<?=($page == $this->current ? ' active-page' : '')?>"><?=$page?></a>
+            <?php endforeach; ?>
+
+            <?php if (isset($this->next)): ?>
+                <a href="<?=$this->url(array('page' => $this->next))?>" class="btn btn-dark btn-page"><i class="icon-right"></i></a>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php endif; ?>

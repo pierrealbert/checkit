@@ -4,6 +4,7 @@
 	height: 155px;
 	padding-top: 20px;
 }
+
 .txt-annonce{
 	font-size: 16px;
 	font-weight: bold;
@@ -170,6 +171,12 @@
 	background-repeat: no-repeat;
 	background-position: 2px 0;
 	padding: 0 0 0 18px;
+}
+.box-btn-page .icon-left{
+    background-image: url(../images/icon-left.png);
+    background-repeat: no-repeat;
+    background-position: 2px 0;
+    padding: 0 0 0 18px;
 }
 .box-btn-page .active-page{
 	background: #198e9c;
@@ -370,4 +377,172 @@
 .title-row-metro .yellow-line-metro .name-line .line4{
 	top: -14px;
 	right: 161px;
+}
+
+.title-row-results.results-metro{
+    background: url(../images/bg-search-metro-header.png) repeat-x;
+    height: 332px;
+    padding-top: 10px;
+}
+
+.container-line-metro{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    height: 170px;
+}
+
+.line-title {
+    margin-left: 142px;
+}
+.line-number {
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-top: 6px;
+}
+.line-name {
+    float: left;
+    font-size: 15px;
+    font-weight: normal;
+    margin-left: 10px;
+    margin-top: 7px;
+}
+.line-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    text-align: center;
+    cursor: pointer;
+}
+.line-circle.rer {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+    background-color: #ffffff;
+    text-align: center;
+    border: solid 2px;
+}
+.line-circle div.number {
+    font-family: Arial;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 32px;
+    float: left;
+}
+.line-circle.rer div.number {
+    line-height: 28px !important;
+}
+.line-circle div.number.align1 {
+    width: 100%;
+    text-align: center;
+}
+.line-circle div.number.align2 {
+    margin-left: 3px;
+}
+.line-circle div.line-str {
+    font-family: Arial;
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 32px;
+    float: left;
+}
+
+.line-wrapper {
+    width: 100%;
+    padding-top: 70px;
+    position: relative;
+}
+
+.line-wrapper div.line-line {
+    width: 100%;
+    height: 16px;
+}
+
+.line-wrapper .station {
+    position: absolute;
+    left: 50%;
+    width: 176px;
+}
+.line-wrapper .station.main {
+    top: 17px;
+    margin-left: -88px;
+}
+.line-wrapper .station.left2 {
+    top: 30px;
+    margin-left: -264px;
+}
+.line-wrapper .station.left1 {
+    top: 30px;
+    margin-left: -440px;
+}
+.line-wrapper .station.right2 {
+    top: 30px;
+    margin-left: 88px;
+}
+.line-wrapper .station.right1 {
+    top: 30px;
+    margin-left: 264px;
+}
+
+.line-wrapper .station.main .station-name {
+    margin-bottom: 0px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 18px;
+    width: 100%;
+    text-align: center;
+    height: 34px;
+    overflow: hidden;
+}
+.line-wrapper .station .station-name {
+    margin-bottom: 0px;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 14px;
+    width: 100%;
+    text-align: center;
+    height: 28px;
+    overflow: hidden;
+}
+
+.line-wrapper .station .station-circle{
+    width: 40px;
+    height: 40px;
+    margin-left: 61px;
+    border-radius: 50%;
+
+    cursor: pointer;
+}
+.line-wrapper .station.main .station-circle{
+    width: 54px;
+    height: 54px;
+    margin-left: 61px;
+    border-radius: 50%;
+    overflow: hidden;
+
+    cursor: default;
+}
+.line-wrapper .station.main .station-circle .inner{
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: auto;
+    margin-top: 14px;
+    text-align: center;
+    background-color: #ffffff;
+}
+.line-wrapper .other-lines {
+    position: absolute;
+    left: 50%;
+    top: 115px;
+}
+.line-wrapper .other-lines .line-circle {
+    margin-right: 10px;
 }

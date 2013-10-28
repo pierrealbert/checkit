@@ -1,0 +1,12 @@
+<h2 class="black-txt txt-small">Profil</h2>
+<div class="box-info-universal bg-circle">
+    <h2 class="black-txt"><?= $this->currUser->first_name ?> <?= $this->currUser->last_name ?></h2>
+    <span class="blue"><?= $this->currUser->email ?></span><br>
+    <span class="red">profil Ommi+</span>
+    <p>
+        <?= $this->currUser->searchesCount() ?> recherches<br>
+        <?= $this->currUser->getApplicationsCount() ?> candidatures<br>
+        <?= $this->currUser->getAcceptedAppsCount() ?> candidatures acceptées
+    </p>
+    <a href="<?= $this->url(array('module' => 'user', 'controller' => 'my-account'), null, false) ?>" class="btn btn-gray">Compléter mon profil</a>
+</div>

@@ -1,0 +1,15 @@
+Model_Search:
+  Search_1:
+    user_id: 5	
+    search_type: main 	
+    is_temp: 0
+    name: Budget and Surface Search
+    found_items: 6
+    conditions: a:2:{s:10:"max_budget";a:3:{s:5:"field";s:32:"amount_of_rent_excluding_charges";s:5:"value";s:4:"2000";s:4:"sign";s:2:"<=";}s:8:"min_size";a:3:{s:5:"field";s:4:"size";s:5:"value";s:2:"10";s:4:"sign";s:2:">=";}}
+  Search_2:
+    user_id: 5	
+    search_type: main 	
+    is_temp: 0
+    name: Surface Search
+    found_items: 10
+    conditions: a:16:{s:15:"region_block_id";a:2:{s:4:"sign";s:1:"=";s:5:"value";s:3:"101";}s:10:"min_budget";a:3:{s:5:"field";s:32:"amount_of_rent_excluding_charges";s:5:"value";s:3:"100";s:4:"sign";s:2:">=";}s:10:"max_budget";a:3:{s:5:"field";s:32:"amount_of_rent_excluding_charges";s:5:"value";s:4:"2000";s:4:"sign";s:2:"<=";}s:8:"min_size";a:3:{s:5:"field";s:4:"size";s:5:"value";s:2:"10";s:4:"sign";s:2:">=";}s:8:"max_size";a:3:{s:5:"field";s:4:"size";s:5:"value";s:4:"2000";s:4:"sign";s:2:"<=";}s:12:"is_furnished";a:2:{s:4:"sign";s:1:"=";s:5:"value";s:1:"1";}s:16:"number_of_rooms1";a:1:{i:0;a:2:{s:4:"sign";s:2:">=";s:5:"value";s:1:"5";}}s:13:"property_type";a:6:{i:0;a:2:{s:4:"sign";s:1:"=";s:5:"value";s:1:"1";}i:1;a:2:{s:4:"sign";s:1:"=";s:5:"value";s:1:"2";}i:2;a:2:{s:4:"sign";s:1:"=";s:5:"value";s:1:"3";}i:3;a:2:{s:4:"sign";s:1:"=";s:5:"value";s:1:"4";}i:4;a:2:{s:4:"sign";s:1:"=";s:5:"value";s:1:"5";}i:5;a:2:{s:4:"sign";s:1:"=";s:5:"value";s:1:"6";}}s:16:"number_of_rooms2";a:1:{i:0;a:2:{s:4:"sign";s:2:">=";s:5:"value";s:1:"5";}}s:10:"is_roomate";a:1:{i:0;a:2:{s:4:"sign";s:1:"=";s:5:"value";s:1:"1";}}s:8:"planning";a:3:{i:0;a:2:{s:4:"sign";s:1:"=";s:5:"value";s:21:"is_separate_restrooms";}i:1;a:2:{s:4:"sign";s:1:"=";s:5:"value";s:16:"is_parquet_floor";}i:2;a:2:{s:4:"sign";s:1:"=";s:5:"value";s:12:"is_fireplace";}}s:11:"outbuilding";N;s:8:"exterior";a:1:{i:0;a:2:{s:4:"sign";s:1:"=";s:5:"value";s:10:"is_terrace";}}s:8:"building";a:1:{i:0;a:2:{s:4:"sign";s:1:"=";s:5:"value";s:11:"is_guardian";}}s:14:"heating_system";a:1:{i:0;a:2:{s:4:"sign";s:1:"=";s:5:"value";s:10:"is_central";}}s:14:"lease_duration";a:2:{s:4:"sign";s:2:"<=";s:5:"value";s:1:"2";}}

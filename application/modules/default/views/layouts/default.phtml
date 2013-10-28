@@ -5,13 +5,22 @@
 		'type'  => 'image/x-icon'
     ));
 
+    $this->headLink()->appendStylesheet('/assets/css/chosen/chosen.css');
     $this->headLink()->appendStylesheet('/assets/css/style.css');
+	//$this->headLink()->appendStylesheet('http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css');
+
     $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=' . $this->getEncoding());
     $this->headScript()->appendFile('/assets/js/dropdown.js');
-    $this->headScript()->appendFile('/js/common.js');
     $this->headScript()->appendFile('/js/jquery.form.js');
     $this->headScript()->appendFile('/assets/js/jquery.the-modal.js');
-    $this->headMeta()->appendHttpEquiv('Content-Language', 'en')
+    $this->headScript()->appendFile('/assets/js/chosen.jquery.min.js');
+    $this->headScript()->appendFile('/js/common.js');
+    $this->headMeta()->appendHttpEquiv('Content-Language', 'en');
+
+    if (!empty($this->homeHeader)) {
+        $this->headLink()->appendStylesheet('/css/ui/jquery-ui-1.10.3.css');
+        $this->headLink()->appendStylesheet('/assets/css/search_form.css');
+    }
 ?>
 <?= $this->doctype() ?>
 <html>

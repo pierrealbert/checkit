@@ -1,0 +1,84 @@
+<div class="tab-search">
+    <h2 class="black-txt txt-small">Mes recherches</h2>
+    <div class="box-info-univ-black">
+        <? foreach ($this->searches as $searchKey => $search) : ?>
+        <div class="grid grid-block">
+            <div class="box-text info-box">
+                <h3 class="title-ad"><?= $this->escape($search->name) ?></h3>
+                <span class="blue-dark"><?= $this->translate('search_' . $search->search_type) ?></span>
+                <div class="box-input-ad-">
+                    <? foreach ($search->getSearchFields() as $key => $field) : ?>
+                    <input type="checkbox" class="input-pretty" id="condition-<?= $searchKey ?>-<?= $key ?>" name="<?= $field ?>"/>
+                    <label for="condition-<?= $searchKey ?>-<?= $key ?>" class="btn-input-gray-lite"><?= $this->translate($field) ?></label>
+                    <? endforeach; ?>
+                </div>
+                <a class="black" href="#">Modifier la recherche</a>
+            </div>
+            <div class="box-text box-center">
+                <p class="gray">Annonces trouvees</p>
+                <p><?= $search->found_items ?></p>
+                <p class="gray">Nouvelles annonces</p>
+                <p>3</p>
+                <a class="btn btn-blue" href="<?= $this->url(array('module' => 'default', 'controller' => 'search', 'action' => 'results', 'search_id' => $search->id), null, false) ?>">Voir les resultats</a>
+            </div>
+            <div class="box-text box-right">
+                <p class="gray">Budget maximum</p>
+                <p><?= $search->issetCondition('max_budget') ? $search->getCondition('max_budget') : '-' ?> €</pre></p>
+                <p class="gray">Surface minimum</p>
+                <p class="size-bottom"><?= $search->issetCondition('min_size') ? $search->getCondition('min_size') : '-' ?> m²</p>
+                <a class="red delete-search" href="<?= $this->url(array('module' => 'user', 'controller' => 'searches', 'action' => 'delete', 'id' => $search->id, 'return' => 'searches'), null, false) ?>">
+                    Supprimer
+                </a>
+            </div>
+        </div>
+        <? endforeach; ?>
+    </div>
+    
+    <a class="btn btn-red w200" href="<?= $this->url(array('module' => 'default', 'controller' => 'search', 'action' => 'standard'), null, false) ?>">Nouvelle rechercher</a>
+    <? if ($this->favorites->count()) : ?>
+    <h2 class="black-txt txt-small">Mes favoris</h2>
+    <div class="box-info-univ-black">
+        <? foreach ($this->favorites as $property) : ?>
+        <div class="grid grid-block">
+            <div class="box-text info-box box-size">
+                <?= $this->imageResize(102, 102, $property->main_photo, array('class' => 'img-ad', 'height' => '104', 'width' => '104')) ?>
+                <h3 class="title-ad"><?= $this->escape($property->title) ?></h3>
+                <div><?= $this->translate($this->propertyType[$property->property_type]) ?> <?= $property->is_furnished ? '<span class="slash">|</span> Meublé' : '' ?>
+                    <br />
+                    <?= $property->address ?> (<?= $property->postcode ?>)<br />
+                    <?= $this->translate('availability') ?> : <?= (date('Y-m-d') < $property->availability) ? $property->availability : $this->translate('right_now') ?><br />
+                    <?= $this->translate('metro') ?>
+                    <? $metro = $property->getNearbyMetroStation() ?>
+                    <?= $metro ? $metro->name : '-' ?>
+                </div>
+            </div>
+            <div class="box-text price-box">
+                <p class="price-small"><?= $property->number_of_rooms1 ?> €</p>
+                <p><?= $property->size ?> m²</p>
+                <p><?= $property->number_of_rooms1 ?> pièces</p>
+            </div>
+            <div class="box-text box-link">
+                <div class="box-btn-voir">
+                    <a class="btn btn-blue" href="<?= $this->url(array('module' => 'default', 'controller' => 'property', 'action' => 'detail', 'item' => $property->id), null, false) ?>">Voir l'annonce</a><br>
+                </div>
+                <a class="red delete-favorite" href="<?= $this->url(array('module' => 'user', 'controller' => 'favorites', 'action' => 'delete', 'id' => $property->id, 'return' => 'searches'), null, false) ?>">Supprimer</a>
+            </div>
+        </div>
+        <? endforeach; ?>
+    </div>
+    <? endif ; ?>
+</div>
+<script type="text/javascript">
+    
+    $('.delete-search').click(function (event) {
+        if (!confirm('<?= $this->translate('are_you_sure_want_to_delete_search') ?>')) {
+            event.preventDefault();
+        }
+    });
+    
+    $('.delete-favorite').click(function (event) {
+        if (!confirm('<?= $this->translate('are_you_sure_want_to_delete_favorite') ?>')) {
+            event.preventDefault();
+        }
+    });
+</script>

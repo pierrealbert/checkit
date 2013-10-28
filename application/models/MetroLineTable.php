@@ -16,4 +16,10 @@ class Model_MetroLineTable extends Ext_Doctrine_Table
     {
         return Doctrine_Core::getTable('Model_MetroLine');
     }
+
+    public function findByStationName($stationName, $curStationId) {
+        $statement = Doctrine_Manager::getInstance()->connection();
+        $results = $statement->execute("SELECT t1.id, t1.name, t1.color FROM metro_line AS t1, metro_station AS t2 WHERE t1.id = t2.metro_line_id AND t2.name = '".addslashes($stationName)."' AND t2.id != ".intval($curStationId)." GROUP BY t1.id ORDER BY t1.id");
+        return $results->fetchAll();
+    }
 }

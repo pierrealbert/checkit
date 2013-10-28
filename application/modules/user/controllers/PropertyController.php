@@ -3,25 +3,21 @@
 class User_PropertyController extends Zend_Controller_Action
 {
 
+    public function init()
+    {
+        parent::init();
+        $this->view->contentTitle = 'add_property';    
+    }
+    
     /*
     * Create clear property
     */
     public function newAddAction()
     {
-        $user = $this->_helper->auth->getCurrUser();
-
         $form = new User_Form_PropertyNewAdd();
 
         if ($this->getRequest()->isPost()) {
-            
-            $property = Doctrine::getTable('Model_Property')->create();
-
-            $property->owner_id = $user->id;
-            $property->state    = Model_Property::STATE_RENTAL;
-
-            $property->save();
-
-            $this->_helper->redirector('rental', 'property', 'user', array('item' => $property->id));
+            $this->_helper->redirector('location', 'property', 'user');
         }
 
         $this->view->form = $form;
@@ -30,12 +26,14 @@ class User_PropertyController extends Zend_Controller_Action
     /*
     * Set rental info
     */
-    public function rentalAction()
+    public function locationAction()
     {
         $user = $this->_helper->auth->getCurrUser();
-
-        $property = $this->getProperty($user);
-
+        if ($this->getRequest()->getParam('item') > 0) {
+            $property = $this->getProperty($user);
+        } else {
+            $property = Doctrine::getTable('Model_Property')->create();
+        }
         $form = new User_Form_PropertyRental();
 
         if ($this->getRequest()->isPost()) {
@@ -43,15 +41,31 @@ class User_PropertyController extends Zend_Controller_Action
 
                 $data = $form->getValues();
 
+                if ($data['availability_select'] == '' && trim($data['availability']) == '') {
+                    unset($data['availability']);
+                } elseif ($data['availability_select'] == 'now') {
+                    $data['availability'] = Zend_Date::now()->toString('YYYY-MM-dd');
+                }
+
+                if (isset($data['availability']) && trim($data['availability']) != '') {
+                    $availabilityTime = strtotime($data['availability']);
+                    if ($availabilityTime === false) {
+                        unset($data['availability']);
+                    } else {
+                        $data['availability'] = date('Y-m-d', $availabilityTime);
+                    }
+                } else {
+                    unset($data['availability']);
+                }
+                unset ($data['availability_select']);
+
+                $property->owner_id = $user->id;
+                $property->state    = Model_Property::STATE_DESCRIPTION;                   
                 $property->merge($data);
-
-                $property->state = Model_Property::STATE_DESCRIPTION;
-
                 $property->save();
 
                 $this->_helper->redirector('description', 'property', 'user', array('item' => $property->id));
             } else {
-                
                 $property->state = Model_Property::STATE_RENTAL;
 
                 $property->save();
@@ -60,7 +74,8 @@ class User_PropertyController extends Zend_Controller_Action
 
                 $forms->rental_form = $form;
 
-                $this->_helper->redirector('rental', 'property', 'user', array('item' => $property->id));
+                //$this->_helper->redirector('rental', 'property', 'user');
+                $this->_helper->redirector('location', 'property', 'user');
             }
         } else {
             $forms = new Zend_Session_Namespace('Forms');
@@ -71,13 +86,21 @@ class User_PropertyController extends Zend_Controller_Action
 
                 unset($forms->rental_form);
             } elseif ($property) { // Fill form for edit
+                //mDump($property->toArray());
 
-                $form->populate($property->toArray());
+                $data = $property->toArray();
+                if ($data['availability'] != '') {
+                    $data['availability'] = date('F j, Y', strtotime($data['availability']));
+                    if ($data['availability'] === false) {
+                        $data['availability'] = '';
+                        $data['availability_select'] = 'now';
+                    }
+                }
+                $form->populate($data);
             }
         }
 
-        $this->view->property = $property;
-
+        $this->view->property      = $property;
         $this->view->current_state = Model_Property::STATE_RENTAL;
 
         $this->view->form = $form;
@@ -86,51 +109,39 @@ class User_PropertyController extends Zend_Controller_Action
     public function descriptionAction()
     {
         $user = $this->_helper->auth->getCurrUser();
-
         $property = $this->getProperty($user);
-
         $form = new User_Form_PropertyDescription();
 
         if ($this->getRequest()->isPost()) {
+
+            if ($this->getRequest()->getParam('cancel') == 1) {
+                $this->_helper->redirector('location', 'property', 'user', array('item' => $property->id));
+            }
+            
             if ($form->isValid($this->getRequest()->getParams())) {
-
                 $property->merge($form->getData());
-
                 $property->state = Model_Property::STATE_PHOTOS;
-
                 $property->save();
-
                 $this->_helper->redirector('photos', 'property', 'user', array('item' => $property->id));
             } else {
-                
                 $property->state = Model_Property::STATE_DESCRIPTION;
-
                 $property->save();
-
                 $forms = new Zend_Session_Namespace('Forms');
-
                 $forms->description_form = $form;
-
                 $this->_helper->redirector('description', 'property', 'user', array('item' => $property->id));
             }
         } else {
             $forms = new Zend_Session_Namespace('Forms');
-
             if (isset($forms->description_form)) {
-
                 $form = $forms->description_form;
-
                 unset($forms->description_form);
             } elseif ($property) { // Fill form for edit
-
                 $form->initData($property->toArray());
             }
         }
 
         $this->view->property = $property;
-
         $this->view->current_state = Model_Property::STATE_DESCRIPTION;
-
         $this->view->form = $form;
     }
 
@@ -533,6 +544,48 @@ class User_PropertyController extends Zend_Controller_Action
         $this->_helper->json->sendJson($result);
     }
 
+    public function mainPhotoAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+        $this->_helper->layout->disableLayout();
+
+        $user = $this->_helper->auth->getCurrUser();
+
+        $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
+
+        $property = $this->getProperty($user);
+
+        $result = array('error' => true);
+
+        if ($property) {
+            $data = $this->getRequest()->getPost();
+
+            if (isset($data['photo']) && !empty($data['photo'])) {
+                $data['photo'] = str_replace("_", '/', $data['photo']);
+
+                if (is_file($settings->get('propertyImages.basePath') . '/' . $data['photo'])) {
+                    if ($property->main_photo != $settings->get('propertyImages.baseUrl') . '/' . $data['photo']) {
+                        $property->main_photo = '';
+                        $photos = $property->getPhotos();
+                        foreach ($photos as $indx => $rec) {
+                            if ($photos[$indx]['link'] == $settings->get('propertyImages.baseUrl') . '/' . $data['photo']) {
+                                $property->main_photo = $photos[$indx]['link'];
+                                $result['main_photo'] = $photos[$indx]['name'];
+                                $property->save();
+                                break;
+                            }
+                        }
+                    }
+                }
+
+
+                $result['error'] = false;
+            }
+        }
+
+        $this->_helper->json->sendJson($result);
+    }
+
     public function selectPhotoAction()
     {
         $this->_helper->viewRenderer->setNoRender(true);
@@ -665,15 +718,6 @@ class User_PropertyController extends Zend_Controller_Action
         $this->view->is_ajax = $isAjax;
 
         return  $this->view->render('property/process-visit-date.phtml');
-    }
-
-    public function myAdsAction()
-    {
-        $user = $this->_helper->auth->getCurrUser();
-
-        $ads = Doctrine::getTable('Model_Property')->findByOwnerId($user->id);
-
-        $this->view->ads = $ads;
     }
 
     public function removeAction()

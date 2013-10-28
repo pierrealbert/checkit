@@ -1,10 +1,22 @@
 <?php
 
-class User_MyAccountController extends Zend_Controller_Action {
+class User_MyAccountController extends Core_Controller_Action_UserDashboard 
+{
+    
+    protected $translator;
+
+    public function init()
+    {
+        $this->translator = Zend_Registry::get('Zend_Translate');
+        parent::init();
+    }
 
     public function indexAction() 
     {
         $user = $this->_helper->auth->getCurrUser();
+
+        if (!$user)
+            $this->redirect($this->_helper->url('', 'login'));
 
         $form = new User_Form_User();
         $form->populate($user->toArray());
@@ -24,7 +36,7 @@ class User_MyAccountController extends Zend_Controller_Action {
             
             $user->save();
             
-            $this->_helper->messenger->success('your_account_succesfully_updated');
+            $this->_helper->messenger->success('your_account_succesfully_updaed');
             $this->_helper->redirector('index', 'my-account', 'user');
         }
         $this->view->form = $form;
@@ -233,4 +245,147 @@ class User_MyAccountController extends Zend_Controller_Action {
         }
     }
 
+    public function myAdsAction()
+    {
+        $user = $this->_helper->auth->getCurrUser();
+
+        $ads = Doctrine::getTable('Model_Property')->findByOwnerId($user->id);
+
+        $this->view->ads = $ads;
+    }
+
+    public function myCandidatesAction()
+    {
+        $this->view->jQuery()->addOnLoad('initMyCandidates();');
+        $user = $this->_helper->auth->getCurrUser();
+
+        $ads = Doctrine::getTable('Model_Property')->getListByOwnerId($user->id);
+        $applicationsPerProperty = array();
+        foreach ($ads as $property) {
+            $applicationsPerProperty[$property->id] = array('awaiting' => array(),
+                                                            'accepted' => array());
+        }
+        foreach (Model_PropertyApplicationTable::getInstance()->getListByOwnerId($user->id) as $application) {
+            if ($application->is_accepted) {
+                $applicationsPerProperty[$application->PropertyVisitDates->property_id]['accepted'][] = $application;
+            } else {
+                $applicationsPerProperty[$application->PropertyVisitDates->property_id]['awaiting'][] = $application;
+            }
+        }
+        
+        $this->view->ads = $ads;
+        $this->view->applicationsPerProperty = $applicationsPerProperty;
+    }
+
+    public function candidateAction()
+    {
+        $curUser = $this->_helper->auth->getCurrUser();
+        
+        $applicationId = $this->_getParam('application');
+        $application = Model_PropertyApplicationTable::getInstance()->getOneByIdForPropOwner($applicationId, $curUser->id);
+        if (!$application) {
+            $this->_helper->messenger->success('application_not_found');
+            $this->_helper->redirector('my-candidates', 'my-account', 'user');
+        }
+
+        $this->view->application = $application;
+    }
+
+    public function acceptCandidateAction()
+    {
+        $curUser = $this->_helper->auth->getCurrUser();
+        
+        $applicationId = $this->_getParam('application');
+        $application = Model_PropertyApplicationTable::getInstance()->getOneByIdForPropOwner($applicationId, $curUser->id);
+        if (!$application) {
+            $this->_helper->messenger->error('application_not_found');
+            $this->_helper->redirector('my-candidates', 'my-account', 'user');
+        }
+        if (!$application->is_accepted) {
+            $application->is_accepted = True;
+            $application->save();
+            $this->_helper->messenger->success('application_accepted');
+        } else {
+            $this->_helper->messenger->success('application_already_accepted');
+        }
+        $this->_helper->redirector('my-candidates', 'my-account', 'user');
+    }
+    
+    public function ajaxAcceptCandidateAction()
+    {
+        $curUser = $this->_helper->auth->getCurrUser();
+        
+        $errorMessage = ''; // if not null will be printed instead of form
+        $successMessage = ''; // if not null will be printed instead of form
+        $acceptForm = '';
+        $applicationId = $this->_getParam('application');
+        $application = Model_PropertyApplicationTable::getInstance()->getOneByIdForPropOwner($applicationId, $curUser->id);
+
+        if (!$application) {
+            $errorMessage = $this->translator->translate('application_not_existed');
+        } elseif ($application->is_accepted) {
+            $errorMessage = $this->translator->translate('application_already_accepted');
+        } else {
+            $acceptForm = new User_Form_AcceptApplication(array('applicationId' => $applicationId));
+            if ($this->getRequest()->isPost() and $post = $this->getRequest()->getPost() and $acceptForm->isValid($post)) {
+                $application->is_accepted = True;
+                $application->save();
+                $successMessage = 'application_accepted';
+            } else {
+                // Do nothing. If errorMessage and successMessage are empty,
+                // then will be print the form with marked wrong fields
+            }
+        }
+
+        $this->view->acceptForm = $acceptForm;
+        $this->view->errorMessage = $errorMessage;
+        $this->view->successMessage = $successMessage;
+    }
+
+    public function declineCandidateAction()
+    {
+        $curUser = $this->_helper->auth->getCurrUser();
+        
+        $applicationId = $this->_getParam('application');
+        $application = Model_PropertyApplicationTable::getInstance()->getOneByIdForPropOwner($applicationId, $curUser->id);
+        if (!$application) {
+            $this->_helper->messenger->error('application_not_found');
+            $this->_helper->redirector('my-candidates', 'my-account', 'user');
+        }
+        if (!$application->is_accepted) {
+            $application->is_declined = True;
+            $application->save();
+            $this->_helper->messenger->success('application_declined');
+        } else {
+            $this->_helper->messenger->success('application_already_accepted');
+        }
+        $this->_helper->redirector('my-candidates', 'my-account', 'user');
+    }
+
+    public function ajaxRateCandidateAction()
+    {
+        $curUser = $this->_helper->auth->getCurrUser();
+        
+        $rate = $this->getRequest()->getPost('rate');
+        $applicationId = $this->getRequest()->getPost('idBox');
+        
+        $application = Model_PropertyApplicationTable::getInstance()->getOneByIdForPropOwner($applicationId, $curUser->id);
+        if (!$application) {
+            $output = array('success' => 0);
+        } else {
+            $output = array('success' => 1,
+                            'rate' => $rate,
+                            'idBox' => $applicationId);
+            $application->rate = (int)$rate;
+            $application->save();
+        }
+        
+        
+        $this->getResponse()->setBody(Zend_Json::encode($output));
+        
+        if (null !== ($layout = Zend_Layout::getMvcInstance())) {
+            $layout->disableLayout();
+        }
+        Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
+    }
 }

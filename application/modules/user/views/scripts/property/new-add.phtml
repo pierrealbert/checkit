@@ -1,90 +1,43 @@
-<table border="1" width="100%">
-    <tr valign="top">
-        <td width="33%">
-            <!-- Left menu -->
-            <table border="1" width="100%">
-                <tr>
-                    <td style="background-color:#3cbecc;"><?= $this->translate('status') ?>: 0%</td>
-                </tr>
-                <tr>
-                    <td>Rental</td>
-                </tr>
-                <tr>
-                    <td>Description</td>
-                </tr>
-                <tr>
-                    <td>Photos</td>
-                </tr>
-                <tr>
-                    <td>Hunted profile</td>
-                </tr>
-                <tr>
-                    <td>Visit dates</td>
-                </tr>
-            </table>
-            <!-- /Left menu -->
-        </td>
-        <td>
-            <table border="1" width="100%">
-                <tr>
-                    <td style="background-color:#c0f2ef;">
-                        <h1>1</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a volutpat odio. 
-                        Fusce nulla libero, convallis id nulla ut, rutrum consequat sapien. Curabitur vel malesuada diam, sed ullamcorper massa. 
-                        Sed luctus at dolor nec imperdiet. In venenatis eleifend rhoncus. 
-                        Nunc ligula lorem, sollicitudin vitae tortor ac, consequat facilisis lectus. 
-                        Aliquam ornare placerat augue vitae pulvinar.
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="background-color:#c0f2ef;">
-                        <h1>2</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a volutpat odio. 
-                        Fusce nulla libero, convallis id nulla ut, rutrum consequat sapien. Curabitur vel malesuada diam, sed ullamcorper massa. 
-                        Sed luctus at dolor nec imperdiet. In venenatis eleifend rhoncus. 
-                        Nunc ligula lorem, sollicitudin vitae tortor ac, consequat facilisis lectus. 
-                        Aliquam ornare placerat augue vitae pulvinar.
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="background-color:#c0f2ef;">
-                        <h1>3</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a volutpat odio. 
-                        Fusce nulla libero, convallis id nulla ut, rutrum consequat sapien. Curabitur vel malesuada diam, sed ullamcorper massa. 
-                        Sed luctus at dolor nec imperdiet. In venenatis eleifend rhoncus. 
-                        Nunc ligula lorem, sollicitudin vitae tortor ac, consequat facilisis lectus. 
-                        Aliquam ornare placerat augue vitae pulvinar.
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="background-color:#c0f2ef;">
-                        <h1>4</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a volutpat odio. 
-                        Fusce nulla libero, convallis id nulla ut, rutrum consequat sapien. Curabitur vel malesuada diam, sed ullamcorper massa. 
-                        Sed luctus at dolor nec imperdiet. In venenatis eleifend rhoncus. 
-                        Nunc ligula lorem, sollicitudin vitae tortor ac, consequat facilisis lectus. 
-                        Aliquam ornare placerat augue vitae pulvinar.
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="background-color:#c0f2ef;">
-                        <h1>5</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc a volutpat odio. 
-                        Fusce nulla libero, convallis id nulla ut, rutrum consequat sapien. Curabitur vel malesuada diam, sed ullamcorper massa. 
-                        Sed luctus at dolor nec imperdiet. In venenatis eleifend rhoncus. 
-                        Nunc ligula lorem, sollicitudin vitae tortor ac, consequat facilisis lectus. 
-                        Aliquam ornare placerat augue vitae pulvinar.
-                        </p>
-                    </td>
-                </tr>
-            </table>
-            <!-- Form -->
-            <?= $this->form ?>
-            <!-- /Form -->
-        </td>
-    </tr>
-</table>
+<div id="publier" class="grid">
+    <div class="left">
+        <?= $this->partial('property/_partials/left-dashboard.phtml', $this->getVars()) ?>
+    </div>
+    <div class="right">
+        <div id="content-step-0" class="progress-content">
+            <div class="block-grid grid-light-blue">
+                <h2>La location</h2>
+                <p>Définissez les éléments essentiels de votre annonce.<br>Titre, montant du loyer, etc… tels qu’ils appaent aux candidats.</p>
+                <span>1</span>
+            </div>
+            <div class="block-grid grid-light-blue">
+                <h2>Décrire le bien</h2>
+                <p>Décrivez les caractéristiques spécifiques de votre bien.<br>Le tout, en quelques clics.</p>
+                <span>2</span>
+            </div>
+            <div class="block-grid grid-light-blue">
+                <h2>Ajouter des photos</h2>
+                <p>Les bonnes photos attirent les bons candidats.<br>Pensez-y.</p>
+                <span>3</span>
+            </div>
+            <div class="block-grid grid-light-blue">
+                <h2>Profil recherché</h2>
+                <p>Vous préférez louer à un étudiant ? Un salarié ? Un indépendant ?<br>Donnez vos préférences, vos candi</p>
+                <span>4</span>
+            </div>
+            <div class="block-grid grid-light-blue">
+                <h2>Définir des visites</h2>
+                <p>Sélectionnez les dates de visite qui vous conviennent.<br>Les candidats postuleront pour l’une d’entre</p>
+                <span>5</span>
+            </div>
+            <div class="progress-buttons">
+                <a class="btn btn-red btn-arrow-next right" href="<?=
+                   $this->url(array(
+                       'module' => 'user',
+                       'controller' => 'property',
+                       'action' => 'location'
+                           ), null, false)
+                   ?>"><?= $this->translate('begin') ?></a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<br/><br/>
+<? if ($this->application->is_accepted): ?>
+    <p>Accepted</p>
+<? else: ?>
+    <p>
+    <a class='open-in-modal' href="<?= $this->url(array('module' => 'user', 'controller' => 'my-account', 'action' => 'ajax-accept-candidate', 'application' => $this->application->id )) ?>"><?= $this->translate('accept') ?></a>
+    </p>
+    <p>
+    <a href="<?= $this->url(array('module' => 'user', 'controller' => 'my-account', 'action' => 'decline-candidate', 'application' => $this->application->id )) ?>"><?= $this->translate('decline') ?></a>
+    </p>
+<? endif ?>

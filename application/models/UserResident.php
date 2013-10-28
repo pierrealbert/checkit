@@ -26,6 +26,38 @@ class Model_UserResident extends Model_Base_UserResident
     const EMPLOYEE_TYPE_CDI = 'cdi';
     const EMPLOYEE_TYPE_CSD = 'csd';
     
+    public function getTitle($number = 1)
+    {
+        $title = 'Candidat';
+        if ($this->is_primary) {
+            $title = 'Candidat';
+        } elseif ($this->rent_type == self::RENT_TYPE_ROOMMATE) {
+            $title = 'Colocataire ' . $number;
+        } elseif ($this->rent_type == self::RENT_TYPE_COUPLE) {
+            $title = 'En couple';
+        }      
+        return $title;
+    }
+    
+    public function getGarants()
+    {
+        $table = Model_UserResidentGarantTable::getInstance();
+        return $table->createQuery()
+                ->andWhere('user_resident_id = ?', $this->id)
+                ->orderBy('id  DESC')
+                ->execute();        
+    }
+    
+    public function getDocuments()
+    {
+        $table = Model_UserResidentDocumentTable::getInstance();
+        return $table->createQuery()
+                ->andWhere('user_resident_id = ?', $this->id)
+                ->andWhere('user_resident_garant_id IS NULL')
+                ->orderBy('id  DESC')
+                ->execute();        
+    }    
+    
     static public function getTypes()
     {
         return array(

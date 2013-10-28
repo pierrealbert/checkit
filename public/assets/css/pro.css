@@ -1,0 +1,282 @@
+/*
+	Page title
+*/
+
+.title-container {
+	background: rgb(202, 202, 202);
+	background: -moz-linear-gradient(90deg, rgb(202, 202, 202) 0%, rgb(139, 139, 139) 100%);
+	background: -webkit-linear-gradient(90deg, rgb(202, 202, 202) 0%, rgb(139, 139, 139) 100%);
+	background: -o-linear-gradient(90deg, rgb(202, 202, 202) 0%, rgb(139, 139, 139) 100%);
+	background: -ms-linear-gradient(90deg, rgb(202, 202, 202) 0%, rgb(139, 139, 139) 100%);
+	background: linear-gradient(180deg, rgb(202, 202, 202) 0%, rgb(139, 139, 139) 100%);
+}
+
+/*
+	Page tabs navigation
+*/
+
+.page-tab-nav {
+	background: #4d4d4d;
+	list-style: none;
+	overflow: hidden;
+	padding-top: 10px;
+	border-radius: 10px 10px 0 0;
+}
+
+.page-tab-nav ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	*zoom: 1;
+}
+
+.page-tab-nav ul:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.page-tab-nav ul li {
+	float: left;
+	margin: 0 0 0 10px;
+}
+
+.page-tab-nav ul li a {
+	display: block;
+	height: 40px;
+	min-width: 120px;
+	line-height: 40px;
+	background: #999999;
+	color: #fff;
+	font-size: 16px;
+	border-radius: 5px 5px 0 0;
+	padding: 0 20px;
+	text-decoration: none;
+	-webkit-transition: background .2s;
+	-moz-transition: background .2s;
+	-ms-transition: background .2s;
+	-o-transition: background .2s;
+	transition: background .2s;
+}
+
+.page-tab-nav ul li a:hover {
+	background: #787878;
+}
+
+.page-tab-nav ul li a:active {
+	background: #686868;
+}
+
+.page-tab-nav ul li a.active {
+	background: #f2f2f2;
+	color: #4d4d4d;
+}
+
+/*
+	Page tab content
+*/
+
+.page-tab-content {
+	background: #f2f2f2;
+	padding: 20px;
+	*zoom: 1;
+}
+
+.page-tab-content:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.page-tab-content-left, .page-tab-content-right {
+	float: left;
+}
+
+.page-tab-content-left {
+	width: 320px;
+}
+
+.page-tab-content-right {
+	width: 620px;
+	margin: 0 0 0 20px;
+}
+
+/*
+	Page tab bottom
+*/
+
+.page-tab-bottom {
+	padding: 20px;;
+}
+
+.page-tab-bottom > .btn {
+	width: 215px;
+}
+
+#annonces h3 {
+	color: #4d4d4d;
+	margin: 5px 0;
+	font-size: 24px;
+	font-family: "Open Sans";
+	font-weight: 300;
+}
+
+#annonces .annonce-blocks {
+	background: #4D4D4D;
+	border-radius: 10px;
+	padding: 15px;
+}
+
+#annonces .annonce-block {
+	padding: 15px;
+	*zoom: 1;
+	color: #666 !important;
+	height: 120px;
+}
+
+.annonce-block +  .annonce-block {
+	margin-top: 15px;
+}
+
+#annonces .annonce-block:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+#annonces .annonce-block-photo {
+	width: 120px;
+	height: 120px;
+	float: left;
+	margin-right: 20px;
+}
+
+#annonces .annonce-block-photo > img {
+	display: block;
+	width: 120px;
+	height: 120px;
+}
+
+#annonces .annonce-block-information {
+	position: relative;
+	width: 424px;
+	height: 100%;
+	margin-right: 15px;
+	float: left;
+}
+
+#annonces .annonce-block-information h4 {
+	font-size: 21px;
+	color: #666666;
+	margin: 0 0 5px 0;
+	font-weight: 400;
+}
+
+#annonces .annonce-block-information .information-more {
+	*zoom: 1;
+}
+
+#annonces .annonce-block-information .information-more:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+#annonces .annonce-block-information .information-more .information-left {
+	width: 50%;
+	float: left;
+}
+
+#annonces .annonce-block-information .information-more .information-right {
+	width: 50%;
+	float: left;
+}
+
+#annonces .annonce-block-information .information-more > div > span {
+	display: block;
+}
+
+#annonces .annonce-block-controlls {
+	height: 100%;
+	float: right;
+}
+
+#annonces .controlls-stats {
+	position: relative;
+	width: 170px;
+	height: 100%;
+	float: left;
+	padding: 15px;
+	margin: -15px 0;
+	border-left: 3px dotted #e5e5e5;
+	border-right: 3px dotted #e5e5e5;
+}
+
+#annonces .controlls-stats > span {
+	display: block;
+}
+
+#annonces .controlls-stats > .btn {
+	display: block;
+	width: 140px;
+	position: absolute;
+	top: auto;
+	bottom: 15px;
+}
+
+#annonces .controlls-price {
+	float: right;
+	position: relative;
+	width: 100px;
+	height: 100%;
+	padding: 0 0 0 15px;
+}
+
+#annonces .controlls-price .price {
+	display: block;
+	font-size: 22px;
+	font-weight: 700;
+	color: #666;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+#annonces .controlls-price .btn {
+	position: absolute;
+	bottom: 0;
+	top: auto;
+	line-height: 18px;
+	height: 37px;
+	padding: 5px;
+	font-size: 14px;
+	width: 90px;
+}
+
+#annonces .information-links {
+	position: absolute;
+	bottom: 0;
+}
+
+#annonces .information-links > a {
+	margin-right: 25px;
+}
+
+.inactive-blocks {
+	
+}
+
+.inactive-blocks .annonce-block {
+	background: #e5e5e5 !important;
+}
+
+.inactive-blocks .controlls-price .btn {
+	pointer-events: none;
+	cursor: default;
+	opacity: .7;
+}
+
+.inactive-blocks .controlls-stats > .btn {
+	pointer-events: none;
+	cursor: default;
+	opacity: .7;
+}

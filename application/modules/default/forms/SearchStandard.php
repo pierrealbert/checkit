@@ -21,14 +21,7 @@ class Form_SearchStandard extends Ext_Form
         
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
 
-        $regionBlockOptions = array('' => 'all');
-        foreach (Model_RegionBlockTable::getInstance()->getAllWithDiscricts() as $region) {
-            $regionBlockOptions[$region->id] = $region->RegionDistrict->name . ' - ' . $region->name;
-        }
-		$this->addElement('select', 'region_block_id', array(
-            'label'      => 'location',
-			'multiOptions' => $regionBlockOptions,
-        ));
+        $this->addElement('hidden', 'region_block_id', array('decorators' => array('ViewHelper')));
 
         $this->addElement('text', 'min_budget', array(
             'label'      => 'min_budget',
@@ -69,7 +62,7 @@ class Form_SearchStandard extends Ext_Form
                 array('MrButtons'),
                 array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-white')),
                 array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
-            ));
+            ))->setValue(-1);
         $this->addElement($radio);
 
         $chbox = new Zend_Form_Element_MultiCheckbox('number_of_rooms1');
@@ -123,11 +116,31 @@ class Form_SearchStandard extends Ext_Form
             ->setLabel('Disponibilité')
             ->addMultiOptions(array('now' => 'Immédiatement', 'date' => 'select_date'))
             ->setDecorators(array(
-                array('MrButtons', array('labelClass' => 'btn-input-gray-lite')),
+                array('MrButtons',
+                    array(
+                        'labelClass' => 'btn-input-gray-lite',
+                        'appendPart' => array(
+                            1 => array(
+                                'html' => '<label for="availability_select_date" class="btn-input-gray-lite label-date icon-calendar-gray"></label>',
+                                'pre' => '<div class="labels-group standard-search-date-pick">',
+                                'post' => '</div>'
+                            )
+                        )
+                    )
+                ),
                 array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-black')),
-                array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
+                array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal box-short')),
             ));
         $this->addElement($radio);
+
+        $this->addElement('datePicker', 'availability', array(
+            'label' => 'ou à partir de',
+            'JQueryParams' => array (
+                'dateFormat' => $settings->get('dateFormat.picker.jquery'),
+            )
+        ));
+        //$this->addDisplayGroup(array('availability_select', 'availability'), 'availability_group', array('legend' => "availability"));
+
 
         $radio = new Zend_Form_Element_Radio('rent_period');
         $radio->setSeparator('')
@@ -140,7 +153,7 @@ class Form_SearchStandard extends Ext_Form
             ));
         $this->addElement($radio);
 
-        $chbox = new Zend_Form_Element_MultiCheckbox('collocation');
+        $chbox = new Zend_Form_Element_MultiCheckbox('is_roomate');
         $chbox->setSeparator('')
             ->setLabel('Colocation acceptée')
             ->addMultiOptions(array(1 => 'Oui'))
@@ -195,7 +208,7 @@ class Form_SearchStandard extends Ext_Form
             ));
         $this->addElement($chbox);
 
-        $chbox = new Zend_Form_Element_MultiCheckbox('heating');
+        $chbox = new Zend_Form_Element_MultiCheckbox('heating_system');
         $chbox->setSeparator('')
             ->setLabel('Chauffage')
             ->addMultiOptions(Model_Property::getHeatingSystemOptions())

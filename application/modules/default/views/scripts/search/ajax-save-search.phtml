@@ -1,0 +1,25 @@
+<div class="login-popup">    
+    <p>OMMI vous propose de sauvegarder votre recherche et de recevoir des alerts par email. Personnalisez-la en lui donnant un titre.</p>
+    <p>Vous la retrouverez dans votre espace "Mes Recherhes"</p>
+    <? if ($this->isLoggedIn) : ?>
+        <? if (isset($this->saved)) : ?>
+        <p class="success"><?= $this->translate('search_saved') ?></p>
+        <? else : ?>
+        <?= $this->form ?>
+        <? endif; ?>
+    <? else : ?>
+    <p class="red"><?= $this->translate('register_to_save_search_results') ?></p>
+    <? endif; ?>
+    <div class="login-bottom clear">
+        <a href="#"><?= $this->translate('cancel') ?></a>
+    </div>    
+</div>
+<script type="text/javascript">
+
+    $(function() {
+        $('#form-save-search').ajaxForm({
+            target: $('.modal-content-container')
+        });
+    });
+</script>
+

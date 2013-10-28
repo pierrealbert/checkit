@@ -1,0 +1,145 @@
+<!-- OLD -->
+<!--<div class="tab-resume">
+    <div class="inner-transparent inner-left">
+        <?/*= $this->partial('_partials/my-profile.phtml', $this->getVars()); */?>
+        <?/*= $this->partial('_partials/my-calendar.phtml', $this->getVars()); */?>
+    </div>
+    <div class="inner-transparent inner-right">
+        <h2 class="black-txt txt-small">Mes candidatures</h2>
+
+    </div>
+</div>-->
+<!-- NEW -->
+<?php
+/**
+ * @var $app Model_PropertyApplication
+ */
+$totalAppsCount = $this->applications->count();
+$acceptedAppsCount = $this->acceptedAppsCount;
+$declinedAppsCount = $this->declinedAppsCount;
+?>
+<div class="tab-candidature">
+    <div class="title-box">
+        <div class="inner-text">
+            <p>Retrouvez ici vos candidatures, leurs avancements et les visites programmées</p>
+            <input type="text" class="txt-gray" placeholder="Vous avez déposé <?= $totalAppsCount ?> candidatures"/>
+            <input type="text" class="txt-red" placeholder="<?= $acceptedAppsCount ?> candidatures acceptées"/>
+            <input type="text" class="txt-blue" placeholder="<?= $declinedAppsCount ?> candidatures refusées"/>
+        </div>
+        <a class="btn btn-gray" id="remove_all_declined" href="#">Effacer mes candidatures refusées</a>
+    </div>
+
+    <div class="alert-blue" id="messages" style="display:none;">
+        <a href="#" class="close-blue"></a>
+        <div class="text-box"></div>
+        <a href="#" class="blue link-btn">Voir</a>
+    </div>
+
+    <div class="box-inner inner-right">
+        <h2 class="black-txt txt-small">Mes candidatures <span class="blue">(<?= ($totalAppsCount > 0) ? $totalAppsCount : '0'; ?>)</span></h2>
+
+        <div class="box-info-univ-black">
+            <?php if ($this->applications->count()): ?>
+                <?php foreach ($this->applications as $app): ?>
+                <div class="grid grid-block" id="<?= $app->id ?>">
+                    <div class="box-text info-box">
+                        <?= $this->imageResize(90, 90, $app->Property->main_photo, array('class' => 'img-ad')) ?>
+                        <h3 class="title-ad"><?= $app->Property->getShortTitle() ?></h3>
+
+                        <div>
+                            <div class="inner-box-right">
+                                <?php if (!empty($app->Property->honoraire)): ?>
+                                    <span class="txt-price">Honoraires : <?= $app->Property->honoraire ?> €</span>
+                                <?php endif; ?>
+                                <?php if ($app->User->is_premium): ?>
+                                    <a href="#" class="btn btn-gray btn-blue-dark small-btn">
+                                        <i class="i-group-white icon-pro"></i>
+                                        Pro
+                                    </a>
+                                <?php endif; ?>
+                            </div>
+                            Appartement <span class="slash">|</span> <?= $this->property_type[$app->Property->property_type]; ?><br>
+                            <?= $this->escape($app->Property->city) ?> (<?= $app->Property->postcode ?>)<br>
+                            2e étage avec ascenseur<br>
+                            Disponibilité : immédiate
+                        </div>
+                        <div class="link-inner">
+                            <a class="black" href="<?= $this->url(array('module' => 'default', 'controller' => 'property', 'action' => 'detail', 'item' => $app->property_id), null, false) ?>">Voir l’annonce</a>
+                            <a class="red" href="#">Supprimer</a>
+                        </div>
+                    </div>
+                    <div class="box-text price-box">
+                        <p class="price-small"><?= $app->rate ?> €</p>
+
+                        <p><?= $app->Property->size ?> m²</p>
+
+                        <p><?= $app->Property->number_of_rooms1 ?> pièces</p>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+
+        </div>
+
+    </div>
+    <div class="box-inner inner-left">
+        <h2 class="black-txt txt-small">État de la candidature</h2>
+
+        <div class="box-info-univ-black">
+            <div class="grid grid-application" id="candidates-status">
+
+            </div>
+        </div>
+    </div>
+    <!--<a class="btn btn-red w200" href="#">J’ai trouvé mon logement</a>-->
+</div>
+
+<?php
+$this->jQuery()
+    ->addJavascriptFile("http://maps.googleapis.com/maps/api/js?key={$this->google_api_key}&amp;sensor=false");
+?>
+
+<script type="text/javascript">
+$(function() {
+
+    // select candidatures block
+    $(".box-info-univ-black .grid-block").click(function() {
+
+        $(".box-info-univ-black .grid-block").removeClass('box-selected');
+        $(this).toggleClass('box-selected');
+
+        var id = $(this).attr('id');
+
+        $.ajax({
+            type: "POST",
+            url: "/user/candidatures/ajax-check-status",
+            data: 'app_id='+id,
+            dataType: 'html',
+            success: function(response) {
+                $('#candidates-status').html(response);
+            }
+        });
+    });
+
+    // handler for remove_all_declined button
+    $("#remove_all_declined").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "/user/candidatures/ajax-remove-declined",
+            data: 'remove=remove',
+            dataType: 'json',
+            success: function(response) {
+                for (var id in response.result) {
+                    $(".box-info-univ-black #"+response.result[id]).hide();
+                }
+
+                $("#messages .text-box").html(response.message);
+                $("#messages").show();
+            }
+        });
+
+        return false;
+    });
+
+});
+</script>

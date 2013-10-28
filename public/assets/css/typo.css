@@ -44,6 +44,22 @@ dl dd input[type=text], dl dd input[type=password] {
 	width: 440px;
 }
 
+dl.zend_form > div {
+	margin-bottom: 15px;
+}
+
+dl.zend_form div > input[type=text], dl.zend_form div > input[type=password] {
+	display: block;
+	width: 440px;
+}
+
+dl.zend_form label {
+	display: block;
+	color: #4d4d4d;
+	font-size: 16px;
+	margin-bottom: 5px;
+}
+
 dl dd ul.errors {
 	margin: 0;
 	padding: 0;
@@ -54,4 +70,32 @@ dl dd ul.errors > li {
 	display: block;
 	margin: 5px 0 0 0;
 	color: #de4c5d;
+}
+
+fieldset {
+	margin: 10px 0 0 0;
+	padding: 0;
+	border: none;
+}
+
+fieldset label {
+	display: block;
+	font-size: 16px;
+	color: #4d4d4d;
+	margin-bottom: 10px;
+}
+
+fieldset p.description {
+	font-size: 14px;
+	color: #999999;
+	margin: 10px 0 0 0;
+}
+
+span.helper {
+	font-size: 16px;
+	color: #198e9c;
+	margin-left: 10px;
+}
+span.bold{
+	font-weight: bold;
 }

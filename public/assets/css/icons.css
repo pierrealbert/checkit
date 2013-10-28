@@ -141,3 +141,9 @@
 	padding: 0 49px 274px 33px;
 	display: block;
 }
+
+.icon-calendar-gray {
+	background-image: url('../images/icon-calend-dark.png');
+	background-position: center;
+	background-repeat: no-repeat;
+}

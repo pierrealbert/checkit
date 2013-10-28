@@ -37,10 +37,17 @@ class View_Helper_MetroMap extends Zend_View_Helper_Abstract
     
     protected function _transformCoordinates($coordinates)
     {
-        $mapZero = array(-569, 330);
-        $modifier = array(80, -80);
+        /*$mapZero = array(-569, 330);
+        switch($metroLine){
+            case '1':
+                $modifier=array(0, -50);
+                break;
+        }
+        $modifier = array(0, 0);
         $coordinates[0] = $coordinates[0] + $mapZero[0] + $modifier[0];
-        $coordinates[1] = (8000 - $coordinates[1]) + $mapZero[1] + $modifier[1];
+        $coordinates[1] = (7870 - $coordinates[1]) + $mapZero[1] + $modifier[1];*/
+        $coordinates[0] = $coordinates[0];
+        $coordinates[1] = (7870 - $coordinates[1]);
         return $coordinates;
     }
     

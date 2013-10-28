@@ -10,12 +10,14 @@
 	background-image: url(../images/alert-mark-gray.png);
 	background-repeat: no-repeat;
 	background-position: 15px center;
+	position: relative;
 }
 .alert-gray .close-gray{
 	line-height: 20px;
-	position: relative;
-	right: -30px;
-	top: -1px;
+	position: absolute;
+	margin-top: -10px;
+	right: 17px;
+	top: 50%;
 }
 .close-gray{
 	background-image: url(../images/alert-x-gray.png);
@@ -36,12 +38,14 @@
 	background-image: url(../images/alert-mark-red.png);
 	background-repeat: no-repeat;
 	background-position: 15px center;
+	position: relative;
 }
 .alert-red .close-red{
 	line-height: 20px;
-	position: relative;
-	right: -30px;
-	top: -1px;
+	position: absolute;
+	margin-top: -10px;
+	right: 17px;
+	top: 50%;
 }
 .close-red{
 	background-image: url(../images/alert-x-red.png);
@@ -61,12 +65,14 @@
 	background-image: url(../images/alert-mark-blue.png);
 	background-repeat: no-repeat;
 	background-position: 15px center;
+	position: relative;
 }
 .alert-blue .close-blue{
 	line-height: 20px;
-	position: relative;
-	right: -30px;
-	top: -1px;
+	position: absolute;
+	margin-top: -10px;
+	right: 17px;
+	top: 50%;
 }
 .close-blue{
 	background-image: url(../images/alert-x-blue.png);

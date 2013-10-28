@@ -184,6 +184,7 @@ class Ext_Auth_Adapter_Doctrine implements Zend_Auth_Adapter_Interface
             return false;
         }
 
+        /** @var Model_Admin $result */
         if (!$result->getHash()->validateHash($this->_credential, $result->{$this->_credentialColumn})) {
             return false;
         }

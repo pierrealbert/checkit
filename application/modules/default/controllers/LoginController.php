@@ -4,7 +4,7 @@ class LoginController extends Zend_Controller_Action
 {
     protected function _redirectAfterLogin()
     {
-        $redirectUrl = '/user/my-account/index';
+        $redirectUrl = '/user/index';
                            
         $currUser = $this->_helper->auth->getCurrUser();
         if ($currUser->isResident() && !$currUser->hasResidents()) {

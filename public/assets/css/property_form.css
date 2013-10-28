@@ -1,0 +1,77 @@
+.clear {
+    clear: both;
+}
+/*
+dt#availability-label {
+    float: left;
+    color: #4D4D4D;
+    margin-top: 38px;
+}
+*/
+div.box-universal.box-short {
+    width: 270px;
+    float: left;
+}
+.date-picker-availability-location {
+    float: left;
+    display: none;
+}
+.date-picker-availability-location dd {
+    float: left;
+    margin-top: 70px;
+    margin-left: 10px;
+}
+
+fieldset.image-form input#image {
+    display: none;
+}
+fieldset.image-form a.btn-upload-photo {
+    display: inline-block;
+    width: 270px;
+    height: 54px;
+    line-height: 22px;
+    text-align: left;
+    padding-top: 18px;
+}
+
+fieldset.image-form a.btn-upload-photo i {
+    margin-left: 15px;
+}
+fieldset.image-form div.i-wrapper {
+    float: left;
+    height: 54px;
+    width: 70px;
+    padding-top: 10px;
+}
+fieldset.image-form div.file-drope-zone {
+    margin-left: 46px;
+    float: left;
+    width: 270px;
+    height: 54px;
+    line-height: 22px;
+    text-align: left;
+    padding-top: 18px;
+    background-color: #c2eef1;
+    text-shadow: 0 -1px 0 #FFFFFF !important;
+    border: 1px dashed #6fc9ca;
+    border-radius: 8px;
+}
+
+fieldset.image-form div.text-wrapper {
+    float: left;
+    width: 200px;
+}
+
+.upload-descr {
+    margin: 20px 0px 10px 0px;
+}
+.upload-descr p {
+    margin: 0px;
+    padding: 0px;
+}
+.upload-descr p.cyan {
+    color: #34A6B3;
+}
+.upload-descr p.drk-gray {
+    color: #808080;
+}

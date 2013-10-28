@@ -84,7 +84,7 @@ class Model_Admin extends Model_Base_Admin
      */
     public function setHash(Ext_Auth_Hash_Interface $hash)
     {
-        $this->_authHash = $authHash;
+        $this->_authHash = $hash;
         return $this;
     }
 }

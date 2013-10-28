@@ -35,16 +35,16 @@ class User_Calendar_Calendar extends User_Calendar_Abstract
      */
     public function getDateStart()
     {
-        $dateStart = !empty($this->_options['date_start']) ? $this->_options['date_start'] : null;
-        if (is_string($dateStart)) {
+        if (is_string($this->_options['date_start'])) {
 
-            $this->_options->date_start = new DateTime($dateStart);
-        } else if (!$dateStart instanceof DateTime) {
+            $this->_options['date_start'] = new DateTime($this->_options['date_start']);
 
-            $dateStart = new DateTime();
-            $this->_options['date_start'] = $dateStart;
+        } else if (!$this->_options['date_start'] instanceof DateTime) {
+
+            $this->_options['date_start'] = new DateTime();
         }
-        return $dateStart;
+
+        return $this->_options['date_start'];
     }
 
     /**
@@ -52,16 +52,16 @@ class User_Calendar_Calendar extends User_Calendar_Abstract
      */
     public function getDateStop()
     {
-        $dateStop = !empty($this->_options['date_stop']) ? $this->_options['date_stop'] : null;
-        if (is_string($dateStop)) {
+        if (is_string($this->_options['date_stop'])) {
 
-            $this->_options->date_stop = new DateTime($dateStop);
-        } else if (!$dateStop instanceof DateTime) {
+            $this->_options['date_stop'] = new DateTime($this->_options['date_stop']);
 
-            $dateStop = $this->getDateStart();
-            $this->_options['date_stop'] = $dateStop;
+        } else if (!$this->_options['date_stop'] instanceof DateTime) {
+
+            $this->_options['date_stop'] = new DateTime();
         }
-        return $dateStop;
+
+        return $this->_options['date_stop'];
     }
 
     /**

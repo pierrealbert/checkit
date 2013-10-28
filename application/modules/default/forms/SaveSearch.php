@@ -6,17 +6,30 @@ class Form_SaveSearch extends Ext_Form
     {
         $this->setMethod('post');
         $this->setAttrib('id', 'form-save-search');
+        $this->setAction($this->getView()->url(array(
+            'controller' => 'search',
+            'action'     => 'ajax-save-search'
+        ), null, true));
         
-        $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
+        $this->addElement('hidden', 'search_id', array(
+            'required' => true,
+            'filters'  => array('StringTrim')
+        ));
+        
+        $this->getElement('search_id')
+                ->removeDecorator('label')
+                ->removeDecorator('HtmlTag');
         
         $this->addElement('text', 'name', array(
-            'label'    => 'name',
+            'label'    => 'search_name',
             'required' => true,
             'filters'  => array('StringTrim')
         ));
         
         $this->addElement('submit', 'save', array(
-            'label'    => 'save search',
+            'label'     => 'save_search',
+            'class'     => 'btn btn-blue',
+            'style'     => 'width: 460px;'
         ));
 	}
 

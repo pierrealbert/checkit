@@ -1,24 +1,724 @@
-<h2><?= $this->contentHeader('search_results') ?></h2>
+<?php
+$this->headLink()->appendStylesheet('/css/ui/jquery-ui-1.10.3.css');
+$this->headLink()->appendStylesheet('/assets/css/search_form.css');
+$this->headScript()->appendFile('/assets/js/search_form.js');
+?>
+<div class="<?=($this->search_type != 'metro' ? 'title-row-results' : 'title-row-results results-metro')?>">
+    <?php if ($this->search_type != 'metro'): ?>
 
-<? if ($this->search->is_temp): ?>
-    <?= $this->form ?>
-<? else: ?>
-    <?= $this->t('Saved Search') ?>: <?= $this->search->name ?>
-<? endif ?>
-<?php if (!count($this->foundProperties)): ?>
+        <div class="container-text">
+            <h1 class="white-txt">Résultats de ma recherche</h1>
+            <p class="txt-annonce"><?=$this->paginator->getTotalItemCount()?> annonces trouvées</p>
+            <a href="#" class="btn btn-gray" id="sendSearchForm"><i class="i-group-white icon-share-alt"></i>Modifier ma recherche</a>
+            <a href="#" class="btn btn-gray">Nouvelle recherche</a>
+            <a class="open-in-modal btn btn-red" data-title="<?= $this->translate('save_search') ?>" href="<?= $this->url(array(
+                'controller'    => 'search',
+                'action'        => 'ajax-save-search',
+                'search_id'     => $this->search->id
+            ), null, false); ?>"><i class="icon-sauv"></i><?= $this->translate('save_search') ?></a>
+            <a href="#" class="btn btn-blue"><i class="icon-bell-blue"></i>Créer une alerte</a>
+        </div>
+
+    <?php else: ?>
+        <div class="container-line-metro">
+            <div class="line-title">
+                <?php
+                $shadowStr = getMetroShadowStr($this->metroLine->color);
+                printMetroLineHTML($this->metroLine->name, $this->metroLine->color, $this->metroLine->id);
+                ?>
+                <div class="line-number">Ligne <?=$this->metroLine->name?></div>
+                <div class="line-name"><?=($this->metro_line_id > 0 ? 'Toutes les stations de métro' : $this->metroStations[$this->curStationIndx]['name'])?></div>
+                <div class="clear"></div>
+            </div>
+            <div class="line-wrapper">
+                <div class="line-line" style="background-color: #<?=$this->metroLine->color?>; -webkit-box-shadow: 0px 2px 0px <?=$shadowStr?>; -moz-box-shadow: 0px 2px 0px <?=$shadowStr?>; box-shadow: 0px 2px 0px <?=$shadowStr?>;"></div>
+                <?php if (isset($this->metroStations[$this->curStationIndx])): ?>
+                <div class="station main">
+                    <div class="station-name"><?=$this->metroStations[$this->curStationIndx]['name']?></div>
+                    <div class="station-circle" style="background-color: #<?=$this->metroLine->color?>; -webkit-box-shadow: 0px 1px 0px <?=$shadowStr?>; -moz-box-shadow: 0px 1px 0px <?=$shadowStr?>; box-shadow: 0px 1px 0px <?=$shadowStr?>;">
+                        <div class="inner">
+                        </div>
+                    </div>
+                </div>
+                <?php endif; ?>
+                <?php if (isset($this->metroStations[$this->curStationIndx-1])): ?>
+                <div class="station left2">
+                    <div class="station-name"><?=$this->metroStations[$this->curStationIndx-1]['name']?></div>
+                    <div class="station-circle selectStation" data-station-id="<?=$this->metroStations[$this->curStationIndx-1]['id']?>" style="background-color: #<?=$this->metroLine->color?>; -webkit-box-shadow: 0px 2px 0px <?=$shadowStr?>; -moz-box-shadow: 0px 2px 0px <?=$shadowStr?>; box-shadow: 0px 2px 0px <?=$shadowStr?>;"></div>
+                </div>
+                <?php endif; ?>
+                <?php if (isset($this->metroStations[$this->curStationIndx-2])): ?>
+                <div class="station left1">
+                    <div class="station-name"><?=$this->metroStations[$this->curStationIndx-2]['name']?></div>
+                    <div class="station-circle selectStation" data-station-id="<?=$this->metroStations[$this->curStationIndx-2]['id']?>" style="background-color: #<?=$this->metroLine->color?>; -webkit-box-shadow: 0px 2px 0px <?=$shadowStr?>; -moz-box-shadow: 0px 2px 0px <?=$shadowStr?>; box-shadow: 0px 2px 0px <?=$shadowStr?>;"></div>
+                </div>
+                <?php endif; ?>
+                <?php if (isset($this->metroStations[$this->curStationIndx+1])): ?>
+                <div class="station right2">
+                    <div class="station-name"><?=$this->metroStations[$this->curStationIndx+1]['name']?></div>
+                    <div class="station-circle selectStation" data-station-id="<?=$this->metroStations[$this->curStationIndx+1]['id']?>" style="background-color: #<?=$this->metroLine->color?>; -webkit-box-shadow: 0px 2px 0px <?=$shadowStr?>; -moz-box-shadow: 0px 2px 0px <?=$shadowStr?>; box-shadow: 0px 2px 0px <?=$shadowStr?>;"></div>
+                </div>
+                <?php endif; ?>
+                <?php if (isset($this->metroStations[$this->curStationIndx+2])): ?>
+                <div class="station right1">
+                    <div class="station-name"><?=$this->metroStations[$this->curStationIndx+2]['name']?></div>
+                    <div class="station-circle selectStation" data-station-id="<?=$this->metroStations[$this->curStationIndx+2]['id']?>" style="background-color: #<?=$this->metroLine->color?>; -webkit-box-shadow: 0px 2px 0px <?=$shadowStr?>; -moz-box-shadow: 0px 1px 0px <?=$shadowStr?>; box-shadow: 0px 2px 0px <?=$shadowStr?>;"></div>
+                </div>
+                <?php endif; ?>
+                <?php if (count($this->otherLines) > 0): ?>
+                <div class="other-lines" style="margin-left: -<?=intval(round(count($this->otherLines)*40/2))?>px">
+                    <?php foreach($this->otherLines as $indx => $rec): ?>
+                        <?php printMetroLineHTML($rec['name'], $rec['color'], $rec['id']); ?>
+                    <?php endforeach; ?>
+                </div>
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="container-text">
+            <h1 class="white-txt">Résultats de ma recherche</h1>
+            <p class="txt-annonce"><?=$this->paginator->getTotalItemCount()?> annonces trouvées</p>
+            <a href="#" class="btn btn-gray" id="sendSearchForm"><i class="i-group-white icon-share-alt"></i>Modifier ma recherche</a>
+            <a href="#" class="btn btn-gray">Nouvelle recherche</a>
+            <a class="open-in-modal btn btn-red" data-title="<?= $this->translate('save_search') ?>" href="<?= $this->url(array(
+                'controller'    => 'search',
+                'action'        => 'ajax-save-search',
+                'search_id'     => $this->search->id
+            ), null, false); ?>"><i class="icon-sauv"></i><?= $this->translate('save_search') ?></a>
+            <a href="#" class="btn btn-blue"><i class="icon-bell-blue"></i>Créer une alerte</a>
+        </div>
+
+    <?php endif; ?>
+</div>
+<main>
+<div class="inner">
+
+<script type="text/javascript">
+    //<!--
+
+    var subFormsList = [
+        {'main': ['region_block_id'], 'title': 'Localisation', 'is_array' : true, 'type': 'normal'},
+        {'main': ['max_budget', 'min_budget'], 'title': 'Budget', 'is_array' : false, 'type': 'slider'},
+        {'main': ['max_size', 'min_size'], 'title': 'Surface', 'is_array' : false, 'type': 'slider'},
+        {'main': ['is_furnished'], 'title': 'Mobilier', 'is_array' : true, 'type': 'normal'},
+        {'main': ['property_type'], 'title': 'Type de bien', 'is_array' : true, 'type': 'normal'},
+        {'main': ['availability_select', 'availability'], 'title': 'Disponibilité', 'is_array' : false, 'type': 'normal'},
+        {'main': ['is_roomate'], 'title': 'Colocation acceptée', 'is_array' : true, 'type': 'normal'},
+        {'main': ['rent_period'], 'title': 'Durée du bail', 'is_array' : true, 'type': 'normal'},
+        {'main': ['planning'], 'title': 'Aménagement', 'is_array' : true, 'type': 'normal'},
+        {'main': ['outbuilding'], 'title': 'Dépendances', 'is_array' : true, 'type': 'normal'},
+        {'main': ['exterior'], 'title': 'Espaces extérieurs', 'is_array' : true, 'type': 'normal'},
+        {'main': ['building'], 'title': 'Immeuble', 'is_array' : true, 'type': 'normal'},
+        {'main': ['number_of_rooms1'], 'title': 'Nombre de chambres', 'is_array' : true, 'type': 'normal'},
+        {'main': ['heating_system'], 'title': 'Chauffage', 'is_array' : true, 'type': 'normal'}
+
+    ];
+    function showActiveSearchSubForms(isFirst) {
+        var found = 0;
+        $('div.top-search-inside').html('');
+        for (var i=0; i<subFormsList.length; i++) {
+            var visible = false;
+            for (var j=0; j<subFormsList[i].main.length; j++) {
+                var fieldName = subFormsList[i].main[j];
+                if (subFormsList[i].is_array) {
+                    if (fieldName == 'region_block_id') {
+                        $('input[name="'+fieldName+'[]"]').each(function() {
+                            if ($(this).val() != '') {
+                                visible = true;
+                            }
+                        });
+                    } else {
+                        if ($('input[name="'+fieldName+'"]').length) {
+                            $('input[name="'+fieldName+'"]').each(function() {
+                                if ($(this).prop('checked')) {
+                                    visible = true;
+                                }
+                            });
+                        } else {
+                            $('input[name="'+fieldName+'[]"]').each(function() {
+                                if ($(this).prop('checked')) {
+                                    visible = true;
+                                }
+                            });
+                        }
+                    }
+                } else {
+                    if ($('input[name="'+fieldName+'"]').attr('type') == 'hidden' || $('input[name="'+fieldName+'"]').attr('type') == 'text') {
+                        if ($('input[name="'+fieldName+'"]').val() != '') {
+                            visible = true;
+                        }
+                    } else {
+                        if ($('input[name="'+fieldName+'"]').prop('checked')) {
+                            visible = true;
+                        }
+                    }
+                }
+            }
+            if (visible) {
+                found++;
+                var line = $('<a>').attr('href', '#').addClass('btn btn-gray btn-blue-dark btn-choice closer-a-btn').text(subFormsList[i].title).attr('data-index', i);
+                line.click(function () {
+                    var indx = $(this).attr('data-index');
+                    for (var i=0; i<subFormsList[indx].main.length; i++) {
+                        var input_id = subFormsList[indx].main[i];
+                        if (subFormsList[indx].is_array) {
+                            if ($('input[name="'+input_id+'[]"]').length) {
+                                $('input[name="'+input_id+'[]"]').each(function() {
+                                    if ($(this).attr('type') == 'hidden' || $(this).attr('type') == 'text') {
+                                        $(this).val('');
+                                    } else {
+                                        $(this).prop('checked', false);
+                                    }
+                                });
+                            } else {
+                                if ($('input[name="'+input_id+'"]').attr('type') == 'hidden' || $('input[name="'+input_id+'"]').attr('type') == 'text') {
+                                    $('input[name="'+input_id+'"]').val('');
+                                } else {
+                                    $('input[name="'+input_id+'"]').prop('checked', false);
+                                }
+                            }
+
+                            if (input_id == 'region_block_id') {
+                                $('a.del-item-region').each(function() {
+                                    var item_id = $(this).attr('data-id');
+                                    $('input[type="hidden"]#'+item_id).remove();
+                                    $(this).remove();
+                                });
+                                $('input#region_input').val('');
+                            }
+                        } else {
+                            if ($('input[name="'+input_id+'"]').attr('type') == 'hidden' || $('input[name="'+input_id+'"]').attr('type') == 'text') {
+                                $('input[name="'+input_id+'"]').val('');
+                            } else {
+                                $('input[name="'+input_id+'"]').prop('checked', false);
+                            }
+                            if (subFormsList[indx].type == 'slider') {
+                                var maxValue = (input_id == 'max_budget' || input_id == 'min_budget') ? <?=$this->MAX_BUDGET?> : <?=$this->MAX_SIZE?>;
+                                $('input[name="'+input_id+'"]').parent().find('label.left').find('span').text('--');
+                                $('input[name="'+input_id+'"]').parent().find('label.right').find('span').text('--');
+                                $('input[name="'+input_id+'"]').parent().find("div.ui-slider").slider('values',0,0);
+                                $('input[name="'+input_id+'"]').parent().find("div.ui-slider").slider('values',1,maxValue);
+                            }
+                        }
+
+                        if (i == subFormsList[indx].main.length-1) {
+                            var curTitle = $(this).text();
+                            $('div.title-name').each(function() {
+                                if ($(this).find('span').text() == curTitle) {
+                                    $(this).closest('.grid-block-search').find('div.subFormWrapper').hide();
+                                    $(this).find('a').removeClass('btn-up btn-down').addClass('btn-down');
+                                    $(this).find('img').attr('src', ('/./assets/images/btn-down.png'));
+                                }
+                            });
+
+                            var closerParent = $(this).parent().parent();
+                            $(this).remove();
+                            if ($('a.closer-a-btn').length == 0) {
+                                closerParent.hide();
+                            }
+                        }
+                    }
+
+                    return false;
+                });
+                $('div.top-search-inside').append(line);
+            } else {
+                if (isFirst) {
+                    $('div.title-name').each(function() {
+                        if ($(this).find('span').text() == subFormsList[i].title) {
+                            $(this).closest('.grid-block-search').find('div.subFormWrapper').hide();
+                            $(this).find('a').removeClass('btn-up btn-down').addClass('btn-down');
+                            $(this).find('img').attr('src', ('/./assets/images/btn-down.png'));
+                        }
+                    });
+                }
+            }
+        }
+        if (found > 0) {
+            $('div.top-search-wrapper').show();
+        } else {
+            $('div.top-search-wrapper').hide();
+        }
+    }
+
+    $(document).ready(function() {
+        $("#availability").datepicker({"dateFormat":"MM d, yy"});
+        showActiveSearchSubForms(true);
+
+        $('input[type="checkbox"]').change(function() {
+            showActiveSearchSubForms(false);
+        });
+        $('input[type="radio"]').change(function() {
+            showActiveSearchSubForms(false);
+        });
+        $('input.btn-tous').click(function() {
+            showActiveSearchSubForms(false);
+        });
+
+        var availableBlocks = <?=json_encode($this->regions_list)?>;
+        for (var i=0; i<availableBlocks.length-1; i++) {
+            availableBlocks[i].value = $('<div />').html(availableBlocks[i].value).text();
+        }
+
+        $("input#region_input").autocomplete({
+            source: availableBlocks,
+            minLength: 0,
+            select: function(event, ui) {
+                $('input.region_id').val(ui.item.id);
+                showActiveSearchSubForms(false);
+            },
+            change: function(event, ui) {
+                $('input.region_id').val(ui.item.id);
+                showActiveSearchSubForms(false);
+            },
+            open: function(event, ui) {
+                $('ul.ui-autocomplete').width('240px');
+                $('ul.ui-autocomplete').css('max-height', '160px');
+            }
+        });
+
+        $('a#sendSearchForm').click(function() {
+            $('form[name="searchForm"]').submit();
+            return false;
+        });
+
+        $('.selectMetroLine').click(function() {
+            var metro_line_id = $(this).attr('data-line-id');
+            var $form = $('form[name="searchForm"]');
+            var $hiddenLineInput    = $form.find('input[name="metro_line_id"]');
+            var $hiddenStationInput = $form.find('input[name="metro_station_id"]');
+            $hiddenStationInput.val('');
+            $hiddenLineInput.val(metro_line_id);
+            $form.submit();
+        });
+        $('.selectStation').click(function() {
+            var metro_station_id = $(this).attr('data-station-id');
+            var $form = $('form[name="searchForm"]');
+            var $hiddenLineInput    = $form.find('input[name="metro_line_id"]');
+            var $hiddenStationInput = $form.find('input[name="metro_station_id"]');
+            $hiddenStationInput.val(metro_station_id);
+            $hiddenLineInput.val('');
+            $form.submit();
+        });
+
+    });
+    //-->
+</script>
+
+<div class="grid grid-transparent">
+<div class="main-container-box">
+<form name="searchForm" action="<?=$this->url(array('controller' => 'search','action' => 'updatesearch', 'search_id' => $this->search->id), null, true)?>" method="post">
+<div class="container-box">
+    <div class="grid grid-blue grid-block-search top-search-wrapper" style="display: none;">
+        <h2 class="name-txt">Ma recherche</h2>
+        <span>Retrouvez ici les filtres <br>de votre recherche. </span>
+        <div class="box-btn-choice top-search-inside">
+        </div>
+    </div>
+
+    <?php if ($this->search_type == 'metro'): ?>
+        <input type="hidden" name="metro_station_id" value="<?=$this->metro_station_id?>" />
+        <input type="hidden" name="metro_line_id" value="<?=$this->metro_line_id?>" />
+        <input type="hidden" name="distance" value="<?=$this->metroDistance?>" />
+    <?php endif; ?>
+
+    <div class="grid grid-dark grid-block-search">
+        <h2 class="name-txt2">Affiner ma recherche</h2>
+    </div>
+    <div class="grid grid-dark grid-block-search">
+        <div class="title-name">
+            <span>Localisation</span>
+            <a href="#" class="btn-up">
+                <img src="/./assets/images/btn-up.png">
+            </a>
+        </div>
+        <div class="subFormWrapper">
+        <div class="box-btn-choice">
+            <?php foreach ($this->regions_sel as $indx => $rec): ?>
+            <a href="#" class="btn btn-gray btn-blue-dark btn-choice del-item-region" data-id="region_<?=$rec['id']?>" title="<?=addslashes($rec['full'])?>"><span style="display: inline-block; width: 198px; overflow: hidden; white-space: nowrap;"><?=$rec['value']?></span></a>
+            <input type="hidden" class="region_id" id="region_<?=$rec['id']?>" name="region_block_id[]" value="<?=$rec['id']?>" />
+            <?php endforeach; ?>
+
+            <input type="text" id="region_input" placeholder="Ajouter un lieu" />
+            <input type="hidden" class="region_id" id="cur_value" name="region_block_id[]" value="" />
+        </div>
+        </div>
+    </div>
+    <div class="grid grid-dark grid-block-search">
+        <div class="title-name">
+            <span>Budget</span>
+            <a href="#" class="btn-up">
+                <img src="/./assets/images/btn-up.png">
+            </a>
+        </div>
+        <div class="subFormWrapper">
+        <div class="box-price-btn">
+            <?php
+            $min_budget = intval($this->form->getElement('min_budget')->getValue());
+            $max_budget = intval($this->form->getElement('max_budget')->getValue());
+            if ($max_budget == 0 && $min_budget != 0) {
+                $max_budget = $this->MAX_BUDGET;
+            }
+            ?>
+            <label class="btn-input-daker sresults_slider_label left"><span><?=($min_budget == 0 && $max_budget == 0 ? '--' : $min_budget)?></span> €</label>
+            <label class="btn-input-daker sresults_slider_label right"><span><?=($min_budget == 0 && $max_budget == 0 ? '--' : $max_budget)?></span> €</label>
+            <div class="clear"></div>
+            <div id="slider-range-budget" style="margin-bottom: 20px;"></div>
+            <input type="hidden" name="min_budget" value="<?=($min_budget > 0 ? $min_budget : '')?>" />
+            <input type="hidden" name="max_budget" value="<?=($max_budget > 0 ? $max_budget : '')?>" />
+        </div>
+        </div>
+    </div>
+    <div class="grid grid-dark grid-block-search">
+        <div class="title-name">
+            <span>Surface</span>
+            <a href="#" class="btn-up">
+                <img src="/./assets/images/btn-up.png">
+            </a>
+        </div>
+        <div class="subFormWrapper">
+        <div class="box-price-btn">
+            <?php
+            $min_size = intval($this->form->getElement('min_size')->getValue());
+            $max_size = intval($this->form->getElement('max_size')->getValue());
+            if ($max_size == 0 && $min_size != 0) {
+                $max_size = $this->MAX_SIZE;
+            }
+            ?>
+            <label class="btn-input-daker sresults_slider_label left"><span><?=($min_size == 0 && $max_size == 0 ? '--' : $min_size)?></span> m²</label>
+            <label class="btn-input-daker sresults_slider_label right"><span><?=($min_size == 0 && $max_size == 0 ? '--' : $max_size)?></span> m²</label>
+            <div class="clear"></div>
+            <div id="slider-range-surface" style="margin-bottom: 20px;"></div>
+            <input type="hidden" name="min_size" value="<?=($min_size > 0 ? $min_size : '')?>" />
+            <input type="hidden" name="max_size" value="<?=($max_size > 0 ? $max_size : '')?>" />
+        </div>
+        </div>
+    </div>
+    <div class="grid grid-dark grid-block-search">
+        <div class="title-name">
+            <span><?=$this->form->getElement('is_furnished')->getLabel()?></span>
+            <a href="#" class="btn-up">
+                <img src="/./assets/images/btn-up.png">
+            </a>
+        </div>
+        <div class="subFormWrapper">
+            <?=$this->form->getElement('is_furnished')?>
+        </div>
+    </div>
+    <div class="grid grid-dark grid-block-search">
+        <div class="title-name">
+            <span><?=$this->form->getElement('property_type')->getLabel()?></span>
+            <a href="#" class="btn-up">
+                <img src="/./assets/images/btn-up.png">
+            </a>
+        </div>
+        <div class="subFormWrapper">
+            <?=$this->form->getElement('property_type')?>
+        </div>
+    </div>
+    <div class="grid grid-dark grid-block-search">
+        <div class="title-name">
+            <span><?=$this->form->getElement('availability_select')->getLabel()?></span>
+            <a href="#" class="btn-up">
+                <img src="/./assets/images/btn-up.png">
+            </a>
+        </div>
+        <div class="subFormWrapper">
+            <?=$this->form->getElement('availability_select')?>
+            <span>ou à partir de</span>
+            <div class="box-calend-search">
+                <input type="text" name="availability" placeholder="Date souhaitée" value="<?=$this->form->getElement('availability')->getValue()?>" id="availability" />
+                <a href="#" class="btn btn-small btn-dark datepicker-show">
+                    <i class="icon-calend"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="grid grid-dark grid-block-search">
+        <div class="title-name">
+            <span><?=$this->form->getElement('is_roomate')->getLabel()?></span>
+            <a href="#" class="btn-up">
+                <img src="/./assets/images/btn-up.png">
+            </a>
+        </div>
+        <div class="subFormWrapper">
+            <?=$this->form->getElement('is_roomate')?>
+        </div>
+    </div>
+    <div class="grid grid-dark grid-block-search">
+        <div class="title-name">
+            <span><?=$this->form->getElement('rent_period')->getLabel()?></span>
+            <a href="#" class="btn-up">
+                <img src="/./assets/images/btn-up.png">
+            </a>
+        </div>
+        <div class="subFormWrapper">
+            <?=$this->form->getElement('rent_period')?>
+        </div>
+    </div>
+    <div class="grid grid-dark grid-block-search">
+        <div class="title-name">
+            <span><?=$this->form->getElement('planning')->getLabel()?></span>
+            <a href="#" class="btn-up">
+                <img src="/./assets/images/btn-up.png">
+            </a>
+        </div>
+        <div class="subFormWrapper">
+            <?=$this->form->getElement('planning')?>
+        </div>
+    </div>
+    <div class="grid grid-dark grid-block-search">
+        <div class="title-name">
+            <span><?=$this->form->getElement('outbuilding')->getLabel()?></span>
+            <a href="#" class="btn-up">
+                <img src="/./assets/images/btn-up.png">
+            </a>
+        </div>
+        <div class="subFormWrapper">
+            <?=$this->form->getElement('outbuilding')?>
+        </div>
+    </div>
+    <div class="grid grid-dark grid-block-search">
+        <div class="title-name">
+            <span><?=$this->form->getElement('exterior')->getLabel()?></span>
+            <a href="#" class="btn-up">
+                <img src="/./assets/images/btn-up.png">
+            </a>
+        </div>
+        <div class="subFormWrapper">
+            <?=$this->form->getElement('exterior')?>
+        </div>
+    </div>
+    <div class="grid grid-dark grid-block-search">
+        <div class="title-name">
+            <span><?=$this->form->getElement('building')->getLabel()?></span>
+            <a href="#" class="btn-up">
+                <img src="/./assets/images/btn-up.png">
+            </a>
+        </div>
+        <div class="subFormWrapper">
+            <?=$this->form->getElement('building')?>
+        </div>
+    </div>
+    <div class="grid grid-dark grid-block-search">
+        <div class="title-name">
+            <span><?=$this->form->getElement('number_of_rooms1')->getLabel()?></span>
+            <a href="#" class="btn-up">
+                <img src="/./assets/images/btn-up.png">
+            </a>
+        </div>
+        <div class="subFormWrapper">
+            <?=$this->form->getElement('number_of_rooms1')?>
+        </div>
+    </div>
+    <div class="grid grid-dark grid-block-search">
+        <div class="title-name">
+            <span><?=$this->form->getElement('heating_system')->getLabel()?></span>
+            <a href="#" class="btn-up">
+                <img src="/./assets/images/btn-up.png">
+            </a>
+        </div>
+        <div class="subFormWrapper">
+            <?=$this->form->getElement('heating_system')?>
+        </div>
+    </div>
+</div>
+</form>
+
+
+<div class="container-box">
+<div class="grid grid-dark grid-block">
+    <h2>Trier les résultats (<?=$this->paginator->getTotalItemCount()?>)</h2>
+    <div class="box-btn-date search-sorter">
+        <span>Trier par</span>
+        <a href="#" class="btn btn-dark btn-date dropdown-toggle" data-toggle="dropdown">
+            <?php
+            if ($this->sortBy == 'price') {
+                $curOrderStr = 'Sort by Price '.($this->sortBy == 'asc' ? 'asc' : 'desc');
+            } elseif ($this->sortBy == 'size') {
+                $curOrderStr = 'Sort by Size '.($this->sortBy == 'asc' ? 'asc' : 'desc');
+            } else {
+                $curOrderStr = 'Date de publication';
+            }
+            echo $curOrderStr;
+            ?>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="<?=$this->url(array('controller' => 'search', 'action' => 'results', 'search_id' => $this->search->id, 'sort' => 'date', 'dir' => 'desc'), null, true)?>">Date de publication</a></li>
+            <li><a href="<?=$this->url(array('controller' => 'search', 'action' => 'results', 'search_id' => $this->search->id, 'sort' => 'price', 'dir' => 'asc'), null, true)?>">Sort by Price acs</a></li>
+            <li><a href="<?=$this->url(array('controller' => 'search', 'action' => 'results', 'search_id' => $this->search->id, 'sort' => 'price', 'dir' => 'desc'), null, true)?>">Sort by Price desc</a></li>
+            <li><a href="<?=$this->url(array('controller' => 'search', 'action' => 'results', 'search_id' => $this->search->id, 'sort' => 'size', 'dir' => 'asc'), null, true)?>">Sort by Size acs</a></li>
+            <li><a href="<?=$this->url(array('controller' => 'search', 'action' => 'results', 'search_id' => $this->search->id, 'sort' => 'size', 'dir' => 'desc'), null, true)?>">Sort by Size desc</a></li>
+        </ul>
+    </div>
+</div>
+
+<?php if ($this->paginator->getTotalItemCount() == 0): ?>
     <p>Properties are not found</p>
 <?php else: ?>
-    <table border="1">
-    <?php foreach($this->foundProperties as $property): ?>
-        <tr>
-            <td width="110px" height="110px" align="center" valign="center"><?= $this->imageResize(100, 100, $property->main_photo) ?></td>
-            <td width="300px" valign="top"><h3><a href="/property/detail/item/<?= $property->id ?>"><?= $property->title ?></a></h3></td>
-            <td width="120px">
-               <h3><?= $property->getPrice() ?> &euro;</h3>
-               <?= $property->size ?> m<sup>2</sup><br />
-               <?= $property->number_of_rooms1 ?> rooms
-            </td>
-        </tr>
-    <?php endforeach; ?>
-    </table>
+    <?php
+    $types = Model_Property::getTypes();
+    ?>
+<?php foreach ($this->paginator AS $property): ?>
+    <?php
+        $urgent = ($property->is_urgent != 0);
+        $pro    = (!isset($this->ownersStatus[$property->owner_id]) ? false : ($this->ownersStatus[$property->owner_id]['is_premium'] != 0));
+    ?>
+    <div class="grid grid-block">
+        <div class="box-text info-box">
+            <div class="anonce-img-wrapper">
+            <a href="<?=$this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $property->id), null, true)?>"><?=$this->imageResize(103, 102, $property->main_photo, array('class' => 'img-ad'))?></a>
+            </div>
+            <h3 class="title-ad"><a href="<?=$this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $property->id), null, true)?>"><?=$property->title?></a></h3>
+            <div><?=$types[$property->property_type]?><?php if ($property->is_furnished): ?> <span class="slash">|</span> Meublé<?php endif; ?><br>
+                <div class="inner-box-right">
+                    <?php if ($pro): ?>
+                        <?php if ($property->honoraire > 0): ?>
+                            <span class="txt-price">Honoraires : <?=number_format($property->honoraire,0)?> €</span>
+                        <?php endif; ?>
+                    <a href="#" class="btn btn-gray btn-blue-dark small-btn">
+                        <i class="i-group-white icon-pro"></i>
+                        Pro
+                    </a>
+                    <?php endif; ?>
+                    <?php if ($urgent): ?>
+                    <a href="#" class="btn btn-red-small small-btn">
+                        <i class="icon-urgent"></i>
+                        Urgent
+                    </a>
+                    <?php endif; ?>
+                </div>
+
+                <?=$property->address.' ('.$property->postcode.')'?><br>
+                <?php if (isset($this->nearStations[$property->id])): ?>
+                Métro : <?=$this->nearStations[$property->id]?><br>
+                <?php endif; ?>
+                <a class="open-in-modal gmap" data-title="<?=$property->title?>" href="<?=$this->url(array('controller' => 'property', 'action' => 'showonmap', 'item' => $property->id), null, true)?>">Voir sur une carte</a>
+            </div>
+        </div>
+        <div class="box-text price-box<?=($urgent ? ' bg-red' : '')?>">
+            <p class="price-small"><?=number_format($property->amount_of_rent_excluding_charges, 0)?> €</p>
+            <p><?=number_format($property->size, 0)?> m²</p>
+            <p><?=$property->number_of_rooms1?> pièces</p>
+        </div>
+    </div>
+<?php endforeach; ?>
 <?php endif; ?>
+<?php
+$paginationControl = $this->paginationControl($this->paginator, null, '_partials/paginator/search.phtml');
+echo $paginationControl;
+?>
+
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<script type="text/javascript">
+    $(function(){
+        $('#slider-range-budget').slider({
+            range: true,
+            min: 0,
+            max: <?=$this->MAX_BUDGET?>,
+            values: [ <?=$min_budget?>, <?=($max_budget > 0 ? $max_budget : $this->MAX_BUDGET)?> ],
+            slide: function( event, ui ) {
+                $(this).parents('div.box-price-btn').find('label.left').find('span').text(ui.values[0]);
+                $(this).parents('div.box-price-btn').find('label.right').find('span').text(ui.values[1]);
+                $('input[name="min_budget"]').val(ui.values[0]);
+                $('input[name="max_budget"]').val(ui.values[1]);
+
+                showActiveSearchSubForms(false);
+            }
+        });
+
+        $('#slider-range-surface').slider({
+            range: true,
+            min: 0,
+            max: <?=$this->MAX_SIZE?>,
+            values: [ <?=$min_size?>, <?=($max_size > 0 ? $max_size : $this->MAX_SIZE)?> ],
+            slide: function( event, ui ) {
+                $(this).parents('div.box-price-btn').find('label.left').find('span').text(ui.values[0]);
+                $(this).parents('div.box-price-btn').find('label.right').find('span').text(ui.values[1]);
+                $('input[name="min_size"]').val(ui.values[0]);
+                $('input[name="max_size"]').val(ui.values[1]);
+
+                showActiveSearchSubForms(false);
+            }
+        });
+
+        $('.title-name .btn-up, .title-name .btn-down').click(function(e){
+            e.preventDefault();
+            var $this = $(this);
+            var hide = $this.hasClass('btn-up');
+            $(this).closest('.grid-block-search').find('div.subFormWrapper')[hide ? 'slideUp' : 'slideDown']();
+            $this.removeClass('btn-up btn-down').addClass(hide ? 'btn-down' : 'btn-up');
+            $this.find('img').attr('src', (hide ? '/./assets/images/btn-down.png' : '/./assets/images/btn-up.png'));
+        });
+
+        $('a.del-item-region').click(function() {
+            var id = $(this).attr('data-id');
+            $('input.region_id#'+id).remove();
+            $(this).remove();
+
+            showActiveSearchSubForms(false);
+
+            return false;
+        });
+
+        $('a.datepicker-show').click(function() {
+            $('#availability').focus();
+            return false;
+        });
+
+        $('input#availability').change(function() {
+            showActiveSearchSubForms(false);
+        });
+    });
+</script>
+
+<?php
+
+function getMetroShadowStr($color) {
+    $r = hexdec(substr($color,0,2));
+    $g = hexdec(substr($color,2,2));
+    $b = hexdec(substr($color,4,2));
+    $Y = ($r+$r+$b+$g+$g+$g)/6;
+
+    $r = round($r * 0.6);
+    $g = round($g * 0.6);
+    $b = round($b * 0.6);
+    return 'rgba('.$r.', '.$g.', '.$b.', 0.9)';
+}
+
+function printMetroLineHTML($name, $color, $id) {
+    $number = intval($name);
+    if ($number == 0) {
+        $isRER = true;
+        $number = mb_strtoupper(mb_substr($name, 0, 1));
+    } else {
+        $isRER = false;
+        $str = mb_substr($name, mb_strlen($number));
+    }
+
+    $r = hexdec(substr($color,0,2));
+    $g = hexdec(substr($color,2,2));
+    $b = hexdec(substr($color,4,2));
+    $Y = ($r+$r+$b+$g+$g+$g)/6;
+
+    $r = round($r * 0.6);
+    $g = round($g * 0.6);
+    $b = round($b * 0.6);
+    $shadowStr = 'rgba('.$r.', '.$g.', '.$b.', 0.9)';
+
+    if (!$isRER) {
+        ?>
+        <div class="line-circle selectMetroLine" data-line-id="<?=$id?>" style="background-color: #<?=$color?>; color: <?=($Y <= 128 ? 'white' : 'black')?> !important; -webkit-box-shadow: 1px 1px 0px <?=$shadowStr?>; -moz-box-shadow: 1px 1px 0px <?=$shadowStr?>; box-shadow: 1px 1px 0px <?=$shadowStr?>;"><?='<div class="number '.($str != '' ? 'align2' : 'align1').'">'.$number.'</div>'.($str != '' ? '<div class="line-str">'.$str.'</div>' : '')?></div>
+    <?php
+    } else {
+        ?>
+        <div class="line-circle rer selectMetroLine" data-line-id="<?=$id?>" style="border-color: #<?=$color?>; color: #<?=$color?> !important; -webkit-box-shadow: 1px 1px 0px <?=$shadowStr?>; -moz-box-shadow: 1px 1px 0px <?=$shadowStr?>; box-shadow: 1px 1px 0px <?=$shadowStr?>;"><?='<div class="number align1">'.$number.'</div>'?></div>
+    <?php
+    }
+}
+?>
+

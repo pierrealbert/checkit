@@ -5,7 +5,7 @@ class RegistrationController extends Zend_Controller_Action
     protected function _processRegistrationForm(Zend_Form $form)
     {
         if ($this->getRequest()->isPost() 
-                && $form->isValid($this->getRequest()->getPost()))
+                && $form->isValid($this->getRequest()->getParams()))
         {
             $user = Doctrine::getTable('Model_User')->create();
             
@@ -15,7 +15,7 @@ class RegistrationController extends Zend_Controller_Action
             
             $this->_helper->mailer->send($user->email, 'confirm-registration', $user->toArray());
             $this->_helper->messenger->success('confirmation_email_message_was_sent');
-            $this->_helper->redirector->gotoSimple('index', 'index', 'default');
+            $this->_helper->redirector->gotoSimple('thank-you', 'registration', 'default');
         } 
         
     }
@@ -41,6 +41,7 @@ class RegistrationController extends Zend_Controller_Action
         }
         $form = new Form_Registration();
         $form->setType($type);
+        
         $this->_processRegistrationForm($form);
 
         $this->view->type = $type;
@@ -56,6 +57,11 @@ class RegistrationController extends Zend_Controller_Action
         $this->view->form = $form;
     }
     
+    public function thankYouAction()
+    {
+        
+    }
+
     public function confirmAction()
     {
         $user = Doctrine::getTable('Model_User')->findOneById($this->_getParam('id', ''));

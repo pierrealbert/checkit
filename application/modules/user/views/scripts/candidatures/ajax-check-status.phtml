@@ -1,0 +1,122 @@
+<?php if ($this->application->isAccepted()) : ?>
+    <div class="box-txt">
+        <div class="triangle-bottom"></div>
+        <p>Candidature envoyée</p>
+        <div class="blue-dark">Acceptée</div>
+    </div>
+    <div class="inner-box-info">
+        <div class="transparent-box">
+            <div class="table-info">
+                <div class="cellsblock cell-first">
+                    <div class="cellleft">
+                        Date de visite
+                    </div>
+                    <div class="cellright">
+                        <?= $this->application->PropertyVisitDates->availability ?>
+                    </div>
+                </div>
+                <div class="cellsblock">
+                    <div class="cellleft">
+                        Horaire
+                    </div>
+                    <div class="cellright">
+                        <?= $this->application->PropertyVisitDates->at_time ?>
+                    </div>
+                </div>
+                <div class="cellsblock">
+                    <div class="cellleft">
+                        Telephone
+                    </div>
+                    <div class="cellright">
+                        <?= $this->application->User->phone ?>
+                    </div>
+                </div>
+                <div class="cellsblock">
+                    <div class="cellleft">
+                        Etage
+                    </div>
+                    <div class="cellright">
+                        <?= $this->application->Property->floor ?>e
+                    </div>
+                </div>
+                <div class="cellsblock cell-last">
+                    <div class="cellleft">
+                        Adresse
+                    </div>
+                    <div class="cellright">
+                        <?= $this->application->Property->address ?><br>
+                        <?= $this->application->Property->postcode ?> <?= $this->application->Property->city ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carte-small" id="map_canvas"></div>
+        <?php if (!empty($this->application->message)): ?>
+            <div class="box-message">
+                <div class="triangle-up"></div>
+                <p>Message du proprietaire</p>
+                <span>
+                    <?= $this->application->message ?>
+                </span>
+            </div>
+        <?php endif; ?>
+    </div>
+<? elseif ($this->application->isDeclined()) : ?>
+    <div class="box-txt">
+        <div class="triangle-bottom"></div>
+        <p>Candidature envoyée</p>
+        <div class="red">Refusée</div>
+    </div>
+    <div class="inner-box-info">
+        <div class="transparent-box">
+            <p>
+                Votre candidature a été refusée par le propriétaire.
+                Vous pouvez cherchez d’autres annonces auxquelles candidater.
+            </p>
+            <a class="btn btn-blue" href="/search/standard">Effectuer une nouvelle recherche</a>
+        </div>
+        <div class="transparent-box">
+            <p>
+                <span class="red"> Des difficultés pour obtenir des visites?</span>
+                Donnez-vous les moyens de trouver un logement
+                avec nos comptes OMMI + et OMMUIM.
+            </p>
+            <a class="btn btn-red" href="#">Découvrir nos comptes +</a>
+        </div>
+    </div>
+<? elseif ($this->application->isRead()) : ?>
+    <div class="box-txt">
+        <p>Candidature envoyée</p>
+        <div>Lue</div>
+    </div>
+<? else : ?>
+    <div class="box-txt">
+        <p>Candidature envoyée</p>
+        <div>Non Lue</div>
+    </div>
+<? endif ?>
+
+<script type="text/javascript">
+    // initialize google map
+    var mapCanvas = document.getElementById('map_canvas');
+    var lat = <?= $this->application->Property->latitude ? $this->application->Property->latitude : '48.8756240000'; ?>;
+    var lng = <?= $this->application->Property->longitude ? $this->application->Property->longitude : '2.3279515000'; ?>;
+    var zoom = 16;
+    var mapOptions = {
+        center: new google.maps.LatLng(lat, lng),
+        zoom: zoom,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    // initialize map
+    var map = new google.maps.Map(mapCanvas, mapOptions);
+
+    // add marker to map
+    var marker = new google.maps.Marker({
+        // need set custom icon marker
+        /*icon: '',*/
+        position: new google.maps.LatLng(lat, lng),
+        map: map,
+        title: '<?= $this->application->Property->title ?>'
+    });
+
+</script>

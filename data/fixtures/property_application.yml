@@ -1,0 +1,57 @@
+Model_PropertyApplication:
+  PropertyApplication1:
+    visitor_id: 5
+    property_visit_date_id: 1
+    property_id: 1
+    visit_time: 20:12
+    rate: 500
+    is_accepted: 0
+    is_declined: 0
+  PropertyApplication2:
+    visitor_id: 5
+    property_visit_date_id: 2
+    property_id: 1    
+    visit_time: 20:12
+    rate: 550
+    is_accepted: 1
+    is_declined: 0    
+  PropertyApplication3:
+    visitor_id: 5
+    property_visit_date_id: 3
+    property_id: 1    
+    visit_time: 10:30
+    rate: 550
+    is_accepted: 0
+    is_declined: 1      
+  PropertyApplication4:
+    visitor_id: 5
+    property_visit_date_id: 4
+    property_id: 1    
+    visit_time: 15:30
+    rate: 550
+    is_accepted: 0
+    is_declined: 1         
+  PropertyApplication5:
+    visitor_id: 5
+    property_visit_date_id: 5
+    property_id: 2
+    visit_time: 15:30
+    rate: 550
+    is_accepted: 0
+    is_declined: 1      
+  PropertyApplication6:
+    visitor_id: 5
+    property_visit_date_id: 6
+    property_id: 2    
+    visit_time: 19:30
+    rate: 1000
+    is_accepted: 0
+    is_declined: 0     
+  PropertyApplication7:
+    visitor_id: 5
+    property_visit_date_id: 7
+    property_id: 3   
+    visit_time: 18:30
+    rate: 1800
+    is_accepted: 0
+    is_declined: 0       

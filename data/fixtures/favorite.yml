@@ -1,0 +1,16 @@
+Model_Favorite:
+  Favorite_1:
+    property_id: 1
+    user_id: 5
+  Favorite_2:
+    property_id: 2
+    user_id: 5
+  Favorite_3:
+    property_id: 3
+    user_id: 5
+  Favorite_4:
+    property_id: 4
+    user_id: 5    
+  Favorite_5:
+    property_id: 4
+    user_id: 4       

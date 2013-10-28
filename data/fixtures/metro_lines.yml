@@ -47,3 +47,24 @@ Model_MetroLine:
   Model_MetroLine_14:
     name: 14
     color: 672f8f
+  Model_MetroLine_A:
+    name: A
+    color: 672f8f    
+  Model_MetroLine_B:
+    name: B
+    color: 672f8f    
+  Model_MetroLine_C:
+    name: C
+    color: 672f8f 
+  Model_MetroLine_D:
+    name: D
+    color: 672f8f 
+  Model_MetroLine_E:
+    name: E
+    color: 672f8f 
+  Model_MetroLine_FUN:
+    name: FUN
+    color: 672f8f 
+  Model_MetroLine_ORV:
+    name: ORV
+    color: 672f8f 

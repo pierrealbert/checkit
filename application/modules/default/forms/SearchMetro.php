@@ -22,8 +22,8 @@ class Form_SearchMetro extends Ext_Form
 
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
 
-        $this->addElement('hidden', 'metro_station_id', array());
-        $this->addElement('hidden', 'metro_line_id', array());
+        $this->addElement('hidden', 'metro_station_id', array('decorators' => array('ViewHelper')));
+        $this->addElement('hidden', 'metro_line_id', array('decorators' => array('ViewHelper')));
         
 		$this->addElement('text', 'min_budget', array(
             'label'      => 'min_budget',
@@ -64,7 +64,7 @@ class Form_SearchMetro extends Ext_Form
                 array('MrButtons'),
                 array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-white')),
                 array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
-            ));
+            ))->setValue(-1);
         $this->addElement($radio);
 
         $chbox = new Zend_Form_Element_MultiCheckbox('number_of_rooms1');
@@ -89,21 +89,21 @@ class Form_SearchMetro extends Ext_Form
             ->setLabel('distance')
             ->setRequired(true)
             ->addMultiOptions(array(
-                '0.35' => '350 m',
-                '0.5' => '500 m',
-                '0.65' => '650 m'
+                '<=0.35' => '350 m',
+                '<=0.5' => '500 m',
+                '<=0.65' => '650 m'
             ))
             ->setDecorators(array(
-                array('MrButtons'),
+                array('MrButtons', array('needAll' => False)),
                 array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-white')),
                 array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
             ));
         $this->addElement($radio);
 
         $this->setDefaults(array(
-            'is_furnished' => '',
+            'is_furnished' => '-1',
             'number_of_rooms1' => '',
-            'distance' => '',
+            'distance' => '<=0.5',
         ));
 	}
 

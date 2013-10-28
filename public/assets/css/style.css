@@ -18,7 +18,10 @@
 @import url('icons.css');
 @import url('modal.css');
 @import url('footer.css');
-
+@import url('pro.css');
+@import url('publier.css');
+@import url('compte.css');
+@import url('datepicker-calendar-mini.css');
 
 body {
 	background: #e7e7e7 url('../images/background.png') repeat;
@@ -660,4 +663,48 @@ p.terms a {
 
 .title-bg-search-metro {
 	background: url(../images/bg-search-metro.png) repeat-x;
+}
+
+.photo-view {
+	position: relative;
+	display: block;
+	width: 614px;
+	height: 500px;
+}
+
+.photo-view > img {
+	position: absolute;
+	display: block;
+	border-radius: 10px;
+}
+
+.photo-view > img.hide-photo {
+	display: none;
+}
+
+.photo-view > img.show-photo {
+	display: block;
+}
+
+form ul.errors {
+    margin: 0px;
+    padding: 10px 0;
+    color: #DE4C5D !important;
+    list-style: none;
+}
+
+
+.title-row-results .container-text {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.title-row-search .container-text {
+	width: 1100px;
+	margin: 0 auto;
+}
+
+.white-txt {
+	color: #fff;
+	text-shadow: 0 -1px 0 #000;
 }

@@ -1,6 +1,6 @@
 Model_Property:
   Property_1:
-    Owner: User_23
+    Owner: User_1
     title: '2 Rue Pecquay'
     amount_of_rent_excluding_charges: '100.00'
     amount_of_charges: '100.00'
@@ -58,7 +58,7 @@ Model_Property:
     created_at: '2013-08-14 08:47:04'
     updated_at: '2013-08-14 08:52:39'
   Property_2:
-    Owner: User_23
+    Owner: User_1
     title: '8 Rue Clovis'
     amount_of_rent_excluding_charges: '200.00'
     amount_of_charges: '200.00'
@@ -116,7 +116,7 @@ Model_Property:
     created_at: '2013-08-14 08:52:44'
     updated_at: '2013-08-14 08:56:45'
   Property_3:
-    Owner: User_23
+    Owner: User_4
     title: '4 Boulevard Saint-Michel'
     amount_of_rent_excluding_charges: '300.00'
     amount_of_charges: '150.00'
@@ -174,7 +174,7 @@ Model_Property:
     created_at: '2013-08-14 08:56:53'
     updated_at: '2013-08-14 09:01:13'
   Property_4:
-    Owner: User_23
+    Owner: User_4
     title: '15 Rue du Bourg Tibourg'
     amount_of_rent_excluding_charges: '250.00'
     amount_of_charges: '150.00'
@@ -232,7 +232,7 @@ Model_Property:
     created_at: '2013-08-14 09:01:18'
     updated_at: '2013-08-14 09:05:38'
   Property_5:
-    Owner: User_23
+    Owner: User_4
     title: '101 Rue Saint-Lazare'
     amount_of_rent_excluding_charges: '333.00'
     amount_of_charges: '200.00'
@@ -290,7 +290,7 @@ Model_Property:
     created_at: '2013-08-14 09:06:10'
     updated_at: '2013-08-14 09:16:21'
   Property_6:
-    Owner: User_23
+    Owner: User_3
     title: '1 Parvis Notre-Dame'
     amount_of_rent_excluding_charges: '333.00'
     amount_of_charges: '200.00'
@@ -348,7 +348,7 @@ Model_Property:
     created_at: '2013-08-14 09:06:10'
     updated_at: '2013-08-14 09:16:21'
   Property_7:
-    Owner: User_23
+    Owner: User_5
     title: 'Rue Bonaparte'
     amount_of_rent_excluding_charges: '333.00'
     amount_of_charges: '200.00'
@@ -406,7 +406,7 @@ Model_Property:
     created_at: '2013-08-14 09:06:10'
     updated_at: '2013-08-14 09:16:21'
   Property_8:
-    Owner: User_23
+    Owner: User_1
     title: '61 Avenue Franklin Delano Roosevelt'
     amount_of_rent_excluding_charges: '333.00'
     amount_of_charges: '200.00'
@@ -464,7 +464,7 @@ Model_Property:
     created_at: '2013-08-14 09:06:10'
     updated_at: '2013-08-14 09:16:21'    
   Property_9:
-    Owner: User_23
+    Owner: User_2
     title: 'Place de la Concorde'
     amount_of_rent_excluding_charges: '360.00'
     amount_of_charges: '220.00'
@@ -522,7 +522,7 @@ Model_Property:
     created_at: '2013-08-14 09:06:10'
     updated_at: '2013-08-14 09:16:21'     
   Property_10:
-    Owner: User_23
+    Owner: User_2
     title: '31 Avenue Bosquet'
     amount_of_rent_excluding_charges: '390.00'
     amount_of_charges: '220.00'
@@ -580,7 +580,7 @@ Model_Property:
     created_at: '2013-08-14 09:06:10'
     updated_at: '2013-08-14 09:16:21'      
   Property_11:
-    Owner: User_23
+    Owner: User_2
     title: '36bis Rue Nicolo'
     amount_of_rent_excluding_charges: '3490.00'
     amount_of_charges: '220.00'
@@ -638,7 +638,7 @@ Model_Property:
     created_at: '2013-08-14 09:06:10'
     updated_at: '2013-08-14 09:16:21'          
   Property_12:
-    Owner: User_23
+    Owner: User_2
     title: '11 Rue Chardon-Lagache'
     amount_of_rent_excluding_charges: '590.00'
     amount_of_charges: '220.00'
@@ -696,7 +696,7 @@ Model_Property:
     created_at: '2013-08-14 09:06:10'
     updated_at: '2013-08-14 09:16:21'                    
   Property_13:
-    Owner: User_23
+    Owner: User_2
     title: '29 Rue Mouffetard'
     amount_of_rent_excluding_charges: '590.00'
     amount_of_charges: '220.00'

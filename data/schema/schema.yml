@@ -180,6 +180,7 @@ UserResident:
                 name: created_at
             updated:
                 name: updated_at  
+                
 UserResidentDocument:
     columns:      
         id:
@@ -187,7 +188,9 @@ UserResidentDocument:
             primary: true
             autoincrement: true   
         user_resident_id:
-            type: integer(4)            
+            type: integer(4)      
+        user_resident_garant_id:
+            type: integer(4)              
         file:           
             type: string(255)
         original_name:  
@@ -198,6 +201,26 @@ UserResidentDocument:
     relations:
         UserResident:
             onDelete: cascade
+        UserResidentGarant:
+            onDelete: cascade            
+            
+UserResidentGarant:
+    columns:      
+        id:
+            type: integer(4)
+            primary: true
+            autoincrement: true   
+        user_resident_id:
+            type: integer(4)            
+        amount:  
+            type: decimal(10)
+            scale: 2           
+        type: 
+            type: enum
+            values: [family, friend, employer, bank, organization]
+    relations:
+        UserResident:
+            onDelete: cascade          
 
 UserMessage:                
     columns:      
@@ -319,6 +342,10 @@ Property:
         number_of_rooms2: 
             type:       integer(4)
             default:    1
+        honoraire:
+            type:       decimal(14)
+            scale:      2
+        is_urgent: integer(1)            
         is_separate_restrooms: integer(1)
         is_parquet_floor: integer(1)
         is_molding:     integer(1)
@@ -505,6 +532,48 @@ PropertyVisitDates:
                 name: created_at
             updated:
                 name: updated_at
+
+PropertyApplication:
+    columns:
+        id:
+            type:       integer(4)
+            primary:    true
+            autoincrement: true
+        visitor_id: integer(4)
+        property_id: integer(4)        
+        property_visit_date_id: integer(4)
+        visit_time: time
+        rate: integer(1)
+        message: text
+        is_read:
+            type: boolean
+            default: false        
+        is_accepted:
+            type: boolean
+            default: false
+        is_declined:
+            type: boolean
+            default: false
+    actAs:
+        Timestampable:
+            created:
+                name: created_at
+            updated:
+                name: updated_at            
+    relations:
+        PropertyVisitDates:
+            onDelete: cascade
+            class: PropertyVisitDates
+            local: property_visit_date_id
+        User:
+            onDelete: cascade
+            class: User
+            local: visitor_id       
+        Property:
+            onDelete: cascade
+            class: Property
+            local: visitor_id              
+
 Favorite:
     columns:      
         user_id:
@@ -580,11 +649,20 @@ Search:
         is_temp:
             type: boolean
             default: true
+        found_items:
+            type: integer(4)
+            default: 0
         name:
             type: string
             size: 255
         conditions:
             type: text
+    actAs:
+          Timestampable:
+              created:
+                  name: created_at
+              updated:
+                  name: updated_at            
     relations:
         User:
             onDelete: cascade

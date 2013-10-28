@@ -17,6 +17,7 @@ class Ext_Form_Decorator_MchBox extends Zend_Form_Decorator_ViewHelper
     protected $_labelClass = 'btn-input-gray-dark btn-input-number';
     protected $_needAll = true;
     protected $_brAfter = -1;
+    protected $_appendPart = false;
 
     public function setOptions(array $options)
     {
@@ -28,6 +29,9 @@ class Ext_Form_Decorator_MchBox extends Zend_Form_Decorator_ViewHelper
         }
         if (isset($options['brAfter'])) {
             $this->_brAfter = intval($options['brAfter']);
+        }
+        if (isset($options['appendPart'])) {
+            $this->_appendPart = $options['appendPart'];
         }
 
         return $this;
@@ -41,7 +45,10 @@ class Ext_Form_Decorator_MchBox extends Zend_Form_Decorator_ViewHelper
             $this->_needAll = $value;
         } elseif ($key == 'brAfter') {
             $this->_brAfter = intval($value);
+        } elseif ($key == 'appendPart') {
+            $this->_appendPart = $value;
         }
+
 
         return $this;
     }
@@ -58,6 +65,32 @@ class Ext_Form_Decorator_MchBox extends Zend_Form_Decorator_ViewHelper
         return $this->_brAfter > 0 ? $this->_brAfter : -1;
     }
 
+    public function getPostPart($indx = 0) {
+        if ($this->_appendPart === false) return '';
+        if (isset($this->_appendPart[$indx]['html'])) {
+            return $this->_appendPart[$indx]['html'];
+        } else {
+            return '';
+        }
+    }
+
+    public function getWrapPost($indx = 0) {
+        if ($this->_appendPart === false) return '';
+        if (isset($this->_appendPart[$indx]['post'])) {
+            return $this->_appendPart[$indx]['post'];
+        } else {
+            return '';
+        }
+    }
+
+    public function getWrapPre($indx = 0) {
+        if ($this->_appendPart === false) return '';
+        if (isset($this->_appendPart[$indx]['pre'])) {
+            return $this->_appendPart[$indx]['pre'];
+        } else {
+            return '';
+        }
+    }
 
     public function render($content)
     {
@@ -76,8 +109,13 @@ class Ext_Form_Decorator_MchBox extends Zend_Form_Decorator_ViewHelper
         $elHtml = '';
         $count = 0;
         foreach ($items as $indx => $itemValue) {
-            $elHtml .= "<input type='checkbox' class='input-pretty' id='".$element->getFullyQualifiedName()."_".$indx."' name='".$element->getFullyQualifiedName()."' value='".$indx."' ".($this->getValue($element) === $indx ? 'checked="checked"' : '').">\n".
-                       "<label for='".$element->getFullyQualifiedName()."_".$indx."' class='".$this->getLabelClass()."'>".$itemValue."</label>";
+            if (is_array($val = $this->getValue($element))) {
+                $checked = in_array($indx, $val);
+            } else {
+                $checked = $indx == $val;
+            }
+            $elHtml .=  $this->getWrapPre($count)."<input type='checkbox' class='input-pretty' id='".$element->getFullyQualifiedName()."_".$indx."' name='".$element->getFullyQualifiedName()."' value='".$indx."' ".($checked ? 'checked="checked"' : '').">\n".
+                       "<label for='".$element->getFullyQualifiedName()."_".$indx."' class='".$this->getLabelClass()."'>".$itemValue."</label>".$this->getPostPart($count).$this->getWrapPost($count);
             $count++;
             if ($this->getBrAfter() > 0) {
                 if ($count % $this->getBrAfter() == 0) {

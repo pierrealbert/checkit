@@ -1,1 +1,105 @@
-
+<div class="tab-resume">
+    <div class="inner-transparent inner-left">
+        <?= $this->partial('_partials/my-profile.phtml', $this->getVars()); ?>
+        <?= $this->partial('_partials/my-calendar.phtml', $this->getVars()); ?>
+    </div>
+    <div class="inner-transparent inner-right">
+        <h2 class="black-txt txt-small">Alertes</h2>
+        <div class="box-info-universal">
+            <div class="alert-gray w500">
+                <a href="#" class="close-gray"></a>
+                <div class="text-box">
+                    Vorte candidature pour l'annonce
+                    <span class="bold-txt">[*.Titre de l'annonce.*]</span> n'a pas ete retenue.
+                </div>
+                <a href="#" class="black link-btn">Voir</a>
+            </div>
+            <div class="alert-blue w500">
+                <a href="#" class="close-blue"></a>
+                <div class="text-box">
+                    Connaissez-vous les avantages<br>du Compte OMMIUM ?
+                </div>
+                <a href="#" class="blue link-btn">Voir</a>
+            </div>
+            <div class="alert-red w500">
+                <a href="#" class="close-red"></a>
+                <div class="text-box">
+                    Rappel : Vous avez une visite programmee<br>
+                    le <span class="bold-txt">(jour mois)</span>
+                    a <span class="bold-txt">(heure)</span>
+                    pour l'annonce <span class="bold-txt"><br>[*Titre de l'annonce.*]</span>
+                </div>
+                <a href="#" class="red link-btn">Voir</a>
+            </div>
+        </div>
+        <? if ($this->applications->count()) : ?>
+        <h2 class="black-txt txt-small">Mes candidatures récentes</h2>
+        <div class="box-info-univ-black">
+            <? foreach ($this->applications as $application) : ?>
+            <div class="grid grid-inner-ad">
+                <div class="box-text info-box">
+                    <?= $this->imageResize(100, 100, $application->Property->main_photo, array('class' => 'img-ad')) ?>
+                    <h3 class="title-ad"><?= $this->escape($application->Property->title) ?></h3>
+                    <div class="ad-address">
+                        <?= $this->escape($application->Property->address) ?> (<?= $application->Property->postcode ?>)
+                    </div>
+                    <? if ($application->isAccepted()) : ?>
+                        <a class="btn small-btn btn-gray-small btn-ad blue" href="#">Acceptee</a>
+                    <? elseif ($application->isDeclined()) : ?>
+                        <a class="btn small-btn btn-gray-small btn-ad red" href="#">Refusee</a>
+                    <? elseif ($application->isRead()) : ?>
+                        <a class="btn small-btn btn-gray-small btn-ad black" href="#">Lue</a>
+                    <? else : ?>
+                        <a class="btn small-btn btn-gray-small btn-ad black" href="#">Non lue</a>
+                    <? endif ?>
+                    <a href="<?= $this->url(array('module' => 'default', 'controller' => 'property', 'action' => 'detail', 'item' => $application->property_id), null, false) ?>" class="black link-add">Voir l'annonce</a>
+                </div>
+                <div class="box-text price-box">
+                    <p class="price-small"><?= $application->rate ?> €</p>
+                    <p><?= $application->Property->size ?> m²</p>
+                    <p><?= $application->Property->number_of_rooms1 ?> pièces</p>
+                </div>
+            </div>
+            <? endforeach; ?>
+            <a href="<?= $this->url(array('module' => 'user', 'controller' => 'candidatures', 'action' => 'index'), null, false) ?>" class="btn btn-blue btn-candid">Voir mes candidatures</a>
+        </div>
+        <? endif; ?>
+        <? if ($this->searches->count()) : ?>
+        <h2 class="black-txt txt-small">Mes recherches récentes</h2>
+        <div class="box-info-univ-black">
+            <? foreach ($this->searches as $searchKey => $search) : ?>
+            <div class="grid grid-inner-ad">
+                <div class="box-text info-box">
+                    <h3 class="title-ad"><?= $this->escape($search->name) ?></h3>                    
+                    <div class="box-input-ad-">
+                        <? foreach ($search->getSearchFields() as $key => $field) : ?>
+                        <input type="checkbox" class="input-pretty" id="condition-<?= $searchKey ?>-<?= $key ?>" name="<?= $field ?>"/>
+                        <label for="condition-<?= $searchKey ?>-<?= $key ?>" class="btn-input-gray-lite"><?= $this->translate($field) ?></label>
+                        <? endforeach; ?>
+                    </div>       
+                    <div class="box-links-add">
+                        <a class="blue" href="<?= $this->url(array('module' => 'default', 'controller' => 'search', 'action' => 'results', 'search_id' => $search->id), null, false) ?>">Voir la recherche</a>
+                        <a class="black" href="#">Modifier la recherche</a>
+                    </div>
+                </div>
+                <div class="box-text price-box box-annonce">
+                    <p><?= $search->found_items ?> annonces trouvees</p>
+                    <p>4 nouvelles annonces</p>
+                    <a class="red delete-search" href="<?= $this->url(array('module' => 'user', 'controller' => 'searches', 'action' => 'delete', 'id' => $search->id), null, false) ?>">Supprimer</a>
+                </div>
+            </div>
+            <? endforeach; ?>
+            <a href="<?= $this->url(array('module' => 'user', 'controller' => 'searches', 'action' => 'index'), null, false) ?>" class="btn btn-blue btn-search">Voir mes recherches</a>
+        </div>
+        <? endif; ?>
+    </div>
+</div>
+<script type="text/javascript">
+    
+    $('.delete-search').click(function (event) {
+        if (!confirm('<?= $this->translate('are_you_sure_want_to_delete_search') ?>')) {
+            event.preventDefault();
+        }
+    })
+    
+</script>

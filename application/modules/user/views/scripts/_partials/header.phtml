@@ -1,14 +1,23 @@
-<div id="header">
-    <h2>User Module Header</h2>
-    <? if ($this->currUser) : ?>
-        <div class="welcome">
-            <div class="clear"></div>
-            <?= $this->translate('hello') ?>, <?= $this->currUser->getFullName() ?>!
-            [<a href="<?= $this->url(array('module' => 'default', 'controller' => 'login', 'action' => 'logout', 'model' => 'user'), null, true) ?>"><?= $this->translate('logout') ?></a>]
-            <? if (!$this->currUser->is_premium): ?>
-                [<a href="<?= $this->url(array('module' => 'user', 'controller' => 'subscription', 'action' => 'index'), null, true) ?>"><?= $this->translate('upgrade_to_premium') ?></a>]
-            <? endif ?>
-        </div>
-        <div class="clear"></div>
-    <? endif ?>
-</div>
+<header>
+    <div class="inner">
+        <a href="/" class="logo">Ommi</a>
+        <ul id="header-nav">
+            <li class="left"><a href="#">Guide du Locataire</a></li>
+            <li><a href="/search" class="btn btn-red">Nouvelle recherche</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="">Bonjour, <?= $this->currUser->getFullName() ?> <i class="caret"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="">Résumé</a></li>
+                    <li><a href="">Mon dossier</a></li>
+                    <li><a href="">Mes candidatures</a></li>
+                    <li><a href="">Mes recherches</a></li>
+                    <li><a href="">Me services</a></li>
+                    <li><a href="">Mon compte</a></li>
+                    <li><a href="">Mes recherches</a></li>
+                    <li><a href="/logout" class="red">Se déconnecter</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Mes candidatures</a></li>           
+        </ul>
+    </div>
+</header>

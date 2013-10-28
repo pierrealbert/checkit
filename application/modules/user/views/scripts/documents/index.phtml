@@ -1,0 +1,105 @@
+<div class="tab-file">
+    <div class="box-title">
+        <div class="title-txt">
+            <h2 class="black-txt">Dossier de candidature</h2>
+            <span class="bold-txt">Candidat + 2 Colocataire</span>
+        </div>
+        <div class="btn-group">
+            <a href="#" class="btn btn-gray">Modifier</a>
+            <a href="#" class="btn btn-blue">Profil Ommi+</a>
+            <a href="#" class="btn btn-red">Profil Ommium</a>
+        </div>
+    </div>
+    <div class="box-info-universal" id="residentTabs">
+        <div class="inner-menu-file">
+            <ul>
+                <? foreach ($this->residents as $key => $resident) : ?>
+                <li>
+                    <a <?= $key ? '' : 'class="active"' ?> href="#resident-<?= $key ?>">
+                        <?= $resident->getTitle() ?>
+                    </a>
+                </li>
+                <? endforeach; ?>
+            </ul>
+        </div>
+        <div class="inner-bg-black">
+            <? foreach ($this->residents as $key => $resident) : ?>
+            <? 
+                $garants    = $resident->getGarants();
+                $documents  = $resident->getDocuments();
+            ?>
+            <div id="resident-<?= $key ?>">
+                <h2 class="white-text txt-small">Profil</h2>
+                <div class="box-info-universal">
+                    <h2 class="black-text"><?= $this->escape($resident->resident_name) ?></h2>
+                    <div class="inner-box">
+                        <p>Profil : <span class="bold-txt"><?= $this->translate($resident->resident_type) ?></span></p>
+                        <p>Revenus : <span class="bold-txt"><?= $resident->monthly_income ?> €/mois</span></p>
+                        <? if ($garants) : ?>
+                        <div class="garant">
+                            <? foreach ($resident->getGarants() as $key => $garant) : ?>                        
+                            <p>Garant <?= ($key + 1) ?>: <span class="bold-txt"><?= $this->translate($garant->type) ?> - <?= $garant->amount ?> €/mois</span></p>
+                            <? endforeach; ?>
+                        </div>
+                        <? endif; ?>
+                    </div>
+                    <? if ($resident->resident_type == Model_UserResident::TYPE_EMPLOYEE || $resident->resident_type == Model_UserResident::TYPE_INDEPENDENT) : ?>
+                    <div class="inner-box">
+                        <p>Profession : <span class="bold-txt"><?= $this->escape($resident->job_title) ?></span></p>
+                        <? if ($resident->resident_type == Model_UserResident::TYPE_EMPLOYEE) : ?>
+                        <p>Contrat: <span class="bold-txt"><?= $this->translate($resident->employee_type) ?></span></p>
+                        <? endif; ?>
+                    </div>
+                    <? endif; ?>
+                    <div class="inner-box">
+                        <p>Compte vérifié sur :</p>
+                        <a href="#" class="btn small-btn btn-gray-small blue-dark btn-fb">x amis</a>
+                        <a href="#" class="btn small-btn btn-gray-small blue-dark btn-in">x relations</a>
+                    </div>
+                </div>
+                <h2 class="white-text txt-small">Pièces justificatives</h2>
+                <p class="white-text">
+                    Sélectionnez un document pour le consulter.<br>
+                    Certaines pièces justificatives peuvent contenir plusieurs pages.
+                </p>
+                <? if ($documents) : ?>
+                
+                <div class="inner-box-btn">
+                    <label class="bold-txt">Candidat</label>
+                    <? foreach ($documents as $document) : ?>
+                        <a href="#" class="btn btn-blue"><?= $this->translate($document->type)?></a>
+                    <? endforeach; ?>  
+                </div>                
+                <? endif; ?>
+                <? $garantNum = 1; ?>
+                <? foreach ($garants as $garant) : ?>
+                <? $garantDocuments = $garant->getDocuments(); ?>
+                <? if (count($garantDocuments)) : ?>
+                <div class="inner-box-btn">
+                    <label class="bold-txt">Garant <?= $garantNum ?></label>
+                    <? foreach ($garantDocuments as $document) : ?>
+                        <a href="#" class="btn btn-blue"><?= $this->translate($document->type)?></a>
+                    <? endforeach; ?> 
+                    <? $garantNum ++ ?>
+                </div>
+                <? endif; ?>
+                <? endforeach; ?>
+            </div>
+             <? endforeach; ?>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function() {
+
+        $('#residentTabs').tabs({
+            activate: function(event, ui) {
+                ui.newTab.find('a').addClass('active');
+                ui.oldTab.find('a').removeClass('active');
+            }
+        }).show();
+        
+    });
+    
+</script>
