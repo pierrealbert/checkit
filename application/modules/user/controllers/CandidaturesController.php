@@ -6,6 +6,7 @@ class User_CandidaturesController extends Core_Controller_Action_UserDashboard
      * @var $_currUser Model_User
     */
     protected $_currUser = null;
+    protected $translator;
 
     public function init()
     {
@@ -15,6 +16,8 @@ class User_CandidaturesController extends Core_Controller_Action_UserDashboard
             ->addActionContext('ajax-remove-declined', 'json')
 
             ->initContext();
+
+        $this->translator = Zend_Registry::get('Zend_Translate');
 
     }
 
@@ -68,4 +71,17 @@ class User_CandidaturesController extends Core_Controller_Action_UserDashboard
         }
         $this->_helper->layout()->disableLayout();
     }
+
+    public function removeAction()
+    {
+        $application = Model_PropertyApplicationTable::getInstance()->find((int) $this->_getParam('id'));
+        
+        if (!$application || $application->visitor_id != $this->_currUser->id) {
+            $this->_helper->error()->notFound();
+        }
+        
+        $application->delete();
+        
+        $this->_helper->redirector->gotoSimple('index', 'candidatures', 'user');
+    }    
 }

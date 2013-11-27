@@ -1,5 +1,4 @@
 <?php
-$this->headLink()->appendStylesheet('/css/ui/jquery-ui-1.10.3.css');
 $this->headLink()->appendStylesheet('/assets/css/property_form.css');
 $this->headScript()->appendFile('/assets/js/property_form.js');
 ?>
@@ -18,7 +17,7 @@ $this->headScript()->appendFile('/assets/js/property_form.js');
             }
         });
 
-        if ($('input#availability').val('') != '') {
+        if ($('input#availability').val() != '') {
             $('input#availability_select_date').prop('checked', true);
             $('div.date-picker-availability-location').show();
             $('input#availability').val($('input#availability').attr('value'));
@@ -60,6 +59,15 @@ $this->headScript()->appendFile('/assets/js/property_form.js');
                     </fieldset>
                 </div>
             </div>
+
+            <?php if($this->user->is_premium == 1): ?>
+            <div class="block-grid grid-inset">
+                <fieldset>
+                    <?= $this->form->honoraire ?>
+                </fieldset>
+            </div>
+            <?php endif; ?>
+
             <div class="block-grid grid-inset">
                 <fieldset>
                     <?= $this->form->is_furnished ?>

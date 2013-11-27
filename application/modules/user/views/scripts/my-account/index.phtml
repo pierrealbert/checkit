@@ -1,18 +1,52 @@
-<div class="tab-resume">
-<?= $this->contentHeader('my_account', array(
-            0=>array(
-                'type'=>'link',
-                'title'=>'Upload Documents',
-                'url'=>'my-account/documents',
-                'id'=>'btnUpdateDocs',
-                //'target'=>'user/my-account/documents'
-            ),
-            1=>array(
-                'type'=>'link',
-                'title'=>'Edit Residents',
-                'url'=>'my-account/residents',
-                'id'=>'btnUpdateRes',
-            )
-        )) ?>
-<?= $this->form ?>
-</div>
+<div id="compte" class="compte-01">
+			<?= $this->partial('my-account/_partials/navigation.phtml') ?>
+			<div class="right">
+				<div class="progress-content">
+					<div class="block-grid grid-inset-white">
+						<h2><span class="red">Mes paramètres :</span> <span class="gray">Notifications</span></h2>
+						<ul>
+							<p>Vous recevez actuellement :</p>
+							<li>Candidatures acceptées : <?= !empty($this->notifications['visit_alerts_period']) ? $this->translate($this->notifications['visit_alerts_period']) : 'Jamais' ?></li>
+							<li>Alertes : <?= !empty($this->notifications['profile_alerts']) ? $this->translate($this->notifications['profile_alerts']) : 'Jamais' ?></li>
+                            <?
+                            $visits = array();
+                            if (!empty($this->notifications['secondary_visit_alerts'])) {
+                                foreach ($this->notifications['secondary_visit_alerts'] as $visit) {
+                                    $visits[] = $this->translate($visit);
+                                }
+                            } else {
+                                $visits = array('Jamais');
+                            }
+                            
+                            ?>
+							<li>Rendez-vous : <?= implode(',', $visits) ?></li>
+						</ul>
+						<a href="<?= $this->url(array('module' => 'user', 'controller' => 'my-account', 'action' => 'notifications'), null, false) ?>" class="btn btn-red w200">Mes paramètres</a>
+					</div>
+					<div class="block-grid grid-inset-white">
+						<h2><span class="blue">Mon compte :</span> <span class="gray">Profil et sécurité</span></h2>
+						<p>
+							<span><?= $this->currUser->getFullName() ?></span><br>
+							<span><?= $this->currUser->email ?></span><br>
+							<span><?= $this->currUser->phone ?></span>
+						</p>
+						<a href="<?= $this->url(array('module' => 'user', 'controller' => 'my-account', 'action' => 'profile'), null, false) ?>" class="btn btn-blue w200">Modifier mon compte</a>
+					</div>
+					<div class="block-grid grid-inset-white">
+						<h2><span class="blue">Bulletin d’informations :</span><br><span class="gray">Restons en contact !</span></h2>
+                        <? if ($this->settings->offers || $this->settings->newsletters) : ?>
+						<ul>
+							<p>Vous êtes inscrit à :</p>
+                            <? if ($this->settings->newsletters) : ?>
+							<li>La newsletter <strong>Ommi</strong></li>
+                            <? endif; ?>
+                            <? if ($this->settings->offers ) : ?>
+							<li>Offres partenaires</li>
+                            <? endif; ?>                            
+						</ul>
+                        <? endif; ?>
+						<a href="<?= $this->url(array('module' => 'user', 'controller' => 'my-account', 'action' => 'newsletters'), null, false) ?>" class="btn btn-blue w200">Mes abonnements</a>
+					</div>
+				</div>
+			</div>
+		</div>

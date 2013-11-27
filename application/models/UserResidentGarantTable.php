@@ -16,4 +16,27 @@ class Model_UserResidentGarantTable extends Ext_Doctrine_Table
     {
         return Doctrine_Core::getTable('Model_UserResidentGarant');
     }
+
+    public function getResidentsGarantsByIDs($residentIDs) {
+        if (count($residentIDs) == 0) {
+            $residentIDs = "NULL";
+        } else {
+            $residentIDs = implode(',', $residentIDs);
+        }
+        $statement = Doctrine_Manager::getInstance()->connection();
+        $results = $statement->execute("SELECT t1.user_resident_id, t1.amount, t1.type  FROM user_resident_garant AS t1 WHERE t1.user_resident_id IN (".$residentIDs.")");
+        $tmpList = $results->fetchAll();
+        $result = array();
+        if ($tmpList) {
+            foreach($tmpList as $indx => $rec) {
+                if (!isset($result[$rec['user_resident_id']])) $result[$rec['user_resident_id']] = array();
+                $result[$rec['user_resident_id']][] = array(
+                    'amount' => $rec['amount'],
+                    'type'   => $rec['type'],
+                );
+            }
+        }
+
+        return $result;
+    }
 }

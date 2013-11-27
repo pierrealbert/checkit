@@ -1,0 +1,47 @@
+<? 
+
+$currAction = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+
+$tabs = array(
+    'index' => array(
+        'title'         => 'Sommaire',
+        'class'         => 'btn-gray',
+        'active-class'  => 'btn-blue progress-menu-active'
+    ),
+    'energy' => array(
+        'title'         => 'Diagnostic énergétique',
+        'class'         => 'btn-gray btn-energy',
+        'active-class'  => 'btn-blue btn-energy progress-menu-active'
+    ),
+    'mail-templates' => array(
+        'title'         => 'Modèles de courrier',
+        'class'         => 'btn-gray btn-mail',
+        'active-class'  => 'btn-blue btn-mail progress-menu-active'
+    ),
+    'contract-templates' => array(
+        'title'         => 'Modèles de contrats',
+        'class'         => 'btn-gray btn-file',
+        'active-class'  => 'btn-blue btn-file progress-menu-active'
+    ),    
+    'state-of-play' => array(
+        'title'         => 'État des lieux',
+        'class'         => 'btn-gray btn-edit',
+        'active-class'  => 'btn-blue btn-edit progress-menu-active'
+    ),        
+    'professionals' => array(
+        'title'         => 'Professionnels',
+        'class'         => 'btn-red btn-pro',
+        'active-class'  => 'btn-red btn-pro progress-menu-active'
+    )
+);
+
+?>
+<div class="left">
+    <div class="menu">
+    <? foreach ($tabs as $action => $settings) : ?>
+        <a href="<?= $this->url(array('module' => 'user', 'controller' => 'owner-services', 'action' => $action), null, true) ?>" class="btn <?= $currAction == $action ? $settings['active-class'] : $settings['class'] ?>">
+            <?= $settings['title'] ?>
+        </a>
+    <? endforeach; ?>
+    </div>
+</div>

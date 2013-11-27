@@ -10,6 +10,7 @@
  * @property integer $property_id
  * @property integer $property_visit_date_id
  * @property time $visit_time
+ * @property time $visit_time_end
  * @property integer $rate
  * @property text $message
  * @property boolean $is_read
@@ -48,6 +49,9 @@ abstract class Model_Base_PropertyApplication extends Ext_Doctrine_Record
              'length' => '4',
              ));
         $this->hasColumn('visit_time', 'time', null, array(
+             'type' => 'time',
+             ));
+        $this->hasColumn('visit_time_end', 'time', null, array(
              'type' => 'time',
              ));
         $this->hasColumn('rate', 'integer', 1, array(

@@ -1,3 +1,5 @@
+<?php if ($this->property): ?>
+
 <div class="modal-map-wrapper">
     <h2><?=$this->property->address?>, <?=$this->property->city?> <?=$this->property->postcode?></h2>
     <div style="width: 678px; height: 398px; margin: 0px; background-color: #4d4d4d;" id="modalMap"></div>
@@ -25,3 +27,12 @@
         $('#modalMap').show();
     }
 </script>
+
+<?php else: ?>
+
+    <div class="modal-map-wrapper">
+        <h2 style="margin: 30px;">Property no found</h2>
+        <a href="#" class="map-bottom-link modal-close">Fermer</a>
+    </div>
+
+<?php endif; ?>

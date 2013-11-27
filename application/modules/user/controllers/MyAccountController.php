@@ -1,6 +1,6 @@
 <?php
 
-class User_MyAccountController extends Core_Controller_Action_UserDashboard 
+class User_MyAccountController extends Core_Controller_Action_UserDashboard
 {
     
     protected $translator;
@@ -13,48 +13,82 @@ class User_MyAccountController extends Core_Controller_Action_UserDashboard
 
     public function indexAction() 
     {
+        $settings = $this->_helper->auth->getCurrUser()->getSettings();
+        $this->view->settings = $settings;
+        $this->view->notifications = $settings->getNotificationSettings();
+    }
+    
+    public function profileAction() 
+    {
+		/** @var Model_User $user */
         $user = $this->_helper->auth->getCurrUser();
-
-        if (!$user)
-            $this->redirect($this->_helper->url('', 'login'));
 
         $form = new User_Form_User();
         $form->populate($user->toArray());
-
-        if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())
-        ) {
-            $data = $form->getValues();
-            $user->merge($data['profile']);
+        
+        if ($this->getRequest()->isPost() 
+                && $form->isValid($this->getRequest()->getParams())) {
             
-            if (!empty($data['change_email']['new_email'])) {
-                $user->email = $data['change_email']['new_email'];
+            $data = $form->getValues();
+            $user->merge($data);
+                   
+            if (!empty($data['new_email'])) {
+                $user->email = $data['new_email'];
             }
 
-            if (!empty($data['change_pass']['new_password'])) {
-                $user->password = $data['change_pass']['new_password'];
+            if (!empty($data['new_password'])) {
+                $user->password = $data['new_password'];
             }
             
             $user->save();
             
-            $this->_helper->messenger->success('your_account_succesfully_updaed');
+            //$this->_helper->messenger->success('your_account_succesfully_updaed');
+            $this->_helper->redirector('profile', 'my-account', 'user');
+        }
+        $this->view->form = $form;       
+    }
+    
+    public function newslettersAction()
+    {
+        $settings = $this->_helper->auth->getCurrUser()->getSettings();
+
+        $form = new User_Form_Newsletters();
+        $form->populate($settings->toArray());
+        
+        if ($this->getRequest()->isPost() 
+                && $form->isValid($this->getRequest()->getParams())) {
+            
+            $data = $form->getValues();
+
+            $settings->merge($data);                                 
+            $settings->save();
+                        
             $this->_helper->redirector('index', 'my-account', 'user');
         }
-        $this->view->form = $form;
-       
+        $this->view->form = $form;           
     }
+    
+    public function notificationsAction()
+    {
+        $settings = $this->_helper->auth->getCurrUser()->getSettings();
 
-    public function changePasswordAction() {
-        $user = $this->_helper->auth->getCurrUser();
-
-        $form = new User_Form_ChangePassword();
-
-        if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())
-        ) {
-            $user->password = $this->_getParam('password');
-            $user->save();
-
-            $this->_helper->messenger->success('your_password_succesfully_updated');
-            $this->_helper->redirector('change-password', 'my-account', 'user');
+        $form = new User_Form_Notifications();
+        $form->populate($settings->getNotificationSettings());
+        
+        if ($this->getRequest()->isPost() 
+                && $form->isValid($this->getRequest()->getParams())) {
+            
+            $data = array();            
+            $settingsOptions = Model_UserSettings::getNotificationOptions();
+                        
+            foreach (array_keys($settingsOptions) as $optionName) {
+                $data[$optionName] = $form->getValue($optionName);
+            }
+                        
+            $settings->settings = serialize($data);                                 
+            $settings->save();
+                        
+            $this->_helper->redirector('index', 'my-account', 'user');
         }
         $this->view->form = $form;
     }
@@ -114,14 +148,20 @@ class User_MyAccountController extends Core_Controller_Action_UserDashboard
 
         // process form
         if ($request->isPost() && $form->isValid($request->getPost())) {
+
             $data = $form->getValues();
             $members = $data['member'];
+
             $membersCount = count($members);
 
             for ($i = 1; $i <= $membersCount; $i++) {
                 $userResident = Doctrine::getTable('Model_UserResident')->find($members[$i]['id']);
                 if (!$userResident) {
                     $userResident = Doctrine::getTable('Model_UserResident')->create();
+                }
+
+                if ($members[$i]['monthly_income_guaranteed'] == '') {
+                    $members[$i]['monthly_income_guaranteed'] = null;
                 }
 
                 $userResident->merge($members[$i]);
@@ -243,149 +283,5 @@ class User_MyAccountController extends Core_Controller_Action_UserDashboard
                 exit();
             }
         }
-    }
-
-    public function myAdsAction()
-    {
-        $user = $this->_helper->auth->getCurrUser();
-
-        $ads = Doctrine::getTable('Model_Property')->findByOwnerId($user->id);
-
-        $this->view->ads = $ads;
-    }
-
-    public function myCandidatesAction()
-    {
-        $this->view->jQuery()->addOnLoad('initMyCandidates();');
-        $user = $this->_helper->auth->getCurrUser();
-
-        $ads = Doctrine::getTable('Model_Property')->getListByOwnerId($user->id);
-        $applicationsPerProperty = array();
-        foreach ($ads as $property) {
-            $applicationsPerProperty[$property->id] = array('awaiting' => array(),
-                                                            'accepted' => array());
-        }
-        foreach (Model_PropertyApplicationTable::getInstance()->getListByOwnerId($user->id) as $application) {
-            if ($application->is_accepted) {
-                $applicationsPerProperty[$application->PropertyVisitDates->property_id]['accepted'][] = $application;
-            } else {
-                $applicationsPerProperty[$application->PropertyVisitDates->property_id]['awaiting'][] = $application;
-            }
-        }
-        
-        $this->view->ads = $ads;
-        $this->view->applicationsPerProperty = $applicationsPerProperty;
-    }
-
-    public function candidateAction()
-    {
-        $curUser = $this->_helper->auth->getCurrUser();
-        
-        $applicationId = $this->_getParam('application');
-        $application = Model_PropertyApplicationTable::getInstance()->getOneByIdForPropOwner($applicationId, $curUser->id);
-        if (!$application) {
-            $this->_helper->messenger->success('application_not_found');
-            $this->_helper->redirector('my-candidates', 'my-account', 'user');
-        }
-
-        $this->view->application = $application;
-    }
-
-    public function acceptCandidateAction()
-    {
-        $curUser = $this->_helper->auth->getCurrUser();
-        
-        $applicationId = $this->_getParam('application');
-        $application = Model_PropertyApplicationTable::getInstance()->getOneByIdForPropOwner($applicationId, $curUser->id);
-        if (!$application) {
-            $this->_helper->messenger->error('application_not_found');
-            $this->_helper->redirector('my-candidates', 'my-account', 'user');
-        }
-        if (!$application->is_accepted) {
-            $application->is_accepted = True;
-            $application->save();
-            $this->_helper->messenger->success('application_accepted');
-        } else {
-            $this->_helper->messenger->success('application_already_accepted');
-        }
-        $this->_helper->redirector('my-candidates', 'my-account', 'user');
-    }
-    
-    public function ajaxAcceptCandidateAction()
-    {
-        $curUser = $this->_helper->auth->getCurrUser();
-        
-        $errorMessage = ''; // if not null will be printed instead of form
-        $successMessage = ''; // if not null will be printed instead of form
-        $acceptForm = '';
-        $applicationId = $this->_getParam('application');
-        $application = Model_PropertyApplicationTable::getInstance()->getOneByIdForPropOwner($applicationId, $curUser->id);
-
-        if (!$application) {
-            $errorMessage = $this->translator->translate('application_not_existed');
-        } elseif ($application->is_accepted) {
-            $errorMessage = $this->translator->translate('application_already_accepted');
-        } else {
-            $acceptForm = new User_Form_AcceptApplication(array('applicationId' => $applicationId));
-            if ($this->getRequest()->isPost() and $post = $this->getRequest()->getPost() and $acceptForm->isValid($post)) {
-                $application->is_accepted = True;
-                $application->save();
-                $successMessage = 'application_accepted';
-            } else {
-                // Do nothing. If errorMessage and successMessage are empty,
-                // then will be print the form with marked wrong fields
-            }
-        }
-
-        $this->view->acceptForm = $acceptForm;
-        $this->view->errorMessage = $errorMessage;
-        $this->view->successMessage = $successMessage;
-    }
-
-    public function declineCandidateAction()
-    {
-        $curUser = $this->_helper->auth->getCurrUser();
-        
-        $applicationId = $this->_getParam('application');
-        $application = Model_PropertyApplicationTable::getInstance()->getOneByIdForPropOwner($applicationId, $curUser->id);
-        if (!$application) {
-            $this->_helper->messenger->error('application_not_found');
-            $this->_helper->redirector('my-candidates', 'my-account', 'user');
-        }
-        if (!$application->is_accepted) {
-            $application->is_declined = True;
-            $application->save();
-            $this->_helper->messenger->success('application_declined');
-        } else {
-            $this->_helper->messenger->success('application_already_accepted');
-        }
-        $this->_helper->redirector('my-candidates', 'my-account', 'user');
-    }
-
-    public function ajaxRateCandidateAction()
-    {
-        $curUser = $this->_helper->auth->getCurrUser();
-        
-        $rate = $this->getRequest()->getPost('rate');
-        $applicationId = $this->getRequest()->getPost('idBox');
-        
-        $application = Model_PropertyApplicationTable::getInstance()->getOneByIdForPropOwner($applicationId, $curUser->id);
-        if (!$application) {
-            $output = array('success' => 0);
-        } else {
-            $output = array('success' => 1,
-                            'rate' => $rate,
-                            'idBox' => $applicationId);
-            $application->rate = (int)$rate;
-            $application->save();
-        }
-        
-        
-        $this->getResponse()->setBody(Zend_Json::encode($output));
-        
-        if (null !== ($layout = Zend_Layout::getMvcInstance())) {
-            $layout->disableLayout();
-        }
-        Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
     }
 }

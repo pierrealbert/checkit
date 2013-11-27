@@ -3,6 +3,14 @@
 
 class User_Form_PropertyRental extends Ext_Form
 {
+    protected $_user = null;
+
+    public function __construct($curUser) {
+        $this->_user = $curUser;
+
+        parent::__construct();
+    }
+
     public function init()
     {
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
@@ -30,6 +38,16 @@ class User_Form_PropertyRental extends Ext_Form
             'placeholder' => 'Montant en euros',
             'validators' => array(new Zend_Validate_GreaterThan(array('min' => 0))),
         ));
+
+        if ($this->_user->is_premium == 1) {
+            $this->addElement('text', 'honoraire', array(
+                'label'      => 'Montant des honoraires',
+                'allowEmpty' => false,
+                'required'   => true,
+                'placeholder' => 'Montant en euros',
+                'validators' => array(new Zend_Validate_GreaterThan(array('min' => 0))),
+            ));
+        }
 
         $radio = new Zend_Form_Element_Radio('is_furnished');
         $radio->setSeparator('')
@@ -116,7 +134,10 @@ class User_Form_PropertyRental extends Ext_Form
 
         $this->addElement('datePicker', 'availability', array(
             'JQueryParams' => array (
-                'dateFormat' => $settings->get('dateFormat.picker.jquery'),
+                //'dateFormat' => $settings->get('dateFormat.picker.jquery'),
+                'dateFormat' => 'dd/mm/yy',
+                'nextText' => '',
+                'prevText' => '',
             )
         ));
 

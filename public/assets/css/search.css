@@ -100,10 +100,16 @@
 .search-box .search-location input{
 	float: left;
 	display: block;
-	width: 365px;
-	background-image: url(../images/icon-gps.png);
+	width: 349px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	padding-right: 30px;
+	background-image: url('../images/input-location.png');
 	background-repeat: no-repeat;
-	background-position: 363px 7px;
+	background-position: 98% center;
+	background-position: calc(100% - 10px) center;
 }
 .search-box .search-location > a.icon-location{
 	background-image: url(../images/location.png);
@@ -300,6 +306,9 @@
 	position: absolute;
 	top: 20px;
 	left: 20px;
+}
+a.btn-return{
+    color: #4C4C4C !important;
 }
 .box-carte .box-btn-return > .btn-gray-lite{
 	background-image: url(../images/icon-retourn.png);

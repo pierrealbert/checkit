@@ -1,5 +1,29 @@
-<div class="property-application" style="margin: 5px; border: 1px solid">
-    <?= $this->application->User->getFullName() ?>
-    <p><a href="<?= $this->url(array('module' => 'user', 'controller' => 'my-account', 'action' => 'candidate', 'application' => $this->application->id), null, true) ?>"><?= $this->translate('view_profile') ?></a></p>
-    <?= $this->candidateRating($this->application->id, $this->application->rate) ?>
+<div class="attente-block">
+    <div class="attente-block-info">
+        <h4 class="attente-block-title"><?=$this->application->User->getFullName()?></h4>
+        <span>&nbsp;</span>
+        <span>Profil <?=(isset($this->residents[$this->application->User->id]['resident_type']) ? $this->translate($this->residents[$this->application->User->id]['resident_type']) : '')?></span>
+        <span>Revenus : <?=(isset($this->residents[$this->application->User->id]['monthly_income']) ? $this->residents[$this->application->User->id]['monthly_income'].' €/mois' : '')?></span>
+        <span>Garant : <?=(isset($this->garants[$this->residents[$this->application->User->id]['id']]) ? (($gCount = count($this->garants[$this->residents[$this->application->User->id]['id']])) > 0 ? 'oui ('.$gCount.')' : 'non') : 'non')?></span>
+        <div class="attente-block-buttons">
+            <input type="checkbox" class="input-pretty" id="demo1" name="demo1" value="demo1">
+            <label for="demo1" class="btn-input-lite">+ Conjoint</label>
+        </div>
+    </div>
+
+    <div class="attente-block-controlls stars-parent">
+        <div class="attente-block-controlls-stars">
+            <span>Mon avis</span>
+            <?= $this->candidateRating($this->application->id, $this->application->rate) ?>
+        </div>
+
+        <div class="attente-block-controlls-score">
+            <span>Score</span>
+            <div class="score"><?=$this->application->rate?><span>/5</span></div>
+        </div>
+        <div class="attente-block-controlls-buttons">
+            <span>Déjà consulté</span>
+            <a href="<?= $this->url(array('module' => 'user', 'controller' => 'candidates', 'action' => 'view', 'application' => $this->application->id), null, true) ?>" class="btn btn-blue btn-view">Voir le dossier</a>
+        </div>
+    </div>
 </div>

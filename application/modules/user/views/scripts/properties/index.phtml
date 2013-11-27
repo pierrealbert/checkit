@@ -1,0 +1,124 @@
+<div class="page-tab-content" id="annonces">
+<? if (count($this->activeProperties)) : ?>
+    <h3>Annonces actives</h3>
+    <div class="annonce-blocks">
+        <? foreach ($this->activeProperties as $property) : ?>
+        <div class="annonce-block grid-gray">
+            <div class="annonce-block-photo">
+                <?= $this->imageResize(120, 120, $property->main_photo) ?>
+            </div>
+            <div class="annonce-block-information">
+                <h4><?= $this->escape($property->title) ?></h4>
+                <div class="information-more">
+                    <div class="information-left">
+                        <span><?= $property->getType() ?>
+                        <? if ($property->is_furnished) : ?>
+                            <span class="slash">|</span> Meublé
+                        <? endif; ?>
+                        </span>
+                        <span><?= $this->escape($property->address) ?> (<?= $property->postcode ?>)</span>
+                        <span><?= $property->size ?> m²</span>
+                        <span><?= $property->floor ?>e étage avec ascenceur</span>
+                    </div>
+                    <div class="information-right">
+                        <span>
+                            disponibilité : 
+                            <?php if (date('Y-m-d') < $property->availability): ?>
+                                <?= $property->availability ?>
+                            <?php else: ?>
+                                <?= $this->translate('right_now') ?>
+                            <?php endif; ?>                            
+                        </span>                        
+                        <span>&nbsp;</span>
+                        <span class="blue"><?= count($property->PropertyVisitDates) ?> dates de visites</span>
+                    </div>
+                </div>
+                <div class="information-links">
+                    <a class="blue" href="#">Ajouter une date</a>
+                    <a class="red" href="<?= $this->url(array('module' => 'user', 'controller' => 'property', 'action' => 'location', 'item' => $property->id), null, false) ?>">Modifier l’annonce</a>
+                    <a class="black" href="#">Voir l’annonce</a>
+                </div>
+            </div>
+            <div class="annonce-block-controlls">
+                <div class="controlls-stats">
+                    <span>Vue <?= $property->views ?> fois</span>
+                    <span><?= $property->getApplicationsCount() ?> candidats</span>
+                    <span><?= $property->getAcceptedAppsCount() ?> candidats sélectionnés</span>
+                    <a class="btn btn-red" href="#">Mettre en valeur</a>
+                </div>
+                <div class="controlls-price">
+                    <span class="price">
+                        <?= $property->amount_of_charges ?> €
+                    </span>
+                    <a class="btn btn-dark" href="#">
+                        J’ai trouvé <br />mon locataire
+                    </a>
+                </div>
+            </div>
+        </div>
+        <? endforeach; ?>
+    </div>
+
+<? endif; ?>
+    <!-- Неактивные блоки -->
+<? if (count($this->inActiveProperties)) : ?>    
+    <h3 style="margin-top: 20px;">Annonces inactives</h3>
+    <div class="annonce-blocks inactive-blocks">
+        <? foreach ($this->inActiveProperties as $property) : ?>      
+        <div class="annonce-block grid-gray">
+            <div class="annonce-block-photo">
+                <?= $this->imageResize(120, 120, $property->main_photo) ?>
+            </div>
+            <div class="annonce-block-information">
+                <h4><?= $this->escape($property->title) ?></h4>
+                <div class="information-more">
+                    <div class="information-left">
+                        <span><?= $property->getType() ?>
+                        <? if ($property->is_furnished) : ?>
+                            <span class="slash">|</span> Meublé
+                        <? endif; ?>
+                        </span>
+                        <span><?= $this->escape($property->address) ?> (<?= $property->postcode ?>)</span>
+                        <span><?= $property->size ?> m²</span>
+                        <span><?= $property->floor ?>e étage avec ascenceur</span>
+                    </div>
+                    <div class="information-right">
+                        <span>
+                            disponibilité : 
+                            <?php if (date('Y-m-d') < $property->availability): ?>
+                                <?= $property->availability ?>
+                            <?php else: ?>
+                                <?= $this->translate('right_now') ?>
+                            <?php endif; ?>                            
+                        </span>                        
+                        <span>&nbsp;</span>
+                        <span class="blue"><?= count($property->PropertyVisitDates) ?> dates de visites</span>
+                    </div>
+                </div>
+                <div class="information-links">
+                    <a class="blue" href="#">Ajouter une date</a>
+                    <a class="red" href="<?= $this->url(array('module' => 'user', 'controller' => 'property', 'action' => 'location', 'item' => $property->id), null, false) ?>">Modifier l’annonce</a>
+                    <a class="black" href="#">Voir l’annonce</a>
+                </div>
+            </div>
+            <div class="annonce-block-controlls">
+                <div class="controlls-stats">
+                    <span>Vue <?= $property->views ?> fois</span>
+                    <span><?= $property->getApplicationsCount() ?> candidats</span>
+                    <span><?= $property->getAcceptedAppsCount() ?> candidats sélectionnés</span>
+                    <a class="btn btn-red" href="#">Mettre en valeur</a>
+                </div>
+                <div class="controlls-price">
+                    <span class="price">
+                        <?= $property->amount_of_charges ?> €
+                    </span>
+                    <a class="btn btn-dark" href="#">
+                        J’ai trouvé <br />mon locataire
+                    </a>
+                </div>
+            </div>
+        </div>
+        <? endforeach; ?>
+    </div>
+</div>
+<? endif; ?>

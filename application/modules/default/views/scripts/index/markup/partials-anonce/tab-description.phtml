@@ -1,16 +1,16 @@
-<div class="grid">
+<div class="grid" id="propertyTtabs">
 	<div class="menu-annonce">
 		<ul>
-			<li><a href="" class="active">Description<i class="i-group-gray icon-list"></i></a></li>
-			<li><a href="">Photos<i class="i-group-white icon-photo"></i></a></li>
-			<li><a href="">Carte<i class="i-group-white icon-carte"></i></a></li>
-			<li><a href="">Visites<i class="i-group-white icon-calendar"></i></a></li>
+			<li><a href="#description" class="active">Description<i class="i-group-white icon-list"></i></a></li>
+			<li><a href="#photos">Photos<i class="i-group-white icon-photo"></i></a></li>
+			<li><a href="#map">Carte<i class="i-group-gray icon-carte"></i></a></li>
+			<li><a href="#calendar">Visites<i class="i-group-white icon-calendar"></i></a></li>
 		</ul>
 		<a href="#" class="btn btn-gray btn-gray-dark btn-left-flag">
 			<i class="i-group-white icon-flag"></i>
 		</a>
 	</div>
-	<div class="tab-annonce">
+	<div class="tab-annonce" id="description">
 		<h2 class="black-txt">Description</h2>
 		<div class="table-discription">
 			<div class="cellsblock cellsblock-first">
@@ -181,3 +181,11 @@
 		</div>
 	</div>
 </div>
+
+
+<script type="text/javascript">
+	$(function () {
+
+		$('#propertyTtabs').tabs();
+	});
+</script>

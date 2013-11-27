@@ -1,0 +1,37 @@
+<? 
+
+$currAction = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+
+$tabs = array(
+    'index' => array(
+        'title'         => 'Sommaire',
+        'class'         => 'btn-gray',
+        'active-class'  => 'active-blue'
+    ),
+    'state-of-play' => array(
+        'title'         => 'État des lieux',
+        'class'         => 'btn-gray icon-affairs',
+        'active-class'  => 'active-blue icon-affairs'
+    ),
+    'mail-templates' => array(
+        'title'         => 'Modèles de courrier',
+        'class'         => 'btn-gray icon-mail',
+        'active-class'  => 'active-blue icon-mail'
+    ),
+    'professionals' => array(
+        'title'         => 'Professionnels',
+        'class'         => 'btn-red icon-repair',
+        'active-class'  => 'active-red icon-repair'
+    )
+);
+
+?>
+<div class="box-nav-button">
+<? foreach ($tabs as $action => $settings) : ?>
+    <a href="<?= $this->url(array('module' => 'user', 'controller' => 'resident-services', 'action' => $action), null, true) ?>" class="btn <?= $settings['class'] ?> <?= $currAction == $action ? $settings['active-class'] : '' ?>">
+        <? if ($currAction == $action) : ?><i class="icon-right"></i>
+        <? endif; ?>
+        <?= $settings['title'] ?>
+    </a>
+<? endforeach; ?>
+</div>

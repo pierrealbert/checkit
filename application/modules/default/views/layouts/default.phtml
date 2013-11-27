@@ -7,7 +7,7 @@
 
     $this->headLink()->appendStylesheet('/assets/css/chosen/chosen.css');
     $this->headLink()->appendStylesheet('/assets/css/style.css');
-	//$this->headLink()->appendStylesheet('http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css');
+//	$this->headLink()->appendStylesheet('http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css');
 
     $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=' . $this->getEncoding());
     $this->headScript()->appendFile('/assets/js/dropdown.js');
@@ -15,6 +15,7 @@
     $this->headScript()->appendFile('/assets/js/jquery.the-modal.js');
     $this->headScript()->appendFile('/assets/js/chosen.jquery.min.js');
     $this->headScript()->appendFile('/js/common.js');
+    $this->headScript()->appendFile('/assets/js/app.js');
     $this->headMeta()->appendHttpEquiv('Content-Language', 'en');
 
     if (!empty($this->homeHeader)) {
@@ -33,6 +34,15 @@
     <?= $this->headScript() ?>
 </head>
     <body <?php echo (!empty($this->homeHeader) ? 'class="home"' : ''); ?>>
+    	<!-- Success popup -->
+        <div id="success-popup">
+            <div class="success-popup-content">
+                <h1>Compte supprimé</h1>
+                <p>Votre compte a bien été supprimé. Vos données ont été effacées.<br>Nous sommes triste de vous voir partir.<br>Nous esperons vous revoir très vite sur Ommi.</p>
+                <a href="#" class="btn btn-blue modal-close">Fermer</a>
+            </div>
+        </div>
+		<!-- Default popup -->
         <div id="modal" style="display: none;">
             <div class="modal-title-container">
                 <div class="modal-title">Inscription</div>
@@ -40,7 +50,13 @@
             </div>
             <div class="modal-content-container"></div>
         </div>
-        <?= $this->partial('_partials/header' . (!empty($this->homeHeader) ? '-home' : '') . '.phtml', $this->getVars()) ?>
+        
+        <?= $this->partial('_partials/header.phtml', $this->getVars()) ?>
+
+        <?php if(!empty($this->homeHeader)): ?>
+            <?= $this->partial('_partials/promo.phtml', $this->getVars()) ?>
+        <?php endif; ?>
+
         <main>
             <?= $this->messenger() ?>
             <?= $this->layout()->content ?>

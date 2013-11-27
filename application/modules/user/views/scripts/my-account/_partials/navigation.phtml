@@ -1,0 +1,21 @@
+<?
+
+$tabs = array(
+    'index'         => 'Sommaire',
+    'notifications' => 'Mes parametres',
+    'profile'       => 'Mon compte',
+    'newsletters'   => "Bulletins d'information"
+);
+
+$currAction = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+
+?>
+<div class="left">
+    <div class="menu">
+        <? foreach ($tabs as $action => $title) : ?>        
+        <a class="btn <?= ($action == $currAction) ?  'btn-blue progress-menu-active' : 'btn-gray' ?>" href="<?= $this->url(array('module' => 'user', 'controller' => 'my-account', 'action' => $action), null, false) ?>">
+            <?= $title ?>
+        </a>
+        <? endforeach; ?>
+    </div>
+</div>

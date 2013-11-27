@@ -1,0 +1,292 @@
+#candidats {
+	padding: 15px;
+	*zoom: 1;
+}
+
+#candidats:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+#candidats .candidats-block {
+	display: block;
+	float: left;
+	height: 100%;
+}
+
+#candidats .candidats-block > h3 {
+	color: #4d4d4d;
+	margin: 5px 0;
+	font-size: 24px;
+	font-family: "Open Sans";
+	font-weight: 300;
+}
+
+#candidats .first-block {
+	width: 230px;
+}
+
+#candidats .second-block {
+	width: 230px;
+	margin-left: 15px;
+}
+
+#candidats .third-block {
+	width: 480px;
+	margin-left: 15px;
+}
+
+#candidats .candidats-block .candidats-content {
+	min-height: 630px;
+	height: 100%;
+	padding: 10px;
+	border-radius: 10px;
+	background: #4d4d4d;
+}
+
+.c_annonce_block,
+.c_candidate_block,
+.attente-block {
+	position: relative;
+	padding: 10px;
+	background: #f2f2f2;
+	box-shadow: 0 2px 0 #acacac;
+	margin-bottom: 10px;
+	border-radius: 8px;
+	color: #666;
+}
+
+.c_annonce_block.active,
+.c_candidate_block.active {
+	background: #3cbecc;
+	box-shadow: 0 2px 0 #3a9099;
+	color: #fff !important;
+}
+
+.c_candidate_block.inactive {
+	opacity: .6;
+}
+
+.c_annonce_block.active:after,
+.c_candidate_block.active:after {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 16px;
+	height: 32px;
+	background: url('../images/active-corner.png') no-repeat;
+	top: 50%;
+	right: -16px;
+	margin-top: -16px;
+}
+
+.c_annonce_block_info {
+	*zoom: 1;
+	margin-bottom: 10px;
+}
+
+.c_annonce_block_info:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.c_annonce_block_info_photo {
+	display: block;
+	width: 70px;
+	height: 70px;
+	float: left;
+	margin-right: 10px;
+}
+
+.c_annonce_block_info_photo > img {
+	width: 70px;
+	height: 70px;
+}
+
+.c_annonce_block_info_titles {
+	width: 110px;
+	float: left;
+}
+
+.c_annonce_block_info_title {
+	display: block;
+	font-size: 14px;
+	line-height: 17px;
+	font-weight: 700;
+}
+
+.c_annonce_block_info_views {
+	display: block;
+	text-shadow: 0 1px 0 #fff;
+	font-size: 14px;
+}
+
+.c_annonce_block_info_price {
+	display: block;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.c_annonce_block_meta > span {
+	display: block;
+	font-size: 14px;
+	line-height: 18px;
+}
+
+.c_candidate {
+	margin-bottom: 20px;
+}
+
+.c_candidate > span {
+	display: block;
+	color: #fff;
+	line-height: 20px;
+	margin-bottom: 5px
+}
+
+.c_candidate_block_title {
+	display: block;
+	margin-bottom: 20px;
+	font-weight: 700;
+}
+
+.c_candidate_block_candidats {
+	display: block;
+}
+
+.attente-block {
+	*zoom: 1;
+}
+
+.attente-block:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.attente-block-info {
+	float: left;
+	width: 227px;
+	padding: 10px;
+	margin: -10px 10px -10px -10px;
+	border-right: 3px dotted #e5e5e5;
+	height: 135px;
+}
+
+.attente-block-title {
+	font-size: 21px;
+	line-height: 25px;
+	margin: 0;
+	font-weight: 400;
+}
+
+.attente-block-info > span {
+	display: block;
+	line-height: 18px;
+}
+
+.attente-block-buttons {
+	margin-top: 5px;
+}
+
+.attente-block-buttons > label {
+	margin: 0 !important;
+	width: 100px;
+}
+
+.attente-block-buttons > input {
+	margin: 0;
+}
+
+.attente-block-controlls {
+	position: relative;
+	height: 135px;
+	float: left;
+	width: 190px;
+	*zoom: 1;
+}
+
+.attente-block-controlls:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.attente-block-controlls-stars > span,
+.attente-block-controlls-score > span,
+.attente-block-controlls-buttons > span {
+	display: block;
+	color: #b3b3b3;
+	margin-bottom: 5px;
+}
+
+.attente-block-controlls-stars {
+	float: left;
+}
+
+.attente-block-controlls-score {
+	float: right;
+}
+
+.attente-block-controlls-buttons {
+	position: absolute;
+	bottom: 0px;
+}
+
+.attente-block-controlls-buttons > .btn{
+	display: block;
+	width: 190px;
+}
+
+.stars {
+	display: block;
+	width: 77px;
+	height: 15px;
+	background-image: url('../images/stars.png');
+	background-repeat: no-repeat;
+}
+
+.star-0 {
+	background-position: 0 0;
+}
+
+.star-1 {
+	background-position: 0 -15px;
+}
+
+.star-2 {
+	background-position: 0 -30px;
+}
+
+.star-3 {
+	background-position: 0 -45px;
+}
+
+.score {
+	font-size: 48px;
+	line-height: 35px;
+	font-weight: 700;
+}
+
+.score > span {
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.attente-block.active {
+	background: #c2eef2;
+}
+
+.attente-block.active .attente-block-info {
+	border-right-color: #fff;
+}
+
+.attente-block.active .attente-block-title {
+	color: #34a6b3;
+}
+
+.attente-block.active .attente-block-controlls span {
+	color: #34a6b3 !important;
+}

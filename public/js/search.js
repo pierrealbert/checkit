@@ -364,16 +364,20 @@ function initSearchDraw(map) {
     });
     $('.clear-polygon').click(function() {
         drawingManager.setMap(map);
-        drawnPolygon.setMap(null);
-        drawnPolygon = null;
+        if (drawnPolygon) {
+            drawnPolygon.setMap(null);
+            drawnPolygon = null;
+        }
         return false;
     });
     $('#form-search-draw').submit(function() {
         var drawnPolygonJson = [];
-        drawnPolygon.getPath().forEach(function(point) {
-            drawnPolygonJson.push({lat: point.lat(), lng: point.lng()});
-        })
-        $('#drawn_polygon').val(JSON.stringify(drawnPolygonJson));
+        if (drawnPolygon) {
+            drawnPolygon.getPath().forEach(function(point) {
+                drawnPolygonJson.push({lat: point.lat(), lng: point.lng()});
+            })
+            $('#drawn_polygon').val(JSON.stringify(drawnPolygonJson));
+        }
     });
     $('.btn-plus-minus .btn-plus').click(function() {
         map.setZoom(map.getZoom() + 1);

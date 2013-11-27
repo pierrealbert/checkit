@@ -9,6 +9,7 @@ $this->headLink()->appendStylesheet('/assets/css/style.css');
 
 $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=' . $this->getEncoding());
 $this->headScript()->appendFile('/assets/js/dropdown.js');
+$this->headScript()->appendFile('/assets/js/chosen.jquery.min.js');
 $this->headScript()->appendFile('/js/common.js');
 $this->headScript()->appendFile('/js/jquery.form.js');
 $this->headScript()->appendFile('/assets/js/jquery.the-modal.js');
@@ -25,6 +26,13 @@ $this->headMeta()->appendHttpEquiv('Content-Language', 'en')
         <?= $this->headScript() ?>
     </head>
     <body>
+        <div id="success-popup">
+            <div class="success-popup-content">
+                <h1>Pop-Up Title</h1>
+                <p>Pop-Up Text</p>
+                <a href="#" class="btn btn-blue modal-close">Fermer</a>
+            </div>
+        </div>
         <div id="modal" style="display: none;">
             <div class="modal-title-container">
                 <div class="modal-title">Inscription</div>
@@ -33,16 +41,21 @@ $this->headMeta()->appendHttpEquiv('Content-Language', 'en')
             <div class="modal-content-container"></div>
         </div>
         <?= $this->partial('_partials/header.phtml', $this->getVars()) ?>
-        <div class="title-row-tabl">
-            <div class="container-text">
-                <h1 class="white-txt">
-                    <?= $this->translate($this->contentTitle) ?>
-                </h1>
-            </div>
-        </div>
         <main>
+        	<div class="title-container">
+				<div class="title-container-text inner">
+					<h1 class="white-text"><?= $this->translate((string) $this->contentTitle) ?></h1>
+                    <div class="candidates-navigation">
+                        <a class="btn btn-gray btn-back-to-list" href="#">Revenir a la liste</a>
+                        <div class="right-btn-block">
+                            <a class="btn btn-gray btn-prev-item" href="#">Candidat precedent</a>
+                            <a class="btn btn-gray btn-next-item" href="#">Candidat suivant</a>
+                        </div>
+                    </div>
+				</div>
+			</div>
             <div class="inner">
-                <?= $this->messenger() ?>
+                <?= $this->messenger('_partials/messenger/default.phtml') ?>
                 <?= $this->layout()->content ?>
                 <? if ($this->showBottomSidebar) : ?>
                 <?= $this->partial('_partials/bottom-sidebar.phtml') ?>

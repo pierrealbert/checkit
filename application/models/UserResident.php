@@ -25,6 +25,7 @@ class Model_UserResident extends Model_Base_UserResident
     
     const EMPLOYEE_TYPE_CDI = 'cdi';
     const EMPLOYEE_TYPE_CSD = 'csd';
+    const EMPLOYEE_TYPE_INTERIM = 'interim';
     
     public function getTitle($number = 1)
     {
@@ -81,7 +82,8 @@ class Model_UserResident extends Model_Base_UserResident
     {
         return array(
             self::EMPLOYEE_TYPE_CDI => 'employee_cdi',
-            self::EMPLOYEE_TYPE_CSD => 'employee_csd'
+            self::EMPLOYEE_TYPE_CSD => 'employee_csd',
+            self::EMPLOYEE_TYPE_INTERIM => 'employee_interim',
         );        
     }
 }

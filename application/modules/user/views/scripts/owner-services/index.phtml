@@ -1,0 +1,45 @@
+<div id="publier">
+    <?= $this->partial('owner-services/_partials/navigation.phtml') ?>
+    <div class="right">
+        <div class="progress-content">
+            <div class="step-title">
+                <h1>Sommaire</h1>
+            </div>
+            <div class="block-grid grid-inset-white block-service">
+                <h2 class="gray">On peut vous rendre service ?</h2>
+                <p class="black"><span class="blue">Pas de panique! </span>Profitez du réseau OMMI, des<br>professionnels de confiance à prix d’ami ! Programmez en<br>ligne vos rendez-vous et laissez-vous guider. Vous-êtes<br>prévenus par mail et sur votre calendrier. </p>
+                <div class="block-btn">
+                    <a class="btn btn-medium btn-red btn-pro" href="<?= $this->url(array('module' => 'user', 'controller' => 'owner-services', 'action' => 'professionals'), null, true) ?>">Professionnels</a>
+                </div>
+            </div>
+            <div class="block-grid grid-inset-white block-service">
+                <h2 class="gray">Mon diagnostic énergétique</h2>
+                <p class="black"><span class="blue">Vous ne manquez pas d’énergie?</span> Le diagnostic de<br>performance énergétique doit être établi par un professionnel.<br>OMMI vous fais profitez de son réseau de confiance.</p>
+                <div class="block-btn">
+                    <a class="btn btn-medium btn-blue btn-energy" href="<?= $this->url(array('module' => 'user', 'controller' => 'owner-services', 'action' => 'energy'), null, true) ?>">Diagnostic énergétique</a>
+                </div>
+            </div>
+            <div class="block-grid grid-inset-white block-service">
+                <h2 class="gray">Comment rédiger un courrier ?</h2>
+                <p class="black"><span class="blue">Les mots vous manquent pour le dire?</span> Retrouvez de<br>nombreux modèles de lettres type pour gérer votre location<br>en toute quiétude. Révision du loyer, Mise en Demeure, etc.<br>Ils sont tous ici sur OMMI.</p>
+                <div class="block-btn">
+                    <a class="btn btn-medium btn-blue btn-mail" href="<?= $this->url(array('module' => 'user', 'controller' => 'owner-services', 'action' => 'mail-templates'), null, true) ?>">Modèles de courrier</a>
+                </div>
+            </div>
+            <div class="block-grid grid-inset-white block-service">
+                <h2 class="gray">Besoin d’un contrat de location ?</h2>
+                <p class="black"><span class="blue">On peut vous rendre service!</span> Inutile de chercher plus loin cet<br>ancien modèle de contrat que vous gardez dans un tiroir.<br>OMMI vous simplifie la vie et vous propose de<br>vous servir de ses modèles types.</p>
+                <div class="block-btn">
+                    <a class="btn btn-medium btn-blue btn-file" href="<?= $this->url(array('module' => 'user', 'controller' => 'owner-services', 'action' => 'contract-templates'), null, true) ?>">Modèles de contrats</a>
+                </div>
+            </div>
+            <div class="block-grid grid-inset-white block-service">
+                <h2 class="gray">Comment faire un état des lieux ? </h2>
+                <p class="black"><span class="blue">Ça fait un bail et vous avez oublié?</span> OMMI met à votre<br>disposition des modèles d’états des lieux et des conseils<br>pour vous simplifier la location.</p>
+                <div class="block-btn">
+                    <a class="btn btn-medium btn-blue btn-edit" href="<?= $this->url(array('module' => 'user', 'controller' => 'owner-services', 'action' => 'state-of-play'), null, true) ?>">Etats des lieux</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,22 @@
-<?php
-$all = scandir(__DIR__);
-foreach ($all as $item) {
-	if (preg_match('/.+\.phtml$/', $item))
-		echo '<div><a href="/index/markup/file/'.$item.'">'.$item.'</a></div>';
-}
-?>
+<style type="text/css">
+	.links-box{
+		width: 500px;
+		margin: 0 auto;
+		padding: 80px 20px 20px;
+	}
+	.links-box a{
+		text-decoration: none;
+	}
+	.links-box a:hover{
+		text-decoration: underline;
+	}
+</style>
+<div class="links-box">
+	<?php
+	$all = scandir(__DIR__);
+	foreach ($all as $item) {
+		if (preg_match('/.+\.phtml$/', $item))
+			echo '<div><a href="/index/markup/file/'.$item.'">'.$item.'</a></div>';
+	}
+	?>
+</div>

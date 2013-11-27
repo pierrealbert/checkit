@@ -82,7 +82,11 @@ class Model_PropertyTable extends Ext_Doctrine_Table
         if (is_numeric($exceptIds))
             $exceptIds = array($exceptIds);
 
-        list($sortBy, $sortDir, $sortSql) = $this->checkSortAttrs($sortBy, $sortDir);
+        if ($sortBy === false) {
+            $sortSql = '';
+        } else {
+            list($sortBy, $sortDir, $sortSql) = $this->checkSortAttrs($sortBy, $sortDir);
+        }
 
         $propertyTN = $this->getTableName(); // used as alias
 
@@ -161,7 +165,11 @@ class Model_PropertyTable extends Ext_Doctrine_Table
             }
         }
 
-        $dqlQuery->orderBy($sortSql);
+        $dqlQuery->andWhere('is_published = ?', 1);
+
+        if ($sortSql != '') {
+            $dqlQuery->orderBy($sortSql);
+        }
 
         return $dqlQuery;
     }
@@ -218,5 +226,20 @@ class Model_PropertyTable extends Ext_Doctrine_Table
 
         return $list;
     }
-
+    
+    public function findActiveByIserId($userId)
+    {
+        return $this->createQuery()
+                ->where('owner_id = ?', $userId)
+                ->addWhere('is_published = ?', 1)
+                ->execute();
+    }
+    
+    public function findInActiveByIserId($userId)
+    {
+        return $this->createQuery()
+                ->where('owner_id = ?', $userId)
+                ->addWhere('is_published = ?', 0)
+                ->execute();        
+    }
 }

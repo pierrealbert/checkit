@@ -138,20 +138,8 @@ class ImageController extends Zend_Controller_Action
 
         if (!$image) return false;
 
-        $old_height = $image_info[0];
-        $old_width = $image_info[1];
-/*
-		if (($old_height  >= $old_width) && ($old_height > $width)) {
-            $new_height = (float)$width;                       
-            $new_width = (int)(($new_height/$old_height ) * $old_width);
-        } elseif (($old_width  >= $old_height) && ($old_width > $height)) {
-            $new_width = (float)$height;                      
-            $new_height = (int)(($new_width/$old_width) * $old_height) ;
-        } else {
-			$new_height = $old_height;
-			$new_width = $old_width;
-		}
-*/
+        $old_height = $image_info[1];
+        $old_width = $image_info[0];
 
         $new_width  = $width;
         $new_height = $height;
@@ -159,7 +147,6 @@ class ImageController extends Zend_Controller_Action
 
         $new_image = imagecreatetruecolor($new_height, $new_width);
 
-        //if (!imagecopyresampled($new_image, $image, 0, 0, 0, 0, $new_height, $new_width, $old_height, $old_width)) return false;
         if (!imagecopyresampled($new_image, $image, 0, 0, $x_delta, $y_delta, $new_height, $new_width, $old_height, $old_width)) return false;
 		
         return self::saveImage($new_image, $destinationImage, $image_info[2]);

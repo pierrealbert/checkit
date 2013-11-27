@@ -141,13 +141,13 @@
 	font-size: 20px;
 	margin-top: 0;
 }
-.title-ad{
+.item-title{
 	font-weight: normal;
 	font-size: 20px;
 	margin: 0 0 10px;
 	color: #666666;
 }
-.img-ad{
+.item-img{
 	float: left;
 	margin-right: 10px;
 }
@@ -176,6 +176,18 @@
 	top: 172px;
 }
 
+.grid-reformed .grid-inner{
+	height: 97px;
+}
+.grid-reformed .index-row-six-text{
+	width: 56%;
+}
+.grid-reformed .index-row-six-link{
+	width: 45%;
+}
+.grid-reformed .index-row-six-link a{
+	font-size: 15px;
+}
 /*menu annonce*/
 
 .menu-annonce{
@@ -538,7 +550,7 @@
 	background: #bff2ef;
 
 }
-.calendar .cell-blue a{
+.calendar  a.cell-blue{
 	color: #545757;
 	text-decoration: none;
 }

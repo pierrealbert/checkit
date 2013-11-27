@@ -3,23 +3,27 @@
     <div class="box-info-univ-black">
         <? foreach ($this->searches as $searchKey => $search) : ?>
         <div class="grid grid-block">
-            <div class="box-text info-box">
-                <h3 class="title-ad"><?= $this->escape($search->name) ?></h3>
+			<?php
+			$urlSearch = $this->url(array('module' => 'default', 'controller' => 'search', 'action' => 'results', 'search_id' => $search->id), null, false);
+			$urlUpdate = $this->url(array('module' => 'default', 'controller' => 'search', 'action' => 'updatesearch', 'search_id' => $search->id), null, false);
+			?>
+			<div class="box-text info-box">
+                <h3 class="item-title"><?= substr($tmpStr = $this->escape($search->name), 0, 50).(strlen($tmpStr) > 50 ? '...' : '') ?></h3>
                 <span class="blue-dark"><?= $this->translate('search_' . $search->search_type) ?></span>
-                <div class="box-input-ad-">
+                <div class="box-input-item-">
                     <? foreach ($search->getSearchFields() as $key => $field) : ?>
                     <input type="checkbox" class="input-pretty" id="condition-<?= $searchKey ?>-<?= $key ?>" name="<?= $field ?>"/>
                     <label for="condition-<?= $searchKey ?>-<?= $key ?>" class="btn-input-gray-lite"><?= $this->translate($field) ?></label>
                     <? endforeach; ?>
                 </div>
-                <a class="black" href="#">Modifier la recherche</a>
+                <a class="black" href="<?= $urlUpdate; ?>">Modifier la recherche</a>
             </div>
             <div class="box-text box-center">
                 <p class="gray">Annonces trouvees</p>
                 <p><?= $search->found_items ?></p>
                 <p class="gray">Nouvelles annonces</p>
                 <p>3</p>
-                <a class="btn btn-blue" href="<?= $this->url(array('module' => 'default', 'controller' => 'search', 'action' => 'results', 'search_id' => $search->id), null, false) ?>">Voir les resultats</a>
+                <a class="btn btn-blue" href="<?= $urlSearch ?>">Voir les resultats</a>
             </div>
             <div class="box-text box-right">
                 <p class="gray">Budget maximum</p>
@@ -41,8 +45,8 @@
         <? foreach ($this->favorites as $property) : ?>
         <div class="grid grid-block">
             <div class="box-text info-box box-size">
-                <?= $this->imageResize(102, 102, $property->main_photo, array('class' => 'img-ad', 'height' => '104', 'width' => '104')) ?>
-                <h3 class="title-ad"><?= $this->escape($property->title) ?></h3>
+                <?= $this->imageResize(102, 102, $property->main_photo, array('class' => 'item-img', 'height' => '104', 'width' => '104')) ?>
+                <h3 class="item-title"><?= $this->escape($property->title) ?></h3>
                 <div><?= $this->translate($this->propertyType[$property->property_type]) ?> <?= $property->is_furnished ? '<span class="slash">|</span> Meublé' : '' ?>
                     <br />
                     <?= $property->address ?> (<?= $property->postcode ?>)<br />

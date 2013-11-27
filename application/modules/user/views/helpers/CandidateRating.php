@@ -14,11 +14,18 @@ class User_View_Helper_CandidateRating extends Zend_View_Helper_Abstract
                                             sendRequest: 1,
                                             canRateAgain: 1,
                                             nbRates: 1000,
-                                            phpPath: '{$this->view->url(array('module' => 'user', 
-                                                                              'controller' => 'my-account',
+                                            phpPath: '{$this->view->url(array('module' => 'user',
+                                                                              'controller' => 'candidates',
                                                                               'action' => 'ajax-rate-candidate',))}',
-                                            bigStarsPath: '/images/icons/stars.png'});
+                                            bigStarsPath: '/assets/images/stars-empty.png',
+                                            onSuccess: function(element,rate) {
+                                                $(element).parents('.stars-parent').find('div.score').html(rate+'<span>/5</span>')
+                                            }
+
+                                            });
         ");
+
+        //bigStarsPath: '/images/icons/stars.png',
 
         $html = '';
         $html .= '<div class="basic candidate-rating"';

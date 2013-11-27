@@ -85,3 +85,32 @@
 .w500{
 	width: 500px;
 }
+p.alert-title {
+    margin: 0px;
+    padding: 0px;
+}
+div.alert-body {
+    display: none;
+    margin-top: 15px;
+}
+.body-switcher {
+    cursor: pointer;
+}
+div.alerts-zone {
+    margin: 0px;
+    padding: 0px;
+}
+a.property-link {
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.alert-red a.property-link {
+    color: #b23f50;
+}
+.alert-gray a.property-link {
+    color: #4d4d4d;
+}
+.alert-blue a.property-link {
+    color: #198e9c;
+}

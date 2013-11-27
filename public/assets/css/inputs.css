@@ -25,7 +25,7 @@ input {
 }
 
 input[type=text]:focus{
-	background: #b6e8ed;
+	background-color: #b6e8ed;
 	box-shadow: inset 0px 1px 0 #3cbecc;
 }
 
@@ -36,7 +36,7 @@ input[type=checkbox].input-pretty{
 }
 input[type=radio].input-pretty + .btn-input-gray-dark,
 input[type=checkbox].input-pretty + .btn-input-gray-dark{
-	background: #808080;
+	background-color: #808080;
 	box-shadow: 0 1px 0 #333333;
 	text-shadow: 0 -1px 0 #333333 !important;
 	/*margin-right: 10px;*/
@@ -44,7 +44,7 @@ input[type=checkbox].input-pretty + .btn-input-gray-dark{
 }
 input[type=radio].input-pretty:checked + .btn-input-gray-dark,
 input[type=checkbox].input-pretty:checked + .btn-input-gray-dark{
-	background: #198e9c;
+	background-color : #198e9c;
 	box-shadow: 0 1px 0 #087380;
 }
 input[type=radio].input-pretty:checked + .btn-input-gray-lite,
@@ -152,4 +152,76 @@ input[type=checkbox].input-pretty + .btn-input-daker{
 
 .labels-group > label + label {
 	border-left: 1px solid #b3b3b3;
+}
+
+.input-phone {
+	box-sizing: border-box;
+	padding-right: 35px;
+	background-image: url('../images/input-phone.png');
+	background-repeat: no-repeat;
+	background-position: 98% center;
+	background-position: calc(100% - 10px) center;
+}
+
+.input-money {
+	box-sizing: border-box;
+	padding-right: 30px;
+	background-image: url('../images/input-money.png');
+	background-repeat: no-repeat;
+	background-position: 98% center;
+	background-position: calc(100% - 10px) center;
+}
+
+.input-date {
+	box-sizing: border-box;
+	padding-right: 30px;
+	background-image: url('../images/input-date.png');
+	background-repeat: no-repeat;
+	background-position: 98% center;
+	background-position: calc(100% - 10px) center;
+}
+
+.input-sqrt {
+	box-sizing: border-box;
+	padding-right: 40px;
+	background-image: url('../images/input-sqrt.png');
+	background-repeat: no-repeat;
+	background-position: 98% center;
+	background-position: calc(100% - 10px) center;
+}
+
+.input-profile {
+	box-sizing: border-box;
+	padding-right: 35px;
+	background-image: url('../images/input-profile.png');
+	background-repeat: no-repeat;
+	background-position: 98% center;
+	background-position: calc(100% - 10px) center;
+}
+
+.input-location {
+	box-sizing: border-box;
+	padding-right: 30px;
+	background-image: url('../images/input-location.png');
+	background-repeat: no-repeat;
+	background-position: 98% center;
+	background-position: calc(100% - 10px) center;
+}
+
+.input-mail {
+	box-sizing: border-box;
+	padding-right: 40px;
+	background-image: url('../images/input-mail.png');
+	background-repeat: no-repeat;
+	background-position: 98% center;
+	background-position: calc(100% - 10px) center;
+}
+
+.input-pass {
+	box-sizing: border-box;
+	padding-right: 35px;
+	background-image: url('../images/input-pass.png');
+	background-repeat: no-repeat;
+	background-position: 98% center;
+	background-position: calc(100% - 10px) center;
 }

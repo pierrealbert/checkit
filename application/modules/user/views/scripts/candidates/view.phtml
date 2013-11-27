@@ -1,0 +1,150 @@
+<?php
+$this->headLink()->appendStylesheet('/assets/css/candidates.css');
+?>
+
+<div class="grid candidates-top">
+    <div class="candidates-top-block-left">
+        <div class="left-block">
+            <h2>Dossier de candidature</h2>
+            <span class="bold">Candidat<?=(count($this->residents) > 1 ? ' + '.(count($this->residents)-1).' Colocataire' : '')?></span><br />
+            <span>Dete de visite demandee : <?=date('d/m/Y', strtotime($this->application->PropertyVisitDates->availability))?></span>
+        </div>
+
+        <div class="right-block stars-parent">
+            <div class="block-controlls-stars">
+                <span>Mon avis</span>
+                <?= $this->candidateRating($this->application->id, $this->application->rate) ?>
+            </div>
+
+            <div class="block-controlls-score">
+                <span>Score</span>
+                <div class="score"><?=$this->application->rate?><span>/5</span></div>
+            </div>
+            <div class="clear"></div>
+            <div class="candidature-date">Candidature : <?=date('d/m/Y', strtotime($this->application->created_at))?></div>
+        </div>
+    </div>
+
+    <? if ($this->application->is_accepted): ?>
+        <div class="candidates-top-block-right">
+            <a href="#" class="btn btn-blue btn-big btn-down accept" onClick="return false;"><?= $this->translate('accepted') ?></a>
+        </div>
+    <? else: ?>
+        <div class="candidates-top-block-right">
+            <a href="<?= $this->url(array('module' => 'user', 'controller' => 'candidates', 'action' => 'decline-candidate', 'application' => $this->application->id )) ?>" class="btn btn-red btn-big reject"><?= $this->translate('decline') ?></a>
+            <a href="<?= $this->url(array('module' => 'user', 'controller' => 'candidates', 'action' => 'accept-candidate', 'application' => $this->application->id )) ?>" class="btn btn-blue btn-big accept"><?= $this->translate('accept') ?></a>
+        </div>
+    <? endif ?>
+
+</div>
+
+
+
+<div class="grid" id="residentTabs">
+    <div class="page-tab-nav">
+        <ul>
+            <? foreach ($this->residents as $key => $resident) : ?>
+                <li>
+                    <a <?= $key ? '' : 'class="active" id="first-tab-a"' ?> href="#resident-<?= $key ?>">
+                        <?= $resident->getTitle($key) ?>
+                    </a>
+                </li>
+            <? endforeach; ?>
+        </ul>
+    </div>
+    <div class="inner-light">
+        <? foreach ($this->residents as $key => $resident) : ?>
+            <?
+
+            $garants    = $resident->getGarants();
+            $documents  = $resident->getDocuments();
+            ?>
+            <div id="resident-<?= $key ?>" style="display: none;">
+                <h2 class="txt-small">Profil</h2>
+                <div class="box-info-universal">
+                    <h2 class="black-text"><?= $this->escape($resident->resident_name) ?></h2>
+                    <div class="inner-box">
+                        <p>Profil : <span class="bold-txt"><?= $this->translate($resident->resident_type) ?></span></p>
+                        <p>Revenus : <span class="bold-txt"><?= $resident->monthly_income ?> €/mois</span></p>
+                        <? if ($garants) : ?>
+                            <div class="garant">
+                                <? foreach ($resident->getGarants() as $key => $garant) : ?>
+                                    <p>Garant <?= ($key + 1) ?>: <span class="bold-txt"><?= $this->translate($garant->type) ?> - <?= $garant->amount ?> €/mois</span></p>
+                                <? endforeach; ?>
+                            </div>
+                        <? endif; ?>
+                    </div>
+                    <? if ($resident->resident_type == Model_UserResident::TYPE_EMPLOYEE || $resident->resident_type == Model_UserResident::TYPE_INDEPENDENT) : ?>
+                        <div class="inner-box">
+                            <p>Profession : <span class="bold-txt"><?= $this->escape($resident->job_title) ?></span></p>
+                            <? if ($resident->resident_type == Model_UserResident::TYPE_EMPLOYEE) : ?>
+                                <p>Contrat: <span class="bold-txt"><?= $this->translate($resident->employee_type) ?></span></p>
+                            <? endif; ?>
+                        </div>
+                    <? endif; ?>
+                    <div class="inner-box">
+                        <p>Compte vérifié sur :</p>
+                        <a href="#" class="btn small-btn btn-gray-small blue-dark btn-fb">x amis</a>
+                        <a href="#" class="btn small-btn btn-gray-small blue-dark btn-in">x relations</a>
+                    </div>
+                </div>
+                <h2 class="txt-small">Pièces justificatives</h2>
+                <p>
+                    Sélectionnez un document pour le consulter.<br>
+                    Certaines pièces justificatives peuvent contenir plusieurs pages.
+                </p>
+                <? if ($documents) : ?>
+
+                    <div class="inner-box-btn">
+                        <label class="bold-txt">Candidat</label>
+                        <? foreach ($documents as $document) : ?>
+                            <a href="#" class="btn btn-blue"><?= $this->translate($document->type)?></a>
+                        <? endforeach; ?>
+                    </div>
+                <? endif; ?>
+                <? $garantNum = 1; ?>
+                <? foreach ($garants as $garant) : ?>
+                    <? $garantDocuments = $garant->getDocuments(); ?>
+                    <? if (count($garantDocuments)) : ?>
+                        <div class="inner-box-btn">
+                            <label class="bold-txt">Garant <?= $garantNum ?></label>
+                            <? foreach ($garantDocuments as $document) : ?>
+                                <a href="#" class="btn btn-blue"><?= $this->translate($document->type)?></a>
+                            <? endforeach; ?>
+                            <? $garantNum ++ ?>
+                        </div>
+                    <? endif; ?>
+                <? endforeach; ?>
+            </div>
+        <? endforeach; ?>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function() {
+
+        $('#residentTabs').tabs({
+            activate: function(event, ui) {
+                ui.newTab.find('a').addClass('active');
+                ui.oldTab.find('a').removeClass('active');
+            },
+            active: 0
+        });
+
+        $('div.title-container').addClass('big-header');
+        $('.candidates-navigation').show();
+        $('a.btn-back-to-list').attr('href', '<?=$this->backToListUrl?>');
+
+        $('a.btn-prev-item').attr('href', '<?=$this->backPrevItemUrl?>');
+        if ($('a.btn-prev-item').attr('href') == '') {
+            $('a.btn-prev-item').css('opacity', 0.5).click(function() { return false; }).addClass('btn-down');
+        }
+
+        $('a.btn-next-item').attr('href', '<?=$this->backNextItemUrl?>');
+        if ($('a.btn-next-item').attr('href') == '') {
+            $('a.btn-next-item').css('opacity', 0.5).click(function() { return false; }).addClass('btn-down');
+        }
+    });
+
+</script>

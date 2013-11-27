@@ -15,6 +15,7 @@ require_once 'Zend/Form/Decorator/Abstract.php';
 class Ext_Form_Decorator_MchBox extends Zend_Form_Decorator_ViewHelper
 {
     protected $_labelClass = 'btn-input-gray-dark btn-input-number';
+    protected $_inputClass = 'input-pretty';
     protected $_needAll = true;
     protected $_brAfter = -1;
     protected $_appendPart = false;
@@ -24,6 +25,9 @@ class Ext_Form_Decorator_MchBox extends Zend_Form_Decorator_ViewHelper
         if (isset($options['labelClass'])) {
             $this->_labelClass = $options['labelClass'];
         }
+        if (isset($options['inputClass'])) {
+            $this->_inputClass = $options['inputClass'];
+        }        
         if (isset($options['needAll'])) {
             $this->_needAll = $options['needAll'];
         }
@@ -57,6 +61,10 @@ class Ext_Form_Decorator_MchBox extends Zend_Form_Decorator_ViewHelper
         return $this->_labelClass;
     }
 
+    public function getInputClass() {
+        return $this->_inputClass;
+    }
+    
     public function getNeedAll() {
         return $this->_needAll;
     }
@@ -114,7 +122,7 @@ class Ext_Form_Decorator_MchBox extends Zend_Form_Decorator_ViewHelper
             } else {
                 $checked = $indx == $val;
             }
-            $elHtml .=  $this->getWrapPre($count)."<input type='checkbox' class='input-pretty' id='".$element->getFullyQualifiedName()."_".$indx."' name='".$element->getFullyQualifiedName()."' value='".$indx."' ".($checked ? 'checked="checked"' : '').">\n".
+            $elHtml .=  $this->getWrapPre($count)."<input type='checkbox' class='" . $this->getInputClass() . "' id='".$element->getFullyQualifiedName()."_".$indx."' name='".$element->getFullyQualifiedName()."' value='".$indx."' ".($checked ? 'checked="checked"' : '').">\n".
                        "<label for='".$element->getFullyQualifiedName()."_".$indx."' class='".$this->getLabelClass()."'>".$itemValue."</label>".$this->getPostPart($count).$this->getWrapPost($count);
             $count++;
             if ($this->getBrAfter() > 0) {

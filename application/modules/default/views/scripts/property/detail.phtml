@@ -21,7 +21,7 @@ $btnFavoritesLabel = $this->isInbookmark ? $this->translate('btn_rm_from_favorit
     <div class="container-text">
         <h1 class="white-txt">Details de l'annonce</h1>
         <?php $url = $this->url(array('controller' => 'test', 'action' => 'ad-list'), null, true); ?>
-        <a href="<?= $url; ?>" class="btn btn-gray icon-share-alt">Retour aux resultats</a>
+        <a href="<?= $url; ?>" class="btn btn-gray icon-share-alt">Retour aux résultats</a>
         <a href="#" class="btn btn-red icon-heart js-bookmark-toggle"><?= $btnFavoritesLabel; ?></a>
         <a href="http://www.addtoany.com/share_save" class="btn btn-blue icon-thumbs-up a2a_dd">Partager</a>
         <script type="text/javascript"> a2a.init('page'); </script>
@@ -49,7 +49,7 @@ $btnFavoritesLabel = $this->isInbookmark ? $this->translate('btn_rm_from_favorit
             <span class="slash">|</span>
             <?= $this->property->size ?> m<sup>2</sup>
             <span class="slash">|</span>
-            <?= $this->number_of_rooms1[$this->property->number_of_rooms1] ?> pieces
+            <?= $this->number_of_rooms1[$this->property->number_of_rooms1] ?> piéces
         </p>
         <p class="date-txt">Mise en  ligne : <?= $this->date($this->property->created_at) ?>
             <?php if ($this->property->is_urgent): ?>
@@ -63,25 +63,24 @@ $btnFavoritesLabel = $this->isInbookmark ? $this->translate('btn_rm_from_favorit
     <div class="box-text box-price">
         <div class="loyer">Loyer mensuel</div>
         <div class="price"><?= $this->property->price ?> €</div>
-
-        <a href="#" class="btn btn-gray btn-blue-dark small-btn">
-            <i class="i-group-white icon-pro"></i>
-            Pro
-        </a>
+        <span class="btn btn-gray btn-blue-dark small-btn"><i class="i-group-white icon-pro"></i>Pro</span>
     </div>
+
     <div class="box-text box-button">
-        <a class="open-in-modal btn btn-blue big-btn" href="<?= $this->url(array('controller' => 'property', 'action' => 'ajax-apply', 'item' => $this->property->id), null, true) ?>"><i class="i-group-white icon-check"></i><?= $this->translate('apply'); ?></a>
+		<?php $url = $this->url(array('controller' => 'property', 'action' => 'ajax-apply', 'item' => $this->property->id), null, true); ?>
+        <a class="open-in-modal btn btn-blue big-btn" data-title="<?= $this->translate('apply') ?>" href="<?= $url ?>"><i class="i-group-white icon-check"></i><?= $this->translate('apply'); ?></a>
     </div>
 </div>
 
 <div class="grid" id="propertyTtabs">
+
 <div class="menu-annonce">
     <ul>
-        <li><a href="#description" class="active"><?= $this->translate('description') ?><i class="i-group-gray icon-list"></i></a></li>
+        <li><a href="#description" class="active"><?= $this->translate('description') ?><i class="i-group-white icon-list"></i></a></li>
         <? if ($this->photos) : ?>
             <li><a href="#photos"><?= $this->translate('photos') ?><i class="i-group-white icon-photo"></i></a></li>
         <? endif; ?>
-        <li><a href="#map"><?= $this->translate('map') ?><i class="i-group-white icon-carte"></i></a></li>
+        <li><a href="#map"><?= $this->translate('map') ?><i class="i-group-gray icon-carte"></i></a></li>
         <li><a href="#calendar"><?= $this->translate('Visites') ?><i class="i-group-white icon-calendar"></i></a></li>
     </ul>
 
@@ -89,265 +88,266 @@ $btnFavoritesLabel = $this->isInbookmark ? $this->translate('btn_rm_from_favorit
         <i class="i-group-white icon-flag"></i>
     </a>
 </div>
+
 <div class="tab-annonce" id="description">
-<h2 class="black-txt"><?= $this->translate('description') ?></h2>
-<div class="table-discription">
-    <div class="cellsblock cellsblock-first">
-        <div class="cellleft">
-            <p><?= $this->translate('localization') ?></p>
-        </div>
-        <div class="cellright">
-            <p><?= $this->property->address ?> (<?= $this->property->postcode ?>)</p>
-        </div>
-    </div>
-    <div class="cellsblock">
-        <div class="cellleft">
-            <p><?= $this->translate('price_include_charge') ?></p>
-        </div>
-        <div class="cellright">
-            <p><?= $this->property->price ?> &euro;</p>
-        </div>
-    </div>
-    <div class="cellsblock">
-        <div class="cellleft">
-            <p><?= $this->translate('is_furnished') ?></p>
-        </div>
-        <div class="cellright">
-            <p><?= $this->property->is_furnished ? 'Meublé' : 'Non' ?></p>
-        </div>
-    </div>
-    <div class="cellsblock cellsblock-first">
-        <div class="cellleft">
-            <p><?= $this->translate('is_roomate') ?></p>
-        </div>
-        <div class="cellright">
-            <p><?= $this->translate($this->is_roomate ? 'yes' : 'no') ?></p>
-        </div>
-    </div>
-    <div class="cellsblock">
-        <div class="cellleft">
-            <p><?= $this->translate('charges') ?></p>
-        </div>
-        <div class="cellright">
-            <p><?= $this->property->amount_of_charges ?> &euro;</p>
-        </div>
-    </div>
-    <div class="cellsblock">
-        <div class="cellleft">
-            <p><?= $this->translate('property_type') ?></p>
-        </div>
-        <div class="cellright">
-            <p><?= $this->translate($this->property_type[$this->property->property_type]) ?></p>
-        </div>
-    </div>
-    <div class="cellsblock">
-        <div class="cellleft">
-            <p><?= $this->translate('size') ?></p>
-        </div>
-        <div class="cellright">
-            <p><?= $this->property->size ?> m<sup>2</sup></p>
-        </div>
-    </div>
-    <div class="cellsblock">
-        <div class="cellleft">
-            <p><?= $this->translate('number_of_rooms1') ?></p>
-        </div>
-        <div class="cellright">
-            <p><?= $this->number_of_rooms1[$this->property->number_of_rooms1] ?> rooms</p>
-        </div>
-    </div>
-    <div class="cellsblock">
-        <div class="cellleft">
-            <p><?= $this->translate('floor') ?></p>
-        </div>
-        <div class="cellright">
-            <p><?= $this->property->floor ?></p>
-        </div>
-    </div>
-    <div class="cellsblock">
-        <div class="cellleft">
-            <p><?= $this->translate('availability') ?></p>
-        </div>
-        <div class="cellright">
-            <p>
-                <?php if (date('Y-m-d') < $this->property->availability): ?>
-                    <?= $this->property->availability ?>
-                <?php else: ?>
-                    <?= $this->translate('right_now') ?>
-                <?php endif; ?>
-            </p>
-        </div>
-    </div>
-    <div class="cellsblock">
-        <div class="cellleft">
-            <p><?= $this->translate('metro') ?></p>
-        </div>
-        <div class="cellright">
-            <p>
-                <? $metro = $this->property->getNearbyMetroStation() ?>
-                <?= $metro ? $metro->name : '-' ?>
-            </p>
-        </div>
-    </div>
-    <div class="cellsblock">
-        <div class="cellleft">
-            <p><?= $this->translate('planning') ?></p>
-        </div>
-        <div class="cellright">
-            <p>
-                <?php $string = ''; ?>
-                <?php foreach ($this->values_groups['planning'] as $key => $value): ?>
-                    <?php if ($this->property->$key): ?>
-                        <?php if (empty($string)): ?>
-                            <?php $string = $this->translate($value); ?>
-                        <?php else: ?>
-                            <?php $string .= ', ' . $this->translate($value); ?>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-                <?= $string ?>
-            </p>
-        </div>
-    </div>
-    <div class="cellsblock">
-        <div class="cellleft">
-            <p><?= $this->translate('outbuilding') ?></p>
-        </div>
-        <div class="cellright">
-            <p>
-                <?php $string = ''; ?>
-                <?php foreach ($this->values_groups['outbuilding'] as $key => $value): ?>
-                    <?php if ($this->property->$key): ?>
-                        <?php if (empty($string)): ?>
-                            <?php $string = $this->translate($value); ?>
-                        <?php else: ?>
-                            <?php $string .= ', ' . $this->translate($value); ?>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-                <?= $string ?>
-            </p>
-        </div>
-    </div>
-    <div class="cellsblock">
-        <div class="cellleft">
-            <p><?= $this->translate('exterior') ?></p>
-        </div>
-        <div class="cellright">
-            <p>
-                <?php $string = ''; ?>
-                <?php foreach ($this->values_groups['exterior'] as $key => $value): ?>
-                    <?php if ($this->property->$key): ?>
-                        <?php if (empty($string)): ?>
-                            <?php $string = $this->translate($value); ?>
-                        <?php else: ?>
-                            <?php $string .= ', ' . $this->translate($value); ?>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-                <?= $string ?>
-            </p>
-        </div>
-    </div>
-    <div class="cellsblock">
-        <div class="cellleft">
-            <p><?= $this->translate('building') ?></p>
-        </div>
-        <div class="cellright">
-            <p>
-                <?php $string = ''; ?>
-                <?php foreach ($this->values_groups['building'] as $key => $value): ?>
-                    <?php if ($this->property->$key): ?>
-                        <?php if (empty($string)): ?>
-                            <?php $string = $this->translate($value); ?>
-                        <?php else: ?>
-                            <?php $string .= ', ' . $this->translate($value); ?>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-                <?= $string ?>
-            </p>
-        </div>
-    </div>
-    <div class="cellsblock">
-        <div class="cellleft">
-            <p><?= $this->translate('heating_system') ?></p>
-        </div>
-        <div class="cellright">
-            <p>
-                <?php $string = ''; ?>
-                <?php foreach ($this->values_groups['heating_system'] as $key => $value): ?>
-                    <?php if ($this->property->$key): ?>
-                        <?php if (empty($string)): ?>
-                            <?php $string = $this->translate($value); ?>
-                        <?php else: ?>
-                            <?php $string .= ', ' . $this->translate($value); ?>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-                <?= $string ?>
-            </p>
-        </div>
-    </div>
-</div>
-<div class="block-photo">
-    <? if ($this->photos) : ?>
-        <div class="photo-gallery">
-            <div class="photo-img" id="property-photo">
-                <?= $this->imageResize(262, 262, $this->photos[0]['link'], array('class' => 'slide')) ?>
-            </div>
-            <div id="property-photos" style="display: none;">
-                <?php foreach ($this->photos as $key => $photo): ?>
-                    <span id="property-photo-<?= ($key + 1) ?>"><?= $this->imageResize(262, 262, $photo['link'], array('class' => 'slide hidden')) ?></span>
-                <?php endforeach; ?>
-            </div>
-            <div class="control-btn">
-                <a href="#" class="btn-next" id="prev-photo"><i class="i-group-gray icon-chevron-left"></i></a>
-                <span>Photo <span id="current-photo">1</span>/<?= count($this->photos) ?></span>
-                <a href="#" id="next-photo"><i class="i-group-gray icon-chevron-right"></i></a>
-            </div>
-            <script type="text/javascript">
+	<h2 class="black-txt"><?= $this->translate('description') ?></h2>
+	<div class="table-discription">
+		<div class="cellsblock cellsblock-first">
+			<div class="cellleft">
+				<p><?= $this->translate('localization') ?></p>
+			</div>
+			<div class="cellright">
+				<p><?= $this->property->address ?> (<?= $this->property->postcode ?>)</p>
+			</div>
+		</div>
+		<div class="cellsblock">
+			<div class="cellleft">
+				<p><?= $this->translate('price_include_charge') ?></p>
+			</div>
+			<div class="cellright">
+				<p><?= $this->property->price ?> &euro;</p>
+			</div>
+		</div>
+		<div class="cellsblock">
+			<div class="cellleft">
+				<p><?= $this->translate('is_furnished') ?></p>
+			</div>
+			<div class="cellright">
+				<p><?= $this->property->is_furnished ? 'Meublé' : 'Non' ?></p>
+			</div>
+		</div>
+		<div class="cellsblock cellsblock-first">
+			<div class="cellleft">
+				<p><?= $this->translate('is_roomate') ?></p>
+			</div>
+			<div class="cellright">
+				<p><?= $this->translate($this->is_roomate ? 'yes' : 'no') ?></p>
+			</div>
+		</div>
+		<div class="cellsblock">
+			<div class="cellleft">
+				<p><?= $this->translate('charges') ?></p>
+			</div>
+			<div class="cellright">
+				<p><?= $this->property->amount_of_charges ?> &euro;</p>
+			</div>
+		</div>
+		<div class="cellsblock">
+			<div class="cellleft">
+				<p><?= $this->translate('property_type') ?></p>
+			</div>
+			<div class="cellright">
+				<p><?= $this->translate($this->property->getType()) ?></p>
+			</div>
+		</div>
+		<div class="cellsblock">
+			<div class="cellleft">
+				<p><?= $this->translate('size') ?></p>
+			</div>
+			<div class="cellright">
+				<p><?= $this->property->size ?> m<sup>2</sup></p>
+			</div>
+		</div>
+		<div class="cellsblock">
+			<div class="cellleft">
+				<p><?= $this->translate('number_of_rooms1') ?></p>
+			</div>
+			<div class="cellright">
+				<p><?= $this->number_of_rooms1[$this->property->number_of_rooms1] ?> rooms</p>
+			</div>
+		</div>
+		<div class="cellsblock">
+			<div class="cellleft">
+				<p><?= $this->translate('floor') ?></p>
+			</div>
+			<div class="cellright">
+				<p><?= $this->property->floor ?></p>
+			</div>
+		</div>
+		<div class="cellsblock">
+			<div class="cellleft">
+				<p><?= $this->translate('availability') ?></p>
+			</div>
+			<div class="cellright">
+				<p>
+					<?php if (date('Y-m-d') < $this->property->availability): ?>
+						<?= $this->property->availability ?>
+					<?php else: ?>
+						<?= $this->translate('right_now') ?>
+					<?php endif; ?>
+				</p>
+			</div>
+		</div>
+		<div class="cellsblock">
+			<div class="cellleft">
+				<p><?= $this->translate('metro') ?></p>
+			</div>
+			<div class="cellright">
+				<p>
+					<? $metro = $this->property->getNearbyMetroStation() ?>
+					<?= $metro ? $metro->name : '-' ?>
+				</p>
+			</div>
+		</div>
+		<div class="cellsblock">
+			<div class="cellleft">
+				<p><?= $this->translate('planning') ?></p>
+			</div>
+			<div class="cellright">
+				<p>
+					<?php $string = ''; ?>
+					<?php foreach ($this->values_groups['planning'] as $key => $value): ?>
+						<?php if ($this->property->$key): ?>
+							<?php if (empty($string)): ?>
+								<?php $string = $this->translate($value); ?>
+							<?php else: ?>
+								<?php $string .= ', ' . $this->translate($value); ?>
+							<?php endif; ?>
+						<?php endif; ?>
+					<?php endforeach; ?>
+					<?= $string ?>
+				</p>
+			</div>
+		</div>
+		<div class="cellsblock">
+			<div class="cellleft">
+				<p><?= $this->translate('outbuilding') ?></p>
+			</div>
+			<div class="cellright">
+				<p>
+					<?php $string = ''; ?>
+					<?php foreach ($this->values_groups['outbuilding'] as $key => $value): ?>
+						<?php if ($this->property->$key): ?>
+							<?php if (empty($string)): ?>
+								<?php $string = $this->translate($value); ?>
+							<?php else: ?>
+								<?php $string .= ', ' . $this->translate($value); ?>
+							<?php endif; ?>
+						<?php endif; ?>
+					<?php endforeach; ?>
+					<?= $string ?>
+				</p>
+			</div>
+		</div>
+		<div class="cellsblock">
+			<div class="cellleft">
+				<p><?= $this->translate('exterior') ?></p>
+			</div>
+			<div class="cellright">
+				<p>
+					<?php $string = ''; ?>
+					<?php foreach ($this->values_groups['exterior'] as $key => $value): ?>
+						<?php if ($this->property->$key): ?>
+							<?php if (empty($string)): ?>
+								<?php $string = $this->translate($value); ?>
+							<?php else: ?>
+								<?php $string .= ', ' . $this->translate($value); ?>
+							<?php endif; ?>
+						<?php endif; ?>
+					<?php endforeach; ?>
+					<?= $string ?>
+				</p>
+			</div>
+		</div>
+		<div class="cellsblock">
+			<div class="cellleft">
+				<p><?= $this->translate('building') ?></p>
+			</div>
+			<div class="cellright">
+				<p>
+					<?php $string = ''; ?>
+					<?php foreach ($this->values_groups['building'] as $key => $value): ?>
+						<?php if ($this->property->$key): ?>
+							<?php if (empty($string)): ?>
+								<?php $string = $this->translate($value); ?>
+							<?php else: ?>
+								<?php $string .= ', ' . $this->translate($value); ?>
+							<?php endif; ?>
+						<?php endif; ?>
+					<?php endforeach; ?>
+					<?= $string ?>
+				</p>
+			</div>
+		</div>
+		<div class="cellsblock">
+			<div class="cellleft">
+				<p><?= $this->translate('heating_system') ?></p>
+			</div>
+			<div class="cellright">
+				<p>
+					<?php $string = ''; ?>
+					<?php foreach ($this->values_groups['heating_system'] as $key => $value): ?>
+						<?php if ($this->property->$key): ?>
+							<?php if (empty($string)): ?>
+								<?php $string = $this->translate($value); ?>
+							<?php else: ?>
+								<?php $string .= ', ' . $this->translate($value); ?>
+							<?php endif; ?>
+						<?php endif; ?>
+					<?php endforeach; ?>
+					<?= $string ?>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="block-photo">
+		<? if ($this->photos) : ?>
+			<div class="photo-gallery">
+				<div class="photo-img" id="property-photo">
+					<?= $this->imageResize(262, 262, $this->photos[0]['link'], array('class' => 'slide')) ?>
+				</div>
+				<div id="property-photos" style="display: none;">
+					<?php foreach ($this->photos as $key => $photo): ?>
+						<span id="property-photo-<?= ($key + 1) ?>"><?= $this->imageResize(262, 262, $photo['link'], array('class' => 'slide hidden')) ?></span>
+					<?php endforeach; ?>
+				</div>
+				<div class="control-btn">
+					<a href="#" class="btn-next" id="prev-photo"><i class="i-group-gray icon-chevron-left"></i></a>
+					<span>Photo <span id="current-photo">1</span>/<?= count($this->photos) ?></span>
+					<a href="#" id="next-photo"><i class="i-group-gray icon-chevron-right"></i></a>
+				</div>
+				<script type="text/javascript">
 
-                $(function() {
-                    var currentPhoto = 1;
-                    var totalPhotos = <?= count($this->photos) ?>;
-                    $('#next-photo').click(function(event) {
-                        event.preventDefault();
-                        currentPhoto = currentPhoto + 1;
-                        if (currentPhoto > totalPhotos) {
-                            currentPhoto = 1;
-                        }
-                        $('#property-photo').html($('#property-photo-' + currentPhoto).html());
-                        $('#current-photo').text(currentPhoto);
-                    });
+					$(function() {
+						var currentPhoto = 1;
+						var totalPhotos = <?= count($this->photos) ?>;
+						$('#next-photo').click(function(event) {
+							event.preventDefault();
+							currentPhoto = currentPhoto + 1;
+							if (currentPhoto > totalPhotos) {
+								currentPhoto = 1;
+							}
+							$('#property-photo').html($('#property-photo-' + currentPhoto).html());
+							$('#current-photo').text(currentPhoto);
+						});
 
-                    $('#prev-photo').click(function(event) {
-                        event.preventDefault();
-                        currentPhoto = currentPhoto - 1;
-                        if (currentPhoto < 1) {
-                            currentPhoto = totalPhotos;
-                        }
-                        $('#property-photo').html($('#property-photo-' + currentPhoto).html());
-                        $('#current-photo').text(currentPhoto);
-                    });
-                });
+						$('#prev-photo').click(function(event) {
+							event.preventDefault();
+							currentPhoto = currentPhoto - 1;
+							if (currentPhoto < 1) {
+								currentPhoto = totalPhotos;
+							}
+							$('#property-photo').html($('#property-photo-' + currentPhoto).html());
+							$('#current-photo').text(currentPhoto);
+						});
+					});
 
-            </script>
-        </div>
-    <? endif; ?>
-    <div class="info-block-photo">
-        <span class="blue">Cette annonce a été publiée par un professionnel.</span>
-        <p>Honoraires (ttc) : <?= $this->property->honoraire ? $this->property->honoraire." €" : '-'; ?></p>
-        <span class="gray">Colocation non acceptee. Disponible immediatement.
-            Bail longue duree.
-        </span>
-    </div>
-    <div class="btn-nav-group">
-        <a href="#" class="btn btn-red icon-heart js-bookmark-toggle"><?= $btnFavoritesLabel; ?></a>
-        <a href="http://www.addtoany.com/share_save" class="btn btn-blue icon-hand a2a_dd">Partager</a>
-        <script type="text/javascript"> a2a.init('page'); </script>
-    </div>
-</div>
+				</script>
+			</div>
+		<? endif; ?>
+		<div class="info-block-photo">
+			<span class="blue">Cette annonce a été publiée par un professionnel.</span>
+			<p>Honoraires (ttc) : <?= $this->property->honoraire ? $this->property->honoraire." €" : '-'; ?></p>
+			<span class="gray">Colocation non acceptee. Disponible immediatement.
+				Bail longue duree.
+			</span>
+		</div>
+		<div class="btn-nav-group">
+			<a href="#" class="btn btn-red icon-heart js-bookmark-toggle"><?= $btnFavoritesLabel; ?></a>
+			<a href="http://www.addtoany.com/share_save" class="btn btn-blue icon-hand a2a_dd">Partager</a>
+			<script type="text/javascript"> a2a.init('page'); </script>
+		</div>
+	</div>
 </div>
 <? if ($this->photos) : ?>
     <div class="tab-annonce" id="photos">
@@ -446,7 +446,7 @@ $btnFavoritesLabel = $this->isInbookmark ? $this->translate('btn_rm_from_favorit
         En candidatant, vous serez invité à sélectionner une de ces dates.<br>
         <span class="blue"> Assurez-vous d’être disponible.</span>
     </p>
-    <?= $this->visitsCalendar($this->visits); ?>
+    <?= $this->visitsCalendar($this->visits, $this->property); ?>
     <div class="block-photo">
         <div class="btn-nav-group">
             <a href="#" class="btn btn-red icon-heart js-bookmark-toggle"><?= $btnFavoritesLabel; ?></a>
@@ -456,6 +456,7 @@ $btnFavoritesLabel = $this->isInbookmark ? $this->translate('btn_rm_from_favorit
     </div>
 </div>
 </div>
+
 <div class="grid grid-transparent">
     <div class="main-container-box">
         <div class="container-box">
@@ -470,8 +471,8 @@ $btnFavoritesLabel = $this->isInbookmark ? $this->translate('btn_rm_from_favorit
             <? foreach ($this->similarProperties as $property) : ?>
                 <div class="grid grid-block">
                     <div class="box-text info-box">
-                        <?= $this->imageResize(102, 102, $property->main_photo, array('class' => 'img-ad', 'height' => '104', 'width' => '104')) ?>
-                        <h3 class="title-ad"><?= $this->escape($this->property->title) ?></h3>
+                        <?= $this->imageResize(102, 102, $property->main_photo, array('class' => 'item-img', 'height' => '104', 'width' => '104')) ?>
+                        <h3 class="item-title"><?= $this->escape($this->property->title) ?></h3>
                         <div><?= $this->translate($this->property_type[$property->property_type]) ?> <?= $property->is_furnished ? '<span class="slash">|</span> Meublé' : '' ?>
                             <br />
                             <?= $property->address ?> (<?= $this->property->postcode ?>)<br />

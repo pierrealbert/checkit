@@ -1,0 +1,49 @@
+<div class="tab-services tab-sommaire">
+    <?= $this->partial('resident-services/_partials/navigation.phtml') ?>
+    <div class="box-right box-sommaire">
+        <h2 class="gray">Sommaire</h2>
+        <div class="inner-box">
+            <div class="box-info-universal">
+                <h2 class="gray">On peut vous rendre service ?</h2>
+                <div class="index-row-six cf">
+                    <div class="index-row-six-text">
+                        <span class="blue">Pas de panique!</span> Profitez du réseau OMMI, des
+                        professionnels de confiance à prix d’ami ! Programmez en
+                        ligne vos rendez-vous et laissez-vous guider. Vous-êtes
+                        prévenus par mail et sur votre calendrier.
+                    </div>
+                    <div class="index-row-six-btn">
+                        <a href="<?= $this->url(array('module' => 'user', 'controller' => 'resident-services', 'action' => 'professionals'), null, true) ?>" class="btn btn-red">Professionnels</a>
+                    </div>
+                </div>
+            </div>
+            <div class="box-info-universal">
+                <h2 class="gray">Comment faire un état des lieux ?</h2>
+                <div class="index-row-six cf">
+                    <div class="index-row-six-text">
+                        <span class="blue">Ça fait un bail et vous avez oublié? </span> OMMI met à votre
+                        disposition des exemples d’états des lieux et des conseils pour vous simplifier
+                        la location.
+                    </div>
+                    <div class="index-row-six-btn">
+                        <a href="<?= $this->url(array('module' => 'user', 'controller' => 'resident-services', 'action' => 'state-of-play'), null, true) ?>" class="btn btn-blue icon-pencil">Etats des lieux</a>
+                    </div>
+                </div>
+            </div>
+            <div class="box-info-universal">
+                <h2 class="gray">Comment rédiger un courrier ?</h2>
+                <div class="index-row-six cf">
+                    <div class="index-row-six-text">
+                        <span class="blue">Les mots vous manquent pour le dire? </span> Retrouvez de
+                        nombreux modèles de lettres type pour gérer votre location en toute quiétude.
+                        Révision du loyer, Mise en Demeure, etc.
+                        Ils sont tous ici sur OMMI.
+                    </div>
+                    <div class="index-row-six-btn">
+                        <a href="<?= $this->url(array('module' => 'user', 'controller' => 'resident-services', 'action' => 'mail-templates'), null, true) ?>" class="btn btn-blue icon-mail">Modèles de courrier</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

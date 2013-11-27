@@ -1,0 +1,25 @@
+Model_Alert:
+  Alert1:
+    user_id: 5
+    msg_type: success
+    title: Welcome To OMMI!
+    message: Welcome To OMMI!
+    is_read: 0
+  Alert2:
+    user_id: 5
+    msg_type: info
+    title: Dear freand! This is a best alert message for you...
+    message: 'Dear freand! This is a best alert message for you... Dear freand! This is a best alert message for you... Dear freand! This is a best alert message for you...'
+    is_read: 0  
+  Alert3:
+    user_id: 5
+    msg_type: warning
+    title: Warning!!!
+    message: Warning message
+    is_read: 0        
+  Alert4:
+    user_id: 1
+    msg_type: success
+    title: Welcome To OMMI!
+    message: Welcome To OMMI!
+    is_read: 0  

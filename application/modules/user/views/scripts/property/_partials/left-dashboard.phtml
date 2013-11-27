@@ -5,18 +5,35 @@
         'description'    => '2 Description',
         'photos'         => '3 Photos',
         'hunted-profile' => '4 Profil recherché',
-        'visit-dates'    => '5 Dates de visite'            
+        'visit-dates'    => '5 Dates de visite',
+        'publish-ad'     => 'Mentre en valeur',
     );
-    
-    $step = (int) array_search($action, array_keys($steps));
+
+    if ($action == 'publish-ad') {
+        $step = 6;
+    } elseif ($action == 'edit') {
+        $step = 1;
+        $action = 'description';
+    } else {
+        $step = (int) array_search($action, array_keys($steps));
+    }
+
+    if (isset($this->property->is_published) && $this->property->is_published == 1 && isset($this->mode)) {
+        $this->mode = 'edit';
+    }
 ?>
 <div class="progress">
     <h2 class="gray">Étapes</h2>
     <div id="step-<?= $step ?>" class="progress-step"></div>
-    <span><?= (5 - $step) ?> étapes restantes</span>
+    <?php if ($step == 6): ?>
+        <span>Votre annonce est prête à etre publiée</span>
+    <?php else: ?>
+        <span><?= (5 - $step) ?> étapes restantes</span>
+    <?php endif; ?>
 </div>
 <div class="menu">
     <? foreach ($steps as $key => $label) : ?>
-    <a class="<?= $key == $action ? 'btn btn-blue progress-menu-active' : 'btn btn-gray' ?>" href="#"><?= $label ?></a>
+        <?php if ($key == 'publish-ad' && $action != 'publish-ad') continue; ?>
+    <a class="<?= $key == $action ? 'btn '.($key != 'publish-ad' ? 'btn-blue' : 'btn-red').' progress-menu-active' : 'btn btn-gray' ?>" href="<?=($step >= 2 || (isset($this->mode) && $this->mode == 'edit') ? '/user/property/'.$key.'/item/'.$this->property->id : '#')?>"><?= $label ?></a>
     <? endforeach; ?>
 </div>

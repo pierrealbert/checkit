@@ -1,8 +1,49 @@
 <?php
-$this->headLink()->appendStylesheet('/css/ui/jquery-ui-1.10.3.css');
 $this->headLink()->appendStylesheet('/assets/css/property_form.css');
 $this->headScript()->appendFile('/assets/js/property_form.js');
 ?>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        var dropZone = document.getElementById('file-drope-zone');
+
+        if (typeof(window.FileReader) == 'undefined') {
+            $(dropZone).hide();
+        }
+
+        dropZone.ondrop = function(event) {
+            event.preventDefault();
+
+            $(dropZone).removeClass('hover');
+            $(dropZone).css('opacity', 0.25);
+
+            var file = event.dataTransfer.files[0];
+            var fd = new FormData();
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', $('form#photos-form').attr('action'));
+
+            xhr.onload = function() {
+                updatePhotosList();
+                $(dropZone).css('opacity', 1);
+            };
+
+            fd.append("image", file);
+            fd.append("form", "upload");
+            xhr.send(fd);
+        };
+
+        dropZone.ondragover = function() {
+            $(dropZone).addClass('hover');
+            return false;
+        };
+
+        dropZone.ondragleave = function() {
+            $(dropZone).removeClass('hover');
+            return false;
+        };
+
+    });
+</script>
 <div id="publier" class="grid">
 
     <div class="left">
@@ -17,8 +58,11 @@ $this->headScript()->appendFile('/assets/js/property_form.js');
                 <div class="block-grid grid-inset">
                     <fieldset class="image-form">
                         <?= $this->form_upload_photo->image ?>
-                        <a id="upload-photo-file-btn" class="btn btn-red left btn-upload-photo" href="#"><div class="i-wrapper"><i class="i-group-white icon-photo"></i></div><div class="text-wrapper">Sélectioner une photo sur mon ordinateur</div></a>
-                        <div class="file-drope-zone"><div class="i-wrapper"><i class="i-group-white icon-photo"></i></div><div class="text-wrapper">Glisser et deposer une photo ici pour la telecharger</div>
+                        <a id="upload-photo-file-btn" class="btn btn-red left btn-upload-photo" href="#"><div class="i-wrapper"><i class="icon-add-photo"></i></div><div class="text-wrapper">Sélectioner une photo sur mon ordinateur</div></a>
+                        <div class="file-drope-zone" id="file-drope-zone">
+                            <div class="i-wrapper"><i class="icon-drop-photo"></i></div>
+                            <div class="text-wrapper">Glisser et deposer une photo ici pour la telecharger</div>
+                        </div>
                     </fieldset>
                     <script type="text/javascript">
                         $('#upload-photo-file-btn').click(function() {
@@ -60,153 +104,44 @@ $this->headScript()->appendFile('/assets/js/property_form.js');
                         <?php endforeach; ?>
                         </fieldset>
                     <?php endif; ?>
-                    <script type="text/javascript">
-                        function aDelClick() {
-                            $('fieldset#photo-wrapper').css('opacity', 0.3);
-                            $.post($(this).attr('href'), {'photo': $(this).attr('data-photo-name')}, function(data) {
-                                $.get(window.location, function(htmlCode) {
-                                    $('fieldset#photo-wrapper').html($(htmlCode).find('fieldset#photo-wrapper').html());
-                                    $('fieldset#photo-wrapper').css('opacity', 1);
-                                    $('a.del-photo').click(aDelClick);
-                                    $('div.setMainPhoto').click(divSetMainClick);
-                                });
-                            });
-
-                            return false;
-                        }
-
-                        function divSetMainClick() {
-                            $('fieldset#photo-wrapper').css('opacity', 0.3);
-                            $.post($(this).attr('data-action-url'), {'photo': $(this).attr('data-photo-name')}, function(data) {
-                                $.get(window.location, function(htmlCode) {
-                                    $('fieldset#photo-wrapper').html($(htmlCode).find('fieldset#photo-wrapper').html());
-                                    $('fieldset#photo-wrapper').css('opacity', 1);
-                                    $('a.del-photo').click(aDelClick);
-                                    $('div.setMainPhoto').click(divSetMainClick);
-                                });
-                            });
-                        }
-
-                        $('a.del-photo').click(aDelClick);
-                        $('div.setMainPhoto').click(divSetMainClick);
-                    </script>
                 </div>
 
                 <div class="progress-buttons">
                     <input type="hidden" name="form" id="form-action" value="upload"/>
-                    <a id="description-form-cancel" class="btn btn-gray btn-arrow-prev left" href="#">Étape précédente</a>
-                    <a id="description-form-next" class="btn btn-blue btn-arrow-next right" href="#">Enregistrer et continuer</a>
-                    <script type="text/javascript">
-
-                        $('#description-form-cancel').click(function (event) {
-                            event.preventDefault();
-                            $('#form-action').attr('name', 'cancel');
-                            $('#description-form').submit();
-                        });
-
-                        $('#description-form-next').click(function (event) {
-                            event.preventDefault();
-                            $('#form-action').attr('name', 'next');
-                            $('#description-form').submit();
-                        });
-
-                    </script>
+                    <a id="description-form-cancel" class="btn btn-gray btn-arrow-prev left" href="/user/property/description/item/<?=$this->property->id?>">Étape précédente</a>
+                    <a id="description-form-next" class="btn btn-blue btn-arrow-next right" href="/user/property/hunted-profile/item/<?=$this->property->id?>">Enregistrer et continuer</a>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<!--
-<table border="1" width="100%">
-    <tr valign="top">
-        <td width="33%">
+<script type="text/javascript">
+    function updatePhotosList() {
+        $.get(window.location, function(htmlCode) {
+            $('fieldset#photo-wrapper').html($(htmlCode).find('fieldset#photo-wrapper').html());
+            $('fieldset#photo-wrapper').css('opacity', 1);
+            $('a.del-photo').click(aDelClick);
+            $('div.setMainPhoto').click(divSetMainClick);
+        });
+    }
 
-
-
-
-            <table border="1" width="100%">
-                <tr>
-                    <td><?= $this->translate('status') ?>: 40%</td>
-                </tr>
-                <?php $states_info = $this->property->getStatesInfo(); ?>
-                <?php foreach($states_info as $state => $info): ?>
-                <tr>
-                        <?php if ($this->current_state == $state): ?>
-                    <td style="background-color:#3cbecc;"><?= $this->translate($info['name']) ?></td>
-                        <?php elseif ($this->property->state < $state): ?>
-                    <td><?= $this->translate($info['name']) ?></td>
-                        <?php else: ?>
-                    <td><a href="/user/property/<?= $info['action'] ?>/item/<?= $this->property->id ?>"><?= $this->translate($info['name']) ?></a></td>
-                        <?php endif; ?>
-                </tr>
-                <?php endforeach; ?>
-            </table>
-
-
-
-
-        </td>
-        <td>
-            <?= $this->form_upload_photo ?>
-
-            <hr />
-
-            <?= $this->form_next_step ?>
-        </td>
-    </tr>
-</table>
--->
-<?php
-    $function = "$(function() {
-        $('.remove_photo').on('click', function(){
-            var photo = $(this).closest('li.photo_info').attr('data-photo');
-
-            $.ajax({
-                type: 'POST',
-                url: '/user/property/remove-photo/item/{$this->property->id}',
-                data: {photo: photo},
-                success: function(r) {
-                    if (!r.error) {
-                        $('li[data-photo=\"' + photo + '\"]').remove();
-
-                        if (r.main_photo.length > 0) {
-                            $('.select_photo').show();
-                            $('.selected_photo').hide();
-
-                            $('.selected_photo', 'li[data-photo=\"' + r.main_photo + '\"]').show();
-                            $('.select_photo', 'li[data-photo=\"' + r.main_photo + '\"]').hide();
-                        }
-                    }
-                },
-                dataType: 'json'
-            });
-            return false;
+    function aDelClick() {
+        $('fieldset#photo-wrapper').css('opacity', 0.3);
+        $.post($(this).attr('href'), {'photo': $(this).attr('data-photo-name')}, function(data) {
+            updatePhotosList();
         });
 
-        $('.select_photo').on('click', function(){
-            var photo = $(this).closest('li.photo_info').attr('data-photo');
+        return false;
+    }
 
-            $.ajax({
-                type: 'POST',
-                url: '/user/property/select-photo/item/{$this->property->id}',
-                data: {photo: photo},
-                success: function(r) {
-                    if (!r.error) {
-                        $('.select_photo').show();
-                        $('.selected_photo').hide();
-
-                        $('.selected_photo', 'li[data-photo=\"' + photo + '\"]').show();
-                        $('.select_photo', 'li[data-photo=\"' + photo + '\"]').hide();
-                    }
-                },
-                dataType: 'json'
-            });
-
-            return false;
+    function divSetMainClick() {
+        $('fieldset#photo-wrapper').css('opacity', 0.3);
+        $.post($(this).attr('data-action-url'), {'photo': $(this).attr('data-photo-name')}, function(data) {
+            updatePhotosList();
         });
-    });";
+    }
 
-    $this->jQuery()->addOnLoad($function);
-
-?>
+    $('a.del-photo').click(aDelClick);
+    $('div.setMainPhoto').click(divSetMainClick);
+</script>

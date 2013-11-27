@@ -1,22 +1,12 @@
-var initialRadioValues = new Array();
 $(document).ready(function(){
-    /*
-    var arrIndx = 0;
-    $('form[name="searchForm"]').find('input[type="radio"]:checked').each(function() {
-        initialRadioValues[arrIndx++] = $(this).attr('id');
-    });
-    $('form[name="searchForm"]').find('input[type="checkbox"]:checked').each(function() {
-        initialRadioValues[arrIndx++] = $(this).attr('id');
-    });
-
-    $('input.btn-tous').click(function() {
-        $(this).parent().find('input[type="radio"]:checked').prop('checked', false);
-        $(this).parent().find('input[type="checkbox"]:checked').prop('checked', false);
-        for (var i=0; i<initialRadioValues.length; i++) {
-            if ($(this).parent().find('input#'+initialRadioValues[i]).length) {
-                //$('input#'+initialRadioValues[i]).prop('checked', true);
+    if ($('ul.errors').length > 0) {
+        $('.block-grid.grid-inset').each(function() {
+            var hasErrors = $(this).find('ul.errors');
+            if (hasErrors.length > 0) {
+                $(this).css('background', "#f2c5cc url('/assets/images/btn-error.png') 98% 12px no-repeat");
+            } else {
+                $(this).css('background', "#c2eef1 url('/assets/images/icon-tick.png') 98% 12px no-repeat");
             }
-        }
-    });
-    */
+        });
+    }
 });

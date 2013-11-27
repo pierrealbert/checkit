@@ -1,0 +1,83 @@
+<div id="compte" class="compte-01">
+    <?= $this->partial('my-account/_partials/navigation.phtml') ?>
+    <div class="right" >
+        <form method="post" action="">
+            <div class="progress-content">
+                <div class="step-title">
+                    <h1>Mon profil</h1>
+                </div>
+                <div class="block-grid grid-inset">
+                    <fieldset>
+                        <?= $this->form->title ?>
+                    </fieldset>
+                    <fieldset>
+                        <?= $this->form->first_name; ?>
+
+                    </fieldset>
+                    <fieldset>
+                        <?= $this->form->last_name; ?>					
+
+                    </fieldset>
+                    <fieldset>
+                        <?= $this->form->address; ?>
+                    </fieldset>
+                    <fieldset>
+                        <div class="left" style="width: 140px;">
+                            <?= $this->form->zip; ?>
+                        </div>
+                        <div class="left">
+                            <?= $this->form->city; ?>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <?= $this->form->phone; ?>
+                    </fieldset>
+                </div>
+                <div class="step-title" style="margin-top: 40px;">
+                    <h1>Mon adresse email</h1>
+                    <span>Votre adresse email actuelle est : <span class="blue"><?= $this->currUser->email ?></span></span>
+                    <span>Vous pouvez la changer ci-dessous.</span>
+                </div>
+                <div class="block-grid grid-inset">
+                    <fieldset>
+                        <?= $this->form->new_email; ?>
+                        <span style="width: 250px;color: #b3b3b3;position: absolute;right: 20px;">Un mail de confirmation vous<br>sera envoyé afin de valider votre<br>nouvelle adresse.</span>
+                    </fieldset>
+                    <fieldset>
+                        <?= $this->form->email_current_password; ?>
+                    </fieldset>
+                </div>
+                <div class="step-title" style="margin-top: 40px;">
+                    <h1>Mon mot de passe</h1>
+                    <span>Vous pouvez changer votre mot de passe ci-dessous.</span>
+                </div>
+                <div class="block-grid grid-inset">
+                    <fieldset>
+                        <span style="width: 250px;color: #b3b3b3;position: absolute;right: 20px;">Votre mot de passe doit contenir<br>au moins 8 caractères.</span>
+                        <?= $this->form->current_password; ?>
+                    </fieldset>
+                    <fieldset>
+                        <?= $this->form->new_password; ?>
+                    </fieldset>
+                    <fieldset>
+                        <?= $this->form->confirm_password; ?>
+                    </fieldset>
+                </div>
+                <div class="step-title" style="margin-top: 40px;">
+                    <h1>Supprimer</h1>
+                </div>
+                <div class="block-grid grid-inset">
+                    <a href="#" class="black">Supprimer mon compte Ommi</a>
+                </div>
+                <div class="progress-buttons">
+                    <!--a href="#" class="btn btn-red right">Enregistrer les modifications</a-->
+                    <?= $this->form->save; ?>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<? /* = $this->form */ ?>
+<!--/div-->

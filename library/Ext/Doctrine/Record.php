@@ -14,6 +14,20 @@ abstract class Ext_Doctrine_Record extends Doctrine_Record
      */
     protected static $_currentLanguage = '';
 
+    private $_translator = null;
+
+    public function getTranslator()
+    {
+        if (null === $this->_translator) {
+            require_once 'Zend/Registry.php';
+            if (Zend_Registry::isRegistered('Zend_Translate')) {
+                $this->_translator = Zend_Registry::get('Zend_Translate');
+            } 
+        }
+
+        return $this->_translator;
+    }
+
     /**
      * Установка текущей локали
      * @param string $lang

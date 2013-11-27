@@ -1,4 +1,5 @@
 <?php if ($this->application->isAccepted()) : ?>
+
     <div class="box-txt">
         <div class="triangle-bottom"></div>
         <p>Candidature envoyée</p>
@@ -61,7 +62,34 @@
             </div>
         <?php endif; ?>
     </div>
+    <script type="text/javascript">
+        // initialize google map
+        var mapCanvas = document.getElementById('map_canvas');
+        var lat = <?= $this->application->Property->latitude ? $this->application->Property->latitude : '48.8756240000'; ?>;
+        var lng = <?= $this->application->Property->longitude ? $this->application->Property->longitude : '2.3279515000'; ?>;
+        var zoom = 16;
+        var mapOptions = {
+            center: new google.maps.LatLng(lat, lng),
+            zoom: zoom,
+            disableDefaultUI: true,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        // initialize map
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+
+        // add marker to map
+        var marker = new google.maps.Marker({
+            // need set custom icon marker
+            icon: '/assets/images/icon-carte-loc.png',
+            position: new google.maps.LatLng(lat, lng),
+            map: map,
+            title: '<?= $this->application->Property->title ?>'
+        });
+
+    </script>
+
 <? elseif ($this->application->isDeclined()) : ?>
+
     <div class="box-txt">
         <div class="triangle-bottom"></div>
         <p>Candidature envoyée</p>
@@ -84,7 +112,9 @@
             <a class="btn btn-red" href="#">Découvrir nos comptes +</a>
         </div>
     </div>
+
 <? elseif ($this->application->isRead()) : ?>
+
     <div class="box-txt">
         <p>Candidature envoyée</p>
         <div>Lue</div>
@@ -94,29 +124,5 @@
         <p>Candidature envoyée</p>
         <div>Non Lue</div>
     </div>
+
 <? endif ?>
-
-<script type="text/javascript">
-    // initialize google map
-    var mapCanvas = document.getElementById('map_canvas');
-    var lat = <?= $this->application->Property->latitude ? $this->application->Property->latitude : '48.8756240000'; ?>;
-    var lng = <?= $this->application->Property->longitude ? $this->application->Property->longitude : '2.3279515000'; ?>;
-    var zoom = 16;
-    var mapOptions = {
-        center: new google.maps.LatLng(lat, lng),
-        zoom: zoom,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    // initialize map
-    var map = new google.maps.Map(mapCanvas, mapOptions);
-
-    // add marker to map
-    var marker = new google.maps.Marker({
-        // need set custom icon marker
-        /*icon: '',*/
-        position: new google.maps.LatLng(lat, lng),
-        map: map,
-        title: '<?= $this->application->Property->title ?>'
-    });
-
-</script>

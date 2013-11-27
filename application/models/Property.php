@@ -51,6 +51,12 @@ class Model_Property extends Model_Base_Property
             self::TYPE_AUTRE            => 'Autre',
         );
     }
+    
+    public function getType()
+    {
+        $types = $this->getTypes();
+        return $types[$this->property_type];     
+    }
 
     static public function getPlanningOptions()
     {
@@ -109,19 +115,54 @@ class Model_Property extends Model_Base_Property
         );
     }
 
+    public function getAcceptedAppsCount()
+    {
+        $table = Model_PropertyApplicationTable::getInstance();
+        return $table->createQuery()
+            ->andWhere('pa.property_id=?', $this->id)
+            ->andWhere('pa.is_declined=?', 0)
+            ->andWhere('pa.is_accepted=?', 1)
+            ->execute()
+            ->count();
+    }
+
+    public function getDeclinedAppsCount()
+    {
+        $table = Model_PropertyApplicationTable::getInstance();
+        return $table->createQuery()
+            ->andWhere('pa.property_id=?', $this->id)
+            ->andWhere('pa.is_declined=?', 1)
+            ->andWhere('pa.is_accepted=?', 0)
+            ->execute()
+            ->count();
+    }
+   
+    public function getApplicationsCount()
+    {
+        $table = Model_PropertyApplicationTable::getInstance();
+        return $table->createQuery()
+                ->andWhere('property_id = ?', $this->id)
+                ->count();
+    }
+        
+    
     protected function _assignCoordinates()
     {
         if (!$this->address or !$this->city) {
             return;
         }
-            $googleMaps = new Ext_Service_GoogleMaps();
-            $coordinates = $googleMaps->addressToCoordinates(array('street' => $this->address,
-                                                                   'city' => $this->city,
-                                                                   'postal_code' => $this->postcode,
-                                                                   'state' => ''));
-            if ($coordinates) {
-                $this->longitude = $coordinates['lng'];
-                $this->latitude = $coordinates['lat'];
+            try {
+                $googleMaps = new Ext_Service_GoogleMaps();
+                $coordinates = $googleMaps->addressToCoordinates(array('street' => $this->address,
+                                                                       'city' => $this->city,
+                                                                       'postal_code' => $this->postcode,
+                                                                       'state' => ''));
+                if ($coordinates) {
+                    $this->longitude = $coordinates['lng'];
+                    $this->latitude = $coordinates['lat'];
+                }
+            } catch (Exception $e) {
+                return;
             }
     }
 

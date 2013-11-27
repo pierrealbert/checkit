@@ -1,0 +1,328 @@
+<div class="grid" id="publier">
+    <div class="left">
+        <div class="progress">
+            <h2 class="gray">Étapes</h2>
+            <div class="progress-step" id="step-0"></div>
+            <span>4 étapes restantes</span>
+        </div>
+        <div class="menu">
+            <a href="#" class="btn btn-blue  progress-menu-active">1  Infos personnelles</a>
+            <a href="#" class="btn btn-gray">2  Garants</a>
+            <a href="#" class="btn btn-gray">3  Vérification</a>
+            <a href="#" class="btn btn-gray">4  Pièces de dossier</a>
+        </div>
+    </div>
+    <div class="right">
+        <div class="progress-content" id="content-step-2">
+            <div class="step-title">
+                <h1>Informations personnelles</h1>
+            </div>
+            <form id="infos-form" method="POST" action="" enctype="multipart/form-data">
+                <!--Phone-->
+                <div class="block-grid grid-inset">
+                    <fieldset>
+                            <?= $this->form->phone ?>
+                    </fieldset>
+                    <div style="margin-top: 10px;">
+                        <span class="gray">Votre numéro de téléphone est important pour organiser vos visites.</span></br>
+                        <span class="blue">Soyez rassuré, il n’est envoyé qu’aux candidats que vous acceptez.</span>
+                    </div>
+                </div>
+                <!--//Phone-->
+
+                <div class="step-title">
+                    <span class="blue">Les informations suivantes sont essentielles et donc obligatoires.</span>
+                    <span>Si il y a plusieurs personnes rattachés à ce dossier, pensez à compléter chaque profil.</span>
+                </div>
+
+                <!-- Rent type radio -->
+                <?php if (!empty($this->availableTypes)) : ?>
+                <div class="block-grid grid-inset">
+                    <fieldset>
+                        <label>Vous souhaitez candidater <em class="red">(obligatoire)</em></label>
+                        <?php
+                            foreach ($this->availableTypes as $type) :
+                                $selectedType = (!empty($this->selectedType)) ? $this->selectedType : Model_UserResident::RENT_TYPE_SINGLE;
+                                $checked = ($type === $selectedType) ? 'checked="checked"' : '';
+                        ?>
+                        <input type="radio" value="<?= $type ?>" id="rent_type-<?= $type ?>" class="input-pretty" name="rent_type" <?= $checked ?> />
+                        <label class="btn-input-lite" for="rent_type-<?= $type ?>"><?= $type ?></label>
+                    <?php endforeach;?>
+                    </fieldset>
+
+                    <!-- Rent type roommate count select -->
+                    <fieldset id="roommate-count-wrapper" style="display:none;">
+                        <label for="roommate-count">Membres de la colocations <em class="red">(obligatoire)</em></label>
+                        <select name="roommate-count" id="roommate-count">
+                            <?php for ($i = 1; $i < $this->roommateMaxCount; $i++):
+                                $selected = ($i === $this->count - 1) ? 'selected="selected"' : '';?>
+                                <option value="<?= $i + 1;?>" <?= $selected;?>>Moi + <?= $i;?> colocataires</option>
+                            <?php endfor;?>
+                        </select>
+                    </fieldset>
+                </div>
+                <?php endif;?>
+
+                <div id="form-container">
+                    <?php $subForms = $this->form->getSubForms() ?>
+                    <?php foreach ($subForms as $subForm): ?>
+                        <div id="form-wrapper" class="block-grid grid-dark">
+                            <!--Form header-->
+                            <?php
+                                $formId = $subForm->getId();
+                                $formId = substr($formId, 7);
+
+                                switch ($formId) {
+                                    case 1:
+                                        $header = $this->translate('Moi');
+                                        break;
+                                    case 2:
+                                        if ($this->count == 2) {
+                                            $header = $this->translate('Mon conjoint');
+                                        } else {
+                                            $header = $this->translate('Colocataire') . ' '. ($formId - 1);
+                                        }
+                                        break;
+                                    default:
+                                        $header = $this->translate('Colocataire') . ' '. ($formId - 1);
+                                }
+                            ?>
+                            <h3 class="white"><?= $header ?></h3>
+
+                            <div id="form-section">
+                                <div class="block-grid grid-inset">
+                                    <?= $subForm->id ?>
+                                    <fieldset>
+                                        <?= $subForm->resident_type ?>
+                                    </fieldset>
+                                    <fieldset id="resident_name" style="display:none;">
+                                        <?= $subForm->resident_name ?>
+                                    </fieldset>
+                                </div>
+
+                                <div class="block-grid grid-inset" style="display: none;">
+                                    <fieldset>
+                                        <?= $subForm->job_title ?>
+                                    </fieldset>
+                                </div>
+
+                                <div class="block-grid grid-inset" style="display: none;">
+                                    <fieldset>
+                                        <?= $subForm->employee_type ?>
+                                    </fieldset>
+                                </div>
+
+                                <div class="block-grid grid-inset" style="display: none;">
+                                    <fieldset>
+                                        <?= $subForm->monthly_income ?>
+                                    </fieldset>
+                                </div>
+
+                                <div class="block-grid grid-inset" style="display: none;">
+                                    <fieldset>
+                                        <?= $subForm->monthly_income_guaranteed ?>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+
+                <div class="progress-buttons">
+                    <!--<a href="#" class="btn btn-medium btn-gray btn-arrow-prev left">Étape précédente</a>-->
+                    <button class="btn btn-medium btn-blue btn-arrow-next right" type="submit">Enregistrer et continuer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var formWrapper = $("#form-container"),
+            countSelect = $("#roommate-count"),
+            roommateType = "<?= Model_UserResident::RENT_TYPE_ROOMMATE ?>",
+            baseUrlForm = "/user/my-files/ajax-infos-form-reload/type/",
+            residentTypeSelects = $("input[type=radio].resident-type"),
+            rentType = $("input[name=rent_type]");
+
+        updateForm = function(url) {
+            $.ajax({
+                type: "post",
+                url: url
+            }).done(function(data) {
+                    formWrapper.empty().append(data);
+                    residentTypeSelects = $("input[type=radio].resident-type");
+                    residentTypeSelects.trigger("change");
+                }).fail(function(data) {
+                    if( console && console.log ) {
+                        console.log("Something is wrong");
+                    }
+                });
+        };
+
+        /* Residents count select handler for roommate rent type */
+        countSelect.on("change", function() {
+            var url = baseUrlForm + roommateType + "/count/" + countSelect.val();
+            updateForm(url);
+        });
+
+        /* Rent type change handler */
+        rentType.on("click", function() {
+            var type = this.value,
+                url = baseUrlForm + type;
+            $("#rent_type").val(type);
+            if (type == roommateType) {
+                url += "/count/" + countSelect.val();
+            }
+            updateForm(url);
+        }).on("change", function() {
+                var roommate = $("input[name=rent_type][value=roommate]"),
+                    container = $("#roommate-count-wrapper");
+                if( $(roommate).is(":checked") ) {
+                    container.show();
+                } else {
+                    container.slideUp();
+                }
+            });
+
+        /* Resident type change handler */
+        formWrapper.on("click", "input[type=radio].resident-type",  function() {
+            var root = $(this).closest("#form-section"),
+                employeeType = root.find("input[type=radio].employee-type"),
+                employeeTypeContainer = employeeType.closest(".block-grid"),
+                hideElemEmployeeType = function() {
+                    employeeTypeContainer.hide();
+                },
+                showElemEmployeeType = function() {
+                    employeeTypeContainer.slideDown();
+                },
+
+                jobTitle = root.find("input.job-title"),
+                jobTitleContainer = jobTitle.closest(".block-grid"),
+                hideElemJobTitle = function() {
+                    jobTitleContainer.hide();
+                },
+                showElemJobTitle = function() {
+                    jobTitleContainer.slideDown();
+                },
+
+                monthlyIncome = root.find("input.monthly-income"),
+                monthlyIncomeContainer = monthlyIncome.closest(".block-grid"),
+                hideElemMonthlyIncome = function() {
+                    monthlyIncomeContainer.hide();
+                },
+                showElemMonthlyIncome = function() {
+                    monthlyIncomeContainer.slideDown();
+                },
+
+                residentName = root.find("input.resident_name"),
+                residentNameContainer = residentName.closest("fieldset"),
+                hideElemResidentName = function() {
+                    residentNameContainer.hide();
+                },
+                showElemResidentName = function() {
+                    residentNameContainer.slideDown();
+                }
+
+            if ($(this).val() === "<?= Model_UserResident::TYPE_STUDENT ?>") {
+                hideElemEmployeeType();
+                hideElemJobTitle();
+                hideElemResidentName();
+                showElemMonthlyIncome();
+            } else if ($(this).val() === "<?= Model_UserResident::TYPE_EMPLOYEE ?>") {
+                showElemJobTitle();
+                showElemEmployeeType();
+                hideElemResidentName();
+                showElemMonthlyIncome();
+            } else if ($(this).val() === "<?= Model_UserResident::TYPE_INDEPENDENT ?>") {
+                hideElemEmployeeType();
+                showElemJobTitle();
+                hideElemResidentName();
+                showElemMonthlyIncome();
+            } else if ($(this).val() === "<?= Model_UserResident::TYPE_OTHER ?>") {
+                hideElemEmployeeType();
+                showElemJobTitle();
+                showElemResidentName();
+                showElemMonthlyIncome();
+            } else {
+                hideElemEmployeeType();
+                hideElemJobTitle();
+                hideElemResidentName();
+                hideElemMonthlyIncome();
+            }
+        });
+
+        rentType.trigger("change");
+        residentTypeSelects.trigger("change");
+
+        // form ajax submit handler
+        $("#infos-form").submit(function(){
+            $.ajax({
+                url: '/user/my-files/ajax-infos-form-submit/',
+                type: 'POST',
+                dataType: 'json',
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.status == 'success') {
+                        alert(response.message);
+                        window.location = "/user/my-files/garants/";
+                    } else {
+                        // show error messages
+                        viewMessages(response.data);
+                    }
+                },
+                error: function(response) {
+                    console.log('Error');
+                    console.log(response);
+                }
+            });
+            return false;
+        });
+
+        // check value of form field
+        $("#infos-form").delegate('input', 'change',function(){
+            if ($(this).val() != '') {
+                $(this).closest(".block-grid").attr('id', 'accept-block');
+                $(this).closest("fieldset").find(".errors").remove();
+            }
+        });
+
+
+        function viewMessages(errors) {
+            for(var k in errors) {
+                if (k == 'member') {
+                    var member = errors[k];
+                    for(var key in member) {
+                        var memberErrors = member[key];
+                        for(var e in memberErrors) {
+                            var elem = $('#infos-form').find($("input[name='member["+key+"]["+e+"]']"));
+                            elem.closest(".block-grid").attr('id', 'error-block');
+                            var messageTxt;
+                            var txt = '';
+                            for (var t in memberErrors[e]) {
+                                txt += "<li>"+memberErrors[e][t]+"</li>";
+                            }
+                            messageTxt = "<ul class='errors'>"+txt+"</ul>";
+                            elem.closest("fieldset").append(messageTxt);
+                        }
+                    }
+                } else {
+                    var elem = $('#infos-form').find($("input[name="+k+"]"));
+                    elem.closest(".block-grid").attr('id', 'error-block');
+                    var messageTxt;
+                    var txt = '';
+                    for (var t in errors[k]) {
+                        txt += "<li>"+errors[k][t]+"</li>";
+                    }
+                    messageTxt = "<ul class='errors'>"+txt+"</ul>";
+                    if (elem.closest("fiedset").has(".errors")) {
+                        elem.closest("fieldset").find(".errors").remove();
+                    }
+                    elem.closest("fieldset").append(messageTxt);
+
+                }
+            }
+        }
+
+    });
+</script>

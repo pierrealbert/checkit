@@ -1,0 +1,241 @@
+<div class="grid" id="publier">
+    <div class="left">
+        <div class="progress">
+            <h2 class="gray">Étapes</h2>
+
+            <div class="progress-step" id="step-75"></div>
+            <span>1 étapes restantes</span>
+        </div>
+        <div class="menu">
+            <a href="#" class="btn btn-gray">1 Infos personnelles</a>
+            <a href="#" class="btn btn-gray">2 Garants</a>
+            <a href="#" class="btn btn-gray">3 Vérification</a>
+            <a href="#" class="btn btn-blue progress-menu-active">4 Pièces de dossier</a>
+        </div>
+    </div>
+    <div class="right">
+        <div class="progress-content" id="content-step-2">
+            <div class="step-title">
+                <h1>Pièces de dossier</h1>
+                <span class="blue" style="float: left;">Pour candidater sur OMMI, vous devez fournir des pièces justificatives. Seuls les</br>
+                    propriétaires auprès desquels vous candidaterez pourront les consulter sur le site.</span>
+                <a href="#" class="red" style="float: right;">Aide?</a>
+            </div>
+            <form id="documents-form" method="POST" action="" enctype="multipart/form-data">
+                <?php if ($this->residents->count()): ?>
+                    <?php
+                    $residentsCount = $this->residents->count();
+                    $key = 1;
+                    /** @var $resident Model_UserResident */
+                    ?>
+                    <?php foreach ($this->residents as $resident): ?>
+                        <div class="block-grid grid-dark">
+                            <?php
+                            // Residents Zone
+                            if ($resident->is_primary) {
+                                $header = $this->translate('Moi');
+                            } elseif ($resident->rent_type == Model_UserResident::RENT_TYPE_COUPLE) {
+                                $header = $this->translate('Mon conjoint');
+                            } else {
+                                $header = $this->translate('Colocataire') . ' '. ($key - 1);
+                            }
+                            ?>
+                            <h3><?= $header ?></h3>
+                            <h5>Vous avez indiqué que vous êtes <span class="blue">salarié : <?= $resident->monthly_income ?>€ /mois</span></h5>
+
+                            <div class="block-grid grid-inset">
+                                <fieldset>
+                                    <label>Pièce d’identité <em class="red">(obligatoire)</em></label>
+
+                                    <div class="upload-files-dossier">
+                                        <a href="" class="btn btn-red" id="upload-file-btn">Sélectionner un fichier</br>sur
+                                            mon ordinateur</a>
+                                        <span class="separator">ou</span>
+
+                                        <div class="upload-area">Glisser et déposer un fichier ici</br>pour le télécharger
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <p class="gray">Carte d’identité, Passeport ou Titre de séjour.</p>
+                            </div>
+
+                            <div class="block-grid grid-inset">
+                                <fieldset>
+                                    <label>Contrat de travail</label>
+
+                                    <div class="upload-files-dossier">
+                                        <a href="" class="btn btn-red" id="upload-file-btn">Sélectionner un fichier</br>sur
+                                            mon ordinateur</a>
+                                        <span class="separator">ou</span>
+
+                                        <div class="upload-area">Glisser et déposer un fichier ici</br>pour le télécharger
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <div class="block-grid grid-inset">
+                                <fieldset>
+                                    <label>Curriculum Vitae <em class="blue">(conseillé)</em></label>
+
+                                    <div class="upload-files-dossier">
+                                        <a href="" class="btn btn-red" id="upload-file-btn">Sélectionner un fichier</br>sur
+                                            mon ordinateur</a>
+                                        <span class="separator">ou</span>
+
+                                        <div class="upload-area">Glisser et déposer un fichier ici</br>pour le télécharger
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <div class="block-grid grid-inset">
+                                <fieldset>
+                                    <label>Justificatif de revenu <em class="red">(obligatoire)</em></label>
+
+                                    <div>
+                                        <input type="checkbox" class="input-pretty" id="demo1" name="demo1" checked>
+                                        <label for="demo1" class="btn-input-lite">Bulletins de salaire</label>
+                                        <input type="checkbox" class="input-pretty" id="demo2" name="demo2">
+                                        <label for="demo2" class="btn-input-lite">Avis d'imposition</label>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <div class="block-grid grid-inset">
+                                <fieldset>
+                                    <label>Bulletin de salaire 1 <em class="red">(obligatoire)</em></label>
+
+                                    <div class="upload-files-dossier">
+                                        <a href="" class="btn btn-red" id="upload-file-btn">Sélectionner un fichier</br>sur
+                                            mon ordinateur</a>
+                                        <span class="separator">ou</span>
+
+                                        <div class="upload-area">Glisser et déposer un fichier ici</br>pour le télécharger
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <div class="block-grid grid-inset">
+                                <fieldset>
+                                    <label>Bulletin de salaire 2 <em class="red">(obligatoire)</em></label>
+
+                                    <div class="upload-files-dossier">
+                                        <a href="" class="btn btn-red" id="upload-file-btn">Sélectionner un fichier</br>sur
+                                            mon ordinateur</a>
+                                        <span class="separator">ou</span>
+
+                                        <div class="upload-area">Glisser et déposer un fichier ici</br>pour le télécharger
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <div class="block-grid grid-inset">
+                                <fieldset>
+                                    <label>Bulletin de salaire 3 <em class="blue">(conseillé)</em></label>
+
+                                    <div class="upload-files-dossier">
+                                        <a href="" class="btn btn-red" id="upload-file-btn">Sélectionner un fichier</br>sur
+                                            mon ordinateur</a>
+                                        <span class="separator">ou</span>
+
+                                        <div class="upload-area">Glisser et déposer un fichier ici</br>pour le télécharger
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <?php
+                            // Garants Zone
+                            $garants = $resident->getGarants();
+                            $garantNum = 1;
+                            /** @var $garant Model_UserResidentGarant */
+                            ?>
+                            <?php foreach ($garants as $garant): ?>
+                                <h4>Garant <?= $garantNum ?></h4>
+                                <h5 class="blue"><?= $this->translate($garant->type) ?> : <?= $garant->amount ?>€ /mois</h5>
+                                <?php
+                                // if garants employer type
+                                if ($garant->type == Model_UserResidentGarant::EMPLOYER) { ?>
+                                    <div class="block-grid grid-inset">
+                                        <fieldset>
+                                            <label>Justificatif <em class="red">(obligatoire)</em></label>
+                                            <div class="upload-files-dossier">
+                                                <a href="" class="btn btn-red" id="upload-file-btn">Sélectionner un fichier</br>sur mon ordinateur</a>
+                                                <span class="separator">ou</span>
+                                                <div class="upload-area">Glisser et déposer un fichier ici</br>pour le télécharger</div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                <?php } else { ?>
+                                    <div class="block-grid grid-inset" id="accept-block">
+                                        <fieldset>
+                                            <label>Justificatif de revenu <em class="red">(obligatoire)</em></label>
+                                            <div>
+                                                <input type="checkbox" class="input-pretty" id="demo1" name="demo1" checked>
+                                                <label for="demo1" class="btn-input-lite">Bulletins de salaire</label>
+                                                <input type="checkbox" class="input-pretty" id="demo2" name="demo2">
+                                                <label for="demo2" class="btn-input-lite">Avis d'imposition</label>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+                                    <div class="block-grid grid-inset" id="accept-block">
+                                        <fieldset>
+                                            <label>Bulletin de salaire 1 <em class="red">(obligatoire)</em></label>
+                                            <div class="uploaded-files-dossier">
+                                                <div class="uploaded-file">
+                                                    <div class="uploaded-file-info">
+                                                        <span class="uploaded-file-info-title">Fichier actuel :</span>
+                                                        <span class="uploaded-file-info-filename">FileName.format</span>
+                                                    </div>
+                                                    <div class="uploaded-file-controlls">
+                                                        <a href="#" class="btn btn-medium btn-gray btn-refresh">Modifier</a>
+                                                        <a href="#" class="btn btn-medium btn-red btn-delete">Supprimer</a>
+                                                    </div>
+                                                </div>
+                                                <a href="#" class="black">Ajouter une page à ce document</a>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+                                    <div class="block-grid grid-inset">
+                                        <fieldset>
+                                            <label>Bulletin de salaire 2 <em class="red">(obligatoire)</em></label>
+                                            <div class="upload-files-dossier">
+                                                <a href="" class="btn btn-red" id="upload-file-btn">Sélectionner un fichier</br>sur mon ordinateur</a>
+                                                <span class="separator">ou</span>
+                                                <div class="upload-area">Glisser et déposer un fichier ici</br>pour le télécharger</div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+                                    <div class="block-grid grid-inset">
+                                        <fieldset>
+                                            <label>Bulletin de salaire 3 <em class="blue">(conseillé)</em></label>
+                                            <div class="upload-files-dossier">
+                                                <a href="" class="btn btn-red" id="upload-file-btn">Sélectionner un fichier</br>sur mon ordinateur</a>
+                                                <span class="separator">ou</span>
+                                                <div class="upload-area">Glisser et déposer un fichier ici</br>pour le télécharger</div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                <?php } ?>
+                                <?php $garantNum++; ?>
+                            <?php endforeach; ?>
+                            <a href="#" class="btn btn-medium btn-gray btn-plus">Ajouter un document</a>
+                        </div>
+                        <?php $key++; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </form>
+
+            <div class="progress-buttons">
+                <a href="/user/my-files/verification/" class="btn btn-medium btn-gray btn-arrow-prev left">Étape
+                    précédente</a>
+                <a href="#" class="btn btn-medium btn-blue btn-arrow-next right">Enregistrer et continuer</a>
+            </div>
+        </div>
+    </div>
+</div>

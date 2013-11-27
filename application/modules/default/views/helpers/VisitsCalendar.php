@@ -7,11 +7,15 @@
 class View_Helper_VisitsCalendar extends Zend_View_Helper_Abstract
 {
 
-    public function visitsCalendar(Doctrine_Collection $visits)
+    public function visitsCalendar(Doctrine_Collection $visitsCollection, $property)
     {
-        $visitsIndex = $visits->toKeyValueArray('availability', 'visitors');
-        $from = new DateTime(($visit = $visits->getFirst()) ? $visit->availability : null);
-        $to = new DateTime(($visit = $visits->getLast()) ? $visit->availability : null);
+		$visitsIndex = array();
+		foreach ($visitsCollection as $visit) {
+			$visitsIndex[ $visit->availability ] = array('id' => $visit->id, 'visitors' => $visit->visitors);
+		} unset($visit);
+
+        $from = new DateTime(($visit = $visitsCollection->getFirst()) ? $visit->availability : null);
+        $to = new DateTime(($visit = $visitsCollection->getLast()) ? $visit->availability : null);
 
         // go to the first day of month
         $from->modify('-'.($from->format('d') - 1).' days');
@@ -28,6 +32,7 @@ class View_Helper_VisitsCalendar extends Zend_View_Helper_Abstract
         }
 
         return $this->view->partial('_partials/helpers/visits-calendar.phtml', array(
+			'property' => $property,
             'months' => $months,
             'hasAnyVisits' => $hasAnyVisits,
         ));
@@ -49,20 +54,24 @@ class View_Helper_VisitsCalendar extends Zend_View_Helper_Abstract
         $iteration = 0;
         $step = 0;
         while (1) {
-            $day = $monthStartDate->format('j');
             $dateStr = $monthStartDate->format('Y-m-d');
             $monthIndex = $monthStartDate->format('n');
             $isCurMonth = $output['index'] == $monthIndex;
             $hasVisits = $isCurMonth && !empty($visitsIndex[$dateStr]);
-            $isToday = $isCurMonth && $dateStr == $today;
-            $output['days'][] = array(
-                'isCurMonth' => $isCurMonth,
-                'hasVisits' => $hasVisits,
-                'isToday' => $isToday,
-                'day' => $day,
-            );
+            $day = array('day' => $monthStartDate->format('j'));
+			if (!$isCurMonth) {
+				$day['isOtherMonth'] = true;
+			}
+			if ($isCurMonth && $dateStr == $today) {
+				$day['isToday'] = true;
+			}
+			if ($hasVisits) {
+				$day['id'] = $visitsIndex[$dateStr]['id'];
+				$day['hasVisits'] = true;
+			}
+			$output['days'][] = $day;
             if ($hasVisits) {
-                $output['visits'][] = array_combine(
+                $output['visits'][] = array('id' => $visitsIndex[$dateStr]['id']) + array_combine(
                     array('weekDay', 'day', 'month', 'year'),
                     explode('-', $monthStartDate->format('N-d-n-Y'))
                 );

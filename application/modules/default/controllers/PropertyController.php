@@ -40,6 +40,8 @@ class PropertyController extends Zend_Controller_Action
             $this->_helper->redirector('index', 'index');
         }
 
+        $this->_updateViews($property);
+        
         //get all subjects from db
         $subjects = Doctrine::getTable('Model_PropertyIssueSubject')->findAll();
         //form for sending issue to admin
@@ -80,7 +82,24 @@ class PropertyController extends Zend_Controller_Action
         $this->view->similarProperties  = $property->getSimilar(2);
         $this->view->google_api_key     = $options['apiKey'];
     }
-
+    
+    private function _updateViews(Model_Property $property)
+    {
+        $viewed = $this->getRequest()->getCookie('viewedProperties'); 
+        $viewed = unserialize($viewed);
+        if (!is_array($viewed)) {
+            $viewed = array();
+        }
+        
+        if (!in_array($property->id, $viewed)) {
+            $property->views = $property->views + 1;
+            $property->save();
+            $viewed[] = $property->id;
+        }
+        
+        setcookie('viewedProperties', serialize($viewed), time() + 365 * 24 * 3600, '/');
+    }
+    
     private static function getPreviousAndNext($currentId) 
     {
         $result = array(
@@ -228,7 +247,21 @@ class PropertyController extends Zend_Controller_Action
         echo Zend_Json::encode($returnData);
         $this->_helper->viewRenderer->setNoRender(true);         
     }
-  
+
+    protected function _checkTime($timeStr) {
+        $tmp = explode(':', $timeStr);
+        if (count($tmp) != 3) return false;
+
+        $tmp = array_map('intval', $tmp);
+        if ($tmp[0] < 0 || $tmp[0] > 23) return false;
+        if ($tmp[1] < 0 || $tmp[1] > 59) return false;
+        if ($tmp[2] < 0 || $tmp[2] > 59) return false;
+
+        return ($tmp[0] < 10 ? '0'.$tmp[0] : $tmp[0]).':'.
+               ($tmp[1] < 10 ? '0'.$tmp[1] : $tmp[1]).':'.
+               ($tmp[2] < 10 ? '0'.$tmp[2] : $tmp[2]);
+    }
+
     public function ajaxApplyAction()
     {
         $currUserId = Zend_Auth::getInstance()->getIdentity();
@@ -237,6 +270,7 @@ class PropertyController extends Zend_Controller_Action
         $successMessage = ''; // if not null will be printed instead of form
         $applyForm = '';
         $propertyId = $this->_getParam('item');
+		$visitId = $this->_getParam('visit-id');
         $property = Model_PropertyTable::getInstance()->find($propertyId);
 
         if ($property and $property->is_published) {
@@ -244,27 +278,46 @@ class PropertyController extends Zend_Controller_Action
                 ->where('pvd.property_id = ?', $propertyId)
                 ->orderBy('pvd.availability ASC')
                 ->execute();
-            
+
             $applications = Model_PropertyApplicationTable::getInstance()->createQuery('app')
                 ->where('app.visitor_id = ?', $currUserId)
                 ->andWhereIn('app.property_visit_date_id', array_map(create_function('$visitDate', 'return $visitDate->id;'), $propertyVisitDates->getData()))
                 ->execute();
-            
-            if ($applications->count() == 0) {
-                $applyForm = new Form_Apply(array('propertyVisitDates' => $propertyVisitDates, 'propertyId' => $propertyId));
-                
-                if ($this->getRequest()->isPost() and $post = $this->getRequest()->getPost() and $applyForm->isValid($post)) {
+
+            $applyForm = new Form_Apply(array(
+                'propertyVisitDates' => $propertyVisitDates,
+                'propertyId' => $propertyId,
+                'checked' => $visitId,
+            ));
+
+            if ($this->getRequest()->isPost() and $post = $this->getRequest()->getPost() and $applyForm->isValid($post)) {
+                $visitTimeBegin = $this->_checkTime($applyForm->getValue('visit_time_begin'));
+                $visitTimeEnd = $this->_checkTime($applyForm->getValue('visit_time_end'));
+
+                if ($visitTimeBegin !== false && $visitTimeEnd !== false) {
+                    if ($visitTimeEnd < $visitTimeBegin) {
+                        $tmp            = $visitTimeBegin;
+                        $visitTimeBegin = $visitTimeEnd;
+                        $visitTimeEnd   = $tmp;
+                    }
+
                     $propertyApplication = new Model_PropertyApplication();
                     $propertyApplication->property_visit_date_id = $applyForm->getValue('property_visit_date_id');
                     $propertyApplication->visitor_id = $currUserId;
+                    $propertyApplication->property_id = $propertyId;
+                    $propertyApplication->visit_time = $visitTimeBegin;
+                    $propertyApplication->visit_time_end = $visitTimeEnd;
                     $propertyApplication->save();
+
                     $successMessage = 'application_sent';
                 } else {
-                    // Do nothing. If errorMessage and successMessage are empty,
-                    // then will be print the form with marked wrong fields
+                    $errorMessage = 'invalid_data';
+
+                    $applyForm->getElement('visit_time_end')->setValue('--');
+                    $applyForm->getElement('visit_time_begin')->setValue('--');
                 }
             } else {
-                $errorMessage = 'already_applied';
+                //$errorMessage = 'already_applied';
             }
         } else {
             $errorMessage = $this->translator->translate('property_not_existed_or_inactive');

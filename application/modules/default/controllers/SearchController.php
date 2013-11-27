@@ -216,100 +216,158 @@ class SearchController extends Zend_Controller_Action
         $this->view->form = $form;
     }
 
-    public function updatesearchAction(){
+    public function updatesearchAction()
+	{
         $searchId = $this->getRequest()->getParam('search_id');
+        $from = $this->getRequest()->getParam('from');
         $search = Model_SearchTable::getInstance()->find($searchId);
         if (!$search or $search->user_id != Zend_Auth::getInstance()->getIdentity()) {
             $searchId = false;
         }
 
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
-        $form = new Form_SearchResults();
+        if ($from != 'results') {
+            $form = new Form_SearchStandard();
+            $form->setAction($this->view->url(array(
+                'controller' => 'search',
+                'action'     => 'updatesearch'
+            ), null, true));
 
-        if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
-            $values = $form->getValues();
-
-            // alter availability value if user selected now or all
-            if ($values['availability_select'] == '' && trim($values['availability']) == '') {
-                unset($values['availability']);
-            } elseif ($values['availability_select'] == 'now') {
-                $values['availability'] = Zend_Date::now()->toString('YYYY-MM-dd');
-            }
-
-            if (isset($values['availability']) && trim($values['availability']) != '') {
-                $availabilityTime = strtotime($values['availability']);
-                if ($availabilityTime === false) {
-                    unset($values['availability']);
-                } else {
-                    $values['availability'] = date('Y-m-d', $availabilityTime);
+            $data = @unserialize($search->conditions);
+            if ($data !== false) {
+                $form_data = array();
+                foreach ($data as $field => $value) {
+                    if (is_array($value)) {
+                        if (isset($value['value'])) {
+                            $form_data[$field] = $value['value'];
+                        } else {
+                            $form_data[$field] = array();
+                            foreach ($value as $indx => $subField) {
+                                if (isset($subField['value'])) {
+                                    if (isset($subField['sign']) && $subField['sign'] != '=') {
+                                        $sign = trim($subField['sign']);
+                                    } else {
+                                        $sign = '';
+                                    }
+                                    $form_data[$field][] = $sign.$subField['value'];
+                                }
+                            }
+                        }
+                    } else {
+                        $form_data[$field] = $value;
+                    }
                 }
-            } else {
-                unset($values['availability']);
-            }
-            unset ($values['availability_select']);
 
-            // convert date format of availability value and add comparison sign
-            try {
-                if (!empty($values['availability'])) {
-                    //$zendDate = new Zend_Date($values['availability'], 'dd MMMM, yyyy');
-                    $zendDate = new Zend_Date($values['availability'], 'YYYY-MM-dd');
-                    $values['availability'] = array('value' => $zendDate->toString('YYYY-MM-dd'),
-                        'sign' => '<=',);
+                if ($searchId) {
+                    $form_data['search_id'] = $searchId;
                 }
-            } catch (Exception $e) {
-                unset($values['availability']);
+                $form->populate($form_data);
             }
-
-            if (isset($values['rent_period']) && $values['rent_period'] != '') {
-                if ('long' == $values['rent_period']) {
-                    $values['lease_duration'] = '>2';
-                } else {
-                    $values['lease_duration'] = '<=2';
-                }
-            }
-            unset($values['rent_period']);
-
-            if (!$values['metro_station_id'] and $values['metro_line_id']) {
-                $values['metro_station_id'] = array();
-                foreach (Model_MetroStationTable::getInstance()->findByMetroLineId($values['metro_line_id']) as $station) {
-                    $values['metro_station_id'][] = $station->id;
-                }
-                if (count($values['metro_station_id']) == 0) {
-                    $values['metro_station_id'][] = -1;
-                }
-            }
-
-            if (isset($values['metro_station_id']) && !is_array($values['metro_station_id'])) {
-                $values['metro_station_id'] = array($values['metro_station_id']);
-            }
-
-            if (empty($values['distance'])) {
-                $values['distance'] = 0.5;
-            }
-
-            $metro_stations = $values['metro_station_id'];
-
-            $values = $this->_processCommonData($form, $values);
-
-            $values['PropertyXMetroStation.distance'] = array(
-                'value' => $values['distance'],
-                'sign' => '<'
-            );
-            $values['PropertyXMetroStation.metro_station_id'] = array('value' => $metro_stations);
-            unset($values['metro_station_id']);
-            unset($values['metro_line_id']);
-            unset($values['distance']);
-
-            if ($searchId === false) {
-                $search = new Model_Search;
-                $search->search_type = 'standart';
-                $search->user_id = Zend_Auth::getInstance()->getIdentity();
-            }
-            $search->conditions = serialize($values);
-            $search->save();
-
-            $this->_helper->redirector->gotoSimple('results', 'search', 'default', array('search_id' => $search->id));
+        } else {
+            $form = new Form_SearchResults();
         }
+
+        if ($this->getRequest()->isPost()) {
+			if ($form->isValid($this->getRequest()->getPost())) {
+				$values = $form->getValues();
+                unset($values['search_id']);
+				// alter availability value if user selected now or all
+				if ($values['availability_select'] == '' && trim($values['availability']) == '') {
+					unset($values['availability']);
+				} elseif ($values['availability_select'] == 'now') {
+					$values['availability'] = Zend_Date::now()->toString('YYYY-MM-dd');
+				}
+
+				if (isset($values['availability']) && trim($values['availability']) != '') {
+					$availabilityTime = strtotime($values['availability']);
+					if ($availabilityTime === false) {
+						unset($values['availability']);
+					} else {
+						$values['availability'] = date('Y-m-d', $availabilityTime);
+					}
+				} else {
+					unset($values['availability']);
+				}
+				unset ($values['availability_select']);
+
+				// convert date format of availability value and add comparison sign
+				try {
+					if (!empty($values['availability'])) {
+						//$zendDate = new Zend_Date($values['availability'], 'dd MMMM, yyyy');
+						$zendDate = new Zend_Date($values['availability'], 'YYYY-MM-dd');
+						$values['availability'] = array('value' => $zendDate->toString('YYYY-MM-dd'),
+							'sign' => '<=',);
+					}
+				} catch (Exception $e) {
+					unset($values['availability']);
+				}
+
+				if (isset($values['rent_period']) && $values['rent_period'] != '') {
+					if ('long' == $values['rent_period']) {
+						$values['lease_duration'] = '>2';
+					} else {
+						$values['lease_duration'] = '<=2';
+					}
+				}
+				unset($values['rent_period']);
+
+				if (!$values['metro_station_id'] and $values['metro_line_id']) {
+					$values['metro_station_id'] = array();
+					foreach (Model_MetroStationTable::getInstance()->findOrderedByMetroLineId($values['metro_line_id']) as $station) {
+						$values['metro_station_id'][] = $station['id'];
+					}
+					if (count($values['metro_station_id']) == 0) {
+						$values['metro_station_id'][] = -1;
+					}
+				}
+
+				if (isset($values['metro_station_id']) && !is_array($values['metro_station_id'])) {
+					$values['metro_station_id'] = array($values['metro_station_id']);
+				}
+
+				if (empty($values['distance'])) {
+					$values['distance'] = 0.5;
+				}
+
+				$metro_stations = $values['metro_station_id'];
+
+				$values = $this->_processCommonData($form, $values);
+
+				$values['PropertyXMetroStation.distance'] = array(
+					'value' => $values['distance'],
+					'sign' => '<'
+				);
+				$values['PropertyXMetroStation.metro_station_id'] = array('value' => $metro_stations);
+                if (empty($metro_stations)) {
+                    unset($values['PropertyXMetroStation.metro_station_id']);
+                    unset($values['PropertyXMetroStation.distance']);
+                }
+				unset($values['metro_station_id']);
+				unset($values['metro_line_id']);
+				unset($values['distance']);
+
+				if ($searchId === false) {
+					$search = new Model_Search;
+					$search->search_type = 'standart';
+					$search->user_id = Zend_Auth::getInstance()->getIdentity();
+				}
+
+                foreach($values as $field => $value) {
+                    if (empty($value)) unset($values[$field]);
+                }
+
+                $search->conditions = serialize($values);
+
+                $query = Model_PropertyTable::getInstance()->searchQuery(unserialize($search->conditions), array(), 'date', 'desc');
+                $adapter = new ZFDoctrine_Paginator_Adapter_DoctrineQuery($query);
+                $paginator = new Zend_Paginator($adapter);
+                $search->found_items = $paginator->getTotalItemCount();
+
+                $search->save();
+
+				$this->_helper->redirector->gotoSimple('results', 'search', 'default', array('search_id' => $search->id));
+			}
+		}
 
         $regionBlockOptions = array();
         foreach (Model_RegionBlockTable::getInstance()->getAllWithDiscricts() as $region) {
@@ -318,7 +376,12 @@ class SearchController extends Zend_Controller_Action
 
         $this->view->regionBlocks = $regionBlockOptions;
         $this->view->form = $form;
-    }
+        $this->view->showSaveBtn = true;
+        if ($searchId) {
+            $this->view->searchId = $searchId;
+        }
+		$this->renderScript('search/standard.phtml');
+	}
 
     public function mapAction()
     {
@@ -544,8 +607,8 @@ class SearchController extends Zend_Controller_Action
 
             if (!$values['metro_station_id'] and $values['metro_line_id']) {
                 $values['metro_station_id'] = array();
-                foreach (Model_MetroStationTable::getInstance()->findByMetroLineId($values['metro_line_id']) as $station) {
-                    $values['metro_station_id'][] = $station->id;
+                foreach (Model_MetroStationTable::getInstance()->findOrderedByMetroLineId($values['metro_line_id']) as $station) {
+                    $values['metro_station_id'][] = $station['id'];
                 }
                 if (count($values['metro_station_id']) == 0) {
                     $values['metro_station_id'][] = -1;
@@ -616,6 +679,8 @@ class SearchController extends Zend_Controller_Action
 
             $values = $this->_processCommonData($form, $values);
 
+
+
             $blocks = Model_RegionBlockTable::getInstance()->findAll();
             $foundBlocks = $geo->polygonRegionsIntersect($polygon, $blocks);
             $blockIds = array();
@@ -623,6 +688,7 @@ class SearchController extends Zend_Controller_Action
                 $blockIds[] = $foundBlock->id;
             }
             $propertiesByBlocks = Model_PropertyTable::getInstance()->search(array('region_block_id' => array('value' => $blockIds)));
+
             if ($propertiesByBlocks->count() < 1000) { // TODO: needs to decide how much properties is to much
                 $foundPropertyIds = array();
                 foreach ($propertiesByBlocks as $property) {
@@ -675,7 +741,7 @@ class SearchController extends Zend_Controller_Action
         $curStationIndx = -1;
 
         if (isset($formValues['PropertyXMetroStation.metro_station_id']) && isset($formValues['PropertyXMetroStation.metro_station_id'][0])) {
-            $lines = Model_MetroLineTable::getInstance()->findAll();
+            //$lines = Model_MetroLineTable::getInstance()->findAll();
 
             if (count($formValues['PropertyXMetroStation.metro_station_id']) > 1) {
                 $curMetroStationId = $formValues['PropertyXMetroStation.metro_station_id'][intval(count($formValues['PropertyXMetroStation.metro_station_id'])/2)];
@@ -707,9 +773,10 @@ class SearchController extends Zend_Controller_Action
 
                 $allStations = array();
                 $curIndx     = false;
-                foreach (Model_MetroStationTable::getInstance()->findByMetroLineId($metroLineId) as $station) {
-                    $allStations[] = array('id' => $station->id, 'name' => $station->name);
-                    if ($station->id == $curMetroStationId) {
+
+                foreach (Model_MetroStationTable::getInstance()->findOrderedByMetroLineId($metroLineId) as $station) {
+                    $allStations[] = array('id' => $station['id'], 'name' => $station['name']);
+                    if ($station['id'] == $curMetroStationId) {
                         $curIndx = count($allStations)-1;
                     }
                 }
@@ -765,7 +832,7 @@ class SearchController extends Zend_Controller_Action
         $paginator->setCurrentPageNumber($currentPage);
         $paginator->setItemCountPerPage(self::COUNT_PER_PAGE);
                
-        $search->found_items = $paginator->count();
+        $search->found_items = $paginator->getTotalItemCount();
         $search->save();
         
         $nearStations = Model_PropertyTable::getInstance()->getNearStations($paginator);
@@ -882,7 +949,21 @@ class SearchController extends Zend_Controller_Action
         ) {
             $search->is_temp    = False;
             $search->name       = $form->getValue('name');
-            $search->save();
+            $conditions         = @unserialize($search->conditions);
+            if ($conditions !== false) {
+                foreach($conditions as $field => $value) {
+                    if (empty($value)) unset($conditions[$field]);
+                }
+
+                $search->conditions = serialize($conditions);
+
+                $query = Model_PropertyTable::getInstance()->searchQuery(unserialize($search->conditions), array(), 'date', 'desc');
+                $adapter = new ZFDoctrine_Paginator_Adapter_DoctrineQuery($query);
+                $paginator = new Zend_Paginator($adapter);
+                $search->found_items = $paginator->getTotalItemCount();
+
+                $search->save();
+            }
  
             $this->view->saved = true;
         }    

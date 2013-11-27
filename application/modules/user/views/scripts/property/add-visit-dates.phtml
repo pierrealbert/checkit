@@ -1,65 +1,246 @@
-<?php $this->jQuery()->addStylesheet('/css/ui/jquery-ui-1.8.14.css'); ?>
-
-<table border="1" width="100%">
-    <tr valign="top">
-        <td width="33%">
-            <!-- Left menu -->
-            <table border="1" width="100%">
-                <tr>
-                    <td><?= $this->translate('status') ?>: 80%</td>
-                </tr>
-                <?php $states_info = $this->property->getStatesInfo(); ?>
-                <?php foreach($states_info as $state => $info): ?>
-                <tr>
-                        <?php if ($this->current_state == $state): ?>
-                    <td style="background-color:#3cbecc;"><?= $this->translate($info['name']) ?></td>
-                        <?php elseif ($this->property->state < $state): ?>
-                    <td><?= $this->translate($info['name']) ?></td>
-                        <?php else: ?>
-                    <td><a href="/user/property/<?= $info['action'] ?>/item/<?= $this->property->id ?>"><?= $this->translate($info['name']) ?></a></td>
-                        <?php endif; ?>
-                </tr>
-                <?php endforeach; ?>
-            </table>
-            <!-- /Left menu -->
-        </td>
-        <td>
-            <?= $this->partial('property/visit-dates.phtml', $this); ?>
-        </td>
-    </tr>
-</table>
 <?php
+$this->headLink()->appendStylesheet('/assets/css/property_form.css');
+$this->headScript()->appendFile('/assets/js/property_form.js');
+?>
 
-    $function = "$(function() {
-        $('#datepicker').datepicker({
-            dateFormat: 'yy-mm-dd',
-            defaultDate: " . time('Y-m-d') . ",
-            minDate: 0,
-            numberOfMonths: 2,
-            altField: '#availability',
+<div id="publier" class="grid">
+    <div class="left">
+        <?= $this->partial('property/_partials/left-dashboard.phtml', $this->getVars()) ?>
+    </div>
+    <div class="right">
+            <div id="content-step-5" class="progress-content">
+                <form id="visit-date-form-main" method="post" action="/user/property/visit-dates/item/<?=$this->property->id?>">
+                <div class="step-title">
+                    <h1>Dates de visite</h1>
+                </div>
+                <div class="block-grid grid-inset">
+                    <fieldset>
+                        <label>Téléphone <span class="recommended">(conseillé)</span></label>
+                        <?php
+                            $elPhone = $this->form->getElement('phone');
+                            if ($elPhone->getValue() == '' && $this->mode == 'add') {
+                                $elPhone->setValue($this->user->phone);
+                            }
+                        ?>
+                        <?= $elPhone ?>
+                        <p class="description">Votre numero de telephone est important pour organiser vos visites.<br />
+                        <span class="cyan">Soyez rassure, il n'est envoye qu'aux candidats que vous acceptez.</span></p>
+                    </fieldset>
+                </div>
+                </form>
+                <div class="block-grid grid-inset two-month-calendar">
+                    <fieldset>
+                        <label>Calendrier</label>
+
+                        <div id="calendar"></div>
+
+                        <p class="description">
+                            Choisissez vos dates de visites a l'avance.<br />
+                            Vous conviendrez de l'horaire avec vos candidats, ultérieurement.<br />
+                            <span class="red">Vous devez définir au moins une date de visite.</span>
+                        </p>
+                    </fieldset>
+                </div>
+                <form id="visit-date-form-date" method="post" action="/user/property/process-visit-date/item/<?=$this->property->id?>">
+                <div class="block-grid grid-inset visit-date-zone">
+                    <fieldset>
+                        <label>Dates de visite <em class="red">(obligatoire)</em></label>
+                        <div class="visit-date-wrapper cyan-block" id="original">
+                            <p>Date</p>
+                            <div class="left-block">
+                                <div class="labels-group standard-search-date-pick">
+                                    <input class="input-pretty" type="radio" name="dummy" value="">
+                                    <label class="btn-input-gray-lite label-cyan date-label"></label>
+                                    <label class="btn-input-gray-lite label-cyan label-date icon-calendar-white"></label>
+                                </div>
+                            </div>
+                            <div class="right-block">
+                                <a data-date="" class="del-date-button btn btn-gray btn-arrow-prev left" href="#">Supprimer</a>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="visit-date-wrapper">
+                            <p>Date</p>
+                            <div class="left-block">
+                                <div class="labels-group standard-search-date-pick">
+                                    <input class="input-pretty" type="radio" name="dummy" value="">
+                                    <label class="btn-input-gray-lite date-label calendarOpener"">Sélectionner une date</label>
+                                    <label class="btn-input-gray-lite label-date icon-calendar-gray calendarOpener"></label>
+                                </div>
+                                <div class="visitdate-wrapper">
+                                <?= $this->form->availability ?>
+                                </div>
+                            </div>
+                            <div class="right-block">
+                                <span class="cyan">
+                                    1. Vous fixez le jour.<br />
+                                    2. Vos candidats vous proposeront une plage horaire.<br />
+                                    3. Vous choisirez l'heure du rendez vous.
+                                </span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <p class="description">
+                            Passée la dernière date de visite, votre annonce ne sera plus visible.<br />
+                            <span class="red">Pensez â en prévoir suffisamment.</span>
+                        </p>
+                    </fieldset>
+                </div>
+                </form>
+                <div class="progress-buttons">
+                    <a id="description-form-cancel" class="btn btn-gray btn-arrow-prev left" href="/user/property/hunted-profile/item/<?=$this->property->id?>">Étape précédente</a>
+                    <a id="description-form-next" class="btn btn-blue btn-arrow-next right" href="#">Dernière étaper</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    var datesList = new Array(<?=json_encode($this->selectedDates)?>);
+
+    function makeDatesList() {
+        $('div.visit-date-zone div.visit-date-wrapper.cyan-block').each(function() {
+            if ($(this).attr('id') != 'original') {
+                $(this).remove();
+            }
         });
-        $('#processVisitDate').on('submit', function(){
-            $.ajax({
-                type: 'POST',
-                url: '/user/property/process-visit-date/item/{$this->property->id}',
-                data: {
-                        phone: $('#phone').val(), 
-                        availability: $('#availability').val(),
-                        at_time: $('#at_time').val(),
-                        visitors: $('#visitors').val(),
-                    },
-                success: function(r) {
-                    if (!r.error) {
-                        $('#visits').empty().append(r.list);
-                    }
-                },
-                dataType: 'json'
-            });
+
+        for (var i=0; i<datesList[0].length; i++) {
+            var dateStr = (datesList[0][i].day <= 9 ? '0'+datesList[0][i].day : datesList[0][i].day)+'/'+(datesList[0][i].month <= 9 ? '0'+datesList[0][i].month : datesList[0][i].month)+'/'+datesList[0][i].year;
+            var $cloneDiv = null;
+            var $originalDiv = null;
+            $originalDiv = $('div.visit-date-zone div.visit-date-wrapper.cyan-block#original');
+            $cloneDiv = $originalDiv.clone();
+            $cloneDiv.attr('id', 'div-id-'+i);
+            $cloneDiv.find('div.right-block').find('a').attr('data-date', dateStr);
+            $cloneDiv.find('div.left-block').find('label.date-label').text(dateStr);
+            $cloneDiv.insertAfter($originalDiv).show();
+        }
+
+        $('a.del-date-button').click(function() {
+            $('.visitdate-wrapper').hide();
+            $('#availability').val($(this).attr('data-date'));
+            $('#availability').change();
             return false;
         });
-    });";
 
-    $this->jQuery()->addOnLoad($function)
-        ->addStylesheet('/css/ui/jquery-ui-1.10.3.css')
-        ->addStylesheet('/css/datepicker.css');
-?>
+    }
+
+    $(document).ready(function(){
+        $('a#description-form-next').click(function() {
+            $('form#visit-date-form-main').submit();
+        });
+
+        $('.calendarOpener').click(function() {
+            $('.visitdate-wrapper').show();
+            $('input#availability').focus();
+        });
+
+        $('#description-form-next').click(function (event) {
+            event.preventDefault();
+            $('#hunted-profile-form').submit();
+        });
+
+        $('#calendar').datepicker(
+            {
+                numberOfMonths: 2,
+                showButtonPanel: false,
+
+                monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin',
+                    'Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+                monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun',
+                    'Jul','Aoû','Sep','Oct','Nov','Déc'],
+                dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+                dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
+                dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
+
+                firstDay: 1,
+                prevText: '', prevStatus: 'Voir le mois précédent',
+                prevJumpText: '&#x3c;&#x3c;', prevJumpStatus: 'Voir l\'année précédent',
+                nextText: '', nextStatus: 'Voir le mois suivant',
+                nextJumpText: '&#x3e;&#x3e;', nextJumpStatus: 'Voir l\'année suivant',
+                currentText: 'Courant', currentStatus: 'Voir le mois courant',
+                todayText: 'Aujourd\'hui', todayStatus: 'Voir aujourd\'hui',
+                clearText: 'Effacer', clearStatus: 'Effacer la date sélectionnée',
+                closeText: 'Fermer', closeStatus: 'Fermer sans modifier',
+                yearStatus: 'Voir une autre année', monthStatus: 'Voir un autre mois',
+                weekText: 'Sm', weekStatus: 'Semaine de l\'année',
+                dayStatus: '\'Choisir\' le DD d MM',
+                defaultStatus: 'Choisir la date',
+                isRTL: false,
+
+                defaultDate: '<?=$this->defDate?>',
+                dateFormat: 'dd/mm/yy',
+
+                onSelect: function(dateText, inst) {
+                    $('.visitdate-wrapper').hide();
+                    $('#availability').val(dateText);
+                    $('#availability').change();
+                },
+
+                beforeShowDay: function(date) {
+                    var res = new Array(
+                        true,
+                        '',
+                        ''
+                    );
+
+                    var curDate = new Date();
+                    curDate = curDate.getFullYear()+'-'+
+                        ((curDate.getMonth()+1) <= 9 ? '0'+(curDate.getMonth()+1) : (curDate.getMonth()+1))+'-'+
+                        (curDate.getDate() <= 9 ? '0'+curDate.getDate() : curDate.getDate());
+
+                    var checkedDate = date.getFullYear()+'-'+
+                        ((date.getMonth()+1) <= 9 ? '0'+(date.getMonth()+1) : (date.getMonth()+1))+'-'+
+                        (date.getDate() <= 9 ? '0'+date.getDate() : date.getDate());
+
+                    if (checkedDate < curDate) {
+                        res[0] = false;
+                        res[1] = 'td-selected';
+                    }
+
+                    for (var i=0; i<datesList[0].length; i++) {
+                        if (datesList[0][i].year == date.getFullYear() &&
+                            datesList[0][i].month == (date.getMonth()+1) &&
+                            datesList[0][i].day == date.getDate()) {
+
+                            if (res[0] != false) {
+                                res[1] = 'td-selected-new';
+                            }
+                        }
+                    }
+                    if (checkedDate == curDate && res[1] != 'td-selected-new') {
+                        res[1] = 'td-selected-cur';
+                    }
+
+
+                    return res;
+                }
+
+            }
+        );
+
+        $('#availability').val('');
+
+        $('#availability').change(function() {
+            if ($(this).val() == '') return ;
+
+            $('.visitdate-wrapper').hide();
+
+            var data = $('form#visit-date-form-date').serialize();
+            $.post($('form#visit-date-form-date').attr('action'), $('form#visit-date-form-date').serialize(), function(data) {
+                if (!data.error) {
+                    datesList[0] = data.list;
+                    $('#availability').val('');
+                    $('#calendar').datepicker('refresh');
+                    makeDatesList();
+                } else {
+                    $('#availability').val('');
+                }
+            });
+        });
+
+        makeDatesList();
+
+    });
+</script>

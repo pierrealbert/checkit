@@ -10,6 +10,7 @@
  * @property string $name
  * @property integer $pixel_x
  * @property integer $pixel_y
+ * @property integer $sort_position
  * @property Model_MetroLine $MetroLine
  * @property Doctrine_Collection $PropertyXMetroStation
  * 
@@ -44,6 +45,11 @@ abstract class Model_Base_MetroStation extends Ext_Doctrine_Record
         $this->hasColumn('pixel_y', 'integer', 4, array(
              'type' => 'integer',
              'length' => '4',
+             ));
+        $this->hasColumn('sort_position', 'integer', 1, array(
+             'type' => 'integer',
+             'default' => 0,
+             'length' => '1',
              ));
     }
 

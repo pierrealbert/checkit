@@ -43,6 +43,8 @@ class Model_User extends Model_Base_User
         $this->confirm_registration_key = null;
         $this->save();
 
+        Model_AlertTable::getInstance()->addAlertInfo($this->id, $this->getTranslator()->translate('alert_user_confirm_title'), $this->getTranslator()->translate('alert_user_confirm_body'));
+
         return $this;
     }
     
@@ -144,8 +146,30 @@ class Model_User extends Model_Base_User
                 ->andWhere('user_id = ?', $this->id)
                 ->orderBy('is_primary  DESC , id  DESC')
                 ->execute();
-    }       
-    
+    }
+
+    public function getResidentGarants($resident_id = false)
+    {
+        if ($resident_id === false) {
+            $pResident = $this->primaryResident();
+            if ($pResident) {
+                $resident_id = $pResident->id;
+            } else {
+                return array();
+            }
+        }
+
+        $table = Model_UserResidentGarantTable::getInstance();
+        $result = $table->createQuery()
+            ->andWhere('user_resident_id = ?', $resident_id)
+            ->execute();
+        if ($result) {
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
     public function getFavorites($limit = 2)
     {
         $table = Model_PropertyTable::getInstance();
@@ -158,6 +182,21 @@ class Model_User extends Model_Base_User
                 ->limit($limit)
                 ->execute();
     }           
+    
+    public function getSettings()
+    {
+        $table = Model_UserSettingsTable::getInstance();
+        $settings = $table->createQuery()
+                ->andWhere('user_id = ?', $this->id)                
+                ->fetchOne();   
+        if (!$settings) {
+            $settings = new Model_UserSettings();
+            $settings->user_id = $this->id;
+            $settings->save();
+        }
+        
+        return $settings;
+    }
     
     public function hasResidents()
     {

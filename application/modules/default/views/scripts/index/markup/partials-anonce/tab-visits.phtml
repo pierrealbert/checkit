@@ -1,10 +1,10 @@
-<div class="grid">
+<div class="grid" id="propertyTtabs">
 	<div class="menu-annonce">
 		<ul>
-			<li><a href="">Description<i class="i-group-white icon-list"></i></a></li>
-			<li><a href="">Photos<i class="i-group-white icon-photo"></i></a></li>
-			<li><a href="">Carte<i class="i-group-white icon-carte"></i></a></li>
-			<li><a href="" class="active">Visites<i class="i-group-gray icon-calendar"></i></a></li>
+			<li><a href="#description">Description<i class="i-group-white icon-list"></i></a></li>
+			<li><a href="#photos">Photos<i class="i-group-white icon-photo"></i></a></li>
+			<li><a href="#map">Carte<i class="i-group-gray icon-carte"></i></a></li>
+			<li><a href="#calendar" class="active">Visites<i class="i-group-white icon-calendar"></i></a></li>
 		</ul>
 		<a href="#" class="btn btn-gray btn-gray-dark btn-left-flag">
 			<i class="i-group-white icon-flag"></i>
@@ -16,7 +16,8 @@
 			<span class="gray"> Le propriétaire a défini des dates de visites
 				pour ce bien (en bleu sur le calendrier).
 			</span><br>
-			En candidatant, vous serez invité à sélectionner une de ces dates.<br>
+			En candidatant, vous serez invité à sélectionner une de ces dates,
+			et à définir une fourchette horaire.<br>
 			<span class="blue"> Assurez-vous d’être disponible.</span>
 		</p>
 		<div class="block-calendar">
@@ -67,10 +68,10 @@
 				</div>
 				<div class="inner-cell">
 					<div class="cell">22</div>
-					<div class="cell cell-blue"><a href="#">23</a></div>
-					<div class="cell cell-blue"><a href="#">24</a></div>
+					<a href="#" class="cell cell-blue">23</a>
+					<a href="#" class="cell cell-blue">24</a>
 					<div class="cell">25</div>
-					<div class="cell cell-blue"><a href="">26</a></div>
+					<a href="#" class="cell cell-blue">26</a>
 					<div class="cell">27</div>
 					<div class="cell">28</div>
 				</div>
@@ -166,3 +167,10 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(function () {
+
+		$('#propertyTtabs').tabs();
+	});
+</script>

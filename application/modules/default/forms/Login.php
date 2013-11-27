@@ -17,13 +17,15 @@ class Form_Login extends Zend_Form
             'filters'    => array('StringTrim'),
             'validators' => array(
                 'EmailAddress'
-            )
+            ),
+            'class'    => 'input-mail'
         ));
 
         $this->addElement('password', 'password', array(
             'label'      => 'password',
             'required'   => true,
-            'filters'    => array('StringTrim')
+            'filters'    => array('StringTrim'),
+            'class'    => 'input-pass'
         ));
 
         $this->addElement('checkbox', 'remember', array(

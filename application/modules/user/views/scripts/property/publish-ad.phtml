@@ -1,31 +1,76 @@
-<table border="1" width="100%">
-    <tr valign="top">
-        <td width="33%">
-            <!-- Left menu -->
-            <table border="1" width="100%">
-                <tr>
-                    <td><?= $this->translate('status') ?>: 100%</td>
-                </tr>
-                <?php $states_info = $this->property->getStatesInfo(); ?>
-                <?php foreach($states_info as $state => $info): ?>
-                <tr>
-                        <?php if ($this->current_state == $state): ?>
-                    <td style="background-color:#3cbecc;"><?= $this->translate($info['name']) ?></td>
-                        <?php elseif ($this->property->state < $state): ?>
-                    <td><?= $this->translate($info['name']) ?></td>
-                        <?php else: ?>
-                    <td><a href="/user/property/<?= $info['action'] ?>/item/<?= $this->property->id ?>"><?= $this->translate($info['name']) ?></a></td>
-                        <?php endif; ?>
-                </tr>
-                <?php endforeach; ?>
-            </table>
-            <!-- /Left menu -->
-        </td>
-        <td>
-            <!-- Form -->
-            <?= $this->form ?>
-            <!-- /Form -->
-        </td>
-    </tr>
-</table>
+<?php
+$this->headLink()->appendStylesheet('/assets/css/property_form.css');
+$this->headScript()->appendFile('/assets/js/property_form.js');
+?>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('a#submit-form').click(function() {
+            $('form#publish-ad-form').submit();
+            return false;
+        });
+    });
+</script>
 
+<div id="publier" class="grid">
+    <div class="left">
+        <?= $this->partial('property/_partials/left-dashboard.phtml', $this->getVars()) ?>
+    </div>
+    <div class="right">
+        <form id="publish-ad-form" method="post" action="/user/property/publish-ad/item/<?=$this->property->id?>">
+            <div id="content-step-6" class="progress-content">
+                <div class="block-grid cyan-block">
+                    <h1>Bravo! Votre annonce est prete.</h1>
+
+                    <p>Il ne vous reste plus qu'a la publier pour commencer a recevoir des candidatures.<br />
+                    Louez bien et vite avec <b>Ommi</b>: Distinguez votre annonce des autres en la<br />
+                    mettant en avant ou en lui ajoutant un logo urgent.</p>
+                </div>
+                <div class="block-grid grid-inset white-block">
+                    <h1 class="red">Mettre en avant mon annonce</h1>
+                    <div class="left">
+                        <p>Il ne vous reste plus qu'a la publier pour commencer a recevoir des candidatures.
+                            Louez bien et vite avec <b>Ommi</b>: Distinguez votre annonce des autres en la
+                            mettant en avant ou en lui ajoutant un logo urgent.</p>
+                    </div>
+                    <div class="right">
+                        <p class="euro">8 €</p>
+                        <p>pour une semaine</p>
+                        <a id="submit-form" class="btn btn-red btn-good right" href="#">Mettre en avant</a>
+                    </div>
+                </div>
+                <div class="block-grid grid-inset white-block">
+                    <h1 class="red">Ajouter un logo urgent</h1>
+                    <div class="left">
+                        <p>Il ne vous reste plus qu'a la publier pour commencer a recevoir des candidatures.
+                            Louez bien et vite avec <b>Ommi</b>: Distinguez votre annonce des autres en la
+                            mettant en avant ou en lui ajoutant un logo urgent.</p>
+                    </div>
+                    <div class="right">
+                        <p class="euro">5 €</p>
+                        <p>pour une semaine</p>
+                        <a id="submit-form" class="btn btn-red btn-good right" href="#">Ajouter urgent</a>
+                    </div>
+                </div>
+                <div class="block-grid grid-inset white-block">
+                    <h1 class="red">Apparaitre sur la page d'accuel</h1>
+                    <div class="left">
+                        <p>Il ne vous reste plus qu'a la publier pour commencer a recevoir des candidatures.
+                            Louez bien et vite avec <b>Ommi</b>: Distinguez votre annonce des autres en la
+                            mettant en avant ou en lui ajoutant un logo urgent.</p>
+                    </div>
+                    <div class="right">
+                        <p class="euro">5 €</p>
+                        <p>pour une semaine</p>
+                        <a id="submit-form" class="btn btn-red btn-good right" href="#">J'ose</a>
+                    </div>
+                </div>
+
+                <?php if ($this->property->is_published != 1): ?>
+                <div class="progress-buttons">
+                    <a id="submit-form" class="btn btn-blue btn-good right" href="#">Publier mon annonce</a>
+                </div>
+                <?php endif; ?>
+            </div>
+        </form>
+    </div>
+</div>

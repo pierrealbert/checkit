@@ -1,0 +1,62 @@
+<?php $subForms = $this->form->getSubForms() ?>
+<?php foreach ($subForms as $subForm): ?>
+    <div id="form-wrapper" class="block-grid grid-dark">
+        <!--Form header-->
+        <?php
+        $formId = $subForm->getId();
+        $formId = substr($formId, 7);
+
+        switch ($formId) {
+            case 1:
+                $header = $this->translate('Moi');
+                break;
+            case 2:
+                if ($this->count == 2) {
+                    $header = $this->translate('Mon conjoint');
+                } else {
+                    $header = $this->translate('Colocataire') . ' '. ($formId - 1);
+                }
+                break;
+            default:
+                $header = $this->translate('Colocataire') . ' '. ($formId - 1);
+        }
+        ?>
+        <h3 class="white"><?= $header ?></h3>
+
+        <div id="form-section">
+            <div class="block-grid grid-inset">
+                <?= $subForm->id ?>
+                <fieldset>
+                    <?= $subForm->resident_type ?>
+                </fieldset>
+                <fieldset id="resident_name" style="display:none;">
+                    <?= $subForm->resident_name ?>
+                </fieldset>
+            </div>
+
+            <div class="block-grid grid-inset" style="display: none;">
+                <fieldset>
+                    <?= $subForm->job_title ?>
+                </fieldset>
+            </div>
+
+            <div class="block-grid grid-inset" style="display: none;">
+                <fieldset>
+                    <?= $subForm->employee_type ?>
+                </fieldset>
+            </div>
+
+            <div class="block-grid grid-inset" style="display: none;">
+                <fieldset>
+                    <?= $subForm->monthly_income ?>
+                </fieldset>
+            </div>
+
+            <div class="block-grid grid-inset" style="display: none;">
+                <fieldset>
+                    <?= $subForm->monthly_income_guaranteed ?>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>

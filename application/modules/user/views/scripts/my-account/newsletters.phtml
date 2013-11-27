@@ -1,0 +1,32 @@
+<div id="compte" class="compte-01">
+    <?= $this->partial('my-account/_partials/navigation.phtml') ?>
+    <div class="right">
+         <form action="" method="post">
+            <div class="progress-content">
+                <div class="step-title">
+                    <h1>Newsletter Ommi</h1>
+                    <span>Ommi a d’excellentes nouvelles à vous apporter.<br>Inscrivez-vous pour recevoir notre bulletin d’information.</span>
+                </div>
+                <div class="block-grid grid-inset">
+                    <fieldset>
+                        <?= $this->form->newsletters ?>
+                    </fieldset>
+                </div>
+                <div style="margin-top: 40px;" class="step-title">
+                    <h1>Offres partenaires</h1>
+                    <span>
+                        Nos partenaires ont souvent des offres exceptionnelles pour vous.<br>Inscrivez pour recevoir les offres de nos partenaires.
+                    </span>
+                </div>
+                <div class="block-grid grid-inset">
+                    <fieldset>
+                        <?= $this->form->offers ?>
+                    </fieldset>
+                </div>
+                <div class="progress-buttons">
+                    <?= $this->form->save ?>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

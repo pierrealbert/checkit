@@ -5,7 +5,7 @@ $this->headScript()->appendFile('/assets/js/search_form.js');
 ?>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('a#btnSearch1, a#btnSearch2' ).click(function() {
+        $('a#btnSearch1, a#btnSearch2, a#btnSaveSearch' ).click(function() {
             $('form[name="searchForm"]').submit();
             return false;
         });
@@ -69,8 +69,11 @@ $this->headScript()->appendFile('/assets/js/search_form.js');
         <div class="search-left">
             <div class="search-location">
                 <label class="name-title-white">Localisation</label>
-                <input name="region_block_input" type="text" placeholder="Où désirez-vous louer? "/>
+                <input class="input-search" name="region_block_input" type="text" placeholder="Où désirez-vous louer? "/>
                 <?=$this->form->getElement('region_block_id')?>
+                <?php if (isset($this->searchId)): ?>
+                <input type="hidden" name="search_id" value="<?=$this->searchId?>" />
+                <?php endif; ?>
                 <a href="#" class="btn btn-small btn-dark icon-location"></a>
             </div>
             <div class="search-budget">
@@ -113,7 +116,9 @@ $this->headScript()->appendFile('/assets/js/search_form.js');
         <?=$this->form->getElement('heating_system')?>
     </div>
     <div class="box-btn-search">
-        <a href="" class="btn btn-red">Sauvegarder ma recherche</a>
+        <?if (isset($this->showSaveBtn)): ?>
+        <a href="" class="btn btn-red" id="btnSaveSearch">Sauvegarder ma recherche</a>
+        <?php endif; ?>
         <a href="#" class="btn btn-blue" id="btnSearch2">Rechercher</a>
     </div>
 </div>

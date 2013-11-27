@@ -69,11 +69,11 @@ $blockIndex = 0;
                     <?php foreach ($month['days'] as $index => $day): ?>
                         <?php
                         $classes = array();
-                        if (!$day['isCurMonth'])
+                        if (!empty($day['isOtherMonth']))
                             $classes[] = 'cell-next-month';
-                        if ($day['hasVisits'])
-                            $classes[] = 'cell-blue';
-                        if ($day['isToday'])
+                        if (!empty($day['hasVisits']))
+                            $classes[] = 'cell-blue open-in-modal';
+                        if (!empty($day['isToday']))
                             $classes[] = 'cell-black';
                         ?>
                         <?php if ($index && $index % 7 == 0): ?>
@@ -81,8 +81,10 @@ $blockIndex = 0;
                             </div>
                             <div class="inner-cell <?= $isLastRow ? 'cell-bottom' : ''; ?>">
                         <?php endif; ?>
-                        <?php if ($day['hasVisits']): ?>
-                            <a href="" class="cell <?= implode(' ', $classes); ?>"><?= $day['day']; ?></a>
+                        <?php if (!empty($day['hasVisits'])): ?>
+							<?php $url = $this->url(array('controller' => 'property', 'action' => 'ajax-apply',
+						    	'item' => $this->property->id, 'visit-id' => $day['id']), null, true); ?>
+                            <a href="<?= $url; ?>" class="cell <?= implode(' ', $classes); ?>"><?= $day['day']; ?></a>
                         <?php else: ?>
                             <div class="cell <?= implode(' ', $classes); ?>"><?= $day['day']; ?></div>
                         <?php endif; ?>
@@ -101,8 +103,13 @@ $blockIndex = 0;
     <div class="block-btn-visites">
         <?php foreach ($this->months as $mIndex => $month): ?>
             <?php foreach ($month['visits'] as $visit): ?>
-                <?php $display = $mIndex == 0 ? '' : 'display: none;'; ?>
-                <a href="#" class="btn btn-blue-lite blue-dark w220 <?= "js-mon-$visit[year]-$visit[month]"; ?>" style="<?= $display; ?>">
+                <?php
+				$display = $mIndex == 0 ? '' : 'display: none;';
+				$url = $this->url(array('controller' => 'property', 'action' => 'ajax-apply',
+										'item' => $this->property->id, 'visit-id' => $visit['id']), null, true);
+				?>
+                <a href="<?= $url; ?>" style="<?= $display; ?>"
+				   class="btn btn-blue-lite blue-dark w220 open-in-modal <?= "js-mon-$visit[year]-$visit[month]"; ?>">
                     <?= $weekDayNames[$visit['weekDay']].' '.$visit['day'].' '.$monthNames[$visit['month']].' '.$visit['year']; ?>
                 </a>
             <?php endforeach; ?>

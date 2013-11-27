@@ -48,4 +48,10 @@ class Model_MetroStationTable extends Ext_Doctrine_Table
         $query->orderBy('kilometers');
         return $query->execute();
     }
+
+    public function findOrderedByMetroLineId($metroLineId) {
+        $statement = Doctrine_Manager::getInstance()->connection();
+        $results = $statement->execute("SELECT t1.id, t1.name FROM metro_station AS t1 WHERE t1.metro_line_id = ".intval($metroLineId)." ORDER BY t1.sort_position");
+        return $results->fetchAll();
+    }
 }

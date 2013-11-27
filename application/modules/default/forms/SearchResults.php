@@ -102,6 +102,8 @@ class Form_SearchResults extends Ext_Form
             'label' => 'ou à partir de',
             'JQueryParams' => array (
                 'dateFormat' => $settings->get('dateFormat.picker.jquery'),
+                'nextText' => '',
+                'prevText' => ''
             )
         ));
 

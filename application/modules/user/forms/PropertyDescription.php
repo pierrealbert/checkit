@@ -61,9 +61,9 @@ class User_Form_PropertyDescription extends Ext_Form
 
         $this->addElement('text', 'floor', array(
             'label'      => 'floor',
-            'required'     => true,
             'filters'    => array('StringTrim'),
             'required'   => true,
+            'validators' => array(new Zend_Validate_Int()),
         ));
 
         $this->addElement('radioButtons', 'is_lift', array(

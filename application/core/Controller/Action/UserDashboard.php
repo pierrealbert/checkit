@@ -16,7 +16,7 @@ class Core_Controller_Action_UserDashboard extends Zend_Controller_Action
     }
 
     public function postDispatch() 
-    {                        
+    {
         if (!$this->getRequest()->isXmlHttpRequest()) {
             $this->view->assign('showBottomSidebar', true);
             $this->view->assign('dashboardContent', $this->view->render($this->getViewScript()));

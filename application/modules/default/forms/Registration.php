@@ -7,13 +7,15 @@ class Form_Registration extends Ext_Form
         $this->addElement('text', 'first_name', array(
             'label'    => 'first_name',
             'required' => true,
-            'filters'  => array('StringTrim')
+            'filters'  => array('StringTrim'),
+            'class'    => 'input-profile'
         ));
 
         $this->addElement('text', 'last_name', array(
             'label'    => 'last_name',
             'required' => true,
-            'filters'  => array('StringTrim')
+            'filters'  => array('StringTrim'),
+            'class'    => 'input-profile'
         ));
         
         $this->addElement('text', 'email', array(
@@ -27,7 +29,8 @@ class Form_Registration extends Ext_Form
                     true,
                     array('Model_User', 'email')
                 )
-            )
+            ),
+            'class'    => 'input-mail'
         ));
 
         $this->addElement('password', 'password', array(
@@ -39,7 +42,8 @@ class Form_Registration extends Ext_Form
                 array('StringLength', false, array(
                     'min' => 4
                 )
-            ))
+            )),
+            'class'    => 'input-pass'
         ));
 
         $this->addElement('password', 'confirm_password', array(
@@ -49,7 +53,8 @@ class Form_Registration extends Ext_Form
             'autocomplete' => 'off',
             'validators'   => array (
                 new Zend_Validate_Identical('password')
-            )
+            ),
+            'class'    => 'input-pass'
         ));
         
 		$this->addElement('hidden', 'type', array(

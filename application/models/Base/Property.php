@@ -18,6 +18,7 @@
  * @property string $address
  * @property string $postcode
  * @property string $city
+ * @property string $phone
  * @property decimal $size
  * @property integer $property_type
  * @property integer $number_of_rooms1
@@ -63,6 +64,7 @@
  * @property integer $is_r_independent
  * @property integer $is_r_other
  * @property integer $is_roomate
+ * @property integer $views
  * @property integer $state
  * @property integer $is_published
  * @property Model_User $Owner
@@ -72,7 +74,7 @@
  * @property Doctrine_Collection $PropertyApplication
  * @property Doctrine_Collection $Favorite
  * @property Doctrine_Collection $PropertyIssue
- * @property Doctrine_Collection $UserProperty
+ * @property Doctrine_Collection $Alert
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -140,6 +142,11 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
         $this->hasColumn('city', 'string', 255, array(
              'type' => 'string',
              'length' => '255',
+             ));
+        $this->hasColumn('phone', 'string', 32, array(
+             'type' => 'string',
+             'default' => '',
+             'length' => '32',
              ));
         $this->hasColumn('size', 'decimal', 14, array(
              'type' => 'decimal',
@@ -327,6 +334,11 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'type' => 'integer',
              'length' => '1',
              ));
+        $this->hasColumn('views', 'integer', 4, array(
+             'type' => 'integer',
+             'default' => 0,
+             'length' => '4',
+             ));
         $this->hasColumn('state', 'integer', 1, array(
              'type' => 'integer',
              'default' => 1,
@@ -372,7 +384,7 @@ abstract class Model_Base_Property extends Ext_Doctrine_Record
              'local' => 'id',
              'foreign' => 'property_id'));
 
-        $this->hasMany('Model_UserProperty as UserProperty', array(
+        $this->hasMany('Model_Alert as Alert', array(
              'local' => 'id',
              'foreign' => 'property_id'));
 

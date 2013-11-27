@@ -1,0 +1,242 @@
+<div class="grid" id="publier">
+    <div class="left">
+        <div class="progress">
+            <h2 class="gray">Étapes</h2>
+
+            <div class="progress-step" id="step-25"></div>
+            <span>3 étapes restantes</span>
+        </div>
+        <div class="menu">
+            <a href="#" class="btn btn-gray">1 Infos personnelles</a>
+            <a href="#" class="btn btn-blue progress-menu-active">2 Garants</a>
+            <a href="#" class="btn btn-gray">3 Vérification</a>
+            <a href="#" class="btn btn-gray">4 Pièces de dossier</a>
+        </div>
+    </div>
+    <div class="right">
+        <div class="progress-content" id="content-step-2">
+            <div class="step-title">
+                <h1>Garants</h1>
+                <span class="blue">Les garants ne sont pas obligatoires mais ils sont fortement conseillés.</span>
+            </div>
+
+            <form id="garants-form" method="POST" action="" enctype="multipart/form-data">
+                <?php if ($this->residents->count()): ?>
+                    <div id="form-container">
+                        <?php
+                        $residentCount = $this->residents->count();
+                        $key = 1;
+                        ?>
+                        <?php foreach ($this->residents as $resident): ?>
+                            <div id="form-wrapper" class="block-grid grid-dark">
+                                <?php
+                                if ($resident->is_primary) {
+                                    $header = $this->translate('Moi');
+                                } elseif ($resident->rent_type == Model_UserResident::RENT_TYPE_COUPLE) {
+                                    $header = $this->translate('Mon conjoint');
+                                } else {
+                                    $header = $this->translate('Colocataire') . ' ' . ($key - 1);
+                                }
+                                ?>
+                                <h3 class="white"><?= $header ?></h3>
+                                <?php
+                                $form = $this->form[$resident->id];
+                                $subForms = $form->getSubForms();
+                                $garantNum = 1;
+                                ?>
+                                <?php foreach ($subForms as $subForm): ?>
+                                    <h4>Garant <?= $garantNum; ?></h4>
+                                    <div id="form-section">
+
+                                        <?= $subForm->id ?>
+                                        <div class="block-grid grid-inset">
+                                            <fieldset>
+                                                <?= $subForm->garant ?>
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="block-grid grid-inset" style="display: none;">
+                                            <fieldset>
+                                                <?= $subForm->type ?>
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="block-grid grid-inset" style="display: none;">
+                                            <fieldset>
+                                                <?= $subForm->amount ?>
+                                            </fieldset>
+                                        </div>
+
+                                        <div class="block-grid grid-inset" style="display: none;">
+                                            <fieldset>
+                                                <?= $subForm->company_name ?>
+                                            </fieldset>
+                                        </div>
+
+                                    </div>
+
+                                    <?php $garantNum++; ?>
+                                <?php endforeach; ?>
+                                <a href="" rel="<?= $resident->id ?>"
+                                   class="btn btn-medium btn-gray btn-plus add-garant-btn">Ajouter un garant</a>
+                            </div>
+                            <?php $key++; ?>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <div class="progress-buttons">
+                        <a href="/user/my-files/infos/" class="btn btn-medium btn-gray btn-arrow-prev left">Étape
+                            précédente</a>
+                        <button href="/user/my-files/verification/" class="btn btn-medium btn-blue btn-arrow-next right"
+                                type="submit">Enregistrer et continuer
+                        </button>
+                    </div>
+                <?php endif; ?>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var formWrapper = $("#form-container"),
+            baseUrlForm = "/user/my-files/ajax-garants-form-reload/type/",
+            garantType = $("input[type=radio].garant")
+
+        /* Garant checker change handler */
+        formWrapper.on("click", "input[type=radio].garant", function () {
+            var root = $(this).closest("#form-section"),
+                garantType = root.find("input[type=radio].garant_type"),
+                garantTypeContainer = garantType.closest(".block-grid"),
+                hideGarantType = function () {
+                    garantTypeContainer.hide();
+                },
+                showGarantType = function () {
+                    garantTypeContainer.slideDown();
+                },
+
+                garantAmount = root.find("input.garant_amount"),
+                garantAmountContainer = garantAmount.closest(".block-grid"),
+                hideGarantAmount = function () {
+                    garantAmountContainer.hide();
+                },
+                showGarantAmount = function () {
+                    garantAmountContainer.slideDown();
+                },
+
+                garantCompanyName = root.find("input.garant_company_name"),
+                garantCompanyNameContainer = garantCompanyName.closest(".block-grid"),
+                hideGarantCompanyName = function () {
+                    garantCompanyNameContainer.hide();
+                },
+                showGarantCompanyName = function () {
+                    garantCompanyNameContainer.slideDown();
+                }
+
+            /* Garant type change handler */
+            garantType.on("change", function () {
+                var type = $(this).val();
+                if (type == '<?= Model_UserResidentGarant::ORGANIZATION ?>') {
+                    hideGarantAmount();
+                    showGarantCompanyName();
+                } else {
+                    hideGarantCompanyName();
+                    showGarantAmount();
+                }
+            });
+
+            if ($(this).val() == 'yes') {
+                showGarantType();
+            } else {
+                hideGarantType();
+            }
+
+        });
+
+        // add-garant-btn click handler
+        formWrapper.on('click', ".add-garant-btn", function () {
+            var e = $(this);
+            $.ajax({
+                type: "post",
+                url: "/user/my-files/ajax-garants-form-reload/",
+                data: { residentId: $(this).attr('rel') }
+            }).done(function (data) {
+                    // view form elements on page
+                    formWrapper.empty().append(data);
+                }).fail(function (data) {
+                    if (console && console.log) {
+                        console.log("Something is wrong");
+                    }
+                });
+
+            return false;
+        });
+
+        garantType.trigger("change");
+
+
+        // form ajax submit handler
+        $("#garants-form").submit(function () {
+            $.ajax({
+                url: '/user/my-files/ajax-garants-form-submit/',
+                type: 'POST',
+                dataType: 'json',
+                data: $(this).serialize(),
+                success: function (response) {
+                    if (response.status == 'success') {
+                        alert(response.message);
+                        window.location = "/user/my-files/verification/";
+                    } else {
+                        // show error messages
+                        var residents = response.residents;
+                        for (var key in residents) {
+                            viewMessages(response.data[residents[key]['id']], residents[key]['id']);
+                        }
+                    }
+                },
+                error: function (response) {
+                    console.log('Error');
+                    console.log(response);
+                }
+            })
+            return false
+        });
+
+        // check value of form field
+        $("#garants-form").delegate('input', 'change', function () {
+            if ($(this).val() != '') {
+                $(this).closest(".block-grid").attr('id', 'accept-block');
+                $(this).closest("fieldset").find(".errors").remove();
+            }
+        });
+
+        function viewMessages(errors, residentId) {
+            for (var k in errors) {
+                if (k == 'garant') {
+                    var garant = errors[k];
+                    for (var key in garant) {
+                        var garantErrors = garant[key];
+                        for (var e in garantErrors) {
+                            var obj = garantErrors[e];
+                            for (var i in obj) {
+                                var elem = $('#garants-form').find($("input[name='garant[" + residentId + "][" + e + "][" + i + "]']"));
+                                elem.closest(".block-grid").attr('id', 'error-block');
+                                var messageTxt;
+                                var txt = '';
+                                for (var t in obj[i]) {
+                                    txt += "<li>" + obj[i][t] + "</li>";
+                                }
+                                messageTxt = "<ul class='errors'>" + txt + "</ul>";
+                                if (elem.closest("fiedset").has(".errors")) {
+                                    elem.closest("fieldset").find(".errors").remove();
+                                }
+                                elem.closest("fieldset").append(messageTxt);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    });
+</script>

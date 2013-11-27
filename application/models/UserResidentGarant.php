@@ -25,7 +25,7 @@ class Model_UserResidentGarant extends Model_Base_UserResidentGarant
             'friend'        => 'friend',
             'employer'      => 'employer',
             'bank'          => 'bank',
-            'organization'  => 'organization'           
+            'organization'  => 'organization'
         );
     }
     

@@ -1,2339 +1,2649 @@
-Model_MetroStation:        
+Model_MetroStation:                    
     MetroStation0:
-        metro_line_id: 16
-        name: Olympiades
-        pixel_x: 5472
-        pixel_y: 6334
-        latitude: 48.8268582997
-        longitude: 2.3672970120        
+        metro_line_id: 16 	
+        name: Olympiades 	 	
+        pixel_x: 5380 	
+        pixel_y:  6100 		
+        sort_position: 9 	
+        latitude: 48.8268582997 	
+        longitude: 2.3672970120            
     MetroStation1:
-        metro_line_id: 16
-        name: Bercy
-        pixel_x: 5900
-        pixel_y: 5766
-        latitude: 48.8404280893
-        longitude: 2.3795829688        
+        metro_line_id: 16 	
+        name: Bercy 	 	
+        pixel_x: 5800 	
+        pixel_y:  5550 		
+        sort_position: 6 	
+        latitude: 48.8404280893 	
+        longitude: 2.3795829688            
     MetroStation2:
-        metro_line_id: 16
-        name: Bibliotheque-Francois Mitterrand
-        pixel_x: 5894
-        pixel_y: 6204
-        latitude: 48.8296059727
-        longitude: 2.3760926117        
+        metro_line_id: 16 	
+        name: Bibliotheque-Francois Mitterrand 	 	
+        pixel_x: 5750 	
+        pixel_y:  5950 		
+        sort_position: 8 	
+        latitude: 48.8296059727 	
+        longitude: 2.3760926117            
     MetroStation3:
-        metro_line_id: 16
-        name: Châtelet
-        pixel_x: 4158
-        pixel_y: 4251
-        latitude: 48.8585195224
-        longitude: 2.3471194011        
+        metro_line_id: 16 	
+        name: Châtelet 	 	
+        pixel_x: 4158 	
+        pixel_y:  4251 		
+        sort_position: 4 	
+        latitude: 48.8585195224 	
+        longitude: 2.3471194011            
     MetroStation4:
-        metro_line_id: 16
-        name: Saint-Lazare
-        pixel_x: 2912
-        pixel_y: 2967
-        latitude: 48.8755778692
-        longitude: 2.3261856586        
+        metro_line_id: 16 	
+        name: Saint-Lazare 	 	
+        pixel_x: 2912 	
+        pixel_y:  2967 		
+        sort_position: 1 	
+        latitude: 48.8755778692 	
+        longitude: 2.3261856586            
     MetroStation5:
-        metro_line_id: 16
-        name: Gare de Lyon
-        pixel_x: 5496
-        pixel_y: 5139
-        latitude: 48.8447045451
-        longitude: 2.3740659075        
+        metro_line_id: 16 	
+        name: Gare de Lyon 	 	
+        pixel_x: 5340 	
+        pixel_y:  5139 		
+        sort_position: 5 	
+        latitude: 48.8447045451 	
+        longitude: 2.3740659075            
     MetroStation6:
-        metro_line_id: 16
-        name: Cour Saint-Emilion
-        pixel_x: 6050
-        pixel_y: 400
-        latitude: 48.8334843072
-        longitude: 2.3876129884        
+        metro_line_id: 16 	
+        name: Cour Saint-Emilion 	 	
+        pixel_x: 5920 	
+        pixel_y:  5830 		
+        sort_position: 7 	
+        latitude: 48.8334843072 	
+        longitude: 2.3876129884            
     MetroStation7:
-        metro_line_id: 16
-        name: Pyramides
-        pixel_x: 3290
-        pixel_y: 3767
-        latitude: 48.8669463021
-        longitude: 2.3336650658        
+        metro_line_id: 16 	
+        name: Pyramides 	 	
+        pixel_x: 3290 	
+        pixel_y:  3767 		
+        sort_position: 3 	
+        latitude: 48.8669463021 	
+        longitude: 2.3336650658            
     MetroStation8:
-        metro_line_id: 16
-        name: Madeleine
-        pixel_x: 2668
-        pixel_y: 3723
-        latitude: 48.8700643518
-        longitude: 2.3251637003        
+        metro_line_id: 16 	
+        name: Madeleine 	 	
+        pixel_x: 2668 	
+        pixel_y:  3723 		
+        sort_position: 2 	
+        latitude: 48.8700643518 	
+        longitude: 2.3251637003            
     MetroStation9:
-        metro_line_id: 14
-        name: Abbesses
-        pixel_x: 3868
-        pixel_y: 2103
-        latitude: 48.8844176452
-        longitude: 2.3387128117        
+        metro_line_id: 14 	
+        name: Abbesses 	 	
+        pixel_x: 3868 	
+        pixel_y:  2103 		
+        sort_position: 7 	
+        latitude: 48.8844176452 	
+        longitude: 2.3387128117            
     MetroStation10:
-        metro_line_id: 5
-        name: Alésia
-        pixel_x: 3882
-        pixel_y: 6192
-        latitude: 48.8283985143
-        longitude: 2.3267456737        
+        metro_line_id: 5 	
+        name: Alésia 	 	
+        pixel_x: 3882 	
+        pixel_y:  6192 		
+        sort_position: 25 	
+        latitude: 48.8283985143 	
+        longitude: 2.3267456737            
     MetroStation11:
-        metro_line_id: 2
-        name: Alexandre-Dumas
-        pixel_x: 6125
-        pixel_y: 4106
-        latitude: 48.8561744490
-        longitude: 2.3949898158        
+        metro_line_id: 2 	
+        name: Alexandre-Dumas 	 	
+        pixel_x: 6125 	
+        pixel_y:  4106 		
+        sort_position: 22 	
+        latitude: 48.8561744490 	
+        longitude: 2.3949898158            
     MetroStation12:
-        metro_line_id: 11
-        name: Alma-Marceau
-        pixel_x: 2131
-        pixel_y: 3917
-        latitude: 48.8646460307
-        longitude: 2.3008833661        
+        metro_line_id: 11 	
+        name: Alma-Marceau 	 	
+        pixel_x: 2131 	
+        pixel_y:  3917 		
+        sort_position: 14 	
+        latitude: 48.8646460307 	
+        longitude: 2.3008833661            
     MetroStation13:
-        metro_line_id: 3
-        name: Anatole-France
-        pixel_x: 2025
-        pixel_y: 1877
-        latitude: 48.8924723754
-        longitude: 2.2853738784        
+        metro_line_id: 3 	
+        name: Anatole-France 	 	
+        pixel_x: 2025 	
+        pixel_y:  1877 		
+        sort_position: 2 	
+        latitude: 48.8924723754 	
+        longitude: 2.2853738784            
     MetroStation14:
-        metro_line_id: 23
-        name: Antony
-        pixel_x: 3515
-        pixel_y: 7422
-        latitude: 48.7547197228
-        longitude: 2.3013137249        
+        metro_line_id: 23 	
+        name: Antony 	 	
+        pixel_x: 3515 	
+        pixel_y:  7422 		
+        sort_position: 1 	
+        latitude: 48.7547197228 	
+        longitude: 2.3013137249            
     MetroStation15:
-        metro_line_id: 2
-        name: Anvers
-        pixel_x: 4163
-        pixel_y: 2265
-        latitude: 48.8831322903
-        longitude: 2.3439728252        
+        metro_line_id: 2 	
+        name: Anvers 	 	
+        pixel_x: 4163 	
+        pixel_y:  2265 		
+        sort_position: 12 	
+        latitude: 48.8831322903 	
+        longitude: 2.3439728252            
     MetroStation16:
-        metro_line_id: 1
-        name: Argentine
-        pixel_x: 1755
-        pixel_y: 3028
-        latitude: 48.8755330929
-        longitude: 2.2893216640        
+        metro_line_id: 1 	
+        name: Argentine 	 	
+        pixel_x: 1755 	
+        pixel_y:  3028 		
+        sort_position: 6 	
+        latitude: 48.8755330929 	
+        longitude: 2.2893216640            
     MetroStation17:
-        metro_line_id: 3
-        name: Arts-et-Métiers
-        pixel_x: 4853
-        pixel_y: 3603
-        latitude: 48.8652929437
-        longitude: 2.3563777809        
+        metro_line_id: 3 	
+        name: Arts-et-Métiers 	 	
+        pixel_x: 4853 	
+        pixel_y:  3603 		
+        sort_position: 17 	
+        latitude: 48.8652929437 	
+        longitude: 2.3563777809            
     MetroStation18:
-        metro_line_id: 15
-        name: Asnieres-Gennevilliers Les Courtilles
-        pixel_x: 1958
-        pixel_y: 679
-        latitude: 48.9301634126
-        longitude: 2.2840744717        
+        metro_line_id: 15 	
+        name: Asnieres-Gennevilliers Les Courtilles 	 	
+        pixel_x: 1958 	
+        pixel_y:  679 		
+        sort_position: 10 	
+        latitude: 48.9301634126 	
+        longitude: 2.2840744717            
     MetroStation19:
-        metro_line_id: 14
-        name: Assemblée Nationale
-        pixel_x: 2714
-        pixel_y: 4330
-        latitude: 48.8608996857
-        longitude: 2.3206322378        
+        metro_line_id: 14 	
+        name: Assemblée Nationale 	 	
+        pixel_x: 2714 	
+        pixel_y:  4330 		
+        sort_position: 15 	
+        latitude: 48.8608996857 	
+        longitude: 2.3206322378            
     MetroStation20:
-        metro_line_id: 8
-        name: Aubervilliers Pantin (4 Chemins)
-        pixel_x: 5965
-        pixel_y: 1589
-        latitude: 48.9038299162
-        longitude: 2.3920219501        
+        metro_line_id: 8 	
+        name: Aubervilliers Pantin (4 Chemins) 	 	
+        pixel_x: 5965 	
+        pixel_y:  1589 		
+        sort_position: 3 	
+        latitude: 48.9038299162 	
+        longitude: 2.3920219501            
     MetroStation21:
-        metro_line_id: 12
-        name: Avenue Emile-Zola
-        pixel_x: 1982
-        pixel_y: 5116
-        latitude: 48.8469642746
-        longitude: 2.2949380752        
+        metro_line_id: 12 	
+        name: Avenue Emile-Zola 	 	
+        pixel_x: 1982 	
+        pixel_y:  5116 		
+        sort_position: 11 	
+        latitude: 48.8469642746 	
+        longitude: 2.2949380752            
     MetroStation22:
-        metro_line_id: 2
-        name: Avron
-        pixel_x: 6149
-        pixel_y: 4390
-        latitude: 48.8509782114
-        longitude: 2.3979801301        
+        metro_line_id: 2 	
+        name: Avron 	 	
+        pixel_x: 6149 	
+        pixel_y:  4390 		
+        sort_position: 23 	
+        latitude: 48.8509782114 	
+        longitude: 2.3979801301            
     MetroStation23:
-        metro_line_id: 10
-        name: Balard
-        pixel_x: 1709
-        pixel_y: 6120
-        latitude: 48.8362754635
-        longitude: 2.2782183270        
+        metro_line_id: 10 	
+        name: Balard 	 	
+        pixel_x: 1709 	
+        pixel_y:  6120 		
+        sort_position: 1 	
+        latitude: 48.8362754635 	
+        longitude: 2.2782183270            
     MetroStation24:
-        metro_line_id: 5
-        name: Barbès-Rochechouart
-        pixel_x: 4518
-        pixel_y: 2273
-        latitude: 48.8836207315
-        longitude: 2.3497371943        
+        metro_line_id: 5 	
+        name: Barbès-Rochechouart 	 	
+        pixel_x: 4518 	
+        pixel_y:  2273 		
+        sort_position: 5 	
+        latitude: 48.8836207315 	
+        longitude: 2.3497371943            
     MetroStation25:
-        metro_line_id: 15
-        name: Basilique de Saint-Denis
-        pixel_x: 4568
-        pixel_y: 718
-        latitude: 48.9366033097
-        longitude: 2.3594147175        
+        metro_line_id: 15 	
+        name: Basilique de Saint-Denis 	 	
+        pixel_x: 4568 	
+        pixel_y:  718 		
+        sort_position: 2 	
+        latitude: 48.9366033097 	
+        longitude: 2.3594147175            
     MetroStation26:
-        metro_line_id: 10
-        name: Bastille
-        pixel_x: 5085
-        pixel_y: 4375
-        latitude: 48.8528417310
-        longitude: 2.3691806051        
+        metro_line_id: 10 	
+        name: Bastille 	 	
+        pixel_x: 5085 	
+        pixel_y:  4375 		
+        sort_position: 21 	
+        latitude: 48.8528417310 	
+        longitude: 2.3691806051            
     MetroStation27:
-        metro_line_id: 7
-        name: Bel-Air
-        pixel_x: 6300
-        pixel_y: 5083
-        latitude: 48.8418961424
-        longitude: 2.4012056271        
+        metro_line_id: 7 	
+        name: Bel-Air 	 	
+        pixel_x: 6300 	
+        pixel_y:  5083 		
+        sort_position: 26 	
+        latitude: 48.8418961424 	
+        longitude: 2.4012056271            
     MetroStation28:
-        metro_line_id: 2
-        name: Belleville
-        pixel_x: 5564
-        pixel_y: 2987
-        latitude: 48.8720416042
-        longitude: 2.3768056077        
+        metro_line_id: 2 	
+        name: Belleville 	 	
+        pixel_x: 5564 	
+        pixel_y:  2987 		
+        sort_position: 17 	
+        latitude: 48.8720416042 	
+        longitude: 2.3768056077            
     MetroStation29:
-        metro_line_id: 1
-        name: Bérault
-        pixel_x: 6962
-        pixel_y: 4988
-        latitude: 48.8453342425
-        longitude: 2.4292384979        
+        metro_line_id: 1 	
+        name: Bérault 	 	
+        pixel_x: 6962 	
+        pixel_y:  4988 		
+        sort_position: 24 	
+        latitude: 48.8453342425 	
+        longitude: 2.4292384979            
     MetroStation30:
-        metro_line_id: 7
-        name: Bercy
-        pixel_x: 5805
-        pixel_y: 5576
-        latitude: 48.8404280893
-        longitude: 2.3795829688        
+        metro_line_id: 7 	
+        name: Bercy 	 	
+        pixel_x: 5805 	
+        pixel_y:  5576 		
+        sort_position: 23 	
+        latitude: 48.8404280893 	
+        longitude: 2.3795829688            
     MetroStation31:
-        metro_line_id: 16
-        name: Bibliotheque-Francois Mitterrand
-        pixel_x: 5764
-        pixel_y: 5969
-        latitude: 48.8296059727
-        longitude: 2.3760926117        
+        metro_line_id: 11 	
+        name: Billancourt 	 	
+        pixel_x: 827 	
+        pixel_y:  6164 		
+        sort_position: 2 	
+        latitude: 48.8319437593 	
+        longitude: 2.2381099971            
     MetroStation32:
-        metro_line_id: 11
-        name: Billancourt
-        pixel_x: 827
-        pixel_y: 6164
-        latitude: 48.8319437593
-        longitude: 2.2381099971        
+        metro_line_id: 7 	
+        name: Bir-Hakeim (Grenelle) 	 	
+        pixel_x: 1710 	
+        pixel_y:  4665 		
+        sort_position: 6 	
+        latitude: 48.8543331586 	
+        longitude: 2.2887828558            
     MetroStation33:
-        metro_line_id: 7
-        name: Bir-Hakeim (Grenelle)
-        pixel_x: 1710
-        pixel_y: 4665
-        latitude: 48.8543331586
-        longitude: 2.2887828558        
+        metro_line_id: 2 	
+        name: Blanche 	 	
+        pixel_x: 3471 	
+        pixel_y:  2257 		
+        sort_position: 10 	
+        latitude: 48.8836536085 	
+        longitude: 2.3316675232            
     MetroStation34:
-        metro_line_id: 2
-        name: Blanche
-        pixel_x: 3471
-        pixel_y: 2257
-        latitude: 48.8836536085
-        longitude: 2.3316675232        
+        metro_line_id: 6 	
+        name: Bobigny-Pablo-Picasso 	 	
+        pixel_x: 7001 	
+        pixel_y:  1711 		
+        sort_position: 1 	
+        latitude: 48.9069699443 	
+        longitude: 2.4496207174            
     MetroStation35:
-        metro_line_id: 6
-        name: Bobigny-Pablo-Picasso
-        pixel_x: 7001
-        pixel_y: 1711
-        latitude: 48.9069699443
-        longitude: 2.4496207174        
+        metro_line_id: 6 	
+        name: Bobigny-Pantin (Raymond Queneau) 	 	
+        pixel_x: 6801 	
+        pixel_y:  1912 		
+        sort_position: 2 	
+        latitude: 48.8952689905 	
+        longitude: 2.4248018777            
     MetroStation36:
-        metro_line_id: 6
-        name: Bobigny-Pantin (Raymond Queneau)
-        pixel_x: 6801
-        pixel_y: 1912
-        latitude: 48.8952689905
-        longitude: 2.4248018777        
+        metro_line_id: 7 	
+        name: Boissière 	 	
+        pixel_x: 1481 	
+        pixel_y:  3721 		
+        sort_position: 3 	
+        latitude: 48.8670270457 	
+        longitude: 2.2904738454            
     MetroStation37:
-        metro_line_id: 7
-        name: Boissière
-        pixel_x: 1481
-        pixel_y: 3721
-        latitude: 48.8670270457
-        longitude: 2.2904738454        
+        metro_line_id: 9 	
+        name: Bolivar 	 	
+        pixel_x: 5701 	
+        pixel_y:  2590 		
+        sort_position: 3 	
+        latitude: 48.8805834299 	
+        longitude: 2.3739778330            
     MetroStation38:
-        metro_line_id: 9
-        name: Bolivar
-        pixel_x: 5701
-        pixel_y: 2590
-        latitude: 48.8805834299
-        longitude: 2.3739778330        
+        metro_line_id: 11 	
+        name: Bonne Nouvelle 	 	
+        pixel_x: 4409 	
+        pixel_y:  3275 		
+        sort_position: 23 	
+        latitude: 48.8705587205 	
+        longitude: 2.3486795697            
     MetroStation39:
-        metro_line_id: 11
-        name: Bonne Nouvelle
-        pixel_x: 4409
-        pixel_y: 3275
-        latitude: 48.8705587205
-        longitude: 2.3486795697        
+        metro_line_id: 9 	
+        name: Botzaris 	 	
+        pixel_x: 6142 	
+        pixel_y:  2651 		
+        sort_position: 5 	
+        latitude: 48.8793377265 	
+        longitude: 2.3887339915            
     MetroStation40:
-        metro_line_id: 9
-        name: Botzaris
-        pixel_x: 6142
-        pixel_y: 2651
-        latitude: 48.8793377265
-        longitude: 2.3887339915        
+        metro_line_id: 10 	
+        name: Boucicaut 	 	
+        pixel_x: 2085 	
+        pixel_y:  5761 		
+        sort_position: 3 	
+        latitude: 48.8412408954 	
+        longitude: 2.2876343175            
     MetroStation41:
-        metro_line_id: 10
-        name: Boucicaut
-        pixel_x: 2085
-        pixel_y: 5761
-        latitude: 48.8412408954
-        longitude: 2.2876343175        
+        metro_line_id: 12 	
+        name: Boulogne-Jean-Jaurès 	 	
+        pixel_x: 709 	
+        pixel_y:  5539 		
+        sort_position: 2 	
+        latitude: 48.8422216613 	
+        longitude: 2.2388358502            
     MetroStation42:
-        metro_line_id: 12
-        name: Boulogne-Jean-Jaurès
-        pixel_x: 709
-        pixel_y: 5539
-        latitude: 48.8422216613
-        longitude: 2.2388358502        
+        metro_line_id: 12 	
+        name: Boulogne Pont de Saint-Cloud 	 	
+        pixel_x: 562 	
+        pixel_y:  5685 		
+        sort_position: 1 	
+        latitude: 48.8407983651 	
+        longitude: 2.2282112904            
     MetroStation43:
-        metro_line_id: 12
-        name: Boulogne Pont de Saint-Cloud
-        pixel_x: 562
-        pixel_y: 5685
-        latitude: 48.8407983651
-        longitude: 2.2282112904        
+        metro_line_id: 3 	
+        name: Bourse 	 	
+        pixel_x: 3792 	
+        pixel_y:  3690 		
+        sort_position: 14 	
+        latitude: 48.8687976839 	
+        longitude: 2.3412326833            
     MetroStation44:
-        metro_line_id: 3
-        name: Bourse
-        pixel_x: 3792
-        pixel_y: 3690
-        latitude: 48.8687976839
-        longitude: 2.3412326833        
+        metro_line_id: 6 	
+        name: Bréguet-Sabin 	 	
+        pixel_x: 5255 	
+        pixel_y:  4163 		
+        sort_position: 15 	
+        latitude: 48.8565162146 	
+        longitude: 2.3709371333            
     MetroStation45:
-        metro_line_id: 6
-        name: Bréguet-Sabin
-        pixel_x: 5255
-        pixel_y: 4163
-        latitude: 48.8565162146
-        longitude: 2.3709371333        
+        metro_line_id: 15 	
+        name: Brochant 	 	
+        pixel_x: 2921 	
+        pixel_y:  1866 		
+        sort_position: 15 	
+        latitude: 48.8903794212 	
+        longitude: 2.3200276516            
     MetroStation46:
-        metro_line_id: 15
-        name: Brochant
-        pixel_x: 2921
-        pixel_y: 1866
-        latitude: 48.8903794212
-        longitude: 2.3200276516        
+        metro_line_id: 9 	
+        name: Buttes-Chaumont 	 	
+        pixel_x: 5996 	
+        pixel_y:  2651 		
+        sort_position: 4 	
+        latitude: 48.8777769835 	
+        longitude: 2.3811293196            
     MetroStation47:
-        metro_line_id: 9
-        name: Buttes-Chaumont
-        pixel_x: 5996
-        pixel_y: 2651
-        latitude: 48.8777769835
-        longitude: 2.3811293196        
+        metro_line_id: 11 	
+        name: Buzenval 	 	
+        pixel_x: 6483 	
+        pixel_y:  4438 		
+        sort_position: 32 	
+        latitude: 48.8517360616 	
+        longitude: 2.4010248254            
     MetroStation48:
-        metro_line_id: 11
-        name: Buzenval
-        pixel_x: 6483
-        pixel_y: 4438
-        latitude: 48.8517360616
-        longitude: 2.4010248254        
+        metro_line_id: 8 	
+        name: Cadet 	 	
+        pixel_x: 3990 	
+        pixel_y:  2807 		
+        sort_position: 13 	
+        latitude: 48.8754751871 	
+        longitude: 2.3430589538            
     MetroStation49:
-        metro_line_id: 8
-        name: Cadet
-        pixel_x: 3990
-        pixel_y: 2807
-        latitude: 48.8754751871
-        longitude: 2.3430589538        
+        metro_line_id: 7 	
+        name: Cambronne 	 	
+        pixel_x: 2527 	
+        pixel_y:  5154 		
+        sort_position: 9 	
+        latitude: 48.8474563363 	
+        longitude: 2.3018078042            
     MetroStation50:
-        metro_line_id: 7
-        name: Cambronne
-        pixel_x: 2527
-        pixel_y: 5154
-        latitude: 48.8474563363
-        longitude: 2.3018078042        
+        metro_line_id: 6 	
+        name: Campo-Formio 	 	
+        pixel_x: 4960 	
+        pixel_y:  5668 		
+        sort_position: 20 	
+        latitude: 48.8357759722 	
+        longitude: 2.3581531411            
     MetroStation51:
-        metro_line_id: 6
-        name: Campo-Formio
-        pixel_x: 4960
-        pixel_y: 5668
-        latitude: 48.8357759722
-        longitude: 2.3581531411        
+        metro_line_id: 12 	
+        name: Cardinal-Lemoine 	 	
+        pixel_x: 4405 	
+        pixel_y:  5016 		
+        sort_position: 21 	
+        latitude: 48.8463912486 	
+        longitude: 2.3514780732            
     MetroStation52:
-        metro_line_id: 12
-        name: Cardinal-Lemoine
-        pixel_x: 4405
-        pixel_y: 5016
-        latitude: 48.8463912486
-        longitude: 2.3514780732        
+        metro_line_id: 15 	
+        name: Carrefour-Pleyel 	 	
+        pixel_x: 3636 	
+        pixel_y:  1029 		
+        sort_position: 4 	
+        latitude: 48.9194552102 	
+        longitude: 2.3432002491            
     MetroStation53:
-        metro_line_id: 15
-        name: Carrefour-Pleyel
-        pixel_x: 3636
-        pixel_y: 1029
-        latitude: 48.9194552102
-        longitude: 2.3432002491        
+        metro_line_id: 8 	
+        name: Censier-Daubenton 	 	
+        pixel_x: 4480 	
+        pixel_y:  5502 		
+        sort_position: 25 	
+        latitude: 48.8405358795 	
+        longitude: 2.3514288121            
     MetroStation54:
-        metro_line_id: 8
-        name: Censier-Daubenton
-        pixel_x: 4480
-        pixel_y: 5502
-        latitude: 48.8405358795
-        longitude: 2.3514288121        
+        metro_line_id: 1 	
+        name: Champs-Elysées-Clémenceau 	 	
+        pixel_x: 2544 	
+        pixel_y:  3802 		
+        sort_position: 10 	
+        latitude: 48.8674114214 	
+        longitude: 2.3139594501            
     MetroStation55:
-        metro_line_id: 1
-        name: Champs-Elysées-Clémenceau
-        pixel_x: 2544
-        pixel_y: 3802
-        latitude: 48.8674114214
-        longitude: 2.3139594501        
+        metro_line_id: 12 	
+        name: Chardon-Lagache 	 	
+        pixel_x: 1206 	
+        pixel_y:  5490 		
+        sort_position: 4 	
+        latitude: 48.8447174018 	
+        longitude: 2.2665416873            
     MetroStation56:
-        metro_line_id: 12
-        name: Chardon-Lagache
-        pixel_x: 1206
-        pixel_y: 5490
-        latitude: 48.8447174018
-        longitude: 2.2665416873        
+        metro_line_id: 10 	
+        name: Charenton-Ecoles 	 	
+        pixel_x: 6529 	
+        pixel_y:  6073 		
+        sort_position: 31 	
+        latitude: 48.8213638104 	
+        longitude: 2.4140743468            
     MetroStation57:
-        metro_line_id: 10
-        name: Charenton-Ecoles
-        pixel_x: 6529
-        pixel_y: 6073
-        latitude: 48.8213638104
-        longitude: 2.4140743468        
+        metro_line_id: 7 	
+        name: Charles de Gaulle-Etoile 	 	
+        pixel_x: 1908 	
+        pixel_y:  3245 		
+        sort_position: 1 	
+        latitude: 48.8744076037 	
+        longitude: 2.2957626847            
     MetroStation58:
-        metro_line_id: 7
-        name: Charles de Gaulle-Etoile
-        pixel_x: 1908
-        pixel_y: 3245
-        latitude: 48.8744076037
-        longitude: 2.2957626847        
+        metro_line_id: 12 	
+        name: Charles Michels 	 	
+        pixel_x: 1867 	
+        pixel_y:  5219 		
+        sort_position: 10 	
+        latitude: 48.8463362741 	
+        longitude: 2.2863323856            
     MetroStation59:
-        metro_line_id: 12
-        name: Charles Michels
-        pixel_x: 1867
-        pixel_y: 5219
-        latitude: 48.8463362741
-        longitude: 2.2863323856        
+        metro_line_id: 11 	
+        name: Charonne 	 	
+        pixel_x: 5935 	
+        pixel_y:  4225 		
+        sort_position: 29 	
+        latitude: 48.8547662368 	
+        longitude: 2.3852706478            
     MetroStation60:
-        metro_line_id: 11
-        name: Charonne
-        pixel_x: 5935
-        pixel_y: 4225
-        latitude: 48.8547662368
-        longitude: 2.3852706478        
+        metro_line_id: 5 	
+        name: Château d'Eau 	 	
+        pixel_x: 4701 	
+        pixel_y:  2955 		
+        sort_position: 8 	
+        latitude: 48.8725890109 	
+        longitude: 2.3554703688            
     MetroStation61:
-        metro_line_id: 5
-        name: Château d'Eau
-        pixel_x: 4701
-        pixel_y: 2955
-        latitude: 48.8725890109
-        longitude: 2.3554703688        
+        metro_line_id: 1 	
+        name: Château de Vincennes 	 	
+        pixel_x: 7021 	
+        pixel_y:  5038 		
+        sort_position: 25 	
+        latitude: 48.8445363117 	
+        longitude: 2.4395097055            
     MetroStation62:
-        metro_line_id: 1
-        name: Château de Vincennes
-        pixel_x: 7021
-        pixel_y: 5038
-        latitude: 48.8445363117
-        longitude: 2.4395097055        
+        metro_line_id: 8 	
+        name: Château Landon 	 	
+        pixel_x: 5158 	
+        pixel_y:  2628 		
+        sort_position: 10 	
+        latitude: 48.8783126784 	
+        longitude: 2.3622989086            
     MetroStation63:
-        metro_line_id: 8
-        name: Château Landon
-        pixel_x: 5158
-        pixel_y: 2628
-        latitude: 48.8783126784
-        longitude: 2.3622989086        
+        metro_line_id: 5 	
+        name: Château Rouge 	 	
+        pixel_x: 4304 	
+        pixel_y:  2066 		
+        sort_position: 4 	
+        latitude: 48.8871760671 	
+        longitude: 2.3498266334            
     MetroStation64:
-        metro_line_id: 5
-        name: Château Rouge
-        pixel_x: 4304
-        pixel_y: 2066
-        latitude: 48.8871760671
-        longitude: 2.3498266334        
+        metro_line_id: 8 	
+        name: Châtelet 	 	
+        pixel_x: 4158 	
+        pixel_y:  4101 		
+        sort_position: 20 	
+        latitude: 48.8585195224 	
+        longitude: 2.3471194010            
     MetroStation65:
-        metro_line_id: 8
-        name: Châtelet
-        pixel_x: 4158
-        pixel_y: 4101
-        latitude: 48.8585195224
-        longitude: 2.3471194010        
+        metro_line_id: 15 	
+        name: Châtillon Montrouge 	 	
+        pixel_x: 2821 	
+        pixel_y:  6916 		
+        sort_position: 32 	
+        latitude: 48.8103147676 	
+        longitude: 2.3012480220            
     MetroStation66:
-        metro_line_id: 15
-        name: Châtillon Montrouge
-        pixel_x: 2821
-        pixel_y: 6916
-        latitude: 48.8103147676
-        longitude: 2.3012480220        
+        metro_line_id: 11 	
+        name: Chaussée d'Antin (La Fayette) 	 	
+        pixel_x: 3517 	
+        pixel_y:  3268 		
+        sort_position: 20 	
+        latitude: 48.8728970366 	
+        longitude: 2.3335011614            
     MetroStation67:
-        metro_line_id: 11
-        name: Chaussée d'Antin (La Fayette)
-        pixel_x: 3517
-        pixel_y: 3268
-        latitude: 48.8728970366
-        longitude: 2.3335011614        
+        metro_line_id: 10 	
+        name: Chemin Vert 	 	
+        pixel_x: 5044 	
+        pixel_y:  4168 		
+        sort_position: 20 	
+        latitude: 48.8575640615 	
+        longitude: 2.3679345256            
     MetroStation68:
-        metro_line_id: 10
-        name: Chemin Vert
-        pixel_x: 5044
-        pixel_y: 4168
-        latitude: 48.8575640615
-        longitude: 2.3679345256        
+        metro_line_id: 7 	
+        name: Chevaleret 	 	
+        pixel_x: 5297 	
+        pixel_y:  5932 		
+        sort_position: 21 	
+        latitude: 48.8344079355 	
+        longitude: 2.3671652407            
     MetroStation69:
-        metro_line_id: 7
-        name: Chevaleret
-        pixel_x: 5297
-        pixel_y: 5932
-        latitude: 48.8344079355
-        longitude: 2.3671652407        
+        metro_line_id: 5 	
+        name: Cité 	 	
+        pixel_x: 4039 	
+        pixel_y:  4294 		
+        sort_position: 14 	
+        latitude: 48.8551005858 	
+        longitude: 2.3467203742            
     MetroStation70:
-        metro_line_id: 5
-        name: Cité
-        pixel_x: 4039
-        pixel_y: 4294
-        latitude: 48.8551005858
-        longitude: 2.3467203742        
+        metro_line_id: 12 	
+        name: Cluny-La Sorbonne 	 	
+        pixel_x: 4083 	
+        pixel_y:  4752 		
+        sort_position: 19 	
+        latitude: 48.8510383641 	
+        longitude: 2.3452215824            
     MetroStation71:
-        metro_line_id: 12
-        name: Cluny-La Sorbonne
-        pixel_x: 4083
-        pixel_y: 4752
-        latitude: 48.8510383641
-        longitude: 2.3452215824        
+        metro_line_id: 2 	
+        name: Colonel Fabien 	 	
+        pixel_x: 5565 	
+        pixel_y:  2722 		
+        sort_position: 16 	
+        latitude: 48.8779422921 	
+        longitude: 2.3701471378            
     MetroStation72:
-        metro_line_id: 2
-        name: Colonel Fabien
-        pixel_x: 5565
-        pixel_y: 2722
-        latitude: 48.8779422921
-        longitude: 2.3701471378        
+        metro_line_id: 10 	
+        name: Commerce 	 	
+        pixel_x: 2171 	
+        pixel_y:  5328 		
+        sort_position: 5 	
+        latitude: 48.8448111918 	
+        longitude: 2.2933534501            
     MetroStation73:
-        metro_line_id: 10
-        name: Commerce
-        pixel_x: 2171
-        pixel_y: 5328
-        latitude: 48.8448111918
-        longitude: 2.2933534501        
+        metro_line_id: 10 	
+        name: Concorde 	 	
+        pixel_x: 2666 	
+        pixel_y:  3935 		
+        sort_position: 10 	
+        latitude: 48.8661829956 	
+        longitude: 2.3232998786            
     MetroStation74:
-        metro_line_id: 10
-        name: Concorde
-        pixel_x: 2666
-        pixel_y: 3935
-        latitude: 48.8661829956
-        longitude: 2.3232998786        
+        metro_line_id: 14 	
+        name: Convention 	 	
+        pixel_x: 2422 	
+        pixel_y:  6057 		
+        sort_position: 26 	
+        latitude: 48.8374696207 	
+        longitude: 2.2968995828            
     MetroStation75:
-        metro_line_id: 14
-        name: Convention
-        pixel_x: 2422
-        pixel_y: 6057
-        latitude: 48.8374696207
-        longitude: 2.2968995828        
+        metro_line_id: 8 	
+        name: Corentin-Cariou 	 	
+        pixel_x: 5642 	
+        pixel_y:  1909 		
+        sort_position: 5 	
+        latitude: 48.8949061258 	
+        longitude: 2.3824455027            
     MetroStation76:
-        metro_line_id: 8
-        name: Corentin-Cariou
-        pixel_x: 5642
-        pixel_y: 1909
-        latitude: 48.8949061258
-        longitude: 2.3824455027        
+        metro_line_id: 14 	
+        name: Corentin-Celton 	 	
+        pixel_x: 1951 	
+        pixel_y:  6508 		
+        sort_position: 28 	
+        latitude: 48.8272434444 	
+        longitude: 2.2793067037            
     MetroStation77:
-        metro_line_id: 14
-        name: Corentin-Celton
-        pixel_x: 1951
-        pixel_y: 6508
-        latitude: 48.8272434444
-        longitude: 2.2793067037        
+        metro_line_id: 7 	
+        name: Corvisart 	 	
+        pixel_x: 4602 	
+        pixel_y:  5940 		
+        sort_position: 18 	
+        latitude: 48.8296116849 	
+        longitude: 2.3494383273            
     MetroStation78:
-        metro_line_id: 7
-        name: Corvisart
-        pixel_x: 4602
-        pixel_y: 5940
-        latitude: 48.8296116849
-        longitude: 2.3494383273        
+        metro_line_id: 2 	
+        name: Courcelles 	 	
+        pixel_x: 2312 	
+        pixel_y:  2847 		
+        sort_position: 5 	
+        latitude: 48.8792362488 	
+        longitude: 2.3036051529            
     MetroStation79:
-        metro_line_id: 2
-        name: Courcelles
-        pixel_x: 2312
-        pixel_y: 2847
-        latitude: 48.8792362488
-        longitude: 2.3036051529        
+        metro_line_id: 2 	
+        name: Couronnes 	 	
+        pixel_x: 5728 	
+        pixel_y:  3196 		
+        sort_position: 18 	
+        latitude: 48.8689698758 	
+        longitude: 2.3798685187            
     MetroStation80:
-        metro_line_id: 2
-        name: Couronnes
-        pixel_x: 5728
-        pixel_y: 3196
-        latitude: 48.8689698758
-        longitude: 2.3798685187        
+        metro_line_id: 10 	
+        name: Créteil-L'Echat (Hôpital Henri Mondor) 	 	
+        pixel_x: 6846 	
+        pixel_y:  6666 		
+        sort_position: 35 	
+        latitude: 48.7964623870 	
+        longitude: 2.4490618710            
     MetroStation81:
-        metro_line_id: 16
-        name: Cour Saint-Emilion
-        pixel_x: 5915
-        pixel_y: 5810
-        latitude: 48.8334843072
-        longitude: 2.3876129884        
+        metro_line_id: 10 	
+        name: Créteil-Préfecture (Hôtel de Ville) 	 	
+        pixel_x: 6851 	
+        pixel_y:  6935 		
+        sort_position: 37 	
+        latitude: 48.7797484034 	
+        longitude: 2.4591442675            
     MetroStation82:
-        metro_line_id: 10
-        name: Créteil-L'Echat (Hôpital Henri Mondor)
-        pixel_x: 6846
-        pixel_y: 6666
-        latitude: 48.7964623870
-        longitude: 2.4490618710        
+        metro_line_id: 10 	
+        name: Créteil-Université 	 	
+        pixel_x: 6846 	
+        pixel_y:  6802 		
+        sort_position: 36 	
+        latitude: 48.7893506911 	
+        longitude: 2.4514473975            
     MetroStation83:
-        metro_line_id: 10
-        name: Créteil-Préfecture (Hôtel de Ville)
-        pixel_x: 6851
-        pixel_y: 6935
-        latitude: 48.7797484034
-        longitude: 2.4591442675        
+        metro_line_id: 8 	
+        name: Crimée 	 	
+        pixel_x: 5526 	
+        pixel_y:  2028 		
+        sort_position: 6 	
+        latitude: 48.8906811629 	
+        longitude: 2.3768152895            
     MetroStation84:
-        metro_line_id: 10
-        name: Créteil-Université
-        pixel_x: 6846
-        pixel_y: 6802
-        latitude: 48.7893506911
-        longitude: 2.4514473975        
+        metro_line_id: 11 	
+        name: Croix-de-Chavaux (Jacques Duclos) 	 	
+        pixel_x: 6908 	
+        pixel_y:  4024 		
+        sort_position: 36 	
+        latitude: 48.8579269412 	
+        longitude: 2.4360983031            
     MetroStation85:
-        metro_line_id: 8
-        name: Crimée
-        pixel_x: 5526
-        pixel_y: 2028
-        latitude: 48.8906811629
-        longitude: 2.3768152895        
+        metro_line_id: 9 	
+        name: Danube 	 	
+        pixel_x: 6382 	
+        pixel_y:  2468 		
+        sort_position: 8 	
+        latitude: 48.8820231366 	
+        longitude: 2.3927020524            
     MetroStation86:
-        metro_line_id: 11
-        name: Croix-de-Chavaux (Jacques Duclos)
-        pixel_x: 6908
-        pixel_y: 4024
-        latitude: 48.8579269412
-        longitude: 2.4360983031        
+        metro_line_id: 10 	
+        name: Daumesnil (Félix Eboué) 	 	
+        pixel_x: 6154 	
+        pixel_y:  5218 		
+        sort_position: 26 	
+        latitude: 48.8393629125 	
+        longitude: 2.3958459081            
     MetroStation87:
-        metro_line_id: 9
-        name: Danube
-        pixel_x: 6382
-        pixel_y: 2468
-        latitude: 48.8820231366
-        longitude: 2.3927020524        
+        metro_line_id: 7 	
+        name: Denfert-Rochereau 	 	
+        pixel_x: 4007 	
+        pixel_y:  5694 		
+        sort_position: 15 	
+        latitude: 48.8335919036 	
+        longitude: 2.3318934600            
     MetroStation88:
-        metro_line_id: 10
-        name: Daumesnil (Félix Eboué)
-        pixel_x: 6154
-        pixel_y: 5218
-        latitude: 48.8393629125
-        longitude: 2.3958459081        
+        metro_line_id: 7 	
+        name: Dugommier 	 	
+        pixel_x: 5984 	
+        pixel_y:  5416 		
+        sort_position: 24 	
+        latitude: 48.8389122332 	
+        longitude: 2.3889525722            
     MetroStation89:
-        metro_line_id: 7
-        name: Denfert-Rochereau
-        pixel_x: 4007
-        pixel_y: 5694
-        latitude: 48.8335919036
-        longitude: 2.3318934600        
+        metro_line_id: 7 	
+        name: Dupleix 	 	
+        pixel_x: 1893 	
+        pixel_y:  4877 		
+        sort_position: 7 	
+        latitude: 48.8508056366 	
+        longitude: 2.2927695871            
     MetroStation90:
-        metro_line_id: 7
-        name: Dugommier
-        pixel_x: 5984
-        pixel_y: 5416
-        latitude: 48.8389122332
-        longitude: 2.3889525722        
+        metro_line_id: 15 	
+        name: Duroc 	 	
+        pixel_x: 2904 	
+        pixel_y:  5159 		
+        sort_position: 24 	
+        latitude: 48.8467835319 	
+        longitude: 2.3167228570            
     MetroStation91:
-        metro_line_id: 7
-        name: Dupleix
-        pixel_x: 1893
-        pixel_y: 4877
-        latitude: 48.8508056366
-        longitude: 2.2927695871        
+        metro_line_id: 10 	
+        name: Ecole Militaire 	 	
+        pixel_x: 2177 	
+        pixel_y:  4693 		
+        sort_position: 7 	
+        latitude: 48.8545185491 	
+        longitude: 2.3055438162            
     MetroStation92:
-        metro_line_id: 15
-        name: Duroc
-        pixel_x: 2904
-        pixel_y: 5159
-        latitude: 48.8467835319
-        longitude: 2.3167228570        
+        metro_line_id: 10 	
+        name: Ecole Vétérinaire de Maisons-Alfort 	 	
+        pixel_x: 6703 	
+        pixel_y:  6249 		
+        sort_position: 32 	
+        latitude: 48.8151517943 	
+        longitude: 2.4207563593            
     MetroStation93:
-        metro_line_id: 10
-        name: Ecole Militaire
-        pixel_x: 2177
-        pixel_y: 4693
-        latitude: 48.8545185491
-        longitude: 2.3055438162        
+        metro_line_id: 7 	
+        name: Edgar-Quinet 	 	
+        pixel_x: 3553 	
+        pixel_y:  5486 		
+        sort_position: 13 	
+        latitude: 48.8403339878 	
+        longitude: 2.3261713916            
     MetroStation94:
-        metro_line_id: 10
-        name: Ecole Vétérinaire de Maisons-Alfort
-        pixel_x: 6703
-        pixel_y: 6249
-        latitude: 48.8151517943
-        longitude: 2.4207563593        
+        metro_line_id: 12 	
+        name: Eglise d'Auteuil 	 	
+        pixel_x: 1304 	
+        pixel_y:  5281 		
+        sort_position: 6 	
+        latitude: 48.8471813582 	
+        longitude: 2.2689009878            
     MetroStation95:
-        metro_line_id: 7
-        name: Edgar-Quinet
-        pixel_x: 3553
-        pixel_y: 5486
-        latitude: 48.8403339878
-        longitude: 2.3261713916        
+        metro_line_id: 6 	
+        name: Eglise de Pantin 	 	
+        pixel_x: 6665 	
+        pixel_y:  2034 		
+        sort_position: 3 	
+        latitude: 48.8931139817 	
+        longitude: 2.4132856803            
     MetroStation96:
-        metro_line_id: 12
-        name: Eglise d'Auteuil
-        pixel_x: 1304
-        pixel_y: 5281
-        latitude: 48.8471813582
-        longitude: 2.2689009878        
+        metro_line_id: 1 	
+        name: Esplanade de la Défense 	 	
+        pixel_x: 1055 	
+        pixel_y:  2313 		
+        sort_position: 2 	
+        latitude: 48.8878431221 	
+        longitude: 2.2504423247            
     MetroStation97:
-        metro_line_id: 6
-        name: Eglise de Pantin
-        pixel_x: 6665
-        pixel_y: 2034
-        latitude: 48.8931139817
-        longitude: 2.4132856803        
+        metro_line_id: 5 	
+        name: Etienne Marcel 	 	
+        pixel_x: 4168 	
+        pixel_y:  3763 		
+        sort_position: 11 	
+        latitude: 48.8634946590 	
+        longitude: 2.3486698400            
     MetroStation98:
-        metro_line_id: 1
-        name: Esplanade de la Défense
-        pixel_x: 1055
-        pixel_y: 2313
-        latitude: 48.8878431221
-        longitude: 2.2504423247        
+        metro_line_id: 3 	
+        name: Europe 	 	
+        pixel_x: 2855 	
+        pixel_y:  2707 		
+        sort_position: 9 	
+        latitude: 48.8787098769 	
+        longitude: 2.3228248406            
     MetroStation99:
-        metro_line_id: 5
-        name: Etienne Marcel
-        pixel_x: 4168
-        pixel_y: 3763
-        latitude: 48.8634946590
-        longitude: 2.3486698400        
+        metro_line_id: 11 	
+        name: Exelmans 	 	
+        pixel_x: 1073 	
+        pixel_y:  5689 		
+        sort_position: 5 	
+        latitude: 48.8424273379 	
+        longitude: 2.2597366158            
     MetroStation100:
-        metro_line_id: 3
-        name: Europe
-        pixel_x: 2855
-        pixel_y: 2707
-        latitude: 48.8787098769
-        longitude: 2.3228248406        
+        metro_line_id: 10 	
+        name: Faidherbe-Chaligny 	 	
+        pixel_x: 5611 	
+        pixel_y:  4682 		
+        sort_position: 23 	
+        latitude: 48.8502384504 	
+        longitude: 2.3842745810            
     MetroStation101:
-        metro_line_id: 11
-        name: Exelmans
-        pixel_x: 1073
-        pixel_y: 5689
-        latitude: 48.8424273379
-        longitude: 2.2597366158        
+        metro_line_id: 14 	
+        name: Falguière 	 	
+        pixel_x: 3089 	
+        pixel_y:  5400 		
+        sort_position: 22 	
+        latitude: 48.8446378942 	
+        longitude: 2.3174964687            
     MetroStation102:
-        metro_line_id: 10
-        name: Faidherbe-Chaligny
-        pixel_x: 5611
-        pixel_y: 4682
-        latitude: 48.8502384504
-        longitude: 2.3842745810        
+        metro_line_id: 10 	
+        name: Félix Faure 	 	
+        pixel_x: 2165 	
+        pixel_y:  5554 		
+        sort_position: 4 	
+        latitude: 48.8429772289 	
+        longitude: 2.2919978878            
     MetroStation103:
-        metro_line_id: 14
-        name: Falguière
-        pixel_x: 3089
-        pixel_y: 5400
-        latitude: 48.8446378942
-        longitude: 2.3174964687        
+        metro_line_id: 10 	
+        name: Filles du Calvaire 	 	
+        pixel_x: 5051 	
+        pixel_y:  3746 		
+        sort_position: 18 	
+        latitude: 48.8633028923 	
+        longitude: 2.3664531380            
     MetroStation104:
-        metro_line_id: 10
-        name: Félix Faure
-        pixel_x: 2165
-        pixel_y: 5554
-        latitude: 48.8429772289
-        longitude: 2.2919978878        
+        metro_line_id: 8 	
+        name: Fort d'Aubervilliers 	 	
+        pixel_x: 6170 	
+        pixel_y:  1352 		
+        sort_position: 2 	
+        latitude: 48.9146921997 	
+        longitude: 2.4041771014            
     MetroStation105:
-        metro_line_id: 10
-        name: Filles du Calvaire
-        pixel_x: 5051
-        pixel_y: 3746
-        latitude: 48.8633028923
-        longitude: 2.3664531380        
+        metro_line_id: 11 	
+        name: Franklin-Roosevelt 	 	
+        pixel_x: 2379 	
+        pixel_y:  3651 		
+        sort_position: 15 	
+        latitude: 48.8693052286 	
+        longitude: 2.3083087645            
     MetroStation106:
-        metro_line_id: 8
-        name: Fort d'Aubervilliers
-        pixel_x: 6170
-        pixel_y: 1352
-        latitude: 48.9146921997
-        longitude: 2.4041771014        
+        metro_line_id: 14 	
+        name: Front Populaire 	 	
+        pixel_x: 5199 	
+        pixel_y:  1490 		
+        sort_position: 1 	
+        latitude: 48.9065795187 	
+        longitude: 2.3658753917            
     MetroStation107:
-        metro_line_id: 11
-        name: Franklin-Roosevelt
-        pixel_x: 2379
-        pixel_y: 3651
-        latitude: 48.8693052286
-        longitude: 2.3083087645        
+        metro_line_id: 22 	
+        name: Funiculaire Gare basse 	 	
+        pixel_x: 4088 	
+        pixel_y:  2205 		
+        sort_position: 1 	
+        latitude: 48.8844354700 	
+        longitude: 2.3434006427            
     MetroStation108:
-        metro_line_id: 14
-        name: Front Populaire
-        pixel_x: 5199
-        pixel_y: 1490
-        latitude: 48.9065795187
-        longitude: 2.3658753917        
+        metro_line_id: 22 	
+        name: Funiculaire Gare haute 	 	
+        pixel_x: 4088 	
+        pixel_y:  2112 		
+        sort_position: 2 	
+        latitude: 48.8856217865 	
+        longitude: 2.3433462725            
     MetroStation109:
-        metro_line_id: 22
-        name: Funiculaire Gare basse
-        pixel_x: 4088
-        pixel_y: 2205
-        latitude: 48.8844354700
-        longitude: 2.3434006427        
+        metro_line_id: 15 	
+        name: Gabriel-Péri 	 	
+        pixel_x: 2193 	
+        pixel_y:  1143 		
+        sort_position: 12 	
+        latitude: 48.9162335021 	
+        longitude: 2.2949237642            
     MetroStation110:
-        metro_line_id: 22
-        name: Funiculaire Gare haute
-        pixel_x: 4088
-        pixel_y: 2112
-        latitude: 48.8856217865
-        longitude: 2.3433462725        
+        metro_line_id: 15 	
+        name: Gaité 	 	
+        pixel_x: 3431 	
+        pixel_y:  5732 		
+        sort_position: 26 	
+        latitude: 48.8384911503 	
+        longitude: 2.3225827798            
     MetroStation111:
-        metro_line_id: 15
-        name: Gabriel-Péri
-        pixel_x: 2193
-        pixel_y: 1143
-        latitude: 48.9162335021
-        longitude: 2.2949237642        
+        metro_line_id: 3 	
+        name: Gallieni (Parc de Bagnolet) 	 	
+        pixel_x: 6996 	
+        pixel_y:  3647 		
+        sort_position: 25 	
+        latitude: 48.8633345779 	
+        longitude: 2.4156826043            
     MetroStation112:
-        metro_line_id: 15
-        name: Gaité
-        pixel_x: 3431
-        pixel_y: 5732
-        latitude: 48.8384911503
-        longitude: 2.3225827798        
+        metro_line_id: 3 	
+        name: Gambetta 	 	
+        pixel_x: 6441 	
+        pixel_y:  3647 		
+        sort_position: 23 	
+        latitude: 48.8648347783 	
+        longitude: 2.3984622387            
     MetroStation113:
-        metro_line_id: 3
-        name: Gallieni (Parc de Bagnolet)
-        pixel_x: 6996
-        pixel_y: 3647
-        latitude: 48.8633345779
-        longitude: 2.4156826043        
+        metro_line_id: 6 	
+        name: Gare d'Austerlitz 	 	
+        pixel_x: 5076 	
+        pixel_y:  5300 		
+        sort_position: 18 	
+        latitude: 48.8431055835 	
+        longitude: 2.3643130482            
     MetroStation114:
-        metro_line_id: 3
-        name: Gambetta
-        pixel_x: 6441
-        pixel_y: 3647
-        latitude: 48.8648347783
-        longitude: 2.3984622387        
+        metro_line_id: 8 	
+        name: Gare de l'Est (Verdun) 	 	
+        pixel_x: 4908 	
+        pixel_y:  2743 		
+        sort_position: 11 	
+        latitude: 48.8760613055 	
+        longitude: 2.3579186772            
     MetroStation115:
-        metro_line_id: 6
-        name: Gare d'Austerlitz
-        pixel_x: 5076
-        pixel_y: 5300
-        latitude: 48.8431055835
-        longitude: 2.3643130482        
+        metro_line_id: 1 	
+        name: Gare de Lyon 	 	
+        pixel_x: 5466 	
+        pixel_y:  5019 		
+        sort_position: 19 	
+        latitude: 48.8447045451 	
+        longitude: 2.3740659075            
     MetroStation116:
-        metro_line_id: 8
-        name: Gare de l'Est (Verdun)
-        pixel_x: 4908
-        pixel_y: 2743
-        latitude: 48.8760613055
-        longitude: 2.3579186772        
+        metro_line_id: 6 	
+        name: Gare du Nord 	 	
+        pixel_x: 4936 	
+        pixel_y:  2433 		
+        sort_position: 10 	
+        latitude: 48.8799654433 	
+        longitude: 2.3547030784            
     MetroStation117:
-        metro_line_id: 1
-        name: Gare de Lyon
-        pixel_x: 5466
-        pixel_y: 5019
-        latitude: 48.8447045451
-        longitude: 2.3740659075        
+        metro_line_id: 15 	
+        name: Garibaldi 	 	
+        pixel_x: 3266 	
+        pixel_y:  1396 		
+        sort_position: 6 	
+        latitude: 48.9060316198 	
+        longitude: 2.3317332760            
     MetroStation118:
-        metro_line_id: 6
-        name: Gare du Nord
-        pixel_x: 4936
-        pixel_y: 2433
-        latitude: 48.8799654433
-        longitude: 2.3547030784        
+        metro_line_id: 1 	
+        name: George V 	 	
+        pixel_x: 2172 	
+        pixel_y:  3423 		
+        sort_position: 8 	
+        latitude: 48.8719825732 	
+        longitude: 2.3004626834            
     MetroStation119:
-        metro_line_id: 15
-        name: Garibaldi
-        pixel_x: 3266
-        pixel_y: 1396
-        latitude: 48.9060316198
-        longitude: 2.3317332760        
+        metro_line_id: 7 	
+        name: Glacière 	 	
+        pixel_x: 4361 	
+        pixel_y:  5946 		
+        sort_position: 17 	
+        latitude: 48.8313647071 	
+        longitude: 2.3439388943            
     MetroStation120:
-        metro_line_id: 1
-        name: George V
-        pixel_x: 2172
-        pixel_y: 3423
-        latitude: 48.8719825732
-        longitude: 2.3004626834        
+        metro_line_id: 13 	
+        name: Goncourt (Hôpital Saint-Louis) 	 	
+        pixel_x: 5366 	
+        pixel_y:  3168 		
+        sort_position: 6 	
+        latitude: 48.8696803934 	
+        longitude: 2.3712726501            
     MetroStation121:
-        metro_line_id: 7
-        name: Glacière
-        pixel_x: 4361
-        pixel_y: 5946
-        latitude: 48.8313647071
-        longitude: 2.3439388943        
+        metro_line_id: 11 	
+        name: Grands Boulevards 	 	
+        pixel_x: 4028 	
+        pixel_y:  3268 		
+        sort_position: 22 	
+        latitude: 48.8714189082 	
+        longitude: 2.3431970107            
     MetroStation122:
-        metro_line_id: 13
-        name: Goncourt (Hôpital Saint-Louis)
-        pixel_x: 5366
-        pixel_y: 3168
-        latitude: 48.8696803934
-        longitude: 2.3712726501        
+        metro_line_id: 15 	
+        name: Guy-Môquet 	 	
+        pixel_x: 3090 	
+        pixel_y:  1833 		
+        sort_position: 8 	
+        latitude: 48.8924675161 	
+        longitude: 2.3272267550            
     MetroStation123:
-        metro_line_id: 11
-        name: Grands Boulevards
-        pixel_x: 4028
-        pixel_y: 3268
-        latitude: 48.8714189082
-        longitude: 2.3431970107        
+        metro_line_id: 11 	
+        name: Havre-Caumartin 	 	
+        pixel_x: 3191 	
+        pixel_y:  3272 		
+        sort_position: 19 	
+        latitude: 48.8733427701 	
+        longitude: 2.3285077503            
     MetroStation124:
-        metro_line_id: 15
-        name: Guy-Môquet
-        pixel_x: 3090
-        pixel_y: 1833
-        latitude: 48.8924675161
-        longitude: 2.3272267550        
+        metro_line_id: 6 	
+        name: Hoche 	 	
+        pixel_x: 6467 	
+        pixel_y:  2170 		
+        sort_position: 4 	
+        latitude: 48.8913165639 	
+        longitude: 2.4031974138            
     MetroStation125:
-        metro_line_id: 11
-        name: Havre-Caumartin
-        pixel_x: 3191
-        pixel_y: 3272
-        latitude: 48.8733427701
-        longitude: 2.3285077503        
+        metro_line_id: 1 	
+        name: Hôtel de Ville 	 	
+        pixel_x: 4481 	
+        pixel_y:  4054 		
+        sort_position: 16 	
+        latitude: 48.8567695272 	
+        longitude: 2.3514945398            
     MetroStation126:
-        metro_line_id: 6
-        name: Hoche
-        pixel_x: 6467
-        pixel_y: 2170
-        latitude: 48.8913165639
-        longitude: 2.4031974138        
+        metro_line_id: 11 	
+        name: Iéna 	 	
+        pixel_x: 1786 	
+        pixel_y:  4049 		
+        sort_position: 13 	
+        latitude: 48.8644728974 	
+        longitude: 2.2937999591            
     MetroStation127:
-        metro_line_id: 1
-        name: Hôtel de Ville
-        pixel_x: 4481
-        pixel_y: 4054
-        latitude: 48.8567695272
-        longitude: 2.3514945398        
+        metro_line_id: 10 	
+        name: Invalides 	 	
+        pixel_x: 2545 	
+        pixel_y:  4240 		
+        sort_position: 9 	
+        latitude: 48.8616865405 	
+        longitude: 2.3143570432            
     MetroStation128:
-        metro_line_id: 11
-        name: Iéna
-        pixel_x: 1786
-        pixel_y: 4049
-        latitude: 48.8644728974
-        longitude: 2.2937999591        
+        metro_line_id: 6 	
+        name: Jacques-Bonsergent 	 	
+        pixel_x: 5012 	
+        pixel_y:  3096 		
+        sort_position: 12 	
+        latitude: 48.8709749040 	
+        longitude: 2.3605378839            
     MetroStation129:
-        metro_line_id: 10
-        name: Invalides
-        pixel_x: 2545
-        pixel_y: 4240
-        latitude: 48.8616865405
-        longitude: 2.3143570432        
+        metro_line_id: 11 	
+        name: Jasmin 	 	
+        pixel_x: 1054 	
+        pixel_y:  4990 		
+        sort_position: 8 	
+        latitude: 48.8523396005 	
+        longitude: 2.2679068138            
     MetroStation130:
-        metro_line_id: 6
-        name: Jacques-Bonsergent
-        pixel_x: 5012
-        pixel_y: 3096
-        latitude: 48.8709749040
-        longitude: 2.3605378839        
+        metro_line_id: 9 	
+        name: Jaurès 	 	
+        pixel_x: 5550 	
+        pixel_y:  2437 		
+        sort_position: 2 	
+        latitude: 48.8825437461 	
+        longitude: 2.3702318192            
     MetroStation131:
-        metro_line_id: 11
-        name: Jasmin
-        pixel_x: 1054
-        pixel_y: 4990
-        latitude: 48.8523396005
-        longitude: 2.2679068138        
+        metro_line_id: 12 	
+        name: Javel-André-Citroen 	 	
+        pixel_x: 1638 	
+        pixel_y:  5292 		
+        sort_position: 9 	
+        latitude: 48.8461034638 	
+        longitude: 2.2784549784            
     MetroStation132:
-        metro_line_id: 9
-        name: Jaurès
-        pixel_x: 5550
-        pixel_y: 2437
-        latitude: 48.8825437461
-        longitude: 2.3702318192        
+        metro_line_id: 13 	
+        name: Jourdain 	 	
+        pixel_x: 6125 	
+        pixel_y:  2868 		
+        sort_position: 9 	
+        latitude: 48.8751674277 	
+        longitude: 2.3891930998            
     MetroStation133:
-        metro_line_id: 12
-        name: Javel-André-Citroen
-        pixel_x: 1638
-        pixel_y: 5292
-        latitude: 48.8461034638
-        longitude: 2.2784549784        
+        metro_line_id: 14 	
+        name: Jules Joffrin 	 	
+        pixel_x: 4067 	
+        pixel_y:  1911 		
+        sort_position: 5 	
+        latitude: 48.8924519922 	
+        longitude: 2.3444646963            
     MetroStation134:
-        metro_line_id: 13
-        name: Jourdain
-        pixel_x: 6125
-        pixel_y: 2868
-        latitude: 48.8751674277
-        longitude: 2.3891930998        
+        metro_line_id: 8 	
+        name: Jussieu 	 	
+        pixel_x: 4642 	
+        pixel_y:  5089 		
+        sort_position: 23 	
+        latitude: 48.8458380895 	
+        longitude: 2.3546915984            
     MetroStation135:
-        metro_line_id: 14
-        name: Jules Joffrin
-        pixel_x: 4067
-        pixel_y: 1911
-        latitude: 48.8924519922
-        longitude: 2.3444646963        
+        metro_line_id: 7 	
+        name: Kléber 	 	
+        pixel_x: 1714 	
+        pixel_y:  3505 		
+        sort_position: 2 	
+        latitude: 48.8710948130 	
+        longitude: 2.2930791542            
     MetroStation136:
-        metro_line_id: 8
-        name: Jussieu
-        pixel_x: 4642
-        pixel_y: 5089
-        latitude: 48.8458380895
-        longitude: 2.3546915984        
+        metro_line_id: 2 	
+        name: La Chapelle 	 	
+        pixel_x: 4895 	
+        pixel_y:  2265 		
+        sort_position: 14 	
+        latitude: 48.8839663988 	
+        longitude: 2.3584996259            
     MetroStation137:
-        metro_line_id: 7
-        name: Kléber
-        pixel_x: 1714
-        pixel_y: 3505
-        latitude: 48.8710948130
-        longitude: 2.2930791542        
+        metro_line_id: 8 	
+        name: La Courneuve-8-Mai-1945 	 	
+        pixel_x: 6171 	
+        pixel_y:  1126 		
+        sort_position: 1 	
+        latitude: 48.9209043594 	
+        longitude: 2.4104554269            
     MetroStation138:
-        metro_line_id: 2
-        name: La Chapelle
-        pixel_x: 4895
-        pixel_y: 2265
-        latitude: 48.8839663988
-        longitude: 2.3584996259        
+        metro_line_id: 1 	
+        name: La Défense (Grande Arche) 	 	
+        pixel_x: 976 	
+        pixel_y:  2175 		
+        sort_position: 1 	
+        latitude: 48.8919344692 	
+        longitude: 2.2378827983            
     MetroStation139:
-        metro_line_id: 8
-        name: La Courneuve-8-Mai-1945
-        pixel_x: 6171
-        pixel_y: 1126
-        latitude: 48.9209043594
-        longitude: 2.4104554269        
+        metro_line_id: 15 	
+        name: La Fourche 	 	
+        pixel_x: 3084 	
+        pixel_y:  2066 		
+        sort_position: 9 	
+        latitude: 48.8873918956 	
+        longitude: 2.3260386771            
     MetroStation140:
-        metro_line_id: 1
-        name: La Défense (Grande Arche)
-        pixel_x: 976
-        pixel_y: 2175
-        latitude: 48.8919344692
-        longitude: 2.2378827983        
+        metro_line_id: 14 	
+        name: Lamarck-Caulaincourt 	 	
+        pixel_x: 3857 	
+        pixel_y:  1931 		
+        sort_position: 6 	
+        latitude: 48.8897560452 	
+        longitude: 2.3388901365            
     MetroStation141:
-        metro_line_id: 15
-        name: La Fourche
-        pixel_x: 3084
-        pixel_y: 2066
-        latitude: 48.8873918956
-        longitude: 2.3260386771        
+        metro_line_id: 10 	
+        name: La Motte-Picquet-Grenelle 	 	
+        pixel_x: 2170 	
+        pixel_y:  5036 		
+        sort_position: 6 	
+        latitude: 48.8491605024 	
+        longitude: 2.2979492991            
     MetroStation142:
-        metro_line_id: 14
-        name: Lamarck-Caulaincourt
-        pixel_x: 3857
-        pixel_y: 1931
-        latitude: 48.8897560452
-        longitude: 2.3388901365        
+        metro_line_id: 11 	
+        name: La Muette 	 	
+        pixel_x: 1068 	
+        pixel_y:  4383 		
+        sort_position: 10 	
+        latitude: 48.8579377399 	
+        longitude: 2.2741170670            
     MetroStation143:
-        metro_line_id: 10
-        name: La Motte-Picquet-Grenelle
-        pixel_x: 2170
-        pixel_y: 5036
-        latitude: 48.8491605024
-        longitude: 2.2979492991        
+        metro_line_id: 10 	
+        name: La Tour-Maubourg 	 	
+        pixel_x: 2366 	
+        pixel_y:  4440 		
+        sort_position: 8 	
+        latitude: 48.8573850542 	
+        longitude: 2.3095986448            
     MetroStation144:
-        metro_line_id: 11
-        name: La Muette
-        pixel_x: 1068
-        pixel_y: 4383
-        latitude: 48.8579377399
-        longitude: 2.2741170670        
+        metro_line_id: 6 	
+        name: Laumière 	 	
+        pixel_x: 5697 	
+        pixel_y:  2292 		
+        sort_position: 7 	
+        latitude: 48.8850422338 	
+        longitude: 2.3795955532            
     MetroStation145:
-        metro_line_id: 10
-        name: La Tour-Maubourg
-        pixel_x: 2366
-        pixel_y: 4440
-        latitude: 48.8573850542
-        longitude: 2.3095986448        
+        metro_line_id: 10 	
+        name: Ledru-Rollin 	 	
+        pixel_x: 5261 	
+        pixel_y:  4550 		
+        sort_position: 22 	
+        latitude: 48.8511941202 	
+        longitude: 2.3759453524            
     MetroStation146:
-        metro_line_id: 6
-        name: Laumière
-        pixel_x: 5697
-        pixel_y: 2292
-        latitude: 48.8850422338
-        longitude: 2.3795955532        
+        metro_line_id: 8 	
+        name: Le Kremlin-Bicêtre 	 	
+        pixel_x: 4761 	
+        pixel_y:  6443 		
+        sort_position: 35 	
+        latitude: 48.8103806352 	
+        longitude: 2.3616129501            
     MetroStation147:
-        metro_line_id: 10
-        name: Ledru-Rollin
-        pixel_x: 5261
-        pixel_y: 4550
-        latitude: 48.8511941202
-        longitude: 2.3759453524        
+        metro_line_id: 8 	
+        name: Le Peletier 	 	
+        pixel_x: 3848 	
+        pixel_y:  2921 		
+        sort_position: 14 	
+        latitude: 48.8749360635 	
+        longitude: 2.3398025382            
     MetroStation148:
-        metro_line_id: 8
-        name: Le Kremlin-Bicêtre
-        pixel_x: 4761
-        pixel_y: 6443
-        latitude: 48.8103806352
-        longitude: 2.3616129501        
+        metro_line_id: 15 	
+        name: Les Agnettes 	 	
+        pixel_x: 2077 	
+        pixel_y:  1030 		
+        sort_position: 11 	
+        latitude: 48.9229162321 	
+        longitude: 2.2858275179            
     MetroStation149:
-        metro_line_id: 8
-        name: Le Peletier
-        pixel_x: 3848
-        pixel_y: 2921
-        latitude: 48.8749360635
-        longitude: 2.3398025382        
+        metro_line_id: 8 	
+        name: Les Gobelins 	 	
+        pixel_x: 4633 	
+        pixel_y:  5685 		
+        sort_position: 26 	
+        latitude: 48.8366105353 	
+        longitude: 2.3516421736            
     MetroStation150:
-        metro_line_id: 15
-        name: Les Agnettes
-        pixel_x: 2077
-        pixel_y: 1030
-        latitude: 48.9229162321
-        longitude: 2.2858275179        
+        metro_line_id: 5 	
+        name: Les Halles 	 	
+        pixel_x: 4153 	
+        pixel_y:  3904 		
+        sort_position: 12 	
+        latitude: 48.8621947212 	
+        longitude: 2.3458362673            
     MetroStation151:
-        metro_line_id: 8
-        name: Les Gobelins
-        pixel_x: 4633
-        pixel_y: 5685
-        latitude: 48.8366105353
-        longitude: 2.3516421736        
+        metro_line_id: 1 	
+        name: Les Sablons (Jardin d'acclimatation) 	 	
+        pixel_x: 1352 	
+        pixel_y:  2621 		
+        sort_position: 4 	
+        latitude: 48.8809017991 	
+        longitude: 2.2725390854            
     MetroStation152:
-        metro_line_id: 5
-        name: Les Halles
-        pixel_x: 4153
-        pixel_y: 3904
-        latitude: 48.8621947212
-        longitude: 2.3458362673        
+        metro_line_id: 10 	
+        name: Liberté 	 	
+        pixel_x: 6356 	
+        pixel_y:  5900 		
+        sort_position: 30 	
+        latitude: 48.8258380800 	
+        longitude: 2.4069255776            
     MetroStation153:
-        metro_line_id: 1
-        name: Les Sablons (Jardin d'acclimatation)
-        pixel_x: 1352
-        pixel_y: 2621
-        latitude: 48.8809017991
-        longitude: 2.2725390854        
+        metro_line_id: 15 	
+        name: Liège 	 	
+        pixel_x: 3084 	
+        pixel_y:  2547 		
+        sort_position: 17 	
+        latitude: 48.8795640572 	
+        longitude: 2.3265172852            
     MetroStation154:
-        metro_line_id: 10
-        name: Liberté
-        pixel_x: 6356
-        pixel_y: 5900
-        latitude: 48.8258380800
-        longitude: 2.4069255776        
+        metro_line_id: 8 	
+        name: Louis Blanc 	 	
+        pixel_x: 5294 	
+        pixel_y:  2497 		
+        sort_position: 9 	
+        latitude: 48.8810261030 	
+        longitude: 2.3655569576            
     MetroStation155:
-        metro_line_id: 15
-        name: Liège
-        pixel_x: 3084
-        pixel_y: 2547
-        latitude: 48.8795640572
-        longitude: 2.3265172852        
+        metro_line_id: 3 	
+        name: Louise Michel 	 	
+        pixel_x: 2111 	
+        pixel_y:  1966 		
+        sort_position: 3 	
+        latitude: 48.8888292428 	
+        longitude: 2.2881373109            
     MetroStation156:
-        metro_line_id: 8
-        name: Louis Blanc
-        pixel_x: 5294
-        pixel_y: 2497
-        latitude: 48.8810261030
-        longitude: 2.3655569576        
+        metro_line_id: 10 	
+        name: Lourmel 	 	
+        pixel_x: 1928 	
+        pixel_y:  5925 		
+        sort_position: 2 	
+        latitude: 48.8384881096 	
+        longitude: 2.2817585233            
     MetroStation157:
-        metro_line_id: 3
-        name: Louise Michel
-        pixel_x: 2111
-        pixel_y: 1966
-        latitude: 48.8888292428
-        longitude: 2.2881373109        
+        metro_line_id: 1 	
+        name: Louvre-Rivoli 	 	
+        pixel_x: 3597 	
+        pixel_y:  4046 		
+        sort_position: 14 	
+        latitude: 48.8605382947 	
+        longitude: 2.3410004903            
     MetroStation158:
-        metro_line_id: 10
-        name: Lourmel
-        pixel_x: 1928
-        pixel_y: 5925
-        latitude: 48.8384881096
-        longitude: 2.2817585233        
+        metro_line_id: 12 	
+        name: Mabillon 	 	
+        pixel_x: 3637 	
+        pixel_y:  4747 		
+        sort_position: 17 	
+        latitude: 48.8528181349 	
+        longitude: 2.3354092889            
     MetroStation159:
-        metro_line_id: 1
-        name: Louvre-Rivoli
-        pixel_x: 3597
-        pixel_y: 4046
-        latitude: 48.8605382947
-        longitude: 2.3410004903        
+        metro_line_id: 10 	
+        name: Madeleine 	 	
+        pixel_x: 2708 	
+        pixel_y:  3693 		
+        sort_position: 11 	
+        latitude: 48.8700643518 	
+        longitude: 2.3251637003            
     MetroStation160:
-        metro_line_id: 12
-        name: Mabillon
-        pixel_x: 3637
-        pixel_y: 4747
-        latitude: 48.8528181349
-        longitude: 2.3354092889        
+        metro_line_id: 15 	
+        name: Mairie de Clichy 	 	
+        pixel_x: 2475 	
+        pixel_y:  1430 		
+        sort_position: 13 	
+        latitude: 48.9036594416 	
+        longitude: 2.3055660013            
     MetroStation161:
-        metro_line_id: 10
-        name: Madeleine
-        pixel_x: 2708
-        pixel_y: 3693
-        latitude: 48.8700643518
-        longitude: 2.3251637003        
+        metro_line_id: 11 	
+        name: Mairie de Montreuil 	 	
+        pixel_x: 7025 	
+        pixel_y:  3915 		
+        sort_position: 37 	
+        latitude: 48.8623601851 	
+        longitude: 2.4416562031            
     MetroStation162:
-        metro_line_id: 15
-        name: Mairie de Clichy
-        pixel_x: 2475
-        pixel_y: 1430
-        latitude: 48.9036594416
-        longitude: 2.3055660013        
+        metro_line_id: 5 	
+        name: Mairie de Montrouge 	 	
+        pixel_x: 3775 	
+        pixel_y:  6490 		
+        sort_position: 27 	
+        latitude: 48.8180648291 	
+        longitude: 2.3195367404            
     MetroStation163:
-        metro_line_id: 11
-        name: Mairie de Montreuil
-        pixel_x: 7025
-        pixel_y: 3915
-        latitude: 48.8623601851
-        longitude: 2.4416562031        
+        metro_line_id: 15 	
+        name: Mairie de Saint-Ouen 	 	
+        pixel_x: 3446 	
+        pixel_y:  1211 		
+        sort_position: 5 	
+        latitude: 48.9120620157 	
+        longitude: 2.3341630154            
     MetroStation164:
-        metro_line_id: 5
-        name: Mairie de Montrouge
-        pixel_x: 3775
-        pixel_y: 6490
-        latitude: 48.8180648291
-        longitude: 2.3195367404        
+        metro_line_id: 13 	
+        name: Mairie des Lilas 	 	
+        pixel_x: 7024 	
+        pixel_y:  2617 		
+        sort_position: 13 	
+        latitude: 48.8797989954 	
+        longitude: 2.4162389352            
     MetroStation165:
-        metro_line_id: 15
-        name: Mairie de Saint-Ouen
-        pixel_x: 3446
-        pixel_y: 1211
-        latitude: 48.9120620157
-        longitude: 2.3341630154        
+        metro_line_id: 14 	
+        name: Mairie d'Issy 	 	
+        pixel_x: 1737 	
+        pixel_y:  6728 		
+        sort_position: 29 	
+        latitude: 48.8248138109 	
+        longitude: 2.2735039998            
     MetroStation166:
-        metro_line_id: 13
-        name: Mairie des Lilas
-        pixel_x: 7024
-        pixel_y: 2617
-        latitude: 48.8797989954
-        longitude: 2.4162389352        
+        metro_line_id: 8 	
+        name: Mairie d'Ivry 	 	
+        pixel_x: 5769 	
+        pixel_y:  6578 		
+        sort_position: 34 	
+        latitude: 48.8111784269 	
+        longitude: 2.3838082733            
     MetroStation167:
-        metro_line_id: 14
-        name: Mairie d'Issy
-        pixel_x: 1737
-        pixel_y: 6728
-        latitude: 48.8248138109
-        longitude: 2.2735039998        
+        metro_line_id: 8 	
+        name: Maison Blanche 	 	
+        pixel_x: 4761 	
+        pixel_y:  6244 		
+        sort_position: 29 	
+        latitude: 48.8226203194 	
+        longitude: 2.3581886767            
     MetroStation168:
-        metro_line_id: 8
-        name: Mairie d'Ivry
-        pixel_x: 5769
-        pixel_y: 6578
-        latitude: 48.8111784269
-        longitude: 2.3838082733        
+        metro_line_id: 10 	
+        name: Maisons-Alfort-Les Juilliottes 	 	
+        pixel_x: 6838 	
+        pixel_y:  6527 		
+        sort_position: 34 	
+        latitude: 48.8031418698 	
+        longitude: 2.4449910267            
     MetroStation169:
-        metro_line_id: 8
-        name: Maison Blanche
-        pixel_x: 4761
-        pixel_y: 6244
-        latitude: 48.8226203194
-        longitude: 2.3581886767        
+        metro_line_id: 10 	
+        name: Maisons-Alfort-Stade 	 	
+        pixel_x: 6835 	
+        pixel_y:  6378 		
+        sort_position: 33 	
+        latitude: 48.8084176209 	
+        longitude: 2.4355822036            
     MetroStation170:
-        metro_line_id: 10
-        name: Maisons-Alfort-Les Juilliottes
-        pixel_x: 6838
-        pixel_y: 6527
-        latitude: 48.8031418698
-        longitude: 2.4449910267        
+        metro_line_id: 15 	
+        name: Malakoff-Plateau de Vanves 	 	
+        pixel_x: 2828 	
+        pixel_y:  6487 		
+        sort_position: 30 	
+        latitude: 48.8231314025 	
+        longitude: 2.2970150852            
     MetroStation171:
-        metro_line_id: 10
-        name: Maisons-Alfort-Stade
-        pixel_x: 6835
-        pixel_y: 6378
-        latitude: 48.8084176209
-        longitude: 2.4355822036        
+        metro_line_id: 15 	
+        name: Malakoff-Rue Etienne Dolet 	 	
+        pixel_x: 2837 	
+        pixel_y:  6712 		
+        sort_position: 31 	
+        latitude: 48.8146679725 	
+        longitude: 2.2969989635            
     MetroStation172:
-        metro_line_id: 15
-        name: Malakoff-Plateau de Vanves
-        pixel_x: 2828
-        pixel_y: 6487
-        latitude: 48.8231314025
-        longitude: 2.2970150852        
+        metro_line_id: 3 	
+        name: Malesherbes 	 	
+        pixel_x: 2545 	
+        pixel_y:  2392 		
+        sort_position: 7 	
+        latitude: 48.8828147398 	
+        longitude: 2.3096940943            
     MetroStation173:
-        metro_line_id: 15
-        name: Malakoff-Rue Etienne Dolet
-        pixel_x: 2837
-        pixel_y: 6712
-        latitude: 48.8146679725
-        longitude: 2.2969989635        
+        metro_line_id: 11 	
+        name: Maraichers 	 	
+        pixel_x: 6585 	
+        pixel_y:  4347 		
+        sort_position: 33 	
+        latitude: 48.8526633633 	
+        longitude: 2.4062307212            
     MetroStation174:
-        metro_line_id: 3
-        name: Malesherbes
-        pixel_x: 2545
-        pixel_y: 2392
-        latitude: 48.8828147398
-        longitude: 2.3096940943        
+        metro_line_id: 5 	
+        name: Marcadet-Poissonniers 	 	
+        pixel_x: 4300 	
+        pixel_y:  1903 		
+        sort_position: 3 	
+        latitude: 48.8908769929 	
+        longitude: 2.3498370716            
     MetroStation175:
-        metro_line_id: 11
-        name: Maraichers
-        pixel_x: 6585
-        pixel_y: 4347
-        latitude: 48.8526633633
-        longitude: 2.4062307212        
+        metro_line_id: 11 	
+        name: Marcel Sembat 	 	
+        pixel_x: 952 	
+        pixel_y:  6034 		
+        sort_position: 3 	
+        latitude: 48.8339143014 	
+        longitude: 2.2440813883            
     MetroStation176:
-        metro_line_id: 5
-        name: Marcadet-Poissonniers
-        pixel_x: 4300
-        pixel_y: 1903
-        latitude: 48.8908769929
-        longitude: 2.3498370716        
+        metro_line_id: 14 	
+        name: Marx-Dormoy 	 	
+        pixel_x: 4929 	
+        pixel_y:  1824 		
+        sort_position: 3 	
+        latitude: 48.8903020650 	
+        longitude: 2.3602058428            
     MetroStation177:
-        metro_line_id: 11
-        name: Marcel Sembat
-        pixel_x: 952
-        pixel_y: 6034
-        latitude: 48.8339143014
-        longitude: 2.2440813883        
+        metro_line_id: 12 	
+        name: Maubert-Mutualité 	 	
+        pixel_x: 4271 	
+        pixel_y:  4882 		
+        sort_position: 20 	
+        latitude: 48.8499086727 	
+        longitude: 2.3485034297            
     MetroStation178:
-        metro_line_id: 14
-        name: Marx-Dormoy
-        pixel_x: 4929
-        pixel_y: 1824
-        latitude: 48.8903020650
-        longitude: 2.3602058428        
+        metro_line_id: 2 	
+        name: Ménilmontant 	 	
+        pixel_x: 5928 	
+        pixel_y:  3400 		
+        sort_position: 19 	
+        latitude: 48.8659488112 	
+        longitude: 2.3833942785            
     MetroStation179:
-        metro_line_id: 12
-        name: Maubert-Mutualité
-        pixel_x: 4271
-        pixel_y: 4882
-        latitude: 48.8499086727
-        longitude: 2.3485034297        
+        metro_line_id: 11 	
+        name: Michel-Ange-Auteuil 	 	
+        pixel_x: 1073 	
+        pixel_y:  5297 		
+        sort_position: 7 	
+        latitude: 48.8477403460 	
+        longitude: 2.2642974417            
     MetroStation180:
-        metro_line_id: 2
-        name: Ménilmontant
-        pixel_x: 5928
-        pixel_y: 3400
-        latitude: 48.8659488112
-        longitude: 2.3833942785        
+        metro_line_id: 11 	
+        name: Michel-Ange-Molitor 	 	
+        pixel_x: 1068 	
+        pixel_y:  5487 		
+        sort_position: 6 	
+        latitude: 48.8448674365 	
+        longitude: 2.2620478642            
     MetroStation181:
-        metro_line_id: 11
-        name: Michel-Ange-Auteuil
-        pixel_x: 1073
-        pixel_y: 5297
-        latitude: 48.8477403460
-        longitude: 2.2642974417        
+        metro_line_id: 10 	
+        name: Michel Bizot 	 	
+        pixel_x: 6274 	
+        pixel_y:  5343 		
+        sort_position: 27 	
+        latitude: 48.8367033670 	
+        longitude: 2.4029691612            
     MetroStation182:
-        metro_line_id: 11
-        name: Michel-Ange-Molitor
-        pixel_x: 1068
-        pixel_y: 5487
-        latitude: 48.8448674365
-        longitude: 2.2620478642        
+        metro_line_id: 12 	
+        name: Mirabeau 	 	
+        pixel_x: 1405 	
+        pixel_y:  5425 		
+        sort_position: 5 	
+        latitude: 48.8473396417 	
+        longitude: 2.2734059593            
     MetroStation183:
-        metro_line_id: 10
-        name: Michel Bizot
-        pixel_x: 6274
-        pixel_y: 5343
-        latitude: 48.8367033670
-        longitude: 2.4029691612        
+        metro_line_id: 11 	
+        name: Miromesnil 	 	
+        pixel_x: 2764 	
+        pixel_y:  3279 		
+        sort_position: 17 	
+        latitude: 48.8737063841 	
+        longitude: 2.3151991849            
     MetroStation184:
-        metro_line_id: 12
-        name: Mirabeau
-        pixel_x: 1405
-        pixel_y: 5425
-        latitude: 48.8473396417
-        longitude: 2.2734059593        
+        metro_line_id: 2 	
+        name: Monceau 	 	
+        pixel_x: 2479 	
+        pixel_y:  2679 		
+        sort_position: 6 	
+        latitude: 48.8806306676 	
+        longitude: 2.3089662422            
     MetroStation185:
-        metro_line_id: 11
-        name: Miromesnil
-        pixel_x: 2764
-        pixel_y: 3279
-        latitude: 48.8737063841
-        longitude: 2.3151991849        
+        metro_line_id: 10 	
+        name: Montgallet 	 	
+        pixel_x: 5966 	
+        pixel_y:  5034 		
+        sort_position: 25 	
+        latitude: 48.8442504626 	
+        longitude: 2.3898021375            
     MetroStation186:
-        metro_line_id: 2
-        name: Monceau
-        pixel_x: 2479
-        pixel_y: 2679
-        latitude: 48.8806306676
-        longitude: 2.3089662422        
+        metro_line_id: 7 	
+        name: Montparnasse-Bienvenue 	 	
+        pixel_x: 3388 	
+        pixel_y:  5475 		
+        sort_position: 12 	
+        latitude: 48.8430428503 	
+        longitude: 2.3226350506            
     MetroStation187:
-        metro_line_id: 10
-        name: Montgallet
-        pixel_x: 5966
-        pixel_y: 5034
-        latitude: 48.8442504626
-        longitude: 2.3898021375        
+        metro_line_id: 5 	
+        name: Mouton-Duvernet 	 	
+        pixel_x: 3999 	
+        pixel_y:  5919 		
+        sort_position: 24 	
+        latitude: 48.8313196996 	
+        longitude: 2.3294269348            
     MetroStation188:
-        metro_line_id: 7
-        name: Montparnasse-Bienvenue
-        pixel_x: 3388
-        pixel_y: 5475
-        latitude: 48.8430428503
-        longitude: 2.3226350506        
+        metro_line_id: 11 	
+        name: Nation 	 	
+        pixel_x: 6277 	
+        pixel_y:  4577 		
+        sort_position: 31 	
+        latitude: 48.8484657506 	
+        longitude: 2.3959057446            
     MetroStation189:
-        metro_line_id: 5
-        name: Mouton-Duvernet
-        pixel_x: 3999
-        pixel_y: 5919
-        latitude: 48.8313196996
-        longitude: 2.3294269348        
+        metro_line_id: 7 	
+        name: Nationale 	 	
+        pixel_x: 5052 	
+        pixel_y:  5943 		
+        sort_position: 20 	
+        latitude: 48.8327104551 	
+        longitude: 2.3620454618            
     MetroStation190:
-        metro_line_id: 11
-        name: Nation
-        pixel_x: 6277
-        pixel_y: 4577
-        latitude: 48.8484657506
-        longitude: 2.3959057446        
+        metro_line_id: 14 	
+        name: Notre-Dame de Lorette 	 	
+        pixel_x: 3771 	
+        pixel_y:  2822 		
+        sort_position: 10 	
+        latitude: 48.8766256957 	
+        longitude: 2.3384537104            
     MetroStation191:
-        metro_line_id: 7
-        name: Nationale
-        pixel_x: 5052
-        pixel_y: 5943
-        latitude: 48.8327104551
-        longitude: 2.3620454618        
+        metro_line_id: 14 	
+        name: Notre-Dame des Champs 	 	
+        pixel_x: 3576 	
+        pixel_y:  5255 		
+        sort_position: 20 	
+        latitude: 48.8449178498 	
+        longitude: 2.3288529681            
     MetroStation192:
-        metro_line_id: 14
-        name: Notre-Dame de Lorette
-        pixel_x: 3771
-        pixel_y: 2822
-        latitude: 48.8766256957
-        longitude: 2.3384537104        
+        metro_line_id: 11 	
+        name: Oberkampf 	 	
+        pixel_x: 5311 	
+        pixel_y:  3552 		
+        sort_position: 26 	
+        latitude: 48.8645156236 	
+        longitude: 2.3686742364            
     MetroStation193:
-        metro_line_id: 14
-        name: Notre-Dame des Champs
-        pixel_x: 3576
-        pixel_y: 5255
-        latitude: 48.8449178498
-        longitude: 2.3288529681        
+        metro_line_id: 5 	
+        name: Odéon 	 	
+        pixel_x: 3885 	
+        pixel_y:  4701 		
+        sort_position: 16 	
+        latitude: 48.8522489364 	
+        longitude: 2.3385575587            
     MetroStation194:
-        metro_line_id: 11
-        name: Oberkampf
-        pixel_x: 5311
-        pixel_y: 3552
-        latitude: 48.8645156236
-        longitude: 2.3686742364        
+        metro_line_id: 10 	
+        name: Opéra 	 	
+        pixel_x: 3334 	
+        pixel_y:  3417 		
+        sort_position: 12 	
+        latitude: 48.8707029412 	
+        longitude: 2.3318051564            
     MetroStation195:
-        metro_line_id: 5
-        name: Odéon
-        pixel_x: 3885
-        pixel_y: 4701
-        latitude: 48.8522489364
-        longitude: 2.3385575587        
+        metro_line_id: 23 	
+        name: Orly-Ouest 	 	
+        pixel_x: 4001 	
+        pixel_y:  7366 		
+        sort_position: 2 	
+        latitude: 48.7285134699 	
+        longitude: 2.3587214188            
     MetroStation196:
-        metro_line_id: 16
-        name: Olympiades
-        pixel_x: 5392
-        pixel_y: 6119
-        latitude: 48.8268582997
-        longitude: 2.3672970120        
+        metro_line_id: 23 	
+        name: Orly-Sud 	 	
+        pixel_x: 4216 	
+        pixel_y:  7370 		
+        sort_position: 3 	
+        latitude: 48.7278373152 	
+        longitude: 2.3679598729            
     MetroStation197:
-        metro_line_id: 10
-        name: Opéra
-        pixel_x: 3334
-        pixel_y: 3417
-        latitude: 48.8707029412
-        longitude: 2.3318051564        
+        metro_line_id: 6 	
+        name: Ourcq 	 	
+        pixel_x: 5908 	
+        pixel_y:  2170 		
+        sort_position: 6 	
+        latitude: 48.8869750227 	
+        longitude: 2.3860295880            
     MetroStation198:
-        metro_line_id: 23
-        name: Orly-Ouest
-        pixel_x: 4001
-        pixel_y: 7366
-        latitude: 48.7285134699
-        longitude: 2.3587214188        
+        metro_line_id: 8 	
+        name: Palais-Royal (Musée du Louvre) 	 	
+        pixel_x: 3342 	
+        pixel_y:  4057 		
+        sort_position: 18 	
+        latitude: 48.8628468214 	
+        longitude: 2.3358166119            
     MetroStation199:
-        metro_line_id: 23
-        name: Orly-Sud
-        pixel_x: 4216
-        pixel_y: 7370
-        latitude: 48.7278373152
-        longitude: 2.3679598729        
+        metro_line_id: 3 	
+        name: Parmentier 	 	
+        pixel_x: 5747 	
+        pixel_y:  3537 		
+        sort_position: 20 	
+        latitude: 48.8651606068 	
+        longitude: 2.3758467947            
     MetroStation200:
-        metro_line_id: 6
-        name: Ourcq
-        pixel_x: 5908
-        pixel_y: 2170
-        latitude: 48.8869750227
-        longitude: 2.3860295880        
+        metro_line_id: 7 	
+        name: Passy 	 	
+        pixel_x: 1487 	
+        pixel_y:  4464 		
+        sort_position: 5 	
+        latitude: 48.8576333212 	
+        longitude: 2.2858650114            
     MetroStation201:
-        metro_line_id: 8
-        name: Palais-Royal (Musée du Louvre)
-        pixel_x: 3342
-        pixel_y: 4057
-        latitude: 48.8628468214
-        longitude: 2.3358166119        
+        metro_line_id: 7 	
+        name: Pasteur 	 	
+        pixel_x: 3009 	
+        pixel_y:  5483 		
+        sort_position: 11 	
+        latitude: 48.8429383503 	
+        longitude: 2.3126564450            
     MetroStation202:
-        metro_line_id: 3
-        name: Parmentier
-        pixel_x: 5747
-        pixel_y: 3537
-        latitude: 48.8651606068
-        longitude: 2.3758467947        
+        metro_line_id: 4 	
+        name: Pelleport 	 	
+        pixel_x: 6638 	
+        pixel_y:  3368 		
+        sort_position: 2 	
+        latitude: 48.8685198745 	
+        longitude: 2.4013519901            
     MetroStation203:
-        metro_line_id: 7
-        name: Passy
-        pixel_x: 1487
-        pixel_y: 4464
-        latitude: 48.8576333212
-        longitude: 2.2858650114        
+        metro_line_id: 3 	
+        name: Péreire 	 	
+        pixel_x: 2344 	
+        pixel_y:  2204 		
+        sort_position: 5 	
+        latitude: 48.8845503318 	
+        longitude: 2.2975170487            
     MetroStation204:
-        metro_line_id: 7
-        name: Pasteur
-        pixel_x: 3009
-        pixel_y: 5483
-        latitude: 48.8429383503
-        longitude: 2.3126564450        
+        metro_line_id: 3 	
+        name: Père-Lachaise 	 	
+        pixel_x: 6120 	
+        pixel_y:  3650 		
+        sort_position: 22 	
+        latitude: 48.8626131584 	
+        longitude: 2.3867218119            
     MetroStation205:
-        metro_line_id: 4
-        name: Pelleport
-        pixel_x: 6638
-        pixel_y: 3368
-        latitude: 48.8685198745
-        longitude: 2.4013519901        
+        metro_line_id: 15 	
+        name: Pernéty 	 	
+        pixel_x: 3316 	
+        pixel_y:  5902 		
+        sort_position: 27 	
+        latitude: 48.8338169002 	
+        longitude: 2.3176639582            
     MetroStation206:
-        metro_line_id: 3
-        name: Péreire
-        pixel_x: 2344
-        pixel_y: 2204
-        latitude: 48.8845503318
-        longitude: 2.2975170487        
+        metro_line_id: 2 	
+        name: Philippe Auguste 	 	
+        pixel_x: 6129 	
+        pixel_y:  3856 		
+        sort_position: 21 	
+        latitude: 48.8583654721 	
+        longitude: 2.3893873915            
     MetroStation207:
-        metro_line_id: 3
-        name: Père-Lachaise
-        pixel_x: 6120
-        pixel_y: 3650
-        latitude: 48.8626131584
-        longitude: 2.3867218119        
+        metro_line_id: 7 	
+        name: Picpus 	 	
+        pixel_x: 6445 	
+        pixel_y:  4950 		
+        sort_position: 27 	
+        latitude: 48.8452604479 	
+        longitude: 2.4012551645            
     MetroStation208:
-        metro_line_id: 15
-        name: Pernéty
-        pixel_x: 3316
-        pixel_y: 5902
-        latitude: 48.8338169002
-        longitude: 2.3176639582        
+        metro_line_id: 8 	
+        name: Pierre et Marie Curie 	 	
+        pixel_x: 5654 	
+        pixel_y:  6477 		
+        sort_position: 33 	
+        latitude: 48.8156836605 	
+        longitude: 2.3772866230            
     MetroStation209:
-        metro_line_id: 2
-        name: Philippe Auguste
-        pixel_x: 6129
-        pixel_y: 3856
-        latitude: 48.8583654721
-        longitude: 2.3893873915        
+        metro_line_id: 2 	
+        name: Pigalle 	 	
+        pixel_x: 3869 	
+        pixel_y:  2261 		
+        sort_position: 11 	
+        latitude: 48.8824943850 	
+        longitude: 2.3376226052            
     MetroStation210:
-        metro_line_id: 7
-        name: Picpus
-        pixel_x: 6445
-        pixel_y: 4950
-        latitude: 48.8452604479
-        longitude: 2.4012551645        
+        metro_line_id: 2 	
+        name: Place de Clichy 	 	
+        pixel_x: 3095 	
+        pixel_y:  2261 		
+        sort_position: 9 	
+        latitude: 48.8836233672 	
+        longitude: 2.3273068221            
     MetroStation211:
-        metro_line_id: 8
-        name: Pierre et Marie Curie
-        pixel_x: 5654
-        pixel_y: 6477
-        latitude: 48.8156836605
-        longitude: 2.3772866230        
+        metro_line_id: 9 	
+        name: Place des Fêtes 	 	
+        pixel_x: 6381 	
+        pixel_y:  2831 		
+        sort_position: 6 	
+        latitude: 48.8768191471 	
+        longitude: 2.3934731351            
     MetroStation212:
-        metro_line_id: 2
-        name: Pigalle
-        pixel_x: 3869
-        pixel_y: 2261
-        latitude: 48.8824943850
-        longitude: 2.3376226052        
+        metro_line_id: 8 	
+        name: Place d'Italie 	 	
+        pixel_x: 4774 	
+        pixel_y:  5952 		
+        sort_position: 27 	
+        latitude: 48.8314061536 	
+        longitude: 2.3557213734            
     MetroStation213:
-        metro_line_id: 2
-        name: Place de Clichy
-        pixel_x: 3095
-        pixel_y: 2261
-        latitude: 48.8836233672
-        longitude: 2.3273068221        
+        metro_line_id: 8 	
+        name: Place Monge (Jardin des Plantes) 	 	
+        pixel_x: 4473 	
+        pixel_y:  5289 		
+        sort_position: 24 	
+        latitude: 48.8431960998 	
+        longitude: 2.3521784510            
     MetroStation214:
-        metro_line_id: 9
-        name: Place des Fêtes
-        pixel_x: 6381
-        pixel_y: 2831
-        latitude: 48.8768191471
-        longitude: 2.3934731351        
+        metro_line_id: 15 	
+        name: Plaisance 	 	
+        pixel_x: 3144 	
+        pixel_y:  6085 		
+        sort_position: 28 	
+        latitude: 48.8317625861 	
+        longitude: 2.3140673448            
     MetroStation215:
-        metro_line_id: 8
-        name: Place d'Italie
-        pixel_x: 4774
-        pixel_y: 5952
-        latitude: 48.8314061536
-        longitude: 2.3557213734        
+        metro_line_id: 10 	
+        name: Pointe du Lac 	 	
+        pixel_x: 6842 	
+        pixel_y:  7070 		
+        sort_position: 38 	
+        latitude: 48.7679578711 	
+        longitude: 2.4659898292            
     MetroStation216:
-        metro_line_id: 8
-        name: Place Monge (Jardin des Plantes)
-        pixel_x: 4473
-        pixel_y: 5289
-        latitude: 48.8431960998
-        longitude: 2.3521784510        
+        metro_line_id: 8 	
+        name: Poissonnière 	 	
+        pixel_x: 4368 	
+        pixel_y:  2754 		
+        sort_position: 12 	
+        latitude: 48.8773395505 	
+        longitude: 2.3496062390            
     MetroStation217:
-        metro_line_id: 15
-        name: Plaisance
-        pixel_x: 3144
-        pixel_y: 6085
-        latitude: 48.8317625861
-        longitude: 2.3140673448        
+        metro_line_id: 3 	
+        name: Pont de Levallois-Bécon 	 	
+        pixel_x: 1927 	
+        pixel_y:  1784 		
+        sort_position: 1 	
+        latitude: 48.8971187551 	
+        longitude: 2.2804894173            
     MetroStation218:
-        metro_line_id: 10
-        name: Pointe du Lac
-        pixel_x: 6842
-        pixel_y: 7070
-        latitude: 48.7679578711
-        longitude: 2.4659898292        
+        metro_line_id: 1 	
+        name: Pont de Neuilly 	 	
+        pixel_x: 1220 	
+        pixel_y:  2480 		
+        sort_position: 3 	
+        latitude: 48.8845093796 	
+        longitude: 2.2598917247            
     MetroStation219:
-        metro_line_id: 8
-        name: Poissonnière
-        pixel_x: 4368
-        pixel_y: 2754
-        latitude: 48.8773395505
-        longitude: 2.3496062390        
+        metro_line_id: 11 	
+        name: Pont de Sèvres 	 	
+        pixel_x: 693 	
+        pixel_y:  6303 		
+        sort_position: 1 	
+        latitude: 48.8295929841 	
+        longitude: 2.2302536479            
     MetroStation220:
-        metro_line_id: 3
-        name: Pont de Levallois-Bécon
-        pixel_x: 1927
-        pixel_y: 1784
-        latitude: 48.8971187551
-        longitude: 2.2804894173        
+        metro_line_id: 8 	
+        name: Pont Marie (Cité des Arts) 	 	
+        pixel_x: 4518 	
+        pixel_y:  4339 		
+        sort_position: 21 	
+        latitude: 48.8533107455 	
+        longitude: 2.3574588160            
     MetroStation221:
-        metro_line_id: 1
-        name: Pont de Neuilly
-        pixel_x: 1220
-        pixel_y: 2480
-        latitude: 48.8845093796
-        longitude: 2.2598917247        
+        metro_line_id: 8 	
+        name: Pont Neuf 	 	
+        pixel_x: 3816 	
+        pixel_y:  4099 		
+        sort_position: 19 	
+        latitude: 48.8584022525 	
+        longitude: 2.3419492363            
     MetroStation222:
-        metro_line_id: 11
-        name: Pont de Sèvres
-        pixel_x: 693
-        pixel_y: 6303
-        latitude: 48.8295929841
-        longitude: 2.2302536479        
+        metro_line_id: 2 	
+        name: Porte Dauphine (Maréchal de Lattre de Tassigny) 	 	
+        pixel_x: 1283 	
+        pixel_y:  3248 		
+        sort_position: 1 	
+        latitude: 48.8716448025 	
+        longitude: 2.2766480746            
     MetroStation223:
-        metro_line_id: 8
-        name: Pont Marie (Cité des Arts)
-        pixel_x: 4518
-        pixel_y: 4339
-        latitude: 48.8533107455
-        longitude: 2.3574588160        
+        metro_line_id: 12 	
+        name: Porte d'Auteuil 	 	
+        pixel_x: 850 	
+        pixel_y:  5421 		
+        sort_position: 8 	
+        latitude: 48.8480737823 	
+        longitude: 2.2586478276            
     MetroStation224:
-        metro_line_id: 8
-        name: Pont Neuf
-        pixel_x: 3816
-        pixel_y: 4099
-        latitude: 48.8584022525
-        longitude: 2.3419492363        
+        metro_line_id: 3 	
+        name: Porte de Bagnolet 	 	
+        pixel_x: 6758 	
+        pixel_y:  3656 		
+        sort_position: 24 	
+        latitude: 48.8643963045 	
+        longitude: 2.4079999527            
     MetroStation225:
-        metro_line_id: 2
-        name: Porte Dauphine (Maréchal de Lattre de Tassigny)
-        pixel_x: 1283
-        pixel_y: 3248
-        latitude: 48.8716448025
-        longitude: 2.2766480746        
+        metro_line_id: 3 	
+        name: Porte de Champerret 	 	
+        pixel_x: 2205 	
+        pixel_y:  2053 		
+        sort_position: 4 	
+        latitude: 48.8855507197 	
+        longitude: 2.2927420414            
     MetroStation226:
-        metro_line_id: 12
-        name: Porte d'Auteuil
-        pixel_x: 850
-        pixel_y: 5421
-        latitude: 48.8480737823
-        longitude: 2.2586478276        
+        metro_line_id: 10 	
+        name: Porte de Charenton 	 	
+        pixel_x: 6237 	
+        pixel_y:  5700 		
+        sort_position: 29 	
+        latitude: 48.8325258940 	
+        longitude: 2.3997010994            
     MetroStation227:
-        metro_line_id: 3
-        name: Porte de Bagnolet
-        pixel_x: 6758
-        pixel_y: 3656
-        latitude: 48.8643963045
-        longitude: 2.4079999527        
+        metro_line_id: 8 	
+        name: Porte de Choisy 	 	
+        pixel_x: 5231 	
+        pixel_y:  6380 		
+        sort_position: 31 	
+        latitude: 48.8201452158 	
+        longitude: 2.3643464453            
     MetroStation228:
-        metro_line_id: 3
-        name: Porte de Champerret
-        pixel_x: 2205
-        pixel_y: 2053
-        latitude: 48.8855507197
-        longitude: 2.2927420414        
+        metro_line_id: 15 	
+        name: Porte de Clichy 	 	
+        pixel_x: 2762 	
+        pixel_y:  1710 		
+        sort_position: 14 	
+        latitude: 48.8943611611 	
+        longitude: 2.3137383438            
     MetroStation229:
-        metro_line_id: 10
-        name: Porte de Charenton
-        pixel_x: 6237
-        pixel_y: 5700
-        latitude: 48.8325258940
-        longitude: 2.3997010994        
+        metro_line_id: 5 	
+        name: Porte de Clignancourt 	 	
+        pixel_x: 4066 	
+        pixel_y:  1606 		
+        sort_position: 1 	
+        latitude: 48.8972870604 	
+        longitude: 2.3447788774            
     MetroStation230:
-        metro_line_id: 8
-        name: Porte de Choisy
-        pixel_x: 5231
-        pixel_y: 6380
-        latitude: 48.8201452158
-        longitude: 2.3643464453        
+        metro_line_id: 14 	
+        name: Porte de la Chapelle 	 	
+        pixel_x: 4928 	
+        pixel_y:  1607 		
+        sort_position: 2 	
+        latitude: 48.8980716717 	
+        longitude: 2.3590915419            
     MetroStation231:
-        metro_line_id: 15
-        name: Porte de Clichy
-        pixel_x: 2762
-        pixel_y: 1710
-        latitude: 48.8943611611
-        longitude: 2.3137383438        
+        metro_line_id: 8 	
+        name: Porte de la Villette 	 	
+        pixel_x: 5781 	
+        pixel_y:  1773 		
+        sort_position: 4 	
+        latitude: 48.8978102191 	
+        longitude: 2.3858061126            
     MetroStation232:
-        metro_line_id: 5
-        name: Porte de Clignancourt
-        pixel_x: 4066
-        pixel_y: 1606
-        latitude: 48.8972870604
-        longitude: 2.3447788774        
+        metro_line_id: 11 	
+        name: Porte de Montreuil 	 	
+        pixel_x: 6699 	
+        pixel_y:  4252 		
+        sort_position: 34 	
+        latitude: 48.8534495044 	
+        longitude: 2.4104344487            
     MetroStation233:
-        metro_line_id: 14
-        name: Porte de la Chapelle
-        pixel_x: 4928
-        pixel_y: 1607
-        latitude: 48.8980716717
-        longitude: 2.3590915419        
+        metro_line_id: 6 	
+        name: Porte de Pantin 	 	
+        pixel_x: 6194 	
+        pixel_y:  2162 		
+        sort_position: 5 	
+        latitude: 48.8883327365 	
+        longitude: 2.3914686140            
     MetroStation234:
-        metro_line_id: 8
-        name: Porte de la Villette
-        pixel_x: 5781
-        pixel_y: 1773
-        latitude: 48.8978102191
-        longitude: 2.3858061126        
+        metro_line_id: 11 	
+        name: Porte de Saint-Cloud 	 	
+        pixel_x: 1068 	
+        pixel_y:  5894 		
+        sort_position: 4 	
+        latitude: 48.8378883866 	
+        longitude: 2.2568025150            
     MetroStation235:
-        metro_line_id: 11
-        name: Porte de Montreuil
-        pixel_x: 6699
-        pixel_y: 4252
-        latitude: 48.8534495044
-        longitude: 2.4104344487        
+        metro_line_id: 15 	
+        name: Porte de Saint-Ouen 	 	
+        pixel_x: 3077 	
+        pixel_y:  1622 		
+        sort_position: 7 	
+        latitude: 48.8972510523 	
+        longitude: 2.3288376697            
     MetroStation236:
-        metro_line_id: 6
-        name: Porte de Pantin
-        pixel_x: 6194
-        pixel_y: 2162
-        latitude: 48.8883327365
-        longitude: 2.3914686140        
+        metro_line_id: 4 	
+        name: Porte des Lilas 	 	
+        pixel_x: 6801 	
+        pixel_y:  2847 		
+        sort_position: 4 	
+        latitude: 48.8770699912 	
+        longitude: 2.4063858234            
     MetroStation237:
-        metro_line_id: 11
-        name: Porte de Saint-Cloud
-        pixel_x: 1068
-        pixel_y: 5894
-        latitude: 48.8378883866
-        longitude: 2.2568025150        
+        metro_line_id: 15 	
+        name: Porte de Vanves 	 	
+        pixel_x: 2940 	
+        pixel_y:  6283 		
+        sort_position: 29 	
+        latitude: 48.8276756893 	
+        longitude: 2.3053401488            
     MetroStation238:
-        metro_line_id: 15
-        name: Porte de Saint-Ouen
-        pixel_x: 3077
-        pixel_y: 1622
-        latitude: 48.8972510523
-        longitude: 2.3288376697        
+        metro_line_id: 14 	
+        name: Porte de Versailles 	 	
+        pixel_x: 2269 	
+        pixel_y:  6214 		
+        sort_position: 27 	
+        latitude: 48.8324619820 	
+        longitude: 2.2880027964            
     MetroStation239:
-        metro_line_id: 4
-        name: Porte des Lilas
-        pixel_x: 6801
-        pixel_y: 2847
-        latitude: 48.8770699912
-        longitude: 2.4063858234        
+        metro_line_id: 1 	
+        name: Porte de Vincennes 	 	
+        pixel_x: 6559 	
+        pixel_y:  4684 		
+        sort_position: 22 	
+        latitude: 48.8472657114 	
+        longitude: 2.4088835253            
     MetroStation240:
-        metro_line_id: 15
-        name: Porte de Vanves
-        pixel_x: 2940
-        pixel_y: 6283
-        latitude: 48.8276756893
-        longitude: 2.3053401488        
+        metro_line_id: 8 	
+        name: Porte d'Italie 	 	
+        pixel_x: 4977 	
+        pixel_y:  6384 		
+        sort_position: 30 	
+        latitude: 48.8189346111 	
+        longitude: 2.3598558027            
     MetroStation241:
-        metro_line_id: 14
-        name: Porte de Versailles
-        pixel_x: 2269
-        pixel_y: 6214
-        latitude: 48.8324619820
-        longitude: 2.2880027964        
+        metro_line_id: 8 	
+        name: Porte d'Ivry 	 	
+        pixel_x: 5474 	
+        pixel_y:  6392 		
+        sort_position: 32 	
+        latitude: 48.8212704975 	
+        longitude: 2.3690949435            
     MetroStation242:
-        metro_line_id: 1
-        name: Porte de Vincennes
-        pixel_x: 6559
-        pixel_y: 4684
-        latitude: 48.8472657114
-        longitude: 2.4088835253        
+        metro_line_id: 10 	
+        name: Porte Dorée 	 	
+        pixel_x: 6388 	
+        pixel_y:  5530 		
+        sort_position: 28 	
+        latitude: 48.8354388892 	
+        longitude: 2.4060183531            
     MetroStation243:
-        metro_line_id: 8
-        name: Porte d'Italie
-        pixel_x: 4977
-        pixel_y: 6384
-        latitude: 48.8189346111
-        longitude: 2.3598558027        
+        metro_line_id: 5 	
+        name: Porte d'Orléans (Général Leclerc) 	 	
+        pixel_x: 3764 	
+        pixel_y:  6291 		
+        sort_position: 26 	
+        latitude: 48.8226012875 	
+        longitude: 2.3248055531            
     MetroStation244:
-        metro_line_id: 8
-        name: Porte d'Ivry
-        pixel_x: 5474
-        pixel_y: 6392
-        latitude: 48.8212704975
-        longitude: 2.3690949435        
+        metro_line_id: 1 	
+        name: Porte Maillot 	 	
+        pixel_x: 1524 	
+        pixel_y:  2788 		
+        sort_position: 5 	
+        latitude: 48.8779645030 	
+        longitude: 2.2818361726            
     MetroStation245:
-        metro_line_id: 10
-        name: Porte Dorée
-        pixel_x: 6388
-        pixel_y: 5530
-        latitude: 48.8354388892
-        longitude: 2.4060183531        
+        metro_line_id: 9 	
+        name: Pré-Saint-Gervais 	 	
+        pixel_x: 6587 	
+        pixel_y:  2612 		
+        sort_position: 7 	
+        latitude: 48.8799349564 	
+        longitude: 2.3990768969            
     MetroStation246:
-        metro_line_id: 5
-        name: Porte d'Orléans (Général Leclerc)
-        pixel_x: 3764
-        pixel_y: 6291
-        latitude: 48.8226012875
-        longitude: 2.3248055531        
+        metro_line_id: 8 	
+        name: Pyramides 	 	
+        pixel_x: 3334 	
+        pixel_y:  3726 		
+        sort_position: 17 	
+        latitude: 48.8669463021 	
+        longitude: 2.3336650658            
     MetroStation247:
-        metro_line_id: 1
-        name: Porte Maillot
-        pixel_x: 1524
-        pixel_y: 2788
-        latitude: 48.8779645030
-        longitude: 2.2818361726        
+        metro_line_id: 8 	
+        name: Pyramides 	 	
+        pixel_x: 3340 	
+        pixel_y:  3737 		
+        sort_position: 17 	
+        latitude: 48.8669463021 	
+        longitude: 2.3336650658            
     MetroStation248:
-        metro_line_id: 9
-        name: Pré-Saint-Gervais
-        pixel_x: 6587
-        pixel_y: 2612
-        latitude: 48.8799349564
-        longitude: 2.3990768969        
+        metro_line_id: 13 	
+        name: Pyrenees 	 	
+        pixel_x: 5816 	
+        pixel_y:  2869 		
+        sort_position: 8 	
+        latitude: 48.8738907818 	
+        longitude: 2.3848898390            
     MetroStation249:
-        metro_line_id: 8
-        name: Pyramides
-        pixel_x: 3334
-        pixel_y: 3726
-        latitude: 48.8669463021
-        longitude: 2.3336650658        
+        metro_line_id: 7 	
+        name: Quai de la Gare 	 	
+        pixel_x: 5536 	
+        pixel_y:  5820 		
+        sort_position: 22 	
+        latitude: 48.8373989542 	
+        longitude: 2.3737838849            
     MetroStation250:
-        metro_line_id: 16
-        name: Pyramides
-        pixel_x: 3340
-        pixel_y: 3737
-        latitude: 48.8669463021
-        longitude: 2.3336650658        
+        metro_line_id: 6 	
+        name: Quai de la Rapée 	 	
+        pixel_x: 5074 	
+        pixel_y:  4922 		
+        sort_position: 17 	
+        latitude: 48.8457951983 	
+        longitude: 2.3670356341            
     MetroStation251:
-        metro_line_id: 13
-        name: Pyrenees
-        pixel_x: 5816
-        pixel_y: 2869
-        latitude: 48.8738907818
-        longitude: 2.3848898390        
+        metro_line_id: 3 	
+        name: Quatre Septembre 	 	
+        pixel_x: 3515 	
+        pixel_y:  3594 		
+        sort_position: 13 	
+        latitude: 48.8693729306 	
+        longitude: 2.3357424748            
     MetroStation252:
-        metro_line_id: 7
-        name: Quai de la Gare
-        pixel_x: 5536
-        pixel_y: 5820
-        latitude: 48.8373989542
-        longitude: 2.3737838849        
+        metro_line_id: 13 	
+        name: Rambuteau 	 	
+        pixel_x: 4673 	
+        pixel_y:  3857 		
+        sort_position: 3 	
+        latitude: 48.8614000355 	
+        longitude: 2.3535049622            
     MetroStation253:
-        metro_line_id: 6
-        name: Quai de la Rapée
-        pixel_x: 5074
-        pixel_y: 4922
-        latitude: 48.8457951983
-        longitude: 2.3670356341        
+        metro_line_id: 11 	
+        name: Ranelagh 	 	
+        pixel_x: 1063 	
+        pixel_y:  4694 		
+        sort_position: 9 	
+        latitude: 48.8553920308 	
+        longitude: 2.2699797504            
     MetroStation254:
-        metro_line_id: 3
-        name: Quatre Septembre
-        pixel_x: 3515
-        pixel_y: 3594
-        latitude: 48.8693729306
-        longitude: 2.3357424748        
+        metro_line_id: 7 	
+        name: Raspail 	 	
+        pixel_x: 3868 	
+        pixel_y:  5557 		
+        sort_position: 14 	
+        latitude: 48.8389637143 	
+        longitude: 2.3305830968            
     MetroStation255:
-        metro_line_id: 13
-        name: Rambuteau
-        pixel_x: 4673
-        pixel_y: 3857
-        latitude: 48.8614000355
-        longitude: 2.3535049622        
+        metro_line_id: 5 	
+        name: Réaumur-Sébastopol 	 	
+        pixel_x: 4445 	
+        pixel_y:  3690 		
+        sort_position: 10 	
+        latitude: 48.8663118302 	
+        longitude: 2.3520352553            
     MetroStation256:
-        metro_line_id: 11
-        name: Ranelagh
-        pixel_x: 1063
-        pixel_y: 4694
-        latitude: 48.8553920308
-        longitude: 2.2699797504        
+        metro_line_id: 14 	
+        name: Rennes 	 	
+        pixel_x: 3401 	
+        pixel_y:  5001 		
+        sort_position: 19 	
+        latitude: 48.8480544329 	
+        longitude: 2.3280830512            
     MetroStation257:
-        metro_line_id: 7
-        name: Raspail
-        pixel_x: 3868
-        pixel_y: 5557
-        latitude: 48.8389637143
-        longitude: 2.3305830968        
+        metro_line_id: 11 	
+        name: République 	 	
+        pixel_x: 5188 	
+        pixel_y:  3366 		
+        sort_position: 25 	
+        latitude: 48.8674860391 	
+        longitude: 2.3636695982            
     MetroStation258:
-        metro_line_id: 5
-        name: Réaumur-Sébastopol
-        pixel_x: 4445
-        pixel_y: 3690
-        latitude: 48.8663118302
-        longitude: 2.3520352553        
+        metro_line_id: 10 	
+        name: Reuilly-Diderot 	 	
+        pixel_x: 5777 	
+        pixel_y:  4856 		
+        sort_position: 24 	
+        latitude: 48.8472381327 	
+        longitude: 2.3861181866            
     MetroStation259:
-        metro_line_id: 14
-        name: Rennes
-        pixel_x: 3401
-        pixel_y: 5001
-        latitude: 48.8480544329
-        longitude: 2.3280830512        
+        metro_line_id: 6 	
+        name: Richard-Lenoir 	 	
+        pixel_x: 5419 	
+        pixel_y:  3986 		
+        sort_position: 14 	
+        latitude: 48.8608927535 	
+        longitude: 2.3720977805            
     MetroStation260:
-        metro_line_id: 11
-        name: République
-        pixel_x: 5188
-        pixel_y: 3366
-        latitude: 48.8674860391
-        longitude: 2.3636695982        
+        metro_line_id: 11 	
+        name: Richelieu-Drouot 	 	
+        pixel_x: 3730 	
+        pixel_y:  3257 		
+        sort_position: 21 	
+        latitude: 48.8720139168 	
+        longitude: 2.3390880994            
     MetroStation261:
-        metro_line_id: 10
-        name: Reuilly-Diderot
-        pixel_x: 5777
-        pixel_y: 4856
-        latitude: 48.8472381327
-        longitude: 2.3861181866        
+        metro_line_id: 8 	
+        name: Riquet 	 	
+        pixel_x: 5407 	
+        pixel_y:  2142 		
+        sort_position: 7 	
+        latitude: 48.8881235581 	
+        longitude: 2.3744874257            
     MetroStation262:
-        metro_line_id: 6
-        name: Richard-Lenoir
-        pixel_x: 5419
-        pixel_y: 3986
-        latitude: 48.8608927535
-        longitude: 2.3720977805        
+        metro_line_id: 11 	
+        name: Robespierre 	 	
+        pixel_x: 6801 	
+        pixel_y:  4133 		
+        sort_position: 35 	
+        latitude: 48.8555640048 	
+        longitude: 2.4235567389            
     MetroStation263:
-        metro_line_id: 11
-        name: Richelieu-Drouot
-        pixel_x: 3730
-        pixel_y: 3257
-        latitude: 48.8720139168
-        longitude: 2.3390880994        
+        metro_line_id: 2 	
+        name: Rome 	 	
+        pixel_x: 2841 	
+        pixel_y:  2316 		
+        sort_position: 8 	
+        latitude: 48.8825292241 	
+        longitude: 2.3209841442            
     MetroStation264:
-        metro_line_id: 8
-        name: Riquet
-        pixel_x: 5407
-        pixel_y: 2142
-        latitude: 48.8881235581
-        longitude: 2.3744874257        
+        metro_line_id: 11 	
+        name: Rue de la Pompe (Avenue Georges Mandel) 	 	
+        pixel_x: 1142 	
+        pixel_y:  4049 		
+        sort_position: 11 	
+        latitude: 48.8641004132 	
+        longitude: 2.2776263299            
     MetroStation265:
-        metro_line_id: 11
-        name: Robespierre
-        pixel_x: 6801
-        pixel_y: 4133
-        latitude: 48.8555640048
-        longitude: 2.4235567389        
+        metro_line_id: 11 	
+        name: Rue des Boulets 	 	
+        pixel_x: 6071 	
+        pixel_y:  4349 		
+        sort_position: 30 	
+        latitude: 48.8521417734 	
+        longitude: 2.3891428046            
     MetroStation266:
-        metro_line_id: 2
-        name: Rome
-        pixel_x: 2841
-        pixel_y: 2316
-        latitude: 48.8825292241
-        longitude: 2.3209841442        
+        metro_line_id: 14 	
+        name: Rue du Bac 	 	
+        pixel_x: 3065 	
+        pixel_y:  4687 		
+        sort_position: 17 	
+        latitude: 48.8557564722 	
+        longitude: 2.3255688218            
     MetroStation267:
-        metro_line_id: 11
-        name: Rue de la Pompe (Avenue Georges Mandel)
-        pixel_x: 1142
-        pixel_y: 4049
-        latitude: 48.8641004132
-        longitude: 2.2776263299        
+        metro_line_id: 3 	
+        name: Rue Saint-Maur 	 	
+        pixel_x: 5905 	
+        pixel_y:  3650 		
+        sort_position: 21 	
+        latitude: 48.8639878082 	
+        longitude: 2.3800732953            
     MetroStation268:
-        metro_line_id: 11
-        name: Rue des Boulets
-        pixel_x: 6071
-        pixel_y: 4349
-        latitude: 48.8521417734
-        longitude: 2.3891428046        
+        metro_line_id: 11 	
+        name: Saint-Ambroise 	 	
+        pixel_x: 5649 	
+        pixel_y:  3936 		
+        sort_position: 27 	
+        latitude: 48.8612121033 	
+        longitude: 2.3740976038            
     MetroStation269:
-        metro_line_id: 14
-        name: Rue du Bac
-        pixel_x: 3065
-        pixel_y: 4687
-        latitude: 48.8557564722
-        longitude: 2.3255688218        
+        metro_line_id: 11 	
+        name: Saint-Augustin 	 	
+        pixel_x: 2887 	
+        pixel_y:  3147 		
+        sort_position: 18 	
+        latitude: 48.8746742716 	
+        longitude: 2.3204313965            
     MetroStation270:
-        metro_line_id: 3
-        name: Rue Saint-Maur
-        pixel_x: 5905
-        pixel_y: 3650
-        latitude: 48.8639878082
-        longitude: 2.3800732953        
+        metro_line_id: 15 	
+        name: Saint-Denis-Porte de Paris 	 	
+        pixel_x: 4089 	
+        pixel_y:  920 		
+        sort_position: 3 	
+        latitude: 48.9296276098 	
+        longitude: 2.3574101643            
     MetroStation271:
-        metro_line_id: 11
-        name: Saint-Ambroise
-        pixel_x: 5649
-        pixel_y: 3936
-        latitude: 48.8612121033
-        longitude: 2.3740976038        
+        metro_line_id: 15 	
+        name: Saint-Denis-Universite 	 	
+        pixel_x: 4707 	
+        pixel_y:  584 		
+        sort_position: 1 	
+        latitude: 48.9456254806 	
+        longitude: 2.3623587582            
     MetroStation272:
-        metro_line_id: 11
-        name: Saint-Augustin
-        pixel_x: 2887
-        pixel_y: 3147
-        latitude: 48.8746742716
-        longitude: 2.3204313965        
+        metro_line_id: 4 	
+        name: Saint-Fargeau 	 	
+        pixel_x: 6805 	
+        pixel_y:  3114 		
+        sort_position: 3 	
+        latitude: 48.8719510995 	
+        longitude: 2.4048576355            
     MetroStation273:
-        metro_line_id: 15
-        name: Saint-Denis-Porte de Paris
-        pixel_x: 4089
-        pixel_y: 920
-        latitude: 48.9296276098
-        longitude: 2.3574101643        
+        metro_line_id: 15 	
+        name: Saint-Francois-Xavier 	 	
+        pixel_x: 2664 	
+        pixel_y:  4908 		
+        sort_position: 23 	
+        latitude: 48.8518632148 	
+        longitude: 2.3140345269            
     MetroStation274:
-        metro_line_id: 15
-        name: Saint-Denis-Universite
-        pixel_x: 4707
-        pixel_y: 584
-        latitude: 48.9456254806
-        longitude: 2.3623587582        
+        metro_line_id: 14 	
+        name: Saint-Georges 	 	
+        pixel_x: 3865 	
+        pixel_y:  2533 		
+        sort_position: 9 	
+        latitude: 48.8785085363 	
+        longitude: 2.3375885122            
     MetroStation275:
-        metro_line_id: 4
-        name: Saint-Fargeau
-        pixel_x: 6805
-        pixel_y: 3114
-        latitude: 48.8719510995
-        longitude: 2.4048576355        
+        metro_line_id: 5 	
+        name: Saint-Germain des Prés 	 	
+        pixel_x: 3555 	
+        pixel_y:  4701 		
+        sort_position: 17 	
+        latitude: 48.8536134868 	
+        longitude: 2.3337204654            
     MetroStation276:
-        metro_line_id: 15
-        name: Saint-Francois-Xavier
-        pixel_x: 2664
-        pixel_y: 4908
-        latitude: 48.8518632148
-        longitude: 2.3140345269        
+        metro_line_id: 7 	
+        name: Saint-Jacques 	 	
+        pixel_x: 4157 	
+        pixel_y:  5829 		
+        sort_position: 16 	
+        latitude: 48.8332522884 	
+        longitude: 2.3362200154            
     MetroStation277:
-        metro_line_id: 14
-        name: Saint-Georges
-        pixel_x: 3865
-        pixel_y: 2533
-        latitude: 48.8785085363
-        longitude: 2.3375885122        
+        metro_line_id: 3 	
+        name: Saint-Lazare 	 	
+        pixel_x: 3612 	
+        pixel_y:  4875 		
+        sort_position: 10 	
+        latitude: 48.8755778692 	
+        longitude: 2.3261856586            
     MetroStation278:
-        metro_line_id: 5
-        name: Saint-Germain des Prés
-        pixel_x: 3555
-        pixel_y: 4701
-        latitude: 48.8536134868
-        longitude: 2.3337204654        
+        metro_line_id: 1 	
+        name: Saint-Mandé 	 	
+        pixel_x: 6784 	
+        pixel_y:  4816 		
+        sort_position: 23 	
+        latitude: 48.8462977573 	
+        longitude: 2.4186731009            
     MetroStation279:
-        metro_line_id: 7
-        name: Saint-Jacques
-        pixel_x: 4157
-        pixel_y: 5829
-        latitude: 48.8332522884
-        longitude: 2.3362200154        
+        metro_line_id: 6 	
+        name: Saint-Marcel 	 	
+        pixel_x: 5090 	
+        pixel_y:  5511 		
+        sort_position: 19 	
+        latitude: 48.8395141858 	
+        longitude: 2.3614087791            
     MetroStation280:
-        metro_line_id: 3
-        name: Saint-Lazare
-        pixel_x: 3612
-        pixel_y: 4875
-        latitude: 48.8755778692
-        longitude: 2.3261856586        
+        metro_line_id: 5 	
+        name: Saint-Michel 	 	
+        pixel_x: 3925 	
+        pixel_y:  4578 		
+        sort_position: 15 	
+        latitude: 48.8532875817 	
+        longitude: 2.3434684520            
     MetroStation281:
-        metro_line_id: 1
-        name: Saint-Mandé
-        pixel_x: 6784
-        pixel_y: 4816
-        latitude: 48.8462977573
-        longitude: 2.4186731009        
+        metro_line_id: 1 	
+        name: Saint-Paul (Le Marais) 	 	
+        pixel_x: 4745 	
+        pixel_y:  4316 		
+        sort_position: 17 	
+        latitude: 48.8551436006 	
+        longitude: 2.3606533540            
     MetroStation282:
-        metro_line_id: 6
-        name: Saint-Marcel
-        pixel_x: 5090
-        pixel_y: 5511
-        latitude: 48.8395141858
-        longitude: 2.3614087791        
+        metro_line_id: 11 	
+        name: Saint-Philippe du Roule 	 	
+        pixel_x: 2624 	
+        pixel_y:  3408 		
+        sort_position: 16 	
+        latitude: 48.8721798206 	
+        longitude: 2.3098200938            
     MetroStation283:
-        metro_line_id: 5
-        name: Saint-Michel
-        pixel_x: 3925
-        pixel_y: 4578
-        latitude: 48.8532875817
-        longitude: 2.3434684520        
+        metro_line_id: 5 	
+        name: Saint-Placide 	 	
+        pixel_x: 3468 	
+        pixel_y:  5161 		
+        sort_position: 19 	
+        latitude: 48.8465803886 	
+        longitude: 2.3269326356            
     MetroStation284:
-        metro_line_id: 1
-        name: Saint-Paul (Le Marais)
-        pixel_x: 4745
-        pixel_y: 4316
-        latitude: 48.8551436006
-        longitude: 2.3606533540        
+        metro_line_id: 10 	
+        name: Saint-Sébastien-Froissart 	 	
+        pixel_x: 5033 	
+        pixel_y:  3952 		
+        sort_position: 19 	
+        latitude: 48.8612805878 	
+        longitude: 2.3670240953            
     MetroStation285:
-        metro_line_id: 11
-        name: Saint-Philippe du Roule
-        pixel_x: 2624
-        pixel_y: 3408
-        latitude: 48.8721798206
-        longitude: 2.3098200938        
+        metro_line_id: 5 	
+        name: Saint-Sulpice 	 	
+        pixel_x: 3463 	
+        pixel_y:  4922 		
+        sort_position: 18 	
+        latitude: 48.8508047852 	
+        longitude: 2.3308675644            
     MetroStation286:
-        metro_line_id: 5
-        name: Saint-Placide
-        pixel_x: 3468
-        pixel_y: 5161
-        latitude: 48.8465803886
-        longitude: 2.3269326356        
+        metro_line_id: 12 	
+        name: Ségur 	 	
+        pixel_x: 2644 	
+        pixel_y:  5231 		
+        sort_position: 13 	
+        latitude: 48.8467524551 	
+        longitude: 2.3078204185            
     MetroStation287:
-        metro_line_id: 10
-        name: Saint-Sébastien-Froissart
-        pixel_x: 5033
-        pixel_y: 3952
-        latitude: 48.8612805878
-        longitude: 2.3670240953        
+        metro_line_id: 3 	
+        name: Sentier 	 	
+        pixel_x: 4077 	
+        pixel_y:  3686 		
+        sort_position: 15 	
+        latitude: 48.8674133309 	
+        longitude: 2.3466136387            
     MetroStation288:
-        metro_line_id: 5
-        name: Saint-Sulpice
-        pixel_x: 3463
-        pixel_y: 4922
-        latitude: 48.8508047852
-        longitude: 2.3308675644        
+        metro_line_id: 14 	
+        name: Sèvres-Babylone 	 	
+        pixel_x: 3234 	
+        pixel_y:  4830 		
+        sort_position: 18 	
+        latitude: 48.8512043553 	
+        longitude: 2.3258728629            
     MetroStation289:
-        metro_line_id: 12
-        name: Ségur
-        pixel_x: 2644
-        pixel_y: 5231
-        latitude: 48.8467524551
-        longitude: 2.3078204185        
+        metro_line_id: 7 	
+        name: Sèvres-Lecourbe 	 	
+        pixel_x: 2724 	
+        pixel_y:  5362 		
+        sort_position: 10 	
+        latitude: 48.8451307700 	
+        longitude: 2.3101839037            
     MetroStation290:
-        metro_line_id: 3
-        name: Sentier
-        pixel_x: 4077
-        pixel_y: 3686
-        latitude: 48.8674133309
-        longitude: 2.3466136387        
+        metro_line_id: 5 	
+        name: Simplon 	 	
+        pixel_x: 4185 	
+        pixel_y:  1729 		
+        sort_position: 2 	
+        latitude: 48.8946326892 	
+        longitude: 2.3470910653            
     MetroStation291:
-        metro_line_id: 14
-        name: Sèvres-Babylone
-        pixel_x: 3234
-        pixel_y: 4830
-        latitude: 48.8512043553
-        longitude: 2.3258728629        
+        metro_line_id: 14 	
+        name: Solférino 	 	
+        pixel_x: 2882 	
+        pixel_y:  4507 		
+        sort_position: 16 	
+        latitude: 48.8585512443 	
+        longitude: 2.3226806222            
     MetroStation292:
-        metro_line_id: 7
-        name: Sèvres-Lecourbe
-        pixel_x: 2724
-        pixel_y: 5362
-        latitude: 48.8451307700
-        longitude: 2.3101839037        
+        metro_line_id: 8 	
+        name: Stalingrad 	 	
+        pixel_x: 5338 	
+        pixel_y:  2291 		
+        sort_position: 8 	
+        latitude: 48.8843047895 	
+        longitude: 2.3670850145            
     MetroStation293:
-        metro_line_id: 5
-        name: Simplon
-        pixel_x: 4185
-        pixel_y: 1729
-        latitude: 48.8946326892
-        longitude: 2.3470910653        
+        metro_line_id: 11 	
+        name: Strasbourg-Saint-Denis 	 	
+        pixel_x: 4610 	
+        pixel_y:  3259 		
+        sort_position: 24 	
+        latitude: 48.8691997058 	
+        longitude: 2.3540971057            
     MetroStation294:
-        metro_line_id: 14
-        name: Solférino
-        pixel_x: 2882
-        pixel_y: 4507
-        latitude: 48.8585512443
-        longitude: 2.3226806222        
+        metro_line_id: 8 	
+        name: Sully-Morland 	 	
+        pixel_x: 4733 	
+        pixel_y:  4553 		
+        sort_position: 22 	
+        latitude: 48.8510338404 	
+        longitude: 2.3618669636            
     MetroStation295:
-        metro_line_id: 8
-        name: Stalingrad
-        pixel_x: 5338
-        pixel_y: 2291
-        latitude: 48.8843047895
-        longitude: 2.3670850145        
+        metro_line_id: 13 	
+        name: Telegraphe 	 	
+        pixel_x: 6624 	
+        pixel_y:  2864 		
+        sort_position: 11 	
+        latitude: 48.8753936354 	
+        longitude: 2.3985900638            
     MetroStation296:
-        metro_line_id: 11
-        name: Strasbourg-Saint-Denis
-        pixel_x: 4610
-        pixel_y: 3259
-        latitude: 48.8691997058
-        longitude: 2.3540971057        
+        metro_line_id: 3 	
+        name: Temple 	 	
+        pixel_x: 4999 	
+        pixel_y:  3481 		
+        sort_position: 18 	
+        latitude: 48.8663687823 	
+        longitude: 2.3610807223            
     MetroStation297:
-        metro_line_id: 8
-        name: Sully-Morland
-        pixel_x: 4733
-        pixel_y: 4553
-        latitude: 48.8510338404
-        longitude: 2.3618669636        
+        metro_line_id: 2 	
+        name: Ternes 	 	
+        pixel_x: 2134 	
+        pixel_y:  3021 		
+        sort_position: 4 	
+        latitude: 48.8780661990 	
+        longitude: 2.2980307126            
     MetroStation298:
-        metro_line_id: 13
-        name: Telegraphe
-        pixel_x: 6624
-        pixel_y: 2864
-        latitude: 48.8753936354
-        longitude: 2.3985900638        
+        metro_line_id: 8 	
+        name: Tolbiac 	 	
+        pixel_x: 4767 	
+        pixel_y:  6102 		
+        sort_position: 28 	
+        latitude: 48.8265068988 	
+        longitude: 2.3572419274            
     MetroStation299:
-        metro_line_id: 3
-        name: Temple
-        pixel_x: 4999
-        pixel_y: 3481
-        latitude: 48.8663687823
-        longitude: 2.3610807223        
+        metro_line_id: 14 	
+        name: Trinité-d'Estienne d'Orves 	 	
+        pixel_x: 3390 	
+        pixel_y:  2836 		
+        sort_position: 11 	
+        latitude: 48.8765087932 	
+        longitude: 2.3330580767            
     MetroStation300:
-        metro_line_id: 2
-        name: Ternes
-        pixel_x: 2134
-        pixel_y: 3021
-        latitude: 48.8780661990
-        longitude: 2.2980307126        
+        metro_line_id: 11 	
+        name: Trocadéro 	 	
+        pixel_x: 1465 	
+        pixel_y:  4054 		
+        sort_position: 12 	
+        latitude: 48.8629708358 	
+        longitude: 2.2870198440            
     MetroStation301:
-        metro_line_id: 8
-        name: Tolbiac
-        pixel_x: 4767
-        pixel_y: 6102
-        latitude: 48.8265068988
-        longitude: 2.3572419274        
+        metro_line_id: 1 	
+        name: Tuileries 	 	
+        pixel_x: 3025 	
+        pixel_y:  4046 		
+        sort_position: 12 	
+        latitude: 48.8644970967 	
+        longitude: 2.3303141803            
     MetroStation302:
-        metro_line_id: 14
-        name: Trinité-d'Estienne d'Orves
-        pixel_x: 3390
-        pixel_y: 2836
-        latitude: 48.8765087932
-        longitude: 2.3330580767        
+        metro_line_id: 12 	
+        name: Vaneau 	 	
+        pixel_x: 3076 	
+        pixel_y:  4999 		
+        sort_position: 15 	
+        latitude: 48.8488716625 	
+        longitude: 2.3219343475            
     MetroStation303:
-        metro_line_id: 11
-        name: Trocadéro
-        pixel_x: 1465
-        pixel_y: 4054
-        latitude: 48.8629708358
-        longitude: 2.2870198440        
+        metro_line_id: 15 	
+        name: Varenne 	 	
+        pixel_x: 2538 	
+        pixel_y:  4547 		
+        sort_position: 22 	
+        latitude: 48.8575166013 	
+        longitude: 2.3155302335            
     MetroStation304:
-        metro_line_id: 1
-        name: Tuileries
-        pixel_x: 3025
-        pixel_y: 4046
-        latitude: 48.8644970967
-        longitude: 2.3303141803        
+        metro_line_id: 14 	
+        name: Vaugirard (Adolphe Chérioux) 	 	
+        pixel_x: 2603 	
+        pixel_y:  5869 		
+        sort_position: 25 	
+        latitude: 48.8395680328 	
+        longitude: 2.3009826399            
     MetroStation305:
-        metro_line_id: 12
-        name: Vaneau
-        pixel_x: 3076
-        pixel_y: 4999
-        latitude: 48.8488716625
-        longitude: 2.3219343475        
+        metro_line_id: 5 	
+        name: Vavin 	 	
+        pixel_x: 3691 	
+        pixel_y:  5437 		
+        sort_position: 21 	
+        latitude: 48.8420036542 	
+        longitude: 2.3290032189            
     MetroStation306:
-        metro_line_id: 15
-        name: Varenne
-        pixel_x: 2538
-        pixel_y: 4547
-        latitude: 48.8575166013
-        longitude: 2.3155302335        
+        metro_line_id: 2 	
+        name: Victor Hugo 	 	
+        pixel_x: 1558 	
+        pixel_y:  3515 		
+        sort_position: 2 	
+        latitude: 48.8696716619 	
+        longitude: 2.2852672684            
     MetroStation307:
-        metro_line_id: 14
-        name: Vaugirard (Adolphe Chérioux)
-        pixel_x: 2603
-        pixel_y: 5869
-        latitude: 48.8395680328
-        longitude: 2.3009826399        
+        metro_line_id: 8 	
+        name: Villejuif-Léo Lagrange 	 	
+        pixel_x: 4756 	
+        pixel_y:  6619 		
+        sort_position: 35 	
+        latitude: 48.8041740664 	
+        longitude: 2.3639435266            
     MetroStation308:
-        metro_line_id: 5
-        name: Vavin
-        pixel_x: 3691
-        pixel_y: 5437
-        latitude: 48.8420036542
-        longitude: 2.3290032189        
+        metro_line_id: 8 	
+        name: Villejuif-Louis Aragon 	 	
+        pixel_x: 4751 	
+        pixel_y:  6934 		
+        sort_position: 37 	
+        latitude: 48.7870020157 	
+        longitude: 2.3669747148            
     MetroStation309:
-        metro_line_id: 2
-        name: Victor Hugo
-        pixel_x: 1558
-        pixel_y: 3515
-        latitude: 48.8696716619
-        longitude: 2.2852672684        
+        metro_line_id: 8 	
+        name: Villejuif-Paul Vaillant Couturier (Hôpital Paul Br 	 	
+        pixel_x: 4761 	
+        pixel_y:  6784 		
+        sort_position: 36 	
+        latitude: 48.7959447271 	
+        longitude: 2.3679661374            
     MetroStation310:
-        metro_line_id: 8
-        name: Villejuif-Léo Lagrange
-        pixel_x: 4756
-        pixel_y: 6619
-        latitude: 48.8041740664
-        longitude: 2.3639435266        
+        metro_line_id: 3 	
+        name: Villiers 	 	
+        pixel_x: 2650 	
+        pixel_y:  2503 		
+        sort_position: 8 	
+        latitude: 48.8810543983 	
+        longitude: 2.3152705510            
     MetroStation311:
-        metro_line_id: 8
-        name: Villejuif-Louis Aragon
-        pixel_x: 4751
-        pixel_y: 6934
-        latitude: 48.7870020157
-        longitude: 2.3669747148        
+        metro_line_id: 14 	
+        name: Volontaires 	 	
+        pixel_x: 2786 	
+        pixel_y:  5683 		
+        sort_position: 24 	
+        latitude: 48.8416970274 	
+        longitude: 2.3080411456            
     MetroStation312:
-        metro_line_id: 8
-        name: Villejuif-Paul Vaillant Couturier (Hôpital Paul Br
-        pixel_x: 4761
-        pixel_y: 6784
-        latitude: 48.7959447271
-        longitude: 2.3679661374        
+        metro_line_id: 11 	
+        name: Voltaire (Léon Blum) 	 	
+        pixel_x: 5784 	
+        pixel_y:  4079 		
+        sort_position: 28 	
+        latitude: 48.8578758429 	
+        longitude: 2.3798839196            
     MetroStation313:
-        metro_line_id: 3
-        name: Villiers
-        pixel_x: 2650
-        pixel_y: 2503
-        latitude: 48.8810543983
-        longitude: 2.3152705510        
+        metro_line_id: 3 	
+        name: Wagram 	 	
+        pixel_x: 2436 	
+        pixel_y:  2290 		
+        sort_position: 6 	
+        latitude: 48.8838739610 	
+        longitude: 2.3046514421            
     MetroStation314:
-        metro_line_id: 14
-        name: Volontaires
-        pixel_x: 2786
-        pixel_y: 5683
-        latitude: 48.8416970274
-        longitude: 2.3080411456        
+        metro_line_id: 18 	
+        name: Antony 	 	
+        pixel_x: 3482 	
+        pixel_y:  7386 		
+        sort_position: 1 	
+        latitude: 48.7550073109 	
+        longitude: 2.3012047782            
     MetroStation315:
-        metro_line_id: 11
-        name: Voltaire (Léon Blum)
-        pixel_x: 5784
-        pixel_y: 4079
-        latitude: 48.8578758429
-        longitude: 2.3798839196        
+        metro_line_id: 18 	
+        name: Arcueil-Cachan 	 	
+        pixel_x: 3978 	
+        pixel_y:  6886 		
+        sort_position: 4 	
+        latitude: 48.7989637452 	
+        longitude: 2.3278264235            
     MetroStation316:
-        metro_line_id: 3
-        name: Wagram
-        pixel_x: 2436
-        pixel_y: 2290
-        latitude: 48.8838739610
-        longitude: 2.3046514421        
+        metro_line_id: 17 	
+        name: Auber 	 	
+        pixel_x: 3186 	
+        pixel_y:  3458 		
+        sort_position: 3 	
+        latitude: 48.8728028704 	
+        longitude: 2.3297976143            
     MetroStation317:
-        metro_line_id: 18
-        name: Antony
-        pixel_x: 3482
-        pixel_y: 7386
-        latitude: 48.7550073109
-        longitude: 2.3012047782        
+        metro_line_id: 18 	
+        name: Bagneux 	 	
+        pixel_x: 3832 	
+        pixel_y:  7053 		
+        sort_position: 3 	
+        latitude: 48.7935073908 	
+        longitude: 2.3211344661            
     MetroStation318:
-        metro_line_id: 18
-        name: Arcueil-Cachan
-        pixel_x: 3978
-        pixel_y: 6886
-        latitude: 48.7989637452
-        longitude: 2.3278264235        
+        metro_line_id: 18 	
+        name: Bourg-la-Reine 	 	
+        pixel_x: 3683 	
+        pixel_y:  7176 		
+        sort_position: 2 	
+        latitude: 48.7801183312 	
+        longitude: 2.3122781905            
     MetroStation319:
-        metro_line_id: 17
-        name: Auber
-        pixel_x: 3186
-        pixel_y: 3458
-        latitude: 48.8728028704
-        longitude: 2.3297976143        
+        metro_line_id: 17 	
+        name: Charles de Gaulle-Etoile 	 	
+        pixel_x: 1975 	
+        pixel_y:  3168 		
+        sort_position: 2 	
+        latitude: 48.8740492795 	
+        longitude: 2.2948251379            
     MetroStation320:
-        metro_line_id: 18
-        name: Bagneux
-        pixel_x: 3832
-        pixel_y: 7053
-        latitude: 48.7935073908
-        longitude: 2.3211344661        
+        metro_line_id: 18 	
+        name: Cité Universitaire 	 	
+        pixel_x: 4043 	
+        pixel_y:  6292 		
+        sort_position: 7 	
+        latitude: 48.8199505116 	
+        longitude: 2.3409839491            
     MetroStation321:
-        metro_line_id: 18
-        name: Bourg-la-Reine
-        pixel_x: 3683
-        pixel_y: 7176
-        latitude: 48.7801183312
-        longitude: 2.3122781905        
+        metro_line_id: 18 	
+        name: Gentilly 	 	
+        pixel_x: 4038 	
+        pixel_y:  6511 		
+        sort_position: 6 	
+        latitude: 48.8155735023 	
+        longitude: 2.3407386664            
     MetroStation322:
-        metro_line_id: 17
-        name: Charles de Gaulle-Etoile
-        pixel_x: 1975
-        pixel_y: 3168
-        latitude: 48.8740492795
-        longitude: 2.2948251379        
+        metro_line_id: 17 	
+        name: La Défense (Grande Arche) 	 	
+        pixel_x: 961 	
+        pixel_y:  2202 		
+        sort_position: 1 	
+        latitude: 48.8918864546 	
+        longitude: 2.2377829420            
     MetroStation323:
-        metro_line_id: 18
-        name: Cité Universitaire
-        pixel_x: 4043
-        pixel_y: 6292
-        latitude: 48.8199505116
-        longitude: 2.3409839491        
+        metro_line_id: 18 	
+        name: Laplace 	 	
+        pixel_x: 4042 	
+        pixel_y:  6725 		
+        sort_position: 5 	
+        latitude: 48.8079249127 	
+        longitude: 2.3334990532            
     MetroStation324:
-        metro_line_id: 18
-        name: Gentilly
-        pixel_x: 4038
-        pixel_y: 6511
-        latitude: 48.8155735023
-        longitude: 2.3407386664        
+        metro_line_id: 18 	
+        name: Luxembourg 	 	
+        pixel_x: 4043 	
+        pixel_y:  5025 		
+        sort_position: 9 	
+        latitude: 48.8459336878 	
+        longitude: 2.3406136122            
     MetroStation325:
-        metro_line_id: 17
-        name: La Défense (Grande Arche)
-        pixel_x: 961
-        pixel_y: 2202
-        latitude: 48.8918864546
-        longitude: 2.2377829420        
+        metro_line_id: 17 	
+        name: Nation 	 	
+        pixel_x: 6256 	
+        pixel_y:  4598 		
+        sort_position: 6 	
+        latitude: 48.8483471801 	
+        longitude: 2.3959499233            
     MetroStation326:
-        metro_line_id: 18
-        name: Laplace
-        pixel_x: 4042
-        pixel_y: 6725
-        latitude: 48.8079249127
-        longitude: 2.3334990532        
+        metro_line_id: 18 	
+        name: Port Royal 	 	
+        pixel_x: 4034 	
+        pixel_y:  5395 		
+        sort_position: 8 	
+        latitude: 48.8389863698 	
+        longitude: 2.3370368298            
     MetroStation327:
-        metro_line_id: 18
-        name: Luxembourg
-        pixel_x: 4043
-        pixel_y: 5025
-        latitude: 48.8459336878
-        longitude: 2.3406136122        
+        metro_line_id: 17 	
+        name: Vincennes 	 	
+        pixel_x: 7204 	
+        pixel_y:  4639 		
+        sort_position: 7 	
+        latitude: 48.8472269351 	
+        longitude: 2.4310666191            
     MetroStation328:
-        metro_line_id: 17
-        name: Nation
-        pixel_x: 6256
-        pixel_y: 4598
-        latitude: 48.8483471801
-        longitude: 2.3959499233        
+        metro_line_id: 17 	
+        name: Chatelet-Les Halles 	 	
+        pixel_x: 4254 	
+        pixel_y:  3966 		
+        sort_position: 4 	
+        latitude: 48.8611491277 	
+        longitude: 2.3466329400            
     MetroStation329:
-        metro_line_id: 18
-        name: Port Royal
-        pixel_x: 4034
-        pixel_y: 5395
-        latitude: 48.8389863698
-        longitude: 2.3370368298        
+        metro_line_id: 18 	
+        name: Gare du Nord 	 	
+        pixel_x: 4846 	
+        pixel_y:  2440 		
+        sort_position: 12 	
+        latitude: 48.8800360157 	
+        longitude: 2.3545491254            
     MetroStation330:
-        metro_line_id: 17
-        name: Vincennes
-        pixel_x: 7204
-        pixel_y: 4639
-        latitude: 48.8472269351
-        longitude: 2.4310666191        
-    MetroStation331:
-        metro_line_id: 17
-        name: Chatelet-Les Halles
-        pixel_x: 4254
-        pixel_y: 3966
-        latitude: 48.8611491277
-        longitude: 2.3466329400        
-    MetroStation332:
-        metro_line_id: 18
-        name: Gare du Nord
-        pixel_x: 4846
-        pixel_y: 2440
-        latitude: 48.8800360157
-        longitude: 2.3545491254        
-    MetroStation333:
-        metro_line_id: 17
-        name: Gare de Lyon
-        pixel_x: 5451
-        pixel_y: 5054
-        latitude: 48.8447572696
-        longitude: 2.3740723000
+        metro_line_id: 17 	
+        name: Gare de Lyon 	 	
+        pixel_x: 5451 	
+        pixel_y:  5054 		
+        sort_position: 5 	
+        latitude: 48.8447572696 	
+        longitude: 2.3740723000   

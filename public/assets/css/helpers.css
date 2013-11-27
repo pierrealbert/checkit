@@ -31,6 +31,9 @@
 .h120 {
 	height: 120px;
 }
+.h160 {
+	height: 160px;
+}
 
 .bottom, .top {
 	position: absolute;
@@ -47,8 +50,21 @@
 .w200 {
 	width: 200px;
 }
+
 .w220{
 	width: 220px;
+}
+
+.w230{
+	width: 230px;
+}
+
+.w250{
+	width: 250px;
+}
+
+.w270{
+	width: 270px;
 }
 
 .w300 {

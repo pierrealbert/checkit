@@ -1,24 +1,43 @@
 <header>
 	<div class="inner">
-		<a href="<?=$this->baseUrl('/'); ?>" class="logo">Ommi</a>
+		<a href="<?=$this->baseUrl('/'); ?>" class="home-logo" id="logo">Ommi</a>
         <ul id="header-nav">
+                <!-- success popup test link -->
+                <li class="left"><a href="#" class="success-popup">Success popup</a></li>
+                <!-- /success popup test link -->
             <? if ($this->currUser) : ?>
-            <li class="left"><a href="#">Guide du Locataire</a></li>
-            <li><a href="<?= $this->url(array('controller' => 'search', 'action' => 'index'), null, true) ?>" class="btn btn-red">Nouvelle recherche</a></li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="">Bonjour, <?= $this->currUser->first_name ?> <?= $this->currUser->last_name ?> <i class="caret"></i></a>
-                <ul class="dropdown-menu">
-                    <li><a href="">Résumé</a></li>
-                    <li><a href="">Mon dossier</a></li>
-                    <li><a href="">Mes candidatures</a></li>
-                    <li><a href="">Mes recherches</a></li>
-                    <li><a href="">Mes services</a></li>
-                    <li><a href="">Mon compte</a></li>
-                    <li><a href="">Mes recherches</a></li>
-                    <li><a href="<?= $this->url(array('controller' => 'login', 'action' => 'logout'), null, true) ?>" class="red">Se déconnecter</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Mes candidatures</a></li>           
+                <? if ($this->currUser->isResident()) : ?>
+                <li class="left"><a href="#">Guide du Locataire</a></li>
+                <li><a href="/search" class="btn btn-red">Nouvelle recherche</a></li>
+                <? elseif ($this->currUser->isOwner()) : ?>       
+                <li class="left"><a href="#">Guide du Propriétaire</a></li>
+                <li><a href="/user/property/new-add" class="btn btn-red">Publier une annonce</a></li>
+                <? endif ?>               
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">Bonjour, <?= $this->currUser->getFullName() ?> <i class="caret"></i></a>
+                    <ul class="dropdown-menu">
+                    <? if ($this->currUser->isResident()) : ?>
+                        <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'index'), null, true) ?>">Résumé</a></li>
+                        <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'documents'), null, true) ?>">Mon dossier</a></li>
+                        <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'candidatures'), null, true) ?>">Mes candidatures</a></li>
+                        <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'searches'), null, true) ?>">Mes recherches</a></li>
+                        <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'resident-services'), null, true) ?>">Me services</a></li>
+                        <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'my-account'), null, true) ?>">Mon compte</a></li>                  
+                    <? elseif ($this->currUser->isOwner()) : ?>               
+                        <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'index'), null, true) ?>">Résumé</a></li>
+                        <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'properties'), null, true) ?>">Mes annonces</a></li>
+                        <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'candidates'), null, true) ?>">Mes candidats</a></li>
+                        <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'owner-services'), null, true) ?>">Me services</a></li>
+                        <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'my-account'), null, true) ?>">Mon compte</a></li>                      
+                    <? endif ?>
+                        <li><a href="<?= $this->url(array('module' => 'default', 'controller' => 'login', 'action' => 'logout'), null, true) ?>" class="red">Se déconnecter</a></li>
+                    </ul>
+                </li>            
+                <? if ($this->currUser->isResident()) : ?>
+                <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'candidatures'), null, true) ?>">Mes candidatures</a></li>   
+                <? elseif ($this->currUser->isOwner()) : ?>       
+                <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'candidates'), null, true) ?>">Mes candidats</a></li>   
+                <? endif ?>             
             <? else : ?>            
             <li class="left"><a href="#">Comment ça marche ?</a></li>
             <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'property', 'action' => 'new-add'), null, true) ?>" class="btn btn-red">Publier une annonce</a></li>
@@ -37,19 +56,3 @@
         </ul>
 	</div>
 </header>
-<!--
-<div id="header">
-    <h1><?= $this->translate('default_module_header') ?></h1>
-    <? if ($this->currUser) : ?>
-        <div class="welcome">
-            <div class="clear"></div>
-            <?= $this->translate('hello') ?>, <?= $this->currUser->getFullName() ?>!
-            [<a href="<?= $this->url(array('module' => 'default', 'controller' => 'login', 'action' => 'logout', 'model' => 'user'), null, true) ?>"><?= $this->translate('logout') ?></a>]
-            <? if (!$this->currUser->is_premium): ?>
-                [<a href="<?= $this->url(array('module' => 'user', 'controller' => 'subscription', 'action' => 'index'), null, true) ?>"><?= $this->translate('upgrade_to_premium') ?></a>]
-            <? endif ?>
-        </div>
-        <div class="clear"></div>
-    <? endif ?>
-</div>
--->

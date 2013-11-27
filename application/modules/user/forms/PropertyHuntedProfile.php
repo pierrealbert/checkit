@@ -7,17 +7,25 @@ class User_Form_PropertyHuntedProfile extends Ext_Form
     {
         $multiCheckboxses = self::getMultiCheckboxses();
 
-        $this->addElement('multiCheckbox', 'hunted_profile', array(
-            'label'         => 'hunted_profile',
-            'multiOptions'  => $multiCheckboxses['hunted_profile'],
-            'separator'     => '',
-        ));
+        $chbox = new Zend_Form_Element_MultiCheckbox('hunted_profile');
+        $chbox->setSeparator('')
+            ->setLabel('Profil recherchè')
+            ->addMultiOptions($multiCheckboxses['hunted_profile'])
+            ->setDecorators(array(
+                array('MchBox', array('labelClass' => 'btn-input-lite', 'needAll' => false)),
+                array('Label', array('tag'=>'label', 'separator'=>' ', 'class' => 'name-title-black')),
+                array('HtmlTag', array('tag' => 'div', 'class'=>'box-universal')),
+            ));
+        $this->addElement($chbox);
 
-        $this->addElement('checkbox', 'is_roomate', array(
-            'label'          => 'is_roomate',
-            'uncheckedValue' => '0',
-            'checkedValue'   => '1'
-        ));
+        $this->addElement('radioButtons', 'is_roomate', array(
+                'label'        => 'is_roomate',
+                'required'     => false,
+                'multiOptions' => array(
+                    '0' => 'Non',
+                    '1' => 'Oui'
+                ))
+        );
 
         $this->addElement('submit', 'next', array(
             'class'     => 'ui-state-default ui-corner-all'

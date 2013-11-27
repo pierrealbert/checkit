@@ -1,0 +1,49 @@
+<div id="compte" class="compte-01">
+    <?= $this->partial('my-account/_partials/navigation.phtml') ?>
+    <div class="right">
+        <form action="" method="post">
+        <div class="progress-content">
+            <div class="step-title">
+                <h1>Notifications des candidatures</h1>
+                <span><strong>Ommi</strong> vous avertit par email lorsqu’une candidature est acceptée ou refusée.</span>
+                <span class="blue">Vous pouvez régler la fréquence de ces notifications.</span>
+            </div>
+            <div class="block-grid grid-inset">
+
+                <fieldset>
+                    <?= $this->form->visit_alerts ?>
+                </fieldset>
+
+                <fieldset>
+                    <?= $this->form->visit_alerts_period ?>
+                </fieldset>
+
+            </div>
+            <div style="margin-top: 40px;" class="step-title">
+                <h1>Notifications des alertes</h1>
+                <span>
+                    <strong>Ommi</strong> vous accompagne et veille à que vous trouviez un locataire, c'est pourquoi<br>Ommi vous avertit par email lorsque vous devez prendre connaissance d'un<br>évènement important ou lorsque de nouveaux candidats correspondent à vos<br>critères. <span class="blue">Vous pouvez régler la fréquence de ces notifications.</span>
+                </span>
+            </div>
+            <div class="block-grid grid-inset">
+                <fieldset>
+                    <?= $this->form->profile_alerts ?>
+                </fieldset>
+            </div>
+            <div style="margin-top: 40px;" class="step-title">
+                <h1>Notifications des alertes et rendez-vous</h1>
+                <span><strong>Ommi</strong> peut vous rappeler à l’avance vos visites et vos rendez-vous.</span>
+                <span class="blue">Vous pouvez régler ces notifications et sélectionner plusieurs choix.</span>
+            </div>
+            <div class="block-grid grid-inset">
+                <fieldset>
+                    <?= $this->form->secondary_visit_alerts ?>
+                </fieldset>
+            </div>
+            <div class="progress-buttons">
+                <?= $this->form->save ?>
+            </div>
+        </div>
+        </form>
+    </div>      
+</div>

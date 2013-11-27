@@ -7,8 +7,8 @@ class User_PropertyController extends Zend_Controller_Action
     {
         parent::init();
         $this->view->contentTitle = 'add_property';    
-    }
-    
+    }   
+            
     /*
     * Create clear property
     */
@@ -33,12 +33,13 @@ class User_PropertyController extends Zend_Controller_Action
             $property = $this->getProperty($user);
         } else {
             $property = Doctrine::getTable('Model_Property')->create();
+            $property->owner_id = $user->id;
         }
-        $form = new User_Form_PropertyRental();
+
+        $form = new User_Form_PropertyRental($user);
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($this->getRequest()->getParams())) {
-
                 $data = $form->getValues();
 
                 if ($data['availability_select'] == '' && trim($data['availability']) == '') {
@@ -48,16 +49,25 @@ class User_PropertyController extends Zend_Controller_Action
                 }
 
                 if (isset($data['availability']) && trim($data['availability']) != '') {
-                    $availabilityTime = strtotime($data['availability']);
+                    $availabilityTime = new Zend_Date($data['availability'], 'dd/MM/yyyy');
                     if ($availabilityTime === false) {
                         unset($data['availability']);
                     } else {
-                        $data['availability'] = date('Y-m-d', $availabilityTime);
+                        $data['availability'] = $availabilityTime->toString('YYYY-MM-dd');
                     }
                 } else {
                     unset($data['availability']);
                 }
                 unset ($data['availability_select']);
+
+                try {
+                    if (!empty($data['availability'])) {
+                        $zendDate = new Zend_Date($data['availability'], 'dd/MM/yyyy');
+                        $data['availability'] = $zendDate->toString('YYYY-MM-dd');
+                    }
+                } catch (Exception $e) {
+                    unset($data['availability']);
+                }
 
                 $property->owner_id = $user->id;
                 $property->state    = Model_Property::STATE_DESCRIPTION;                   
@@ -67,49 +77,60 @@ class User_PropertyController extends Zend_Controller_Action
                 $this->_helper->redirector('description', 'property', 'user', array('item' => $property->id));
             } else {
                 $property->state = Model_Property::STATE_RENTAL;
-
                 $property->save();
-
                 $forms = new Zend_Session_Namespace('Forms');
-
                 $forms->rental_form = $form;
 
-                //$this->_helper->redirector('rental', 'property', 'user');
-                $this->_helper->redirector('location', 'property', 'user');
+                $this->_helper->redirector('location', 'property', 'user', array('item' => $property->id));
             }
         } else {
             $forms = new Zend_Session_Namespace('Forms');
 
             if (isset($forms->rental_form)) {
-
                 $form = $forms->rental_form;
-
                 unset($forms->rental_form);
-            } elseif ($property) { // Fill form for edit
-                //mDump($property->toArray());
 
-                $data = $property->toArray();
+                $data = $form->getValues();
                 if ($data['availability'] != '') {
-                    $data['availability'] = date('F j, Y', strtotime($data['availability']));
-                    if ($data['availability'] === false) {
+                    $data['availability'] = date('d/m/Y', strtotime($data['availability']));
+                    if ($data['availability'] === false || $data['availability'] == '') {
                         $data['availability'] = '';
                         $data['availability_select'] = 'now';
                     }
+                } else {
+                    $data['availability_select'] = 'now';
                 }
+                $form->populate($data);
+
+            } elseif ($property) { // Fill form for edit
+                $data = $property->toArray();
+                if ($data['availability'] != '') {
+                    $data['availability'] = date('d/m/Y', strtotime($data['availability']));
+                    if ($data['availability'] === false || $data['availability'] == '') {
+                        $data['availability'] = '';
+                        $data['availability_select'] = 'now';
+                    }
+                } else {
+                    $data['availability_select'] = 'now';
+                }
+
                 $form->populate($data);
             }
         }
 
+        $this->view->user          = $user;
         $this->view->property      = $property;
         $this->view->current_state = Model_Property::STATE_RENTAL;
+        $this->view->mode          = (($property->is_published == 1) ? 'edit' : 'add');
 
         $this->view->form = $form;
     }
 
-    public function descriptionAction()
+    public function descriptionAction($mode = 'add')
     {
         $user = $this->_helper->auth->getCurrUser();
         $property = $this->getProperty($user);
+
         $form = new User_Form_PropertyDescription();
 
         if ($this->getRequest()->isPost()) {
@@ -142,6 +163,8 @@ class User_PropertyController extends Zend_Controller_Action
 
         $this->view->property = $property;
         $this->view->current_state = Model_Property::STATE_DESCRIPTION;
+
+        $this->view->mode = $mode;
         $this->view->form = $form;
     }
 
@@ -171,32 +194,37 @@ class User_PropertyController extends Zend_Controller_Action
                             $pathinfo = pathinfo($tmpPath);
 
                             $filePath =  md5($tmpPath . time()) . '.' . strtolower($pathinfo['extension']);
-                
-                            $path = $settings->get('propertyImages.basePath') . "/{$property->id}";
-            
-                            // Create property dir on first photo upload
-                            if (!is_dir($path) && !mkdir($path, 0777, true)) {
-                                throw new Zend_Controller_Action_Exception("Can't create dirictory \"{$path}\"");
+
+                            if (in_array(strtolower($pathinfo['extension']), array('gif', 'jpg', 'jpeg', 'png'))) {
+
+                                $path = $settings->get('propertyImages.basePath') . "/{$property->id}";
+
+                                // Create property dir on first photo upload
+                                if (!is_dir($path) && !mkdir($path, 0777, true)) {
+                                    throw new Zend_Controller_Action_Exception("Can't create dirictory \"{$path}\"");
+                                }
+
+                                $fullFilePath = $path . '/' . $filePath;
+
+                                if (!is_file($tmpPath)) {
+                                    throw new Zend_Controller_Action_Exception($tmpPath . ' is not exists');
+                                }
+
+                                // Move photo to propery dir
+                                if (!@rename($tmpPath, $fullFilePath)) {
+                                    throw new Zend_Controller_Action_Exception('Can not move file to ' . $fullFilePath);
+                                }
+
+                                // Select first photo as main
+                                if (empty($property->main_photo)) {
+                                    $property->main_photo = $settings->get('propertyImages.baseUrl') . "/{$property->id}/{$filePath}";
+                                    $property->save();
+                                }
+
+                                $this->_helper->messenger->success('photo_was_uploaded');
+                            } else {
+                                $this->_helper->messenger->error('invalid_image_type');
                             }
-
-                            $fullFilePath = $path . '/' . $filePath;
-
-                            if (!is_file($tmpPath)) {
-                                throw new Zend_Controller_Action_Exception($tmpPath . ' is not exists');
-                            }
-
-                            // Move photo to propery dir
-                            if (!@rename($tmpPath, $fullFilePath)) {
-                                throw new Zend_Controller_Action_Exception('Can not move file to ' . $fullFilePath);
-                            }
-
-                            // Select first photo as main
-                            if (empty($property->main_photo)) {
-                                $property->main_photo = $settings->get('propertyImages.baseUrl') . "/{$property->id}/{$filePath}";
-                                $property->save();
-                            }
-
-                            $this->_helper->messenger->success('photo_was_uploaded');
                         } else {
                             
                             $this->_helper->messenger->error('error_photo_upload');
@@ -331,8 +359,9 @@ class User_PropertyController extends Zend_Controller_Action
 
     public function editVisitDatesAction()
     {
-        $this->visitDates();
-        $this->_helper->viewRenderer->renderScript('property/edit-visit-dates.phtml');
+        $this->visitDates('edit');
+        //$this->_helper->viewRenderer->renderScript('property/edit-visit-dates.phtml');
+        $this->_helper->viewRenderer->renderScript('property/add-visit-dates.phtml');
     }
 
     /*
@@ -344,7 +373,7 @@ class User_PropertyController extends Zend_Controller_Action
         $this->_helper->viewRenderer->renderScript('property/add-visit-dates.phtml');
     }
 
-    protected function visitDates()
+    protected function visitDates($mode = 'add')
     {
         $user = $this->_helper->auth->getCurrUser();
 
@@ -361,52 +390,42 @@ class User_PropertyController extends Zend_Controller_Action
             if (count($visits)) {
 
                 $data = $form->getValues();
-
                 $property->merge($data);
-
                 $property->state = Model_Property::STATE_PUBLISH_AD;
-
                 $property->save();
 
                 $this->_helper->redirector('publish-ad', 'property', 'user', array('item' => $property->id));
             } else {
                 
                 $property->state = Model_Property::STATE_VISIT_DATES;
+                $form->isValid($this->getRequest()->getParams());
+                $data = $form->getValues();
 
+                $property->phone = $data['phone'];
                 $property->save();
-
                 $forms = new Zend_Session_Namespace('Forms');
-
                 $forms->visit_dates_form = $form;
-
                 $this->_helper->messenger->error('list_dates_for_visit_empty');
-
                 $this->_helper->redirector('visit-dates', 'property', 'user', array('item' => $property->id));
             }
         } else {
             $forms = new Zend_Session_Namespace('Forms');
 
             if (isset($forms->visit_dates_form)) {
-
                 $form = $forms->visit_dates_form;
-
                 unset($forms->visit_dates_form);
-            } elseif ($property) { // Fill form for edit
-
+            } elseif ($property) {
                 $form->populate($property->toArray());
             }
         }
 
-        $this->view->visits =  $this->getVisits($property);
-        $this->view->time_list = Model_PropertyVisitDates::getTimeList();
-        $this->view->number_of_candidats_list = Model_PropertyVisitDates::getNumberOfCandidats();
+        $this->view->defDate = date('d/m/Y');
 
+        $this->view->selectedDates =  $this->getSelectedDates($property);
         $this->view->property = $property;
-
         $this->view->user = $user;
-
+        $this->view->mode = $mode;
         $this->view->current_state = Model_Property::STATE_VISIT_DATES;
-
         $this->view->form = $form;
     }
     /*
@@ -417,59 +436,42 @@ class User_PropertyController extends Zend_Controller_Action
         $user = $this->_helper->auth->getCurrUser();
 
         $property = $this->getProperty($user);
-
         $form = new User_Form_PropertyPublishAd();
-
         if ($this->getRequest()->isPost()) {
-            
             $property->is_published = 1;
-
             $property->save();
 
             $this->_helper->messenger->success('property_published');
-            
             $this->_helper->redirector('index', 'index', 'default');
         }
 
         $this->view->property = $property;
-
         $this->view->current_state = Model_Property::STATE_PUBLISH_AD;
-
         $this->view->form = $form;
     }
 
     public function unpublishAdAction()
     {
         $user = $this->_helper->auth->getCurrUser();
-
         $property = $this->getProperty($user);
-
         $form = new User_Form_PropertyUnPublishAd();
 
         if ($this->getRequest()->isPost()) {
-            
             $property->is_published = 0;
-
             $property->save();
-
             $this->_helper->messenger->success('property_unpublished');
-            
             $this->_helper->redirector('index', 'index', 'default');
         }
 
         $this->view->property = $property;
-
         $this->view->current_state = Model_Property::STATE_PUBLISH_AD;
-
         $this->view->form = $form;
     }
 
     private function getProperty($user)
     {
         $property = Doctrine::getTable('Model_Property')->findOneById($this->_getParam('item', ''));
-
         if (!$property || ($property && $property->owner_id != $user->id)) {
-
             $this->_helper->redirector('new-add', 'property', 'user');
         }
 
@@ -489,11 +491,8 @@ class User_PropertyController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
 
         $user = $this->_helper->auth->getCurrUser();
-
         $settings = Zend_Controller_Action_HelperBroker::getStaticHelper('settings');
-        
         $property = $this->getProperty($user);
-
         $result = array('error' => true);
 
         if ($property) {
@@ -505,7 +504,7 @@ class User_PropertyController extends Zend_Controller_Action
 
                 @unlink($settings->get('propertyImages.basePath') . '/' . $data['photo']);
 
-                // Remove thub images
+                // Remove thumb images
                 $image_info = pathinfo($data['photo']);
 
                 $path = $settings->get('propertyImages.basePath') . '/' . $image_info['dirname'] . '/thumb/';
@@ -633,9 +632,12 @@ class User_PropertyController extends Zend_Controller_Action
                 $tmp = $this->getRequest()->getParams();
 
                 if ($form->isValid($this->getRequest()->getParams())) {
-
                     $data = $form->getValues();
-                    
+
+                    $old = $data['availability'];
+                    $eff_date = new Zend_Date($data['availability'], 'dd/MM/yyyy');
+                    $data['availability'] = $eff_date->get('YYYY-MM-dd');
+
                     $q = Doctrine::getTable('Model_PropertyVisitDates')->createQuery('pvd')
                         ->where('pvd.property_id = ?', $property->id)
                         ->andWhere('pvd.availability = ?', $data['availability']);
@@ -643,12 +645,15 @@ class User_PropertyController extends Zend_Controller_Action
                     $visit = $q->fetchOne();
 
                     if (!$visit) {
-                        $visit = Doctrine::getTable('Model_PropertyVisitDates')->create();
-                        $visit->property_id = $property->id;
+                        if (strtotime($data['availability']) >= strtotime(date('Y-m-d'))) {
+                            $visit = Doctrine::getTable('Model_PropertyVisitDates')->create();
+                            $visit->property_id = $property->id;
+                            $visit->merge($data);
+                            $visit->save();
+                        }
+                    } else {
+                        $visit->delete();
                     }
-                
-                    $visit->merge($data);
-                    $visit->save();
 
                     if (isset($tmp['phone'])) {
                         $user->phone = $tmp['phone'];
@@ -656,12 +661,10 @@ class User_PropertyController extends Zend_Controller_Action
                     }
 
                     $result['error'] = false;
-                } else {
-
                 }
             }
 
-            $result['list'] =  $this->getVisits($property, true);
+            $result['list'] =  $this->getSelectedDates($property);
         }
 
         $this->_helper->json->sendJson($result);
@@ -720,6 +723,28 @@ class User_PropertyController extends Zend_Controller_Action
         return  $this->view->render('property/process-visit-date.phtml');
     }
 
+    private function getSelectedDates($property)
+    {
+        $q = Doctrine::getTable('Model_PropertyVisitDates')->createQuery('pvd')
+            ->where('pvd.property_id = ?', $property->id);
+
+        $visits = $q->execute();
+        $result = array();
+        if ($visits !== false){
+            foreach ($visits as $indx => $rec) {
+                list($y,$m,$d) = explode('-', $rec->availability);
+
+                $result[] = array(
+                    'year' => intval($y),
+                    'month' => intval($m),
+                    'day' => intval($d)
+                );
+            }
+        }
+
+        return  $result;
+    }
+
     public function removeAction()
     {
         $user = $this->_helper->auth->getCurrUser();
@@ -728,58 +753,7 @@ class User_PropertyController extends Zend_Controller_Action
 
     public function editAction()
     {
-        $user = $this->_helper->auth->getCurrUser();
-
-        $property = $this->getProperty($user);
-
-        $form = new User_Form_PropertyEdit();
-
-        if ($this->getRequest()->isPost()) {
-            if ($form->isValid($this->getRequest()->getParams())) {
-
-                $data = $form->getValues();
-
-                $property->merge($data);
-
-                $property->state = Model_Property::STATE_DESCRIPTION;
-
-                $property->save();
-
-                $this->_helper->redirector('description', 'property', 'user', array('item' => $property->id));
-            } else {
-                
-                $property->state = Model_Property::STATE_RENTAL;
-
-                $property->save();
-
-                $forms = new Zend_Session_Namespace('Forms');
-
-                $forms->rental_form = $form;
-
-                $this->_helper->redirector('rental', 'property', 'user', array('item' => $property->id));
-            }
-        } else {
-            $forms = new Zend_Session_Namespace('Forms');
-
-            if (isset($forms->rental_form)) {
-
-                $form = $forms->rental_form;
-
-                unset($forms->rental_form);
-            } elseif ($property) { // Fill form for edit
-
-                $form->populate($property->toArray());
-            }
-        }
-
-        $this->view->property = $property;
-
-        $this->view->current_state = Model_Property::STATE_RENTAL;
-
-        $this->view->form = $form;
-
-
-
+        $this->descriptionAction('edit');
     }
 }
 

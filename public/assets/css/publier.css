@@ -34,6 +34,9 @@
 
 #publier .progress > span {
 	color: #198e9c;
+    display: inline-block;
+    width: 132px;
+    margin-bottom: 5px;
 }
 
 #publier .progress > .progress-step {
@@ -42,33 +45,63 @@
 	right: 20px;
 	width: 56px;
 	height: 56px;
-	background-image: url('../images/progress.png');
 	background-repeat: no-repeat;
 }
 
 .progress-step#step-0 {
+	background-image: url('../images/progress.png');
 	background-position: 0 0;
 }
 
 .progress-step#step-1 {
+	background-image: url('../images/progress.png');
 	background-position: -56px 0;
 }
 
 .progress-step#step-2 {
+	background-image: url('../images/progress.png');
 	background-position: -112px 0;
 }
 
 .progress-step#step-3 {
+	background-image: url('../images/progress.png');
 	background-position: -168px 0;
 }
 
 .progress-step#step-4 {
+	background-image: url('../images/progress.png');
 	background-position: -224px 0;
 }
 
 .progress-step#step-5 {
+	background-image: url('../images/progress.png');
 	background-position: -280px 0;
 }
+.progress-step#step-6 {
+    background-image: url('../images/progress.png');
+    background-position: -280px 0;
+}
+
+.progress-step#step-25 {
+	background-image: url('../images/progress-1.png');
+	background-position: 0 0;
+}
+
+.progress-step#step-50 {
+	background-image: url('../images/progress-1.png');
+	background-position: 0 -56px;
+}
+
+.progress-step#step-75 {
+	background-image: url('../images/progress-1.png');
+	background-position: 0 -112px;
+}
+
+.progress-step#step-100 {
+	background-image: url('../images/progress-1.png');
+	background-position: 0 -168px;
+}
+
 
 #publier .menu {
 
@@ -87,13 +120,14 @@
 }
 
 .progress-content .block-grid {
+	position: relative;
 	padding: 10px 20px;
 	margin-bottom: 15px;
 }
 
 #publier .progress-content#content-step-0 .block-grid {
 	position: relative;
-	padding: 0 30px;
+	padding: 10px 30px;
 }
 
 #publier .progress-content .block-grid > h2 {
@@ -101,6 +135,29 @@
 	padding: 10px 0 5px 0;
 	color: #198e9c;
 	text-shadow: 0 1px 0 #fff;
+}
+
+#publier .progress-content .block-grid > h3 {
+	color: #fff;
+	margin: 5px 0 15px 0;
+	line-height: 30px;
+	font-size: 38px;
+	font-family: "Open Sans";
+	font-weight: 300;
+}
+
+#publier .progress-content .block-grid > h4 {
+	color: #fff;
+	margin: 10px 0;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+#publier .progress-content .block-grid > h5 {
+	color: #fff;
+	margin: 10px 0;
+	font-size: 14px;
+	font-weight: 400;
 }
 
 #publier .progress-content .block-grid > p {
@@ -136,32 +193,50 @@
 	margin-left: 0 !important;
 }
 
-.progress-buttons > a.btn-arrow-next {
+.progress-buttons > .btn-arrow-next {
 	background-image: url('../images/arrow-next.png');
 	background-repeat: no-repeat;
 	background-position: 240px center;
 }
 
-.progress-buttons > a.btn-good {
+.progress-buttons > .btn-good {
 	background-image: url('../images/btn-good.png');
 	background-repeat: no-repeat;
 	background-position: 240px center;
 }
 
-.progress-buttons > a.btn-arrow-prev {
+.progress-buttons > .btn-arrow-prev {
 	background-image: url('../images/arrow-prev.png');
 	background-repeat: no-repeat;
 	background-position: 20px center;
 }
 
 #publier .menu .progress-menu-active {
+	pointer-events: none;
+	cursor: default;
+}
+
+#publier .menu .progress-menu-active:after {
+	content: '';
+	display: block;
+	position: absolute;
 	background-image: url('../images/progress-menu-active.png');
 	background-repeat: no-repeat;
-	background-position: 210px center;
+	width: 12px;
+	height: 18px;
+	top: 20px;
+	right: 10px;
 }
 
 .progress-content > .step-title {
 	margin: 0 0 15px 0;
+	*zoom: 1;
+}
+
+.progress-content > .step-title:after {
+	content: '';
+	display: table;
+	clear: both;
 }
 
 .progress-content > .step-title > h1 {
@@ -185,7 +260,16 @@
 
 }
 
-.upload-photos > a#upload-btn {
+#upload-btn {
+	display: block;
+	float: left;
+	line-height: 21px;
+	text-align: left;
+	height: 40px;
+	padding: 15px 55px 15px 65px;
+}
+
+#upload-file-btn {
 	display: block;
 	float: left;
 	line-height: 21px;
@@ -204,7 +288,7 @@
 .upload-photos .upload-area {
 	display: block;
 	float: left;
-	background: #c2eef2;
+	background-color: #c2eef2;
 	color: #198e9c;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 	height: 40px;
@@ -266,4 +350,255 @@
 
 #title-element {
 	display: inline-block;
+}
+
+#accept-block {
+	background-color: #c2eef2;
+	box-shadow: inset 0 2px 0 #97d8df;
+	border: none;
+	background-image: url('../images/select-photo.png');
+	background-repeat: no-repeat;
+	background-position: 98% 10px;
+	background-position: calc(100% - 15px) 10px;
+}
+
+#error-block {
+	background-color: #f2c5cb;
+	box-shadow: inset 0 2px 0 #eab3ba;
+	border: none;
+	background-image: url('../images/btn-error.png');
+	background-repeat: no-repeat;
+	background-position: 98% 10px;
+	background-position: calc(100% - 15px) 10px;
+}
+
+.upload-files-dossier {
+
+}
+
+.upload-files-dossier > a#upload-btn {
+	display: block;
+	float: left;
+	line-height: 21px;
+	text-align: left;
+	height: 40px;
+	padding: 15px 30px 15px 65px;
+}
+
+.upload-files-dossier > a#upload-file-btn {
+	display: block;
+	float: left;
+	line-height: 21px;
+	text-align: left;
+	height: 40px;
+	padding: 15px 30px 15px 65px;
+}
+
+.upload-files-dossier .separator {
+	display: block;
+	float: left;
+	line-height: 70px;
+	height: 70px;
+}
+
+.upload-files-dossier .upload-area {
+	display: block;
+	float: left;
+	background-color: #c2eef2;
+	color: #198e9c;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+	height: 40px;
+	font-size: 16px;
+	padding: 15px 25px 15px 60px;
+	cursor: pointer;
+	border-radius: 7px;
+	border: 2px dashed #198e9c;
+}
+
+.uploaded-files-dossier {
+	
+}
+
+.uploaded-files-dossier .uploaded-file {
+	height: 50px;
+	margin-bottom: 10px;
+	*zoom: 1;
+}
+
+.uploaded-files-dossier .uploaded-file:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.uploaded-files-dossier .uploaded-file .uploaded-file-info {
+	width: 50%;
+	float: left;
+}
+
+.uploaded-files-dossier .uploaded-file .uploaded-file-info .uploaded-file-info-title {
+	display: block;
+	font-size: 16px;
+	color: #4d4d4d;
+	line-height: 20px;
+}
+
+.uploaded-files-dossier .uploaded-file .uploaded-file-info .uploaded-file-info-filename {
+	display: block;
+	font-size: 16px;
+	color: #198e9c;
+	line-height: 20px;
+}
+
+.uploaded-files-dossier .uploaded-file .uploaded-file-controlls {
+	width: 50%;
+	float: right;
+	text-align: right;
+}
+
+.block-price {
+	position: absolute;
+	bottom: 25px;
+	right: 20px;
+}
+
+.block-price > span {
+	display: block;
+	text-align: right;
+	font-size: 36px;
+	color: #666666;
+	font-weight: 700;
+	margin-bottom: 5px;
+}
+
+.block-price > p {
+	margin: -10px 0 5px 0;
+	text-align: right;
+}
+
+.block-price > a.btn {
+	
+}
+
+#content-step-0 .grid-light-blue.accept {
+	background-image: url('../images/select-photo.png');
+	background-repeat: no-repeat;
+	background-position: 98% 10px;
+	background-position: calc(100% - 15px) 10px;
+}
+
+.block-service {
+	position: relative;
+}
+
+.block-service h2 {
+	margin-bottom: 15px !important;
+}
+
+.block-service .block-btn {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+}
+
+.select-dates {
+	position: relative;
+}
+
+.select-dates .block-btn {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+}
+
+.block-service .block-btn > .btn {
+	width: 245px;
+	text-align: left;
+}
+
+.block-file {
+	margin: 15px 0;
+	*zoom: 1;
+}
+
+.block-file:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.block-file #file {
+	padding: 0 50px 0 70px;
+}
+
+.block-file > .btn {
+	display: block;
+	float: left;
+}
+
+.block-file span {
+	display: block;
+	width: 100%;
+	float: left;
+	margin: 10px 0 0 0;
+	color: #999;
+}
+
+.block-file span:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.select-dates {
+	*zoom: 1;
+}
+
+.select-dates:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.select-dates #date-fieldset {
+	width: 290px;
+	float: left;
+}
+
+.select-dates #time-fieldset {
+	width: 320px;
+	float: left;
+}
+
+.select-dates #time-fieldset .select {
+	float: left;
+}
+
+.content-tab-inner .block-calendar{
+	margin: 17px 0 20px;
+}
+.content-tab-inner .block-calendar .calendar{
+	padding: 0 13px;
+	width: 45%;
+}
+.content-tab-inner .block-calendar .calendar .cell{
+	padding: 11px 0;
+}
+.content-tab-inner .block-calendar .calendar .name-month-calend h2{
+	font-size: 29px;
+	margin: 0 0 10px 0;
+}
+.content-tab-inner .block-calendar .calendar .btn-gray-lite{
+	background: #f2f2f2;
+	padding: 0 6px;
+	height: 32px;
+	line-height: 32px;
+}
+
+.calendar .cell-bottom .cell:first-child {
+	border-radius: 0 0 0 10px;
+}
+
+.calendar .cell-bottom .cell:last-child {
+	border-radius: 0 0 10px 0;
 }

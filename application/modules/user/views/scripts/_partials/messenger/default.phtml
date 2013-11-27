@@ -1,9 +1,9 @@
-<? if (!empty($this->messages)) : ?>    
+<? if (!empty($this->messages)) : ?>
+    <script type="text/javascript">
     <? foreach ($this->messages as $type => $messages) : ?>
-        <div class="message-box <?= $type ?>">
         <? foreach ($messages as $message) : ?>
-        <p><?= $message ?></p>
+        addToMessagesQueue('<?=addslashes($this->translate($type))?>', '<?=addslashes($message)?>');
         <? endforeach ?>
-        </div>
-    <? endforeach; ?>   
+    <? endforeach; ?>
+    </script>
 <? endif; ?>

@@ -33,7 +33,15 @@ class Model_Search extends Model_Base_Search
                 if (!in_array('budget', $fields)) {
                     $fields[] = 'budget';
                 }
-            }            
+            }
+
+            if ($value == 'PropertyXMetroStation.distance' || $value == 'PropertyXMetroStation.metro_station_id') {
+                unset($fields[$key]);
+                if (!in_array('metro', $fields)) {
+                    $fields[] = 'metro';
+                }
+            }
+
         }
         
         sort($fields);

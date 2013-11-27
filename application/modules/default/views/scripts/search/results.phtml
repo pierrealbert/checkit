@@ -1,6 +1,10 @@
 <?php
-$this->headLink()->appendStylesheet('/css/ui/jquery-ui-1.10.3.css');
 $this->headLink()->appendStylesheet('/assets/css/search_form.css');
+
+if ($this->search_type == 'metro') {
+    $this->headLink()->appendStylesheet('/assets/css/results-metro.css');
+}
+
 $this->headScript()->appendFile('/assets/js/search_form.js');
 ?>
 <div class="<?=($this->search_type != 'metro' ? 'title-row-results' : 'title-row-results results-metro')?>">
@@ -23,15 +27,29 @@ $this->headScript()->appendFile('/assets/js/search_form.js');
         <div class="container-line-metro">
             <div class="line-title">
                 <?php
-                $shadowStr = getMetroShadowStr($this->metroLine->color);
-                printMetroLineHTML($this->metroLine->name, $this->metroLine->color, $this->metroLine->id);
+                $isRER = printMetroLineHTML($this->metroLine->name, $this->metroLine->color, $this->metroLine->id);
+                $shadowStr = getMetroShadowStr($this->metroLine->color, $isRER);
                 ?>
                 <div class="line-number">Ligne <?=$this->metroLine->name?></div>
                 <div class="line-name"><?=($this->metro_line_id > 0 ? 'Toutes les stations de métro' : $this->metroStations[$this->curStationIndx]['name'])?></div>
                 <div class="clear"></div>
             </div>
             <div class="line-wrapper">
-                <div class="line-line" style="background-color: #<?=$this->metroLine->color?>; -webkit-box-shadow: 0px 2px 0px <?=$shadowStr?>; -moz-box-shadow: 0px 2px 0px <?=$shadowStr?>; box-shadow: 0px 2px 0px <?=$shadowStr?>;"></div>
+                <?php
+                if ($isRER) {
+                    $lineColorStr = "background: #".$this->metroLine->color.";
+                                     background: -moz-linear-gradient(top, #".$this->metroLine->color." 0%, #".$this->metroLine->color." 20%, #ffffff 20%, #ffffff 80%, #".$this->metroLine->color." 80%, #".$this->metroLine->color." 100%);
+                                     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#".$this->metroLine->color."), color-stop(20%,#".$this->metroLine->color."), color-stop(20%,#ffffff), color-stop(80%,#ffffff), color-stop(80%,#".$this->metroLine->color."), color-stop(100%,#".$this->metroLine->color."));
+                                     background: -webkit-linear-gradient(top, #".$this->metroLine->color." 0%,#".$this->metroLine->color." 20%,#ffffff 20%,#ffffff 80%,#".$this->metroLine->color." 80%,#".$this->metroLine->color." 100%);
+                                     background: -o-linear-gradient(top, #".$this->metroLine->color." 0%,#".$this->metroLine->color." 20%,#ffffff 20%,#ffffff 80%,#".$this->metroLine->color." 80%,#".$this->metroLine->color." 100%);
+                                     background: -ms-linear-gradient(top, #".$this->metroLine->color." 0%,#".$this->metroLine->color." 20%,#ffffff 20%,#ffffff 80%,#".$this->metroLine->color." 80%,#".$this->metroLine->color." 100%);
+                                     background: linear-gradient(to bottom, #".$this->metroLine->color." 0%,#".$this->metroLine->color." 20%,#ffffff 20%,#ffffff 80%,#".$this->metroLine->color." 80%,#".$this->metroLine->color." 100%);
+                                     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#".$this->metroLine->color."', endColorstr='#".$this->metroLine->color."',GradientType=0 );";
+                } else {
+                    $lineColorStr = "background-color: #".$this->metroLine->color.';';
+                }
+                ?>
+                <div class="line-line" style="<?=$lineColorStr?> -webkit-box-shadow: 0px 2px 0px <?=$shadowStr?>; -moz-box-shadow: 0px 2px 0px <?=$shadowStr?>; box-shadow: 0px 2px 0px <?=$shadowStr?>;"></div>
                 <?php if (isset($this->metroStations[$this->curStationIndx])): ?>
                 <div class="station main">
                     <div class="station-name"><?=$this->metroStations[$this->curStationIndx]['name']?></div>
@@ -44,25 +62,25 @@ $this->headScript()->appendFile('/assets/js/search_form.js');
                 <?php if (isset($this->metroStations[$this->curStationIndx-1])): ?>
                 <div class="station left2">
                     <div class="station-name"><?=$this->metroStations[$this->curStationIndx-1]['name']?></div>
-                    <div class="station-circle selectStation" data-station-id="<?=$this->metroStations[$this->curStationIndx-1]['id']?>" style="background-color: #<?=$this->metroLine->color?>; -webkit-box-shadow: 0px 2px 0px <?=$shadowStr?>; -moz-box-shadow: 0px 2px 0px <?=$shadowStr?>; box-shadow: 0px 2px 0px <?=$shadowStr?>;"></div>
+                    <div class="station-circle selectStation <?=($isRER ? 'rer-circle' : '')?>" data-station-id="<?=$this->metroStations[$this->curStationIndx-1]['id']?>" style="<?=($isRER ? 'border: solid 3px #'.$this->metroLine->color.';' : 'background-color: #'.$this->metroLine->color.';')?> -webkit-box-shadow: 0px 2px 0px <?=$shadowStr?>; -moz-box-shadow: 0px 2px 0px <?=$shadowStr?>; box-shadow: 0px 2px 0px <?=$shadowStr?>;"></div>
                 </div>
                 <?php endif; ?>
                 <?php if (isset($this->metroStations[$this->curStationIndx-2])): ?>
                 <div class="station left1">
                     <div class="station-name"><?=$this->metroStations[$this->curStationIndx-2]['name']?></div>
-                    <div class="station-circle selectStation" data-station-id="<?=$this->metroStations[$this->curStationIndx-2]['id']?>" style="background-color: #<?=$this->metroLine->color?>; -webkit-box-shadow: 0px 2px 0px <?=$shadowStr?>; -moz-box-shadow: 0px 2px 0px <?=$shadowStr?>; box-shadow: 0px 2px 0px <?=$shadowStr?>;"></div>
+                    <div class="station-circle selectStation <?=($isRER ? 'rer-circle' : '')?>" data-station-id="<?=$this->metroStations[$this->curStationIndx-2]['id']?>" style="<?=($isRER ? 'border: solid 3px #'.$this->metroLine->color.';' : 'background-color: #'.$this->metroLine->color.';')?> -webkit-box-shadow: 0px 2px 0px <?=$shadowStr?>; -moz-box-shadow: 0px 2px 0px <?=$shadowStr?>; box-shadow: 0px 2px 0px <?=$shadowStr?>;"></div>
                 </div>
                 <?php endif; ?>
                 <?php if (isset($this->metroStations[$this->curStationIndx+1])): ?>
                 <div class="station right2">
                     <div class="station-name"><?=$this->metroStations[$this->curStationIndx+1]['name']?></div>
-                    <div class="station-circle selectStation" data-station-id="<?=$this->metroStations[$this->curStationIndx+1]['id']?>" style="background-color: #<?=$this->metroLine->color?>; -webkit-box-shadow: 0px 2px 0px <?=$shadowStr?>; -moz-box-shadow: 0px 2px 0px <?=$shadowStr?>; box-shadow: 0px 2px 0px <?=$shadowStr?>;"></div>
+                    <div class="station-circle selectStation <?=($isRER ? 'rer-circle' : '')?>" data-station-id="<?=$this->metroStations[$this->curStationIndx+1]['id']?>" style="<?=($isRER ? 'border: solid 3px #'.$this->metroLine->color.';' : 'background-color: #'.$this->metroLine->color.';')?> -webkit-box-shadow: 0px 2px 0px <?=$shadowStr?>; -moz-box-shadow: 0px 2px 0px <?=$shadowStr?>; box-shadow: 0px 2px 0px <?=$shadowStr?>;"></div>
                 </div>
                 <?php endif; ?>
                 <?php if (isset($this->metroStations[$this->curStationIndx+2])): ?>
                 <div class="station right1">
                     <div class="station-name"><?=$this->metroStations[$this->curStationIndx+2]['name']?></div>
-                    <div class="station-circle selectStation" data-station-id="<?=$this->metroStations[$this->curStationIndx+2]['id']?>" style="background-color: #<?=$this->metroLine->color?>; -webkit-box-shadow: 0px 2px 0px <?=$shadowStr?>; -moz-box-shadow: 0px 1px 0px <?=$shadowStr?>; box-shadow: 0px 2px 0px <?=$shadowStr?>;"></div>
+                    <div class="station-circle selectStation <?=($isRER ? 'rer-circle' : '')?>" data-station-id="<?=$this->metroStations[$this->curStationIndx+2]['id']?>" style="<?=($isRER ? 'border: solid 3px #'.$this->metroLine->color.';' : 'background-color: #'.$this->metroLine->color.';')?> -webkit-box-shadow: 0px 2px 0px <?=$shadowStr?>; -moz-box-shadow: 0px 1px 0px <?=$shadowStr?>; box-shadow: 0px 2px 0px <?=$shadowStr?>;"></div>
                 </div>
                 <?php endif; ?>
                 <?php if (count($this->otherLines) > 0): ?>
@@ -241,7 +259,11 @@ $this->headScript()->appendFile('/assets/js/search_form.js');
     }
 
     $(document).ready(function() {
-        $("#availability").datepicker({"dateFormat":"MM d, yy"});
+        $("#availability").datepicker({
+            "dateFormat":"MM d, yy",
+            "nextText": "",
+            "prevText": ""
+        });
         showActiveSearchSubForms(true);
 
         $('input[type="checkbox"]').change(function() {
@@ -306,7 +328,7 @@ $this->headScript()->appendFile('/assets/js/search_form.js');
 
 <div class="grid grid-transparent">
 <div class="main-container-box">
-<form name="searchForm" action="<?=$this->url(array('controller' => 'search','action' => 'updatesearch', 'search_id' => $this->search->id), null, true)?>" method="post">
+<form name="searchForm" action="<?=$this->url(array('controller' => 'search','action' => 'updatesearch', 'search_id' => $this->search->id, 'from' => 'results'), null, true)?>" method="post">
 <div class="container-box">
     <div class="grid grid-blue grid-block-search top-search-wrapper" style="display: none;">
         <h2 class="name-txt">Ma recherche</h2>
@@ -426,10 +448,12 @@ $this->headScript()->appendFile('/assets/js/search_form.js');
             <?=$this->form->getElement('availability_select')?>
             <span>ou à partir de</span>
             <div class="box-calend-search">
+                <div class="hack-ui-datepicker-wrapper-search-results">
                 <input type="text" name="availability" placeholder="Date souhaitée" value="<?=$this->form->getElement('availability')->getValue()?>" id="availability" />
                 <a href="#" class="btn btn-small btn-dark datepicker-show">
                     <i class="icon-calend"></i>
                 </a>
+                </div>
             </div>
         </div>
     </div>
@@ -533,9 +557,9 @@ $this->headScript()->appendFile('/assets/js/search_form.js');
         <a href="#" class="btn btn-dark btn-date dropdown-toggle" data-toggle="dropdown">
             <?php
             if ($this->sortBy == 'price') {
-                $curOrderStr = 'Sort by Price '.($this->sortBy == 'asc' ? 'asc' : 'desc');
+                $curOrderStr = 'Sort by Price '.($this->sortDir == 'asc' ? 'asc' : 'desc');
             } elseif ($this->sortBy == 'size') {
-                $curOrderStr = 'Sort by Size '.($this->sortBy == 'asc' ? 'asc' : 'desc');
+                $curOrderStr = 'Sort by Size '.($this->sortDir == 'asc' ? 'asc' : 'desc');
             } else {
                 $curOrderStr = 'Date de publication';
             }
@@ -566,10 +590,10 @@ $this->headScript()->appendFile('/assets/js/search_form.js');
     <div class="grid grid-block">
         <div class="box-text info-box">
             <div class="anonce-img-wrapper">
-            <a href="<?=$this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $property->id), null, true)?>"><?=$this->imageResize(103, 102, $property->main_photo, array('class' => 'img-ad'))?></a>
+            <a href="<?=$this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $property->id), null, true)?>"><?=$this->imageResize(103, 102, $property->main_photo, array('class' => 'item-img'))?></a>
             </div>
-            <h3 class="title-ad"><a href="<?=$this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $property->id), null, true)?>"><?=$property->title?></a></h3>
-            <div><?=$types[$property->property_type]?><?php if ($property->is_furnished): ?> <span class="slash">|</span> Meublé<?php endif; ?><br>
+            <h3 class="item-title"><a href="<?=$this->url(array('controller' => 'property', 'action' => 'detail', 'item' => $property->id), null, true)?>"><?=$property->title?></a></h3>
+            <div><?=(isset($types[$property->property_type]) ? $types[$property->property_type] : '')?><?php if ($property->is_furnished): ?> <span class="slash">|</span> Meublé<?php endif; ?><br>
                 <div class="inner-box-right">
                     <?php if ($pro): ?>
                         <?php if ($property->honoraire > 0): ?>
@@ -678,7 +702,7 @@ echo $paginationControl;
 
 <?php
 
-function getMetroShadowStr($color) {
+function getMetroShadowStr($color, $isRER = false) {
     $r = hexdec(substr($color,0,2));
     $g = hexdec(substr($color,2,2));
     $b = hexdec(substr($color,4,2));
@@ -687,7 +711,11 @@ function getMetroShadowStr($color) {
     $r = round($r * 0.6);
     $g = round($g * 0.6);
     $b = round($b * 0.6);
-    return 'rgba('.$r.', '.$g.', '.$b.', 0.9)';
+    if ($isRER) {
+        return 'rgba('.$r.', '.$g.', '.$b.', 0.65)';
+    } else {
+        return 'rgba('.$r.', '.$g.', '.$b.', 0.9)';
+    }
 }
 
 function printMetroLineHTML($name, $color, $id) {
@@ -719,6 +747,8 @@ function printMetroLineHTML($name, $color, $id) {
         <div class="line-circle rer selectMetroLine" data-line-id="<?=$id?>" style="border-color: #<?=$color?>; color: #<?=$color?> !important; -webkit-box-shadow: 1px 1px 0px <?=$shadowStr?>; -moz-box-shadow: 1px 1px 0px <?=$shadowStr?>; box-shadow: 1px 1px 0px <?=$shadowStr?>;"><?='<div class="number align1">'.$number.'</div>'?></div>
     <?php
     }
+
+    return $isRER;
 }
 ?>
 

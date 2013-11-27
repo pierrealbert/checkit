@@ -1,0 +1,122 @@
+<header>
+    <div class="inner">
+        <a href="<?=$this->baseUrl('/'); ?>" class="home-logo">Ommi</a>
+        <ul id="header-nav">
+            <? if ($this->currUser) : ?>
+            <li class="left"><a href="#">Guide du Locataire</a></li>
+            <li><a href="<?= $this->url(array('controller' => 'search', 'action' => 'index'), null, true) ?>" class="btn btn-red">Nouvelle recherche</a></li>
+            <li class="dropdown">
+            	<a class="dropdown-toggle" data-toggle="dropdown" href="">Bonjour, <?= $this->currUser->first_name ?> <?= $this->currUser->last_name ?> <i class="caret"></i></a>
+            	<ul class="dropdown-menu">
+            		<li><a href="">Résumé</a></li>
+            		<li><a href="">Mon dossier</a></li>
+            		<li><a href="">Mes candidatures</a></li>
+            		<li><a href="">Mes recherches</a></li>
+            		<li><a href="">Mes services</a></li>
+            		<li><a href="">Mon compte</a></li>
+            		<li><a href="">Mes recherches</a></li>
+            		<li><a href="<?= $this->url(array('controller' => 'logout'), null, true) ?>" class="red">Se déconnecter</a></li>
+            	</ul>
+            </li>
+            <li><a href="#">Mes candidatures</a></li>           
+            <? else : ?>            
+            <li class="left"><a href="#">Comment ça marche ?</a></li>
+            <li><a href="<?= $this->url(array('module' => 'user', 'controller' => 'property', 'action' => 'new-add'), null, true) ?>" class="btn btn-red">Publier une annonce</a></li>
+            <li class="dropdown">
+            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Aide <i class="caret"></i></a>
+            	<ul class="dropdown-menu">
+            		<li><a href="">Guide du Locataire</a></li>
+            		<li><a href="">Guide du Propriétaire</a></li>
+            		<li><a href="">Guide du Professionnel</a></li>
+            		<li><a href="">F.A.Q.</a></li>
+            	</ul>
+            </li>
+            <li><a class="open-in-modal" data-title="<?= $this->translate('sign_up') ?>" href="<?= $this->url(array('controller' => 'registration'), null, true) ?>"><?= $this->translate('sign_up') ?></a></li>
+            <li><a class="open-in-modal" data-title="<?= $this->translate('sign_in') ?>" href="<?= $this->url(array('controller' => 'login'), null, true) ?>"><?= $this->translate('sign_in') ?></a></li>            
+            <? endif; ?>
+        </ul>
+    </div>
+</header>
+<div class="promo-page">
+	<div class="inner">
+		<div class="promo">
+			<div class="logo"></div>
+			<div class="text">l’immo<br>repensé</div>
+		</div>
+		<a href="#" id="promo-video" class="btn btn-small btn-red">Voir la vidéo</a>
+
+        <?php
+            $regionBlocks = array();
+            foreach (Model_RegionBlockTable::getInstance()->getAllWithDiscricts() as $region) {
+                $regionBlocks[] = array('id' => $region->id, 'value' => $region->RegionDistrict->name . ' - ' . $region->name);
+            }
+        ?>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('a#btnSearch' ).click(function() {
+                    $('form[name="searchForm"]').submit();
+                    return false;
+                });
+
+                var availableBlocks = <?=json_encode($regionBlocks)?>;
+                for (var i=0; i<availableBlocks.length-1; i++) {
+                    availableBlocks[i].value = $('<div />').html(availableBlocks[i].value).text();
+                }
+
+                $("input[name='region_block_input']").autocomplete({
+                    source: availableBlocks,
+                    minLength: 0,
+                    select: function(event, ui) {
+                        $('input#region_block_id').val(ui.item.id);
+                    },
+                    change: function(event, ui) {
+                        $('input#region_block_id').val(ui.item.id);
+                    },
+                    open: function(event, ui) {
+                        $('ul.ui-autocomplete').css('width', '355px');
+                        $('ul.ui-autocomplete').css('max-height', '160px');
+                    }
+                });
+
+            });
+        </script>
+
+		<form name="searchForm" action="<?=$this->form->getAction()?>" method="post">
+			<div id="promo-search" class="grid grid-dark">
+                <div class="promo-search-left">
+					<h2>Chercher une location</h2>
+					<fieldset class="promo-search-location">
+						<label>Localisation</label>
+						<input type="text" name="region_block_input" placeholder="Où désirez-vous louer?">
+                        <?=$this->form->getElement('region_block_id')?>
+						<a href="#location" class="btn btn-small btn-dark icon-location"></a>
+					</fieldset>
+					<fieldset class="promo-search-budget-surface">
+						<div>
+							<label>Budget maximum</label>
+                            <?=$this->form->getElement('max_budget')?>
+						</div>
+						<div>
+							<label>Surface minimum</label>
+                            <?=$this->form->getElement('min_size')?>
+						</div>
+					</fieldset>
+					<fieldset>
+						<a href="<?= $this->url(array('controller' => 'search', 'action' => 'standard'), null, true) ?>" id="add-criteria" class="btn btn-small btn-dark">Plus de critères</a>
+					</fieldset>
+				</div>
+				<div class="promo-search-right">
+					<div class="promo-search-buttons">
+						<a href="#" class="btn btn-blue" id="btnSearch">Recherche rapide</a>
+						<span class="separator">— ou —</span>
+						<div class="cf promo-search-buttons-group">
+							<a class="btn btn-red icon-metro" href="<?= $this->url(array('controller' => 'search', 'action' => 'metro'), null, true) ?>">par métro</a>
+							<a class="btn btn-red icon-dessin" href="<?= $this->url(array('controller' => 'search', 'action' => 'draw'), null, true) ?>">par dessin</a>
+							<a class="btn btn-red icon-carte-red" href="<?= $this->url(array('controller' => 'search', 'action' => 'map'), null, true) ?>">par carte</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

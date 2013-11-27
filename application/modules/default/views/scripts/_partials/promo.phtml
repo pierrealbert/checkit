@@ -1,0 +1,116 @@
+<div class="promo-page">
+    <div class="inner" style="position:relative; height: 695px;">
+        <div class="promo-bubble-link-1">
+            <div class="bubble grid-gray">
+                <div class="bubble-info">
+                    <img src="//place-hold.it/70x70"/>
+                    <div class="bubble-info-data">
+                        <span class="bubble-title">Appartament calme a Pere-Lachaise</span>
+                        <span class="bubble-m">31 m<sup>2</sup></span>
+                        <span class="bubble-price">980 €</span>
+                    </div>
+                </div>
+               <div class="bubble-button">
+                   <a href="#" class="btn btn-blue btn-small">Voir lannonce</a>
+               </div>
+            </div>
+        </div>
+        <div class="promo-bubble-link-2">
+            <div class="bubble grid-gray">
+                <div class="bubble-info">
+                    <img src="//place-hold.it/70x70"/>
+                    <div class="bubble-info-data">
+                        <span class="bubble-title">Appartament calme a Pere-Lachaise</span>
+                        <span class="bubble-m">31 m<sup>2</sup></span>
+                        <span class="bubble-price">980 €</span>
+                    </div>
+                    
+                </div>
+               <div class="bubble-button">
+                   <a href="#" class="btn btn-blue btn-small">Voir lannonce</a>
+               </div>
+            </div>
+        </div>
+        <div class="promo">
+            <div class="logo"></div>
+            <div class="text">l’immo<br>repensé</div>
+        </div>
+        <div id="promo-video">
+            <a href="#"class="btn btn-small btn-red btn-play-red">Voir la vidéo</a>
+        </div>
+
+        <?php
+            $regionBlocks = array();
+            foreach (Model_RegionBlockTable::getInstance()->getAllWithDiscricts() as $region) {
+                $regionBlocks[] = array('id' => $region->id, 'value' => $region->RegionDistrict->name . ' - ' . $region->name);
+            }
+        ?>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('a#btnSearch' ).click(function() {
+                    $('form[name="searchForm"]').submit();
+                    return false;
+                });
+
+                var availableBlocks = <?=json_encode($regionBlocks)?>;
+                for (var i=0; i<availableBlocks.length-1; i++) {
+                    availableBlocks[i].value = $('<div />').html(availableBlocks[i].value).text();
+                }
+
+                $("input[name='region_block_input']").autocomplete({
+                    source: availableBlocks,
+                    minLength: 0,
+                    select: function(event, ui) {
+                        $('input#region_block_id').val(ui.item.id);
+                    },
+                    change: function(event, ui) {
+                        $('input#region_block_id').val(ui.item.id);
+                    },
+                    open: function(event, ui) {
+                        $('ul.ui-autocomplete').css('width', '355px');
+                        $('ul.ui-autocomplete').css('max-height', '160px');
+                    }
+                });
+
+            });
+        </script>
+
+        <form name="searchForm" action="<?=$this->form->getAction()?>" method="post">
+            <div id="promo-search" class="grid grid-promo">
+                <div class="promo-search-left">
+                    <h2>Chercher une location</h2>
+                    <fieldset class="promo-search-location">
+                        <label>Localisation</label>
+                        <input type="text" name="region_block_input" placeholder="Où désirez-vous louer?">
+                        <?=$this->form->getElement('region_block_id')?>
+                        <a href="#location" class="btn btn-small btn-dark icon-location"></a>
+                    </fieldset>
+                    <fieldset class="promo-search-budget-surface">
+                        <div>
+                            <label>Budget maximum</label>
+                            <?=$this->form->getElement('max_budget')?>
+                        </div>
+                        <div>
+                            <label>Surface minimum</label>
+                            <?=$this->form->getElement('min_size')?>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <a href="<?= $this->url(array('controller' => 'search', 'action' => 'standard'), null, true) ?>" id="add-criteria" class="btn btn-small btn-dark">Plus de critères</a>
+                    </fieldset>
+                </div>
+                <div class="promo-search-right">
+                    <div class="promo-search-buttons">
+                        <a href="#" class="btn btn-blue" id="btnSearch">Recherche rapide</a>
+                        <span class="separator">— ou —</span>
+                        <div class="cf promo-search-buttons-group">
+                            <a class="btn btn-red icon-metro" href="<?= $this->url(array('controller' => 'search', 'action' => 'metro'), null, true) ?>">par métro</a>
+                            <a class="btn btn-red icon-dessin" href="<?= $this->url(array('controller' => 'search', 'action' => 'draw'), null, true) ?>">par dessin</a>
+                            <a class="btn btn-red icon-carte-red" href="<?= $this->url(array('controller' => 'search', 'action' => 'map'), null, true) ?>">par carte</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

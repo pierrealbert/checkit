@@ -29,7 +29,15 @@ class Model_PropertyApplicationTable extends Ext_Doctrine_Table
     {
         return $this->_queryWithDefaultJoins()->andWhere('PropertyApplication.is_declined != True');
     }
-    
+
+    public function getVisitDatesByOwnerId($ownerId)
+    {
+        $statement = Doctrine_Manager::getInstance()->connection();
+        $results = $statement->execute("SELECT DISTINCT t2.availability, t1.is_declined FROM property_application AS t1, property_visit_dates AS t2 WHERE t1.property_visit_date_id = t2.id AND t1.visitor_id = ?", array($ownerId));
+
+        return $results->fetchAll();
+    }
+
     public function getListByOwnerId($ownerId)
     {
         return $this->_queryInitial()->andWhere('Property.owner_id = ?', $ownerId)
@@ -42,5 +50,27 @@ class Model_PropertyApplicationTable extends Ext_Doctrine_Table
         return $this->_queryInitial()->andWhere('PropertyApplication.id = ?', $applicationId)
                                      ->andWhere('Property.owner_id = ?', $propertyOwnerId)
                                      ->fetchOne();
+    }
+
+    public function getApplicationsAttrByOwnerId($ownerId) {
+        $statement = Doctrine_Manager::getInstance()->connection();
+        $tmp = $statement->execute("SELECT t1.id, t1.postcode, t1.title, t2.id AS appl_id, t2.is_read, t2.is_accepted  FROM property AS t1, property_application AS t2 WHERE t1.id = t2.property_id AND t2.is_declined != 1 AND t1.is_published = 1 AND t1.owner_id = ?", array(intval($ownerId)))->fetchAll();
+        $results = array();
+        foreach ($tmp as $indx => $rec) {
+            if (!isset($results[$rec['id']])) {
+                $results[$rec['id']] = array(
+                    'title' => $rec['title'].' ('.$rec['postcode'].')',
+                    'all' => 0,
+                    'selected' => 0,
+                    'new' => 0,
+                );
+            }
+
+            $results[$rec['id']]['all']++;
+            if ($rec['is_read'] != 1) $results[$rec['id']]['new']++;
+            if ($rec['is_accepted'] != 1) $results[$rec['id']]['selected']++;
+        }
+
+        return $results;
     }
 }

@@ -218,6 +218,8 @@ UserResidentGarant:
         type: 
             type: enum
             values: [family, friend, employer, bank, organization]
+        company_name:
+            type: string(255)
     relations:
         UserResident:
             onDelete: cascade          
@@ -332,6 +334,9 @@ Property:
         address:        string(255)
         postcode:       string(8)
         city:           string(255)
+        phone:  
+            type: string(32)
+            default: ''        
         size:           
             type:       decimal(14)
             scale:      2
@@ -389,6 +394,9 @@ Property:
         is_r_independent:   integer(1)
         is_r_other:     integer(1)
         is_roomate:     integer(1)
+        views:        
+            type:       integer(4)
+            default:    0        
         state:          
             type:       integer(1)
             default:    1
@@ -478,6 +486,9 @@ MetroStation:
             type:       integer(4)
         pixel_y:
             type:       integer(4)
+        sort_position:   
+            type:       integer(1)
+            default:    0            
     actAs:
         Geographical:
             latitude:
@@ -543,6 +554,7 @@ PropertyApplication:
         property_id: integer(4)        
         property_visit_date_id: integer(4)
         visit_time: time
+        visit_time_end: time
         rate: integer(1)
         message: text
         is_read:
@@ -669,26 +681,21 @@ Search:
             class: User
             local: user_id        
                 
-UserProperty:
+UserSettings:
     columns:      
         id:
             type:       integer(4)
             primary:    true
             autoincrement: true      
-        property_id:    
+        user_id:    
             type:        integer(4)      
-        property_visit_date_id:
-            type:        integer(4)
-        user_id:        
-            type:       integer(4)
-        visit_date:     date
-        visit_time:     time        
-        is_new:         
-            type:       boolean
-            default:    true          
-        status:         
-            type:     integer(1)
-            default:  1   
+        settings: text
+        newsletters:     
+            type:        boolean   
+            default:     false        
+        offers:     
+            type:        boolean  
+            default:     false        
     actAs:
           Timestampable:
               created:
@@ -699,12 +706,62 @@ UserProperty:
         User:
             onDelete: cascade
             class: User
-            local: user_id        
+            local: user_id      
+            
+Alert:
+    columns:      
+        id:
+            type:       integer(4)
+            primary:    true
+            autoincrement: true      
+        user_id:    
+            type:        integer(4)      
+        property_id:    
+            type:        integer(4)                
+        msg_type: 
+            type: enum
+            values: [info, notice, success, warning, error]
+            size: 10     
+        title:
+            type: string
+            size: 250            
+        message: text
+        is_read:
+            type: boolean
+            default: false        
+    actAs:
+          Timestampable:
+              created:
+                  name: created_at
+              updated:
+                  name: updated_at
+    relations:
+        User:
+            onDelete: cascade
+            class: User
+            local: user_id                 
         Property:
             onDelete: cascade
             class: Property
-            local: property_id            
-        PropertyVisitDate:
+            local: property_id                 
+UserRequest:
+    columns:      
+        id:
+            type:       integer(4)
+            primary:    true
+            autoincrement: true      
+        user_id:    
+            type:        integer(4)      
+        request:    
+            type:        text                     
+    actAs:
+          Timestampable:
+              created:
+                  name: created_at
+              updated:
+                  name: updated_at
+    relations:
+        User:
             onDelete: cascade
-            class: PropertyVisitDate
-            local: property_visit_date_id  
+            class: User
+            local: user_id                                

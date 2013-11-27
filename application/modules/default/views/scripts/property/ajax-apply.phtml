@@ -1,18 +1,88 @@
+<div class="carte-popup1-html">
+    <? if (!empty($this->successMessage)): ?>
+        <p class="success-message"><?= $this->successMessage ?></p>
+        <a href="#" class="btn btn-blue modal-ok modal-bottom-btn"><?= $this->translate('Ok') ?></a>
+    <? else: ?>
 
-<? if (!empty($this->successMessage)): ?>
-    <div class="error-message"><?= $this->successMessage ?></div>
-    <button class="btn btn-blue ui-state-default ui-corner-all modal-ok"><?= $this->translate('Ok') ?>" </button>
-<? elseif (!empty($this->errorMessage)): ?>
-    <div class="success-message"><?= $this->errorMessage ?></div>
-    <button class="btn btn-blue ui-state-default ui-corner-all modal-ok"><?= $this->translate('Ok') ?>" </button>
-<? else: ?>
-    <div class="inner">
-        <h2><?= $this->translate('apply') ?></h2>
-        <div id="apply-page">
-            <?= $this->applyForm ?>
+        <?php if (!empty($this->errorMessage)): ?>
+            <p class="error-message"><?= $this->errorMessage ?></p>
+        <?php endif; ?>
+
+        <p>
+            Vous candidatez Tres bon choix!<br>
+			<span class="blue">Vauillez selectionner l'une des dates de visite proposees<br>
+			par le proprietare.</span>
+        </p>
+
+        <form name="applayForm" action="<?=$this->applyForm->getAction()?>" method="post">
+        <?php
+        if ($this->applyForm) {
+            $datesList = $this->applyForm->property_visit_date_id->getMultiOptions();
+            if (isset($this->applyForm->property_visit_date_id->disable) && count($this->applyForm->property_visit_date_id->disable) > 0) {
+                $disabledList = array_flip($this->applyForm->property_visit_date_id->disable);
+            } else {
+                $disabledList = array();
+            }
+        } else {
+            $datesList   = array();
+            $disabledList = array();
+        }
+        ?>
+        <?php if (count($datesList) > 0): ?>
+        <div class="box-choice-btn">
+            <?//= $this->applyForm ?>
+
+            <ul>
+                <?php foreach ($datesList as $id => $date): ?>
+                    <?php
+                        $date = new Zend_Date($date, 'YYYY-MM-dd');
+                        $date = $date->toString('EEEE d MMMM YYYY', 'fr_FR');
+                        $date[0] = mb_strtoupper($date[0]);
+                    ?>
+                    <li><a href="#" data-id="<?=$id?>" <?=(!isset($disabledList[$id]) ? ' class="dateBtn active-btn"' : ' class="dateBtn disabled"')?>><?=$date?></a></li>
+                <?php endforeach; ?>
+            </ul>
+            <input type="hidden" name="property_visit_date_id" value="" />
+
         </div>
-    </div>
-<? endif ?>
+        <?php endif; ?>
+
+        <div class="details-block" style="display: none;">
+            <p>
+                A vous d'indiquer au proprietaire une plage horaire de visite qui vous
+                arrange. Pensez large. Si vous etes choisi, le proprietaire vous
+                donnera un horaire de visite precis correspondant a vos choix.<br>
+                <span class="blue">Vauillez selectionner un horaire minimum et maximum.</span>
+            </p>
+
+            <div class="box-select">
+                <div class="inner-box-select">
+                    <label>Horaire minimum</label>
+                    <?=$this->applyForm->visit_time_begin?>
+                </div>
+                <span>a</span>
+                <div class="inner-box-select">
+                    <label>Horaire maximum</label>
+                    <?=$this->applyForm->visit_time_end?>
+                </div>
+            </div>
+            <p>Vorte dossier va etre transmis au proprietaire qui va etudier votre
+                candidature. Si vous etes selectionne vous recevrez l'adresse
+                exacte sur vorte tableau de bord.
+            </p>
+            <a href="#" class="btn btn-gray btnSendForm">Envoyer mon dossier</a>
+            <p class="gray">
+                En cliquant "Envoyer mon dossier" vous acceptez que vorte dossier
+                de candidature dans tous ses elements soir transmis au proprietaire.
+            </p>
+        </div>
+        </form>
+
+        <a href="#" class="black btn-annuler" onClick="$.modal().close();">Annuler</a>
+    <? endif ?>
+
+</div>
+
 <script type="text/javascript">
     <? if (isset($this->redirectUrl)) : ?>
         document.location.href = '<?= $this->redirectUrl ?>';
@@ -25,6 +95,64 @@
             e.preventDefault();
             $.modal().close();
             $('#modal .modal-content-container').empty();
-        })
+        });
+
+        if ($.fn.chosen) {
+            $('select.pretty').chosen({
+                disable_search: true,
+                inherit_select_classes: true
+            }).on('change', function(){
+                    var box = $(this).data('chosen').container || $(this);
+                    box[$(this).val() != '--' ? 'addClass' : 'removeClass']('selected');
+
+                    $(this).parents('div.select-performed').find('select').val($(this).val());
+
+                    if ($('div.pretty.selected').length == 2) {
+                        $('.btnSendForm').removeClass('btn-blue').removeClass('btn-gray').addClass('btn-blue');
+                    } else {
+                        $('.btnSendForm').removeClass('btn-blue').removeClass('btn-gray').addClass('btn-gray');
+                    }
+            }).on('show', function() {
+
+            }).change('--');
+        };
+
+        $('.dateBtn').click(function() {
+            if ($(this).hasClass('disabled')) return false;
+
+            var $curBtn = $(this);
+
+            $('.dateBtn').removeClass('active-btn').addClass('disabled');
+            $curBtn.addClass('active-btn');
+            $('input[name="property_visit_date_id"]').val($(this).attr('data-id'));
+            $('.details-block').show();
+
+            return false;
+        });
+
+        $('.btnSendForm').click(function() {
+            if ($(this).hasClass('btn-gray')) {
+                return false;
+            }
+            var $form = $('form[name="applayForm"]');
+            var url = $form.attr('action');
+
+            var data = {
+                'property_visit_date_id': $('input[name="property_visit_date_id"]').val(),
+                'visit_time_begin': $('select[name="visit_time_begin"]').val(),
+                'visit_time_end': $('select[name="visit_time_end"]').val()
+            };
+
+            $('select[name="visit_time_begin"]').val('--');
+            $('select[name="visit_time_end"]').val('--');
+
+            $.post(url, data, function(data) {
+                $('div.carte-popup1-html').parent().html(data);
+                return false;
+            });
+
+            return false;
+        });
     });
+
 </script>

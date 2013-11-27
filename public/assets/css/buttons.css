@@ -17,11 +17,17 @@ button, .btn, [type=submit], [type=reset], [type=button] {
 	text-decoration: none !important;
 	border: 0;
 	text-align: center;
+	font-weight: 400;
 }
 
 .btn-small {
 	height: 30px;
 	line-height: 30px;
+}
+
+.btn-medium {
+	height: 40px;
+	line-height: 40px;
 }
 
 .btn + .btn, .btn + button, button + button, [type=submit] + [type=submit], [type=reset] + [type=reset], [type=button] + [type=button], input + .btn {
@@ -33,7 +39,7 @@ button, .btn, [type=submit], [type=reset], [type=button] {
 */
 
 .btn-blue {
-	background: #3cbecc;
+	background-color: #3cbecc;
 	box-shadow: 0 3px 0 #34a6b3;
 	text-shadow: 0px -1px 0px #34a6b3 !important;
 }
@@ -321,3 +327,320 @@ input[type="reset"]:focus{
 	top: 2px;
 }
 
+
+
+.btn-plus {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-plus.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-linkedin-red {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 50px;
+	background-image: url('../images/btn-linkedin-red.png');
+	background-repeat: no-repeat;
+	background-position: 20px 9px;
+	text-align: left;
+}
+
+.btn-facebook-red {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 50px;
+	background-image: url('../images/btn-facebook-red.png');
+	background-repeat: no-repeat;
+	background-position: 20px 8px;
+	text-align: left;
+}
+
+.btn-pro {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-pro.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-energy {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-energy.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-mail {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-mail.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-file {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-file.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-edit {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-edit.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-download {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 30px;
+	background-image: url('../images/btn-download.png');
+	background-repeat: no-repeat;
+	background-position: 14px center;
+	text-indent: -9999px;
+}
+
+.btn-time-red {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-time-red.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-delete {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-delete.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-danger {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-danger.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-chat {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-chat.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-speed {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-speed.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-good-check {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-good-check.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-plus-round {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-plus-round.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-check-round {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-check-round.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-search {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-search.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-refresh {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-refresh.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+#upload-btn {
+	background-image: url('../images/btn-photo.png');
+	background-repeat: no-repeat;
+	background-position: 22px center;
+}
+
+#upload-file-btn {
+	background-image: url('../images/btn-folder.png');
+	background-repeat: no-repeat;
+	background-position: 22px center;
+}
+
+.upload-area {
+	background-image: url('../images/btn-hand.png');
+	background-repeat: no-repeat;
+	background-position: 22px center;
+}
+
+.btn-gears {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-gears.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-lock {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-lock.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-disk {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-disk.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-play-red {
+	box-sizing: border-box;  
+-moz-box-sizing: border-box;  
+-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-play-red.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-view {
+	box-sizing: border-box;  
+	-moz-box-sizing: border-box;  
+	-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-view.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-magic {
+	box-sizing: border-box;  
+	-moz-box-sizing: border-box;  
+	-webkit-box-sizing: border-box;  
+	padding-left: 56px;
+	background-image: url('../images/btn-magic.png');
+	background-repeat: no-repeat;
+	background-position: 20px center;
+}
+
+.btn-back-to-list {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    padding-left: 56px;
+    width: 240px;
+    background-image: url('../images/icon-alt.png');
+    background-repeat: no-repeat;
+    background-position: 20px center;
+}
+
+.btn-prev-item {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    padding-left: 56px;
+    width: 240px;
+    background-image: url('../images/icon-thumb-left.png');
+    background-repeat: no-repeat;
+    background-position: 20px center;
+}
+
+.btn-next-item {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    padding-right: 56px;
+    width: 240px;
+    background-image: url('../images/icon-thumb-right.png');
+    background-repeat: no-repeat;
+    background-position: 210px center;
+}
+.btn.btn-blue.btn-down {
+    box-shadow: 0 1px 0 #34a6b3;
+    top: 2px;
+}
+.btn.btn-gray.btn-down {
+    box-shadow: 0 1px 0 #808080;
+    top: 2px;
+}
+
+a.disabled {
+    cursor: default;
+}

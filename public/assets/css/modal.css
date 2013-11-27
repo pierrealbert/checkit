@@ -8,7 +8,7 @@
 	left: 0;
 	top: 0;
 	right: 0;
-	z-index: 9999;
+	z-index: 10000;
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 }
@@ -174,4 +174,150 @@ margin: 0 -40px;
 #modal .login-popup #login-button {
 	display: block;
 	width: 100%;
+}
+
+
+/*
+	Success popup
+*/
+
+#success-popup {
+	display: none;
+	width: 540px;
+	margin: 100px auto;
+}
+
+.success-popup-content {
+	display: block;
+	padding: 30px 50px;
+	background-color: #c2eef2;
+	background-image: url('../images/success-popup-icon.png');
+	background-repeat: no-repeat;
+	background-position: 97% 15px;
+	background-position: calc(100% - 20px) 15px;
+	border-radius: 10px;
+}
+
+.success-popup-content > h1 {
+	text-align: center;
+	color: #198e9c;
+	text-shadow: 0 1px 0 #fff;
+	margin: 0 0 20px 0;
+}
+
+.success-popup-content > p {
+	margin: 20px 0;
+	color: #087380;
+	text-align: center;
+}
+
+.success-popup-content > .btn {
+	display: block;
+}
+
+
+
+/*
+	Annoce description popup
+*/
+
+.favoris-popup-html > .btn{
+	display: block;
+	margin: 30px 0;
+}
+
+/*
+	Annoce carte popup-1
+*/
+
+.carte-popup1-html .box-choice-btn{
+	background: #4e4e4e;
+	border-radius: 10px;
+	padding: 20px;
+	box-shadow: inset 0 1px 0 #414141;
+	border-bottom: 1px solid #d2d2d2;
+}
+.carte-popup1-html ul{
+	margin: 0;
+	padding: 0;
+}
+.carte-popup1-html ul li{
+	text-align: center;
+
+	margin-bottom: 10px;
+
+}
+.carte-popup1-html ul li:last-child{
+	margin-bottom: 0;
+}
+.carte-popup1-html ul li a{
+	text-decoration: none;
+	padding: 15px 0;
+	display: block;
+	color: #656565;
+	text-shadow: 0 1px 0 #fff;
+	font-size: 16px;
+	background: #e5e5e5;
+	border-radius: 5px;
+	border-bottom: 1px solid #b2b2b2;
+}
+.carte-popup1-html .active-btn{
+	color: #f6f1eb;
+	text-shadow: 0 -1px 0 #1c899d;
+	background: #35a6b4;
+	border-bottom: 1px solid #257d89;
+}
+.carte-popup1-html .btn-annuler{
+	margin: 20px 0;
+	display: block;
+}
+.carte-popup1-html .details-block .btn{
+	display: block;
+	font-size: 16px;
+}
+.carte-popup1-html .box-select{
+	background: #e5e5e5;
+	border-radius: 10px;
+	padding: 20px;
+	box-shadow: inset 0 1px 0 #b2b2b2;
+	border-bottom: 1px solid #f6f6f6;
+}
+.carte-popup1-html .chosen-container-single .chosen-single{
+	width: 179px;
+ }
+.carte-popup1-html .box-select .select-performed{
+	display: inline-block;
+	width: 175px;
+}
+.carte-popup1-html .chosen-container .chosen-drop {
+	width: 187px;
+}
+/*.carte-popup1-html .chosen-container-single .chosen-drop{*/
+	/*margin-top: 32px;*/
+/*}*/
+.carte-popup1-html .box-select .inner-box-select{
+	display: inline-block;
+	width: 187px;
+}
+.carte-popup1-html .box-select .inner-box-select label{
+	margin-bottom: 10px;
+	display: block;
+	font-size: 16px;
+}
+.carte-popup1-html .box-select span{
+	margin: 0 12px;
+}
+
+#modal .error-message {
+   padding: 20px 0px 10px 0px;
+   color: red;
+}
+#modal .success-message {
+    padding: 20px 0px 10px 0px;
+    color: #3CBECC;
+}
+#modal .modal-bottom-btn {
+    width: 350px;
+    display: block;
+    margin: 0px auto 30px auto;
 }

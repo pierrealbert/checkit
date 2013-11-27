@@ -1,0 +1,144 @@
+.clear {
+    clear: both;
+}
+div#residentTabs .inner-light {
+    background: none repeat scroll 0 0 #F2F2F2;
+    padding: 2px 20px 10px 20px;
+    padding: 15px 22px 40px;
+    border-radius: 0px 0px 10px 10px;
+}
+div#residentTabs .inner-light h2 {
+    margin: 0;
+}
+div#residentTabs .inner-light h2 {
+    font-size: 25px;
+}
+div#residentTabs .inner-light .box-info-universal .inner-box {
+    float: left;
+    width: 300px;
+}
+div#residentTabs .inner-light .box-info-universal {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 1px 0 #CCCCCC inset;
+    margin-bottom: 20px;
+    overflow: hidden;
+    padding: 15px;
+}
+div#residentTabs .inner-light .box-info-universal p {
+    margin: 0;
+}
+div#residentTabs .inner-light .box-info-universal .inner-box .garant {
+    margin-top: 20px;
+}
+div#residentTabs .inner-light .box-info-universal .inner-box .btn-fb {
+    background-image: url("../images/icon-fb.png");
+    background-position: 6px center;
+    background-repeat: no-repeat;
+}
+div#residentTabs .inner-light .box-info-universal .inner-box .btn-gray-small {
+    float: none;
+    margin: 10px 0 0;
+    padding-left: 55px;
+    text-align: left;
+    text-transform: none;
+    width: 101px;
+}
+div#residentTabs .inner-light .box-info-universal .inner-box .btn-in {
+    background-image: url("../images/icon-in.png");
+    background-position: 6px center;
+    background-repeat: no-repeat;
+}
+div#residentTabs .inner-light .box-info-universal .inner-box .btn-gray-small {
+    float: none;
+    margin: 10px 0 0;
+    padding-left: 55px;
+    text-align: left;
+    text-transform: none;
+    width: 101px;
+}
+div#residentTabs .inner-light .inner-box-btn label {
+    color: #4D4D4D;
+    display: block;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+div#residentTabs .inner-light .inner-box-btn .btn-blue {
+    background-image: url("../images/icon-list.png");
+    background-position: 18px center;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding-left: 46px;
+    width: 167px;
+}
+div#residentTabs .inner-light .inner-box-btn {
+    margin-top: 20px;
+}
+.grid.candidates-top {
+    padding: 0px 15px 0px 30px;
+    width: 955px;
+}
+.candidates-top-block-left {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    float: left;
+}
+.candidates-top-block-right {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    float: right;
+    width: 377px;
+    border-left: 3px dotted #E5E5E5;
+}
+.candidates-top-block-right a.btn-big {
+    display: inline-block !important;
+    width: 105px;
+    height: 70px;
+    float: right;
+    padding-top: 28px;
+    padding-right: 40px;
+    line-height: 45px;
+    text-align: right;
+}
+.candidates-top-block-right a.btn-big.accept {
+    background-image: url("../images/btn-good.png");
+    background-position: 18px center;
+    background-repeat: no-repeat;
+}
+.candidates-top-block-right a.btn-big.reject {
+    background-image: url("../images/icon-del-gray.png");
+    background-position: 18px center;
+    background-repeat: no-repeat;
+    margin-left: 16px;
+}
+.candidates-top-block-left .right-block {
+    float: right;
+    width: 208px;
+    color: #b4b4b4;
+}
+.candidates-top-block-left .right-block div.score {
+    color: #4d4d4d;
+}
+.candidates-top-block-left .right-block .candidature-date {
+    margin-top: 12px;
+    font-size: 14px;
+}
+.candidates-top-block-left .left-block {
+    float: left;
+    width: 365px;
+}
+.candidates-top-block-left .left-block h2 {
+    font-size: 25px;
+    margin: 0px;
+    margin-bottom: 10px;
+}
+.candidates-top-block-left .left-block span {
+    font-size: 16px;
+}
+.candidates-top-block-left .block-controlls-stars {
+   float: left;
+   width: 120px;
+}
+.candidates-top-block-left .block-controlls-score {
+    float: left;
+}

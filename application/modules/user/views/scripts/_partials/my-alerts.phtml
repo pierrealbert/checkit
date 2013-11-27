@@ -1,0 +1,100 @@
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.body-switcher').click(function() {
+        var id = $(this).attr('data-id');
+        var $div = $('div#'+id);
+        if ($div.length > 0) {
+            if ($div.css('display') == 'none') {
+                $div.css('display', 'block');
+            } else {
+                $div.css('display', 'none');
+            }
+        }
+
+        return false;
+    });
+
+    $('a.close-action').click(function() {
+        var url = $(this).attr('href');
+        var $alertBlock = $(this).parent();
+        $alertBlock.css('opacity', 0.5);
+        $.get(url, function(data) {
+            if (!data.error) {
+                $alertBlock.remove();
+            } else {
+                $alertBlock.css('opacity', 1);
+            }
+
+            var alertCount = $('.single-alert').length;
+            if (alertCount == 0) $('div.alerts-zone').hide();
+        })
+
+        return false;
+    });
+});
+</script>
+
+<?php if (count($this->alerts) > 0): ?>
+<div class="alerts-zone">
+    <h2 class="black-txt txt-small">Alertes</h2>
+    <div class="box-info-universal">
+        <?php foreach($this->alerts as $indx => $rec): ?>
+        <div class="<?=getAlertClassByType($rec->msg_type)?> w500 single-alert">
+            <a href="<?=$this->url(array('module' => 'user', 'controller' => 'alert', 'action' => 'close-alert', 'item' => $rec->id), null, true)?>" class="<?=getAlertCloseClassByType($rec->msg_type)?> close-action"></a>
+            <div class="text-box">
+                <p class="alert-title"><?=$rec->title?></p>
+                <?php if ($rec->property_id > 0): ?>
+                    <a class="property-link" href="<?=$this->url(array('module' => 'default', 'controller' => 'property', 'action' => 'detail', 'item' => $rec->property_id), null, true)?>" target="_blank">[*Titre de l'annonce.*]</a>
+                <?php endif; ?>
+                <?php if (trim($rec->message) != ''): ?>
+                    <?php if ($rec->property_id > 0): ?>
+                        <br />
+                    <?php endif; ?>
+                    <span class="bold-txt body-switcher" data-id="alert-body-<?=$rec->id?>">[*Read more...*]</span>
+                    <div class="alert-body" id="alert-body-<?=$rec->id?>"><?=$rec->message?></div>
+                <?php endif; ?>
+            </div>
+            <?php if (trim($rec->message) != ''): ?>
+            <a href="#" class="black link-btn body-switcher" data-id="alert-body-<?=$rec->id?>">Voir</a>
+            <?php endif; ?>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+<?php endif; ?>
+
+<?php
+
+function getAlertClassByType($type) {
+    $list = array(
+        Model_Alert::TYPE_INFO    => 'alert-gray',
+        Model_Alert::TYPE_NOTICE  => 'alert-blue',
+        Model_Alert::TYPE_SUCCESS => 'alert-blue',
+        Model_Alert::TYPE_WARNING => 'alert-red',
+        Model_Alert::TYPE_ERROR   => 'alert-red'
+    );
+
+    if (isset($list[$type])) {
+        return $list[$type];
+    } else {
+        return 'alert-gray';
+    }
+}
+
+function getAlertCloseClassByType($type) {
+    $list = array(
+        Model_Alert::TYPE_INFO    => 'close-gray',
+        Model_Alert::TYPE_NOTICE  => 'close-blue',
+        Model_Alert::TYPE_SUCCESS => 'close-blue',
+        Model_Alert::TYPE_WARNING => 'close-red',
+        Model_Alert::TYPE_ERROR   => 'close-red'
+    );
+
+    if (isset($list[$type])) {
+        return $list[$type];
+    } else {
+        return 'close-gray';
+    }
+}
+
+?>

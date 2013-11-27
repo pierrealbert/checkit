@@ -38,7 +38,9 @@
  * @property Doctrine_Collection $Favorite
  * @property Doctrine_Collection $PropertyIssue
  * @property Doctrine_Collection $Search
- * @property Doctrine_Collection $UserProperty
+ * @property Doctrine_Collection $UserSettings
+ * @property Doctrine_Collection $Alert
+ * @property Doctrine_Collection $UserRequest
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -206,7 +208,15 @@ abstract class Model_Base_User extends Ext_Doctrine_Record
              'local' => 'id',
              'foreign' => 'user_id'));
 
-        $this->hasMany('Model_UserProperty as UserProperty', array(
+        $this->hasMany('Model_UserSettings as UserSettings', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('Model_Alert as Alert', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('Model_UserRequest as UserRequest', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 

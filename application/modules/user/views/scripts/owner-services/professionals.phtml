@@ -1,0 +1,263 @@
+<?php
+$this->headLink()->appendStylesheet('/assets/css/property_form.css');
+?>
+<div id="publier">
+    <?= $this->partial('owner-services/_partials/navigation.phtml') ?>
+    <div class="right">
+        <form action="<?=$this->url(array('module' => 'user', 'controller' => 'owner-services', 'action' => 'professionals'), null, true)?>" name="services" method="post">
+            <div class="progress-content">
+                <div class="step-title">
+                    <h1>Professionnels</h1>
+                    <span class="blue">On peut vous rendre service?</span>
+                    <span>Besoin d’idées ? D’un coup de peinture ? Des travaux à faire ?<br>Qu’il arrive un sinistre chez vous ou si vous voulez simplement remettre à neuf votre bien,<br>ne cherchez pas plus loin. <strong>OMMI</strong> travaille en collaboration avec des entrepreneurs, <br>des dépanneurs et des décorateurs d’intérieur de talent et de confiance.</span>
+                </div>
+                <div class="block-grid grid-inset">
+                    <fieldset>
+                        <label>Téléphone <em class="blue">(conseillé)</em></label>
+                        <?=$this->form->phone?>
+                        <p class="description blue">Soyez rassuré, ces informations ne seront utilisées qu’aux fins<br>d’organiser votre rendez-vous avec le professionnel.</p>
+                    </fieldset>
+                </div>
+
+                <div class="block-grid grid-set-gray">
+                    <div class="content-tab-nav">
+                        <ul>
+                            <?php $curType = 1; ?>
+                            <?php foreach($this->typesList as $indx => $type): ?>
+                                <li><a data-id="<?=$indx?>" class="tabTypeHeader<?=$this->form->getElement('request_type')->getValue() == $indx ? ' active' : ''?>" href="#"><?=$type?></a></li>
+                                <?php if ($this->form->getElement('request_type')->getValue() == $indx): ?>
+                                    <?php $curType = $indx; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <?=$this->form->request_type?>
+                    <div class="content-tab-inner">
+                        <p class="description TypeDescription" data-id="1"<?php if($curType != 1): ?> style="display: none;"<?php endif; ?>>
+                            Une fuite ? Une casse ? Une panne ?<br>Pas de panique, les dépanneurs <strong>OMMI</strong> sont là pour vous aider.
+                        </p>
+                        <p class="description TypeDescription" data-id="2"<?php if($curType != 2): ?> style="display: none;"<?php endif; ?>>
+                            Comme les chats, votre appartement a lusieurs vies. Celle qui vient se trouve peut etre ici.<br />Conultez les decorateurs d'interieur <b>OMMI</b>
+                        </p>
+                        <p class="description TypeDescription" data-id="3"<?php if($curType != 3): ?> style="display: none;"<?php endif; ?>>
+                            Avant toute location, faites lo bon diagnostic.<br /><b>OMMI</b> vous propose des professionels certifies.
+                        </p>
+                        <p class="description TypeDescription" data-id="4"<?php if($curType != 4): ?> style="display: none;"<?php endif; ?>>
+                            Vous aimez les types entreprenants ? Du genre a tout changer dans votre logement ?<br /><b>OMMI</b> vous propose son reseau d'entrepreneurs.
+                        </p>
+
+                        <fieldset id="visitSpec" <?php if ($curType != 1): ?>style="display: none;"<?php endif; ?>>
+                            <label>Spécialité <em class="red">(obligatoire)</em></label>
+                            <?=$this->form->visit_spec?>
+                        </fieldset>
+
+                        <div class="two-month-calendar">
+                            <fieldset>
+                                <label>Calendrier</label>
+                                <div id="calendar"></div>
+                            </fieldset>
+                        </div>
+
+                        <fieldset>
+                            <label>Dates de visite <em class="red">(obligatoire)</em></label>
+                            <div class="block-grid grid-gray select-dates">
+                                <fieldset id="date-fieldset">
+                                    <label>Date</label>
+
+                                    <div class="left-block">
+                                        <div class="labels-group standard-search-date-pick">
+                                            <input class="input-pretty" type="radio" name="dummy" value="">
+                                            <label class="btn-input-gray-lite date-label calendarOpener"">Sélectionner une date</label>
+                                            <label class="btn-input-gray-lite label-date icon-calendar-gray calendarOpener"></label>
+                                        </div>
+                                        <div class="visitdate-wrapper">
+                                            <?= $this->form->availability ?>
+                                        </div>
+                                    </div>
+
+                                    <p class="description blue">
+                                        Sélectionnez une date et un horaire puis un<br>professionnel du réseau OMMI vous<br>contactera au plus vite.
+                                    </p>
+                                    <?php
+                                        $dateError = '';
+                                        $errorMessages = $this->form->availability->getErrorMessages();
+                                        if (isset($errorMessages[0])) {
+                                            $dateError .= '<li>'.trim($errorMessages[0]).'</li>';
+                                        }
+                                        $errorMessages = $this->form->visit_time_begin->getErrorMessages();
+                                        if (isset($errorMessages[0])) {
+                                            $dateError .= '<li>'.trim($errorMessages[0]).'</li>';
+                                        }
+                                        $errorMessages = $this->form->visit_time_end->getErrorMessages();
+                                        if (isset($errorMessages[0])) {
+                                            $dateError .= '<li>'.trim($errorMessages[0]).'</li>';
+                                        }
+                                    ?>
+                                    <?php if ($dateError != ''): ?>
+                                    <ul class="errors"><?=$dateError?></ul>
+                                    <?php endif; ?>
+                                </fieldset>
+
+                                <fieldset id="time-fieldset">
+                                    <label>Horaire</label>
+                                    <div class="small_pretty">
+                                        <span style="margin-right: 5px;">Entre</span>
+                                        <?=$this->form->visit_time_begin?>
+                                        <span style="margin-left: 63px; margin-right: 12px;">et</span>
+                                        <?=$this->form->visit_time_end?>
+                                    </div>
+                                </fieldset>
+                                <div class="block-btn">
+                                    <a class="btn btn-medium btn-red btn-time-red" href="#">Prendre lerendez-vous</a>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <a class="btn btn-medium btn-blue btn-danger BtnSubmit" href="#">Dépannage en urgence !</a>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var datesList = new Array(<?=json_encode(array())?>);
+
+    var readOnly = <?=$this->readonly?>;
+
+    $(document).ready(function(){
+
+        $('.tabTypeHeader').click(function() {
+            if (readOnly) return false;
+            var id = $(this).attr('data-id');
+            $('.tabTypeHeader').removeClass('active');
+            $(this).addClass('active');
+            $('p.TypeDescription').hide();
+            $('p.TypeDescription[data-id="'+id+'"]').show();
+            if (id != 1) {
+                $('#visitSpec').hide();
+            } else {
+                $('#visitSpec').show();
+            }
+
+            $('input[name="request_type"]').val(id);
+
+            return false;
+        });
+
+        $('.BtnSubmit').click(function() {
+            if (readOnly) return false;
+            $('form[name="services"]').submit();
+            return false;
+        });
+
+        $('.calendarOpener').click(function() {
+            if (readOnly) return false;
+
+            $('.visitdate-wrapper').show();
+            $('input#availability').focus();
+        });
+
+        if ($('#availability').val() != '') {
+            $('.visitdate-wrapper').show();
+        }
+
+
+        $('#calendar').datepicker(
+            {
+                numberOfMonths: 2,
+                showButtonPanel: false,
+
+                monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin',
+                    'Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+                monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun',
+                    'Jul','Aoû','Sep','Oct','Nov','Déc'],
+                dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+                dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
+                dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
+
+                firstDay: 1,
+                prevText: '', prevStatus: 'Voir le mois précédent',
+                prevJumpText: '', prevJumpStatus: 'Voir l\'année précédent',
+                nextText: '', nextStatus: 'Voir le mois suivant',
+                nextJumpText: '', nextJumpStatus: 'Voir l\'année suivant',
+                currentText: 'Courant', currentStatus: 'Voir le mois courant',
+                todayText: 'Aujourd\'hui', todayStatus: 'Voir aujourd\'hui',
+                clearText: 'Effacer', clearStatus: 'Effacer la date sélectionnée',
+                closeText: 'Fermer', closeStatus: 'Fermer sans modifier',
+                yearStatus: 'Voir une autre année', monthStatus: 'Voir un autre mois',
+                weekText: 'Sm', weekStatus: 'Semaine de l\'année',
+                dayStatus: '\'Choisir\' le DD d MM',
+                defaultStatus: 'Choisir la date',
+                isRTL: false,
+
+                defaultDate: '<?=date('d/m/Y')?>',
+                dateFormat: 'dd/mm/yy',
+
+                onSelect: function(dateText, inst) {
+                    if (readOnly) return false;
+
+                    $('.visitdate-wrapper').show();
+                    $('#availability').val(dateText);
+                    $('#availability').change();
+                },
+
+                beforeShowDay: function(date) {
+                    var res = new Array(
+                        true,
+                        '',
+                        ''
+                    );
+
+                    var curDate = new Date();
+                    curDate = curDate.getFullYear()+'-'+
+                        ((curDate.getMonth()+1) <= 9 ? '0'+(curDate.getMonth()+1) : (curDate.getMonth()+1))+'-'+
+                        (curDate.getDate() <= 9 ? '0'+curDate.getDate() : curDate.getDate());
+
+                    var checkedDate = date.getFullYear()+'-'+
+                        ((date.getMonth()+1) <= 9 ? '0'+(date.getMonth()+1) : (date.getMonth()+1))+'-'+
+                        (date.getDate() <= 9 ? '0'+date.getDate() : date.getDate());
+
+                    if (checkedDate < curDate) {
+                        res[0] = false;
+                        res[1] = 'td-selected';
+                    }
+
+                    for (var i=0; i<datesList[0].length; i++) {
+                        if (datesList[0][i].year == date.getFullYear() &&
+                            datesList[0][i].month == (date.getMonth()+1) &&
+                            datesList[0][i].day == date.getDate()) {
+
+                            if (res[0] != false) {
+                                res[1] = 'td-selected-new';
+                            }
+                        }
+                    }
+                    if (checkedDate == curDate && res[1] != 'td-selected-new') {
+                        res[1] = 'td-selected-cur';
+                    }
+
+
+                    return res;
+                }
+
+            }
+        );
+
+
+        if ($('ul.errors').length > 0) {
+            $('.block-grid.grid-gray.select-dates').each(function() {
+                var hasErrors = $(this).find('ul.errors');
+                if (hasErrors.length > 0) {
+                    $(this).css('background', "#f2c5cc url('/assets/images/btn-error.png') 98% 12px no-repeat");
+                } else {
+                    $(this).css('background', "#c2eef1 url('/assets/images/icon-tick.png') 98% 12px no-repeat");
+                }
+            });
+        }
+
+    });
+</script>

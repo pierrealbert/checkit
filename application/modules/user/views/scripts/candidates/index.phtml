@@ -1,0 +1,127 @@
+<?php
+$this->headLink()->appendStylesheet('/assets/css/candidats.css');
+?>
+
+<div id="candidats">
+<div class="candidats-block first-block">
+    <h3>Mes annonces</h3>
+    <div class="candidats-content">
+        <?php
+            $wasSelected   = false;
+            $totCandidates = 0;
+            $totWaiting    = 0;
+            $adCounts      = array();
+        ?>
+        <?php foreach($this->ads as $ad): ?>
+            <div class="property-item c_annonce_block<?=(!$wasSelected ? ' active' : '')?>" data-property-id="<?= $ad->id ?>">
+                <div class="c_annonce_block_info">
+                    <div class="c_annonce_block_info_photo">
+                        <?= $this->imageResize(70, 70, $ad->main_photo) ?>
+                    </div>
+                    <div class="c_annonce_block_info_titles">
+                        <span class="c_annonce_block_info_title"><?= $ad->title ?></span>
+                        <span class="c_annonce_block_info_views">(<?= $ad->postcode ?>)</span>
+                        <span class="c_annonce_block_info_price"><?= $ad->price ?> €</span>
+                    </div>
+                </div>
+
+                <div class="c_annonce_block_meta">
+                    <span><?= count($this->applicationsPerProperty[$ad->id]['awaiting']) + count($this->applicationsPerProperty[$ad->id]['accepted']) ?> candidats</span>
+                    <span><?= count($this->applicationsPerProperty[$ad->id]['accepted']) ?> candidats sélectionnés</span>
+                </div>
+            </div>
+            <?php
+                $totCandidates += (count($this->applicationsPerProperty[$ad->id]['awaiting']) + count($this->applicationsPerProperty[$ad->id]['accepted']));
+                $totWaiting += count($this->applicationsPerProperty[$ad->id]['awaiting']);
+                if (!isset($adCounts[$ad->id])) $adCounts[$ad->id] = array('awaiting' => 0, 'selected' => 0);
+                $adCounts[$ad->id]['awaiting'] += count($this->applicationsPerProperty[$ad->id]['awaiting']);
+                $adCounts[$ad->id]['selected'] += count($this->applicationsPerProperty[$ad->id]['accepted']);
+
+                $wasSelected = true;
+            ?>
+        <?php endforeach; ?>
+
+    </div>
+</div>
+<div class="candidats-block second-block dates-col">
+    <h3>Candidats <span class="blue">(<?=$totCandidates?>)</span></h3>
+    <div class="candidats-content">
+
+        <?php foreach($this->ads as $ad): ?>
+            <div class="dates-inner" data-property-id="<?= $ad->id ?>">
+
+            <div class="c_candidate">
+                <span><?= $this->translate('awaiting_candidates') ?></span>
+                <div id="p<?= $ad->id ?>-wating-candidates-item" class="c_candidate_block date-item<?=($adCounts[$ad->id]['awaiting'] == 0 ? ' inactive' : '')?>">
+                    <span class="c_candidate_block_title">Tous les candidats</br>en attente</span>
+                    <span class="c_candidate_block_candidats"><?=$adCounts[$ad->id]['awaiting']?> candidats</span>
+                </div>
+            </div>
+
+            <div class="c_candidate">
+                <span><?= $this->translate('selected_candidates') ?></span>
+                <div id="p<?= $ad->id ?>-selected-candidates-item" class="c_candidate_block date-item<?=($adCounts[$ad->id]['selected'] == 0 ? ' inactive' : '')?>">
+                    <span class="c_candidate_block_title">Tous les candidats</br>en attente</span>
+                    <span class="c_candidate_block_candidats"><?=$adCounts[$ad->id]['selected']?> candidats</span>
+                </div>
+            </div>
+
+            <div class="c_candidate">
+                <span id="visit-dates-title"><?= $this->translate('my_visits') ?></span>
+                <?php foreach ($ad->PropertyVisitDates as $index => $visitDate): ?>
+                    <div class="c_candidate_block date-item" id="p<?= $ad->id ?>-visit-date-item-<?= $visitDate->id ?>" data-visit-date-id="<?= $visitDate->id ?>" >
+                        <span class="c_candidate_block_title"><?= $this->translate('visit') ?> <?= $this->date($visitDate->availability) ?></span>
+                        <span class="c_candidate_block_candidats"><?=count($visitDate->PropertyApplication)?> candidats</span>
+                    </div>
+                <?php endforeach ?>
+            </div>
+
+            </div>
+
+        <?php endforeach; ?>
+
+    </div>
+</div>
+<div class="candidats-block third-block candidates-col">
+    <h3>En attente <span class="blue">(<?=$totWaiting?>)</span></h3>
+    <div class="candidats-content">
+        <div class="attente-list">
+
+            <div class="attente-block" id="no-candidates" style="display: none;">
+                <h3 style="font-size: 23px; color: #34A6B3; margin: 0; font-weight: 400;" class="blue">Vous n’avez actuellement aucun candidat</h3>
+                        <span style="display: block; margin-bottom: 10px;">Dés qu’un utilisateur candidate à votre annonce, il apparaît ici.</br>
+                            Vous pourrez alors consulter son dossier.</br>
+                            Puis le sélectionner ou le refuser pour la visite demandée.</span>
+                <a href="#" class="btn btn-red btn-magic" style="width: 100%;">Augmenter la visibilité de mon annonce</a>
+            </div>
+
+            <?php foreach($this->ads as $ad): ?>
+                <div class="candidates-inner" data-candidates-for="p<?= $ad->id ?>-wating-candidates-item">
+                    <? if (count($this->applicationsPerProperty[$ad->id]['awaiting']) > 0): ?>
+                        <? foreach ($this->applicationsPerProperty[$ad->id]['awaiting'] as $application): ?>
+                            <?= $this->partial('_partials/my-candidate.phtml', array('application' => $application, 'residents' => $this->residents, 'garants' => $this->garants)) ?>
+                        <? endforeach ?>
+                    <? endif ?>
+                </div>
+                <div class="candidates-inner" data-candidates-for="p<?= $ad->id ?>-selected-candidates-item">
+                    <? if (count($this->applicationsPerProperty[$ad->id]['accepted']) > 0): ?>
+                        <? foreach ($this->applicationsPerProperty[$ad->id]['accepted'] as $application): ?>
+                            <?= $this->partial('_partials/my-candidate.phtml', array('application' => $application, 'residents' => $this->residents, 'garants' => $this->garants)) ?>
+                        <? endforeach ?>
+                    <? endif ?>
+                </div>
+                <?php foreach ($ad->PropertyVisitDates as $index => $visitDate): ?>
+                    <div class="candidates-inner" data-candidates-for="p<?= $ad->id ?>-visit-date-item-<?= $visitDate->id ?>">
+                        <? foreach ($this->applicationsPerProperty[$ad->id]['accepted'] as $application): ?>
+                            <? if($application->property_visit_date_id == $visitDate->id): ?>
+                                <?= $this->partial('_partials/my-candidate.phtml', array('application' => $application, 'residents' => $this->residents, 'garants' => $this->garants)) ?>
+                            <? endif ?>
+                        <? endforeach ?>
+                    </div>
+                <?php endforeach ?>
+            <?php endforeach; ?>
+
+        </div>
+    </div>
+</div>
+</div>

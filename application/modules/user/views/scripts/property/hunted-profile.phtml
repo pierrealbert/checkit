@@ -1,32 +1,51 @@
-<table border="1" width="100%">
-    <tr valign="top">
-        <td width="33%">
-            <!-- Left menu -->
-            <table border="1" width="100%">
-                <tr>
-                    <td><?= $this->translate('status') ?>: 60%</td>
-                </tr>
-                <?php $states_info = $this->property->getStatesInfo(); ?>
-                <?php foreach($states_info as $state => $info): ?>
-                <tr>
-                        <?php if ($this->current_state == $state): ?>
-                    <td style="background-color:#3cbecc;"><?= $this->translate($info['name']) ?></td>
-                        <?php elseif ($this->property->state < $state): ?>
-                    <td><?= $this->translate($info['name']) ?></td>
-                        <?php else: ?>
-                    <td><a href="/user/property/<?= $info['action'] ?>/item/<?= $this->property->id ?>"><?= $this->translate($info['name']) ?></a></td>
-                        <?php endif; ?>
-                </tr>
-                <?php endforeach; ?>
-            </table>
-            <!-- /Left menu -->
-        </td>
-        <td>
-            <!-- Form -->
-            <?= $this->form ?>
-            <!-- /Form -->
-        </td>
-    </tr>
-</table>
+<?php
+$this->headLink()->appendStylesheet('/assets/css/property_form.css');
+$this->headScript()->appendFile('/assets/js/property_form.js');
+?>
 
-
+<div id="publier" class="grid">
+    <div class="left">
+        <?= $this->partial('property/_partials/left-dashboard.phtml', $this->getVars()) ?>
+    </div>
+    <div class="right">
+        <form id="hunted-profile-form" method="post" action="/user/property/hunted-profile/item/<?=$this->property->id?>">
+            <div id="content-step-4" class="progress-content">
+                <div class="step-title">
+                    <h1>Profil recherchè</h1>
+                </div>
+                <p style="font-size: 16px;">Quel profil recherchez-vous?</p>
+                <div class="block-grid grid-inset compact">
+                    <fieldset>
+                        <?= $this->form->hunted_profile ?>
+                        <p class="cyan">Indiquez nous votre preference quant au profil que vous recherchez</p>
+                        <p class="description">En fonction de celle-ci de la solidite du dossier, OMMI classe les<br />
+                            candidatures que vous recevrez sur une echelle de 1 a 5 afin de vous aider<br />
+                            a faire votre choix</p>
+                    </fieldset>
+                </div>
+                <div class="block-grid grid-inset">
+                    <div class="left">
+                        <fieldset>
+                            <?= $this->form->is_roomate ?>
+                        </fieldset>
+                    </div>
+                    <div class="left">
+                        <fieldset>
+                            <?= $this->form->amount_of_charges ?>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="progress-buttons">
+                    <a id="description-form-cancel" class="btn btn-gray btn-arrow-prev left" href="/user/property/photos/item/<?=$this->property->id?>">Étape précédente</a>
+                    <a id="description-form-next" class="btn btn-blue btn-arrow-next right" href="#">Enregistrer et continuer</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#description-form-next').click(function (event) {
+        event.preventDefault();
+        $('#hunted-profile-form').submit();
+    });
+</script>

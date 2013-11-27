@@ -1,0 +1,64 @@
+<?php
+$residentCount = $this->residents->count();
+$key = 1;
+?>
+<?php foreach ($this->residents as $resident): ?>
+    <div id="form-wrapper" class="block-grid grid-dark">
+        <?php
+        if ($resident->is_primary) {
+            $header = $this->translate('Moi');
+        } elseif ($resident->rent_type == Model_UserResident::RENT_TYPE_COUPLE) {
+            $header = $this->translate('Mon conjoint');
+        } else {
+            $header = $this->translate('Colocataire') . ' '. ($key - 1);
+        }
+        ?>
+        <h3 class="white"><?= $header ?></h3>
+        <?php
+        $form = $this->form[$resident->id];
+        $subForms = $form->getSubForms();
+        $garantNum = 1;
+        ?>
+        <?php foreach ($subForms as $subForm): ?>
+            <h4>Garant <?= $garantNum; ?></h4>
+            <div id="form-section">
+
+                <?= $subForm->id ?>
+                <div class="block-grid grid-inset">
+                    <fieldset>
+                        <?= $subForm->garant ?>
+                    </fieldset>
+                </div>
+
+                <div class="block-grid grid-inset" style="display: none;">
+                    <fieldset>
+                        <?= $subForm->type ?>
+                    </fieldset>
+                </div>
+
+                <div class="block-grid grid-inset" style="display: none;">
+                    <fieldset>
+                        <?= $subForm->amount ?>
+                    </fieldset>
+                </div>
+
+                <div class="block-grid grid-inset" style="display: none;">
+                    <fieldset>
+                        <?= $subForm->company_name ?>
+                    </fieldset>
+                </div>
+
+            </div>
+
+            <?php $garantNum++; ?>
+        <?php endforeach; ?>
+        <a href="" rel="<?= $resident->id ?>" class="btn btn-medium btn-gray btn-plus add-garant-btn">Ajouter un garant</a>
+    </div>
+    <?php $key++; ?>
+<?php endforeach; ?>
+
+<script type="text/javascript">
+    $(function () {
+        //$(".add-garant-btn").trigger('click');
+    });
+</script>

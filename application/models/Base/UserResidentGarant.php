@@ -9,6 +9,7 @@
  * @property integer $user_resident_id
  * @property decimal $amount
  * @property enum $type
+ * @property string $company_name
  * @property Model_UserResident $UserResident
  * @property Doctrine_Collection $UserResidentDocument
  * 
@@ -47,6 +48,10 @@ abstract class Model_Base_UserResidentGarant extends Ext_Doctrine_Record
               3 => 'bank',
               4 => 'organization',
              ),
+             ));
+        $this->hasColumn('company_name', 'string', 255, array(
+             'type' => 'string',
+             'length' => '255',
              ));
     }
 
